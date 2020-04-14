@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{47DEC2D7-6AF8-481F-94C8-DB3D2979AE0A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{79AD0C81-44BA-4AF2-9814-99CA2438DBC7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Novacta.Analytics", "src\Novacta.Analytics\Novacta.Analytics.csproj", "{0B716FFC-68F8-444E-BEA1-75E7B59F0116}"
+EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Novacta.Analytics.Documentation", "src\Novacta.Analytics.Documentation\Novacta.Analytics.Documentation.shfbproj", "{B58F628E-8563-4571-BEAA-8D2387497730}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Novacta.Analytics.CodeExamples", "src\Novacta.Analytics.CodeExamples\Novacta.Analytics.CodeExamples.csproj", "{51A08509-E0C9-4BFD-B57C-1AB9687083B9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Novacta.Analytics.Tests", "tests\Novacta.Analytics.Tests\Novacta.Analytics.Tests.csproj", "{6768886D-71DD-4A50-8BB9-CA96CD52328C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{EDE0D17A-C40F-4AA4-8B7E-D7A4F205CC9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BindingToRowCollection", "samples\BindingToRowCollection\BindingToRowCollection.csproj", "{92EE510F-E113-428D-AC98-FDE184992FB6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B716FFC-68F8-444E-BEA1-75E7B59F0116}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B716FFC-68F8-444E-BEA1-75E7B59F0116}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B716FFC-68F8-444E-BEA1-75E7B59F0116}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B716FFC-68F8-444E-BEA1-75E7B59F0116}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B58F628E-8563-4571-BEAA-8D2387497730}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B58F628E-8563-4571-BEAA-8D2387497730}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51A08509-E0C9-4BFD-B57C-1AB9687083B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51A08509-E0C9-4BFD-B57C-1AB9687083B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51A08509-E0C9-4BFD-B57C-1AB9687083B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6768886D-71DD-4A50-8BB9-CA96CD52328C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6768886D-71DD-4A50-8BB9-CA96CD52328C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6768886D-71DD-4A50-8BB9-CA96CD52328C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6768886D-71DD-4A50-8BB9-CA96CD52328C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92EE510F-E113-428D-AC98-FDE184992FB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92EE510F-E113-428D-AC98-FDE184992FB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92EE510F-E113-428D-AC98-FDE184992FB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92EE510F-E113-428D-AC98-FDE184992FB6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0B716FFC-68F8-444E-BEA1-75E7B59F0116} = {47DEC2D7-6AF8-481F-94C8-DB3D2979AE0A}
+		{B58F628E-8563-4571-BEAA-8D2387497730} = {47DEC2D7-6AF8-481F-94C8-DB3D2979AE0A}
+		{51A08509-E0C9-4BFD-B57C-1AB9687083B9} = {47DEC2D7-6AF8-481F-94C8-DB3D2979AE0A}
+		{6768886D-71DD-4A50-8BB9-CA96CD52328C} = {79AD0C81-44BA-4AF2-9814-99CA2438DBC7}
+		{92EE510F-E113-428D-AC98-FDE184992FB6} = {EDE0D17A-C40F-4AA4-8B7E-D7A4F205CC9B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AA191A9C-9BAC-4554-9DB3-BBB73B8D69B0}
+	EndGlobalSection
+EndGlobal

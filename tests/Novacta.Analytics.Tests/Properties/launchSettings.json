@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Novacta.Analytics.Tests": {
+      "commandName": "Project",
+      "commandLineArgs": "/diag"
+    }
+  }
+}

@@ -1,0 +1,270 @@
+﻿<html><head><meta http-equiv="X-UA-Compatible" content="IE=edge" /><link rel="shortcut icon" href="../icons/favicon.ico" /><link rel="stylesheet" type="text/css" href="../styles/branding.css" /><link rel="stylesheet" type="text/css" href="../styles/branding-en-US.css" /><script type="text/javascript" src="../scripts/branding.js"> </script><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>CategoricalEntailmentEnsembleClassifier Class</title><meta name="Language" content="en-us" /><meta name="System.Keywords" content="CategoricalEntailmentEnsembleClassifier class" /><meta name="System.Keywords" content="Novacta.Analytics.CategoricalEntailmentEnsembleClassifier class" /><meta name="Microsoft.Help.F1" content="Novacta.Analytics.CategoricalEntailmentEnsembleClassifier" /><meta name="Microsoft.Help.Id" content="T:Novacta.Analytics.CategoricalEntailmentEnsembleClassifier" /><meta name="Description" content="Represents a classifier that exploits an ensemble of categorical entailments to assign labels to items from a given feature space." /><meta name="Microsoft.Help.ContentType" content="Reference" /><meta name="BrandingAware" content="true" /><meta name="container" content="Novacta.Analytics" /><meta name="file" content="T_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier" /><meta name="guid" content="T_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier" /><link type="text/css" rel="stylesheet" href="../styles/highlight.css" /><script type="text/javascript" src="../scripts/highlight.js"> </script><link rel="stylesheet" type="text/css" href="../styles/branding-Website.css" /><script type="text/javascript" src="../scripts/jquery-3.3.1.min.js"></script><script type="text/javascript" src="../scripts/branding-Website.js"></script><script type="text/javascript" src="../scripts/clipboard.min.js"></script></head><body onload="OnLoad('cs')"><input type="hidden" id="userDataCache" class="userDataStyle" /><div class="pageHeader" id="PageHeader">Novacta.Analytics Documentation<form id="SearchForm" method="get" action="#" onsubmit="javascript:TransferToSearchPage(); return false;"><input id="SearchTextBox" type="text" maxlength="200" /><button id="SearchButton" type="submit"></button></form></div><div class="pageBody"><div class="leftNav" id="leftNav"><div id="tocNav"><div class="toclevel0" data-toclevel="0"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/a4ea75a2-ef53-4ea2-a7f4-b493a50f90b3.htm" title="Novacta.Analytics Documentation" tocid="roottoc">Novacta.Analytics Documentation</a></div><div class="toclevel0" data-toclevel="0"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/G_Novacta_Analytics.htm" title="Novacta.Analytics Namespaces" tocid="G_Novacta_Analytics">Novacta.Analytics Namespaces</a></div><div class="toclevel0" data-toclevel="0"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/N_Novacta_Analytics.htm" title="Novacta.Analytics" tocid="N_Novacta_Analytics">Novacta.Analytics</a></div><div class="toclevel1 current" data-toclevel="1" data-childrenloaded="true"><a class="tocExpanded" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/T_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier.htm" title="CategoricalEntailmentEnsembleClassifier Class" tocid="T_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier">CategoricalEntailmentEnsembleClassifier Class</a></div><div class="toclevel2" data-toclevel="2"><a data-tochassubtree="false" href="../html/M_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier__ctor.htm" title="CategoricalEntailmentEnsembleClassifier Constructor " tocid="M_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier__ctor">CategoricalEntailmentEnsembleClassifier Constructor </a></div><div class="toclevel2" data-toclevel="2"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/Properties_T_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier.htm" title="CategoricalEntailmentEnsembleClassifier Properties" tocid="Properties_T_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier">CategoricalEntailmentEnsembleClassifier Properties</a></div><div class="toclevel2" data-toclevel="2"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/Methods_T_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier.htm" title="CategoricalEntailmentEnsembleClassifier Methods" tocid="Methods_T_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier">CategoricalEntailmentEnsembleClassifier Methods</a></div></div><div id="tocResizableEW" onmousedown="OnMouseDown(event);"></div><div id="TocResize" class="tocResize"><img id="ResizeImageIncrease" src="../icons/TocOpen.gif" onclick="OnIncreaseToc()" alt="Click or drag to resize" title="Click or drag to resize" /><img id="ResizeImageReset" src="../icons/TocClose.gif" style="display:none" onclick="OnResetToc()" alt="Click or drag to resize" title="Click or drag to resize" /></div></div><div class="topicContent" id="TopicContent"><table class="titleTable"><tr><td class="logoColumn"><img src="../icons/Help.png" /></td><td class="titleColumn"><h1>CategoricalEntailmentEnsembleClassifier Class</h1></td></tr></table><span class="introStyle"></span> <div class="summary">
+            Represents a classifier that exploits an ensemble of categorical
+            entailments to assign labels to items from a given feature
+            space.
+            </div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID0RB')" onkeypress="SectionExpandCollapse_CheckKey('ID0RB', event)" tabindex="0"><img id="ID0RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Inheritance Hierarchy</span></div><div id="ID0RBSection" class="collapsibleSection"><a href="https://docs.microsoft.com/dotnet/api/system.object" target="_blank">System<span id="LST401D2F27_0"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST401D2F27_0?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>Object</a><br />  <span class="selflink">Novacta.Analytics<span id="LST401D2F27_1"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST401D2F27_1?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>CategoricalEntailmentEnsembleClassifier</span><br /></div><p> </p>
+    <strong>Namespace:</strong> 
+   <a href="N_Novacta_Analytics.htm">Novacta.Analytics</a><br />
+    <strong>Assembly:</strong>
+   Novacta.Analytics (in Novacta.Analytics.dll) Version: 1.0.0<div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID2RB')" onkeypress="SectionExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Syntax</span></div><div id="ID2RBSection" class="collapsibleSection"><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID1EDCA_tab1" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID1EDCA','cs','1','4');return false;">C#</a></div><div id="ID1EDCA_tab2" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID1EDCA','vb','2','4');return false;">VB</a></div><div id="ID1EDCA_tab3" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID1EDCA','cpp','3','4');return false;">C++</a></div><div id="ID1EDCA_tab4" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID1EDCA','fs','4','4');return false;">F#</a></div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EDCA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EDCA');return false;" title="Copy">Copy</a></div></div><div id="ID1EDCA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="keyword">public</span> <span class="keyword">class</span> <span class="identifier">CategoricalEntailmentEnsembleClassifier</span></pre></div><div id="ID1EDCA_code_Div2" class="codeSnippetContainerCode" style="display: none"><pre xml:space="preserve"><span class="keyword">Public</span> <span class="keyword">Class</span> <span class="identifier">CategoricalEntailmentEnsembleClassifier</span></pre></div><div id="ID1EDCA_code_Div3" class="codeSnippetContainerCode" style="display: none"><pre xml:space="preserve"><span class="keyword">public</span> <span class="keyword">ref class</span> <span class="identifier">CategoricalEntailmentEnsembleClassifier</span></pre></div><div id="ID1EDCA_code_Div4" class="codeSnippetContainerCode" style="display: none"><pre xml:space="preserve"><span class="keyword">type</span> <span class="identifier">CategoricalEntailmentEnsembleClassifier</span> =  <span class="keyword">class</span> <span class="keyword">end</span></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EDCA");</script></div><p>The <span class="selflink">CategoricalEntailmentEnsembleClassifier</span> type exposes the following members.</p><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Constructors</span></div><div id="ID3RBSection" class="collapsibleSection"><table class="members" id="constructorList"><tr><th class="iconColumn">
+								 
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier__ctor.htm">CategoricalEntailmentEnsembleClassifier</a></td><td><div class="summary">
+            Initializes a new instance of 
+            the <span class="selflink">CategoricalEntailmentEnsembleClassifier</span> class 
+            whose categorical entailments
+            will classify items from the space defined by the specified 
+            feature variables by assigning categories of 
+            the given response variable.
+            </div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Properties</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="propertyList"><tr><th class="iconColumn">
+								 
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier_Entailments.htm">Entailments</a></td><td><div class="summary">
+            Gets the list of categorical entailments contributing
+            to classification.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier_FeatureVariables.htm">FeatureVariables</a></td><td><div class="summary">
+            Gets the categorical variables defining the 
+            feature space whose items can be classified by
+            this instance.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier_ResponseVariable.htm">ResponseVariable</a></td><td><div class="summary">
+            Gets the response variable whose categories 
+            this instance exploits for classification.
+            </div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID5RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
+								 
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier_Add.htm">Add</a></td><td><div class="summary">
+            Adds to this instance a
+            <a href="T_Novacta_Analytics_CategoricalEntailment.htm">CategoricalEntailment</a> object having
+            the specified premises on feature variables, 
+            derived response category, and truth value.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier_AddTrained.htm">AddTrained</a></td><td><div class="summary">
+            Adds a number of new categorical entailments 
+            by training them together with 
+            the entailments currently included in this instance.
+            Training happens on the 
+            specified features and response categorical 
+            variables in a given data set.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier_Classify.htm">Classify</a></td><td><div class="summary">
+            Classifies the categorical items in the specified data set.
+            </div></td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_" target="_blank">Equals</a></td><td><div class="summary">Determines whether the specified object is equal to the current object.</div> (Inherited from <a href="https://docs.microsoft.com/dotnet/api/system.object" target="_blank">Object</a>.)</td></tr><tr data="public;static;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /><img src="../icons/static.gif" alt="Static member" title="Static member" /></td><td><a href="M_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier_EvaluateAccuracy.htm">EvaluateAccuracy</a></td><td><div class="summary">
+            Returns the accuracy of a predicted classification with respect
+            to an actual one.
+            </div></td></tr><tr data="protected;inherited;notNetfw;"><td><img src="../icons/protmethod.gif" alt="Protected method" title="Protected method" /></td><td><a href="https://docs.microsoft.com/dotnet/api/system.object.finalize#System_Object_Finalize" target="_blank">Finalize</a></td><td><div class="summary">Allows an object to try to free resources and perform other cleanup operations before it is reclaimed by garbage collection.</div> (Inherited from <a href="https://docs.microsoft.com/dotnet/api/system.object" target="_blank">Object</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode" target="_blank">GetHashCode</a></td><td><div class="summary">Serves as the default hash function.</div> (Inherited from <a href="https://docs.microsoft.com/dotnet/api/system.object" target="_blank">Object</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType" target="_blank">GetType</a></td><td><div class="summary">Gets the <a href="https://docs.microsoft.com/dotnet/api/system.type" target="_blank">Type</a> of the current instance.</div> (Inherited from <a href="https://docs.microsoft.com/dotnet/api/system.object" target="_blank">Object</a>.)</td></tr><tr data="protected;inherited;notNetfw;"><td><img src="../icons/protmethod.gif" alt="Protected method" title="Protected method" /></td><td><a href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone" target="_blank">MemberwiseClone</a></td><td><div class="summary">Creates a shallow copy of the current <a href="https://docs.microsoft.com/dotnet/api/system.object" target="_blank">Object</a>.</div> (Inherited from <a href="https://docs.microsoft.com/dotnet/api/system.object" target="_blank">Object</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString" target="_blank">ToString</a></td><td><div class="summary">Returns a string that represents the current object.</div> (Inherited from <a href="https://docs.microsoft.com/dotnet/api/system.object" target="_blank">Object</a>.)</td></tr><tr data="public;static;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /><img src="../icons/static.gif" alt="Static member" title="Static member" /></td><td><a href="M_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier_Train.htm">Train</a></td><td><div class="summary">
+            Initializes a new instance of the 
+            <span class="selflink">CategoricalEntailmentEnsembleClassifier</span> class 
+            by training an ensemble of categorical entailments on the 
+            specified features and response categorical 
+            variables in a given data set.
+            </div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID6RB')" onkeypress="SectionExpandCollapse_CheckKey('ID6RB', event)" tabindex="0"><img id="ID6RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID6RBSection" class="collapsibleSection"><p><b>Categorical entailments for maximal accuracy</b></p><p>
+            Let us assume that items from a given categorical space 
+            <img alt="LaTeX equation" src="../media/latex_32.svg" style="vertical-align: -1px" /> must be 
+            classified into a set <img alt="LaTeX equation" src="../media/latex_33.svg" style="vertical-align: -0px" /> of labels. 
+            If <img alt="LaTeX equation" src="../media/latex_34.svg" style="vertical-align: -0px" /> input attributes 
+            are taken into account, and if attribute 
+            <img alt="LaTeX equation" src="../media/latex_35.svg" style="vertical-align: -4px" /> has nonempty
+            finite domain <img alt="LaTeX equation" src="../media/latex_36.svg" style="vertical-align: -2px" />, then 
+            <img alt="LaTeX equation" src="../media/latex_37.svg" style="vertical-align: -1px" /> can be represented as the 
+            Cartesian product <img alt="LaTeX equation" src="../media/latex_38.svg" style="vertical-align: -2px" />.
+            </p><p>
+            A <a href="T_Novacta_Analytics_CategoricalEntailment.htm">CategoricalEntailment</a> instance, 
+            say <img alt="LaTeX equation" src="../media/latex_39.svg" style="vertical-align: -0px" />, is a 
+            triple <img alt="LaTeX equation" src="../media/latex_40.svg" style="vertical-align: -4px" />, 
+            where <img alt="LaTeX equation" src="../media/latex_41.svg" style="vertical-align: -0px" /> is a subset of <img alt="LaTeX equation" src="../media/latex_42.svg" style="vertical-align: -1px" />, 
+            <img alt="LaTeX equation" src="../media/latex_43.svg" style="vertical-align: -4px" />, and <img alt="LaTeX equation" src="../media/latex_44.svg" style="vertical-align: -0px" /> is a truth value.
+            Given an 
+            instance <img alt="LaTeX equation" src="../media/latex_45.svg" style="vertical-align: -4px" />, the entailment will classify 
+            <img alt="LaTeX equation" src="../media/latex_46.svg" style="vertical-align: -4px" /> as <img alt="LaTeX equation" src="../media/latex_47.svg" style="vertical-align: -4px" /> if and 
+            only if <img alt="LaTeX equation" src="../media/latex_48.svg" style="vertical-align: -4px" />. 
+            </p><p><b>Instantiation and training</b></p><p>
+            Method <a href="M_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier_Train.htm">Train(CategoricalDataSet, IndexCollection, Int32, Int32, Boolean, Boolean)</a> returns
+            a <span class="selflink">CategoricalEntailmentEnsembleClassifier</span> instance 
+            whose ensemble of categorical entailments has been trained by 
+            maximizing the accuracy of label assignments to items in a 
+            specified data set.
+            </p><p>
+            Classifiers can also be instantiated by calling the constructor
+            <a href="M_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier__ctor.htm">CategoricalEntailmentEnsembleClassifier(IList<span id="LST401D2F27_2"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST401D2F27_2?cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=(");</script>CategoricalVariable<span id="LST401D2F27_3"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST401D2F27_3?cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)");</script>, CategoricalVariable)</a>, and then adding 
+            categorical entailments by calling method
+            <a href="M_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier_Add.htm">Add(IList<span id="LST401D2F27_4"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST401D2F27_4?cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=(");</script>SortedSet<span id="LST401D2F27_5"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST401D2F27_5?cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=(");</script>Double<span id="LST401D2F27_6"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST401D2F27_6?cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)");</script><span id="LST401D2F27_7"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST401D2F27_7?cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)");</script>, Double, Double)</a>, or 
+            <a href="M_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier_AddTrained.htm">AddTrained(CategoricalDataSet, IndexCollection, Int32, Int32, Boolean, Boolean)</a>.
+            </p><p>
+            Empty feature or response domains are not allowed. 
+            </p><p>
+            A premise can be empty, 
+            but in such case it is represented 
+            as matching the corresponding feature domain. 
+            Equivalently, a premise which is not a nonempty proper
+            subset of the domain is always 
+            valid for every item in the feature space.
+            </p><p><b>Classification</b></p><p>
+            Property <a href="P_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier_Entailments.htm">Entailments</a>
+            gets the list of the categorical entailments in the ensemble of a given
+            classifier.
+            </p><p>
+            Given a classifier based on, say, <img alt="LaTeX equation" src="../media/latex_49.svg" style="vertical-align: -0px" /> categorical 
+            entailments,
+            entailment <img alt="LaTeX equation" src="../media/latex_50.svg" style="vertical-align: -5px" />, 
+            with <img alt="LaTeX equation" src="../media/latex_51.svg" style="vertical-align: -4px" />,
+            is said to vote to classify <img alt="LaTeX equation" src="../media/latex_52.svg" style="vertical-align: -4px" /> as <img alt="LaTeX equation" src="../media/latex_53.svg" style="vertical-align: -4px" /> 
+            whenever <img alt="LaTeX equation" src="../media/latex_54.svg" style="vertical-align: -5px" />.  
+            Unlabeled items can thus be 
+            classified via the collection of 
+            <a href="P_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier_Entailments.htm">Entailments</a> by 
+            performing majority voting procedures, where 
+            the classification <img alt="LaTeX equation" src="../media/latex_55.svg" style="vertical-align: -2px" /> of a 
+            given item <img alt="LaTeX equation" src="../media/latex_56.svg" style="vertical-align: -4px" />, is defined as 
+            satisfying
+            <br /><br /><img alt="LaTeX equation" src="../media/latex_57.svg" /><br /><br />
+            and ties are eventually resolved by selecting one of the 
+            maximizing arguments at random.
+            </p><p>
+            Method <a href="M_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier_Classify.htm">Classify(CategoricalDataSet, IndexCollection)</a> returns such classification
+            for a given collection of items in the feature space.
+            </p><p><b>Advanced scenarios</b></p><p>
+            Internally, the problem of training an ensemble of 
+            categorical entailments is solved 
+            via a default 
+            Cross-Entropy context of type
+            <a href="T_Novacta_Analytics_Advanced_CategoricalEntailmentEnsembleOptimizationContext.htm">CategoricalEntailmentEnsembleOptimizationContext</a>.
+            For advanced scenarios, in which additional control on the 
+            parameters of the underlying algorithm is needed, or a 
+            different performance function should be optimized, a specialized 
+            context can be instantiated and hence exploited executing
+            method <a href="M_Novacta_Analytics_Advanced_SystemPerformanceOptimizer_Optimize.htm">Optimize</a>
+            on a <a href="T_Novacta_Analytics_Advanced_SystemPerformanceOptimizer.htm">SystemPerformanceOptimizer</a> 
+            object.
+            </p></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID7RB')" onkeypress="SectionExpandCollapse_CheckKey('ID7RB', event)" tabindex="0"><img id="ID7RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Examples</span></div><div id="ID7RBSection" class="collapsibleSection"><p>
+            In the following example, a classifier is trained on
+            a categorical data set. Items are thus classified and
+            the corresponding accuracy computed.
+            </p><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID1EAACBA_tab1" class="codeSnippetContainerTabSingle">Exploiting a classifier based on an ensemble of categorical entailments</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-keyword">using</span> System;
+<span class="highlight-keyword">using</span> System.Collections.Generic;
+
+<span class="highlight-keyword">namespace</span> Novacta.Analytics.CodeExamples
+{
+    <span class="highlight-keyword">public</span> <span class="highlight-keyword">class</span> CategoricalEntailmentEnsembleClassifierExample0  
+    {
+        <span class="highlight-keyword">public</span> <span class="highlight-keyword">void</span> Main()
+        {
+            <span class="highlight-comment">// Create the feature variables.</span>
+            <span class="highlight-class-name">CategoricalVariable</span> f0 = <span class="highlight-keyword">new</span> <span class="highlight-class-name">CategoricalVariable</span>(<span class="highlight-literal">"F-0"</span>)
+            {
+                { <span class="highlight-number">0</span>, <span class="highlight-literal">"A"</span> },
+                { <span class="highlight-number">1</span>, <span class="highlight-literal">"B"</span> },
+                { <span class="highlight-number">2</span>, <span class="highlight-literal">"C"</span> },
+                { <span class="highlight-number">3</span>, <span class="highlight-literal">"D"</span> },
+                { <span class="highlight-number">4</span>, <span class="highlight-literal">"E"</span> }
+            };
+            f0.SetAsReadOnly();
+
+            <span class="highlight-class-name">CategoricalVariable</span> f1 = <span class="highlight-keyword">new</span> <span class="highlight-class-name">CategoricalVariable</span>(<span class="highlight-literal">"F-1"</span>)
+            {
+                { <span class="highlight-number">0</span>, <span class="highlight-literal">"I"</span> },
+                { <span class="highlight-number">1</span>, <span class="highlight-literal">"II"</span> },
+                { <span class="highlight-number">2</span>, <span class="highlight-literal">"III"</span> },
+                { <span class="highlight-number">3</span>, <span class="highlight-literal">"IV"</span> }
+            };
+            f1.SetAsReadOnly();
+
+            <span class="highlight-comment">// Create the response variable.</span>
+            <span class="highlight-class-name">CategoricalVariable</span> r = <span class="highlight-keyword">new</span> <span class="highlight-class-name">CategoricalVariable</span>(<span class="highlight-literal">"R"</span>)
+            {
+                <span class="highlight-number">0</span>,
+                <span class="highlight-number">1</span>,
+                <span class="highlight-number">2</span>
+            };
+            r.SetAsReadOnly();
+
+            <span class="highlight-comment">// Create a categorical data set containing</span>
+            <span class="highlight-comment">// observations about such variables.</span>
+            List&lt;<span class="highlight-class-name">CategoricalVariable</span>&gt; variables =
+                <span class="highlight-keyword">new</span> List&lt;<span class="highlight-class-name">CategoricalVariable</span>&gt;() { f0, f1, r };
+
+            <span class="highlight-class-name">DoubleMatrix</span> data = <span class="highlight-class-name">DoubleMatrix</span>.Dense(
+                <span class="highlight-keyword">new</span> <span class="highlight-keyword">double</span>[<span class="highlight-number">20</span>, <span class="highlight-number">3</span>] {
+                    { <span class="highlight-number">0</span>, <span class="highlight-number">0</span>, <span class="highlight-number">0</span> },
+                    { <span class="highlight-number">0</span>, <span class="highlight-number">1</span>, <span class="highlight-number">0</span> },
+                    { <span class="highlight-number">0</span>, <span class="highlight-number">2</span>, <span class="highlight-number">2</span> },
+                    { <span class="highlight-number">0</span>, <span class="highlight-number">3</span>, <span class="highlight-number">2</span> },
+
+                    { <span class="highlight-number">1</span>, <span class="highlight-number">0</span>, <span class="highlight-number">0</span> },
+                    { <span class="highlight-number">1</span>, <span class="highlight-number">1</span>, <span class="highlight-number">0</span> },
+                    { <span class="highlight-number">1</span>, <span class="highlight-number">2</span>, <span class="highlight-number">2</span> },
+                    { <span class="highlight-number">1</span>, <span class="highlight-number">3</span>, <span class="highlight-number">2</span> },
+
+                    { <span class="highlight-number">2</span>, <span class="highlight-number">0</span>, <span class="highlight-number">0</span> },
+                    { <span class="highlight-number">2</span>, <span class="highlight-number">1</span>, <span class="highlight-number">0</span> },
+                    { <span class="highlight-number">2</span>, <span class="highlight-number">2</span>, <span class="highlight-number">2</span> },
+                    { <span class="highlight-number">2</span>, <span class="highlight-number">3</span>, <span class="highlight-number">2</span> },
+
+                    { <span class="highlight-number">3</span>, <span class="highlight-number">0</span>, <span class="highlight-number">1</span> },
+                    { <span class="highlight-number">3</span>, <span class="highlight-number">1</span>, <span class="highlight-number">1</span> },
+                    { <span class="highlight-number">3</span>, <span class="highlight-number">2</span>, <span class="highlight-number">1</span> },
+                    { <span class="highlight-number">3</span>, <span class="highlight-number">3</span>, <span class="highlight-number">1</span> },
+
+                    { <span class="highlight-number">4</span>, <span class="highlight-number">0</span>, <span class="highlight-number">1</span> },
+                    { <span class="highlight-number">4</span>, <span class="highlight-number">1</span>, <span class="highlight-number">1</span> },
+                    { <span class="highlight-number">4</span>, <span class="highlight-number">2</span>, <span class="highlight-number">1</span> },
+                    { <span class="highlight-number">4</span>, <span class="highlight-number">3</span>, <span class="highlight-number">1</span> } });
+
+            <span class="highlight-class-name">CategoricalDataSet</span> dataSet = <span class="highlight-class-name">CategoricalDataSet</span>.FromEncodedData(
+                variables,
+                data);
+
+            <span class="highlight-comment">// Train a classifier on the specified data set.</span>
+            <span class="highlight-keyword">var</span> classifier = <span class="highlight-class-name">CategoricalEntailmentEnsembleClassifier</span>.Train(
+                dataSet: dataSet,
+                featureVariableIndexes: <span class="highlight-class-name">IndexCollection</span>.Range(<span class="highlight-number">0</span>, <span class="highlight-number">1</span>),
+                responseVariableIndex: <span class="highlight-number">2</span>,
+                numberOfTrainedCategoricalEntailments: <span class="highlight-number">3</span>,
+                allowEntailmentPartialTruthValues: <span class="highlight-keyword">false</span>,
+                trainSequentially: <span class="highlight-keyword">true</span>);
+
+            <span class="highlight-comment">// Show the ensemble of categorical entailments</span>
+            <span class="highlight-comment">// in the trained classifier.</span>
+            <span class="highlight-keyword">foreach</span> (<span class="highlight-keyword">var</span> entailment <span class="highlight-keyword">in</span> classifier.Entailments)
+            {
+                Console.WriteLine(entailment);
+            }
+
+            <span class="highlight-comment">// Classify the items in the data set.</span>
+            <span class="highlight-keyword">var</span> predicted = classifier.Classify(dataSet, <span class="highlight-class-name">IndexCollection</span>.Range(<span class="highlight-number">0</span>, <span class="highlight-number">1</span>));
+
+            <span class="highlight-comment">// Evaluate and show the accuracy of the predicted classification </span>
+            <span class="highlight-comment">// with respect to the actual one.</span>
+            <span class="highlight-keyword">var</span> actual = dataSet[<span class="highlight-literal">":"</span>, <span class="highlight-number">2</span>];
+
+            <span class="highlight-keyword">var</span> accuracy = <span class="highlight-class-name">CategoricalEntailmentEnsembleClassifier</span>.EvaluateAccuracy(
+                predictedDataSet: predicted,
+                predictedResponseVariableIndex: <span class="highlight-number">0</span>,
+                actualDataSet: actual,
+                actualResponseVariableIndex: <span class="highlight-number">0</span>);
+            Console.WriteLine(<span class="highlight-literal">"Accuracy: {0}"</span>, accuracy);
+        }
+    }
+}
+
+<span class="highlight-comment">// Executing method Main() produces the following output:</span>
+<span class="highlight-comment">// </span>
+<span class="highlight-comment">//  IF </span>
+<span class="highlight-comment">//  F-0 IN { 3 4 } </span>
+<span class="highlight-comment">//  AND </span>
+<span class="highlight-comment">//  F-1 IN { 0 1 2 3 } </span>
+<span class="highlight-comment">//  THEN </span>
+<span class="highlight-comment">//  R IS 1</span>
+<span class="highlight-comment">//  WITH TRUTH VALUE 1</span>
+<span class="highlight-comment">// </span>
+<span class="highlight-comment">//  IF </span>
+<span class="highlight-comment">//  F-0 IN { 0 1 2 } </span>
+<span class="highlight-comment">//  AND </span>
+<span class="highlight-comment">//  F-1 IN { 0 1 } </span>
+<span class="highlight-comment">//  THEN </span>
+<span class="highlight-comment">//  R IS 0</span>
+<span class="highlight-comment">//  WITH TRUTH VALUE 1</span>
+<span class="highlight-comment">// </span>
+<span class="highlight-comment">//  IF </span>
+<span class="highlight-comment">//  F-0 IN { 0 1 2 } </span>
+<span class="highlight-comment">//  AND </span>
+<span class="highlight-comment">//  F-1 IN { 2 3 } </span>
+<span class="highlight-comment">//  THEN </span>
+<span class="highlight-comment">//  R IS 2</span>
+<span class="highlight-comment">//  WITH TRUTH VALUE 1</span>
+<span class="highlight-comment">// </span>
+<span class="highlight-comment">// Accuracy: 1</span></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EAACBA");</script></div><div class="collapsibleAreaRegion" id="seeAlsoSection"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID8RB')" onkeypress="SectionExpandCollapse_CheckKey('ID8RB', event)" tabindex="0"><img id="ID8RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />See Also</span></div><div id="ID8RBSection" class="collapsibleSection"><h4 class="subHeading">Reference</h4><div class="seeAlsoStyle"><a href="N_Novacta_Analytics.htm">Novacta.Analytics Namespace</a></div><div class="seeAlsoStyle"><a href="T_Novacta_Analytics_CategoricalEntailment.htm">Novacta.Analytics<span id="LST401D2F27_8"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST401D2F27_8?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>CategoricalEntailment</a></div><div class="seeAlsoStyle"><a href="T_Novacta_Analytics_Advanced_CategoricalEntailmentEnsembleOptimizationContext.htm">Novacta.Analytics.Advanced<span id="LST401D2F27_9"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST401D2F27_9?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>CategoricalEntailmentEnsembleOptimizationContext</a></div></div></div></div><div id="pageFooter" class="pageFooter"><p>Copyright (c) Giovanni Lafratta</p> </div></body></html>

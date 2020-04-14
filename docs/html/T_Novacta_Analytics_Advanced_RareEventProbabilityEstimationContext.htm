@@ -1,0 +1,486 @@
+﻿<html><head><meta http-equiv="X-UA-Compatible" content="IE=edge" /><link rel="shortcut icon" href="../icons/favicon.ico" /><link rel="stylesheet" type="text/css" href="../styles/branding.css" /><link rel="stylesheet" type="text/css" href="../styles/branding-en-US.css" /><script type="text/javascript" src="../scripts/branding.js"> </script><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>RareEventProbabilityEstimationContext Class</title><meta name="Language" content="en-us" /><meta name="System.Keywords" content="RareEventProbabilityEstimationContext class" /><meta name="System.Keywords" content="Novacta.Analytics.Advanced.RareEventProbabilityEstimationContext class" /><meta name="Microsoft.Help.F1" content="Novacta.Analytics.Advanced.RareEventProbabilityEstimationContext" /><meta name="Microsoft.Help.Id" content="T:Novacta.Analytics.Advanced.RareEventProbabilityEstimationContext" /><meta name="Description" content="Represents a Cross-Entropy context in which the estimation of a rare event probability is obtained by exploiting a instance." /><meta name="Microsoft.Help.ContentType" content="Reference" /><meta name="BrandingAware" content="true" /><meta name="container" content="Novacta.Analytics.Advanced" /><meta name="file" content="T_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext" /><meta name="guid" content="T_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext" /><link type="text/css" rel="stylesheet" href="../styles/highlight.css" /><script type="text/javascript" src="../scripts/highlight.js"> </script><link rel="stylesheet" type="text/css" href="../styles/branding-Website.css" /><script type="text/javascript" src="../scripts/jquery-3.3.1.min.js"></script><script type="text/javascript" src="../scripts/branding-Website.js"></script><script type="text/javascript" src="../scripts/clipboard.min.js"></script></head><body onload="OnLoad('cs')"><input type="hidden" id="userDataCache" class="userDataStyle" /><div class="pageHeader" id="PageHeader">Novacta.Analytics Documentation<form id="SearchForm" method="get" action="#" onsubmit="javascript:TransferToSearchPage(); return false;"><input id="SearchTextBox" type="text" maxlength="200" /><button id="SearchButton" type="submit"></button></form></div><div class="pageBody"><div class="leftNav" id="leftNav"><div id="tocNav"><div class="toclevel0" data-toclevel="0"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/a4ea75a2-ef53-4ea2-a7f4-b493a50f90b3.htm" title="Novacta.Analytics Documentation" tocid="roottoc">Novacta.Analytics Documentation</a></div><div class="toclevel0" data-toclevel="0"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/G_Novacta_Analytics.htm" title="Novacta.Analytics Namespaces" tocid="G_Novacta_Analytics">Novacta.Analytics Namespaces</a></div><div class="toclevel0" data-toclevel="0"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/N_Novacta_Analytics_Advanced.htm" title="Novacta.Analytics.Advanced" tocid="N_Novacta_Analytics_Advanced">Novacta.Analytics.Advanced</a></div><div class="toclevel1 current" data-toclevel="1" data-childrenloaded="true"><a class="tocExpanded" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/T_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext.htm" title="RareEventProbabilityEstimationContext Class" tocid="T_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext">RareEventProbabilityEstimationContext Class</a></div><div class="toclevel2" data-toclevel="2"><a data-tochassubtree="false" href="../html/M_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext__ctor.htm" title="RareEventProbabilityEstimationContext Constructor " tocid="M_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext__ctor">RareEventProbabilityEstimationContext Constructor </a></div><div class="toclevel2" data-toclevel="2"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/Properties_T_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext.htm" title="RareEventProbabilityEstimationContext Properties" tocid="Properties_T_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext">RareEventProbabilityEstimationContext Properties</a></div><div class="toclevel2" data-toclevel="2"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/Methods_T_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext.htm" title="RareEventProbabilityEstimationContext Methods" tocid="Methods_T_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext">RareEventProbabilityEstimationContext Methods</a></div></div><div id="tocResizableEW" onmousedown="OnMouseDown(event);"></div><div id="TocResize" class="tocResize"><img id="ResizeImageIncrease" src="../icons/TocOpen.gif" onclick="OnIncreaseToc()" alt="Click or drag to resize" title="Click or drag to resize" /><img id="ResizeImageReset" src="../icons/TocClose.gif" style="display:none" onclick="OnResetToc()" alt="Click or drag to resize" title="Click or drag to resize" /></div></div><div class="topicContent" id="TopicContent"><table class="titleTable"><tr><td class="logoColumn"><img src="../icons/Help.png" /></td><td class="titleColumn"><h1>RareEventProbabilityEstimationContext Class</h1></td></tr></table><span class="introStyle"></span> <div class="summary">
+             Represents a Cross-Entropy context in which the 
+             estimation of a rare event probability 
+             is obtained by exploiting 
+             a <a href="T_Novacta_Analytics_Advanced_RareEventProbabilityEstimator.htm">RareEventProbabilityEstimator</a> instance.
+             </div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID0RB')" onkeypress="SectionExpandCollapse_CheckKey('ID0RB', event)" tabindex="0"><img id="ID0RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Inheritance Hierarchy</span></div><div id="ID0RBSection" class="collapsibleSection"><a href="https://docs.microsoft.com/dotnet/api/system.object" target="_blank">System<span id="LSTF877CA6A_0"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF877CA6A_0?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>Object</a><br />  <a href="T_Novacta_Analytics_Advanced_CrossEntropyContext.htm">Novacta.Analytics.Advanced<span id="LSTF877CA6A_1"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF877CA6A_1?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>CrossEntropyContext</a><br />    <span class="selflink">Novacta.Analytics.Advanced<span id="LSTF877CA6A_2"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF877CA6A_2?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>RareEventProbabilityEstimationContext</span><br /></div><p> </p>
+    <strong>Namespace:</strong> 
+   <a href="N_Novacta_Analytics_Advanced.htm">Novacta.Analytics.Advanced</a><br />
+    <strong>Assembly:</strong>
+   Novacta.Analytics (in Novacta.Analytics.dll) Version: 1.0.0<div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID2RB')" onkeypress="SectionExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Syntax</span></div><div id="ID2RBSection" class="collapsibleSection"><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID1EDCA_tab1" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID1EDCA','cs','1','4');return false;">C#</a></div><div id="ID1EDCA_tab2" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID1EDCA','vb','2','4');return false;">VB</a></div><div id="ID1EDCA_tab3" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID1EDCA','cpp','3','4');return false;">C++</a></div><div id="ID1EDCA_tab4" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID1EDCA','fs','4','4');return false;">F#</a></div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EDCA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EDCA');return false;" title="Copy">Copy</a></div></div><div id="ID1EDCA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="identifier">RareEventProbabilityEstimationContext</span> : <span class="identifier">CrossEntropyContext</span></pre></div><div id="ID1EDCA_code_Div2" class="codeSnippetContainerCode" style="display: none"><pre xml:space="preserve"><span class="keyword">Public</span> <span class="keyword">MustInherit</span> <span class="keyword">Class</span> <span class="identifier">RareEventProbabilityEstimationContext</span>
+	<span class="keyword">Inherits</span> <span class="identifier">CrossEntropyContext</span></pre></div><div id="ID1EDCA_code_Div3" class="codeSnippetContainerCode" style="display: none"><pre xml:space="preserve"><span class="keyword">public</span> <span class="keyword">ref class</span> <span class="identifier">RareEventProbabilityEstimationContext</span> <span class="keyword">abstract</span> : <span class="keyword">public</span> <span class="identifier">CrossEntropyContext</span></pre></div><div id="ID1EDCA_code_Div4" class="codeSnippetContainerCode" style="display: none"><pre xml:space="preserve">[&lt;<span class="identifier">AbstractClassAttribute</span>&gt;]
+<span class="keyword">type</span> <span class="identifier">RareEventProbabilityEstimationContext</span> =  
+    <span class="keyword">class</span>
+        <span class="keyword">inherit</span> <span class="identifier">CrossEntropyContext</span>
+    <span class="keyword">end</span></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EDCA");</script></div><p>The <span class="selflink">RareEventProbabilityEstimationContext</span> type exposes the following members.</p><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Constructors</span></div><div id="ID3RBSection" class="collapsibleSection"><table class="members" id="constructorList"><tr><th class="iconColumn">
+								 
+							</th><th>Name</th><th>Description</th></tr><tr data="protected;declared;notNetfw;"><td><img src="../icons/protmethod.gif" alt="Protected method" title="Protected method" /></td><td><a href="M_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext__ctor.htm">RareEventProbabilityEstimationContext</a></td><td><div class="summary">
+            Initializes a new instance of the 
+            <span class="selflink">RareEventProbabilityEstimationContext</span> class 
+            having the specified state dimension, threshold level,
+            and boundedness.
+            </div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Properties</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="propertyList"><tr><th class="iconColumn">
+								 
+							</th><th>Name</th><th>Description</th></tr><tr data="protected;declared;notNetfw;"><td><img src="../icons/protproperty.gif" alt="Protected property" title="Protected property" /></td><td><a href="P_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext_EliteSampleDefinition.htm">EliteSampleDefinition</a></td><td><div class="summary">
+            Gets the elite sample definition for this context.
+            </div> (Overrides <a href="P_Novacta_Analytics_Advanced_CrossEntropyContext_EliteSampleDefinition.htm">CrossEntropyContext<span id="LSTF877CA6A_3"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF877CA6A_3?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>EliteSampleDefinition</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_Novacta_Analytics_Advanced_CrossEntropyContext_InitialParameter.htm">InitialParameter</a></td><td><div class="summary">
+            Gets the parameter initially exploited to sample from 
+            the state-space of the system defined by this context.
+            </div> (Inherited from <a href="T_Novacta_Analytics_Advanced_CrossEntropyContext.htm">CrossEntropyContext</a>.)</td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext_RareEventPerformanceBoundedness.htm">RareEventPerformanceBoundedness</a></td><td><div class="summary">
+            Gets a constant specifying if the rare event is a 
+            set of states whose performances are lower or upper bounded 
+            by the <a href="P_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext_ThresholdLevel.htm">ThresholdLevel</a> of this instance.
+            </div></td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_Novacta_Analytics_Advanced_CrossEntropyContext_StateDimension.htm">StateDimension</a></td><td><div class="summary">
+            Gets or sets the dimension of a vector representing a 
+            system's state
+            when 
+            a <a href="T_Novacta_Analytics_Advanced_CrossEntropyProgram.htm">CrossEntropyProgram</a> executes in this
+            context.
+            </div> (Inherited from <a href="T_Novacta_Analytics_Advanced_CrossEntropyContext.htm">CrossEntropyContext</a>.)</td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext_ThresholdLevel.htm">ThresholdLevel</a></td><td><div class="summary">
+            Get the threshold level applied to bound the 
+            performances characterizing the rare event
+            taken into account by this context.
+            </div></td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_Novacta_Analytics_Advanced_CrossEntropyContext_TraceExecution.htm">TraceExecution</a></td><td><div class="summary">
+            Gets or sets a value indicating whether the 
+            execution of this context must be traced.
+            </div> (Inherited from <a href="T_Novacta_Analytics_Advanced_CrossEntropyContext.htm">CrossEntropyContext</a>.)</td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID5RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
+								 
+							</th><th>Name</th><th>Description</th></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_" target="_blank">Equals</a></td><td><div class="summary">Determines whether the specified object is equal to the current object.</div> (Inherited from <a href="https://docs.microsoft.com/dotnet/api/system.object" target="_blank">Object</a>.)</td></tr><tr data="protected;inherited;notNetfw;"><td><img src="../icons/protmethod.gif" alt="Protected method" title="Protected method" /></td><td><a href="https://docs.microsoft.com/dotnet/api/system.object.finalize#System_Object_Finalize" target="_blank">Finalize</a></td><td><div class="summary">Allows an object to try to free resources and perform other cleanup operations before it is reclaimed by garbage collection.</div> (Inherited from <a href="https://docs.microsoft.com/dotnet/api/system.object" target="_blank">Object</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode" target="_blank">GetHashCode</a></td><td><div class="summary">Serves as the default hash function.</div> (Inherited from <a href="https://docs.microsoft.com/dotnet/api/system.object" target="_blank">Object</a>.)</td></tr><tr data="protected;declared;notNetfw;"><td><img src="../icons/protmethod.gif" alt="Protected method" title="Protected method" /></td><td><a href="M_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext_GetLikelihoodRatio.htm">GetLikelihoodRatio</a></td><td><div class="summary">
+            Gets the likelihood ratio of a nominal density to 
+            a given reference one, 
+            evaluated at the specified sample point.
+            </div></td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType" target="_blank">GetType</a></td><td><div class="summary">Gets the <a href="https://docs.microsoft.com/dotnet/api/system.type" target="_blank">Type</a> of the current instance.</div> (Inherited from <a href="https://docs.microsoft.com/dotnet/api/system.object" target="_blank">Object</a>.)</td></tr><tr data="protected;inherited;notNetfw;"><td><img src="../icons/protmethod.gif" alt="Protected method" title="Protected method" /></td><td><a href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone" target="_blank">MemberwiseClone</a></td><td><div class="summary">Creates a shallow copy of the current <a href="https://docs.microsoft.com/dotnet/api/system.object" target="_blank">Object</a>.</div> (Inherited from <a href="https://docs.microsoft.com/dotnet/api/system.object" target="_blank">Object</a>.)</td></tr><tr data="protected;inherited;notNetfw;"><td><img src="../icons/protmethod.gif" alt="Protected method" title="Protected method" /></td><td><a href="M_Novacta_Analytics_Advanced_CrossEntropyContext_OnExecutedIteration.htm">OnExecutedIteration</a></td><td><div class="summary">
+            Called after completion of each iteration of 
+            a <a href="T_Novacta_Analytics_Advanced_CrossEntropyProgram.htm">CrossEntropyProgram</a> executing in this
+            context.
+            </div> (Inherited from <a href="T_Novacta_Analytics_Advanced_CrossEntropyContext.htm">CrossEntropyContext</a>.)</td></tr><tr data="protected;inherited;notNetfw;"><td><img src="../icons/protmethod.gif" alt="Protected method" title="Protected method" /></td><td><a href="M_Novacta_Analytics_Advanced_CrossEntropyContext_PartialSample.htm">PartialSample</a></td><td><div class="summary">
+            Draws the specified subset of a sample from a distribution 
+            characterized by the given parameter, using the stated
+            random number generator. Used when executing the sampling
+            step of a  <a href="T_Novacta_Analytics_Advanced_CrossEntropyProgram.htm">CrossEntropyProgram</a> running
+            in this context.
+            </div> (Inherited from <a href="T_Novacta_Analytics_Advanced_CrossEntropyContext.htm">CrossEntropyContext</a>.)</td></tr><tr data="protected;inherited;notNetfw;"><td><img src="../icons/protmethod.gif" alt="Protected method" title="Protected method" /></td><td><a href="M_Novacta_Analytics_Advanced_CrossEntropyContext_Performance.htm">Performance</a></td><td><div class="summary">
+            Defines the performance of a specified state
+            in this context.
+            </div> (Inherited from <a href="T_Novacta_Analytics_Advanced_CrossEntropyContext.htm">CrossEntropyContext</a>.)</td></tr><tr data="protected;declared;notNetfw;"><td><img src="../icons/protmethod.gif" alt="Protected method" title="Protected method" /></td><td><a href="M_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext_StopExecution.htm">StopExecution</a></td><td><div class="summary">
+            Specifies conditions 
+            under which 
+            a <a href="T_Novacta_Analytics_Advanced_CrossEntropyProgram.htm">CrossEntropyProgram</a> executing in this 
+            context should be considered 
+            as terminated.
+            </div> (Overrides <a href="M_Novacta_Analytics_Advanced_CrossEntropyContext_StopExecution.htm">CrossEntropyContext<span id="LSTF877CA6A_4"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF877CA6A_4?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>StopExecution(Int32, LinkedList<span id="LSTF877CA6A_5"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF877CA6A_5?cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=(");</script>Double<span id="LSTF877CA6A_6"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF877CA6A_6?cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)");</script>, LinkedList<span id="LSTF877CA6A_7"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF877CA6A_7?cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=(");</script>DoubleMatrix<span id="LSTF877CA6A_8"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF877CA6A_8?cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)");</script>)</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString" target="_blank">ToString</a></td><td><div class="summary">Returns a string that represents the current object.</div> (Inherited from <a href="https://docs.microsoft.com/dotnet/api/system.object" target="_blank">Object</a>.)</td></tr><tr data="protected;declared;notNetfw;"><td><img src="../icons/protmethod.gif" alt="Protected method" title="Protected method" /></td><td><a href="M_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext_UpdateLevel.htm">UpdateLevel</a></td><td><div class="summary">
+            Updates the performance level for the current iteration 
+            of a  <a href="T_Novacta_Analytics_Advanced_CrossEntropyProgram.htm">CrossEntropyProgram</a> executing in
+            this context
+            and determines the corresponding elite sample.
+            </div> (Overrides <a href="M_Novacta_Analytics_Advanced_CrossEntropyContext_UpdateLevel.htm">CrossEntropyContext<span id="LSTF877CA6A_9"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF877CA6A_9?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>UpdateLevel(DoubleMatrix, DoubleMatrix, EliteSampleDefinition, Double, DoubleMatrix<span id="LSTF877CA6A_10"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF877CA6A_10?cpp=%");</script>)</a>.)</td></tr><tr data="protected;inherited;notNetfw;"><td><img src="../icons/protmethod.gif" alt="Protected method" title="Protected method" /></td><td><a href="M_Novacta_Analytics_Advanced_CrossEntropyContext_UpdateParameter.htm">UpdateParameter</a></td><td><div class="summary">
+            Updates the 
+            sampling parameter attending the generation 
+            of the sample in the next iteration of a 
+             <a href="T_Novacta_Analytics_Advanced_CrossEntropyProgram.htm">CrossEntropyProgram</a> executing in 
+             this context.
+            </div> (Inherited from <a href="T_Novacta_Analytics_Advanced_CrossEntropyContext.htm">CrossEntropyContext</a>.)</td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID6RB')" onkeypress="SectionExpandCollapse_CheckKey('ID6RB', event)" tabindex="0"><img id="ID6RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID6RBSection" class="collapsibleSection"><p>
+             A <a href="T_Novacta_Analytics_Advanced_RareEventProbabilityEstimator.htm">RareEventProbabilityEstimator</a> is executed by calling its 
+             <a href="M_Novacta_Analytics_Advanced_RareEventProbabilityEstimator_Estimate.htm">Estimate</a> 
+             method. This is a 
+             template method, in the sense that it defines the 
+             invariant parts of a Cross-Entropy program for rare event simulation.
+             Such method relies on an instance of 
+             class <span class="selflink">RareEventProbabilityEstimationContext</span>, which is 
+             passed as a parameter to it and specifies the 
+             <em>primitive operations</em> 
+             of the template method, i.e. 
+             those varying steps of the algorithm that depends 
+             on the problem under study.
+             </p><p>
+             Class <span class="selflink">RareEventProbabilityEstimationContext</span> thoroughly 
+             defines the rare event of interest, and supplies the 
+             primitive operations as abstract methods, that its 
+             subclasses will override to provide the concrete 
+             behavior of the estimator.
+             </p><p>
+             A Cross-Entropy estimator is designed to evaluate the probability 
+             of rare events regarding the performance of complex systems.
+             It is assumed that such probability must be evaluated 
+             with respect to a specific density function, member of a parametric 
+             family  
+             <br /><br /><img alt="LaTeX equation" src="../media/latex_2718.svg" /><br /><br />
+             where <img alt="LaTeX equation" src="../media/latex_2719.svg" style="vertical-align: -0px" /> is a vector representing 
+             a possible state of the system, 
+             and <img alt="LaTeX equation" src="../media/latex_2720.svg" style="vertical-align: -1px" /> is the set of allowable 
+             values for parameter <img alt="LaTeX equation" src="../media/latex_2721.svg" style="vertical-align: -0px" />. 
+             </p><p>
+             Let <img alt="LaTeX equation" src="../media/latex_2722.svg" style="vertical-align: -0px" /> be
+             an extreme performance value, referred to as the 
+             <i>threshold level</i>, and consider  
+             the event <img alt="LaTeX equation" src="../media/latex_2723.svg" style="vertical-align: -4px" /> defined as 
+             <br /><br /><img alt="LaTeX equation" src="../media/latex_2724.svg" /><br /><br /> 
+             or 
+             <br /><br /><img alt="LaTeX equation" src="../media/latex_2725.svg" /><br /><br /> 
+             where <img alt="LaTeX equation" src="../media/latex_2726.svg" style="vertical-align: -0px" /> is the state space 
+             of the system and 
+             <img alt="LaTeX equation" src="../media/latex_2727.svg" style="vertical-align: -4px" /> is the function 
+             returning the system performance at state  
+             <img alt="LaTeX equation" src="../media/latex_2728.svg" style="vertical-align: -0px" />. Let us assume that 
+             the probability of an event 
+             having form <img alt="LaTeX equation" src="../media/latex_2729.svg" style="vertical-align: -2px" /> or <img alt="LaTeX equation" src="../media/latex_2730.svg" style="vertical-align: -2px" /> must 
+             be evaluated under the specific parameter 
+             value <img alt="LaTeX equation" src="../media/latex_2731.svg" style="vertical-align: -1px" />, 
+             the so called <i>nominal parameter</i>: such 
+             probabilities can be evaluated by a Cross-Entropy 
+             estimator.
+             </p><p>
+             At instantiation, the constructor of 
+             a <span class="selflink">RareEventProbabilityEstimationContext</span> object
+             will receive information about the rare event under study by
+             means of parameters representing <img alt="LaTeX equation" src="../media/latex_2732.svg" style="vertical-align: -0px" />,
+             <img alt="LaTeX equation" src="../media/latex_2733.svg" style="vertical-align: -0px" />, and a constant stating if the event has 
+             the form <img alt="LaTeX equation" src="../media/latex_2734.svg" style="vertical-align: -2px" /> or <img alt="LaTeX equation" src="../media/latex_2735.svg" style="vertical-align: -2px" />.
+             </p><p>
+             After construction, property 
+             <a href="P_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext_ThresholdLevel.htm">ThresholdLevel</a> represents 
+             <img alt="LaTeX equation" src="../media/latex_2736.svg" style="vertical-align: -0px" />, while <img alt="LaTeX equation" src="../media/latex_2737.svg" style="vertical-align: -0px" />
+             can be inspected via property <a href="P_Novacta_Analytics_Advanced_CrossEntropyContext_InitialParameter.htm">InitialParameter</a>. Lastly, 
+             property 
+             <a href="P_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext_RareEventPerformanceBoundedness.htm">RareEventPerformanceBoundedness</a> 
+             signals that the 
+             event has the form <img alt="LaTeX equation" src="../media/latex_2738.svg" style="vertical-align: -4px" /> if it 
+             evaluates to the constant <a href="T_Novacta_Analytics_Advanced_RareEventPerformanceBoundedness.htm">Lower</a>, or 
+             that it has the form <img alt="LaTeX equation" src="../media/latex_2739.svg" style="vertical-align: -4px" /> 
+             if it evaluates to
+             the constant <a href="T_Novacta_Analytics_Advanced_RareEventPerformanceBoundedness.htm">Upper</a>.
+             </p><p><b>Implementing a context for rare event simulation</b></p><p>
+             The Cross-Entropy method 
+             provides an iterative multi step procedure, where, at each 
+             iteration <img alt="LaTeX equation" src="../media/latex_2740.svg" style="vertical-align: -0px" />, the <i>sampling step</i>
+             is executed in order to generate diverse candidate states of 
+             the system, sampled from a distribution 
+             characterized by the <i>reference parameter</i> of the iteration,
+             say <img alt="LaTeX equation" src="../media/latex_2741.svg" style="vertical-align: -2px" />. 
+             Such sample is thus exploited in the <i>updating step</i>,
+             in which a new level 
+             <img alt="LaTeX equation" src="../media/latex_2742.svg" style="vertical-align: -2px" /> and a new <em>reference</em> 
+             parameter <img alt="LaTeX equation" src="../media/latex_2743.svg" style="vertical-align: -2px" /> are 
+             identified to modify the distribution from which the samples 
+             will be obtained in the next iteration, in order to improve 
+             the probability of sampling relevant states, i.e. those 
+             states corresponding to the performance excesses of interest
+             (See the documentation of class <a href="T_Novacta_Analytics_Advanced_CrossEntropyProgram.htm">CrossEntropyProgram</a> for a 
+             thorough discussion of the Cross-Entropy method). 
+             </p><p>
+             When the Cross-Entropy method is applied in an rare event 
+             context, the <i>estimating step</i> is executed, in which the rare event 
+             probability is effectively estimated.
+             </p><p>These steps must be implemented as follows.</p><p><b><i>Sampling step</i></b></p><p>
+             Since class <span class="selflink">RareEventProbabilityEstimationContext</span> derives 
+             from <a href="T_Novacta_Analytics_Advanced_CrossEntropyContext.htm">CrossEntropyContext</a>,  
+             property <a href="P_Novacta_Analytics_Advanced_CrossEntropyContext_StateDimension.htm">StateDimension</a> 
+             will return the dimension of the points in the Cross-Entropy samples.  
+             If a state <img alt="LaTeX equation" src="../media/latex_2744.svg" style="vertical-align: -0px" /> of the system 
+             can be represented as a vector of length 
+             <img alt="LaTeX equation" src="../media/latex_2745.svg" style="vertical-align: -0px" />, as in 
+             <img alt="LaTeX equation" src="../media/latex_2746.svg" style="vertical-align: -4px" />, then 
+             <img alt="LaTeX equation" src="../media/latex_2747.svg" style="vertical-align: -0px" /> should be returned.
+             In addition, method <a href="M_Novacta_Analytics_Advanced_CrossEntropyContext_PartialSample.htm">PartialSample(<span id="LSTF877CA6A_11"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF877CA6A_11?cpp=array&lt;");</script>Double<span id="LSTF877CA6A_12"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF877CA6A_12?cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]");</script>, Tuple<span id="LSTF877CA6A_13"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF877CA6A_13?cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=(");</script>Int32, Int32<span id="LSTF877CA6A_14"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF877CA6A_14?cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)");</script>, RandomNumberGenerator, DoubleMatrix, Int32)</a> 
+             must be overriden to determine how to draw the sample locally 
+             to a given thread when processing in parallel the sampling step.
+             </p><p><b><i>Updating step</i></b></p><p>
+             Class <span class="selflink">RareEventProbabilityEstimationContext</span> overrides 
+             for you the methods 
+             required for ordering the system performances of the states sampled 
+             in the previous step, and for updating the 
+             iteration levels.
+             However, to complete the implementation of the <i>updating step</i>, 
+             function <img alt="LaTeX equation" src="../media/latex_2748.svg" style="vertical-align: -0px" /> must be defined via 
+             method <a href="M_Novacta_Analytics_Advanced_CrossEntropyContext_Performance.htm">Performance(DoubleMatrix)</a>,
+             and method <a href="M_Novacta_Analytics_Advanced_CrossEntropyContext_UpdateParameter.htm">UpdateParameter(LinkedList<span id="LSTF877CA6A_15"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF877CA6A_15?cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=(");</script>DoubleMatrix<span id="LSTF877CA6A_16"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF877CA6A_16?cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)");</script>, DoubleMatrix)</a> 
+             also needs to be overridden. 
+             Given <img alt="LaTeX equation" src="../media/latex_2749.svg" style="vertical-align: -2px" /> and 
+             <img alt="LaTeX equation" src="../media/latex_2750.svg" style="vertical-align: -2px" />, the method is expected to return 
+             the solution to the following program:
+             <br /><br /><img alt="LaTeX equation" src="../media/latex_2751.svg" /><br /><br />
+             where 
+             <br /><br /><img alt="LaTeX equation" src="../media/latex_2752.svg" /><br /><br />
+             is the Likelihood ratio of <img alt="LaTeX equation" src="../media/latex_2753.svg" style="vertical-align: -4px" /> to <img alt="LaTeX equation" src="../media/latex_2754.svg" style="vertical-align: -4px" />
+             evaluated at <img alt="LaTeX equation" src="../media/latex_2755.svg" style="vertical-align: -0px" />,
+             <img alt="LaTeX equation" src="../media/latex_2756.svg" style="vertical-align: -4px" /> is the set 
+             of elite sample positions (row indexes of the matrix returned 
+             by method <a href="M_Novacta_Analytics_Advanced_CrossEntropyProgram_Sample.htm">Sample</a>, with 
+             <img alt="LaTeX equation" src="../media/latex_2757.svg" style="vertical-align: -5px" /> being the <img alt="LaTeX equation" src="../media/latex_2758.svg" style="vertical-align: -0px" />-th row of such matrix
+             and <img alt="LaTeX equation" src="../media/latex_2759.svg" style="vertical-align: -0px" /> being its number of rows.
+             Method <a href="M_Novacta_Analytics_Advanced_CrossEntropyContext_UpdateParameter.htm">UpdateParameter</a> 
+             receives two parameters. The first is a <a href="https://docs.microsoft.com/dotnet/api/system.collections.generic.linkedlist-1" target="_blank">LinkedList<span id="LSTF877CA6A_17"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF877CA6A_17?cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'");</script>T<span id="LSTF877CA6A_18"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF877CA6A_18?cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;");</script></a> 
+             of <a href="T_Novacta_Analytics_DoubleMatrix.htm">DoubleMatrix</a> instances, 
+             representing the <em>reference</em> parameters applied in previous 
+             iterations. The instance 
+             returned by property <a href="https://docs.microsoft.com/dotnet/api/system.collections.generic.linkedlist-1.last#System_Collections_Generic_LinkedList_1_Last" target="_blank">Last</a> corresponds to 
+             parameter <img alt="LaTeX equation" src="../media/latex_2760.svg" style="vertical-align: -2px" />. The second method parameter is 
+             a <a href="T_Novacta_Analytics_DoubleMatrix.htm">DoubleMatrix</a> instance whose rows represent the elite points
+             sampled in the current iteration.
+             </p><p><b><i>Estimating step</i></b></p><p>
+             The estimating step is executed after that the underlying 
+             Cross-Entropy program 
+             has converged. Given the optimal 
+             parameter <img alt="LaTeX equation" src="../media/latex_2761.svg" style="vertical-align: -2px" />, 
+             a Likelihood estimator based on the ratio 
+             <img alt="LaTeX equation" src="../media/latex_2762.svg" style="vertical-align: -5px" /> is exploited by 
+             drawing a sample from density 
+             <img alt="LaTeX equation" src="../media/latex_2763.svg" style="vertical-align: -4px" />.  
+             Method 
+             <a href="M_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext_GetLikelihoodRatio.htm">GetLikelihoodRatio(DoubleMatrix, DoubleMatrix, DoubleMatrix)</a> 
+             must be overridden in order to evaluate the ratio 
+             at a specific sample point 
+             for a given pair of <i>nominal</i> and <i>reference</i> parameters.
+             </p></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID7RB')" onkeypress="SectionExpandCollapse_CheckKey('ID7RB', event)" tabindex="0"><img id="ID7RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Examples</span></div><div id="ID7RBSection" class="collapsibleSection"><p>
+             The following example is based on the Rare-Event Simulation Example 
+             proposed by Rubinstein and Kroese 
+             (Section 2.2.1)<sup class="citation"><a href="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;#cite1">[1]
+							</a></sup>.
+             </p><p>
+             A Cross-Entropy estimator is exploited 
+             to analyze, under extreme conditions, the length 
+             <img alt="LaTeX equation" src="../media/latex_2764.svg" style="vertical-align: -0px" /> of the shortest path from 
+             node <img alt="LaTeX equation" src="../media/latex_2765.svg" style="vertical-align: -0px" /> to 
+             node <img alt="LaTeX equation" src="../media/latex_2766.svg" style="vertical-align: -0px" /> in the undirected graph 
+             depicted in the following figure.
+            </p><p><img src="../media/RareEventExample.png" width="100%" alt="Shortest path from A to B" /></p><p>
+             There are 5 edges in the graph. Their lengths 
+             are 
+             represented as independent and exponentially distributed random 
+             variables <img alt="LaTeX equation" src="../media/latex_2767.svg" style="vertical-align: -4px" />, with 
+             variable <img alt="LaTeX equation" src="../media/latex_2768.svg" style="vertical-align: -2px" /> 
+             having a specific mean <img alt="LaTeX equation" src="../media/latex_2769.svg" style="vertical-align: -2px" />, 
+             for <img alt="LaTeX equation" src="../media/latex_2770.svg" style="vertical-align: -4px" />, forming 
+             the following <em>nominal</em> parameter:  
+             <br /><br /><img alt="LaTeX equation" src="../media/latex_2771.svg" /><br /><br /></p><p>
+             In order to represent a possible state 
+             <img alt="LaTeX equation" src="../media/latex_2772.svg" style="vertical-align: -0px" /> of such system, we hence need a 
+             vector of length 5:
+             <br /><br /><img alt="LaTeX equation" src="../media/latex_2773.svg" /><br /><br />    
+             and the performance of the system is the total length 
+             <img alt="LaTeX equation" src="../media/latex_2774.svg" style="vertical-align: -0px" /> of the 
+             shortest path given <img alt="LaTeX equation" src="../media/latex_2775.svg" style="vertical-align: -0px" />, i.e. 
+             <br /><br /><img alt="LaTeX equation" src="../media/latex_2776.svg" /><br /><br /></p><p>
+             The likelihood ratio of 
+             <img alt="LaTeX equation" src="../media/latex_2777.svg" style="vertical-align: -4px" /> to the generic density 
+             <img alt="LaTeX equation" src="../media/latex_2778.svg" style="vertical-align: -4px" /> is 
+             <br /><br /><img alt="LaTeX equation" src="../media/latex_2779.svg" /><br /><br /></p><p>
+             At iteration <img alt="LaTeX equation" src="../media/latex_2780.svg" style="vertical-align: -0px" />, the parameter updating formula is, 
+             for <img alt="LaTeX equation" src="../media/latex_2781.svg" style="vertical-align: -4px" />,
+             <br /><br /><img alt="LaTeX equation" src="../media/latex_2782.svg" /><br /><br />
+             where <img alt="LaTeX equation" src="../media/latex_2783.svg" style="vertical-align: -4px" />.
+             </p><p>
+             In this example, we want to estimate the probability of observing 
+             a shortest path greater than or equal to a <em>level</em> 
+             set as <img alt="LaTeX equation" src="../media/latex_2784.svg" style="vertical-align: -0px" />. 
+             This is equivalent to define the target event as 
+             <img alt="LaTeX equation" src="../media/latex_2785.svg" style="vertical-align: -4px" />. 
+             </p><p><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID1EAAABBA_tab1" class="codeSnippetContainerTabSingle">Estimating the probability of an extreme shortest path in a network.
+             </div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAABBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAABBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAABBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-keyword">using</span> System;
+<span class="highlight-keyword">using</span> System.Collections.Generic;
+<span class="highlight-keyword">using</span> Novacta.Analytics.Advanced;
+<span class="highlight-keyword">using</span> System.Linq;
+
+<span class="highlight-keyword">namespace</span> Novacta.Analytics.CodeExamples.Advanced
+{
+    <span class="highlight-keyword">public</span> <span class="highlight-keyword">class</span> CrossEntropyEstimatorExample0  
+    {
+        <span class="highlight-keyword">class</span> RareShortestPathProbabilityEstimation
+            : <span class="highlight-class-name">RareEventProbabilityEstimationContext</span>
+        {
+            <span class="highlight-keyword">public</span> RareShortestPathProbabilityEstimation()
+                : <span class="highlight-keyword">base</span>(
+                    <span class="highlight-comment">// There are 5 edges in the network under study.</span>
+                    <span class="highlight-comment">// Hence we need a vector of length 5 to represent</span>
+                    <span class="highlight-comment">// the state of the system, i.e. the observed lengths </span>
+                    <span class="highlight-comment">// corresponding to such edges.</span>
+                    stateDimension: <span class="highlight-number">5</span>,
+                    <span class="highlight-comment">// Set the threshold level and the rare event </span>
+                    <span class="highlight-comment">// boundedness in order to target the probability </span>
+                    <span class="highlight-comment">// of the event {2.0 &lt;= Performance(x)}.</span>
+                    thresholdLevel: <span class="highlight-number">2.0</span>,
+                    rareEventPerformanceBoundedness:
+                        <span class="highlight-class-name">RareEventPerformanceBoundedness</span>.Lower,
+                    <span class="highlight-comment">// Define the nominal parameter of interest.</span>
+                    initialParameter: <span class="highlight-class-name">DoubleMatrix</span>.Dense(<span class="highlight-number">1</span>, <span class="highlight-number">5</span>,
+                        <span class="highlight-keyword">new</span> <span class="highlight-keyword">double</span>[] { <span class="highlight-number">0.25</span>, <span class="highlight-number">0.4</span>, <span class="highlight-number">0.1</span>, <span class="highlight-number">0.3</span>, <span class="highlight-number">0.2</span> })
+                      )
+            {
+            }
+
+            <span class="highlight-comment">// Define the performance function of the </span>
+            <span class="highlight-comment">// system under study.</span>
+            <span class="highlight-keyword">protected</span> <span class="highlight-keyword">override</span> <span class="highlight-keyword">double</span> Performance(<span class="highlight-class-name">DoubleMatrix</span> x)
+            {
+                <span class="highlight-comment">// Compute the lengths of the possible </span>
+                <span class="highlight-comment">// paths when the state of the system is x.</span>
+                <span class="highlight-class-name">DoubleMatrix</span> paths = <span class="highlight-class-name">DoubleMatrix</span>.Dense(<span class="highlight-number">4</span>, <span class="highlight-number">1</span>);
+                paths[<span class="highlight-number">0</span>] = x[<span class="highlight-number">0</span>] + x[<span class="highlight-number">3</span>];
+                paths[<span class="highlight-number">1</span>] = x[<span class="highlight-number">0</span>] + x[<span class="highlight-number">2</span>] + x[<span class="highlight-number">4</span>];
+                paths[<span class="highlight-number">2</span>] = x[<span class="highlight-number">1</span>] + x[<span class="highlight-number">4</span>];
+                paths[<span class="highlight-number">3</span>] = x[<span class="highlight-number">1</span>] + x[<span class="highlight-number">2</span>] + x[<span class="highlight-number">3</span>];
+
+                <span class="highlight-comment">// Compute the shortest path.</span>
+                <span class="highlight-keyword">var</span> indexValuePair = <span class="highlight-class-name">Stat</span>.Min(paths);
+
+                <span class="highlight-comment">// Return the shortest path.</span>
+                <span class="highlight-keyword">return</span> indexValuePair.Value;
+            }
+
+            <span class="highlight-comment">// Set how to sample system states</span>
+            <span class="highlight-comment">// given the specified parameter. </span>
+            <span class="highlight-keyword">protected</span> <span class="highlight-keyword">override</span> <span class="highlight-keyword">void</span> PartialSample(
+                <span class="highlight-keyword">double</span>[] destinationArray,
+                Tuple&lt;<span class="highlight-keyword">int</span>, <span class="highlight-keyword">int</span>&gt; sampleSubsetRange,
+                <span class="highlight-class-name">RandomNumberGenerator</span> randomNumberGenerator,
+                <span class="highlight-class-name">DoubleMatrix</span> parameter,
+                <span class="highlight-keyword">int</span> sampleSize)
+            {
+                <span class="highlight-comment">// Must be Item1 included, Item2 excluded</span>
+                <span class="highlight-keyword">int</span> subSampleSize = sampleSubsetRange.Item2 - sampleSubsetRange.Item1;
+                <span class="highlight-keyword">int</span> leadingDimension = Convert.ToInt32(sampleSize);
+                <span class="highlight-keyword">for</span> (<span class="highlight-keyword">int</span> j = <span class="highlight-number">0</span>; j &lt; <span class="highlight-keyword">this</span>.StateDimension; j++)
+                {
+                    <span class="highlight-keyword">var</span> distribution = <span class="highlight-keyword">new</span> <span class="highlight-class-name">ExponentialDistribution</span>(<span class="highlight-number">1.0</span> / parameter[j])
+                    {
+                        <span class="highlight-class-name">RandomNumberGenerator</span> = randomNumberGenerator
+                    };
+                    distribution.Sample(
+                         subSampleSize,
+                         destinationArray, j * leadingDimension + sampleSubsetRange.Item1);
+                }
+            }
+
+            <span class="highlight-comment">// Define the Likelihood ratio for the </span>
+            <span class="highlight-comment">// problem under study.</span>
+            <span class="highlight-keyword">protected</span> <span class="highlight-keyword">override</span> <span class="highlight-keyword">double</span> GetLikelihoodRatio(
+                <span class="highlight-class-name">DoubleMatrix</span> samplePoint,
+                <span class="highlight-class-name">DoubleMatrix</span> nominalParameter,
+                <span class="highlight-class-name">DoubleMatrix</span> referenceParameter)
+            {
+                <span class="highlight-keyword">var</span> x = samplePoint;
+                <span class="highlight-keyword">var</span> u = nominalParameter;
+                <span class="highlight-keyword">var</span> v = referenceParameter;
+                <span class="highlight-keyword">var</span> prod = <span class="highlight-number">1.0</span>;
+                <span class="highlight-keyword">var</span> sum = <span class="highlight-number">0.0</span>;
+                <span class="highlight-keyword">for</span> (<span class="highlight-keyword">int</span> j = <span class="highlight-number">0</span>; j &lt; x.Count; j++)
+                {
+                    prod *= v[j] / u[j];
+                    sum += x[j] * (<span class="highlight-number">1.0</span> / u[j] - <span class="highlight-number">1.0</span> / v[j]);
+                }
+
+                <span class="highlight-keyword">return</span> Math.Exp(-sum) * prod;
+            }
+
+            <span class="highlight-comment">// Set how to update the parameter via </span>
+            <span class="highlight-comment">// the elite sample.</span>
+            <span class="highlight-keyword">protected</span> <span class="highlight-keyword">override</span> <span class="highlight-class-name">DoubleMatrix</span> UpdateParameter(
+                LinkedList&lt;<span class="highlight-class-name">DoubleMatrix</span>&gt; parameters,
+                <span class="highlight-class-name">DoubleMatrix</span> eliteSample)
+            {
+                <span class="highlight-keyword">var</span> nominalParameter = parameters.First.Value;
+                <span class="highlight-keyword">var</span> referenceParameter = parameters.Last.Value;
+
+                <span class="highlight-keyword">var</span> ratios = <span class="highlight-class-name">DoubleMatrix</span>.Dense(<span class="highlight-number">1</span>, eliteSample.NumberOfRows);
+
+                <span class="highlight-keyword">var</span> u = nominalParameter;
+                <span class="highlight-keyword">var</span> w = referenceParameter;
+                <span class="highlight-keyword">for</span> (<span class="highlight-keyword">int</span> i = <span class="highlight-number">0</span>; i &lt; eliteSample.NumberOfRows; i++)
+                {
+                    <span class="highlight-keyword">var</span> x = eliteSample[i, <span class="highlight-literal">":"</span>];
+                    ratios[i] = <span class="highlight-keyword">this</span>.GetLikelihoodRatio(x, u, w);
+                }
+
+                <span class="highlight-keyword">var</span> newParameter = (ratios * eliteSample);
+                <span class="highlight-keyword">var</span> sumOfRatios = <span class="highlight-class-name">Stat</span>.Sum(ratios);
+                newParameter.InPlaceApply(d =&gt; d / sumOfRatios);
+
+                <span class="highlight-keyword">return</span> newParameter;
+            }
+        }
+
+        <span class="highlight-keyword">public</span> <span class="highlight-keyword">void</span> Main()
+        {
+            <span class="highlight-comment">// Create the context.</span>
+            <span class="highlight-keyword">var</span> context = <span class="highlight-keyword">new</span> RareShortestPathProbabilityEstimation();
+
+            <span class="highlight-comment">// Create the estimator.</span>
+            <span class="highlight-keyword">var</span> estimator = <span class="highlight-keyword">new</span> <span class="highlight-class-name">RareEventProbabilityEstimator</span>()
+            {
+                PerformanceEvaluationParallelOptions = { MaxDegreeOfParallelism = <span class="highlight-number">1</span> },
+                SampleGenerationParallelOptions = { MaxDegreeOfParallelism = <span class="highlight-number">1</span> }
+            };
+
+            <span class="highlight-comment">// Set estimation parameters.</span>
+            <span class="highlight-keyword">double</span> rarity = <span class="highlight-number">0.1</span>;
+            <span class="highlight-keyword">int</span> sampleSize = <span class="highlight-number">1000</span>;
+            <span class="highlight-keyword">int</span> finalSampleSize = <span class="highlight-number">10000</span>;
+
+            <span class="highlight-comment">// Solve the problem.</span>
+            <span class="highlight-keyword">var</span> results = estimator.Estimate(
+                context,
+                rarity,
+                sampleSize,
+                finalSampleSize);
+
+            <span class="highlight-comment">// Show the results.</span>
+            Console.WriteLine(<span class="highlight-literal">"Under the nominal parameter:"</span>);
+            Console.WriteLine(context.InitialParameter);
+            Console.WriteLine(<span class="highlight-literal">"the estimated probability of observing"</span>);
+            Console.WriteLine(<span class="highlight-literal">"a shortest path greater than 2.0 is:"</span>);
+            Console.WriteLine(results.RareEventProbability);
+
+            Console.WriteLine();
+            Console.WriteLine(<span class="highlight-literal">"Details on iterations:"</span>);
+
+            <span class="highlight-keyword">var</span> info = <span class="highlight-class-name">DoubleMatrix</span>.Dense(
+                <span class="highlight-number">-1</span> + results.Parameters.Count,
+                <span class="highlight-number">1</span> + results.Parameters.Last.Value.Count);
+
+            info.SetColumnName(<span class="highlight-number">0</span>, <span class="highlight-literal">"Level"</span>);
+            <span class="highlight-keyword">for</span> (<span class="highlight-keyword">int</span> j = <span class="highlight-number">1</span>; j &lt; info.NumberOfColumns; j++)
+            {
+                info.SetColumnName(j, <span class="highlight-literal">"Param"</span> + (j - <span class="highlight-number">1</span>).ToString());
+            }
+
+            <span class="highlight-keyword">int</span> i = <span class="highlight-number">0</span>;
+            <span class="highlight-keyword">foreach</span> (<span class="highlight-keyword">var</span> level <span class="highlight-keyword">in</span> results.Levels)
+            {
+                info[i++, <span class="highlight-number">0</span>] = level;
+            }
+
+            <span class="highlight-keyword">var</span> referenceParameters = results.Parameters.Skip(<span class="highlight-number">1</span>).ToList();
+            <span class="highlight-keyword">var</span> paramIndexes = <span class="highlight-class-name">IndexCollection</span>.Range(<span class="highlight-number">1</span>, info.NumberOfColumns - <span class="highlight-number">1</span>);
+            <span class="highlight-keyword">for</span> (i = <span class="highlight-number">0</span>; i &lt; info.NumberOfRows; i++)
+            {
+                info[i, paramIndexes] = referenceParameters[i];
+            }
+
+            Console.WriteLine();
+            Console.WriteLine(info);
+        }
+    }
+}
+
+<span class="highlight-comment">// Executing method Main() produces the following output:</span>
+<span class="highlight-comment">// </span>
+<span class="highlight-comment">// Under the nominal parameter:</span>
+<span class="highlight-comment">// 0.25             0.4              0.1              0.3              0.2              </span>
+<span class="highlight-comment">// </span>
+<span class="highlight-comment">// </span>
+<span class="highlight-comment">// the estimated probability of observing</span>
+<span class="highlight-comment">// a shortest path greater than 2.0 is:</span>
+<span class="highlight-comment">// 1.339307437308636E-05</span>
+<span class="highlight-comment">// </span>
+<span class="highlight-comment">// Details on iterations:</span>
+<span class="highlight-comment">// </span>
+<span class="highlight-comment">// [Level]          [Param0]         [Param1]         [Param2]         [Param3]         [Param4]         </span>
+<span class="highlight-comment">// 0.5701085996     0.4834386758     0.7368059823     0.1165236151     0.4809725975     0.3517883835     </span>
+<span class="highlight-comment">// 1.001016636      0.7781246679     1.032966974      0.139379404      0.6118801624     0.4451968968     </span>
+<span class="highlight-comment">// 1.432288935      1.125821427      1.365387943      0.1350581588     0.6630079159     0.5322452418     </span>
+<span class="highlight-comment">// 1.902650317      1.4492325        1.598880592      0.1144234238     0.8007808655     0.6827841092     </span>
+<span class="highlight-comment">// 2                1.871832294      1.864920531      0.1155839523     0.9132348861     0.8024430848     </span>
+<span class="highlight-comment">// </span>
+</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EAAABBA");</script></p></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID8RB')" onkeypress="SectionExpandCollapse_CheckKey('ID8RB', event)" tabindex="0"><img id="ID8RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Bibliography</span></div><div id="ID8RBSection" class="collapsibleSection"><div class="bibliographStyle"><span class="bibliographyNumber" id="cite1">
+          [1]
+        </span><span class="bibliographyAuthor">Rubinstein, R.Y. and Kroese, D.P.</span>, <span class="bibliographyTitle">The Cross-Entropy Method, A unified Approach to Combinatorial Optimization, Monte-Carlo Simulation, and Machine Learning</span>, <span class="bibliographyPublisher">Springer, New York. (2004)</span></div></div><div class="collapsibleAreaRegion" id="seeAlsoSection"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID9RB')" onkeypress="SectionExpandCollapse_CheckKey('ID9RB', event)" tabindex="0"><img id="ID9RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />See Also</span></div><div id="ID9RBSection" class="collapsibleSection"><h4 class="subHeading">Reference</h4><div class="seeAlsoStyle"><a href="N_Novacta_Analytics_Advanced.htm">Novacta.Analytics.Advanced Namespace</a></div><div class="seeAlsoStyle"><a href="T_Novacta_Analytics_Advanced_CrossEntropyContext.htm">Novacta.Analytics.Advanced<span id="LSTF877CA6A_19"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF877CA6A_19?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>CrossEntropyContext</a></div></div></div></div><div id="pageFooter" class="pageFooter"><p>Copyright (c) Giovanni Lafratta</p> </div></body></html>

@@ -1,0 +1,1365 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpTOC>
+
+  <HelpTOCNode Title="Welcome" Url="html/a4ea75a2-ef53-4ea2-a7f4-b493a50f90b3.htm" />
+  <HelpTOCNode Title="License agreement" Url="html/6e0413d7-d042-4781-a888-14641b635d8a.htm" />
+  <HelpTOCNode Title="Testing environment" Url="html/07a926cb-9c3c-432d-998b-0af7eea037f6.htm" />
+  <HelpTOCNode Id="af28e88b-9cff-4172-b3f3-c02bec34d666" Title="Version history" Url="html/98825745-d228-4a65-9fc2-9f3041567e53.htm">
+    <HelpTOCNode Title="Version 1.0.0" Url="html/41221eed-891e-4925-a654-ecf8b2d38c65.htm" />
+  </HelpTOCNode>
+  <HelpTOCNode Id="06fa38b8-7e5d-4352-ac8f-af2c0fbd4d7e" Title="Novacta.Analytics Namespaces" Url="html/G_Novacta_Analytics.htm">
+    <HelpTOCNode Id="dc6c10cd-1f11-40e5-9fca-b774244eb841" Title="Novacta.Analytics" Url="html/N_Novacta_Analytics.htm">
+      <HelpTOCNode Id="d5df6e1d-1d2b-4a6e-9f66-52fb3d9865e2" Title="BernoulliDistribution Class" Url="html/T_Novacta_Analytics_BernoulliDistribution.htm">
+        <HelpTOCNode Title="BernoulliDistribution Constructor " Url="html/M_Novacta_Analytics_BernoulliDistribution__ctor.htm" />
+        <HelpTOCNode Id="b39ccec2-3fcb-4bfe-865f-c0d95f7428fa" Title="BernoulliDistribution Properties" Url="html/Properties_T_Novacta_Analytics_BernoulliDistribution.htm">
+          <HelpTOCNode Title="CanInvertCdf Property " Url="html/P_Novacta_Analytics_BernoulliDistribution_CanInvertCdf.htm" />
+          <HelpTOCNode Title="SuccessProbability Property " Url="html/P_Novacta_Analytics_BernoulliDistribution_SuccessProbability.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="5af6439c-1e59-40f0-b1d6-c4274c089072" Title="BernoulliDistribution Methods" Url="html/Methods_T_Novacta_Analytics_BernoulliDistribution.htm">
+          <HelpTOCNode Title="Balanced Method " Url="html/M_Novacta_Analytics_BernoulliDistribution_Balanced.htm" />
+          <HelpTOCNode Id="33932736-b10e-4863-abb4-ea39ff0170ec" Title="Cdf Method " Url="html/Overload_Novacta_Analytics_BernoulliDistribution_Cdf.htm">
+            <HelpTOCNode Title="Cdf Method (Double)" Url="html/M_Novacta_Analytics_BernoulliDistribution_Cdf.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="2d936698-1965-4629-baa7-d8e632e992c1" Title="InverseCdf Method " Url="html/Overload_Novacta_Analytics_BernoulliDistribution_InverseCdf.htm">
+            <HelpTOCNode Title="InverseCdf Method (Double)" Url="html/M_Novacta_Analytics_BernoulliDistribution_InverseCdf_1.htm" />
+            <HelpTOCNode Title="InverseCdf Method (DoubleMatrix)" Url="html/M_Novacta_Analytics_BernoulliDistribution_InverseCdf.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Mean Method " Url="html/M_Novacta_Analytics_BernoulliDistribution_Mean.htm" />
+          <HelpTOCNode Title="OnSample Method " Url="html/M_Novacta_Analytics_BernoulliDistribution_OnSample.htm" />
+          <HelpTOCNode Id="2a403dec-968f-43ba-b6cf-d9699e141ab8" Title="Pdf Method " Url="html/Overload_Novacta_Analytics_BernoulliDistribution_Pdf.htm">
+            <HelpTOCNode Title="Pdf Method (Double)" Url="html/M_Novacta_Analytics_BernoulliDistribution_Pdf.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="3bacdec0-d327-4c27-b051-9c63c6856c28" Title="Sample Method " Url="html/Overload_Novacta_Analytics_BernoulliDistribution_Sample.htm">
+            <HelpTOCNode Title="Sample Method " Url="html/M_Novacta_Analytics_BernoulliDistribution_Sample.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Variance Method " Url="html/M_Novacta_Analytics_BernoulliDistribution_Variance.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="2f836234-d146-4093-aaed-6fcc56669522" Title="CategoricalDataSet Class" Url="html/T_Novacta_Analytics_CategoricalDataSet.htm">
+        <HelpTOCNode Title="CategoricalDataSet Constructor " Url="html/M_Novacta_Analytics_CategoricalDataSet__ctor.htm" />
+        <HelpTOCNode Id="959a3af8-b67e-49a9-aeee-d4409c327f36" Title="CategoricalDataSet Properties" Url="html/Properties_T_Novacta_Analytics_CategoricalDataSet.htm">
+          <HelpTOCNode Title="Data Property " Url="html/P_Novacta_Analytics_CategoricalDataSet_Data.htm" />
+          <HelpTOCNode Id="22c75a76-6d81-4e8a-be5b-13e896d685b3" Title="Item Property " Url="html/Overload_Novacta_Analytics_CategoricalDataSet_Item.htm">
+            <HelpTOCNode Title="Item Property (Int32, IndexCollection)" Url="html/P_Novacta_Analytics_CategoricalDataSet_Item_3.htm" />
+            <HelpTOCNode Title="Item Property (Int32, Int32)" Url="html/P_Novacta_Analytics_CategoricalDataSet_Item_4.htm" />
+            <HelpTOCNode Title="Item Property (Int32, String)" Url="html/P_Novacta_Analytics_CategoricalDataSet_Item_5.htm" />
+            <HelpTOCNode Title="Item Property (String, IndexCollection)" Url="html/P_Novacta_Analytics_CategoricalDataSet_Item_6.htm" />
+            <HelpTOCNode Title="Item Property (String, Int32)" Url="html/P_Novacta_Analytics_CategoricalDataSet_Item_7.htm" />
+            <HelpTOCNode Title="Item Property (String, String)" Url="html/P_Novacta_Analytics_CategoricalDataSet_Item_8.htm" />
+            <HelpTOCNode Title="Item Property (IndexCollection, IndexCollection)" Url="html/P_Novacta_Analytics_CategoricalDataSet_Item.htm" />
+            <HelpTOCNode Title="Item Property (IndexCollection, Int32)" Url="html/P_Novacta_Analytics_CategoricalDataSet_Item_1.htm" />
+            <HelpTOCNode Title="Item Property (IndexCollection, String)" Url="html/P_Novacta_Analytics_CategoricalDataSet_Item_2.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Name Property " Url="html/P_Novacta_Analytics_CategoricalDataSet_Name.htm" />
+          <HelpTOCNode Title="NumberOfColumns Property " Url="html/P_Novacta_Analytics_CategoricalDataSet_NumberOfColumns.htm" />
+          <HelpTOCNode Title="NumberOfRows Property " Url="html/P_Novacta_Analytics_CategoricalDataSet_NumberOfRows.htm" />
+          <HelpTOCNode Title="Variables Property " Url="html/P_Novacta_Analytics_CategoricalDataSet_Variables.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="41151dd7-d4fa-49da-8b52-c47f383b585a" Title="CategoricalDataSet Methods" Url="html/Methods_T_Novacta_Analytics_CategoricalDataSet.htm">
+          <HelpTOCNode Id="8be6775d-1e24-4af6-b268-f24295b53b52" Title="CategorizeByEntropyMinimization Method " Url="html/Overload_Novacta_Analytics_CategoricalDataSet_CategorizeByEntropyMinimization.htm">
+            <HelpTOCNode Title="CategorizeByEntropyMinimization Method (TextReader, Char, IndexCollection, Boolean, Int32, IFormatProvider)" Url="html/M_Novacta_Analytics_CategoricalDataSet_CategorizeByEntropyMinimization.htm" />
+            <HelpTOCNode Title="CategorizeByEntropyMinimization Method (String, Char, IndexCollection, Boolean, Int32, IFormatProvider)" Url="html/M_Novacta_Analytics_CategoricalDataSet_CategorizeByEntropyMinimization_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Decode Method " Url="html/M_Novacta_Analytics_CategoricalDataSet_Decode.htm" />
+          <HelpTOCNode Id="a7697340-bc23-4826-9e79-f46d49e267fe" Title="Disjoin Method " Url="html/Overload_Novacta_Analytics_CategoricalDataSet_Disjoin.htm">
+            <HelpTOCNode Title="Disjoin Method " Url="html/M_Novacta_Analytics_CategoricalDataSet_Disjoin.htm" />
+            <HelpTOCNode Title="Disjoin Method (DoubleMatrix)" Url="html/M_Novacta_Analytics_CategoricalDataSet_Disjoin_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="4071d851-9827-470c-afe5-1b1983a08838" Title="Encode Method " Url="html/Overload_Novacta_Analytics_CategoricalDataSet_Encode.htm">
+            <HelpTOCNode Title="Encode Method (TextReader, Char, IndexCollection, Boolean)" Url="html/M_Novacta_Analytics_CategoricalDataSet_Encode.htm" />
+            <HelpTOCNode Title="Encode Method (String, Char, IndexCollection, Boolean)" Url="html/M_Novacta_Analytics_CategoricalDataSet_Encode_2.htm" />
+            <HelpTOCNode Title="Encode Method (TextReader, Char, IndexCollection, Boolean, Dictionary(Int32, Categorizer), IFormatProvider)" Url="html/M_Novacta_Analytics_CategoricalDataSet_Encode_1.htm" />
+            <HelpTOCNode Title="Encode Method (String, Char, IndexCollection, Boolean, Dictionary(Int32, Categorizer), IFormatProvider)" Url="html/M_Novacta_Analytics_CategoricalDataSet_Encode_3.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="FromEncodedData Method " Url="html/M_Novacta_Analytics_CategoricalDataSet_FromEncodedData.htm" />
+          <HelpTOCNode Title="GetContingencyTable Method " Url="html/M_Novacta_Analytics_CategoricalDataSet_GetContingencyTable.htm" />
+          <HelpTOCNode Title="GetObjectData Method " Url="html/M_Novacta_Analytics_CategoricalDataSet_GetObjectData.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="1dfd743e-9faa-4951-8c96-cfe3c5941e4e" Title="CategoricalEntailment Class" Url="html/T_Novacta_Analytics_CategoricalEntailment.htm">
+        <HelpTOCNode Title="CategoricalEntailment Constructor " Url="html/M_Novacta_Analytics_CategoricalEntailment__ctor.htm" />
+        <HelpTOCNode Id="1779d2f8-a677-476b-a514-ec271e05aee2" Title="CategoricalEntailment Properties" Url="html/Properties_T_Novacta_Analytics_CategoricalEntailment.htm">
+          <HelpTOCNode Title="FeaturePremises Property " Url="html/P_Novacta_Analytics_CategoricalEntailment_FeaturePremises.htm" />
+          <HelpTOCNode Title="FeatureVariables Property " Url="html/P_Novacta_Analytics_CategoricalEntailment_FeatureVariables.htm" />
+          <HelpTOCNode Title="ResponseConclusion Property " Url="html/P_Novacta_Analytics_CategoricalEntailment_ResponseConclusion.htm" />
+          <HelpTOCNode Title="ResponseVariable Property " Url="html/P_Novacta_Analytics_CategoricalEntailment_ResponseVariable.htm" />
+          <HelpTOCNode Title="TruthValue Property " Url="html/P_Novacta_Analytics_CategoricalEntailment_TruthValue.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="3368323f-ff31-4a66-bf4d-f3e0b6f59f42" Title="CategoricalEntailment Methods" Url="html/Methods_T_Novacta_Analytics_CategoricalEntailment.htm">
+          <HelpTOCNode Title="GetObjectData Method " Url="html/M_Novacta_Analytics_CategoricalEntailment_GetObjectData.htm" />
+          <HelpTOCNode Title="ToString Method " Url="html/M_Novacta_Analytics_CategoricalEntailment_ToString.htm" />
+          <HelpTOCNode Title="ValidatePremises Method " Url="html/M_Novacta_Analytics_CategoricalEntailment_ValidatePremises.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="e690fa72-a770-422c-af1e-8199a50d90cc" Title="CategoricalEntailmentEnsembleClassifier Class" Url="html/T_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier.htm">
+        <HelpTOCNode Title="CategoricalEntailmentEnsembleClassifier Constructor " Url="html/M_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier__ctor.htm" />
+        <HelpTOCNode Id="328a649c-3558-46d7-bfba-65ccd1a5c506" Title="CategoricalEntailmentEnsembleClassifier Properties" Url="html/Properties_T_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier.htm">
+          <HelpTOCNode Title="Entailments Property " Url="html/P_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier_Entailments.htm" />
+          <HelpTOCNode Title="FeatureVariables Property " Url="html/P_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier_FeatureVariables.htm" />
+          <HelpTOCNode Title="ResponseVariable Property " Url="html/P_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier_ResponseVariable.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="b8395170-210f-49b5-8b8a-ad5993e35b09" Title="CategoricalEntailmentEnsembleClassifier Methods" Url="html/Methods_T_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier.htm">
+          <HelpTOCNode Title="Add Method " Url="html/M_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier_Add.htm" />
+          <HelpTOCNode Title="AddTrained Method " Url="html/M_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier_AddTrained.htm" />
+          <HelpTOCNode Title="Classify Method " Url="html/M_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier_Classify.htm" />
+          <HelpTOCNode Title="EvaluateAccuracy Method " Url="html/M_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier_EvaluateAccuracy.htm" />
+          <HelpTOCNode Title="Train Method " Url="html/M_Novacta_Analytics_CategoricalEntailmentEnsembleClassifier_Train.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="d243ea6c-3d51-4c4f-b883-4cb91ee53b7f" Title="CategoricalVariable Class" Url="html/T_Novacta_Analytics_CategoricalVariable.htm">
+        <HelpTOCNode Id="b873bb24-805b-4252-b60a-67357fa4d66d" Title="CategoricalVariable Constructor " Url="html/Overload_Novacta_Analytics_CategoricalVariable__ctor.htm">
+          <HelpTOCNode Title="CategoricalVariable Constructor (String)" Url="html/M_Novacta_Analytics_CategoricalVariable__ctor_1.htm" />
+          <HelpTOCNode Title="CategoricalVariable Constructor (SerializationInfo, StreamingContext)" Url="html/M_Novacta_Analytics_CategoricalVariable__ctor.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="c7333b55-ce4c-45c1-b95b-45207bd2cc34" Title="CategoricalVariable Properties" Url="html/Properties_T_Novacta_Analytics_CategoricalVariable.htm">
+          <HelpTOCNode Title="Categories Property " Url="html/P_Novacta_Analytics_CategoricalVariable_Categories.htm" />
+          <HelpTOCNode Title="CategoryCodes Property " Url="html/P_Novacta_Analytics_CategoricalVariable_CategoryCodes.htm" />
+          <HelpTOCNode Title="CategoryLabels Property " Url="html/P_Novacta_Analytics_CategoricalVariable_CategoryLabels.htm" />
+          <HelpTOCNode Title="IsReadOnly Property " Url="html/P_Novacta_Analytics_CategoricalVariable_IsReadOnly.htm" />
+          <HelpTOCNode Title="Name Property " Url="html/P_Novacta_Analytics_CategoricalVariable_Name.htm" />
+          <HelpTOCNode Title="NumberOfCategories Property " Url="html/P_Novacta_Analytics_CategoricalVariable_NumberOfCategories.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="3677a156-ac69-469f-9bb9-d277c1e44d51" Title="CategoricalVariable Methods" Url="html/Methods_T_Novacta_Analytics_CategoricalVariable.htm">
+          <HelpTOCNode Title="IEnumerable.GetEnumerator Method " Url="html/M_Novacta_Analytics_CategoricalVariable_System_Collections_IEnumerable_GetEnumerator.htm" />
+          <HelpTOCNode Id="521dbdaf-793f-4a0f-994f-5572144d22de" Title="Add Method " Url="html/Overload_Novacta_Analytics_CategoricalVariable_Add.htm">
+            <HelpTOCNode Title="Add Method (Double)" Url="html/M_Novacta_Analytics_CategoricalVariable_Add.htm" />
+            <HelpTOCNode Title="Add Method (Double, String)" Url="html/M_Novacta_Analytics_CategoricalVariable_Add_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="FromDoubleMatrix Method " Url="html/M_Novacta_Analytics_CategoricalVariable_FromDoubleMatrix.htm" />
+          <HelpTOCNode Title="GetEnumerator Method " Url="html/M_Novacta_Analytics_CategoricalVariable_GetEnumerator.htm" />
+          <HelpTOCNode Title="GetObjectData Method " Url="html/M_Novacta_Analytics_CategoricalVariable_GetObjectData.htm" />
+          <HelpTOCNode Id="7559ccf5-793c-4a7a-b9c4-802d2501ac11" Title="Remove Method " Url="html/Overload_Novacta_Analytics_CategoricalVariable_Remove.htm">
+            <HelpTOCNode Title="Remove Method (Double)" Url="html/M_Novacta_Analytics_CategoricalVariable_Remove.htm" />
+            <HelpTOCNode Title="Remove Method (String)" Url="html/M_Novacta_Analytics_CategoricalVariable_Remove_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="SetAsReadOnly Method " Url="html/M_Novacta_Analytics_CategoricalVariable_SetAsReadOnly.htm" />
+          <HelpTOCNode Title="ToDoubleMatrix Method " Url="html/M_Novacta_Analytics_CategoricalVariable_ToDoubleMatrix.htm" />
+          <HelpTOCNode Title="ToString Method " Url="html/M_Novacta_Analytics_CategoricalVariable_ToString.htm" />
+          <HelpTOCNode Id="cabf7538-cd67-4d0f-a5fc-7d3019dbe54d" Title="TryGet Method " Url="html/Overload_Novacta_Analytics_CategoricalVariable_TryGet.htm">
+            <HelpTOCNode Title="TryGet Method (Double, Category)" Url="html/M_Novacta_Analytics_CategoricalVariable_TryGet.htm" />
+            <HelpTOCNode Title="TryGet Method (String, Category)" Url="html/M_Novacta_Analytics_CategoricalVariable_TryGet_1.htm" />
+          </HelpTOCNode>
+        </HelpTOCNode>
+        <HelpTOCNode Id="06a5b500-29a7-4665-9532-574868e8a92e" Title="CategoricalVariable Type Conversions" Url="html/Operators_T_Novacta_Analytics_CategoricalVariable.htm">
+          <HelpTOCNode Id="dcf9397c-f768-4f59-af4d-26559094c231" Title="Explicit Conversion Operators" Url="html/Overload_Novacta_Analytics_CategoricalVariable_op_Explicit.htm">
+            <HelpTOCNode Title="Explicit Conversion (CategoricalVariable to DoubleMatrix)" Url="html/M_Novacta_Analytics_CategoricalVariable_op_Explicit.htm" />
+            <HelpTOCNode Title="Explicit Conversion (DoubleMatrix to CategoricalVariable)" Url="html/M_Novacta_Analytics_CategoricalVariable_op_Explicit_1.htm" />
+          </HelpTOCNode>
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Title="Categorizer Delegate" Url="html/T_Novacta_Analytics_Categorizer.htm" />
+      <HelpTOCNode Id="181340bb-c99d-4e2a-8c0c-d59dc3eb1c49" Title="Category Class" Url="html/T_Novacta_Analytics_Category.htm">
+        <HelpTOCNode Title="Category Constructor " Url="html/M_Novacta_Analytics_Category__ctor.htm" />
+        <HelpTOCNode Id="36d5c5cf-e68a-4d46-8d13-c471430f835e" Title="Category Properties" Url="html/Properties_T_Novacta_Analytics_Category.htm">
+          <HelpTOCNode Title="Code Property " Url="html/P_Novacta_Analytics_Category_Code.htm" />
+          <HelpTOCNode Title="Label Property " Url="html/P_Novacta_Analytics_Category_Label.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="b8b53b3f-4b4b-4e0b-b701-24576aacd43c" Title="Category Methods" Url="html/Methods_T_Novacta_Analytics_Category.htm">
+          <HelpTOCNode Title="GetObjectData Method " Url="html/M_Novacta_Analytics_Category_GetObjectData.htm" />
+          <HelpTOCNode Title="ToString Method " Url="html/M_Novacta_Analytics_Category_ToString.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="6e2ee05b-7625-48d5-b156-e276ebb61d18" Title="Clusters Class" Url="html/T_Novacta_Analytics_Clusters.htm">
+        <HelpTOCNode Id="a32fa5bd-9a75-40d0-a6b1-c04767683bf6" Title="Clusters Methods" Url="html/Methods_T_Novacta_Analytics_Clusters.htm">
+          <HelpTOCNode Title="Discover Method " Url="html/M_Novacta_Analytics_Clusters_Discover.htm" />
+          <HelpTOCNode Title="Explain Method " Url="html/M_Novacta_Analytics_Clusters_Explain.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="89a2377b-9370-4d25-85cb-0238730f230c" Title="ContinuousOptimization Class" Url="html/T_Novacta_Analytics_ContinuousOptimization.htm">
+        <HelpTOCNode Id="e3941528-32a4-401e-95dc-ab266959db9e" Title="ContinuousOptimization Methods" Url="html/Methods_T_Novacta_Analytics_ContinuousOptimization.htm">
+          <HelpTOCNode Id="0be04547-fdb6-42f3-99fc-8a3c14da9a96" Title="Maximize Method " Url="html/Overload_Novacta_Analytics_ContinuousOptimization_Maximize.htm">
+            <HelpTOCNode Title="Maximize Method (Func(DoubleMatrix, Double), DoubleMatrix)" Url="html/M_Novacta_Analytics_ContinuousOptimization_Maximize.htm" />
+            <HelpTOCNode Title="Maximize(TFunctionParameter) Method (Func(DoubleMatrix, TFunctionParameter, Double), DoubleMatrix, TFunctionParameter)" Url="html/M_Novacta_Analytics_ContinuousOptimization_Maximize__1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="88b4dddc-ac1c-433d-b3e1-ca3cd13431b3" Title="Minimize Method " Url="html/Overload_Novacta_Analytics_ContinuousOptimization_Minimize.htm">
+            <HelpTOCNode Title="Minimize Method (Func(DoubleMatrix, Double), DoubleMatrix)" Url="html/M_Novacta_Analytics_ContinuousOptimization_Minimize.htm" />
+            <HelpTOCNode Title="Minimize(TFunctionParameter) Method (Func(DoubleMatrix, TFunctionParameter, Double), DoubleMatrix, TFunctionParameter)" Url="html/M_Novacta_Analytics_ContinuousOptimization_Minimize__1.htm" />
+          </HelpTOCNode>
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="e08c00fb-6d5a-45a5-a26c-10ca5ce1c7e5" Title="Correspondence Class" Url="html/T_Novacta_Analytics_Correspondence.htm">
+        <HelpTOCNode Title="Correspondence Constructor " Url="html/M_Novacta_Analytics_Correspondence__ctor.htm" />
+        <HelpTOCNode Id="36c36976-d899-48a4-8712-5a1d0fd1bd8d" Title="Correspondence Properties" Url="html/Properties_T_Novacta_Analytics_Correspondence.htm">
+          <HelpTOCNode Title="ColumnProfiles Property " Url="html/P_Novacta_Analytics_Correspondence_ColumnProfiles.htm" />
+          <HelpTOCNode Title="RowProfiles Property " Url="html/P_Novacta_Analytics_Correspondence_RowProfiles.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="ba4afde0-4e4a-4f1f-a536-02adf3d932e0" Title="Correspondence Methods" Url="html/Methods_T_Novacta_Analytics_Correspondence.htm">
+          <HelpTOCNode Title="Analyze Method " Url="html/M_Novacta_Analytics_Correspondence_Analyze.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="8cee9242-a54f-44fa-891c-00d5048819ac" Title="CsvMatrixSerializer Class" Url="html/T_Novacta_Analytics_CsvMatrixSerializer.htm">
+        <HelpTOCNode Id="c75e4d4a-04fd-4f9b-a5f9-054e226b50f6" Title="CsvMatrixSerializer Methods" Url="html/Methods_T_Novacta_Analytics_CsvMatrixSerializer.htm">
+          <HelpTOCNode Id="d6a2c9ce-455c-4b1a-876b-ce24be2bffc4" Title="Deserialize Method " Url="html/Overload_Novacta_Analytics_CsvMatrixSerializer_Deserialize.htm">
+            <HelpTOCNode Title="Deserialize Method (TextReader)" Url="html/M_Novacta_Analytics_CsvMatrixSerializer_Deserialize.htm" />
+            <HelpTOCNode Title="Deserialize Method (String)" Url="html/M_Novacta_Analytics_CsvMatrixSerializer_Deserialize_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="46ff13e8-94ca-4026-9c71-a7859a30ff2c" Title="Serialize Method " Url="html/Overload_Novacta_Analytics_CsvMatrixSerializer_Serialize.htm">
+            <HelpTOCNode Title="Serialize Method (TextWriter, DoubleMatrix)" Url="html/M_Novacta_Analytics_CsvMatrixSerializer_Serialize.htm" />
+            <HelpTOCNode Title="Serialize Method (TextWriter, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_CsvMatrixSerializer_Serialize_1.htm" />
+            <HelpTOCNode Title="Serialize Method (String, DoubleMatrix)" Url="html/M_Novacta_Analytics_CsvMatrixSerializer_Serialize_2.htm" />
+            <HelpTOCNode Title="Serialize Method (String, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_CsvMatrixSerializer_Serialize_3.htm" />
+          </HelpTOCNode>
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Title="DataOperation Enumeration" Url="html/T_Novacta_Analytics_DataOperation.htm" />
+      <HelpTOCNode Id="7becb184-f9d6-4655-9b34-0eb17f0fd76d" Title="Distance Class" Url="html/T_Novacta_Analytics_Distance.htm">
+        <HelpTOCNode Id="5a6e1f6a-60a3-4e11-b4fd-0042f0990560" Title="Distance Methods" Url="html/Methods_T_Novacta_Analytics_Distance.htm">
+          <HelpTOCNode Title="AverageLinkage Method " Url="html/M_Novacta_Analytics_Distance_AverageLinkage.htm" />
+          <HelpTOCNode Title="CentroidLinkage Method " Url="html/M_Novacta_Analytics_Distance_CentroidLinkage.htm" />
+          <HelpTOCNode Title="CompleteDiameter Method " Url="html/M_Novacta_Analytics_Distance_CompleteDiameter.htm" />
+          <HelpTOCNode Title="CompleteLinkage Method " Url="html/M_Novacta_Analytics_Distance_CompleteLinkage.htm" />
+          <HelpTOCNode Title="Euclidean Method " Url="html/M_Novacta_Analytics_Distance_Euclidean.htm" />
+          <HelpTOCNode Title="SingleLinkage Method " Url="html/M_Novacta_Analytics_Distance_SingleLinkage.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="2c9021a6-518e-4677-b789-1de44441ab4b" Title="DoubleMatrix Class" Url="html/T_Novacta_Analytics_DoubleMatrix.htm">
+        <HelpTOCNode Id="38923b86-d0b3-4dfb-85a5-12ccf00239bd" Title="DoubleMatrix Constructor " Url="html/Overload_Novacta_Analytics_DoubleMatrix__ctor.htm">
+          <HelpTOCNode Title="DoubleMatrix Constructor (Double)" Url="html/M_Novacta_Analytics_DoubleMatrix__ctor.htm" />
+          <HelpTOCNode Title="DoubleMatrix Constructor (SerializationInfo, StreamingContext)" Url="html/M_Novacta_Analytics_DoubleMatrix__ctor_1.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="2d3758ae-6695-46a9-8b3c-6656572f4326" Title="DoubleMatrix Properties" Url="html/Properties_T_Novacta_Analytics_DoubleMatrix.htm">
+          <HelpTOCNode Title="ColumnNames Property " Url="html/P_Novacta_Analytics_DoubleMatrix_ColumnNames.htm" />
+          <HelpTOCNode Title="Count Property " Url="html/P_Novacta_Analytics_DoubleMatrix_Count.htm" />
+          <HelpTOCNode Title="HasColumnNames Property " Url="html/P_Novacta_Analytics_DoubleMatrix_HasColumnNames.htm" />
+          <HelpTOCNode Title="HasRowNames Property " Url="html/P_Novacta_Analytics_DoubleMatrix_HasRowNames.htm" />
+          <HelpTOCNode Title="IsBidiagonal Property " Url="html/P_Novacta_Analytics_DoubleMatrix_IsBidiagonal.htm" />
+          <HelpTOCNode Title="IsColumnVector Property " Url="html/P_Novacta_Analytics_DoubleMatrix_IsColumnVector.htm" />
+          <HelpTOCNode Title="IsDiagonal Property " Url="html/P_Novacta_Analytics_DoubleMatrix_IsDiagonal.htm" />
+          <HelpTOCNode Title="IsHessenberg Property " Url="html/P_Novacta_Analytics_DoubleMatrix_IsHessenberg.htm" />
+          <HelpTOCNode Title="IsLowerBidiagonal Property " Url="html/P_Novacta_Analytics_DoubleMatrix_IsLowerBidiagonal.htm" />
+          <HelpTOCNode Title="IsLowerHessenberg Property " Url="html/P_Novacta_Analytics_DoubleMatrix_IsLowerHessenberg.htm" />
+          <HelpTOCNode Title="IsLowerTriangular Property " Url="html/P_Novacta_Analytics_DoubleMatrix_IsLowerTriangular.htm" />
+          <HelpTOCNode Title="IsReadOnly Property " Url="html/P_Novacta_Analytics_DoubleMatrix_IsReadOnly.htm" />
+          <HelpTOCNode Title="IsRowVector Property " Url="html/P_Novacta_Analytics_DoubleMatrix_IsRowVector.htm" />
+          <HelpTOCNode Title="IsScalar Property " Url="html/P_Novacta_Analytics_DoubleMatrix_IsScalar.htm" />
+          <HelpTOCNode Title="IsSkewSymmetric Property " Url="html/P_Novacta_Analytics_DoubleMatrix_IsSkewSymmetric.htm" />
+          <HelpTOCNode Title="IsSquare Property " Url="html/P_Novacta_Analytics_DoubleMatrix_IsSquare.htm" />
+          <HelpTOCNode Title="IsSymmetric Property " Url="html/P_Novacta_Analytics_DoubleMatrix_IsSymmetric.htm" />
+          <HelpTOCNode Title="IsTriangular Property " Url="html/P_Novacta_Analytics_DoubleMatrix_IsTriangular.htm" />
+          <HelpTOCNode Title="IsTridiagonal Property " Url="html/P_Novacta_Analytics_DoubleMatrix_IsTridiagonal.htm" />
+          <HelpTOCNode Title="IsUpperBidiagonal Property " Url="html/P_Novacta_Analytics_DoubleMatrix_IsUpperBidiagonal.htm" />
+          <HelpTOCNode Title="IsUpperHessenberg Property " Url="html/P_Novacta_Analytics_DoubleMatrix_IsUpperHessenberg.htm" />
+          <HelpTOCNode Title="IsUpperTriangular Property " Url="html/P_Novacta_Analytics_DoubleMatrix_IsUpperTriangular.htm" />
+          <HelpTOCNode Title="IsVector Property " Url="html/P_Novacta_Analytics_DoubleMatrix_IsVector.htm" />
+          <HelpTOCNode Id="98967cb0-ce52-42b0-83c8-75571a08328c" Title="Item Property " Url="html/Overload_Novacta_Analytics_DoubleMatrix_Item.htm">
+            <HelpTOCNode Title="Item Property (Int32)" Url="html/P_Novacta_Analytics_DoubleMatrix_Item_5.htm" />
+            <HelpTOCNode Title="Item Property (Int32, IndexCollection)" Url="html/P_Novacta_Analytics_DoubleMatrix_Item_6.htm" />
+            <HelpTOCNode Title="Item Property (Int32, Int32)" Url="html/P_Novacta_Analytics_DoubleMatrix_Item_7.htm" />
+            <HelpTOCNode Title="Item Property (Int32, String)" Url="html/P_Novacta_Analytics_DoubleMatrix_Item_8.htm" />
+            <HelpTOCNode Title="Item Property (String, IndexCollection)" Url="html/P_Novacta_Analytics_DoubleMatrix_Item_9.htm" />
+            <HelpTOCNode Title="Item Property (String, Int32)" Url="html/P_Novacta_Analytics_DoubleMatrix_Item_11.htm" />
+            <HelpTOCNode Title="Item Property (String, String)" Url="html/P_Novacta_Analytics_DoubleMatrix_Item_12.htm" />
+            <HelpTOCNode Title="Item Property (IndexCollection, IndexCollection)" Url="html/P_Novacta_Analytics_DoubleMatrix_Item.htm" />
+            <HelpTOCNode Title="Item Property (IndexCollection, Int32)" Url="html/P_Novacta_Analytics_DoubleMatrix_Item_2.htm" />
+            <HelpTOCNode Title="Item Property (IndexCollection, String)" Url="html/P_Novacta_Analytics_DoubleMatrix_Item_3.htm" />
+            <HelpTOCNode Title="Item Property (String, IndexCollection, Boolean)" Url="html/P_Novacta_Analytics_DoubleMatrix_Item_10.htm" />
+            <HelpTOCNode Title="Item Property (String, String, Boolean)" Url="html/P_Novacta_Analytics_DoubleMatrix_Item_13.htm" />
+            <HelpTOCNode Title="Item Property (IndexCollection, IndexCollection, Boolean)" Url="html/P_Novacta_Analytics_DoubleMatrix_Item_1.htm" />
+            <HelpTOCNode Title="Item Property (IndexCollection, String, Boolean)" Url="html/P_Novacta_Analytics_DoubleMatrix_Item_4.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="LowerBandwidth Property " Url="html/P_Novacta_Analytics_DoubleMatrix_LowerBandwidth.htm" />
+          <HelpTOCNode Title="Name Property " Url="html/P_Novacta_Analytics_DoubleMatrix_Name.htm" />
+          <HelpTOCNode Title="NumberOfColumns Property " Url="html/P_Novacta_Analytics_DoubleMatrix_NumberOfColumns.htm" />
+          <HelpTOCNode Title="NumberOfRows Property " Url="html/P_Novacta_Analytics_DoubleMatrix_NumberOfRows.htm" />
+          <HelpTOCNode Title="RowNames Property " Url="html/P_Novacta_Analytics_DoubleMatrix_RowNames.htm" />
+          <HelpTOCNode Title="StorageOrder Property " Url="html/P_Novacta_Analytics_DoubleMatrix_StorageOrder.htm" />
+          <HelpTOCNode Title="StorageScheme Property " Url="html/P_Novacta_Analytics_DoubleMatrix_StorageScheme.htm" />
+          <HelpTOCNode Title="UpperBandwidth Property " Url="html/P_Novacta_Analytics_DoubleMatrix_UpperBandwidth.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="69d59c18-114f-4725-9447-056e1f4753cf" Title="DoubleMatrix Methods" Url="html/Methods_T_Novacta_Analytics_DoubleMatrix.htm">
+          <HelpTOCNode Title="ICollection(Double).Add Method " Url="html/M_Novacta_Analytics_DoubleMatrix_System_Collections_Generic_ICollection{System_Double}_Add.htm" />
+          <HelpTOCNode Title="ICollection(Double).Clear Method " Url="html/M_Novacta_Analytics_DoubleMatrix_System_Collections_Generic_ICollection{System_Double}_Clear.htm" />
+          <HelpTOCNode Title="IEnumerable.GetEnumerator Method " Url="html/M_Novacta_Analytics_DoubleMatrix_System_Collections_IEnumerable_GetEnumerator.htm" />
+          <HelpTOCNode Title="IList(Double).Insert Method " Url="html/M_Novacta_Analytics_DoubleMatrix_System_Collections_Generic_IList{System_Double}_Insert.htm" />
+          <HelpTOCNode Title="ICollection(Double).Remove Method " Url="html/M_Novacta_Analytics_DoubleMatrix_System_Collections_Generic_ICollection{System_Double}_Remove.htm" />
+          <HelpTOCNode Title="IList(Double).RemoveAt Method " Url="html/M_Novacta_Analytics_DoubleMatrix_System_Collections_Generic_IList{System_Double}_RemoveAt.htm" />
+          <HelpTOCNode Id="748bc2ce-f5b5-4605-a344-298013d32861" Title="Add Method " Url="html/Overload_Novacta_Analytics_DoubleMatrix_Add.htm">
+            <HelpTOCNode Title="Add Method (Double, DoubleMatrix)" Url="html/M_Novacta_Analytics_DoubleMatrix_Add_2.htm" />
+            <HelpTOCNode Title="Add Method (DoubleMatrix, DoubleMatrix)" Url="html/M_Novacta_Analytics_DoubleMatrix_Add.htm" />
+            <HelpTOCNode Title="Add Method (DoubleMatrix, Double)" Url="html/M_Novacta_Analytics_DoubleMatrix_Add_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Apply Method " Url="html/M_Novacta_Analytics_DoubleMatrix_Apply.htm" />
+          <HelpTOCNode Title="AsColumnMajorDenseArray Method " Url="html/M_Novacta_Analytics_DoubleMatrix_AsColumnMajorDenseArray.htm" />
+          <HelpTOCNode Title="AsReadOnly Method " Url="html/M_Novacta_Analytics_DoubleMatrix_AsReadOnly.htm" />
+          <HelpTOCNode Id="7502bee1-c155-426c-8339-da34f00b8677" Title="AsRowCollection Method " Url="html/Overload_Novacta_Analytics_DoubleMatrix_AsRowCollection.htm">
+            <HelpTOCNode Title="AsRowCollection Method " Url="html/M_Novacta_Analytics_DoubleMatrix_AsRowCollection.htm" />
+            <HelpTOCNode Title="AsRowCollection Method (IndexCollection)" Url="html/M_Novacta_Analytics_DoubleMatrix_AsRowCollection_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Contains Method " Url="html/M_Novacta_Analytics_DoubleMatrix_Contains.htm" />
+          <HelpTOCNode Title="CopyTo Method " Url="html/M_Novacta_Analytics_DoubleMatrix_CopyTo.htm" />
+          <HelpTOCNode Id="c7dae70c-e550-4c97-9d5c-3c0b5c527b1b" Title="Dense Method " Url="html/Overload_Novacta_Analytics_DoubleMatrix_Dense.htm">
+            <HelpTOCNode Title="Dense Method (Double[,])" Url="html/M_Novacta_Analytics_DoubleMatrix_Dense.htm" />
+            <HelpTOCNode Title="Dense Method (Int32, Int32)" Url="html/M_Novacta_Analytics_DoubleMatrix_Dense_1.htm" />
+            <HelpTOCNode Title="Dense Method (Int32, Int32, IEnumerable(Double))" Url="html/M_Novacta_Analytics_DoubleMatrix_Dense_2.htm" />
+            <HelpTOCNode Title="Dense Method (Int32, Int32, Double)" Url="html/M_Novacta_Analytics_DoubleMatrix_Dense_4.htm" />
+            <HelpTOCNode Title="Dense Method (Int32, Int32, Double[])" Url="html/M_Novacta_Analytics_DoubleMatrix_Dense_5.htm" />
+            <HelpTOCNode Title="Dense Method (Int32, Int32, IEnumerable(Double), StorageOrder)" Url="html/M_Novacta_Analytics_DoubleMatrix_Dense_3.htm" />
+            <HelpTOCNode Title="Dense Method (Int32, Int32, Double[], StorageOrder)" Url="html/M_Novacta_Analytics_DoubleMatrix_Dense_6.htm" />
+            <HelpTOCNode Title="Dense Method (Int32, Int32, Double[], Boolean)" Url="html/M_Novacta_Analytics_DoubleMatrix_Dense_7.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="d80cf45c-3d28-47f1-942c-afe309437fe5" Title="Diagonal Method " Url="html/Overload_Novacta_Analytics_DoubleMatrix_Diagonal.htm">
+            <HelpTOCNode Title="Diagonal Method (DoubleMatrix)" Url="html/M_Novacta_Analytics_DoubleMatrix_Diagonal.htm" />
+            <HelpTOCNode Title="Diagonal Method (ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_DoubleMatrix_Diagonal_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="6dbad6ce-5e45-48ea-9ec5-b39d729dc30e" Title="Dispose Method " Url="html/Overload_Novacta_Analytics_DoubleMatrix_Dispose.htm">
+            <HelpTOCNode Title="Dispose Method " Url="html/M_Novacta_Analytics_DoubleMatrix_Dispose.htm" />
+            <HelpTOCNode Title="Dispose Method (Boolean)" Url="html/M_Novacta_Analytics_DoubleMatrix_Dispose_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="5711c921-bbe1-4b41-855b-a042a6294985" Title="Divide Method " Url="html/Overload_Novacta_Analytics_DoubleMatrix_Divide.htm">
+            <HelpTOCNode Title="Divide Method (Double, DoubleMatrix)" Url="html/M_Novacta_Analytics_DoubleMatrix_Divide_2.htm" />
+            <HelpTOCNode Title="Divide Method (DoubleMatrix, DoubleMatrix)" Url="html/M_Novacta_Analytics_DoubleMatrix_Divide.htm" />
+            <HelpTOCNode Title="Divide Method (DoubleMatrix, Double)" Url="html/M_Novacta_Analytics_DoubleMatrix_Divide_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="ElementWiseMultiply Method " Url="html/M_Novacta_Analytics_DoubleMatrix_ElementWiseMultiply.htm" />
+          <HelpTOCNode Title="Finalize Method " Url="html/M_Novacta_Analytics_DoubleMatrix_Finalize.htm" />
+          <HelpTOCNode Title="Find Method " Url="html/M_Novacta_Analytics_DoubleMatrix_Find.htm" />
+          <HelpTOCNode Title="FindNonzero Method " Url="html/M_Novacta_Analytics_DoubleMatrix_FindNonzero.htm" />
+          <HelpTOCNode Title="FindWhile Method " Url="html/M_Novacta_Analytics_DoubleMatrix_FindWhile.htm" />
+          <HelpTOCNode Title="FromDouble Method " Url="html/M_Novacta_Analytics_DoubleMatrix_FromDouble.htm" />
+          <HelpTOCNode Title="FromIndexPartition Method " Url="html/M_Novacta_Analytics_DoubleMatrix_FromIndexPartition.htm" />
+          <HelpTOCNode Title="FromReadOnlyDoubleMatrix Method " Url="html/M_Novacta_Analytics_DoubleMatrix_FromReadOnlyDoubleMatrix.htm" />
+          <HelpTOCNode Title="GetEnumerator Method " Url="html/M_Novacta_Analytics_DoubleMatrix_GetEnumerator.htm" />
+          <HelpTOCNode Title="GetObjectData Method " Url="html/M_Novacta_Analytics_DoubleMatrix_GetObjectData.htm" />
+          <HelpTOCNode Title="GetStorage Method " Url="html/M_Novacta_Analytics_DoubleMatrix_GetStorage.htm" />
+          <HelpTOCNode Title="Identity Method " Url="html/M_Novacta_Analytics_DoubleMatrix_Identity.htm" />
+          <HelpTOCNode Title="IndexOf Method " Url="html/M_Novacta_Analytics_DoubleMatrix_IndexOf.htm" />
+          <HelpTOCNode Title="InPlaceApply Method " Url="html/M_Novacta_Analytics_DoubleMatrix_InPlaceApply.htm" />
+          <HelpTOCNode Title="InPlaceTranspose Method " Url="html/M_Novacta_Analytics_DoubleMatrix_InPlaceTranspose.htm" />
+          <HelpTOCNode Id="903ee95c-381e-47ca-861d-1ff365d4cbbe" Title="Multiply Method " Url="html/Overload_Novacta_Analytics_DoubleMatrix_Multiply.htm">
+            <HelpTOCNode Title="Multiply Method (Double, DoubleMatrix)" Url="html/M_Novacta_Analytics_DoubleMatrix_Multiply_2.htm" />
+            <HelpTOCNode Title="Multiply Method (DoubleMatrix, DoubleMatrix)" Url="html/M_Novacta_Analytics_DoubleMatrix_Multiply.htm" />
+            <HelpTOCNode Title="Multiply Method (DoubleMatrix, Double)" Url="html/M_Novacta_Analytics_DoubleMatrix_Multiply_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Negate Method " Url="html/M_Novacta_Analytics_DoubleMatrix_Negate.htm" />
+          <HelpTOCNode Title="RemoveAllColumnNames Method " Url="html/M_Novacta_Analytics_DoubleMatrix_RemoveAllColumnNames.htm" />
+          <HelpTOCNode Title="RemoveAllRowNames Method " Url="html/M_Novacta_Analytics_DoubleMatrix_RemoveAllRowNames.htm" />
+          <HelpTOCNode Title="RemoveColumnName Method " Url="html/M_Novacta_Analytics_DoubleMatrix_RemoveColumnName.htm" />
+          <HelpTOCNode Title="RemoveRowName Method " Url="html/M_Novacta_Analytics_DoubleMatrix_RemoveRowName.htm" />
+          <HelpTOCNode Title="SetColumnName Method " Url="html/M_Novacta_Analytics_DoubleMatrix_SetColumnName.htm" />
+          <HelpTOCNode Title="SetRowName Method " Url="html/M_Novacta_Analytics_DoubleMatrix_SetRowName.htm" />
+          <HelpTOCNode Title="Sparse Method " Url="html/M_Novacta_Analytics_DoubleMatrix_Sparse.htm" />
+          <HelpTOCNode Id="a70686d5-fb46-41c8-b88e-c0a10e32f549" Title="Subtract Method " Url="html/Overload_Novacta_Analytics_DoubleMatrix_Subtract.htm">
+            <HelpTOCNode Title="Subtract Method (Double, DoubleMatrix)" Url="html/M_Novacta_Analytics_DoubleMatrix_Subtract_2.htm" />
+            <HelpTOCNode Title="Subtract Method (DoubleMatrix, DoubleMatrix)" Url="html/M_Novacta_Analytics_DoubleMatrix_Subtract.htm" />
+            <HelpTOCNode Title="Subtract Method (DoubleMatrix, Double)" Url="html/M_Novacta_Analytics_DoubleMatrix_Subtract_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="ToDouble Method " Url="html/M_Novacta_Analytics_DoubleMatrix_ToDouble.htm" />
+          <HelpTOCNode Title="ToString Method " Url="html/M_Novacta_Analytics_DoubleMatrix_ToString.htm" />
+          <HelpTOCNode Title="Transpose Method " Url="html/M_Novacta_Analytics_DoubleMatrix_Transpose.htm" />
+          <HelpTOCNode Title="TryGetColumnName Method " Url="html/M_Novacta_Analytics_DoubleMatrix_TryGetColumnName.htm" />
+          <HelpTOCNode Title="TryGetRowName Method " Url="html/M_Novacta_Analytics_DoubleMatrix_TryGetRowName.htm" />
+          <HelpTOCNode Id="8fae630a-ca50-4c9a-ae34-4dac0422a771" Title="Vec Method " Url="html/Overload_Novacta_Analytics_DoubleMatrix_Vec.htm">
+            <HelpTOCNode Title="Vec Method " Url="html/M_Novacta_Analytics_DoubleMatrix_Vec.htm" />
+            <HelpTOCNode Title="Vec Method (IndexCollection)" Url="html/M_Novacta_Analytics_DoubleMatrix_Vec_1.htm" />
+          </HelpTOCNode>
+        </HelpTOCNode>
+        <HelpTOCNode Id="b8c02058-0c36-45c9-8d6b-8949b1571073" Title="DoubleMatrix Operators and Type Conversions" Url="html/Operators_T_Novacta_Analytics_DoubleMatrix.htm">
+          <HelpTOCNode Id="e3e79239-1c92-4160-9662-4d76eb2bfa42" Title="Addition Operator " Url="html/Overload_Novacta_Analytics_DoubleMatrix_op_Addition.htm">
+            <HelpTOCNode Title="Addition Operator (Double, DoubleMatrix)" Url="html/M_Novacta_Analytics_DoubleMatrix_op_Addition_2.htm" />
+            <HelpTOCNode Title="Addition Operator (DoubleMatrix, DoubleMatrix)" Url="html/M_Novacta_Analytics_DoubleMatrix_op_Addition.htm" />
+            <HelpTOCNode Title="Addition Operator (DoubleMatrix, Double)" Url="html/M_Novacta_Analytics_DoubleMatrix_op_Addition_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="0f41fa29-7ce8-410b-8b66-c6a90cb144b2" Title="Division Operator " Url="html/Overload_Novacta_Analytics_DoubleMatrix_op_Division.htm">
+            <HelpTOCNode Title="Division Operator (Double, DoubleMatrix)" Url="html/M_Novacta_Analytics_DoubleMatrix_op_Division_2.htm" />
+            <HelpTOCNode Title="Division Operator (DoubleMatrix, DoubleMatrix)" Url="html/M_Novacta_Analytics_DoubleMatrix_op_Division.htm" />
+            <HelpTOCNode Title="Division Operator (DoubleMatrix, Double)" Url="html/M_Novacta_Analytics_DoubleMatrix_op_Division_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="6d8765a9-0950-4917-9dd7-74a9614cdea3" Title="Explicit Conversion Operators" Url="html/Overload_Novacta_Analytics_DoubleMatrix_op_Explicit.htm">
+            <HelpTOCNode Title="Explicit Conversion (Double to DoubleMatrix)" Url="html/M_Novacta_Analytics_DoubleMatrix_op_Explicit_3.htm" />
+            <HelpTOCNode Title="Explicit Conversion (DoubleMatrix to Double)" Url="html/M_Novacta_Analytics_DoubleMatrix_op_Explicit.htm" />
+            <HelpTOCNode Title="Explicit Conversion (IndexPartition(Double) to DoubleMatrix)" Url="html/M_Novacta_Analytics_DoubleMatrix_op_Explicit_1.htm" />
+            <HelpTOCNode Title="Explicit Conversion (ReadOnlyDoubleMatrix to DoubleMatrix)" Url="html/M_Novacta_Analytics_DoubleMatrix_op_Explicit_2.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="68c4c0c9-6828-4354-9088-57670859075d" Title="Multiply Operator " Url="html/Overload_Novacta_Analytics_DoubleMatrix_op_Multiply.htm">
+            <HelpTOCNode Title="Multiply Operator (Double, DoubleMatrix)" Url="html/M_Novacta_Analytics_DoubleMatrix_op_Multiply_2.htm" />
+            <HelpTOCNode Title="Multiply Operator (DoubleMatrix, DoubleMatrix)" Url="html/M_Novacta_Analytics_DoubleMatrix_op_Multiply.htm" />
+            <HelpTOCNode Title="Multiply Operator (DoubleMatrix, Double)" Url="html/M_Novacta_Analytics_DoubleMatrix_op_Multiply_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="56266016-a287-4376-9bed-4eebf1d680fe" Title="Subtraction Operator " Url="html/Overload_Novacta_Analytics_DoubleMatrix_op_Subtraction.htm">
+            <HelpTOCNode Title="Subtraction Operator (Double, DoubleMatrix)" Url="html/M_Novacta_Analytics_DoubleMatrix_op_Subtraction_2.htm" />
+            <HelpTOCNode Title="Subtraction Operator (DoubleMatrix, DoubleMatrix)" Url="html/M_Novacta_Analytics_DoubleMatrix_op_Subtraction.htm" />
+            <HelpTOCNode Title="Subtraction Operator (DoubleMatrix, Double)" Url="html/M_Novacta_Analytics_DoubleMatrix_op_Subtraction_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="UnaryNegation Operator " Url="html/M_Novacta_Analytics_DoubleMatrix_op_UnaryNegation.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="441f3cc7-6c1c-416a-89f1-c6100dec74cb" Title="DoubleMatrixRow Class" Url="html/T_Novacta_Analytics_DoubleMatrixRow.htm">
+        <HelpTOCNode Id="bd02194b-f06f-49a3-b86e-561833125625" Title="DoubleMatrixRow Properties" Url="html/Properties_T_Novacta_Analytics_DoubleMatrixRow.htm">
+          <HelpTOCNode Title="Index Property " Url="html/P_Novacta_Analytics_DoubleMatrixRow_Index.htm" />
+          <HelpTOCNode Id="d48970c9-ab71-4abf-9001-2c030643dba8" Title="Item Property " Url="html/Overload_Novacta_Analytics_DoubleMatrixRow_Item.htm">
+            <HelpTOCNode Title="Item Property (Int32)" Url="html/P_Novacta_Analytics_DoubleMatrixRow_Item.htm" />
+            <HelpTOCNode Title="Item Property (String)" Url="html/P_Novacta_Analytics_DoubleMatrixRow_Item_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Length Property " Url="html/P_Novacta_Analytics_DoubleMatrixRow_Length.htm" />
+          <HelpTOCNode Title="Name Property " Url="html/P_Novacta_Analytics_DoubleMatrixRow_Name.htm" />
+          <HelpTOCNode Title="XData Property " Url="html/P_Novacta_Analytics_DoubleMatrixRow_XData.htm" />
+          <HelpTOCNode Title="YData Property " Url="html/P_Novacta_Analytics_DoubleMatrixRow_YData.htm" />
+          <HelpTOCNode Title="ZData Property " Url="html/P_Novacta_Analytics_DoubleMatrixRow_ZData.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="49bbcd34-d1c4-4544-899a-f79b8b56cd84" Title="DoubleMatrixRow Methods" Url="html/Methods_T_Novacta_Analytics_DoubleMatrixRow.htm">
+          <HelpTOCNode Title="IEnumerable(Double).GetEnumerator Method " Url="html/M_Novacta_Analytics_DoubleMatrixRow_System_Collections_Generic_IEnumerable{System_Double}_GetEnumerator.htm" />
+          <HelpTOCNode Id="120f00f0-f23d-4e75-8eb5-dc8413e27c70" Title="CompareTo Method " Url="html/Overload_Novacta_Analytics_DoubleMatrixRow_CompareTo.htm">
+            <HelpTOCNode Title="CompareTo Method (Object)" Url="html/M_Novacta_Analytics_DoubleMatrixRow_CompareTo_1.htm" />
+            <HelpTOCNode Title="CompareTo Method (DoubleMatrixRow)" Url="html/M_Novacta_Analytics_DoubleMatrixRow_CompareTo.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="a246d9dd-c87f-4994-8936-04f839097c1e" Title="Equals Method " Url="html/Overload_Novacta_Analytics_DoubleMatrixRow_Equals.htm">
+            <HelpTOCNode Title="Equals Method (Object)" Url="html/M_Novacta_Analytics_DoubleMatrixRow_Equals_1.htm" />
+            <HelpTOCNode Title="Equals Method (DoubleMatrixRow)" Url="html/M_Novacta_Analytics_DoubleMatrixRow_Equals.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="GetEnumerator Method " Url="html/M_Novacta_Analytics_DoubleMatrixRow_GetEnumerator.htm" />
+          <HelpTOCNode Title="GetHashCode Method " Url="html/M_Novacta_Analytics_DoubleMatrixRow_GetHashCode.htm" />
+          <HelpTOCNode Title="ToDoubleMatrix Method " Url="html/M_Novacta_Analytics_DoubleMatrixRow_ToDoubleMatrix.htm" />
+          <HelpTOCNode Title="ToString Method " Url="html/M_Novacta_Analytics_DoubleMatrixRow_ToString.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="4e6ff96a-1c55-4860-a721-191dc97cd9b3" Title="DoubleMatrixRow Events" Url="html/Events_T_Novacta_Analytics_DoubleMatrixRow.htm">
+          <HelpTOCNode Title="PropertyChanged Event" Url="html/E_Novacta_Analytics_DoubleMatrixRow_PropertyChanged.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="4b084b54-18e4-4570-a52b-153bf2d8548e" Title="DoubleMatrixRow Operators and Type Conversions" Url="html/Operators_T_Novacta_Analytics_DoubleMatrixRow.htm">
+          <HelpTOCNode Title="Equality Operator " Url="html/M_Novacta_Analytics_DoubleMatrixRow_op_Equality.htm" />
+          <HelpTOCNode Title="GreaterThan Operator " Url="html/M_Novacta_Analytics_DoubleMatrixRow_op_GreaterThan.htm" />
+          <HelpTOCNode Title="GreaterThanOrEqual Operator " Url="html/M_Novacta_Analytics_DoubleMatrixRow_op_GreaterThanOrEqual.htm" />
+          <HelpTOCNode Title="Implicit Conversion (DoubleMatrixRow to DoubleMatrix)" Url="html/M_Novacta_Analytics_DoubleMatrixRow_op_Implicit.htm" />
+          <HelpTOCNode Title="Inequality Operator " Url="html/M_Novacta_Analytics_DoubleMatrixRow_op_Inequality.htm" />
+          <HelpTOCNode Title="LessThan Operator " Url="html/M_Novacta_Analytics_DoubleMatrixRow_op_LessThan.htm" />
+          <HelpTOCNode Title="LessThanOrEqual Operator " Url="html/M_Novacta_Analytics_DoubleMatrixRow_op_LessThanOrEqual.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="ca498663-823c-4e9d-87f8-8b1a3b29a83b" Title="DoubleMatrixRowCollection Class" Url="html/T_Novacta_Analytics_DoubleMatrixRowCollection.htm">
+        <HelpTOCNode Id="6ba00a48-374a-4d5b-81e9-4c3d3f233e67" Title="DoubleMatrixRowCollection Properties" Url="html/Properties_T_Novacta_Analytics_DoubleMatrixRowCollection.htm">
+          <HelpTOCNode Title="Matrix Property " Url="html/P_Novacta_Analytics_DoubleMatrixRowCollection_Matrix.htm" />
+          <HelpTOCNode Title="XDataColumn Property " Url="html/P_Novacta_Analytics_DoubleMatrixRowCollection_XDataColumn.htm" />
+          <HelpTOCNode Title="YDataColumn Property " Url="html/P_Novacta_Analytics_DoubleMatrixRowCollection_YDataColumn.htm" />
+          <HelpTOCNode Title="ZDataColumn Property " Url="html/P_Novacta_Analytics_DoubleMatrixRowCollection_ZDataColumn.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="d23ac944-fe7f-488f-a7f6-90160f8ba33f" Title="DoubleMatrixRowCollection Methods" Url="html/Methods_T_Novacta_Analytics_DoubleMatrixRowCollection.htm">
+          <HelpTOCNode Title="ToDoubleMatrix Method " Url="html/M_Novacta_Analytics_DoubleMatrixRowCollection_ToDoubleMatrix.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="DoubleMatrixRowCollection Events" Url="html/Events_T_Novacta_Analytics_DoubleMatrixRowCollection.htm" />
+        <HelpTOCNode Id="47af0751-60f2-4562-86a3-411ea872c117" Title="DoubleMatrixRowCollection Type Conversions" Url="html/Operators_T_Novacta_Analytics_DoubleMatrixRowCollection.htm">
+          <HelpTOCNode Title="Implicit Conversion (DoubleMatrixRowCollection to DoubleMatrix)" Url="html/M_Novacta_Analytics_DoubleMatrixRowCollection_op_Implicit.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="711d8c81-c24b-4f84-8ba3-4ba0318b0d1d" Title="ExponentialDistribution Class" Url="html/T_Novacta_Analytics_ExponentialDistribution.htm">
+        <HelpTOCNode Title="ExponentialDistribution Constructor " Url="html/M_Novacta_Analytics_ExponentialDistribution__ctor.htm" />
+        <HelpTOCNode Id="865e7d06-9891-4e78-8541-d728efb31308" Title="ExponentialDistribution Properties" Url="html/Properties_T_Novacta_Analytics_ExponentialDistribution.htm">
+          <HelpTOCNode Title="CanInvertCdf Property " Url="html/P_Novacta_Analytics_ExponentialDistribution_CanInvertCdf.htm" />
+          <HelpTOCNode Title="Rate Property " Url="html/P_Novacta_Analytics_ExponentialDistribution_Rate.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="5f888342-e5cf-4a73-936a-0dc4b4423123" Title="ExponentialDistribution Methods" Url="html/Methods_T_Novacta_Analytics_ExponentialDistribution.htm">
+          <HelpTOCNode Id="c86ee2ee-f794-41b7-bdae-51da953a3843" Title="Cdf Method " Url="html/Overload_Novacta_Analytics_ExponentialDistribution_Cdf.htm">
+            <HelpTOCNode Title="Cdf Method (Double)" Url="html/M_Novacta_Analytics_ExponentialDistribution_Cdf.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="f9be4837-2213-48a1-9c8d-66a88e62c8c3" Title="InverseCdf Method " Url="html/Overload_Novacta_Analytics_ExponentialDistribution_InverseCdf.htm">
+            <HelpTOCNode Title="InverseCdf Method (Double)" Url="html/M_Novacta_Analytics_ExponentialDistribution_InverseCdf.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Mean Method " Url="html/M_Novacta_Analytics_ExponentialDistribution_Mean.htm" />
+          <HelpTOCNode Title="OnSample Method " Url="html/M_Novacta_Analytics_ExponentialDistribution_OnSample.htm" />
+          <HelpTOCNode Id="676b10ea-860d-4517-81d1-0e2c7ec595cb" Title="Pdf Method " Url="html/Overload_Novacta_Analytics_ExponentialDistribution_Pdf.htm">
+            <HelpTOCNode Title="Pdf Method (Double)" Url="html/M_Novacta_Analytics_ExponentialDistribution_Pdf.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="a0a68bd2-efef-4074-9c02-7a0d398dc3c3" Title="Sample Method " Url="html/Overload_Novacta_Analytics_ExponentialDistribution_Sample.htm">
+            <HelpTOCNode Title="Sample Method " Url="html/M_Novacta_Analytics_ExponentialDistribution_Sample.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Variance Method " Url="html/M_Novacta_Analytics_ExponentialDistribution_Variance.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="434c9aae-3e19-448b-a6a9-44cbc9ad7842" Title="FiniteDiscreteDistribution Class" Url="html/T_Novacta_Analytics_FiniteDiscreteDistribution.htm">
+        <HelpTOCNode Title="FiniteDiscreteDistribution Constructor " Url="html/M_Novacta_Analytics_FiniteDiscreteDistribution__ctor.htm" />
+        <HelpTOCNode Id="0b02d6d7-7bb1-4046-89b9-fc11d2705a4a" Title="FiniteDiscreteDistribution Properties" Url="html/Properties_T_Novacta_Analytics_FiniteDiscreteDistribution.htm">
+          <HelpTOCNode Title="CanInvertCdf Property " Url="html/P_Novacta_Analytics_FiniteDiscreteDistribution_CanInvertCdf.htm" />
+          <HelpTOCNode Title="Masses Property " Url="html/P_Novacta_Analytics_FiniteDiscreteDistribution_Masses.htm" />
+          <HelpTOCNode Title="Values Property " Url="html/P_Novacta_Analytics_FiniteDiscreteDistribution_Values.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="e687329f-069a-4f0d-a6e8-a08e34703285" Title="FiniteDiscreteDistribution Methods" Url="html/Methods_T_Novacta_Analytics_FiniteDiscreteDistribution.htm">
+          <HelpTOCNode Id="8b24b5a9-b2c0-4c9e-bcd1-f6b15570b393" Title="Cdf Method " Url="html/Overload_Novacta_Analytics_FiniteDiscreteDistribution_Cdf.htm">
+            <HelpTOCNode Title="Cdf Method (Double)" Url="html/M_Novacta_Analytics_FiniteDiscreteDistribution_Cdf.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="e434d3df-344d-40b8-9636-b27fa22bcd87" Title="InverseCdf Method " Url="html/Overload_Novacta_Analytics_FiniteDiscreteDistribution_InverseCdf.htm">
+            <HelpTOCNode Title="InverseCdf Method (Double)" Url="html/M_Novacta_Analytics_FiniteDiscreteDistribution_InverseCdf_1.htm" />
+            <HelpTOCNode Title="InverseCdf Method (DoubleMatrix)" Url="html/M_Novacta_Analytics_FiniteDiscreteDistribution_InverseCdf.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Mean Method " Url="html/M_Novacta_Analytics_FiniteDiscreteDistribution_Mean.htm" />
+          <HelpTOCNode Title="OnSample Method " Url="html/M_Novacta_Analytics_FiniteDiscreteDistribution_OnSample.htm" />
+          <HelpTOCNode Id="301f6c00-22cd-49a9-8739-26045a6af0fe" Title="Pdf Method " Url="html/Overload_Novacta_Analytics_FiniteDiscreteDistribution_Pdf.htm">
+            <HelpTOCNode Title="Pdf Method (Double)" Url="html/M_Novacta_Analytics_FiniteDiscreteDistribution_Pdf.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="302c6ecd-6756-4cc7-bc91-bc1470ee3909" Title="Sample Method " Url="html/Overload_Novacta_Analytics_FiniteDiscreteDistribution_Sample.htm">
+            <HelpTOCNode Title="Sample Method " Url="html/M_Novacta_Analytics_FiniteDiscreteDistribution_Sample.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="SetMasses Method " Url="html/M_Novacta_Analytics_FiniteDiscreteDistribution_SetMasses.htm" />
+          <HelpTOCNode Title="Uniform Method " Url="html/M_Novacta_Analytics_FiniteDiscreteDistribution_Uniform.htm" />
+          <HelpTOCNode Title="Variance Method " Url="html/M_Novacta_Analytics_FiniteDiscreteDistribution_Variance.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="47170474-40f5-4d74-a9ff-332551c3423c" Title="GaussianDistribution Class" Url="html/T_Novacta_Analytics_GaussianDistribution.htm">
+        <HelpTOCNode Title="GaussianDistribution Constructor " Url="html/M_Novacta_Analytics_GaussianDistribution__ctor.htm" />
+        <HelpTOCNode Id="5b3361bb-3d80-4a25-bff2-dfb867218cc9" Title="GaussianDistribution Properties" Url="html/Properties_T_Novacta_Analytics_GaussianDistribution.htm">
+          <HelpTOCNode Title="CanInvertCdf Property " Url="html/P_Novacta_Analytics_GaussianDistribution_CanInvertCdf.htm" />
+          <HelpTOCNode Title="Mu Property " Url="html/P_Novacta_Analytics_GaussianDistribution_Mu.htm" />
+          <HelpTOCNode Title="Sigma Property " Url="html/P_Novacta_Analytics_GaussianDistribution_Sigma.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="a863a0f8-e280-48eb-8e80-a296d6623f01" Title="GaussianDistribution Methods" Url="html/Methods_T_Novacta_Analytics_GaussianDistribution.htm">
+          <HelpTOCNode Id="7ab819fa-14a6-4e48-a71e-9ec695f40fc2" Title="Cdf Method " Url="html/Overload_Novacta_Analytics_GaussianDistribution_Cdf.htm">
+            <HelpTOCNode Title="Cdf Method (Double)" Url="html/M_Novacta_Analytics_GaussianDistribution_Cdf.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="d93ecc49-7cb9-4e3a-8faa-f80590fd9d1e" Title="InverseCdf Method " Url="html/Overload_Novacta_Analytics_GaussianDistribution_InverseCdf.htm">
+            <HelpTOCNode Title="InverseCdf Method (Double)" Url="html/M_Novacta_Analytics_GaussianDistribution_InverseCdf_1.htm" />
+            <HelpTOCNode Title="InverseCdf Method (DoubleMatrix)" Url="html/M_Novacta_Analytics_GaussianDistribution_InverseCdf.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Mean Method " Url="html/M_Novacta_Analytics_GaussianDistribution_Mean.htm" />
+          <HelpTOCNode Title="OnSample Method " Url="html/M_Novacta_Analytics_GaussianDistribution_OnSample.htm" />
+          <HelpTOCNode Id="2f4f1ab9-6dba-4bb3-b0c6-c0ac216e4dfa" Title="Pdf Method " Url="html/Overload_Novacta_Analytics_GaussianDistribution_Pdf.htm">
+            <HelpTOCNode Title="Pdf Method (Double)" Url="html/M_Novacta_Analytics_GaussianDistribution_Pdf_1.htm" />
+            <HelpTOCNode Title="Pdf Method (DoubleMatrix)" Url="html/M_Novacta_Analytics_GaussianDistribution_Pdf.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="bf2676a1-5951-4af8-a344-dee23559fdb3" Title="Sample Method " Url="html/Overload_Novacta_Analytics_GaussianDistribution_Sample.htm">
+            <HelpTOCNode Title="Sample Method " Url="html/M_Novacta_Analytics_GaussianDistribution_Sample.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Standard Method " Url="html/M_Novacta_Analytics_GaussianDistribution_Standard.htm" />
+          <HelpTOCNode Title="StandardDeviation Method " Url="html/M_Novacta_Analytics_GaussianDistribution_StandardDeviation.htm" />
+          <HelpTOCNode Title="Variance Method " Url="html/M_Novacta_Analytics_GaussianDistribution_Variance.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="f7a9832e-6bc0-4f98-8a72-f1dbad2d6899" Title="GeneralizedParetoDistribution Class" Url="html/T_Novacta_Analytics_GeneralizedParetoDistribution.htm">
+        <HelpTOCNode Title="GeneralizedParetoDistribution Constructor " Url="html/M_Novacta_Analytics_GeneralizedParetoDistribution__ctor.htm" />
+        <HelpTOCNode Id="a4cd8e75-e712-40cb-a1be-99de8901ab56" Title="GeneralizedParetoDistribution Properties" Url="html/Properties_T_Novacta_Analytics_GeneralizedParetoDistribution.htm">
+          <HelpTOCNode Title="CanInvertCdf Property " Url="html/P_Novacta_Analytics_GeneralizedParetoDistribution_CanInvertCdf.htm" />
+          <HelpTOCNode Title="Mu Property " Url="html/P_Novacta_Analytics_GeneralizedParetoDistribution_Mu.htm" />
+          <HelpTOCNode Title="Sigma Property " Url="html/P_Novacta_Analytics_GeneralizedParetoDistribution_Sigma.htm" />
+          <HelpTOCNode Title="Xi Property " Url="html/P_Novacta_Analytics_GeneralizedParetoDistribution_Xi.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="d95d277b-57b3-4f8f-b664-15247ec206e5" Title="GeneralizedParetoDistribution Methods" Url="html/Methods_T_Novacta_Analytics_GeneralizedParetoDistribution.htm">
+          <HelpTOCNode Id="e7a17fd2-650c-4214-86e1-6876c2c4e54c" Title="Cdf Method " Url="html/Overload_Novacta_Analytics_GeneralizedParetoDistribution_Cdf.htm">
+            <HelpTOCNode Title="Cdf Method (Double)" Url="html/M_Novacta_Analytics_GeneralizedParetoDistribution_Cdf_1.htm" />
+            <HelpTOCNode Title="Cdf Method (DoubleMatrix)" Url="html/M_Novacta_Analytics_GeneralizedParetoDistribution_Cdf.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="36449a26-b0dc-48a1-a772-2fa8b1bcdc90" Title="InverseCdf Method " Url="html/Overload_Novacta_Analytics_GeneralizedParetoDistribution_InverseCdf.htm">
+            <HelpTOCNode Title="InverseCdf Method (Double)" Url="html/M_Novacta_Analytics_GeneralizedParetoDistribution_InverseCdf_1.htm" />
+            <HelpTOCNode Title="InverseCdf Method (DoubleMatrix)" Url="html/M_Novacta_Analytics_GeneralizedParetoDistribution_InverseCdf.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Mean Method " Url="html/M_Novacta_Analytics_GeneralizedParetoDistribution_Mean.htm" />
+          <HelpTOCNode Title="OnSample Method " Url="html/M_Novacta_Analytics_GeneralizedParetoDistribution_OnSample.htm" />
+          <HelpTOCNode Id="76226ae8-e342-4679-b3e4-617baff3f2f0" Title="Pdf Method " Url="html/Overload_Novacta_Analytics_GeneralizedParetoDistribution_Pdf.htm">
+            <HelpTOCNode Title="Pdf Method (Double)" Url="html/M_Novacta_Analytics_GeneralizedParetoDistribution_Pdf_1.htm" />
+            <HelpTOCNode Title="Pdf Method (DoubleMatrix)" Url="html/M_Novacta_Analytics_GeneralizedParetoDistribution_Pdf.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="cefb5ab8-d6bf-4f2a-b2da-7d6717c9ddde" Title="Sample Method " Url="html/Overload_Novacta_Analytics_GeneralizedParetoDistribution_Sample.htm">
+            <HelpTOCNode Title="Sample Method " Url="html/M_Novacta_Analytics_GeneralizedParetoDistribution_Sample.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Variance Method " Url="html/M_Novacta_Analytics_GeneralizedParetoDistribution_Variance.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="ba74346b-5f2c-4ffb-8909-be946f0ca313" Title="IMatrixPatterns Interface" Url="html/T_Novacta_Analytics_IMatrixPatterns.htm">
+        <HelpTOCNode Id="1c05813c-da4c-45ac-9c51-8c3434ea299e" Title="IMatrixPatterns Properties" Url="html/Properties_T_Novacta_Analytics_IMatrixPatterns.htm">
+          <HelpTOCNode Title="IsBidiagonal Property " Url="html/P_Novacta_Analytics_IMatrixPatterns_IsBidiagonal.htm" />
+          <HelpTOCNode Title="IsColumnVector Property " Url="html/P_Novacta_Analytics_IMatrixPatterns_IsColumnVector.htm" />
+          <HelpTOCNode Title="IsDiagonal Property " Url="html/P_Novacta_Analytics_IMatrixPatterns_IsDiagonal.htm" />
+          <HelpTOCNode Title="IsHessenberg Property " Url="html/P_Novacta_Analytics_IMatrixPatterns_IsHessenberg.htm" />
+          <HelpTOCNode Title="IsLowerBidiagonal Property " Url="html/P_Novacta_Analytics_IMatrixPatterns_IsLowerBidiagonal.htm" />
+          <HelpTOCNode Title="IsLowerHessenberg Property " Url="html/P_Novacta_Analytics_IMatrixPatterns_IsLowerHessenberg.htm" />
+          <HelpTOCNode Title="IsLowerTriangular Property " Url="html/P_Novacta_Analytics_IMatrixPatterns_IsLowerTriangular.htm" />
+          <HelpTOCNode Title="IsRowVector Property " Url="html/P_Novacta_Analytics_IMatrixPatterns_IsRowVector.htm" />
+          <HelpTOCNode Title="IsScalar Property " Url="html/P_Novacta_Analytics_IMatrixPatterns_IsScalar.htm" />
+          <HelpTOCNode Title="IsSkewSymmetric Property " Url="html/P_Novacta_Analytics_IMatrixPatterns_IsSkewSymmetric.htm" />
+          <HelpTOCNode Title="IsSquare Property " Url="html/P_Novacta_Analytics_IMatrixPatterns_IsSquare.htm" />
+          <HelpTOCNode Title="IsSymmetric Property " Url="html/P_Novacta_Analytics_IMatrixPatterns_IsSymmetric.htm" />
+          <HelpTOCNode Title="IsTriangular Property " Url="html/P_Novacta_Analytics_IMatrixPatterns_IsTriangular.htm" />
+          <HelpTOCNode Title="IsTridiagonal Property " Url="html/P_Novacta_Analytics_IMatrixPatterns_IsTridiagonal.htm" />
+          <HelpTOCNode Title="IsUpperBidiagonal Property " Url="html/P_Novacta_Analytics_IMatrixPatterns_IsUpperBidiagonal.htm" />
+          <HelpTOCNode Title="IsUpperHessenberg Property " Url="html/P_Novacta_Analytics_IMatrixPatterns_IsUpperHessenberg.htm" />
+          <HelpTOCNode Title="IsUpperTriangular Property " Url="html/P_Novacta_Analytics_IMatrixPatterns_IsUpperTriangular.htm" />
+          <HelpTOCNode Title="IsVector Property " Url="html/P_Novacta_Analytics_IMatrixPatterns_IsVector.htm" />
+          <HelpTOCNode Title="LowerBandwidth Property " Url="html/P_Novacta_Analytics_IMatrixPatterns_LowerBandwidth.htm" />
+          <HelpTOCNode Title="UpperBandwidth Property " Url="html/P_Novacta_Analytics_IMatrixPatterns_UpperBandwidth.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="16060971-d13e-4c1a-84b8-bca8243f892d" Title="IndexCollection Class" Url="html/T_Novacta_Analytics_IndexCollection.htm">
+        <HelpTOCNode Title="IndexCollection Constructor " Url="html/M_Novacta_Analytics_IndexCollection__ctor.htm" />
+        <HelpTOCNode Id="72079840-4f8f-41ad-91fa-070d50825deb" Title="IndexCollection Properties" Url="html/Properties_T_Novacta_Analytics_IndexCollection.htm">
+          <HelpTOCNode Title="Count Property " Url="html/P_Novacta_Analytics_IndexCollection_Count.htm" />
+          <HelpTOCNode Title="IsReadOnly Property " Url="html/P_Novacta_Analytics_IndexCollection_IsReadOnly.htm" />
+          <HelpTOCNode Id="b847d6cc-15c8-4436-9ef2-d49af4a9b9bf" Title="Item Property " Url="html/Overload_Novacta_Analytics_IndexCollection_Item.htm">
+            <HelpTOCNode Title="Item Property (Int32)" Url="html/P_Novacta_Analytics_IndexCollection_Item_1.htm" />
+            <HelpTOCNode Title="Item Property (IndexCollection)" Url="html/P_Novacta_Analytics_IndexCollection_Item.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Max Property " Url="html/P_Novacta_Analytics_IndexCollection_Max.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="c7eab5ba-9e3e-4846-9619-86d6a122be0c" Title="IndexCollection Methods" Url="html/Methods_T_Novacta_Analytics_IndexCollection.htm">
+          <HelpTOCNode Title="ICollection(Int32).Add Method " Url="html/M_Novacta_Analytics_IndexCollection_System_Collections_Generic_ICollection{System_Int32}_Add.htm" />
+          <HelpTOCNode Title="ICollection(Int32).Clear Method " Url="html/M_Novacta_Analytics_IndexCollection_System_Collections_Generic_ICollection{System_Int32}_Clear.htm" />
+          <HelpTOCNode Title="IEnumerable.GetEnumerator Method " Url="html/M_Novacta_Analytics_IndexCollection_System_Collections_IEnumerable_GetEnumerator.htm" />
+          <HelpTOCNode Title="IList(Int32).Insert Method " Url="html/M_Novacta_Analytics_IndexCollection_System_Collections_Generic_IList{System_Int32}_Insert.htm" />
+          <HelpTOCNode Title="ICollection(Int32).Remove Method " Url="html/M_Novacta_Analytics_IndexCollection_System_Collections_Generic_ICollection{System_Int32}_Remove.htm" />
+          <HelpTOCNode Title="IList(Int32).RemoveAt Method " Url="html/M_Novacta_Analytics_IndexCollection_System_Collections_Generic_IList{System_Int32}_RemoveAt.htm" />
+          <HelpTOCNode Id="ee6b591d-b744-42fd-819f-3bca149f5dd9" Title="CompareTo Method " Url="html/Overload_Novacta_Analytics_IndexCollection_CompareTo.htm">
+            <HelpTOCNode Title="CompareTo Method (Object)" Url="html/M_Novacta_Analytics_IndexCollection_CompareTo_1.htm" />
+            <HelpTOCNode Title="CompareTo Method (IndexCollection)" Url="html/M_Novacta_Analytics_IndexCollection_CompareTo.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Contains Method " Url="html/M_Novacta_Analytics_IndexCollection_Contains.htm" />
+          <HelpTOCNode Title="CopyTo Method " Url="html/M_Novacta_Analytics_IndexCollection_CopyTo.htm" />
+          <HelpTOCNode Title="Default Method " Url="html/M_Novacta_Analytics_IndexCollection_Default.htm" />
+          <HelpTOCNode Id="a6fc7585-974a-444d-b3f6-505ab12ba7b6" Title="Equals Method " Url="html/Overload_Novacta_Analytics_IndexCollection_Equals.htm">
+            <HelpTOCNode Title="Equals Method (Object)" Url="html/M_Novacta_Analytics_IndexCollection_Equals_1.htm" />
+            <HelpTOCNode Title="Equals Method (IndexCollection)" Url="html/M_Novacta_Analytics_IndexCollection_Equals.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="8af7581c-09bc-429f-b26a-520f99950422" Title="FromArray Method " Url="html/Overload_Novacta_Analytics_IndexCollection_FromArray.htm">
+            <HelpTOCNode Title="FromArray Method (Int32[])" Url="html/M_Novacta_Analytics_IndexCollection_FromArray.htm" />
+            <HelpTOCNode Title="FromArray Method (Int32[], Boolean)" Url="html/M_Novacta_Analytics_IndexCollection_FromArray_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="GetEnumerator Method " Url="html/M_Novacta_Analytics_IndexCollection_GetEnumerator.htm" />
+          <HelpTOCNode Title="GetHashCode Method " Url="html/M_Novacta_Analytics_IndexCollection_GetHashCode.htm" />
+          <HelpTOCNode Title="GetObjectData Method " Url="html/M_Novacta_Analytics_IndexCollection_GetObjectData.htm" />
+          <HelpTOCNode Title="IndexOf Method " Url="html/M_Novacta_Analytics_IndexCollection_IndexOf.htm" />
+          <HelpTOCNode Title="Range Method " Url="html/M_Novacta_Analytics_IndexCollection_Range.htm" />
+          <HelpTOCNode Title="Sequence Method " Url="html/M_Novacta_Analytics_IndexCollection_Sequence.htm" />
+          <HelpTOCNode Title="Sort Method " Url="html/M_Novacta_Analytics_IndexCollection_Sort.htm" />
+          <HelpTOCNode Title="ToString Method " Url="html/M_Novacta_Analytics_IndexCollection_ToString.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="ebf79548-ea6b-45bc-b229-49e11d251fd6" Title="IndexCollection Operators" Url="html/Operators_T_Novacta_Analytics_IndexCollection.htm">
+          <HelpTOCNode Title="Equality Operator " Url="html/M_Novacta_Analytics_IndexCollection_op_Equality.htm" />
+          <HelpTOCNode Title="GreaterThan Operator " Url="html/M_Novacta_Analytics_IndexCollection_op_GreaterThan.htm" />
+          <HelpTOCNode Title="GreaterThanOrEqual Operator " Url="html/M_Novacta_Analytics_IndexCollection_op_GreaterThanOrEqual.htm" />
+          <HelpTOCNode Title="Inequality Operator " Url="html/M_Novacta_Analytics_IndexCollection_op_Inequality.htm" />
+          <HelpTOCNode Title="LessThan Operator " Url="html/M_Novacta_Analytics_IndexCollection_op_LessThan.htm" />
+          <HelpTOCNode Title="LessThanOrEqual Operator " Url="html/M_Novacta_Analytics_IndexCollection_op_LessThanOrEqual.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="75121503-c405-410b-ae19-62ad337ac0ea" Title="IndexPartition Class" Url="html/T_Novacta_Analytics_IndexPartition.htm">
+        <HelpTOCNode Id="9e144628-bd00-4e7d-9cda-d3acba813586" Title="IndexPartition Methods" Url="html/Methods_T_Novacta_Analytics_IndexPartition.htm">
+          <HelpTOCNode Id="2a340868-8fba-425d-bb44-b3f7927790d5" Title="Create Method " Url="html/Overload_Novacta_Analytics_IndexPartition_Create.htm">
+            <HelpTOCNode Title="Create(T) Method (IEnumerable(T))" Url="html/M_Novacta_Analytics_IndexPartition_Create__1_1.htm" />
+            <HelpTOCNode Title="Create Method (DoubleMatrix)" Url="html/M_Novacta_Analytics_IndexPartition_Create.htm" />
+            <HelpTOCNode Title="Create Method (DoubleMatrixRowCollection)" Url="html/M_Novacta_Analytics_IndexPartition_Create_1.htm" />
+            <HelpTOCNode Title="Create(T) Method (IndexCollection, Func(Int32, T))" Url="html/M_Novacta_Analytics_IndexPartition_Create__1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="DaviesBouldinIndex Method " Url="html/M_Novacta_Analytics_IndexPartition_DaviesBouldinIndex.htm" />
+          <HelpTOCNode Title="DunnIndex Method " Url="html/M_Novacta_Analytics_IndexPartition_DunnIndex.htm" />
+          <HelpTOCNode Title="MinimumCentroidLinkage Method " Url="html/M_Novacta_Analytics_IndexPartition_MinimumCentroidLinkage.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="1385002b-5c28-4dc5-84cb-293d001dfccf" Title="IndexPartition(T) Class" Url="html/T_Novacta_Analytics_IndexPartition_1.htm">
+        <HelpTOCNode Id="a2d218f0-b4a3-4a00-a926-e1a4313f5c3d" Title="IndexPartition(T) Properties" Url="html/Properties_T_Novacta_Analytics_IndexPartition_1.htm">
+          <HelpTOCNode Title="Count Property " Url="html/P_Novacta_Analytics_IndexPartition_1_Count.htm" />
+          <HelpTOCNode Title="Identifiers Property " Url="html/P_Novacta_Analytics_IndexPartition_1_Identifiers.htm" />
+          <HelpTOCNode Title="Item Property " Url="html/P_Novacta_Analytics_IndexPartition_1_Item.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="91235b29-0ddb-4702-be1e-46dfcafe39c8" Title="IndexPartition(T) Methods" Url="html/Methods_T_Novacta_Analytics_IndexPartition_1.htm">
+          <HelpTOCNode Title="GetObjectData Method " Url="html/M_Novacta_Analytics_IndexPartition_1_GetObjectData.htm" />
+          <HelpTOCNode Title="ToString Method " Url="html/M_Novacta_Analytics_IndexPartition_1_ToString.htm" />
+          <HelpTOCNode Title="TryGetPart Method " Url="html/M_Novacta_Analytics_IndexPartition_1_TryGetPart.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="e0812a05-2f6a-4dc1-aa89-f13ea8f34acb" Title="IndexValuePair Structure" Url="html/T_Novacta_Analytics_IndexValuePair.htm">
+        <HelpTOCNode Id="e552cb84-e2ad-4798-9325-e4cad904b9ec" Title="IndexValuePair Properties" Url="html/Properties_T_Novacta_Analytics_IndexValuePair.htm">
+          <HelpTOCNode Title="Index Property " Url="html/P_Novacta_Analytics_IndexValuePair_Index.htm" />
+          <HelpTOCNode Title="Value Property " Url="html/P_Novacta_Analytics_IndexValuePair_Value.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="73d8b6ca-e41f-4662-b324-56e59cfd34fb" Title="IndexValuePair Methods" Url="html/Methods_T_Novacta_Analytics_IndexValuePair.htm">
+          <HelpTOCNode Id="43b7b3ad-7cd3-4d61-a17f-24228b3edbfa" Title="Equals Method " Url="html/Overload_Novacta_Analytics_IndexValuePair_Equals.htm">
+            <HelpTOCNode Title="Equals Method (Object)" Url="html/M_Novacta_Analytics_IndexValuePair_Equals_1.htm" />
+            <HelpTOCNode Title="Equals Method (IndexValuePair)" Url="html/M_Novacta_Analytics_IndexValuePair_Equals.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="GetHashCode Method " Url="html/M_Novacta_Analytics_IndexValuePair_GetHashCode.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="6da065e7-2e59-4746-8c48-0ee344ca8289" Title="IndexValuePair Operators" Url="html/Operators_T_Novacta_Analytics_IndexValuePair.htm">
+          <HelpTOCNode Title="Equality Operator " Url="html/M_Novacta_Analytics_IndexValuePair_op_Equality.htm" />
+          <HelpTOCNode Title="Inequality Operator " Url="html/M_Novacta_Analytics_IndexValuePair_op_Inequality.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="24ab657f-84ad-4435-b822-2a97b14d5fda" Title="IReadOnlyTabularCollection(TValue, TCollection) Interface" Url="html/T_Novacta_Analytics_IReadOnlyTabularCollection_2.htm">
+        <HelpTOCNode Id="10e452a1-52f4-470c-9d27-36a7a6290168" Title="IReadOnlyTabularCollection(TValue, TCollection) Properties" Url="html/Properties_T_Novacta_Analytics_IReadOnlyTabularCollection_2.htm">
+          <HelpTOCNode Id="cef127b9-0629-48d8-b297-56b149a4a969" Title="Item Property " Url="html/Overload_Novacta_Analytics_IReadOnlyTabularCollection_2_Item.htm">
+            <HelpTOCNode Title="Item Property (Int32, IndexCollection)" Url="html/P_Novacta_Analytics_IReadOnlyTabularCollection_2_Item_3.htm" />
+            <HelpTOCNode Title="Item Property (Int32, Int32)" Url="html/P_Novacta_Analytics_IReadOnlyTabularCollection_2_Item_4.htm" />
+            <HelpTOCNode Title="Item Property (Int32, String)" Url="html/P_Novacta_Analytics_IReadOnlyTabularCollection_2_Item_5.htm" />
+            <HelpTOCNode Title="Item Property (String, IndexCollection)" Url="html/P_Novacta_Analytics_IReadOnlyTabularCollection_2_Item_6.htm" />
+            <HelpTOCNode Title="Item Property (String, Int32)" Url="html/P_Novacta_Analytics_IReadOnlyTabularCollection_2_Item_7.htm" />
+            <HelpTOCNode Title="Item Property (String, String)" Url="html/P_Novacta_Analytics_IReadOnlyTabularCollection_2_Item_8.htm" />
+            <HelpTOCNode Title="Item Property (IndexCollection, IndexCollection)" Url="html/P_Novacta_Analytics_IReadOnlyTabularCollection_2_Item.htm" />
+            <HelpTOCNode Title="Item Property (IndexCollection, Int32)" Url="html/P_Novacta_Analytics_IReadOnlyTabularCollection_2_Item_1.htm" />
+            <HelpTOCNode Title="Item Property (IndexCollection, String)" Url="html/P_Novacta_Analytics_IReadOnlyTabularCollection_2_Item_2.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="NumberOfColumns Property " Url="html/P_Novacta_Analytics_IReadOnlyTabularCollection_2_NumberOfColumns.htm" />
+          <HelpTOCNode Title="NumberOfRows Property " Url="html/P_Novacta_Analytics_IReadOnlyTabularCollection_2_NumberOfRows.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="29d40900-1581-4bdf-b4e7-d64ccbf925e3" Title="ITabularCollection(TValue, TCollection) Interface" Url="html/T_Novacta_Analytics_ITabularCollection_2.htm">
+        <HelpTOCNode Id="42a1c2c0-05d1-468d-a576-538846933bb2" Title="ITabularCollection(TValue, TCollection) Properties" Url="html/Properties_T_Novacta_Analytics_ITabularCollection_2.htm">
+          <HelpTOCNode Id="87244366-971c-4d09-bc89-0392d97a0b67" Title="Item Property " Url="html/Overload_Novacta_Analytics_ITabularCollection_2_Item.htm">
+            <HelpTOCNode Title="Item Property (Int32, IndexCollection)" Url="html/P_Novacta_Analytics_ITabularCollection_2_Item_3.htm" />
+            <HelpTOCNode Title="Item Property (Int32, Int32)" Url="html/P_Novacta_Analytics_ITabularCollection_2_Item_4.htm" />
+            <HelpTOCNode Title="Item Property (Int32, String)" Url="html/P_Novacta_Analytics_ITabularCollection_2_Item_5.htm" />
+            <HelpTOCNode Title="Item Property (String, IndexCollection)" Url="html/P_Novacta_Analytics_ITabularCollection_2_Item_6.htm" />
+            <HelpTOCNode Title="Item Property (String, Int32)" Url="html/P_Novacta_Analytics_ITabularCollection_2_Item_7.htm" />
+            <HelpTOCNode Title="Item Property (String, String)" Url="html/P_Novacta_Analytics_ITabularCollection_2_Item_8.htm" />
+            <HelpTOCNode Title="Item Property (IndexCollection, IndexCollection)" Url="html/P_Novacta_Analytics_ITabularCollection_2_Item.htm" />
+            <HelpTOCNode Title="Item Property (IndexCollection, Int32)" Url="html/P_Novacta_Analytics_ITabularCollection_2_Item_1.htm" />
+            <HelpTOCNode Title="Item Property (IndexCollection, String)" Url="html/P_Novacta_Analytics_ITabularCollection_2_Item_2.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="NumberOfColumns Property " Url="html/P_Novacta_Analytics_ITabularCollection_2_NumberOfColumns.htm" />
+          <HelpTOCNode Title="NumberOfRows Property " Url="html/P_Novacta_Analytics_ITabularCollection_2_NumberOfRows.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="71aef427-d911-46e7-a545-515c4d9f9916" Title="JsonSerialization Class" Url="html/T_Novacta_Analytics_JsonSerialization.htm">
+        <HelpTOCNode Id="d07b9862-479f-48e8-b53e-4097f4ddf95c" Title="JsonSerialization Methods" Url="html/Methods_T_Novacta_Analytics_JsonSerialization.htm">
+          <HelpTOCNode Title="AddDataConverters Method " Url="html/M_Novacta_Analytics_JsonSerialization_AddDataConverters.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="4b3e372b-f428-4877-8ba9-069b6f9dd6a5" Title="MultipleCorrespondence Class" Url="html/T_Novacta_Analytics_MultipleCorrespondence.htm">
+        <HelpTOCNode Id="478ba8cb-553f-4d5e-97fc-0b0529928972" Title="MultipleCorrespondence Properties" Url="html/Properties_T_Novacta_Analytics_MultipleCorrespondence.htm">
+          <HelpTOCNode Title="Categories Property " Url="html/P_Novacta_Analytics_MultipleCorrespondence_Categories.htm" />
+          <HelpTOCNode Title="Individuals Property " Url="html/P_Novacta_Analytics_MultipleCorrespondence_Individuals.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="28f78a3c-09ca-4560-8dca-a1dbbdddcea5" Title="MultipleCorrespondence Methods" Url="html/Methods_T_Novacta_Analytics_MultipleCorrespondence.htm">
+          <HelpTOCNode Title="Analyze Method " Url="html/M_Novacta_Analytics_MultipleCorrespondence_Analyze.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="14e33673-8f3a-4a99-9a3c-8aafe4ebbcf8" Title="NumericalDifferentiation Class" Url="html/T_Novacta_Analytics_NumericalDifferentiation.htm">
+        <HelpTOCNode Id="a023aaec-c1de-4ba0-be06-2abc5bb929f3" Title="NumericalDifferentiation Methods" Url="html/Methods_T_Novacta_Analytics_NumericalDifferentiation.htm">
+          <HelpTOCNode Id="73125fac-0734-48f5-bacd-070bc8819ca0" Title="Gradient Method " Url="html/Overload_Novacta_Analytics_NumericalDifferentiation_Gradient.htm">
+            <HelpTOCNode Title="Gradient Method (Func(DoubleMatrix, Double), DoubleMatrix)" Url="html/M_Novacta_Analytics_NumericalDifferentiation_Gradient.htm" />
+            <HelpTOCNode Title="Gradient(TFunctionParameter) Method (Func(DoubleMatrix, TFunctionParameter, Double), DoubleMatrix, TFunctionParameter)" Url="html/M_Novacta_Analytics_NumericalDifferentiation_Gradient__1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="8e09a9c3-75e6-40ce-9a0c-f8df10d6c493" Title="Hessian Method " Url="html/Overload_Novacta_Analytics_NumericalDifferentiation_Hessian.htm">
+            <HelpTOCNode Title="Hessian Method (Func(DoubleMatrix, Double), DoubleMatrix)" Url="html/M_Novacta_Analytics_NumericalDifferentiation_Hessian.htm" />
+            <HelpTOCNode Title="Hessian(TFunctionParameter) Method (Func(DoubleMatrix, TFunctionParameter, Double), DoubleMatrix, TFunctionParameter)" Url="html/M_Novacta_Analytics_NumericalDifferentiation_Hessian__1.htm" />
+          </HelpTOCNode>
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="cd5db296-ee4b-4288-91f3-27280fe1fa50" Title="PrincipalComponents Class" Url="html/T_Novacta_Analytics_PrincipalComponents.htm">
+        <HelpTOCNode Title="PrincipalComponents Properties" Url="html/Properties_T_Novacta_Analytics_PrincipalComponents.htm" />
+        <HelpTOCNode Id="eb7e2b82-ff67-465b-867c-7ad59842a7d1" Title="PrincipalComponents Methods" Url="html/Methods_T_Novacta_Analytics_PrincipalComponents.htm">
+          <HelpTOCNode Id="ec16236c-ac45-4909-b13b-a0d5bf15ecfc" Title="Analyze Method " Url="html/Overload_Novacta_Analytics_PrincipalComponents_Analyze.htm">
+            <HelpTOCNode Title="Analyze Method (DoubleMatrix)" Url="html/M_Novacta_Analytics_PrincipalComponents_Analyze.htm" />
+            <HelpTOCNode Title="Analyze Method (DoubleMatrix, DoubleMatrix)" Url="html/M_Novacta_Analytics_PrincipalComponents_Analyze_1.htm" />
+            <HelpTOCNode Title="Analyze Method (DoubleMatrix, DoubleMatrix, DoubleMatrix)" Url="html/M_Novacta_Analytics_PrincipalComponents_Analyze_2.htm" />
+          </HelpTOCNode>
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="d3dcb9c4-ca31-44aa-8449-7afd95b6804a" Title="PrincipalProjections Class" Url="html/T_Novacta_Analytics_PrincipalProjections.htm">
+        <HelpTOCNode Id="31a6ac79-f1a7-40a0-8c34-6162ce31e0ed" Title="PrincipalProjections Properties" Url="html/Properties_T_Novacta_Analytics_PrincipalProjections.htm">
+          <HelpTOCNode Title="ActiveCloud Property " Url="html/P_Novacta_Analytics_PrincipalProjections_ActiveCloud.htm" />
+          <HelpTOCNode Title="Contributions Property " Url="html/P_Novacta_Analytics_PrincipalProjections_Contributions.htm" />
+          <HelpTOCNode Title="Coordinates Property " Url="html/P_Novacta_Analytics_PrincipalProjections_Coordinates.htm" />
+          <HelpTOCNode Title="Correlations Property " Url="html/P_Novacta_Analytics_PrincipalProjections_Correlations.htm" />
+          <HelpTOCNode Title="Directions Property " Url="html/P_Novacta_Analytics_PrincipalProjections_Directions.htm" />
+          <HelpTOCNode Title="NumberOfDirections Property " Url="html/P_Novacta_Analytics_PrincipalProjections_NumberOfDirections.htm" />
+          <HelpTOCNode Title="RegressionCoefficients Property " Url="html/P_Novacta_Analytics_PrincipalProjections_RegressionCoefficients.htm" />
+          <HelpTOCNode Title="RepresentationQualities Property " Url="html/P_Novacta_Analytics_PrincipalProjections_RepresentationQualities.htm" />
+          <HelpTOCNode Title="Variances Property " Url="html/P_Novacta_Analytics_PrincipalProjections_Variances.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="6b4dbdca-170b-4001-81b9-34748d21de08" Title="PrincipalProjections Methods" Url="html/Methods_T_Novacta_Analytics_PrincipalProjections.htm">
+          <HelpTOCNode Id="29a8db9b-d771-412b-9f56-b8dedaa8f0e8" Title="CorrelateSupplementaryVariables Method " Url="html/Overload_Novacta_Analytics_PrincipalProjections_CorrelateSupplementaryVariables.htm">
+            <HelpTOCNode Title="CorrelateSupplementaryVariables Method (DoubleMatrix)" Url="html/M_Novacta_Analytics_PrincipalProjections_CorrelateSupplementaryVariables.htm" />
+            <HelpTOCNode Title="CorrelateSupplementaryVariables Method (ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_PrincipalProjections_CorrelateSupplementaryVariables_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="61cfb1cd-5bab-4b29-ae65-66ff822e6d57" Title="LocateSupplementaryPoints Method " Url="html/Overload_Novacta_Analytics_PrincipalProjections_LocateSupplementaryPoints.htm">
+            <HelpTOCNode Title="LocateSupplementaryPoints Method (DoubleMatrix)" Url="html/M_Novacta_Analytics_PrincipalProjections_LocateSupplementaryPoints.htm" />
+            <HelpTOCNode Title="LocateSupplementaryPoints Method (ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_PrincipalProjections_LocateSupplementaryPoints_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="a15ccd7e-d97a-4151-94c9-7d84ebcb9cae" Title="RegressSupplementaryVariables Method " Url="html/Overload_Novacta_Analytics_PrincipalProjections_RegressSupplementaryVariables.htm">
+            <HelpTOCNode Title="RegressSupplementaryVariables Method (DoubleMatrix)" Url="html/M_Novacta_Analytics_PrincipalProjections_RegressSupplementaryVariables.htm" />
+            <HelpTOCNode Title="RegressSupplementaryVariables Method (ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_PrincipalProjections_RegressSupplementaryVariables_1.htm" />
+          </HelpTOCNode>
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="912947bc-76e8-457f-ba2c-92d74163efe9" Title="ProbabilityDistribution Class" Url="html/T_Novacta_Analytics_ProbabilityDistribution.htm">
+        <HelpTOCNode Title="ProbabilityDistribution Constructor " Url="html/M_Novacta_Analytics_ProbabilityDistribution__ctor.htm" />
+        <HelpTOCNode Id="66c92fba-2595-4be5-8388-c7b0b56e5243" Title="ProbabilityDistribution Properties" Url="html/Properties_T_Novacta_Analytics_ProbabilityDistribution.htm">
+          <HelpTOCNode Title="CanInvertCdf Property " Url="html/P_Novacta_Analytics_ProbabilityDistribution_CanInvertCdf.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="a443b32d-3684-4635-95c8-c23f1f771cb3" Title="ProbabilityDistribution Methods" Url="html/Methods_T_Novacta_Analytics_ProbabilityDistribution.htm">
+          <HelpTOCNode Id="b5f4eacd-f2dd-43e0-bd4a-e2c0ad77bab3" Title="Cdf Method " Url="html/Overload_Novacta_Analytics_ProbabilityDistribution_Cdf.htm">
+            <HelpTOCNode Title="Cdf Method (Double)" Url="html/M_Novacta_Analytics_ProbabilityDistribution_Cdf_2.htm" />
+            <HelpTOCNode Title="Cdf Method (DoubleMatrix)" Url="html/M_Novacta_Analytics_ProbabilityDistribution_Cdf.htm" />
+            <HelpTOCNode Title="Cdf Method (ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ProbabilityDistribution_Cdf_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="c4ad27f0-875c-4d1d-a7d0-2e9fea300e4c" Title="InverseCdf Method " Url="html/Overload_Novacta_Analytics_ProbabilityDistribution_InverseCdf.htm">
+            <HelpTOCNode Title="InverseCdf Method (Double)" Url="html/M_Novacta_Analytics_ProbabilityDistribution_InverseCdf_2.htm" />
+            <HelpTOCNode Title="InverseCdf Method (DoubleMatrix)" Url="html/M_Novacta_Analytics_ProbabilityDistribution_InverseCdf.htm" />
+            <HelpTOCNode Title="InverseCdf Method (ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ProbabilityDistribution_InverseCdf_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Mean Method " Url="html/M_Novacta_Analytics_ProbabilityDistribution_Mean.htm" />
+          <HelpTOCNode Title="OnSample Method " Url="html/M_Novacta_Analytics_ProbabilityDistribution_OnSample.htm" />
+          <HelpTOCNode Id="9d8a6652-8ff0-40ce-8c72-35b287c0f3ae" Title="Pdf Method " Url="html/Overload_Novacta_Analytics_ProbabilityDistribution_Pdf.htm">
+            <HelpTOCNode Title="Pdf Method (Double)" Url="html/M_Novacta_Analytics_ProbabilityDistribution_Pdf_2.htm" />
+            <HelpTOCNode Title="Pdf Method (DoubleMatrix)" Url="html/M_Novacta_Analytics_ProbabilityDistribution_Pdf.htm" />
+            <HelpTOCNode Title="Pdf Method (ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ProbabilityDistribution_Pdf_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="fefa937e-04a6-4e69-be68-862f13dd3c5d" Title="Sample Method " Url="html/Overload_Novacta_Analytics_ProbabilityDistribution_Sample.htm">
+            <HelpTOCNode Title="Sample Method " Url="html/M_Novacta_Analytics_ProbabilityDistribution_Sample.htm" />
+            <HelpTOCNode Title="Sample Method (Int32)" Url="html/M_Novacta_Analytics_ProbabilityDistribution_Sample_1.htm" />
+            <HelpTOCNode Title="Sample Method (Int32, Double[], Int32)" Url="html/M_Novacta_Analytics_ProbabilityDistribution_Sample_2.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="StandardDeviation Method " Url="html/M_Novacta_Analytics_ProbabilityDistribution_StandardDeviation.htm" />
+          <HelpTOCNode Title="Variance Method " Url="html/M_Novacta_Analytics_ProbabilityDistribution_Variance.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="3d9373ce-5c7c-4be6-ad59-722d20e0d25c" Title="RandomDevice Class" Url="html/T_Novacta_Analytics_RandomDevice.htm">
+        <HelpTOCNode Title="RandomDevice Constructor " Url="html/M_Novacta_Analytics_RandomDevice__ctor.htm" />
+        <HelpTOCNode Id="80fb7e07-00ff-434e-8809-e2754c18d6ba" Title="RandomDevice Properties" Url="html/Properties_T_Novacta_Analytics_RandomDevice.htm">
+          <HelpTOCNode Title="RandomNumberGenerator Property " Url="html/P_Novacta_Analytics_RandomDevice_RandomNumberGenerator.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="RandomDevice Methods" Url="html/Methods_T_Novacta_Analytics_RandomDevice.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="73c15721-fb03-4a9e-abc3-0ac6f5159db1" Title="RandomIndexPermutation Class" Url="html/T_Novacta_Analytics_RandomIndexPermutation.htm">
+        <HelpTOCNode Title="RandomIndexPermutation Constructor " Url="html/M_Novacta_Analytics_RandomIndexPermutation__ctor.htm" />
+        <HelpTOCNode Id="ce723af0-4765-4e5d-bd0e-37ff5a7375ae" Title="RandomIndexPermutation Properties" Url="html/Properties_T_Novacta_Analytics_RandomIndexPermutation.htm">
+          <HelpTOCNode Title="Indexes Property " Url="html/P_Novacta_Analytics_RandomIndexPermutation_Indexes.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="2bc26fc4-9a39-4eea-886f-cbf8bbe6398f" Title="RandomIndexPermutation Methods" Url="html/Methods_T_Novacta_Analytics_RandomIndexPermutation.htm">
+          <HelpTOCNode Title="Next Method " Url="html/M_Novacta_Analytics_RandomIndexPermutation_Next.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="d47e3ecd-dc7e-42f5-9ec2-867f8cb5333a" Title="RandomNumberGenerator Class" Url="html/T_Novacta_Analytics_RandomNumberGenerator.htm">
+        <HelpTOCNode Id="063443ad-243b-4d8a-bbe9-546869ae90a0" Title="RandomNumberGenerator Methods" Url="html/Methods_T_Novacta_Analytics_RandomNumberGenerator.htm">
+          <HelpTOCNode Title="CreateMT19937 Method " Url="html/M_Novacta_Analytics_RandomNumberGenerator_CreateMT19937.htm" />
+          <HelpTOCNode Title="CreateNextMT2203 Method " Url="html/M_Novacta_Analytics_RandomNumberGenerator_CreateNextMT2203.htm" />
+          <HelpTOCNode Title="CreateSFMT19937 Method " Url="html/M_Novacta_Analytics_RandomNumberGenerator_CreateSFMT19937.htm" />
+          <HelpTOCNode Id="c6c04079-6482-4a0a-8a17-771969c27df3" Title="DefaultUniform Method " Url="html/Overload_Novacta_Analytics_RandomNumberGenerator_DefaultUniform.htm">
+            <HelpTOCNode Title="DefaultUniform Method " Url="html/M_Novacta_Analytics_RandomNumberGenerator_DefaultUniform.htm" />
+            <HelpTOCNode Title="DefaultUniform Method (Int32, Double[], Int32)" Url="html/M_Novacta_Analytics_RandomNumberGenerator_DefaultUniform_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="ff6e28cb-a743-44c7-bb88-6590f9debe9c" Title="DiscreteUniform Method " Url="html/Overload_Novacta_Analytics_RandomNumberGenerator_DiscreteUniform.htm">
+            <HelpTOCNode Title="DiscreteUniform Method (Int32, Int32)" Url="html/M_Novacta_Analytics_RandomNumberGenerator_DiscreteUniform.htm" />
+            <HelpTOCNode Title="DiscreteUniform Method (Int32, Int32[], Int32, Int32, Int32)" Url="html/M_Novacta_Analytics_RandomNumberGenerator_DiscreteUniform_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="643f95fa-6f4a-428d-b937-c55eff23c0c4" Title="Gaussian Method " Url="html/Overload_Novacta_Analytics_RandomNumberGenerator_Gaussian.htm">
+            <HelpTOCNode Title="Gaussian Method (Double, Double)" Url="html/M_Novacta_Analytics_RandomNumberGenerator_Gaussian.htm" />
+            <HelpTOCNode Title="Gaussian Method (Int32, Double[], Int32, Double, Double)" Url="html/M_Novacta_Analytics_RandomNumberGenerator_Gaussian_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="b9acaf4c-506c-4e2e-91a2-833ec7096c11" Title="Uniform Method " Url="html/Overload_Novacta_Analytics_RandomNumberGenerator_Uniform.htm">
+            <HelpTOCNode Title="Uniform Method (Double, Double)" Url="html/M_Novacta_Analytics_RandomNumberGenerator_Uniform.htm" />
+            <HelpTOCNode Title="Uniform Method (Int32, Double[], Int32, Double, Double)" Url="html/M_Novacta_Analytics_RandomNumberGenerator_Uniform_1.htm" />
+          </HelpTOCNode>
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="a0c68a17-bbec-4b3e-8a1b-930e933eb68a" Title="RandomSampling Class" Url="html/T_Novacta_Analytics_RandomSampling.htm">
+        <HelpTOCNode Title="RandomSampling Constructor " Url="html/M_Novacta_Analytics_RandomSampling__ctor.htm" />
+        <HelpTOCNode Id="2fee46ed-ffd1-4ea8-b30e-9cbf7ae53d57" Title="RandomSampling Properties" Url="html/Properties_T_Novacta_Analytics_RandomSampling.htm">
+          <HelpTOCNode Title="InclusionProbabilities Property " Url="html/P_Novacta_Analytics_RandomSampling_InclusionProbabilities.htm" />
+          <HelpTOCNode Title="PopulationSize Property " Url="html/P_Novacta_Analytics_RandomSampling_PopulationSize.htm" />
+          <HelpTOCNode Title="SampleSize Property " Url="html/P_Novacta_Analytics_RandomSampling_SampleSize.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="7b9a28c6-417d-40b9-b4ec-9b5b630e275c" Title="RandomSampling Methods" Url="html/Methods_T_Novacta_Analytics_RandomSampling.htm">
+          <HelpTOCNode Title="NextDoubleMatrix Method " Url="html/M_Novacta_Analytics_RandomSampling_NextDoubleMatrix.htm" />
+          <HelpTOCNode Title="NextIndexCollection Method " Url="html/M_Novacta_Analytics_RandomSampling_NextIndexCollection.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="1bbe94c8-b094-46a4-820b-401d88b1a427" Title="ReadOnlyDoubleMatrix Class" Url="html/T_Novacta_Analytics_ReadOnlyDoubleMatrix.htm">
+        <HelpTOCNode Id="4bf8bcea-8f16-4b04-94f8-c6edf263eb49" Title="ReadOnlyDoubleMatrix Properties" Url="html/Properties_T_Novacta_Analytics_ReadOnlyDoubleMatrix.htm">
+          <HelpTOCNode Title="IList(Double).Item Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_System_Collections_Generic_IList{System_Double}_Item.htm" />
+          <HelpTOCNode Title="ColumnNames Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_ColumnNames.htm" />
+          <HelpTOCNode Title="Count Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_Count.htm" />
+          <HelpTOCNode Title="HasColumnNames Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_HasColumnNames.htm" />
+          <HelpTOCNode Title="HasRowNames Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_HasRowNames.htm" />
+          <HelpTOCNode Title="IsBidiagonal Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_IsBidiagonal.htm" />
+          <HelpTOCNode Title="IsColumnVector Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_IsColumnVector.htm" />
+          <HelpTOCNode Title="IsDiagonal Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_IsDiagonal.htm" />
+          <HelpTOCNode Title="IsHessenberg Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_IsHessenberg.htm" />
+          <HelpTOCNode Title="IsLowerBidiagonal Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_IsLowerBidiagonal.htm" />
+          <HelpTOCNode Title="IsLowerHessenberg Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_IsLowerHessenberg.htm" />
+          <HelpTOCNode Title="IsLowerTriangular Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_IsLowerTriangular.htm" />
+          <HelpTOCNode Title="IsReadOnly Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_IsReadOnly.htm" />
+          <HelpTOCNode Title="IsRowVector Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_IsRowVector.htm" />
+          <HelpTOCNode Title="IsScalar Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_IsScalar.htm" />
+          <HelpTOCNode Title="IsSkewSymmetric Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_IsSkewSymmetric.htm" />
+          <HelpTOCNode Title="IsSquare Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_IsSquare.htm" />
+          <HelpTOCNode Title="IsSymmetric Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_IsSymmetric.htm" />
+          <HelpTOCNode Title="IsTriangular Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_IsTriangular.htm" />
+          <HelpTOCNode Title="IsTridiagonal Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_IsTridiagonal.htm" />
+          <HelpTOCNode Title="IsUpperBidiagonal Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_IsUpperBidiagonal.htm" />
+          <HelpTOCNode Title="IsUpperHessenberg Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_IsUpperHessenberg.htm" />
+          <HelpTOCNode Title="IsUpperTriangular Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_IsUpperTriangular.htm" />
+          <HelpTOCNode Title="IsVector Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_IsVector.htm" />
+          <HelpTOCNode Id="459b1953-9c26-4fa0-9422-1efff1454d0e" Title="Item Property " Url="html/Overload_Novacta_Analytics_ReadOnlyDoubleMatrix_Item.htm">
+            <HelpTOCNode Title="Item Property (Int32)" Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_Item_3.htm" />
+            <HelpTOCNode Title="Item Property (Int32, IndexCollection)" Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_Item_4.htm" />
+            <HelpTOCNode Title="Item Property (Int32, Int32)" Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_Item_5.htm" />
+            <HelpTOCNode Title="Item Property (Int32, String)" Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_Item_6.htm" />
+            <HelpTOCNode Title="Item Property (String, IndexCollection)" Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_Item_7.htm" />
+            <HelpTOCNode Title="Item Property (String, Int32)" Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_Item_8.htm" />
+            <HelpTOCNode Title="Item Property (String, String)" Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_Item_9.htm" />
+            <HelpTOCNode Title="Item Property (IndexCollection, IndexCollection)" Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_Item.htm" />
+            <HelpTOCNode Title="Item Property (IndexCollection, Int32)" Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_Item_1.htm" />
+            <HelpTOCNode Title="Item Property (IndexCollection, String)" Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_Item_2.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="ad49d95e-d861-42f5-ac40-5ac58e16e71a" Title="Item Property " Url="html/Overload_Novacta_Analytics_ReadOnlyDoubleMatrix_Novacta_Analytics_ITabularCollection{System_Double@Novacta_Analytics_DoubleMatrix}_Item.htm">
+            <HelpTOCNode Title="ITabularCollection(Double, DoubleMatrix).Item Property (Int32, IndexCollection)" Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_Novacta_Analytics_ITabularCollection{System_Double@Novacta_Analytics_DoubleMatrix}_Item_3.htm" />
+            <HelpTOCNode Title="ITabularCollection(Double, DoubleMatrix).Item Property (Int32, Int32)" Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_Novacta_Analytics_ITabularCollection{System_Double@Novacta_Analytics_DoubleMatrix}_Item_4.htm" />
+            <HelpTOCNode Title="ITabularCollection(Double, DoubleMatrix).Item Property (Int32, String)" Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_Novacta_Analytics_ITabularCollection{System_Double@Novacta_Analytics_DoubleMatrix}_Item_5.htm" />
+            <HelpTOCNode Title="ITabularCollection(Double, DoubleMatrix).Item Property (String, IndexCollection)" Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_Novacta_Analytics_ITabularCollection{System_Double@Novacta_Analytics_DoubleMatrix}_Item_6.htm" />
+            <HelpTOCNode Title="ITabularCollection(Double, DoubleMatrix).Item Property (String, Int32)" Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_Novacta_Analytics_ITabularCollection{System_Double@Novacta_Analytics_DoubleMatrix}_Item_7.htm" />
+            <HelpTOCNode Title="ITabularCollection(Double, DoubleMatrix).Item Property (String, String)" Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_Novacta_Analytics_ITabularCollection{System_Double@Novacta_Analytics_DoubleMatrix}_Item_8.htm" />
+            <HelpTOCNode Title="ITabularCollection(Double, DoubleMatrix).Item Property (IndexCollection, IndexCollection)" Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_Novacta_Analytics_ITabularCollection{System_Double@Novacta_Analytics_DoubleMatrix}_Item.htm" />
+            <HelpTOCNode Title="ITabularCollection(Double, DoubleMatrix).Item Property (IndexCollection, Int32)" Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_Novacta_Analytics_ITabularCollection{System_Double@Novacta_Analytics_DoubleMatrix}_Item_1.htm" />
+            <HelpTOCNode Title="ITabularCollection(Double, DoubleMatrix).Item Property (IndexCollection, String)" Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_Novacta_Analytics_ITabularCollection{System_Double@Novacta_Analytics_DoubleMatrix}_Item_2.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="LowerBandwidth Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_LowerBandwidth.htm" />
+          <HelpTOCNode Title="Name Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_Name.htm" />
+          <HelpTOCNode Title="NumberOfColumns Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_NumberOfColumns.htm" />
+          <HelpTOCNode Title="NumberOfRows Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_NumberOfRows.htm" />
+          <HelpTOCNode Title="RowNames Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_RowNames.htm" />
+          <HelpTOCNode Title="StorageOrder Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_StorageOrder.htm" />
+          <HelpTOCNode Title="StorageScheme Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_StorageScheme.htm" />
+          <HelpTOCNode Title="UpperBandwidth Property " Url="html/P_Novacta_Analytics_ReadOnlyDoubleMatrix_UpperBandwidth.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="80a27bad-07f5-48ac-906a-2aab5428daa4" Title="ReadOnlyDoubleMatrix Methods" Url="html/Methods_T_Novacta_Analytics_ReadOnlyDoubleMatrix.htm">
+          <HelpTOCNode Title="ICollection(Double).Add Method " Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_System_Collections_Generic_ICollection{System_Double}_Add.htm" />
+          <HelpTOCNode Title="ICollection(Double).Clear Method " Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_System_Collections_Generic_ICollection{System_Double}_Clear.htm" />
+          <HelpTOCNode Title="IEnumerable.GetEnumerator Method " Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_System_Collections_IEnumerable_GetEnumerator.htm" />
+          <HelpTOCNode Title="IList(Double).Insert Method " Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_System_Collections_Generic_IList{System_Double}_Insert.htm" />
+          <HelpTOCNode Title="ICollection(Double).Remove Method " Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_System_Collections_Generic_ICollection{System_Double}_Remove.htm" />
+          <HelpTOCNode Title="IList(Double).RemoveAt Method " Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_System_Collections_Generic_IList{System_Double}_RemoveAt.htm" />
+          <HelpTOCNode Id="80f352c7-19d8-4555-8e7c-c2cf742c44ee" Title="Add Method " Url="html/Overload_Novacta_Analytics_ReadOnlyDoubleMatrix_Add.htm">
+            <HelpTOCNode Title="Add Method (Double, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Add_4.htm" />
+            <HelpTOCNode Title="Add Method (DoubleMatrix, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Add.htm" />
+            <HelpTOCNode Title="Add Method (ReadOnlyDoubleMatrix, DoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Add_1.htm" />
+            <HelpTOCNode Title="Add Method (ReadOnlyDoubleMatrix, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Add_2.htm" />
+            <HelpTOCNode Title="Add Method (ReadOnlyDoubleMatrix, Double)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Add_3.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Apply Method " Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Apply.htm" />
+          <HelpTOCNode Title="AsColumnMajorDenseArray Method " Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_AsColumnMajorDenseArray.htm" />
+          <HelpTOCNode Title="Contains Method " Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Contains.htm" />
+          <HelpTOCNode Title="CopyTo Method " Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_CopyTo.htm" />
+          <HelpTOCNode Id="da48c97c-d43d-4e8c-b659-ff1cc96ac297" Title="Divide Method " Url="html/Overload_Novacta_Analytics_ReadOnlyDoubleMatrix_Divide.htm">
+            <HelpTOCNode Title="Divide Method (Double, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Divide_4.htm" />
+            <HelpTOCNode Title="Divide Method (DoubleMatrix, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Divide.htm" />
+            <HelpTOCNode Title="Divide Method (ReadOnlyDoubleMatrix, DoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Divide_1.htm" />
+            <HelpTOCNode Title="Divide Method (ReadOnlyDoubleMatrix, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Divide_2.htm" />
+            <HelpTOCNode Title="Divide Method (ReadOnlyDoubleMatrix, Double)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Divide_3.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="00ea53e6-c40d-4c8c-8adb-63a8bf6d21ed" Title="ElementWiseMultiply Method " Url="html/Overload_Novacta_Analytics_ReadOnlyDoubleMatrix_ElementWiseMultiply.htm">
+            <HelpTOCNode Title="ElementWiseMultiply Method (DoubleMatrix, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_ElementWiseMultiply.htm" />
+            <HelpTOCNode Title="ElementWiseMultiply Method (ReadOnlyDoubleMatrix, DoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_ElementWiseMultiply_1.htm" />
+            <HelpTOCNode Title="ElementWiseMultiply Method (ReadOnlyDoubleMatrix, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_ElementWiseMultiply_2.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Find Method " Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Find.htm" />
+          <HelpTOCNode Title="FindNonzero Method " Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_FindNonzero.htm" />
+          <HelpTOCNode Title="FindWhile Method " Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_FindWhile.htm" />
+          <HelpTOCNode Title="GetEnumerator Method " Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_GetEnumerator.htm" />
+          <HelpTOCNode Title="IndexOf Method " Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_IndexOf.htm" />
+          <HelpTOCNode Id="2eeeb446-616c-4366-8952-08394c9578be" Title="Multiply Method " Url="html/Overload_Novacta_Analytics_ReadOnlyDoubleMatrix_Multiply.htm">
+            <HelpTOCNode Title="Multiply Method (Double, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Multiply_4.htm" />
+            <HelpTOCNode Title="Multiply Method (DoubleMatrix, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Multiply.htm" />
+            <HelpTOCNode Title="Multiply Method (ReadOnlyDoubleMatrix, DoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Multiply_1.htm" />
+            <HelpTOCNode Title="Multiply Method (ReadOnlyDoubleMatrix, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Multiply_2.htm" />
+            <HelpTOCNode Title="Multiply Method (ReadOnlyDoubleMatrix, Double)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Multiply_3.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Negate Method " Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Negate.htm" />
+          <HelpTOCNode Id="3606566e-9a31-4982-9044-076700808b23" Title="Subtract Method " Url="html/Overload_Novacta_Analytics_ReadOnlyDoubleMatrix_Subtract.htm">
+            <HelpTOCNode Title="Subtract Method (Double, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Subtract_4.htm" />
+            <HelpTOCNode Title="Subtract Method (DoubleMatrix, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Subtract.htm" />
+            <HelpTOCNode Title="Subtract Method (ReadOnlyDoubleMatrix, DoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Subtract_1.htm" />
+            <HelpTOCNode Title="Subtract Method (ReadOnlyDoubleMatrix, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Subtract_2.htm" />
+            <HelpTOCNode Title="Subtract Method (ReadOnlyDoubleMatrix, Double)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Subtract_3.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="ToDouble Method " Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_ToDouble.htm" />
+          <HelpTOCNode Title="ToString Method " Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_ToString.htm" />
+          <HelpTOCNode Title="Transpose Method " Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Transpose.htm" />
+          <HelpTOCNode Title="TryGetColumnName Method " Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_TryGetColumnName.htm" />
+          <HelpTOCNode Title="TryGetRowName Method " Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_TryGetRowName.htm" />
+          <HelpTOCNode Id="32c2ea04-e824-4980-958f-7eb5f718377e" Title="Vec Method " Url="html/Overload_Novacta_Analytics_ReadOnlyDoubleMatrix_Vec.htm">
+            <HelpTOCNode Title="Vec Method " Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Vec.htm" />
+            <HelpTOCNode Title="Vec Method (IndexCollection)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_Vec_1.htm" />
+          </HelpTOCNode>
+        </HelpTOCNode>
+        <HelpTOCNode Id="57ebdd07-20af-4680-a7cb-8a6d8d7457b5" Title="ReadOnlyDoubleMatrix Operators and Type Conversions" Url="html/Operators_T_Novacta_Analytics_ReadOnlyDoubleMatrix.htm">
+          <HelpTOCNode Id="c46a487c-97b9-457c-99ab-bd0f98004e05" Title="Addition Operator " Url="html/Overload_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Addition.htm">
+            <HelpTOCNode Title="Addition Operator (Double, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Addition_4.htm" />
+            <HelpTOCNode Title="Addition Operator (DoubleMatrix, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Addition.htm" />
+            <HelpTOCNode Title="Addition Operator (ReadOnlyDoubleMatrix, DoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Addition_1.htm" />
+            <HelpTOCNode Title="Addition Operator (ReadOnlyDoubleMatrix, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Addition_2.htm" />
+            <HelpTOCNode Title="Addition Operator (ReadOnlyDoubleMatrix, Double)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Addition_3.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="3b098fb6-576a-4b62-be6a-a1910edd6a42" Title="Division Operator " Url="html/Overload_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Division.htm">
+            <HelpTOCNode Title="Division Operator (Double, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Division_4.htm" />
+            <HelpTOCNode Title="Division Operator (DoubleMatrix, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Division.htm" />
+            <HelpTOCNode Title="Division Operator (ReadOnlyDoubleMatrix, DoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Division_1.htm" />
+            <HelpTOCNode Title="Division Operator (ReadOnlyDoubleMatrix, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Division_2.htm" />
+            <HelpTOCNode Title="Division Operator (ReadOnlyDoubleMatrix, Double)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Division_3.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Explicit Conversion (ReadOnlyDoubleMatrix to Double)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Explicit.htm" />
+          <HelpTOCNode Id="d7e65d3e-dc84-4cf9-97fc-d47ca154ffdd" Title="Multiply Operator " Url="html/Overload_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Multiply.htm">
+            <HelpTOCNode Title="Multiply Operator (Double, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Multiply_4.htm" />
+            <HelpTOCNode Title="Multiply Operator (DoubleMatrix, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Multiply.htm" />
+            <HelpTOCNode Title="Multiply Operator (ReadOnlyDoubleMatrix, DoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Multiply_1.htm" />
+            <HelpTOCNode Title="Multiply Operator (ReadOnlyDoubleMatrix, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Multiply_2.htm" />
+            <HelpTOCNode Title="Multiply Operator (ReadOnlyDoubleMatrix, Double)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Multiply_3.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="8f853f7c-fdf2-435a-a617-fcfec7c93e58" Title="Subtraction Operator " Url="html/Overload_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Subtraction.htm">
+            <HelpTOCNode Title="Subtraction Operator (Double, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Subtraction_4.htm" />
+            <HelpTOCNode Title="Subtraction Operator (DoubleMatrix, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Subtraction.htm" />
+            <HelpTOCNode Title="Subtraction Operator (ReadOnlyDoubleMatrix, DoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Subtraction_1.htm" />
+            <HelpTOCNode Title="Subtraction Operator (ReadOnlyDoubleMatrix, ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Subtraction_2.htm" />
+            <HelpTOCNode Title="Subtraction Operator (ReadOnlyDoubleMatrix, Double)" Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_op_Subtraction_3.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="UnaryNegation Operator " Url="html/M_Novacta_Analytics_ReadOnlyDoubleMatrix_op_UnaryNegation.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="1fa111b2-3975-468f-9ab0-5937cfeb5dd1" Title="SimpleRandomSampling Class" Url="html/T_Novacta_Analytics_SimpleRandomSampling.htm">
+        <HelpTOCNode Title="SimpleRandomSampling Constructor " Url="html/M_Novacta_Analytics_SimpleRandomSampling__ctor.htm" />
+        <HelpTOCNode Id="a7e42fbc-dde4-48ea-8abc-b1f61755a844" Title="SimpleRandomSampling Properties" Url="html/Properties_T_Novacta_Analytics_SimpleRandomSampling.htm">
+          <HelpTOCNode Title="InclusionProbabilities Property " Url="html/P_Novacta_Analytics_SimpleRandomSampling_InclusionProbabilities.htm" />
+          <HelpTOCNode Title="PopulationSize Property " Url="html/P_Novacta_Analytics_SimpleRandomSampling_PopulationSize.htm" />
+          <HelpTOCNode Title="SampleSize Property " Url="html/P_Novacta_Analytics_SimpleRandomSampling_SampleSize.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="7282990b-2957-4749-b8ee-f975dd99d72d" Title="SimpleRandomSampling Methods" Url="html/Methods_T_Novacta_Analytics_SimpleRandomSampling.htm">
+          <HelpTOCNode Title="NextDoubleMatrix Method " Url="html/M_Novacta_Analytics_SimpleRandomSampling_NextDoubleMatrix.htm" />
+          <HelpTOCNode Title="NextIndexCollection Method " Url="html/M_Novacta_Analytics_SimpleRandomSampling_NextIndexCollection.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Title="SortDirection Enumeration" Url="html/T_Novacta_Analytics_SortDirection.htm" />
+      <HelpTOCNode Id="08e63d96-ce75-4174-9524-9cce17ac4ef7" Title="SortIndexResults Class" Url="html/T_Novacta_Analytics_SortIndexResults.htm">
+        <HelpTOCNode Title="SortIndexResults Constructor " Url="html/M_Novacta_Analytics_SortIndexResults__ctor.htm" />
+        <HelpTOCNode Id="59d24852-b2dd-4b77-982c-a46e1517db5b" Title="SortIndexResults Properties" Url="html/Properties_T_Novacta_Analytics_SortIndexResults.htm">
+          <HelpTOCNode Title="SortedData Property " Url="html/P_Novacta_Analytics_SortIndexResults_SortedData.htm" />
+          <HelpTOCNode Title="SortedIndexes Property " Url="html/P_Novacta_Analytics_SortIndexResults_SortedIndexes.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="SortIndexResults Methods" Url="html/Methods_T_Novacta_Analytics_SortIndexResults.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="d12095b0-3a1f-4908-9114-d169493aa369" Title="SpecialFunctions Class" Url="html/T_Novacta_Analytics_SpecialFunctions.htm">
+        <HelpTOCNode Id="0959504b-a50c-4cb3-ae0f-811c86d65fe1" Title="SpecialFunctions Methods" Url="html/Methods_T_Novacta_Analytics_SpecialFunctions.htm">
+          <HelpTOCNode Title="BinomialCoefficient Method " Url="html/M_Novacta_Analytics_SpecialFunctions_BinomialCoefficient.htm" />
+          <HelpTOCNode Title="Factorial Method " Url="html/M_Novacta_Analytics_SpecialFunctions_Factorial.htm" />
+          <HelpTOCNode Title="LogGamma Method " Url="html/M_Novacta_Analytics_SpecialFunctions_LogGamma.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="51c55d8e-0ede-4f5c-8ec4-642ddd2d165b" Title="Stat Class" Url="html/T_Novacta_Analytics_Stat.htm">
+        <HelpTOCNode Id="cca7338a-f422-4ff9-b251-165774cec225" Title="Stat Methods" Url="html/Methods_T_Novacta_Analytics_Stat.htm">
+          <HelpTOCNode Id="85856f1f-96f6-4ca5-bb5e-ed144fa157cf" Title="Correlation Method " Url="html/Overload_Novacta_Analytics_Stat_Correlation.htm">
+            <HelpTOCNode Title="Correlation Method (DoubleMatrix, DataOperation)" Url="html/M_Novacta_Analytics_Stat_Correlation.htm" />
+            <HelpTOCNode Title="Correlation Method (ReadOnlyDoubleMatrix, DataOperation)" Url="html/M_Novacta_Analytics_Stat_Correlation_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="a5f25d06-7aa6-4f31-bf6d-99f2008c85ba" Title="Covariance Method " Url="html/Overload_Novacta_Analytics_Stat_Covariance.htm">
+            <HelpTOCNode Title="Covariance Method (DoubleMatrix, Boolean, DataOperation)" Url="html/M_Novacta_Analytics_Stat_Covariance.htm" />
+            <HelpTOCNode Title="Covariance Method (ReadOnlyDoubleMatrix, Boolean, DataOperation)" Url="html/M_Novacta_Analytics_Stat_Covariance_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="9e895bbd-229c-487e-8090-72c559f621d8" Title="Kurtosis Method " Url="html/Overload_Novacta_Analytics_Stat_Kurtosis.htm">
+            <HelpTOCNode Title="Kurtosis Method (DoubleMatrix, Boolean)" Url="html/M_Novacta_Analytics_Stat_Kurtosis.htm" />
+            <HelpTOCNode Title="Kurtosis Method (ReadOnlyDoubleMatrix, Boolean)" Url="html/M_Novacta_Analytics_Stat_Kurtosis_2.htm" />
+            <HelpTOCNode Title="Kurtosis Method (DoubleMatrix, Boolean, DataOperation)" Url="html/M_Novacta_Analytics_Stat_Kurtosis_1.htm" />
+            <HelpTOCNode Title="Kurtosis Method (ReadOnlyDoubleMatrix, Boolean, DataOperation)" Url="html/M_Novacta_Analytics_Stat_Kurtosis_3.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="d6e39f1d-fea5-47a0-a53b-0fe4d6c7f129" Title="Max Method " Url="html/Overload_Novacta_Analytics_Stat_Max.htm">
+            <HelpTOCNode Title="Max Method (DoubleMatrix)" Url="html/M_Novacta_Analytics_Stat_Max.htm" />
+            <HelpTOCNode Title="Max Method (ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_Stat_Max_2.htm" />
+            <HelpTOCNode Title="Max Method (DoubleMatrix, DataOperation)" Url="html/M_Novacta_Analytics_Stat_Max_1.htm" />
+            <HelpTOCNode Title="Max Method (ReadOnlyDoubleMatrix, DataOperation)" Url="html/M_Novacta_Analytics_Stat_Max_3.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="36333498-9b01-4fcc-91ae-aece8d17ca80" Title="Mean Method " Url="html/Overload_Novacta_Analytics_Stat_Mean.htm">
+            <HelpTOCNode Title="Mean Method (DoubleMatrix)" Url="html/M_Novacta_Analytics_Stat_Mean.htm" />
+            <HelpTOCNode Title="Mean Method (ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_Stat_Mean_2.htm" />
+            <HelpTOCNode Title="Mean Method (DoubleMatrix, DataOperation)" Url="html/M_Novacta_Analytics_Stat_Mean_1.htm" />
+            <HelpTOCNode Title="Mean Method (ReadOnlyDoubleMatrix, DataOperation)" Url="html/M_Novacta_Analytics_Stat_Mean_3.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="c2671f53-f8bb-429f-8cbe-afb52849b87c" Title="Min Method " Url="html/Overload_Novacta_Analytics_Stat_Min.htm">
+            <HelpTOCNode Title="Min Method (DoubleMatrix)" Url="html/M_Novacta_Analytics_Stat_Min.htm" />
+            <HelpTOCNode Title="Min Method (ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_Stat_Min_2.htm" />
+            <HelpTOCNode Title="Min Method (DoubleMatrix, DataOperation)" Url="html/M_Novacta_Analytics_Stat_Min_1.htm" />
+            <HelpTOCNode Title="Min Method (ReadOnlyDoubleMatrix, DataOperation)" Url="html/M_Novacta_Analytics_Stat_Min_3.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="aa2723fd-7e0f-481d-8924-bd1b22adc03c" Title="Quantile Method " Url="html/Overload_Novacta_Analytics_Stat_Quantile.htm">
+            <HelpTOCNode Title="Quantile Method (DoubleMatrix, DoubleMatrix)" Url="html/M_Novacta_Analytics_Stat_Quantile.htm" />
+            <HelpTOCNode Title="Quantile Method (ReadOnlyDoubleMatrix, DoubleMatrix)" Url="html/M_Novacta_Analytics_Stat_Quantile_2.htm" />
+            <HelpTOCNode Title="Quantile Method (DoubleMatrix, DoubleMatrix, DataOperation)" Url="html/M_Novacta_Analytics_Stat_Quantile_1.htm" />
+            <HelpTOCNode Title="Quantile Method (ReadOnlyDoubleMatrix, DoubleMatrix, DataOperation)" Url="html/M_Novacta_Analytics_Stat_Quantile_3.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="d449a431-09be-4fa8-ace9-4e8f5e739c53" Title="Skewness Method " Url="html/Overload_Novacta_Analytics_Stat_Skewness.htm">
+            <HelpTOCNode Title="Skewness Method (DoubleMatrix, Boolean)" Url="html/M_Novacta_Analytics_Stat_Skewness.htm" />
+            <HelpTOCNode Title="Skewness Method (ReadOnlyDoubleMatrix, Boolean)" Url="html/M_Novacta_Analytics_Stat_Skewness_2.htm" />
+            <HelpTOCNode Title="Skewness Method (DoubleMatrix, Boolean, DataOperation)" Url="html/M_Novacta_Analytics_Stat_Skewness_1.htm" />
+            <HelpTOCNode Title="Skewness Method (ReadOnlyDoubleMatrix, Boolean, DataOperation)" Url="html/M_Novacta_Analytics_Stat_Skewness_3.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="5474b51f-0e41-493d-bea0-8fe3503f98c0" Title="Sort Method " Url="html/Overload_Novacta_Analytics_Stat_Sort.htm">
+            <HelpTOCNode Title="Sort Method (DoubleMatrix, SortDirection)" Url="html/M_Novacta_Analytics_Stat_Sort.htm" />
+            <HelpTOCNode Title="Sort Method (ReadOnlyDoubleMatrix, SortDirection)" Url="html/M_Novacta_Analytics_Stat_Sort_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="1b43cdc2-78a6-4d77-9c2b-6158e1ec9bed" Title="SortIndex Method " Url="html/Overload_Novacta_Analytics_Stat_SortIndex.htm">
+            <HelpTOCNode Title="SortIndex Method (DoubleMatrix, SortDirection)" Url="html/M_Novacta_Analytics_Stat_SortIndex.htm" />
+            <HelpTOCNode Title="SortIndex Method (ReadOnlyDoubleMatrix, SortDirection)" Url="html/M_Novacta_Analytics_Stat_SortIndex_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="d6a074c6-eed4-4bfc-9054-e46ad1c156f2" Title="StandardDeviation Method " Url="html/Overload_Novacta_Analytics_Stat_StandardDeviation.htm">
+            <HelpTOCNode Title="StandardDeviation Method (DoubleMatrix, Boolean)" Url="html/M_Novacta_Analytics_Stat_StandardDeviation.htm" />
+            <HelpTOCNode Title="StandardDeviation Method (ReadOnlyDoubleMatrix, Boolean)" Url="html/M_Novacta_Analytics_Stat_StandardDeviation_2.htm" />
+            <HelpTOCNode Title="StandardDeviation Method (DoubleMatrix, Boolean, DataOperation)" Url="html/M_Novacta_Analytics_Stat_StandardDeviation_1.htm" />
+            <HelpTOCNode Title="StandardDeviation Method (ReadOnlyDoubleMatrix, Boolean, DataOperation)" Url="html/M_Novacta_Analytics_Stat_StandardDeviation_3.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="0b97ee15-a7b8-432f-be96-e932e74e507f" Title="Sum Method " Url="html/Overload_Novacta_Analytics_Stat_Sum.htm">
+            <HelpTOCNode Title="Sum Method (DoubleMatrix)" Url="html/M_Novacta_Analytics_Stat_Sum.htm" />
+            <HelpTOCNode Title="Sum Method (ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_Stat_Sum_2.htm" />
+            <HelpTOCNode Title="Sum Method (DoubleMatrix, DataOperation)" Url="html/M_Novacta_Analytics_Stat_Sum_1.htm" />
+            <HelpTOCNode Title="Sum Method (ReadOnlyDoubleMatrix, DataOperation)" Url="html/M_Novacta_Analytics_Stat_Sum_3.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="c25751c9-5059-455b-bb90-a3fa400e0592" Title="SumOfSquaredDeviations Method " Url="html/Overload_Novacta_Analytics_Stat_SumOfSquaredDeviations.htm">
+            <HelpTOCNode Title="SumOfSquaredDeviations Method (DoubleMatrix)" Url="html/M_Novacta_Analytics_Stat_SumOfSquaredDeviations.htm" />
+            <HelpTOCNode Title="SumOfSquaredDeviations Method (ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_Stat_SumOfSquaredDeviations_2.htm" />
+            <HelpTOCNode Title="SumOfSquaredDeviations Method (DoubleMatrix, DataOperation)" Url="html/M_Novacta_Analytics_Stat_SumOfSquaredDeviations_1.htm" />
+            <HelpTOCNode Title="SumOfSquaredDeviations Method (ReadOnlyDoubleMatrix, DataOperation)" Url="html/M_Novacta_Analytics_Stat_SumOfSquaredDeviations_3.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="22b9111c-5209-4e0f-abd7-5a8e7ee5e7d7" Title="Variance Method " Url="html/Overload_Novacta_Analytics_Stat_Variance.htm">
+            <HelpTOCNode Title="Variance Method (DoubleMatrix, Boolean)" Url="html/M_Novacta_Analytics_Stat_Variance.htm" />
+            <HelpTOCNode Title="Variance Method (ReadOnlyDoubleMatrix, Boolean)" Url="html/M_Novacta_Analytics_Stat_Variance_2.htm" />
+            <HelpTOCNode Title="Variance Method (DoubleMatrix, Boolean, DataOperation)" Url="html/M_Novacta_Analytics_Stat_Variance_1.htm" />
+            <HelpTOCNode Title="Variance Method (ReadOnlyDoubleMatrix, Boolean, DataOperation)" Url="html/M_Novacta_Analytics_Stat_Variance_3.htm" />
+          </HelpTOCNode>
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Title="StorageOrder Enumeration" Url="html/T_Novacta_Analytics_StorageOrder.htm" />
+      <HelpTOCNode Title="StorageScheme Enumeration" Url="html/T_Novacta_Analytics_StorageScheme.htm" />
+      <HelpTOCNode Id="4d34824a-60f2-4d91-8943-bb9e5e6f6e3e" Title="UnequalProbabilityRandomSampling Class" Url="html/T_Novacta_Analytics_UnequalProbabilityRandomSampling.htm">
+        <HelpTOCNode Id="d60f0d7b-3e17-4794-854a-8d73dd9b31bb" Title="UnequalProbabilityRandomSampling Properties" Url="html/Properties_T_Novacta_Analytics_UnequalProbabilityRandomSampling.htm">
+          <HelpTOCNode Title="InclusionProbabilities Property " Url="html/P_Novacta_Analytics_UnequalProbabilityRandomSampling_InclusionProbabilities.htm" />
+          <HelpTOCNode Title="PopulationSize Property " Url="html/P_Novacta_Analytics_UnequalProbabilityRandomSampling_PopulationSize.htm" />
+          <HelpTOCNode Title="SampleSize Property " Url="html/P_Novacta_Analytics_UnequalProbabilityRandomSampling_SampleSize.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="36b77117-9479-46f1-8649-807f2d556269" Title="UnequalProbabilityRandomSampling Methods" Url="html/Methods_T_Novacta_Analytics_UnequalProbabilityRandomSampling.htm">
+          <HelpTOCNode Title="FromBernoulliProbabilities Method " Url="html/M_Novacta_Analytics_UnequalProbabilityRandomSampling_FromBernoulliProbabilities.htm" />
+          <HelpTOCNode Title="FromInclusionProbabilities Method " Url="html/M_Novacta_Analytics_UnequalProbabilityRandomSampling_FromInclusionProbabilities.htm" />
+          <HelpTOCNode Title="NextDoubleMatrix Method " Url="html/M_Novacta_Analytics_UnequalProbabilityRandomSampling_NextDoubleMatrix.htm" />
+          <HelpTOCNode Title="NextIndexCollection Method " Url="html/M_Novacta_Analytics_UnequalProbabilityRandomSampling_NextIndexCollection.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="5971f10d-10df-489f-951e-e68c4ed17887" Title="UniformDistribution Class" Url="html/T_Novacta_Analytics_UniformDistribution.htm">
+        <HelpTOCNode Title="UniformDistribution Constructor " Url="html/M_Novacta_Analytics_UniformDistribution__ctor.htm" />
+        <HelpTOCNode Id="4d8a76f7-2e9b-439e-8e00-7dea8a7d6e68" Title="UniformDistribution Properties" Url="html/Properties_T_Novacta_Analytics_UniformDistribution.htm">
+          <HelpTOCNode Title="CanInvertCdf Property " Url="html/P_Novacta_Analytics_UniformDistribution_CanInvertCdf.htm" />
+          <HelpTOCNode Title="LowerBound Property " Url="html/P_Novacta_Analytics_UniformDistribution_LowerBound.htm" />
+          <HelpTOCNode Title="UpperBound Property " Url="html/P_Novacta_Analytics_UniformDistribution_UpperBound.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="f47616dc-b207-4652-a412-35bf51778948" Title="UniformDistribution Methods" Url="html/Methods_T_Novacta_Analytics_UniformDistribution.htm">
+          <HelpTOCNode Id="04a76b74-46f0-4945-a14c-3fbaea241e0f" Title="Cdf Method " Url="html/Overload_Novacta_Analytics_UniformDistribution_Cdf.htm">
+            <HelpTOCNode Title="Cdf Method (Double)" Url="html/M_Novacta_Analytics_UniformDistribution_Cdf.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Default Method " Url="html/M_Novacta_Analytics_UniformDistribution_Default.htm" />
+          <HelpTOCNode Id="45066fe7-d123-4cf4-b79a-17ec9699aaa2" Title="InverseCdf Method " Url="html/Overload_Novacta_Analytics_UniformDistribution_InverseCdf.htm">
+            <HelpTOCNode Title="InverseCdf Method (Double)" Url="html/M_Novacta_Analytics_UniformDistribution_InverseCdf.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Mean Method " Url="html/M_Novacta_Analytics_UniformDistribution_Mean.htm" />
+          <HelpTOCNode Title="OnSample Method " Url="html/M_Novacta_Analytics_UniformDistribution_OnSample.htm" />
+          <HelpTOCNode Id="64bfea7d-4acd-4857-8573-17a214416186" Title="Pdf Method " Url="html/Overload_Novacta_Analytics_UniformDistribution_Pdf.htm">
+            <HelpTOCNode Title="Pdf Method (Double)" Url="html/M_Novacta_Analytics_UniformDistribution_Pdf.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="80050c12-9fb4-446b-b46e-eb90c39e8197" Title="Sample Method " Url="html/Overload_Novacta_Analytics_UniformDistribution_Sample.htm">
+            <HelpTOCNode Title="Sample Method " Url="html/M_Novacta_Analytics_UniformDistribution_Sample.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Variance Method " Url="html/M_Novacta_Analytics_UniformDistribution_Variance.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="23413a74-5326-421a-85e6-7b842151ed90" Title="Novacta.Analytics.Advanced" Url="html/N_Novacta_Analytics_Advanced.htm">
+      <HelpTOCNode Id="1ea1f184-823b-41aa-b1c8-356056635f2c" Title="Basis Class" Url="html/T_Novacta_Analytics_Advanced_Basis.htm">
+        <HelpTOCNode Title="Basis Constructor " Url="html/M_Novacta_Analytics_Advanced_Basis__ctor.htm" />
+        <HelpTOCNode Id="d51b7825-d886-4f1b-a702-75e5887a3fca" Title="Basis Properties" Url="html/Properties_T_Novacta_Analytics_Advanced_Basis.htm">
+          <HelpTOCNode Title="Dimension Property " Url="html/P_Novacta_Analytics_Advanced_Basis_Dimension.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="aaa9f62f-2b42-4d3a-a734-3986d80e3c60" Title="Basis Methods" Url="html/Methods_T_Novacta_Analytics_Advanced_Basis.htm">
+          <HelpTOCNode Title="ChangeCoordinates Method " Url="html/M_Novacta_Analytics_Advanced_Basis_ChangeCoordinates.htm" />
+          <HelpTOCNode Title="Distance Method " Url="html/M_Novacta_Analytics_Advanced_Basis_Distance.htm" />
+          <HelpTOCNode Title="GetBasisMatrix Method " Url="html/M_Novacta_Analytics_Advanced_Basis_GetBasisMatrix.htm" />
+          <HelpTOCNode Title="GetCoordinates Method " Url="html/M_Novacta_Analytics_Advanced_Basis_GetCoordinates.htm" />
+          <HelpTOCNode Title="GetVectors Method " Url="html/M_Novacta_Analytics_Advanced_Basis_GetVectors.htm" />
+          <HelpTOCNode Title="Norm Method " Url="html/M_Novacta_Analytics_Advanced_Basis_Norm.htm" />
+          <HelpTOCNode Title="ScalarProduct Method " Url="html/M_Novacta_Analytics_Advanced_Basis_ScalarProduct.htm" />
+          <HelpTOCNode Title="Standard Method " Url="html/M_Novacta_Analytics_Advanced_Basis_Standard.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="44bd1a25-f445-46ad-9631-f97d4dfeeb39" Title="CategoricalEntailmentEnsembleOptimizationContext Class" Url="html/T_Novacta_Analytics_Advanced_CategoricalEntailmentEnsembleOptimizationContext.htm">
+        <HelpTOCNode Title="CategoricalEntailmentEnsembleOptimizationContext Constructor " Url="html/M_Novacta_Analytics_Advanced_CategoricalEntailmentEnsembleOptimizationContext__ctor.htm" />
+        <HelpTOCNode Id="71cb8cb2-d784-44e2-b750-5752cfb3ee07" Title="CategoricalEntailmentEnsembleOptimizationContext Properties" Url="html/Properties_T_Novacta_Analytics_Advanced_CategoricalEntailmentEnsembleOptimizationContext.htm">
+          <HelpTOCNode Title="AllowEntailmentPartialTruthValues Property " Url="html/P_Novacta_Analytics_Advanced_CategoricalEntailmentEnsembleOptimizationContext_AllowEntailmentPartialTruthValues.htm" />
+          <HelpTOCNode Title="FeatureCategoryCounts Property " Url="html/P_Novacta_Analytics_Advanced_CategoricalEntailmentEnsembleOptimizationContext_FeatureCategoryCounts.htm" />
+          <HelpTOCNode Title="NumberOfCategoricalEntailments Property " Url="html/P_Novacta_Analytics_Advanced_CategoricalEntailmentEnsembleOptimizationContext_NumberOfCategoricalEntailments.htm" />
+          <HelpTOCNode Title="NumberOfResponseCategories Property " Url="html/P_Novacta_Analytics_Advanced_CategoricalEntailmentEnsembleOptimizationContext_NumberOfResponseCategories.htm" />
+          <HelpTOCNode Title="OverallNumberOfFeatureCategories Property " Url="html/P_Novacta_Analytics_Advanced_CategoricalEntailmentEnsembleOptimizationContext_OverallNumberOfFeatureCategories.htm" />
+          <HelpTOCNode Title="ProbabilitySmoothingCoefficient Property " Url="html/P_Novacta_Analytics_Advanced_CategoricalEntailmentEnsembleOptimizationContext_ProbabilitySmoothingCoefficient.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="cd99e72e-2955-40ef-9edf-d9d455e59e05" Title="CategoricalEntailmentEnsembleOptimizationContext Methods" Url="html/Methods_T_Novacta_Analytics_Advanced_CategoricalEntailmentEnsembleOptimizationContext.htm">
+          <HelpTOCNode Title="GetCategoricalEntailmentEnsembleClassifier Method " Url="html/M_Novacta_Analytics_Advanced_CategoricalEntailmentEnsembleOptimizationContext_GetCategoricalEntailmentEnsembleClassifier.htm" />
+          <HelpTOCNode Title="GetOptimalState Method " Url="html/M_Novacta_Analytics_Advanced_CategoricalEntailmentEnsembleOptimizationContext_GetOptimalState.htm" />
+          <HelpTOCNode Title="OnExecutedIteration Method " Url="html/M_Novacta_Analytics_Advanced_CategoricalEntailmentEnsembleOptimizationContext_OnExecutedIteration.htm" />
+          <HelpTOCNode Title="PartialSample Method " Url="html/M_Novacta_Analytics_Advanced_CategoricalEntailmentEnsembleOptimizationContext_PartialSample.htm" />
+          <HelpTOCNode Title="Performance Method " Url="html/M_Novacta_Analytics_Advanced_CategoricalEntailmentEnsembleOptimizationContext_Performance.htm" />
+          <HelpTOCNode Title="SmoothParameter Method " Url="html/M_Novacta_Analytics_Advanced_CategoricalEntailmentEnsembleOptimizationContext_SmoothParameter.htm" />
+          <HelpTOCNode Title="UpdateParameter Method " Url="html/M_Novacta_Analytics_Advanced_CategoricalEntailmentEnsembleOptimizationContext_UpdateParameter.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="cadaba94-56d3-4ae7-b2ed-7931435174c2" Title="Cloud Class" Url="html/T_Novacta_Analytics_Advanced_Cloud.htm">
+        <HelpTOCNode Id="6a03263d-6f2a-460d-9c3c-0dac77fcb6fa" Title="Cloud Constructor " Url="html/Overload_Novacta_Analytics_Advanced_Cloud__ctor.htm">
+          <HelpTOCNode Title="Cloud Constructor (DoubleMatrix)" Url="html/M_Novacta_Analytics_Advanced_Cloud__ctor.htm" />
+          <HelpTOCNode Title="Cloud Constructor (DoubleMatrix, DoubleMatrix)" Url="html/M_Novacta_Analytics_Advanced_Cloud__ctor_1.htm" />
+          <HelpTOCNode Title="Cloud Constructor (DoubleMatrix, DoubleMatrix, Basis)" Url="html/M_Novacta_Analytics_Advanced_Cloud__ctor_2.htm" />
+          <HelpTOCNode Title="Cloud Constructor (DoubleMatrix, DoubleMatrix, Basis, Boolean)" Url="html/M_Novacta_Analytics_Advanced_Cloud__ctor_3.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="f9871b4e-8c8b-462e-b0a4-27985a6c719c" Title="Cloud Properties" Url="html/Properties_T_Novacta_Analytics_Advanced_Cloud.htm">
+          <HelpTOCNode Title="Basis Property " Url="html/P_Novacta_Analytics_Advanced_Cloud_Basis.htm" />
+          <HelpTOCNode Title="Coordinates Property " Url="html/P_Novacta_Analytics_Advanced_Cloud_Coordinates.htm" />
+          <HelpTOCNode Title="Covariance Property " Url="html/P_Novacta_Analytics_Advanced_Cloud_Covariance.htm" />
+          <HelpTOCNode Title="Mean Property " Url="html/P_Novacta_Analytics_Advanced_Cloud_Mean.htm" />
+          <HelpTOCNode Title="Variance Property " Url="html/P_Novacta_Analytics_Advanced_Cloud_Variance.htm" />
+          <HelpTOCNode Title="Weights Property " Url="html/P_Novacta_Analytics_Advanced_Cloud_Weights.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="1bc04d19-82b8-4cbb-84ad-ce5d78183ac9" Title="Cloud Methods" Url="html/Methods_T_Novacta_Analytics_Advanced_Cloud.htm">
+          <HelpTOCNode Title="Center Method " Url="html/M_Novacta_Analytics_Advanced_Cloud_Center.htm" />
+          <HelpTOCNode Title="GetPrincipalProjections Method " Url="html/M_Novacta_Analytics_Advanced_Cloud_GetPrincipalProjections.htm" />
+          <HelpTOCNode Id="3e3e7a3d-4b8e-443d-b777-da2d70de70f5" Title="GetVariances Method " Url="html/Overload_Novacta_Analytics_Advanced_Cloud_GetVariances.htm">
+            <HelpTOCNode Title="GetVariances Method (DoubleMatrix)" Url="html/M_Novacta_Analytics_Advanced_Cloud_GetVariances.htm" />
+            <HelpTOCNode Title="GetVariances Method (ReadOnlyDoubleMatrix)" Url="html/M_Novacta_Analytics_Advanced_Cloud_GetVariances_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Rebase Method " Url="html/M_Novacta_Analytics_Advanced_Cloud_Rebase.htm" />
+          <HelpTOCNode Title="Standardize Method " Url="html/M_Novacta_Analytics_Advanced_Cloud_Standardize.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="30dfad9a-8827-494f-9dc2-0aedbb1161f1" Title="CombinationOptimizationContext Class" Url="html/T_Novacta_Analytics_Advanced_CombinationOptimizationContext.htm">
+        <HelpTOCNode Title="CombinationOptimizationContext Constructor " Url="html/M_Novacta_Analytics_Advanced_CombinationOptimizationContext__ctor.htm" />
+        <HelpTOCNode Id="8b9135fc-bf20-4cbd-b398-904b26e9731c" Title="CombinationOptimizationContext Properties" Url="html/Properties_T_Novacta_Analytics_Advanced_CombinationOptimizationContext.htm">
+          <HelpTOCNode Title="CombinationDimension Property " Url="html/P_Novacta_Analytics_Advanced_CombinationOptimizationContext_CombinationDimension.htm" />
+          <HelpTOCNode Title="ProbabilitySmoothingCoefficient Property " Url="html/P_Novacta_Analytics_Advanced_CombinationOptimizationContext_ProbabilitySmoothingCoefficient.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="cc201704-c8ca-464c-8d52-a0b01cd6b518" Title="CombinationOptimizationContext Methods" Url="html/Methods_T_Novacta_Analytics_Advanced_CombinationOptimizationContext.htm">
+          <HelpTOCNode Title="GetOptimalState Method " Url="html/M_Novacta_Analytics_Advanced_CombinationOptimizationContext_GetOptimalState.htm" />
+          <HelpTOCNode Title="OnExecutedIteration Method " Url="html/M_Novacta_Analytics_Advanced_CombinationOptimizationContext_OnExecutedIteration.htm" />
+          <HelpTOCNode Title="PartialSample Method " Url="html/M_Novacta_Analytics_Advanced_CombinationOptimizationContext_PartialSample.htm" />
+          <HelpTOCNode Title="Performance Method " Url="html/M_Novacta_Analytics_Advanced_CombinationOptimizationContext_Performance.htm" />
+          <HelpTOCNode Title="SmoothParameter Method " Url="html/M_Novacta_Analytics_Advanced_CombinationOptimizationContext_SmoothParameter.htm" />
+          <HelpTOCNode Title="StopAtIntermediateIteration Method " Url="html/M_Novacta_Analytics_Advanced_CombinationOptimizationContext_StopAtIntermediateIteration.htm" />
+          <HelpTOCNode Title="UpdateParameter Method " Url="html/M_Novacta_Analytics_Advanced_CombinationOptimizationContext_UpdateParameter.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="632c6b88-9a52-44ae-b5e6-cc4c8248a78b" Title="ContinuousOptimizationContext Class" Url="html/T_Novacta_Analytics_Advanced_ContinuousOptimizationContext.htm">
+        <HelpTOCNode Title="ContinuousOptimizationContext Constructor " Url="html/M_Novacta_Analytics_Advanced_ContinuousOptimizationContext__ctor.htm" />
+        <HelpTOCNode Id="15346890-7845-4298-924a-45e129a3b535" Title="ContinuousOptimizationContext Properties" Url="html/Properties_T_Novacta_Analytics_Advanced_ContinuousOptimizationContext.htm">
+          <HelpTOCNode Title="InitialArgument Property " Url="html/P_Novacta_Analytics_Advanced_ContinuousOptimizationContext_InitialArgument.htm" />
+          <HelpTOCNode Title="InitialStandardDeviation Property " Url="html/P_Novacta_Analytics_Advanced_ContinuousOptimizationContext_InitialStandardDeviation.htm" />
+          <HelpTOCNode Title="MeanSmoothingCoefficient Property " Url="html/P_Novacta_Analytics_Advanced_ContinuousOptimizationContext_MeanSmoothingCoefficient.htm" />
+          <HelpTOCNode Title="StandardDeviationSmoothingCoefficient Property " Url="html/P_Novacta_Analytics_Advanced_ContinuousOptimizationContext_StandardDeviationSmoothingCoefficient.htm" />
+          <HelpTOCNode Title="StandardDeviationSmoothingExponent Property " Url="html/P_Novacta_Analytics_Advanced_ContinuousOptimizationContext_StandardDeviationSmoothingExponent.htm" />
+          <HelpTOCNode Title="TerminationTolerance Property " Url="html/P_Novacta_Analytics_Advanced_ContinuousOptimizationContext_TerminationTolerance.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="4b4214d8-e8e4-4f59-921f-86de5d318fdd" Title="ContinuousOptimizationContext Methods" Url="html/Methods_T_Novacta_Analytics_Advanced_ContinuousOptimizationContext.htm">
+          <HelpTOCNode Title="GetOptimalState Method " Url="html/M_Novacta_Analytics_Advanced_ContinuousOptimizationContext_GetOptimalState.htm" />
+          <HelpTOCNode Title="PartialSample Method " Url="html/M_Novacta_Analytics_Advanced_ContinuousOptimizationContext_PartialSample.htm" />
+          <HelpTOCNode Title="Performance Method " Url="html/M_Novacta_Analytics_Advanced_ContinuousOptimizationContext_Performance.htm" />
+          <HelpTOCNode Title="SmoothParameter Method " Url="html/M_Novacta_Analytics_Advanced_ContinuousOptimizationContext_SmoothParameter.htm" />
+          <HelpTOCNode Title="StopAtIntermediateIteration Method " Url="html/M_Novacta_Analytics_Advanced_ContinuousOptimizationContext_StopAtIntermediateIteration.htm" />
+          <HelpTOCNode Title="UpdateParameter Method " Url="html/M_Novacta_Analytics_Advanced_ContinuousOptimizationContext_UpdateParameter.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="aa754693-2142-4e9c-97bb-6599d7038e5b" Title="CrossEntropyContext Class" Url="html/T_Novacta_Analytics_Advanced_CrossEntropyContext.htm">
+        <HelpTOCNode Title="CrossEntropyContext Constructor " Url="html/M_Novacta_Analytics_Advanced_CrossEntropyContext__ctor.htm" />
+        <HelpTOCNode Id="4b27ec08-729b-4f64-aced-f22fef947586" Title="CrossEntropyContext Properties" Url="html/Properties_T_Novacta_Analytics_Advanced_CrossEntropyContext.htm">
+          <HelpTOCNode Title="EliteSampleDefinition Property " Url="html/P_Novacta_Analytics_Advanced_CrossEntropyContext_EliteSampleDefinition.htm" />
+          <HelpTOCNode Title="InitialParameter Property " Url="html/P_Novacta_Analytics_Advanced_CrossEntropyContext_InitialParameter.htm" />
+          <HelpTOCNode Title="StateDimension Property " Url="html/P_Novacta_Analytics_Advanced_CrossEntropyContext_StateDimension.htm" />
+          <HelpTOCNode Title="TraceExecution Property " Url="html/P_Novacta_Analytics_Advanced_CrossEntropyContext_TraceExecution.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="2c2a3480-0cd4-44b5-8d15-41ba9c515194" Title="CrossEntropyContext Methods" Url="html/Methods_T_Novacta_Analytics_Advanced_CrossEntropyContext.htm">
+          <HelpTOCNode Title="OnExecutedIteration Method " Url="html/M_Novacta_Analytics_Advanced_CrossEntropyContext_OnExecutedIteration.htm" />
+          <HelpTOCNode Title="PartialSample Method " Url="html/M_Novacta_Analytics_Advanced_CrossEntropyContext_PartialSample.htm" />
+          <HelpTOCNode Title="Performance Method " Url="html/M_Novacta_Analytics_Advanced_CrossEntropyContext_Performance.htm" />
+          <HelpTOCNode Title="StopExecution Method " Url="html/M_Novacta_Analytics_Advanced_CrossEntropyContext_StopExecution.htm" />
+          <HelpTOCNode Title="UpdateLevel Method " Url="html/M_Novacta_Analytics_Advanced_CrossEntropyContext_UpdateLevel.htm" />
+          <HelpTOCNode Title="UpdateParameter Method " Url="html/M_Novacta_Analytics_Advanced_CrossEntropyContext_UpdateParameter.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="f4d8d0c5-61a4-4f01-92d2-9cbff857d102" Title="CrossEntropyProgram Class" Url="html/T_Novacta_Analytics_Advanced_CrossEntropyProgram.htm">
+        <HelpTOCNode Title="CrossEntropyProgram Constructor " Url="html/M_Novacta_Analytics_Advanced_CrossEntropyProgram__ctor.htm" />
+        <HelpTOCNode Id="0e541a4b-a6da-40ee-b8b3-e6a12f47c6a2" Title="CrossEntropyProgram Properties" Url="html/Properties_T_Novacta_Analytics_Advanced_CrossEntropyProgram.htm">
+          <HelpTOCNode Title="PerformanceEvaluationParallelOptions Property " Url="html/P_Novacta_Analytics_Advanced_CrossEntropyProgram_PerformanceEvaluationParallelOptions.htm" />
+          <HelpTOCNode Title="SampleGenerationParallelOptions Property " Url="html/P_Novacta_Analytics_Advanced_CrossEntropyProgram_SampleGenerationParallelOptions.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="d9e7ead7-0684-4eca-b625-996a4494e4e0" Title="CrossEntropyProgram Methods" Url="html/Methods_T_Novacta_Analytics_Advanced_CrossEntropyProgram.htm">
+          <HelpTOCNode Title="EvaluatePerformances Method " Url="html/M_Novacta_Analytics_Advanced_CrossEntropyProgram_EvaluatePerformances.htm" />
+          <HelpTOCNode Title="Run Method " Url="html/M_Novacta_Analytics_Advanced_CrossEntropyProgram_Run.htm" />
+          <HelpTOCNode Title="Sample Method " Url="html/M_Novacta_Analytics_Advanced_CrossEntropyProgram_Sample.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="bf82ba3e-cb79-4e43-bf83-2104af872c3c" Title="CrossEntropyResults Class" Url="html/T_Novacta_Analytics_Advanced_CrossEntropyResults.htm">
+        <HelpTOCNode Id="4ce63c63-c1a4-4293-8120-db1cdda091b0" Title="CrossEntropyResults Properties" Url="html/Properties_T_Novacta_Analytics_Advanced_CrossEntropyResults.htm">
+          <HelpTOCNode Title="HasConverged Property " Url="html/P_Novacta_Analytics_Advanced_CrossEntropyResults_HasConverged.htm" />
+          <HelpTOCNode Title="Levels Property " Url="html/P_Novacta_Analytics_Advanced_CrossEntropyResults_Levels.htm" />
+          <HelpTOCNode Title="Parameters Property " Url="html/P_Novacta_Analytics_Advanced_CrossEntropyResults_Parameters.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="CrossEntropyResults Methods" Url="html/Methods_T_Novacta_Analytics_Advanced_CrossEntropyResults.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Title="EliteSampleDefinition Enumeration" Url="html/T_Novacta_Analytics_Advanced_EliteSampleDefinition.htm" />
+      <HelpTOCNode Title="OptimizationGoal Enumeration" Url="html/T_Novacta_Analytics_Advanced_OptimizationGoal.htm" />
+      <HelpTOCNode Id="7f034a73-75ac-4751-b9fa-0789d0ab0626" Title="PartitionOptimizationContext Class" Url="html/T_Novacta_Analytics_Advanced_PartitionOptimizationContext.htm">
+        <HelpTOCNode Title="PartitionOptimizationContext Constructor " Url="html/M_Novacta_Analytics_Advanced_PartitionOptimizationContext__ctor.htm" />
+        <HelpTOCNode Id="5b726d16-d1fe-40a1-9fa9-eea979845f32" Title="PartitionOptimizationContext Properties" Url="html/Properties_T_Novacta_Analytics_Advanced_PartitionOptimizationContext.htm">
+          <HelpTOCNode Title="PartitionDimension Property " Url="html/P_Novacta_Analytics_Advanced_PartitionOptimizationContext_PartitionDimension.htm" />
+          <HelpTOCNode Title="ProbabilitySmoothingCoefficient Property " Url="html/P_Novacta_Analytics_Advanced_PartitionOptimizationContext_ProbabilitySmoothingCoefficient.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="4dfc5668-48ea-4c07-ac89-5938ca29c7f9" Title="PartitionOptimizationContext Methods" Url="html/Methods_T_Novacta_Analytics_Advanced_PartitionOptimizationContext.htm">
+          <HelpTOCNode Title="GetOptimalState Method " Url="html/M_Novacta_Analytics_Advanced_PartitionOptimizationContext_GetOptimalState.htm" />
+          <HelpTOCNode Title="OnExecutedIteration Method " Url="html/M_Novacta_Analytics_Advanced_PartitionOptimizationContext_OnExecutedIteration.htm" />
+          <HelpTOCNode Title="PartialSample Method " Url="html/M_Novacta_Analytics_Advanced_PartitionOptimizationContext_PartialSample.htm" />
+          <HelpTOCNode Title="Performance Method " Url="html/M_Novacta_Analytics_Advanced_PartitionOptimizationContext_Performance.htm" />
+          <HelpTOCNode Title="SmoothParameter Method " Url="html/M_Novacta_Analytics_Advanced_PartitionOptimizationContext_SmoothParameter.htm" />
+          <HelpTOCNode Title="StopAtIntermediateIteration Method " Url="html/M_Novacta_Analytics_Advanced_PartitionOptimizationContext_StopAtIntermediateIteration.htm" />
+          <HelpTOCNode Title="UpdateParameter Method " Url="html/M_Novacta_Analytics_Advanced_PartitionOptimizationContext_UpdateParameter.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Title="RareEventPerformanceBoundedness Enumeration" Url="html/T_Novacta_Analytics_Advanced_RareEventPerformanceBoundedness.htm" />
+      <HelpTOCNode Id="b767adc5-3d7c-4c67-8410-1ed008983625" Title="RareEventProbabilityEstimationContext Class" Url="html/T_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext.htm">
+        <HelpTOCNode Title="RareEventProbabilityEstimationContext Constructor " Url="html/M_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext__ctor.htm" />
+        <HelpTOCNode Id="d21339d6-2288-4f15-9638-1a0d4b929404" Title="RareEventProbabilityEstimationContext Properties" Url="html/Properties_T_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext.htm">
+          <HelpTOCNode Title="EliteSampleDefinition Property " Url="html/P_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext_EliteSampleDefinition.htm" />
+          <HelpTOCNode Title="RareEventPerformanceBoundedness Property " Url="html/P_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext_RareEventPerformanceBoundedness.htm" />
+          <HelpTOCNode Title="ThresholdLevel Property " Url="html/P_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext_ThresholdLevel.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="7bda6004-ba10-444d-a18a-7c3ad79cb522" Title="RareEventProbabilityEstimationContext Methods" Url="html/Methods_T_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext.htm">
+          <HelpTOCNode Title="GetLikelihoodRatio Method " Url="html/M_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext_GetLikelihoodRatio.htm" />
+          <HelpTOCNode Title="StopExecution Method " Url="html/M_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext_StopExecution.htm" />
+          <HelpTOCNode Title="UpdateLevel Method " Url="html/M_Novacta_Analytics_Advanced_RareEventProbabilityEstimationContext_UpdateLevel.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="ae5ce1e6-b1e5-4e2b-af2d-eba522c95f15" Title="RareEventProbabilityEstimationResults Class" Url="html/T_Novacta_Analytics_Advanced_RareEventProbabilityEstimationResults.htm">
+        <HelpTOCNode Title="RareEventProbabilityEstimationResults Constructor " Url="html/M_Novacta_Analytics_Advanced_RareEventProbabilityEstimationResults__ctor.htm" />
+        <HelpTOCNode Id="bdfe9d1c-517d-4195-ad6c-e1e5b281baa5" Title="RareEventProbabilityEstimationResults Properties" Url="html/Properties_T_Novacta_Analytics_Advanced_RareEventProbabilityEstimationResults.htm">
+          <HelpTOCNode Title="RareEventProbability Property " Url="html/P_Novacta_Analytics_Advanced_RareEventProbabilityEstimationResults_RareEventProbability.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="RareEventProbabilityEstimationResults Methods" Url="html/Methods_T_Novacta_Analytics_Advanced_RareEventProbabilityEstimationResults.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="05204b37-4acc-48cc-8eb2-785d219cc546" Title="RareEventProbabilityEstimator Class" Url="html/T_Novacta_Analytics_Advanced_RareEventProbabilityEstimator.htm">
+        <HelpTOCNode Title="RareEventProbabilityEstimator Constructor " Url="html/M_Novacta_Analytics_Advanced_RareEventProbabilityEstimator__ctor.htm" />
+        <HelpTOCNode Title="RareEventProbabilityEstimator Properties" Url="html/Properties_T_Novacta_Analytics_Advanced_RareEventProbabilityEstimator.htm" />
+        <HelpTOCNode Id="bb718e70-d833-4f5e-a21b-62f5307fd083" Title="RareEventProbabilityEstimator Methods" Url="html/Methods_T_Novacta_Analytics_Advanced_RareEventProbabilityEstimator.htm">
+          <HelpTOCNode Title="Estimate Method " Url="html/M_Novacta_Analytics_Advanced_RareEventProbabilityEstimator_Estimate.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="7697bb9a-c447-497f-a3a1-49a4f96401b1" Title="SystemPerformanceOptimizationContext Class" Url="html/T_Novacta_Analytics_Advanced_SystemPerformanceOptimizationContext.htm">
+        <HelpTOCNode Title="SystemPerformanceOptimizationContext Constructor " Url="html/M_Novacta_Analytics_Advanced_SystemPerformanceOptimizationContext__ctor.htm" />
+        <HelpTOCNode Id="c89635d2-f403-44f4-857f-c2925ae7a153" Title="SystemPerformanceOptimizationContext Properties" Url="html/Properties_T_Novacta_Analytics_Advanced_SystemPerformanceOptimizationContext.htm">
+          <HelpTOCNode Title="EliteSampleDefinition Property " Url="html/P_Novacta_Analytics_Advanced_SystemPerformanceOptimizationContext_EliteSampleDefinition.htm" />
+          <HelpTOCNode Title="MaximumNumberOfIterations Property " Url="html/P_Novacta_Analytics_Advanced_SystemPerformanceOptimizationContext_MaximumNumberOfIterations.htm" />
+          <HelpTOCNode Title="MinimumNumberOfIterations Property " Url="html/P_Novacta_Analytics_Advanced_SystemPerformanceOptimizationContext_MinimumNumberOfIterations.htm" />
+          <HelpTOCNode Title="OptimizationGoal Property " Url="html/P_Novacta_Analytics_Advanced_SystemPerformanceOptimizationContext_OptimizationGoal.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="a50949a8-d847-4527-b03c-a95503a11363" Title="SystemPerformanceOptimizationContext Methods" Url="html/Methods_T_Novacta_Analytics_Advanced_SystemPerformanceOptimizationContext.htm">
+          <HelpTOCNode Title="GetOptimalState Method " Url="html/M_Novacta_Analytics_Advanced_SystemPerformanceOptimizationContext_GetOptimalState.htm" />
+          <HelpTOCNode Title="OnExecutedIteration Method " Url="html/M_Novacta_Analytics_Advanced_SystemPerformanceOptimizationContext_OnExecutedIteration.htm" />
+          <HelpTOCNode Title="SmoothParameter Method " Url="html/M_Novacta_Analytics_Advanced_SystemPerformanceOptimizationContext_SmoothParameter.htm" />
+          <HelpTOCNode Title="StopAtIntermediateIteration Method " Url="html/M_Novacta_Analytics_Advanced_SystemPerformanceOptimizationContext_StopAtIntermediateIteration.htm" />
+          <HelpTOCNode Title="StopExecution Method " Url="html/M_Novacta_Analytics_Advanced_SystemPerformanceOptimizationContext_StopExecution.htm" />
+          <HelpTOCNode Title="UpdateLevel Method " Url="html/M_Novacta_Analytics_Advanced_SystemPerformanceOptimizationContext_UpdateLevel.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="669765fb-64f0-4da8-87d8-1fc89f94f42d" Title="SystemPerformanceOptimizationResults Class" Url="html/T_Novacta_Analytics_Advanced_SystemPerformanceOptimizationResults.htm">
+        <HelpTOCNode Title="SystemPerformanceOptimizationResults Constructor " Url="html/M_Novacta_Analytics_Advanced_SystemPerformanceOptimizationResults__ctor.htm" />
+        <HelpTOCNode Id="0af8b5ad-bdd1-407b-aabc-7da141bbbee8" Title="SystemPerformanceOptimizationResults Properties" Url="html/Properties_T_Novacta_Analytics_Advanced_SystemPerformanceOptimizationResults.htm">
+          <HelpTOCNode Title="OptimalPerformance Property " Url="html/P_Novacta_Analytics_Advanced_SystemPerformanceOptimizationResults_OptimalPerformance.htm" />
+          <HelpTOCNode Title="OptimalState Property " Url="html/P_Novacta_Analytics_Advanced_SystemPerformanceOptimizationResults_OptimalState.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="SystemPerformanceOptimizationResults Methods" Url="html/Methods_T_Novacta_Analytics_Advanced_SystemPerformanceOptimizationResults.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="9a342f0f-e382-4c7a-8664-432fc98deb9a" Title="SystemPerformanceOptimizer Class" Url="html/T_Novacta_Analytics_Advanced_SystemPerformanceOptimizer.htm">
+        <HelpTOCNode Title="SystemPerformanceOptimizer Constructor " Url="html/M_Novacta_Analytics_Advanced_SystemPerformanceOptimizer__ctor.htm" />
+        <HelpTOCNode Title="SystemPerformanceOptimizer Properties" Url="html/Properties_T_Novacta_Analytics_Advanced_SystemPerformanceOptimizer.htm" />
+        <HelpTOCNode Id="569fbbae-fccb-4868-9b00-cc3291960bd4" Title="SystemPerformanceOptimizer Methods" Url="html/Methods_T_Novacta_Analytics_Advanced_SystemPerformanceOptimizer.htm">
+          <HelpTOCNode Title="Optimize Method " Url="html/M_Novacta_Analytics_Advanced_SystemPerformanceOptimizer_Optimize.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+</HelpTOC>

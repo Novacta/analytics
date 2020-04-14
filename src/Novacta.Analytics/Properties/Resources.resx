@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="STR_EXCEPT_CAT_ALREADY_EXISTS_IN_VARIABLE_LIST" xml:space="preserve">
+    <value>A category already exists in the variable having the same code or label.</value>
+  </data>
+  <data name="STR_EXCEPT_CAT_CATEGORIZER_IS_NULL" xml:space="preserve">
+    <value>The dictionary cannot contain null values.</value>
+  </data>
+  <data name="STR_EXCEPT_CAT_CATEGORIZER_REFERS_TO_IRRELEVANT_KEY" xml:space="preserve">
+    <value>The dictionary cannot contain keys not included in collection parameter {0}.</value>
+  </data>
+  <data name="STR_EXCEPT_CAT_CODE_NOT_IN_VARIABLE_LIST" xml:space="preserve">
+    <value>The paremeter is not a category code in the variable represented by parameter {0}.</value>
+  </data>
+  <data name="STR_EXCEPT_CAT_COLUMNS_NOT_EQUAL_TO_DATASET_VARIABLES" xml:space="preserve">
+    <value>The parameter must have a number of columns equal to the number of variables in this instance.</value>
+  </data>
+  <data name="STR_EXCEPT_CAT_COLUMNS_NOT_EQUAL_TO_VARIABLES_COUNT" xml:space="preserve">
+    <value>The parameter must have a number of columns equal to the number of items in parameter {0}.</value>
+  </data>
+  <data name="STR_EXCEPT_CAT_DATASET_NOT_ENOUGH_DATA" xml:space="preserve">
+    <value>The stream contains not enough data to define a valid categorical data set.</value>
+  </data>
+  <data name="STR_EXCEPT_CAT_DATASET_NOT_ENOUGH_ROW_DATA" xml:space="preserve">
+    <value>Stream line {0} must contain data for column {1}.</value>
+  </data>
+  <data name="STR_EXCEPT_CAT_INDEXES_MUST_HAVE_SAME_COUNT_OF_FEATURES" xml:space="preserve">
+    <value>The parameter must contain a number of indexes equal to the number of feature variables in this instance.</value>
+  </data>
+  <data name="STR_EXCEPT_CAT_MATRIX_ENTRY_NOT_IN_VARIABLE_LIST" xml:space="preserve">
+    <value>A matrix entry is not a category code in the variable corresponding to the entry column.</value>
+  </data>
+  <data name="STR_EXCEPT_CAT_VARIABLE_IS_READONLY" xml:space="preserve">
+    <value>Operation not supported for read-only variables.</value>
+  </data>
+  <data name="STR_EXCEPT_CEE_INVALID_FEATURE_CATEGORIES_COUNT" xml:space="preserve">
+    <value>The parameter contains a feature variable whose number of categories is not as expected by this instance.</value>
+  </data>
+  <data name="STR_EXCEPT_CEE_INVALID_RESPONSE_CATEGORIES_COUNT" xml:space="preserve">
+    <value>The parameter has not the number of categories expected by this instance.</value>
+  </data>
+  <data name="STR_EXCEPT_CEE_INVALID_STATE_COUNT" xml:space="preserve">
+    <value>The parameter has not the count expected by this instance.</value>
+  </data>
+  <data name="STR_EXCEPT_CEE_MUST_HAVE_SAME_FEATURES_COUNT" xml:space="preserve">
+    <value>The parameter's count must agree with the number of feature variables expected by this instance.</value>
+  </data>
+  <data name="STR_EXCEPT_CEE_PREMISE_IS_NOT_FEATURE_SUBSET" xml:space="preserve">
+    <value>A premise must be a subset of the corresponding feature domain.</value>
+  </data>
+  <data name="STR_EXCEPT_CEE_UNRECOGNIZED_RESPONSE_CODE" xml:space="preserve">
+    <value>The parameter must be a category code of the response variable defined by this instance.</value>
+  </data>
+  <data name="STR_EXCEPT_CEE_VARIABLE_IS_EMPTY" xml:space="preserve">
+    <value>The {0} variable must define at least a category.</value>
+  </data>
+  <data name="STR_EXCEPT_CEP_PARAMETER_IS_CONTEXT_INCOMPATIBLE" xml:space="preserve">
+    <value>The parameter has not the dimensions expected by the specified context.</value>
+  </data>
+  <data name="STR_EXCEPT_CEP_SAMPLE_IS_CONTEXT_INCOMPATIBLE" xml:space="preserve">
+    <value>The parameter has a number of columns that is not equal to the state dimension defined by the specified context.</value>
+  </data>
+  <data name="STR_EXCEPT_ENU_OUT_OF_BOUNDS" xml:space="preserve">
+    <value>The enumerator is currently before the first or after the last item in the collection.</value>
+  </data>
+  <data name="STR_EXCEPT_GDA_COLUMNS_NOT_EQUAL_TO_ACTIVE_VARIABLES" xml:space="preserve">
+    <value>The parameter must have a number of columns equal to the number of active variables.</value>
+  </data>
+  <data name="STR_EXCEPT_GDA_MCA_NON_POSITIVE_MARGINAL_SUMS" xml:space="preserve">
+    <value>The disjoint form of the parameter has at least a non positive marginal sum. The principal information cannot be acquired.</value>
+  </data>
+  <data name="STR_EXCEPT_GDA_NON_POSITIVE_MARGINAL_SUMS" xml:space="preserve">
+    <value>The parameter has at least a non positive marginal sum. The principal information cannot be acquired.</value>
+  </data>
+  <data name="STR_EXCEPT_GDA_NON_POSITIVE_PRINCIPAL_VARIANCES" xml:space="preserve">
+    <value>No principal variable has positive variance. The principal information cannot be acquired.</value>
+  </data>
+  <data name="STR_EXCEPT_GDA_ROWS_NOT_EQUAL_TO_ACTIVE_POINTS" xml:space="preserve">
+    <value>The parameter must have a number of rows equal to the number of active points.</value>
+  </data>
+  <data name="STR_EXCEPT_IND_LAST_LESS_THAN_FIRST" xml:space="preserve">
+    <value>The last index must be greater than or equal to first one.</value>
+  </data>
+  <data name="STR_EXCEPT_IND_NEGATIVE_INCREMENT_FIRST_LESS_THAN_LAST" xml:space="preserve">
+    <value>If the increment is negative, then the index bound must be less than or equal to the first index.</value>
+  </data>
+  <data name="STR_EXCEPT_IND_POSITION_EXCEEDS_DIMS" xml:space="preserve">
+    <value>A position exceeds the dimensions of this instance.</value>
+  </data>
+  <data name="STR_EXCEPT_IND_POSITIVE_INCREMENT_LAST_LESS_THAN_FIRST" xml:space="preserve">
+    <value>If the increment is positive, then the index bound must be greater than or equal to the first index.</value>
+  </data>
+  <data name="STR_EXCEPT_INP_PART_CONTAINS_INVALID_INDEX" xml:space="preserve">
+    <value>A part contains an element which is not valid as a row index of the data.</value>
+  </data>
+  <data name="STR_EXCEPT_MAT_ADD_ALL_DIMS_MUST_MATCH" xml:space="preserve">
+    <value>In addition operations, the dimensions of the right operand must match those of the left one.</value>
+  </data>
+  <data name="STR_EXCEPT_MAT_CONVERTED_TO_DOUBLE_MUST_BE_SCALAR" xml:space="preserve">
+    <value>A matrix can be converted to a double only if it is scalar.</value>
+  </data>
+  <data name="STR_EXCEPT_MAT_DIVIDE_COLUMNS_MUST_MATCH" xml:space="preserve">
+    <value>In division operations, the number of columns of the right operand must match that of the left one.</value>
+  </data>
+  <data name="STR_EXCEPT_MAT_DIVIDE_RANK_DEFICIENT_OPERATION" xml:space="preserve">
+    <value>In division operations, the right operand cannot be unsquare and rank deficient.</value>
+  </data>
+  <data name="STR_EXCEPT_MAT_ELEMENT_WISE_ALL_DIMS_MUST_MATCH" xml:space="preserve">
+    <value>In element-wise operations, the dimensions of the right operand must match those of the left one.</value>
+  </data>
+  <data name="STR_EXCEPT_MAT_INCONSISTENCY_DATA_DIMS" xml:space="preserve">
+    <value>Inconsistency between dimensions and data.</value>
+  </data>
+  <data name="STR_EXCEPT_MAT_MULTIPLY_INNER_DIMS_MUST_MATCH" xml:space="preserve">
+    <value>In multiplication operations, the number of rows of the right operand must match the number of columns of the left one.</value>
+  </data>
+  <data name="STR_EXCEPT_MAT_SUBTRACT_ALL_DIMS_MUST_MATCH" xml:space="preserve">
+    <value>In subtraction operations, the dimensions of the right operand must match those of the left one.</value>
+  </data>
+  <data name="STR_EXCEPT_MAT_UNALLOWED_NON_POSITIVE_DIMS" xml:space="preserve">
+    <value>Negative or zero matrix dimensions are not allowed.</value>
+  </data>
+  <data name="STR_EXCEPT_NOT_FIELD_OF_DATA_OPERATION" xml:space="preserve">
+    <value>The parameter is not a field of the DataOperation enumeration.</value>
+  </data>
+  <data name="STR_EXCEPT_NOT_FIELD_OF_ELITE_SAMPLE_DEFINITION" xml:space="preserve">
+    <value>The parameter is not a field of the EliteSampleDefinition enumeration.</value>
+  </data>
+  <data name="STR_EXCEPT_NOT_FIELD_OF_OPTIMIZATION_GOAL" xml:space="preserve">
+    <value>The parameter is not a field of the OptimizationGoal enumeration.</value>
+  </data>
+  <data name="STR_EXCEPT_NOT_FIELD_OF_RARE_EVENT_PERFORMANCE_BOUNDEDNESS" xml:space="preserve">
+    <value>The parameter is not a field of the RareEventPerformanceBoundedness enumeration.</value>
+  </data>
+  <data name="STR_EXCEPT_NOT_FIELD_OF_SORT_DIRECTION" xml:space="preserve">
+    <value>The parameter is not a field of the SortDirection enumeration.</value>
+  </data>
+  <data name="STR_EXCEPT_NOT_FIELD_OF_STORAGE_ORDER" xml:space="preserve">
+    <value>The parameter is not a field of the StorageOrder enumeration.</value>
+  </data>
+  <data name="STR_EXCEPT_OBJ_HAS_WRONG_TYPE" xml:space="preserve">
+    <value>Object is not of type {0}.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_BASES_MUST_SHARE_DIMENSION" xml:space="preserve">
+    <value>The new basis and the current one must share the same dimension.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_CANNOT_PARSE_AS_INT32" xml:space="preserve">
+    <value>The parameter does not represent a valid integer.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_ENTRIES_MUST_BE_DISTINCT" xml:space="preserve">
+    <value>The parameter entries must be distinct.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_ENTRIES_MUST_BE_NON_NEGATIVE" xml:space="preserve">
+    <value>The parameter entries must be nonnegative.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_ENTRIES_MUST_BE_POSITIVE" xml:space="preserve">
+    <value>The parameter entries must be positive.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_ENTRIES_MUST_SUM_TO_1" xml:space="preserve">
+    <value>The parameter entries must sum up to 1.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_ENTRIES_MUST_SUM_TO_INTEGER" xml:space="preserve">
+    <value>The sum of parameter entries must not differ from an integer more than .001 in absolute value.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_ENTRIES_NOT_IN_CLOSED_INTERVAL" xml:space="preserve">
+    <value>The parameter entries must be in the closed interval [{0}, {1}].</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_ENTRIES_NOT_IN_OPEN_INTERVAL" xml:space="preserve">
+    <value>The parameter entries must be in the open interval ]{0}, {1}[.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_INDEX_EXCEEDS_OTHER_PAR_DIMS" xml:space="preserve">
+    <value>The parameter has or contains a value which is not a valid {0} index for parameter {1}.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_IS_NOT_A_PART_IDENTIFIER" xml:space="preserve">
+    <value>The parameter is not a part identifier.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_MUST_BE_BASIS_COMPLIANT_MATRIX" xml:space="preserve">
+    <value>The parameter's number of columns must agree with the basis dimension.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_MUST_BE_BASIS_COMPLIANT_VECTOR" xml:space="preserve">
+    <value>The parameter's count must agree with the basis dimension.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_MUST_BE_COLUMN_VECTOR" xml:space="preserve">
+    <value>The parameter must be a column vector.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_MUST_BE_GREATER_THAN_OTHER" xml:space="preserve">
+    <value>Parameter {0} must be greater than parameter {1}.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_MUST_BE_GREATER_THAN_VALUE" xml:space="preserve">
+    <value>The parameter must be greater than {0}.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_MUST_BE_LESS_THAN_OTHER" xml:space="preserve">
+    <value>Parameter {0} must be less than parameter {1}.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_MUST_BE_LESS_THAN_OTHER_COLUMNS" xml:space="preserve">
+    <value>Parameter {0} must be less than the number of columns in parameter {1}.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_MUST_BE_LESS_THAN_OTHER_ROWS" xml:space="preserve">
+    <value>Parameter {0} must be less than the number of rows in parameter {1}.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_MUST_BE_LESS_THAN_VALUE" xml:space="preserve">
+    <value>The parameter must be less than {0}.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_MUST_BE_NONZERO" xml:space="preserve">
+    <value>The parameter must be nonzero.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_MUST_BE_NON_EMPTY" xml:space="preserve">
+    <value>The parameter must be non empty.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_MUST_BE_NON_NEGATIVE" xml:space="preserve">
+    <value>The parameter must be non negative.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_MUST_BE_NON_SINGULAR" xml:space="preserve">
+    <value>The parameter must be a non singular matrix.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_MUST_BE_NOT_GREATER_THAN_OTHER" xml:space="preserve">
+    <value>Parameter {0} must be less than or equal to parameter {1}.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_MUST_BE_POSITIVE" xml:space="preserve">
+    <value>The parameter must be positive.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_MUST_BE_ROW_VECTOR" xml:space="preserve">
+    <value>The parameter must be a row vector.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_MUST_BE_SQUARE" xml:space="preserve">
+    <value>The parameter must be a square matrix.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_MUST_HAVE_SAME_COUNT" xml:space="preserve">
+    <value>The parameter's count must be equal to that of parameter {0}.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_MUST_HAVE_SAME_NUM_OF_COLUMNS" xml:space="preserve">
+    <value>The parameter must have a number of columns equal to that of parameter {0}.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_MUST_HAVE_SAME_NUM_OF_ROWS" xml:space="preserve">
+    <value>The parameter must have a number of rows equal to that of parameter {0}.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_NAME_CANNOT_BE_RESERVED_STRING" xml:space="preserve">
+    <value>A row or column name cannot match a string reserved for matrix indexing.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_NOT_ENOUGH_SPACE_IN_ARRAY" xml:space="preserve">
+    <value>The number of elements in this instance is greater than the available space from arrayIndex to the end of the destination array.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_NOT_IN_CLOSED_INTERVAL" xml:space="preserve">
+    <value>The parameter must be in the closed interval [{0}, {1}].</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_NOT_IN_OPEN_INTERVAL" xml:space="preserve">
+    <value>The parameter must be in the open interval ]{0}, {1}[.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_ROW_DIM_MUST_MATCH_INDIVIDUALS_COUNT" xml:space="preserve">
+    <value>The parameter must have a number of rows equal to the number of cloud individuals.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_STRING_IS_EMPTY_OR_WHITESPACE" xml:space="preserve">
+    <value>The string parameter cannot be empty, or consist only of white-space characters.</value>
+  </data>
+  <data name="STR_EXCEPT_PDF_INVERSE_CDF_NOT_SUPPORTED" xml:space="preserve">
+    <value>Cannot invert the cumulative distribution function of this instance.</value>
+  </data>
+  <data name="STR_EXCEPT_PDF_SAMPLESIZE_ARRAYLENGTH_MISMATCH" xml:space="preserve">
+    <value>Parameter {0} must be less than or equal to the difference between the length of parameter {1} and {2}.</value>
+  </data>
+  <data name="STR_EXCEPT_REP_UNABLE_TO_DESERIALIZE" xml:space="preserve">
+    <value>An error occurred during deserialization. Inspect eventual inner exceptions for additional details.</value>
+  </data>
+  <data name="STR_EXCEPT_REP_UNABLE_TO_SERIALIZE" xml:space="preserve">
+    <value>An error occurred during serialization. Inspect eventual inner exceptions for additional details.</value>
+  </data>
+  <data name="STR_EXCEPT_ROW_DATA_COLUMN_EXCEEDS_DIMS" xml:space="preserve">
+    <value>The value must represent a valid column index for the matrix whose rows this instance is collecting.</value>
+  </data>
+  <data name="STR_EXCEPT_STA_KURTOSIS_ADJUST_FOR_BIAS_UNDEFINED" xml:space="preserve">
+    <value>Sample kurtosis cannot be adjusted for bias if the sample size is less than 4.</value>
+  </data>
+  <data name="STR_EXCEPT_STA_SKEWNESS_ADJUST_FOR_BIAS_UNDEFINED" xml:space="preserve">
+    <value>Sample skewness cannot be adjusted for bias if the sample size is less than 3.</value>
+  </data>
+  <data name="STR_EXCEPT_STA_VARIANCE_ADJUST_FOR_BIAS_UNDEFINED" xml:space="preserve">
+    <value>Sample standard deviations, variances or covariances cannot be adjusted for bias if the sample size is less than 2.</value>
+  </data>
+  <data name="STR_EXCEPT_SVD_ERRORS" xml:space="preserve">
+    <value>The Singular Value Decomposition required to acquire the principal information cannot be executed or does not converge.</value>
+  </data>
+  <data name="STR_EXCEPT_TAB_INCONSISTENT_SUBASSIGNMENT" xml:space="preserve">
+    <value>The assigned collection and the sub-referenced one have unequal dimensions.</value>
+  </data>
+  <data name="STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS" xml:space="preserve">
+    <value>An index exceeds the dimensions of this instance.</value>
+  </data>
+  <data name="STR_EXCEPT_TAB_IS_OF_A_FIXED_SIZE" xml:space="preserve">
+    <value>The collection is of a fixed size.</value>
+  </data>
+  <data name="STR_EXCEPT_TAB_IS_READ_ONLY" xml:space="preserve">
+    <value>The collection is read-only.</value>
+  </data>
+  <data name="STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX" xml:space="preserve">
+    <value>Unsupported sub-reference syntax. The argument is not a string reserved for matrix indexing.</value>
+  </data>
+  <data name="STR_EXCEPT_VSL_CANNOT_CREATE_STREAM_DESCRIPTOR" xml:space="preserve">
+    <value>An error occured during the creation of the random stream.</value>
+  </data>
+</root>

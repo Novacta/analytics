@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Topics>
+  <Topic id="a4ea75a2-ef53-4ea2-a7f4-b493a50f90b3" visible="True" isDefault="true" title="Welcome">
+    <HelpKeywords>
+      <HelpKeyword index="K" term="Welcome" />
+    </HelpKeywords>
+  </Topic>
+  <Topic id="6e0413d7-d042-4781-a888-14641b635d8a" visible="True" title="License agreement" />
+  <Topic id="07a926cb-9c3c-432d-998b-0af7eea037f6" visible="True" title="Testing environment" />
+  <Topic id="98825745-d228-4a65-9fc2-9f3041567e53" visible="True" isExpanded="true" title="Version history">
+    <HelpKeywords>
+      <HelpKeyword index="K" term="version, history" />
+    </HelpKeywords>
+    <Topic id="41221eed-891e-4925-a654-ecf8b2d38c65" visible="True" isSelected="true" title="Version 1.0.0">
+      <HelpKeywords>
+        <HelpKeyword index="K" term="version, 1.0.0" />
+      </HelpKeywords>
+    </Topic>
+  </Topic>
+</Topics>

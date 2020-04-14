@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<topic id="a4ea75a2-ef53-4ea2-a7f4-b493a50f90b3" revisionNumber="1">
+  <developerConceptualDocument  xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                xmlns:ltx="http://www.novacta.net/2018/XSL/ShfbLatexTools">
+    <introduction>
+      <para>
+        The <legacyBold>Novacta.Analytics</legacyBold> library
+        provides functionality for data analysis.
+      </para>
+      <para>
+        The project targets all platforms implementing
+        the <externalLink>
+          <linkText>.NET Standard</linkText>
+          <linkUri>https://github.com/dotnet/standard</linkUri>
+        </externalLink>, version 2.0, and supports the
+        <externalLink>
+          <linkText>x86 architecture</linkText>
+          <linkUri>https://en.wikipedia.org/wiki/X86</linkUri>
+        </externalLink>:
+        64 bit is supported on all platforms, 32 bit on Windows only.
+      </para>
+    </introduction>
+    <section>
+      <title>Features</title>
+      <content>
+        <para>
+          <legacyBold>Matrix algebra operations</legacyBold>
+        </para>
+        <list class="bullet">
+          <listItem>
+            <para>
+              <codeEntityReference linkText="Readonly">
+                T:Novacta.Analytics.ReadOnlyDoubleMatrix
+              </codeEntityReference> or
+              <codeEntityReference linkText="writable">
+                T:Novacta.Analytics.DoubleMatrix
+              </codeEntityReference> matrices, supporting
+              <codeEntityReference linkText="Sparse">
+                M:Novacta.Analytics.DoubleMatrix.Sparse(System.Int32,System.Int32,System.Int32)
+              </codeEntityReference>
+              and
+              <codeEntityReference linkText="Dense">
+                M:Novacta.Analytics.DoubleMatrix.Dense(System.Int32,System.Int32)
+              </codeEntityReference>
+              storage schemes.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              Overloaded operators supporting sums,
+              subtractions,
+              multiplications, and divisions whose operands are matrices
+              or scalars.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              Matrix slicing where rows or columns are referred to
+              using integers, strings, or
+              <codeEntityReference linkText="collections of indexes">
+                T:Novacta.Analytics.IndexCollection
+              </codeEntityReference>, possibly avoiding dense allocations
+              via specialized
+              <codeEntityReference linkText="indexers">
+                P:Novacta.Analytics.DoubleMatrix.Item(Novacta.Analytics.IndexCollection,Novacta.Analytics.IndexCollection,System.Boolean)
+              </codeEntityReference>.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              <codeEntityReference linkText="Out-">
+                M:Novacta.Analytics.DoubleMatrix.Apply(System.Func{System.Double,System.Double})
+              </codeEntityReference> or
+              <codeEntityReference linkText="In-">
+                M:Novacta.Analytics.DoubleMatrix.InPlaceApply(System.Func{System.Double,System.Double})
+              </codeEntityReference> place application
+              of operations to matrix entries.
+            </para>
+          </listItem>
+        </list>
+        <para>
+          <legacyBold>Matrix data presentation and interaction in application UI</legacyBold>
+        </para>
+        <list class="bullet">
+          <listItem>
+            <para>
+              Matrices can be exploited as
+              <externalLink>
+                <linkText>binding sources</linkText>
+                <linkUri>
+                  https://docs.microsoft.com/en-us/dotnet/desktop-wpf/data/data-binding-overview#basic-data-binding-concepts
+                </linkUri>
+              </externalLink> by
+              interpreting them as
+              <codeEntityReference linkText="collections">
+                T:Novacta.Analytics.DoubleMatrixRowCollection
+              </codeEntityReference> of
+              <codeEntityReference linkText="rows">
+                T:Novacta.Analytics.DoubleMatrixRow
+              </codeEntityReference>.
+              See the
+              <externalLink>
+                <linkText>BindingToRowCollection</linkText>
+                <linkUri>
+                  https://github.com/novacta/analytics/blob/master/samples/BindingToRowCollection
+                </linkUri>
+              </externalLink>
+              sample for further details.
+            </para>
+          </listItem>>
+        </list>
+        <para>
+          <legacyBold>Summary statistics</legacyBold>
+        </para>
+        <list class="bullet">
+          <listItem>
+            <para>
+              <codeEntityReference
+                  linkText="Descriptive statistical functions">
+                T:Novacta.Analytics.Stat
+              </codeEntityReference>,
+              operating on rows, columns, or all matrix entries.
+            </para>
+          </listItem>
+        </list>
+        <para>
+          <legacyBold>Multivariate data analysis</legacyBold>
+        </para>
+        <list class="bullet">
+          <listItem>
+            <para>
+              Represent multi-dimensional, weighted points by taking
+              their coordinates
+              with respect to whatever
+              <codeEntityReference linkText="basis">
+                T:Novacta.Analytics.Advanced.Basis
+              </codeEntityReference> 
+              using
+              <codeEntityReference
+              linkText="cloud">
+                T:Novacta.Analytics.Advanced.Cloud
+              </codeEntityReference>
+              instances.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              Project clouds
+              along their
+              <codeEntityReference linkText="principal">
+                T:Novacta.Analytics.PrincipalProjections
+              </codeEntityReference>
+              directions
+              by identifying new, uncorrelated variables
+              whose variances enhance our comprehension of the overall cloud
+              variability, possibly approximating the cloud in a lower dimensional space.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              Compute the
+              <codeEntityReference linkText="principal components">
+                T:Novacta.Analytics.PrincipalComponents
+              </codeEntityReference>
+              of a matrix, an application of principal projections
+              to the classical context in which matrix rows are
+              interpreted as point coordinates taken with respect to
+              bases depending on specific coefficients assigned to the
+              observed variables.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              <codeEntityReference linkText="Correspondence">
+                T:Novacta.Analytics.Correspondence
+              </codeEntityReference>
+              analysis of a contingency table.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              Cluster Analysis
+              <list class="bullet">
+                <listItem>
+                  <para>
+                    <codeEntityReference linkText="Discover">
+                      M:Novacta.Analytics.Clusters.Discover(Novacta.Analytics.DoubleMatrix,System.Int32)
+                    </codeEntityReference>
+                    optimal clusters in a data set by minimizing the sum of
+                    intra-cluster squared deviations.
+                  </para>
+                </listItem>
+                <listItem>
+                  <para>
+                    <codeEntityReference linkText="Explain">
+                      M:Novacta.Analytics.Clusters.Explain(Novacta.Analytics.DoubleMatrix,Novacta.Analytics.IndexPartition{System.Double},System.Int32)
+                    </codeEntityReference>
+                    existing clusters selecting features 
+                    by minimizing the
+                    <codeEntityReference linkText="Davies-Bouldin index">
+                      M:Novacta.Analytics.IndexPartition.DaviesBouldinIndex(Novacta.Analytics.DoubleMatrix,Novacta.Analytics.IndexPartition{System.Double})
+                    </codeEntityReference>.
+                  </para>
+                </listItem>
+              </list>
+            </para>
+          </listItem>
+        </list>
+        <para>
+          <legacyBold>Categorical data sets</legacyBold>
+        </para>
+        <list class="bullet">
+          <listItem>
+            <para>
+              Create
+              <codeEntityReference linkText="categorical data sets">
+                T:Novacta.Analytics.CategoricalDataSet
+              </codeEntityReference>
+              by
+              <codeEntityReference linkText="encoding">
+                M:Novacta.Analytics.CategoricalDataSet.Encode(System.IO.TextReader,System.Char,Novacta.Analytics.IndexCollection,System.Boolean,System.Collections.Generic.Dictionary{System.Int32,Novacta.Analytics.Categorizer},System.IFormatProvider)
+              </codeEntityReference>
+              categorical or numerical data from a stream.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              Categorize continuous data
+              <codeEntityReference linkText="by entropy minimization">
+                M:Novacta.Analytics.CategoricalDataSet.CategorizeByEntropyMinimization(System.IO.TextReader,System.Char,Novacta.Analytics.IndexCollection,System.Boolean,System.Int32,System.IFormatProvider)
+              </codeEntityReference>.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              <codeEntityReference linkText="Multiple Correspondence">
+                T:Novacta.Analytics.MultipleCorrespondence
+              </codeEntityReference> 
+              analysis of a categorical data set.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              Classify items from a feature space via
+              <codeEntityReference linkText="ensembles">
+                T:Novacta.Analytics.CategoricalEntailmentEnsembleClassifier
+              </codeEntityReference>
+              of
+              <codeEntityReference linkText="categorical entailments">
+                T:Novacta.Analytics.CategoricalEntailment
+              </codeEntityReference>.            
+            </para>
+          </listItem>
+        </list>
+        <para>
+          <legacyBold>Randomization</legacyBold>
+        </para>
+        <list class="bullet">
+          <listItem>
+            <para>
+              Use Mersenne Twister
+              <codeEntityReference linkText="random number generators">
+                T:Novacta.Analytics.RandomNumberGenerator
+              </codeEntityReference>
+              to draw samples from basic statistical distributions.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              Represent additional
+              <codeEntityReference linkText="probability distributions">
+                T:Novacta.Analytics.ProbabilityDistribution
+              </codeEntityReference>
+              to compute and sample from specific cumulative or probability density
+              functions.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              Select
+              <codeEntityReference linkText="random samples">
+                T:Novacta.Analytics.RandomSampling
+              </codeEntityReference>
+              from a finite population, with
+              <codeEntityReference linkText="equal">
+                T:Novacta.Analytics.SimpleRandomSampling
+              </codeEntityReference>
+              or
+              <codeEntityReference linkText="unequal">
+                T:Novacta.Analytics.UnequalProbabilityRandomSampling
+              </codeEntityReference>
+              probabilities of being inserted in a sample.
+            </para>
+          </listItem>
+          <listItem>
+            <para>              
+              <codeEntityReference linkText="Permute randomly">
+                T:Novacta.Analytics.RandomIndexPermutation
+              </codeEntityReference>              
+              a given collection of integers.
+            </para>
+          </listItem>
+        </list>
+        <para>
+          <legacyBold>Optimization</legacyBold>
+        </para>
+        <list class="bullet">
+          <listItem>
+            <para>              
+              <codeEntityReference linkText="Optimize continuous functions">
+                T:Novacta.Analytics.ContinuousOptimization
+              </codeEntityReference>
+              having multiple arguments ranging over the real line.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              Apply the Cross-Entropy method to
+              represent continuous or combinatorial optimization problems
+              via 
+              <codeEntityReference linkText="Cross-Entropy contexts for optimization">
+                T:Novacta.Analytics.Advanced.SystemPerformanceOptimizationContext
+              </codeEntityReference>,
+              and solve them using a
+              <codeEntityReference linkText="Cross-Entropy optimizer">
+                T:Novacta.Analytics.Advanced.SystemPerformanceOptimizer
+              </codeEntityReference>.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              Take advantage of specialized Cross-Entropy contexts to
+              optimize functions having as arguments
+              <codeEntityReference linkText="continuous variables">
+                T:Novacta.Analytics.Advanced.ContinuousOptimizationContext
+              </codeEntityReference>,
+              <codeEntityReference linkText="combinations">
+                T:Novacta.Analytics.Advanced.CombinationOptimizationContext
+              </codeEntityReference>,
+              <codeEntityReference linkText="partitions">
+                T:Novacta.Analytics.Advanced.PartitionOptimizationContext
+              </codeEntityReference>,
+              or
+              <codeEntityReference linkText="ensembles of categorical entailments">
+                T:Novacta.Analytics.Advanced.CategoricalEntailmentEnsembleOptimizationContext
+              </codeEntityReference>.
+            </para>
+          </listItem>          
+        </list>
+        <para>
+          <legacyBold>Rare event simulation</legacyBold>
+        </para>
+        <list class="bullet">
+          <listItem>
+            <para>
+              Express the problem of estimating the probability of
+              rare events
+              via 
+              <codeEntityReference linkText="Cross-Entropy contexts for rare event simulation">
+                T:Novacta.Analytics.Advanced.RareEventProbabilityEstimationContext
+              </codeEntityReference>,
+              solvable using a
+              <codeEntityReference linkText="Cross-Entropy estimator">
+                T:Novacta.Analytics.Advanced.RareEventProbabilityEstimator
+              </codeEntityReference>.
+            </para>
+          </listItem>
+        </list>
+      </content>
+    </section>
+    <section>
+      <title>
+        Documentation
+      </title>
+      <content>
+        <para>
+          The current documentation includes the following topics.
+        </para>
+        <list class="bullet">
+          <listItem>
+            <para>
+              <link xlink:href="41221eed-891e-4925-a654-ecf8b2d38c65">
+                Novacta.Analytics release notes
+              </link>
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              <link xlink:href="07a926cb-9c3c-432d-998b-0af7eea037f6">
+                Testing environment
+              </link> instructs about the setup required
+              to test the assembly.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              <codeEntityReference linkText="Library reference">
+                N:Novacta.Analytics
+              </codeEntityReference>
+              contains reference information about library
+              types by namespace.
+            </para>
+          </listItem>
+        </list>
+      </content>
+    </section>
+    <section>
+      <title>Copyrights and Licenses</title>
+      <content>
+        <para>
+          All source code is Copyright (c) 2018
+          Giovanni Lafratta, licensed under the
+          <link xlink:href="6e0413d7-d042-4781-a888-14641b635d8a">
+            MIT license
+          </link>.
+        </para>
+        <para>
+          This project relies on native dynamic-link libraries obtained
+          via the Intel® MKL custom DLL builder.
+          <externalLink>
+            <linkText>MKL</linkText>
+            <linkUri>
+              https://software.intel.com/en-us/mkl
+            </linkUri>
+          </externalLink> is Copyright (c) 2018 Intel Corporation and
+          licensed under the
+          <externalLink>
+            <linkText>ISSL</linkText>
+            <linkUri>
+              https://software.intel.com/en-us/license/intel-simplified-software-license
+            </linkUri>
+          </externalLink>
+          terms.
+        </para>
+      </content>
+    </section>
+    <relatedTopics>
+      <link xlink:href="98825745-d228-4a65-9fc2-9f3041567e53" />
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

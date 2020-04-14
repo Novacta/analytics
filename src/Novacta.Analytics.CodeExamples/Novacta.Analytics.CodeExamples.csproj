@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Novacta.Analytics" Version="0.1.0-CI-20200412-135132" />
+    <PackageReference Include="Novacta.Documentation.CodeExamples" Version="1.0.0" />
+  </ItemGroup>
+
+</Project>

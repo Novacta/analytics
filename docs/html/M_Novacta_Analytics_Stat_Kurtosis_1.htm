@@ -1,0 +1,213 @@
+﻿<html><head><meta http-equiv="X-UA-Compatible" content="IE=edge" /><link rel="shortcut icon" href="../icons/favicon.ico" /><link rel="stylesheet" type="text/css" href="../styles/branding.css" /><link rel="stylesheet" type="text/css" href="../styles/branding-en-US.css" /><script type="text/javascript" src="../scripts/branding.js"> </script><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Stat.Kurtosis Method (DoubleMatrix, Boolean, DataOperation)</title><meta name="Language" content="en-us" /><meta name="Microsoft.Help.Id" content="M:Novacta.Analytics.Stat.Kurtosis(Novacta.Analytics.DoubleMatrix,System.Boolean,Novacta.Analytics.DataOperation)" /><meta name="Description" content="Returns the kurtosis of each row or column in the specified data, eventually adjusted for bias." /><meta name="Microsoft.Help.ContentType" content="Reference" /><meta name="BrandingAware" content="true" /><meta name="container" content="Novacta.Analytics" /><meta name="file" content="M_Novacta_Analytics_Stat_Kurtosis_1" /><meta name="guid" content="M_Novacta_Analytics_Stat_Kurtosis_1" /><link type="text/css" rel="stylesheet" href="../styles/highlight.css" /><script type="text/javascript" src="../scripts/highlight.js"> </script><link rel="stylesheet" type="text/css" href="../styles/branding-Website.css" /><script type="text/javascript" src="../scripts/jquery-3.3.1.min.js"></script><script type="text/javascript" src="../scripts/branding-Website.js"></script><script type="text/javascript" src="../scripts/clipboard.min.js"></script></head><body onload="OnLoad('cs')"><input type="hidden" id="userDataCache" class="userDataStyle" /><div class="pageHeader" id="PageHeader">Novacta.Analytics Documentation<form id="SearchForm" method="get" action="#" onsubmit="javascript:TransferToSearchPage(); return false;"><input id="SearchTextBox" type="text" maxlength="200" /><button id="SearchButton" type="submit"></button></form></div><div class="pageBody"><div class="leftNav" id="leftNav"><div id="tocNav"><div class="toclevel0" data-toclevel="0"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/a4ea75a2-ef53-4ea2-a7f4-b493a50f90b3.htm" title="Novacta.Analytics Documentation" tocid="roottoc">Novacta.Analytics Documentation</a></div><div class="toclevel0" data-toclevel="0"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/G_Novacta_Analytics.htm" title="Novacta.Analytics Namespaces" tocid="G_Novacta_Analytics">Novacta.Analytics Namespaces</a></div><div class="toclevel0" data-toclevel="0"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/N_Novacta_Analytics.htm" title="Novacta.Analytics" tocid="N_Novacta_Analytics">Novacta.Analytics</a></div><div class="toclevel0" data-toclevel="0"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/T_Novacta_Analytics_Stat.htm" title="Stat Class" tocid="T_Novacta_Analytics_Stat">Stat Class</a></div><div class="toclevel0" data-toclevel="0"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/Methods_T_Novacta_Analytics_Stat.htm" title="Stat Methods" tocid="Methods_T_Novacta_Analytics_Stat">Stat Methods</a></div><div class="toclevel1" data-toclevel="1" data-childrenloaded="true"><a class="tocExpanded" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/Overload_Novacta_Analytics_Stat_Kurtosis.htm" title="Kurtosis Method " tocid="Overload_Novacta_Analytics_Stat_Kurtosis">Kurtosis Method </a></div><div class="toclevel2" data-toclevel="2"><a data-tochassubtree="false" href="../html/M_Novacta_Analytics_Stat_Kurtosis.htm" title="Kurtosis Method (DoubleMatrix, Boolean)" tocid="M_Novacta_Analytics_Stat_Kurtosis">Kurtosis Method (DoubleMatrix, Boolean)</a></div><div class="toclevel2" data-toclevel="2"><a data-tochassubtree="false" href="../html/M_Novacta_Analytics_Stat_Kurtosis_2.htm" title="Kurtosis Method (ReadOnlyDoubleMatrix, Boolean)" tocid="M_Novacta_Analytics_Stat_Kurtosis_2">Kurtosis Method (ReadOnlyDoubleMatrix, Boolean)</a></div><div class="toclevel2 current" data-toclevel="2"><a data-tochassubtree="false" href="../html/M_Novacta_Analytics_Stat_Kurtosis_1.htm" title="Kurtosis Method (DoubleMatrix, Boolean, DataOperation)" tocid="M_Novacta_Analytics_Stat_Kurtosis_1">Kurtosis Method (DoubleMatrix, Boolean, DataOperation)</a></div><div class="toclevel2" data-toclevel="2"><a data-tochassubtree="false" href="../html/M_Novacta_Analytics_Stat_Kurtosis_3.htm" title="Kurtosis Method (ReadOnlyDoubleMatrix, Boolean, DataOperation)" tocid="M_Novacta_Analytics_Stat_Kurtosis_3">Kurtosis Method (ReadOnlyDoubleMatrix, Boolean, DataOperation)</a></div></div><div id="tocResizableEW" onmousedown="OnMouseDown(event);"></div><div id="TocResize" class="tocResize"><img id="ResizeImageIncrease" src="../icons/TocOpen.gif" onclick="OnIncreaseToc()" alt="Click or drag to resize" title="Click or drag to resize" /><img id="ResizeImageReset" src="../icons/TocClose.gif" style="display:none" onclick="OnResetToc()" alt="Click or drag to resize" title="Click or drag to resize" /></div></div><div class="topicContent" id="TopicContent"><table class="titleTable"><tr><td class="logoColumn"><img src="../icons/Help.png" /></td><td class="titleColumn"><h1>Stat<span id="LSTF487FB2B_0"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF487FB2B_0?cpp=::|nu=.");</script>Kurtosis Method (DoubleMatrix, Boolean, DataOperation)</h1></td></tr></table><span class="introStyle"></span> <div class="summary">
+            Returns the kurtosis of each row or column in the specified
+            data, eventually adjusted for bias.
+            </div><p> </p>
+    <strong>Namespace:</strong> 
+   <a href="N_Novacta_Analytics.htm">Novacta.Analytics</a><br />
+    <strong>Assembly:</strong>
+   Novacta.Analytics (in Novacta.Analytics.dll) Version: 1.0.0<div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID1RB')" onkeypress="SectionExpandCollapse_CheckKey('ID1RB', event)" tabindex="0"><img id="ID1RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Syntax</span></div><div id="ID1RBSection" class="collapsibleSection"><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID0EDCA_tab1" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID0EDCA','cs','1','4');return false;">C#</a></div><div id="ID0EDCA_tab2" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID0EDCA','vb','2','4');return false;">VB</a></div><div id="ID0EDCA_tab3" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID0EDCA','cpp','3','4');return false;">C++</a></div><div id="ID0EDCA_tab4" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID0EDCA','fs','4','4');return false;">F#</a></div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EDCA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EDCA');return false;" title="Copy">Copy</a></div></div><div id="ID0EDCA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="keyword">public</span> <span class="keyword">static</span> <span class="identifier">DoubleMatrix</span> <span class="identifier">Kurtosis</span>(
+	<span class="identifier">DoubleMatrix</span> <span class="parameter">data</span>,
+	<span class="identifier">bool</span> <span class="parameter">adjustForBias</span>,
+	<span class="identifier">DataOperation</span> <span class="parameter">dataOperation</span>
+)</pre></div><div id="ID0EDCA_code_Div2" class="codeSnippetContainerCode" style="display: none"><pre xml:space="preserve"><span class="keyword">Public</span> <span class="keyword">Shared</span> <span class="keyword">Function</span> <span class="identifier">Kurtosis</span> ( 
+	<span class="parameter">data</span> <span class="keyword">As</span> <span class="identifier">DoubleMatrix</span>,
+	<span class="parameter">adjustForBias</span> <span class="keyword">As</span> <span class="identifier">Boolean</span>,
+	<span class="parameter">dataOperation</span> <span class="keyword">As</span> <span class="identifier">DataOperation</span>
+) <span class="keyword">As</span> <span class="identifier">DoubleMatrix</span></pre></div><div id="ID0EDCA_code_Div3" class="codeSnippetContainerCode" style="display: none"><pre xml:space="preserve"><span class="keyword">public</span>:
+<span class="keyword">static</span> <span class="identifier">DoubleMatrix</span>^ <span class="identifier">Kurtosis</span>(
+	<span class="identifier">DoubleMatrix</span>^ <span class="parameter">data</span>, 
+	<span class="identifier">bool</span> <span class="parameter">adjustForBias</span>, 
+	<span class="identifier">DataOperation</span> <span class="parameter">dataOperation</span>
+)</pre></div><div id="ID0EDCA_code_Div4" class="codeSnippetContainerCode" style="display: none"><pre xml:space="preserve"><span class="keyword">static</span> <span class="keyword">member</span> <span class="identifier">Kurtosis</span> : 
+        <span class="parameter">data</span> : <span class="identifier">DoubleMatrix</span> * 
+        <span class="parameter">adjustForBias</span> : <span class="identifier">bool</span> * 
+        <span class="parameter">dataOperation</span> : <span class="identifier">DataOperation</span> <span class="keyword">-&gt;</span> <span class="identifier">DoubleMatrix</span> 
+</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID0EDCA");</script><h4 class="subHeading">Parameters</h4><dl><dt><span class="parameter">data</span></dt><dd>Type: <a href="T_Novacta_Analytics_DoubleMatrix.htm">Novacta.Analytics<span id="LSTF487FB2B_1"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF487FB2B_1?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>DoubleMatrix</a><br />The data.</dd><dt><span class="parameter">adjustForBias</span></dt><dd>Type: <a href="https://docs.microsoft.com/dotnet/api/system.boolean" target="_blank">System<span id="LSTF487FB2B_2"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF487FB2B_2?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>Boolean</a><br />If set to <b>true</b> signals that the kurtosis 
+            is adjusted for bias.
+            </dd><dt><span class="parameter">dataOperation</span></dt><dd>Type: <a href="T_Novacta_Analytics_DataOperation.htm">Novacta.Analytics<span id="LSTF487FB2B_3"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF487FB2B_3?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>DataOperation</a><br />A constant to specify if the kurtosis 
+            is to be computed for rows or columns.
+            </dd></dl><h4 class="subHeading">Return Value</h4>Type: <a href="T_Novacta_Analytics_DoubleMatrix.htm">DoubleMatrix</a><br />
+            The kurtosis of each row or column in the specified data, 
+            eventually adjusted for bias. 
+            </div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID2RB')" onkeypress="SectionExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Exceptions</span></div><div id="ID2RBSection" class="collapsibleSection"><div class="tableSection"><table><tr><th>Exception</th><th>Condition</th></tr><tr><td><a href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception" target="_blank">ArgumentNullException</a></td><td><span class="parameter">data</span> is <b>null</b>.
+            </td></tr><tr><td><a href="https://docs.microsoft.com/dotnet/api/system.argumentexception" target="_blank">ArgumentException</a></td><td><span class="parameter">dataOperation</span> is not a field of 
+            <a href="T_Novacta_Analytics_DataOperation.htm">DataOperation</a>.<br />
+            -or-<br /><span class="parameter">adjustForBias</span> is <b>true</b>, 
+            <span class="parameter">dataOperation</span> is <a href="T_Novacta_Analytics_DataOperation.htm">OnRows</a> and
+            the number of columns
+            of <span class="parameter">data</span> is less than <span class="code">4</span>.<br />
+            -or-<br /><span class="parameter">adjustForBias</span> is <b>true</b>, 
+            <span class="parameter">dataOperation</span> is <a href="T_Novacta_Analytics_DataOperation.htm">OnColumns</a> and
+            the <span class="parameter">data</span> number of rows 
+            is less than <span class="code">4</span>.
+            </td></tr></table></div></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID3RBSection" class="collapsibleSection"><p>
+            The kurtosis of a random variable <img alt="LaTeX equation" src="../media/latex_1532.svg" style="vertical-align: -0px" /> 
+            can be defined as follows:
+            <br /><br /><img alt="LaTeX equation" src="../media/latex_1533.svg" /><br /><br />        
+            where <img alt="LaTeX equation" src="../media/latex_1534.svg" style="vertical-align: -4px" /> and 
+            <img alt="LaTeX equation" src="../media/latex_1535.svg" style="vertical-align: -4px" /> are         
+            the cumulants of order 2 and 4, respectively, and 
+            <br /><br /><img alt="LaTeX equation" src="../media/latex_1536.svg" /><br /><br />        
+            is the <img alt="LaTeX equation" src="../media/latex_1537.svg" style="vertical-align: -0px" /> central moment 
+            of order <img alt="LaTeX equation" src="../media/latex_1538.svg" style="vertical-align: -0px" />.
+            </p><p>
+            By interpreting the rows or the columns 
+            of <span class="parameter">data</span> as samples drawn from
+            random variables, this method returns the kurtosis 
+            estimates of such variables.
+            Let <img alt="LaTeX equation" src="../media/latex_1539.svg" style="vertical-align: -0px" /> and  
+            <img alt="LaTeX equation" src="../media/latex_1540.svg" style="vertical-align: -0px" /> be the <span class="parameter">data</span>
+            number of rows and columns, respectively, and define
+            <br /><br /><img alt="LaTeX equation" src="../media/latex_1541.svg" /><br /><br /></p><p><b>Operating on rows</b></p><p>
+            If <span class="parameter">dataOperation</span> is <a href="T_Novacta_Analytics_DataOperation.htm">OnRows</a>,
+            then the method returns a column vector
+            whose length
+            equals the number of rows of <span class="parameter">data</span>.
+            The <i>i</i>-th entry of such column returns the kurtosis of the <i>i</i>-th 
+            <span class="parameter">data</span> row, say <img alt="LaTeX equation" src="../media/latex_1542.svg" style="vertical-align: -5px" /></p><p>
+            The  <img alt="LaTeX equation" src="../media/latex_1543.svg" style="vertical-align: -5px" /> parameter can be 
+            estimated through the coefficient
+            <br /><br /><img alt="LaTeX equation" src="../media/latex_1544.svg" /><br /><br />
+            where
+            <br /><br /><img alt="LaTeX equation" src="../media/latex_1545.svg" /><br /><br />
+            is the sample <img alt="LaTeX equation" src="../media/latex_1546.svg" style="vertical-align: -0px" />-th central moment of the 
+            <i>i</i>-th row.
+            </p><p>
+            Note that <img alt="LaTeX equation" src="../media/latex_1547.svg" style="vertical-align: -5px" /> is
+            undefined if the standard deviation 
+            of the <i>i</i>-th row of <span class="parameter">data</span> is zero.
+            </p><p>
+            The statistic <img alt="LaTeX equation" src="../media/latex_1548.svg" style="vertical-align: -5px" /> is  
+            a biased estimator of <img alt="LaTeX equation" src="../media/latex_1549.svg" style="vertical-align: -5px" />
+            However, provided that the number of 
+            columns in <span class="parameter">data</span> is greater than 3,
+            it can be corrected for bias and the corresponding kurtosis 
+            evaluated through the coefficient
+            <br /><br /><img alt="LaTeX equation" src="../media/latex_1550.svg" /><br /><br /></p><p>
+            If <span class="parameter">adjustForBias</span> is set to <b>false</b>, 
+            then <img alt="LaTeX equation" src="../media/latex_1551.svg" style="vertical-align: -5px" /> is estimated 
+            through <img alt="LaTeX equation" src="../media/latex_1552.svg" style="vertical-align: -5px" /> if it is 
+            defined, otherwise the <i>i</i>-th position in the returned 
+            value evaluates to <a href="https://docs.microsoft.com/dotnet/api/system.double.nan" target="_blank">NaN</a>.  
+            </p><p>
+            If <span class="parameter">adjustForBias</span> is set to <b>true</b>, then 
+            this method operates as follows.
+            <ul><li>
+            If <img alt="LaTeX equation" src="../media/latex_1553.svg" style="vertical-align: -0px" /> is less than
+            4, i.e. the cumulant estimators cannot be corrected for bias,
+            then an exception is thrown.
+            </li><li>
+            Differently, if <img alt="LaTeX equation" src="../media/latex_1554.svg" style="vertical-align: -5px" /> is defined,
+            then <img alt="LaTeX equation" src="../media/latex_1555.svg" style="vertical-align: -5px" /> is stored in 
+            the <i>i</i>-th position of the returned value, otherwise
+            such position stores <a href="https://docs.microsoft.com/dotnet/api/system.double.nan" target="_blank">NaN</a>.
+            </li></ul></p><p><b>Operating on columns</b></p><p>
+            If <span class="parameter">dataOperation</span> is <a href="T_Novacta_Analytics_DataOperation.htm">OnColumns</a>,
+            then the method returns a row vector 
+            whose length is the <span class="parameter">data</span> number of columns.
+            The <i>j</i>-th entry of the returned row exposes the kurtosis of 
+            the <i>j</i>-th 
+            <span class="parameter">data</span> column, 
+            say <img alt="LaTeX equation" src="../media/latex_1556.svg" style="vertical-align: -5px" /></p><p>
+            The <img alt="LaTeX equation" src="../media/latex_1557.svg" style="vertical-align: -5px" /> parameter 
+            can be estimated through the coefficient
+            <br /><br /><img alt="LaTeX equation" src="../media/latex_1558.svg" /><br /><br />
+            where
+            <br /><br /><img alt="LaTeX equation" src="../media/latex_1559.svg" /><br /><br />
+            is the sample <img alt="LaTeX equation" src="../media/latex_1560.svg" style="vertical-align: -0px" />-th central
+            moment of the <i>j</i>-th column.
+            </p><p>
+            Note that <img alt="LaTeX equation" src="../media/latex_1561.svg" style="vertical-align: -5px" /> is
+            undefined if the standard deviation 
+            of the <i>j</i>-th column of <span class="parameter">data</span> is zero.
+            </p><p>
+            The statistic <img alt="LaTeX equation" src="../media/latex_1562.svg" style="vertical-align: -5px" /> is 
+            a biased estimator of <img alt="LaTeX equation" src="../media/latex_1563.svg" style="vertical-align: -5px" />.
+            However, provided that the number of 
+            rows in <span class="parameter">data</span> is greater than 3,
+            it can be corrected for bias and the corresponding kurtosis 
+            evaluated through the coefficient
+            <br /><br /><img alt="LaTeX equation" src="../media/latex_1564.svg" /><br /><br /></p><p>
+            If <span class="parameter">adjustForBias</span> is set to <b>false</b>, 
+            then <img alt="LaTeX equation" src="../media/latex_1565.svg" style="vertical-align: -5px" /> is estimated 
+            through <img alt="LaTeX equation" src="../media/latex_1566.svg" style="vertical-align: -5px" /> if it is 
+            defined, otherwise the <i>j</i>-th position in the returned 
+            value evaluates to <a href="https://docs.microsoft.com/dotnet/api/system.double.nan" target="_blank">NaN</a>.  
+            </p><p>
+            If <span class="parameter">adjustForBias</span> is set to <b>true</b>, then 
+            this method operates as follows.
+            <ul><li>
+            If <img alt="LaTeX equation" src="../media/latex_1567.svg" style="vertical-align: -0px" /> is less than
+            4, i.e. the cumulant estimators cannot be corrected for bias,
+            then an exception is thrown.
+            </li><li>
+            Differently, if <img alt="LaTeX equation" src="../media/latex_1568.svg" style="vertical-align: -5px" /> is defined,
+            then <img alt="LaTeX equation" src="../media/latex_1569.svg" style="vertical-align: -5px" /> is stored in 
+            the <i>j</i>-th position of the returned value, otherwise
+            such position stores <a href="https://docs.microsoft.com/dotnet/api/system.double.nan" target="_blank">NaN</a>.
+            </li></ul></p></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Examples</span></div><div id="ID4RBSection" class="collapsibleSection"><p>
+            In the following example, row and column kurtosis estimates in a data matrix 
+            are computed.
+            </p><p><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID0EAAAEBA_tab1" class="codeSnippetContainerTabSingle">C#</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EAAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID0EAAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-keyword">using</span> System;
+
+<span class="highlight-keyword">namespace</span> Novacta.Analytics.CodeExamples
+{
+    <span class="highlight-keyword">public</span> <span class="highlight-keyword">class</span> KurtosisExample0  
+    {
+        <span class="highlight-keyword">public</span> <span class="highlight-keyword">void</span> Main()
+        {
+            <span class="highlight-comment">// Create a matrix.</span>
+            <span class="highlight-keyword">var</span> data = <span class="highlight-keyword">new</span> <span class="highlight-keyword">double</span>[<span class="highlight-number">20</span>] {
+                <span class="highlight-number">1</span>, <span class="highlight-number">2</span>, <span class="highlight-number">-3</span>,  <span class="highlight-number">6</span>, <span class="highlight-number">-2</span>,
+                <span class="highlight-number">2</span>, <span class="highlight-number">2</span>,  <span class="highlight-number">2</span>,  <span class="highlight-number">0</span>,  <span class="highlight-number">7</span>,
+               <span class="highlight-number">-3</span>, <span class="highlight-number">2</span>,  <span class="highlight-number">3</span>,  <span class="highlight-number">2</span>,  <span class="highlight-number">9</span>,
+                <span class="highlight-number">5</span>, <span class="highlight-number">2</span>,  <span class="highlight-number">7</span>, <span class="highlight-number">-1</span>, <span class="highlight-number">-4</span>
+            };
+            <span class="highlight-keyword">var</span> matrix = <span class="highlight-class-name">DoubleMatrix</span>.Dense(<span class="highlight-number">4</span>, <span class="highlight-number">5</span>, data, <span class="highlight-class-name">StorageOrder</span>.RowMajor);
+            Console.WriteLine(<span class="highlight-literal">"The data matrix:"</span>);
+            Console.WriteLine(matrix);
+
+            <span class="highlight-comment">// Kurtosis can be adjusted for bias.</span>
+            <span class="highlight-keyword">bool</span> adjustForBias = <span class="highlight-keyword">true</span>;
+
+            <span class="highlight-comment">// Compute the kurtosis on columns.</span>
+            <span class="highlight-keyword">var</span> kurtosisOnColumns = <span class="highlight-class-name">Stat</span>.Kurtosis(matrix, adjustForBias, <span class="highlight-class-name">DataOperation</span>.OnColumns);
+
+            Console.WriteLine();
+            Console.WriteLine(<span class="highlight-literal">"Kurtosis on columns:"</span>);
+            Console.WriteLine(kurtosisOnColumns);
+
+            <span class="highlight-comment">// Kurtosis is overloaded to accept data as a read-only matrix:</span>
+            <span class="highlight-comment">// compute the kurtosis on rows using a read-only wrapper of the data matrix.</span>
+            <span class="highlight-class-name">ReadOnlyDoubleMatrix</span> readOnlyMatrix = matrix.AsReadOnly();
+            <span class="highlight-keyword">var</span> kurtosisOnRows = <span class="highlight-class-name">Stat</span>.Kurtosis(readOnlyMatrix, adjustForBias, <span class="highlight-class-name">DataOperation</span>.OnRows);
+
+            Console.WriteLine();
+            Console.WriteLine(<span class="highlight-literal">"Kurtosis on rows:"</span>);
+            Console.WriteLine(kurtosisOnRows);
+        }
+    }
+}
+
+<span class="highlight-comment">// Executing method Main() produces the following output:</span>
+<span class="highlight-comment">// </span>
+<span class="highlight-comment">// The data matrix:</span>
+<span class="highlight-comment">// 1                2                -3               6                -2               </span>
+<span class="highlight-comment">// 2                2                2                0                7                </span>
+<span class="highlight-comment">// -3               2                3                2                9                </span>
+<span class="highlight-comment">// 5                2                7                -1               -4               </span>
+<span class="highlight-comment">// </span>
+<span class="highlight-comment">// </span>
+<span class="highlight-comment">// </span>
+<span class="highlight-comment">// Kurtosis on columns:</span>
+<span class="highlight-comment">// 1.165666336      NaN              1.282147104      0.7576559546     -5.07072         </span>
+<span class="highlight-comment">// </span>
+<span class="highlight-comment">// </span>
+<span class="highlight-comment">// </span>
+<span class="highlight-comment">// Kurtosis on rows:</span>
+<span class="highlight-comment">// -0.2250604501    </span>
+<span class="highlight-comment">// 3.378027682      </span>
+<span class="highlight-comment">// 1.934067903      </span>
+<span class="highlight-comment">// -1.464351053     </span>
+<span class="highlight-comment">// </span>
+</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID0EAAAEBA");</script></p></div><div class="collapsibleAreaRegion" id="seeAlsoSection"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />See Also</span></div><div id="ID5RBSection" class="collapsibleSection"><h4 class="subHeading">Reference</h4><div class="seeAlsoStyle"><a href="T_Novacta_Analytics_Stat.htm">Stat Class</a></div><div class="seeAlsoStyle"><a href="Overload_Novacta_Analytics_Stat_Kurtosis.htm">Kurtosis Overload</a></div><div class="seeAlsoStyle"><a href="N_Novacta_Analytics.htm">Novacta.Analytics Namespace</a></div><h4 class="subHeading">Other Resources</h4><div class="seeAlsoStyle"><a href="http://en.wikipedia.org/wiki/Kurtosis" target="_blank">http://en.wikipedia.org/wiki/Kurtosis</a></div></div></div></div><div id="pageFooter" class="pageFooter"><p>Copyright (c) Giovanni Lafratta</p> </div></body></html>

@@ -1,0 +1,45 @@
+// Copyright (c) Giovanni Lafratta. All rights reserved.
+// Licensed under the MIT license. 
+// See the LICENSE file in the project root for more information.
+
+namespace Novacta.Analytics.Tests.TestableItems.Matrices
+{
+    /// <summary>
+    /// Provides methods to test implementations of matrix 
+    /// <para /> 
+    /// 0.0  0.0  -2.0 <para /> 
+    /// 0.0 -1.0   0.0 
+    /// </summary>
+    class TestableDoubleMatrix46 : TestableDoubleMatrix
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestableDoubleMatrix46" /> class.
+        /// </summary>
+        TestableDoubleMatrix46() : base(
+                asColumnMajorDenseArray: new double[6] { 0, 0, 0, -1, -2, 0 },
+                numberOfRows: 2,
+                numberOfColumns: 3,
+                isUpperHessenberg: false,
+                isLowerHessenberg: false,
+                isUpperTriangular: false,
+                isLowerTriangular: false,
+                isSymmetric: false,
+                isSkewSymmetric: false,
+                upperBandwidth: 2,
+                lowerBandwidth: 0)
+        {
+            // 0.0  0.0  -2.0 
+            // 0.0 -1.0   0.0 
+        }
+
+        /// <summary>
+        /// Gets an instance of the <see cref="TestableDoubleMatrix46"/> class.
+        /// </summary>
+        /// <returns>An instance of the 
+        /// <see cref="TestableDoubleMatrix46"/> class.</returns>
+        public static TestableDoubleMatrix46 Get()
+        {
+            return new TestableDoubleMatrix46();
+        }
+    }
+}
