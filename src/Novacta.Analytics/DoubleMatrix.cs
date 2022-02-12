@@ -11,9 +11,7 @@ using System.Collections.ObjectModel;
 
 using Novacta.Analytics.Infrastructure;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
-using System.Security;
+using System.Numerics;
 
 namespace Novacta.Analytics
 {
@@ -280,17 +278,6 @@ namespace Novacta.Analytics
     /// the matrix internal data. Do not call <see cref="GetStorage()"/> if 
     /// you do not have complete control of the instance you used to invoke 
     /// the method.
-    /// If, after a call
-    /// to <see cref="GetStorage()"/>, indexers are called that avoid
-    /// dense allocations, such as <see cref="this[
-    /// IndexCollection,IndexCollection,bool]"/> then the array returned
-    /// by <see cref="GetStorage"/>
-    /// must be treated as a read-only object:
-    /// you shouldn't manipulate its entries; 
-    /// otherwise, the 
-    /// behavior of the calling <see cref="DoubleMatrix"/> instance 
-    /// must be considered as undefined and  
-    /// almost surely prone to errors.
     /// </note>
     /// </para>
     /// <para id='MinimizeMemoryUsage.2'>
@@ -302,142 +289,25 @@ namespace Novacta.Analytics
     /// <see cref="StorageScheme.Dense"/>, such method 
     /// returns a copy of the matrix data.
     /// </para>
-    /// <para id='MinimizeMemoryUsage.3'>
-    /// It is possible to create matrices whose entries are not directly stored. 
-    /// Such behavior can be obtained by indexing into a 
-    /// <see cref="DoubleMatrix"/> instance, henceforth referred to as 
-    /// a <i>source</i> matrix, through
-    /// <c>Item</c> getters accepting a boolean parameter named 
-    /// <c>avoidDenseAllocations</c>: if such parameters evaluates to
-    /// <b>true</b>, then the indexer will try to minimize memory allocations
-    /// by avoiding the application 
-    /// of the <see cref="StorageScheme.Dense">Dense</see> storage scheme.
-    /// </para>
-    /// <para id='MinimizeMemoryUsage.4'>
-    /// Note that the returned matrix, referred to as the <i>sub</i> matrix, cannot 
-    /// be considered as a view of the 
-    /// <i>source</i> one: they are independent objects.
-    /// This means that the system will try to minimize dense storage 
-    /// allocations until possible, and, under some circumstances, the savings in 
-    /// storage can be lost, as when
-    /// setting entries of the <i>source</i> or the <i>sub</i> matrix, 
-    /// when getting property <see cref="GetStorage()"/> of the <i>sub</i>
-    /// matrix, or when it is involved in matrix division or
-    /// multiplication operations.
-    /// </para>
     /// <para><b>Serialization</b></para>
     /// <para>
     /// Matrices can be loaded from, or saved to a CSV file through the
-    /// <see cref="CsvMatrixSerializer"/> class.
+    /// <see cref="CsvDoubleMatrixSerializer"/> class.
     /// </para>              
+    /// <para>
+    /// Matrices can also be represented as JSON strings, see <see cref="JsonSerialization"/>.
+    /// </para>
     ///</remarks>
     ///<seealso cref="DoubleMatrixRow">DoubleMatrixRow Class</seealso>
     ///<seealso cref="IndexCollection">IndexCollection Class</seealso>
     ///<seealso cref="ReadOnlyDoubleMatrix">ReadOnlyDoubleMatrix Class</seealso>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage(
-        "Microsoft.Naming",
-        "CA1710:IdentifiersShouldHaveCorrectSuffix",
-        Justification = "Type is a data structure."), Serializable]
     public class DoubleMatrix :
         IList<double>,
         IReadOnlyList<double>,
-        IMatrixPatterns,
+        IComplexMatrixPatterns,
         IReadOnlyTabularCollection<double, DoubleMatrix>,
-        ITabularCollection<double, DoubleMatrix>,
-        ISerializable
+        ITabularCollection<double, DoubleMatrix>
     {
-        #region ISerializable
-
-        /// <summary>
-        /// Initializes a new instance of the 
-        /// <see cref="DoubleMatrix"/> class with serialized data.
-        /// </summary>
-        /// <param name="info">
-        /// The object that holds the serialized object data.
-        /// </param>
-        /// <param name="context">
-        /// The contextual information about the source or destination.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="info"/> is <b>null</b>.
-        /// </exception>
-        [SecurityPermission(
-            SecurityAction.Demand,
-            SerializationFormatter = true),
-         System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Naming",
-            "CA1801:ReviewUnusedParameters",
-        Justification = "Constructor requires parameter context.")]
-        protected DoubleMatrix(
-            SerializationInfo info,
-            StreamingContext context)
-        {
-            if (null == info)
-                throw new ArgumentNullException(nameof(info));
-
-            this.implementor =
-                (MatrixImplementor<double>)info.GetValue(
-                    "implementor",
-                    typeof(MatrixImplementor<double>));
-
-            this.Name =
-                (string)info.GetValue(
-                    "Name",
-                    typeof(string));
-
-            this.rowNames =
-                (Dictionary<int, string>)info.GetValue(
-                    "rowNames",
-                    typeof(Dictionary<int, string>));
-
-            this.columnNames =
-                (Dictionary<int, string>)info.GetValue(
-                    "columnNames",
-                    typeof(Dictionary<int, string>));
-        }
-
-        /// <inheritdoc/>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="info"/> is <b>null</b>.
-        /// </exception>
-        [SecurityCritical]
-        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            if (null == info)
-                throw new ArgumentNullException(nameof(info));
-
-            var matrixImplementor =
-                this.implementor.StorageScheme == StorageScheme.View ?
-                (DenseDoubleMatrixImplementor)(ViewDoubleMatrixImplementor)this.implementor
-                :
-                this.implementor;
-
-            info.AddValue(
-                "implementor",
-                matrixImplementor,
-                matrixImplementor.GetType());
-
-            var name = this.Name;
-            info.AddValue(
-                "Name",
-                name,
-                typeof(string));
-
-            var rowNames = this.rowNames;
-            info.AddValue(
-                "rowNames",
-                rowNames,
-                typeof(Dictionary<int, string>));
-
-            var columnNames = this.columnNames;
-            info.AddValue(
-                "columnNames",
-                columnNames,
-                typeof(Dictionary<int, string>));
-        }
-
-        #endregion
-
         #region Constructors
 
         /// <summary>
@@ -454,9 +324,6 @@ namespace Novacta.Analytics
         internal DoubleMatrix(MatrixImplementor<Double> implementor)
         {
             this.implementor = implementor;
-            this.implementor.ImplementorChanged +=
-                new EventHandler<ImplementorChangedEventArgs>(
-                    this.ImplementorChangedHandler);
         }
 
         #endregion
@@ -650,7 +517,7 @@ namespace Novacta.Analytics
             {
                 throw new ArgumentException(
                     ImplementationServices.GetResourceString(
-                        "STR_EXCEPT_MAT_CONVERTED_TO_DOUBLE_MUST_BE_SCALAR"),
+                        "STR_EXCEPT_MAT_CONVERTED_TO_ENTRY_TYPE_MUST_BE_SCALAR"),
                     nameof(value));
             }
 
@@ -684,15 +551,6 @@ namespace Novacta.Analytics
         #region Implementor
 
         internal MatrixImplementor<Double> implementor;
-
-        private void ImplementorChangedHandler(object sender, ImplementorChangedEventArgs e)
-        {
-            this.implementor.ImplementorChanged -=
-                new EventHandler<ImplementorChangedEventArgs>(this.ImplementorChangedHandler);
-            this.implementor = (MatrixImplementor<Double>)e.NewImplementor;
-            this.implementor.ImplementorChanged +=
-                new EventHandler<ImplementorChangedEventArgs>(this.ImplementorChangedHandler);
-        }
 
         #endregion
 
@@ -868,7 +726,7 @@ namespace Novacta.Analytics
         {
             Dictionary<int, string> clonedRowNames = null;
 
-            if (!(this.rowNames is null))
+            if (this.rowNames is not null)
             {
                 clonedRowNames = new Dictionary<int, string>();
                 foreach (var i in this.rowNames.Keys)
@@ -1044,7 +902,7 @@ namespace Novacta.Analytics
         {
             Dictionary<int, string> clonedColumnNames = null;
 
-            if (!(this.columnNames is null))
+            if (this.columnNames is not null)
             {
                 clonedColumnNames = new Dictionary<int, string>();
                 foreach (var i in this.columnNames.Keys)
@@ -1088,13 +946,6 @@ namespace Novacta.Analytics
         {
             if (disposing)
             {
-                /*
-                 * The object is being explicitly disposed/closed, not finalized.
-                 * It is therefore safe for category in this "if" statement to access 
-                 * fields that reference other objects, because the Finalize() 
-                 * method of these other objects hasn't yet been called
-                 */
-                this.implementor.OnChangingData();
             }
         }
 
@@ -1187,7 +1038,7 @@ namespace Novacta.Analytics
         /// </remarks>
         internal DoubleMatrix Clone()
         {
-            DoubleMatrix clone = new DoubleMatrix((MatrixImplementor<double>)this.implementor.Clone())
+            DoubleMatrix clone = new((MatrixImplementor<double>)this.implementor.Clone())
             {
                 columnNames = this.CloneColumnIndexesByName(),
                 rowNames = this.CloneRowIndexesByName(),
@@ -1278,7 +1129,7 @@ namespace Novacta.Analytics
             int dimension = mainDiagonal.Count;
             var diagonalImplementor = new SparseCsr3DoubleMatrixImplementor(dimension, dimension, dimension);
 
-            DoubleMatrix diagonal = new DoubleMatrix(diagonalImplementor);
+            DoubleMatrix diagonal = new(diagonalImplementor);
 
             for (int i = 0; i < dimension; i++)
             {
@@ -1322,7 +1173,7 @@ namespace Novacta.Analytics
         /// </para>
         /// <para id='Sparse.1'>
         /// <note type="note">In the current version of the Novacta.Analytics
-        /// assembly, this method stores non-zero entries using the compressed sparse column scheme.</note>
+        /// assembly, this method stores non-zero entries using the compressed sparse row scheme.</note>
         /// </para>
         /// </remarks>
         /// <example>
@@ -1342,7 +1193,7 @@ namespace Novacta.Analytics
         /// -or-<br/>
         /// <paramref name="capacity"/> is negative.
         /// </exception>
-        /// <seealso href="https://en.wikipedia.org/wiki/Sparse_matrix#Compressed_sparse_column_.28CSC_or_CCS.29"/>
+        /// <seealso href="https://en.wikipedia.org/wiki/Sparse_matrix#Compressed_sparse_row_(CSR,_CRS_or_Yale_format)"/>
         public static DoubleMatrix Sparse(
             int numberOfRows,
             int numberOfColumns,
@@ -1406,10 +1257,6 @@ namespace Novacta.Analytics
         /// <paramref name="data"/> has at least a dimension along which the
         /// number of elements is zero.
         /// </exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Performance",
-            "CA1814:Prefer jagged arrays over multidimensional",
-            Justification = "The array does not waste space.")]
         public static DoubleMatrix Dense(
             double[,] data)
         {
@@ -1441,7 +1288,7 @@ namespace Novacta.Analytics
         /// </summary>
         /// <param name="numberOfRows">The number of matrix rows.</param>
         /// <param name="numberOfColumns">The number of matrix columns.</param>
-        /// <returns>The matrix having the specified size and data.</returns>
+        /// <returns>The matrix having the specified size.</returns>
         /// <remarks>
         /// <inheritdoc cref="Dense(int, int, double[], StorageOrder)" 
         /// path="para[@id='Dense.StorageOrder.0']"/>
@@ -1728,8 +1575,8 @@ namespace Novacta.Analytics
         /// <param name="numberOfColumns">The number of matrix columns.</param>
         /// <param name="data">The data assigned to matrix entries.</param>
         /// <param name="copyData">
-        /// <b>true</b> if <paramref name="data"/> 
-        /// must be copied before instantiation; otherwise <b>false</b>.
+        /// <c>true</c> if <paramref name="data"/> 
+        /// must be copied before instantiation; otherwise <c>false</c>.
         /// </param>
         /// <returns>The matrix having the specified size and data.</returns>
         /// <remarks>
@@ -1957,28 +1804,29 @@ namespace Novacta.Analytics
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString()
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new();
 
             NumberFormatInfo numberFormatInfo = CultureInfo.InvariantCulture.NumberFormat;
 
-            // minimum number of chars in the number representation
-            int numberOfCharacters = 17;
+            // minimum number of chars in the number representation.
+            int minimumNumberOfChars = 17;
 
-            // The precision must be <c>numberOfCharacters</c> 
-            // (minimum number of chars in the number representation)
-            // minus the number of positions for  additional format characters, such as
-            //    the (eventual) minus sign, e.g. "-". (1 char)
-            //    the scientific notation exponent, e.g. "e+101" (max 5 chars)
-            // In this way, <c>numberOfCharacters</c> is also the MAXIMUM
+            // The precision must be <c>minimumNumberOfChars</c> 
+            // (number of chars in the number representation)
+            // minus the number of positions for additional format characters, such as
+            //    the (eventual) minus sign, e.g., "-". (1 char),
+            //    the (eventual) decimal point, e.g. ".", (1 char)
+            //    the scientific notation exponent, e.g., "e+101" (max 5 chars)
+            // In this way, <c>minimumNumberOfChars</c> is also the MAXIMUM
             // number of chars in the number representation.
             //
             // ----- Current implementation details -----
-            // The precision is 10 in the current implementation, so that the 
-            // number representation has maximum length equal to 10+1+5 = 16 chars.
-            // By setting <c>numberOfCharacters</c> to 17, we know that number representations
-            // are always separated by at least one char.
+            // The precision is 9 in the current implementation, so that the 
+            // number representation has maximum length equal to 9+1+1+5 = 16 chars.
+            // By setting <c>minimumNumberOfChars</c> to 17, we know that number
+            // representations are always separated by at least one char.
 
-            string numberFormatSpecifier = "{0,-17:g10}";
+            string numberFormatSpecifier = "{0,-17:g9}";
 
             bool columnsHaveNames = this.HasColumnNames;
             bool rowsHaveNames = this.HasRowNames;
@@ -1987,12 +1835,11 @@ namespace Novacta.Analytics
             int numberOfColumns = this.NumberOfColumns;
 
             // The representation of names must have length 17, right aligned,
-            // but a name must have no more than 14 chars (two chars needed for [ and ], 
-            // the last one to 
-            // needed to separate them each from the other.
+            // but a name must have no more than 14 chars (two chars needed for '[' and ']', 
+            // the last one blank needed for separation.
             string blankNamesFormatSpecifier = "{0,-17}";
             string truncatedNamesFormatSpecifier = "[{0,-14}] ";
-            int maximumNameLength = numberOfCharacters - 3;
+            int maximumNameLength = minimumNumberOfChars - 3;
 
             if (columnsHaveNames)
             {
@@ -2015,7 +1862,7 @@ namespace Novacta.Analytics
                         if (columnNameLength > maximumNameLength)
                         {
                             columnName = columnName.Insert(maximumNameLength - 1, "*")
-                                .Substring(0, maximumNameLength);
+                                [..maximumNameLength];
                             stringBuilder.AppendFormat(
                                 CultureInfo.InvariantCulture, truncatedNamesFormatSpecifier, columnName);
                         }
@@ -2025,7 +1872,7 @@ namespace Novacta.Analytics
                                 string.Format(
                                     CultureInfo.InvariantCulture,
                                     "[{0}]",
-                                    columnName).PadRight(numberOfCharacters);
+                                    columnName).PadRight(minimumNumberOfChars);
                             stringBuilder.Append(columnName);
                         }
                     }
@@ -2051,7 +1898,7 @@ namespace Novacta.Analytics
                         if (rowNameLength > maximumNameLength)
                         {
                             rowName = rowName.Insert(maximumNameLength - 1, "*")
-                                .Substring(0, maximumNameLength);
+                                [..maximumNameLength];
                             stringBuilder.AppendFormat(
                                 CultureInfo.InvariantCulture, truncatedNamesFormatSpecifier, rowName);
                         }
@@ -2061,7 +1908,7 @@ namespace Novacta.Analytics
                                 string.Format(
                                     CultureInfo.InvariantCulture,
                                     "[{0}]",
-                                    rowName).PadRight(numberOfCharacters);
+                                    rowName).PadRight(minimumNumberOfChars);
                             stringBuilder.Append(rowName);
                         }
                     }
@@ -2088,9 +1935,8 @@ namespace Novacta.Analytics
         #region Operations
 
         private const int dense = (int)StorageScheme.Dense;
-        private const int view = (int)StorageScheme.View;
         private const int sparse = (int)StorageScheme.CompressedRow;
-        private const int numberOfStorageSchemes = 3;
+        private const int numberOfStorageSchemes = 2;
 
         #region Add
 
@@ -2098,21 +1944,22 @@ namespace Novacta.Analytics
 
         private static DenseMatrixImplementor<MatrixBinaryOperator<double, double, double>> SumOperators()
         {
-            var operators = new DenseMatrixImplementor<MatrixBinaryOperator<double, double, double>>(numberOfStorageSchemes, numberOfStorageSchemes);
-            operators[dense, dense] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Dense_Dense_Sum);
-            operators[dense, view] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Dense_View_Sum);
-            operators[view, dense] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_View_Dense_Sum);
-            operators[view, view] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_View_View_Sum);
-
-            operators[sparse, dense] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Sparse_Dense_Sum);
-            operators[dense, sparse] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Dense_Sparse_Sum);
-            operators[sparse, sparse] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Sparse_Sparse_Sum);
-            operators[sparse, view] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Sparse_View_Sum);
-            operators[view, sparse] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_View_Sparse_Sum);
+            var operators =
+                new DenseMatrixImplementor<MatrixBinaryOperator<double, double, double>>(
+                    numberOfStorageSchemes, numberOfStorageSchemes);
+            operators[dense, dense] = new MatrixBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Matrix_Dense_Dense_Sum);
+            operators[sparse, dense] = new MatrixBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Matrix_Sparse_Dense_Sum);
+            operators[dense, sparse] = new MatrixBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Matrix_Dense_Sparse_Sum);
+            operators[sparse, sparse] = new MatrixBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Matrix_Sparse_Sparse_Sum);
 
             return operators;
         }
-        private static readonly DenseMatrixImplementor<MatrixBinaryOperator<double, double, double>> sumOperators = SumOperators();
+        private static readonly DenseMatrixImplementor<MatrixBinaryOperator<double, double, double>>
+            sumOperators = SumOperators();
 
         /// <summary>
         /// Determines the sum of two matrices.
@@ -2206,16 +2053,20 @@ namespace Novacta.Analytics
 
         #region Scalar
 
-        private static DenseMatrixImplementor<MatrixScalarBinaryOperator<double, double, double>> ScalarSumOperators()
+        #region Double
+
+        private static MatrixScalarBinaryOperator<double, double, double>[] ScalarSumOperators()
         {
-            var operators = new DenseMatrixImplementor<MatrixScalarBinaryOperator<double, double, double>>(numberOfStorageSchemes, 1);
-            operators[dense] = new MatrixScalarBinaryOperator<double, double, double>(DoubleMatrixOperators.Scalar_Dense_Sum);
-            operators[view] = new MatrixScalarBinaryOperator<double, double, double>(DoubleMatrixOperators.Scalar_View_Sum);
-            operators[sparse] = new MatrixScalarBinaryOperator<double, double, double>(DoubleMatrixOperators.Scalar_Sparse_Sum);
+            var operators = new MatrixScalarBinaryOperator<double, double, double>[numberOfStorageSchemes];
+            operators[dense] = new MatrixScalarBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Scalar_Dense_Sum);
+            operators[sparse] = new MatrixScalarBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Scalar_Sparse_Sum);
 
             return operators;
         }
-        private static readonly DenseMatrixImplementor<MatrixScalarBinaryOperator<double, double, double>> scalarSumOperators = ScalarSumOperators();
+        private static readonly MatrixScalarBinaryOperator<double, double, double>[]
+            scalarSumOperators = ScalarSumOperators();
 
         /// <summary>
         /// Determines the addition of a matrix to a scalar.
@@ -2323,25 +2174,130 @@ namespace Novacta.Analytics
 
         #endregion
 
+        #region Complex
+
+        private static MatrixScalarBinaryOperator<Complex, double, Complex>[] ComplexScalarSumOperators()
+        {
+            var operators = new MatrixScalarBinaryOperator<Complex, double, Complex>[numberOfStorageSchemes];
+            operators[dense] = new MatrixScalarBinaryOperator<Complex, double, Complex>(
+                DoubleMatrixOperators.Scalar_Dense_Sum);
+            operators[sparse] = new MatrixScalarBinaryOperator<Complex, double, Complex>(
+                DoubleMatrixOperators.Scalar_Sparse_Sum);
+
+            return operators;
+        }
+        private static readonly MatrixScalarBinaryOperator<Complex, double, Complex>[]
+            complexScalarSumOperators = ComplexScalarSumOperators();
+
+        /// <summary>
+        /// Determines the addition of a matrix to a scalar.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns>
+        /// The result of adding <paramref name="left"/> to <paramref name="right"/>.
+        /// </returns>
+        /// <remarks>
+        /// <para id='left.operand'>
+        /// Let <latex mode="inline">m_L</latex> and  
+        /// <latex mode="inline">n_L</latex> be the <paramref name="left"/>
+        /// number of rows and columns, respectively, and consider its generic entry
+        /// <latex mode="display">
+        /// \mathit{left}[i,j],\hspace{12pt} i=0,\dots,m_L-1,\hspace{12pt} j=0,\dots,n_L-1.
+        /// </latex>
+        /// </para>
+        /// <para>
+        /// The method returns a matrix
+        /// having the same dimensions of <paramref name="left"/>, whose generic
+        /// entry is:
+        /// <latex mode="display">\mathit{left}[i,j] + \mathit{right},\hspace{12pt} i=0,\dots,m_L-1,\hspace{12pt} j=0,\dots,n_L-1.</latex> 
+        /// </para>
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="left"/> is <b>null</b>.
+        /// </exception>
+        public static ComplexMatrix operator +(DoubleMatrix left, Complex right)
+        {
+            if (left is null)
+            {
+                throw new ArgumentNullException(nameof(left));
+            }
+            return new ComplexMatrix(complexScalarSumOperators[(int)left.implementor.StorageScheme]
+                (left.implementor, right));
+        }
+
+        /// <inheritdoc cref = "op_Addition(DoubleMatrix,Complex)"/>
+        public static ComplexMatrix Add(DoubleMatrix left, Complex right)
+        {
+            return left + right;
+        }
+
+        /// <summary>
+        /// Determines the addition of a scalar to a matrix.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns>
+        /// The result of adding <paramref name="left"/> to <paramref name="right"/>.
+        /// </returns>
+        /// <remarks>
+        /// <para id='right.operand'>
+        /// Let <latex mode="inline">m_R</latex> and  
+        /// <latex mode="inline">n_R</latex> be the <paramref name="right"/>
+        /// number of rows and columns, respectively, and let its generic entry given by
+        /// <latex mode="display">
+        /// \mathit{right}[i,j],\hspace{12pt} i=0,\dots,m_R-1,\hspace{12pt} j=0,\dots,n_R-1.
+        /// </latex>
+        /// </para>
+        /// <para>
+        /// The method returns a matrix having
+        /// the same dimensions of <paramref name="right"/>, whose generic
+        /// entry is:
+        /// <latex mode="display">\mathit{left} + \mathit{right}[i,j],\hspace{12pt} i=0,\dots,m_R-1,\hspace{12pt} j=0,\dots,n_R-1.</latex> 
+        /// </para>
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="right"/> is <b>null</b>.
+        /// </exception>
+        public static ComplexMatrix operator +(Complex left, DoubleMatrix right)
+        {
+            if (right is null)
+            {
+                throw new ArgumentNullException(nameof(right));
+            }
+            return new ComplexMatrix(complexScalarSumOperators[(int)right.implementor.StorageScheme]
+                (right.implementor, left));
+        }
+
+        /// <inheritdoc cref = "op_Addition(Complex,DoubleMatrix)"/>
+        public static ComplexMatrix Add(Complex left, DoubleMatrix right)
+        {
+            return left + right;
+        }
+
+        #endregion
+
+        #endregion
+
         #endregion
 
         #region Apply
 
         #region InPlace
 
-        private static DenseMatrixImplementor<MatrixInPlaceApplyOperator<double>> InPlaceApplyOperators()
+        private static MatrixInPlaceApplyOperator<double>[] InPlaceApplyOperators()
         {
-            var operators = new DenseMatrixImplementor<MatrixInPlaceApplyOperator<double>>(numberOfStorageSchemes, 1);
+            var operators = new MatrixInPlaceApplyOperator<double>[numberOfStorageSchemes];
 
-            operators[dense] = new MatrixInPlaceApplyOperator<double>(DoubleMatrixOperators.Dense_InPlaceApply);
-            operators[view] = new MatrixInPlaceApplyOperator<double>(DoubleMatrixOperators.View_InPlaceApply);
-            operators[sparse] = new MatrixInPlaceApplyOperator<double>(DoubleMatrixOperators.Sparse_InPlaceApply);
+            operators[dense] = new MatrixInPlaceApplyOperator<double>(
+                DoubleMatrixOperators.Dense_InPlaceApply);
+            operators[sparse] = new MatrixInPlaceApplyOperator<double>(
+                DoubleMatrixOperators.Sparse_InPlaceApply);
 
             return operators;
         }
-        private static readonly
-            DenseMatrixImplementor<MatrixInPlaceApplyOperator<double>>
-                inPlaceApplyOperators = InPlaceApplyOperators();
+        private static readonly MatrixInPlaceApplyOperator<double>[]
+            inPlaceApplyOperators = InPlaceApplyOperators();
 
         /// <summary>
         /// Evaluates the specified function at each entry of this instance,
@@ -2378,7 +2334,6 @@ namespace Novacta.Analytics
             {
                 throw new ArgumentNullException(nameof(func));
             }
-            this.implementor.OnChangingData();
             inPlaceApplyOperators[(int)this.implementor.StorageScheme](this.implementor, func);
         }
 
@@ -2386,17 +2341,19 @@ namespace Novacta.Analytics
 
         #region OutPlace
 
-        private static DenseMatrixImplementor<MatrixOutPlaceApplyOperator<double>> OutPlaceApplyOperators()
+        private static MatrixOutPlaceApplyOperator<double>[] OutPlaceApplyOperators()
         {
-            var operators = new DenseMatrixImplementor<MatrixOutPlaceApplyOperator<double>>(numberOfStorageSchemes, 1);
+            var operators = new MatrixOutPlaceApplyOperator<double>[numberOfStorageSchemes];
 
-            operators[dense] = new MatrixOutPlaceApplyOperator<double>(DoubleMatrixOperators.Dense_OutPlaceApply);
-            operators[view] = new MatrixOutPlaceApplyOperator<double>(DoubleMatrixOperators.View_OutPlaceApply);
-            operators[sparse] = new MatrixOutPlaceApplyOperator<double>(DoubleMatrixOperators.Sparse_OutPlaceApply);
+            operators[dense] = new MatrixOutPlaceApplyOperator<double>(
+                DoubleMatrixOperators.Dense_OutPlaceApply);
+            operators[sparse] = new MatrixOutPlaceApplyOperator<double>(
+                DoubleMatrixOperators.Sparse_OutPlaceApply);
 
             return operators;
         }
-        private static readonly DenseMatrixImplementor<MatrixOutPlaceApplyOperator<double>> outPlaceApplyOperators = OutPlaceApplyOperators();
+        private static readonly MatrixOutPlaceApplyOperator<double>[]
+            outPlaceApplyOperators = OutPlaceApplyOperators();
 
         /// <summary>
         /// Evaluates the specified function at each entry of this instance,
@@ -2452,17 +2409,16 @@ namespace Novacta.Analytics
 
         private static DenseMatrixImplementor<MatrixBinaryOperator<double, double, double>> MultiplyByElementOperators()
         {
-            var operators = new DenseMatrixImplementor<MatrixBinaryOperator<double, double, double>>(numberOfStorageSchemes, numberOfStorageSchemes);
-            operators[dense, dense] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Dense_Dense_ElementWiseMultiply);
-            operators[dense, view] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Dense_View_ElementWiseMultiply);
-            operators[view, dense] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_View_Dense_ElementWiseMultiply);
-            operators[view, view] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_View_View_ElementWiseMultiply);
-
-            operators[sparse, dense] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Sparse_Dense_ElementWiseMultiply);
-            operators[dense, sparse] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Dense_Sparse_ElementWiseMultiply);
-            operators[sparse, sparse] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Sparse_Sparse_ElementWiseMultiply);
-            operators[sparse, view] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Sparse_View_ElementWiseMultiply);
-            operators[view, sparse] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_View_Sparse_ElementWiseMultiply);
+            var operators = new DenseMatrixImplementor<MatrixBinaryOperator<double, double, double>>(
+                numberOfStorageSchemes, numberOfStorageSchemes);
+            operators[dense, dense] = new MatrixBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Matrix_Dense_Dense_ElementWiseMultiply);
+            operators[sparse, dense] = new MatrixBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Matrix_Sparse_Dense_ElementWiseMultiply);
+            operators[dense, sparse] = new MatrixBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Matrix_Dense_Sparse_ElementWiseMultiply);
+            operators[sparse, sparse] = new MatrixBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Matrix_Sparse_Sparse_ElementWiseMultiply);
 
             return operators;
         }
@@ -2527,23 +2483,19 @@ namespace Novacta.Analytics
 
         #region Value
 
-        private static DenseMatrixImplementor<FindValueOperator<double>> FindValueOperators()
+        private static FindValueOperator<double>[] FindValueOperators()
         {
-            var operators =
-                new DenseMatrixImplementor<FindValueOperator<double>>(numberOfStorageSchemes, 1);
+            var operators = new FindValueOperator<double>[numberOfStorageSchemes];
 
-            operators[dense] =
-                new FindValueOperator<double>(DoubleMatrixOperators.Dense_FindValue);
+            operators[dense] = new FindValueOperator<double>(
+                    DoubleMatrixOperators.Dense_FindValue);
 
-            operators[view] =
-                new FindValueOperator<double>(DoubleMatrixOperators.View_FindValue);
-
-            operators[sparse] =
-                new FindValueOperator<double>(DoubleMatrixOperators.Sparse_FindValue);
+            operators[sparse] = new FindValueOperator<double>(
+                    DoubleMatrixOperators.Sparse_FindValue);
 
             return operators;
         }
-        private static readonly DenseMatrixImplementor<FindValueOperator<double>>
+        private static readonly FindValueOperator<double>[]
             findValueDoubleOperators = FindValueOperators();
 
         /// <summary>
@@ -2572,10 +2524,10 @@ namespace Novacta.Analytics
         {
             var implementor = this.implementor;
 
-            if (Double.IsNaN(value))
+            if (double.IsNaN(value))
             {
                 // Local function
-                bool match(double d) { return Double.IsNaN(d); }
+                static bool match(double d) { return double.IsNaN(d); }
                 return findWhileDoubleOperators[(int)implementor.StorageScheme](implementor, match);
             }
 
@@ -2586,23 +2538,19 @@ namespace Novacta.Analytics
 
         #region Nonzero
 
-        private static DenseMatrixImplementor<FindNonzeroOperator<double>> FindNonzeroOperators()
+        private static FindNonzeroOperator<double>[] FindNonzeroOperators()
         {
-            var operators = new
-                DenseMatrixImplementor<FindNonzeroOperator<double>>(numberOfStorageSchemes, 1);
+            var operators = new FindNonzeroOperator<double>[numberOfStorageSchemes];
 
-            operators[dense] =
-                new FindNonzeroOperator<double>(DoubleMatrixOperators.Dense_FindNonzero);
+            operators[dense] = new FindNonzeroOperator<double>(
+                    DoubleMatrixOperators.Dense_FindNonzero);
 
-            operators[view] =
-                new FindNonzeroOperator<double>(DoubleMatrixOperators.View_FindNonzero);
-
-            operators[sparse] =
-                new FindNonzeroOperator<double>(DoubleMatrixOperators.Sparse_FindNonzero);
+            operators[sparse] = new FindNonzeroOperator<double>(
+                    DoubleMatrixOperators.Sparse_FindNonzero);
 
             return operators;
         }
-        private static readonly DenseMatrixImplementor<FindNonzeroOperator<double>>
+        private static readonly FindNonzeroOperator<double>[]
             findNonzeroDoubleOperators = FindNonzeroOperators();
 
         /// <summary>
@@ -2636,23 +2584,19 @@ namespace Novacta.Analytics
 
         #region While
 
-        private static DenseMatrixImplementor<FindWhileOperator<double>> FindWhileOperators()
+        private static FindWhileOperator<double>[] FindWhileOperators()
         {
-            var operators =
-                new DenseMatrixImplementor<FindWhileOperator<double>>(numberOfStorageSchemes, 1);
+            var operators = new FindWhileOperator<double>[numberOfStorageSchemes];
 
-            operators[dense] =
-                new FindWhileOperator<double>(DoubleMatrixOperators.Dense_FindWhile);
+            operators[dense] = new FindWhileOperator<double>(
+                    DoubleMatrixOperators.Dense_FindWhile);
 
-            operators[view] =
-                new FindWhileOperator<double>(DoubleMatrixOperators.View_FindWhile);
-
-            operators[sparse] =
-                new FindWhileOperator<double>(DoubleMatrixOperators.Sparse_FindWhile);
+            operators[sparse] = new FindWhileOperator<double>(
+                    DoubleMatrixOperators.Sparse_FindWhile);
 
             return operators;
         }
-        private static readonly DenseMatrixImplementor<FindWhileOperator<double>>
+        private static readonly FindWhileOperator<double>[]
             findWhileDoubleOperators = FindWhileOperators();
 
         /// <summary>
@@ -2700,17 +2644,19 @@ namespace Novacta.Analytics
 
         #region InPlace
 
-        private static DenseMatrixImplementor<MatrixInPlaceOperator<double>> InPlaceTransposeOperators()
+        private static MatrixInPlaceOperator<double>[] InPlaceTransposeOperators()
         {
-            var operators = new DenseMatrixImplementor<MatrixInPlaceOperator<double>>(numberOfStorageSchemes, 1);
+            var operators = new MatrixInPlaceOperator<double>[numberOfStorageSchemes];
 
-            operators[dense] = new MatrixInPlaceOperator<double>(DoubleMatrixOperators.Dense_InPlaceTranspose);
-            operators[view] = new MatrixInPlaceOperator<double>(DoubleMatrixOperators.View_InPlaceTranspose);
-            operators[sparse] = new MatrixInPlaceOperator<double>(DoubleMatrixOperators.Sparse_InPlaceTranspose);
+            operators[dense] = new MatrixInPlaceOperator<double>(
+                DoubleMatrixOperators.Dense_InPlaceTranspose);
+            operators[sparse] = new MatrixInPlaceOperator<double>(
+                DoubleMatrixOperators.Sparse_InPlaceTranspose);
 
             return operators;
         }
-        private static readonly DenseMatrixImplementor<MatrixInPlaceOperator<double>> inPlaceTransposeOperators = InPlaceTransposeOperators();
+        private static readonly MatrixInPlaceOperator<double>[]
+            inPlaceTransposeOperators = InPlaceTransposeOperators();
 
         /// <summary>
         /// Transposes this instance.
@@ -2743,7 +2689,6 @@ namespace Novacta.Analytics
         /// <seealso href="https://en.wikipedia.org/wiki/Transpose"/>
         public void InPlaceTranspose()
         {
-            this.implementor.OnChangingData();
             inPlaceTransposeOperators[(int)this.implementor.StorageScheme](this.implementor);
 
             if (this.HasRowNames)
@@ -2774,17 +2719,19 @@ namespace Novacta.Analytics
 
         #region OutPlace
 
-        private static DenseMatrixImplementor<MatrixUnaryOperator<double, double>> OutPlaceTransposeOperators()
+        private static MatrixUnaryOperator<double, double>[] OutPlaceTransposeOperators()
         {
-            var operators = new DenseMatrixImplementor<MatrixUnaryOperator<double, double>>(numberOfStorageSchemes, 1);
+            var operators = new MatrixUnaryOperator<double, double>[numberOfStorageSchemes];
 
-            operators[dense] = new MatrixUnaryOperator<double, double>(DoubleMatrixOperators.Dense_OutPlaceTranspose);
-            operators[view] = new MatrixUnaryOperator<double, double>(DoubleMatrixOperators.View_OutPlaceTranspose);
-            operators[sparse] = new MatrixUnaryOperator<double, double>(DoubleMatrixOperators.Sparse_OutPlaceTranspose);
+            operators[dense] = new MatrixUnaryOperator<double, double>(
+                DoubleMatrixOperators.Dense_OutPlaceTranspose);
+            operators[sparse] = new MatrixUnaryOperator<double, double>(
+                DoubleMatrixOperators.Sparse_OutPlaceTranspose);
 
             return operators;
         }
-        private static readonly DenseMatrixImplementor<MatrixUnaryOperator<double, double>> outPlaceTransposeOperators = OutPlaceTransposeOperators();
+        private static readonly MatrixUnaryOperator<double, double>[]
+            outPlaceTransposeOperators = OutPlaceTransposeOperators();
 
         /// <summary>
         /// Returns the transpose of this instance.
@@ -2821,7 +2768,7 @@ namespace Novacta.Analytics
         /// <seealso href="https://en.wikipedia.org/wiki/Transpose"/>
         public DoubleMatrix Transpose()
         {
-            DoubleMatrix transposed = new DoubleMatrix(outPlaceTransposeOperators[
+            DoubleMatrix transposed = new(outPlaceTransposeOperators[
                 (int)this.implementor.StorageScheme]
                 (this.implementor));
 
@@ -2852,22 +2799,22 @@ namespace Novacta.Analytics
 
         private static DenseMatrixImplementor<MatrixBinaryOperator<double, double, double>> DivideOperators()
         {
-            var operators = new DenseMatrixImplementor<MatrixBinaryOperator<double, double, double>>(numberOfStorageSchemes, numberOfStorageSchemes);
+            var operators = new DenseMatrixImplementor<MatrixBinaryOperator<double, double, double>>(
+                numberOfStorageSchemes, numberOfStorageSchemes);
 
-            operators[dense, dense] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Dense_Dense_Divide);
-            operators[dense, view] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Dense_View_Divide);
-            operators[view, dense] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_View_Dense_Divide);
-            operators[view, view] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_View_View_Divide);
-
-            operators[sparse, dense] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Sparse_Dense_Divide);
-            operators[dense, sparse] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Dense_Sparse_Divide);
-            operators[sparse, sparse] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Sparse_Sparse_Divide);
-            operators[sparse, view] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Sparse_View_Divide);
-            operators[view, sparse] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_View_Sparse_Divide);
+            operators[dense, dense] = new MatrixBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Matrix_Dense_Dense_Divide);
+            operators[sparse, dense] = new MatrixBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Matrix_Sparse_Dense_Divide);
+            operators[dense, sparse] = new MatrixBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Matrix_Dense_Sparse_Divide);
+            operators[sparse, sparse] = new MatrixBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Matrix_Sparse_Sparse_Divide);
 
             return operators;
         }
-        private static readonly DenseMatrixImplementor<MatrixBinaryOperator<double, double, double>> divideOperators = DivideOperators();
+        private static readonly DenseMatrixImplementor<MatrixBinaryOperator<double, double, double>>
+            divideOperators = DivideOperators();
 
         /// <summary>
         /// Determines the division of a matrix by another.
@@ -2974,16 +2921,20 @@ namespace Novacta.Analytics
 
         #region Right scalar
 
-        private static DenseMatrixImplementor<MatrixScalarBinaryOperator<double, double, double>> ScalarRightDivideOperators()
+        #region Double
+
+        private static MatrixScalarBinaryOperator<double, double, double>[] ScalarRightDivideOperators()
         {
-            var operators = new DenseMatrixImplementor<MatrixScalarBinaryOperator<double, double, double>>(numberOfStorageSchemes, 1);
-            operators[dense] = new MatrixScalarBinaryOperator<double, double, double>(DoubleMatrixOperators.Scalar_Dense_RightDivide);
-            operators[view] = new MatrixScalarBinaryOperator<double, double, double>(DoubleMatrixOperators.Scalar_View_RightDivide);
-            operators[sparse] = new MatrixScalarBinaryOperator<double, double, double>(DoubleMatrixOperators.Scalar_Sparse_RightDivide);
+            var operators = new MatrixScalarBinaryOperator<double, double, double>[numberOfStorageSchemes];
+            operators[dense] = new MatrixScalarBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Scalar_Dense_RightDivide);
+            operators[sparse] = new MatrixScalarBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Scalar_Sparse_RightDivide);
 
             return operators;
         }
-        private static readonly DenseMatrixImplementor<MatrixScalarBinaryOperator<double, double, double>> scalarRightDivideOperators = ScalarRightDivideOperators();
+        private static readonly MatrixScalarBinaryOperator<double, double, double>[]
+            scalarRightDivideOperators = ScalarRightDivideOperators();
 
         /// <summary>
         /// Determines the division of a matrix by a scalar.
@@ -3033,18 +2984,78 @@ namespace Novacta.Analytics
 
         #endregion
 
-        #region Left scalar
+        #region Complex
 
-        private static DenseMatrixImplementor<MatrixScalarBinaryOperator<double, double, double>> ScalarLeftDivideOperators()
+        private static MatrixScalarBinaryOperator<Complex, double, Complex>[] ComplexScalarRightDivideOperators()
         {
-            var operators = new DenseMatrixImplementor<MatrixScalarBinaryOperator<double, double, double>>(numberOfStorageSchemes, 1);
-            operators[dense] = new MatrixScalarBinaryOperator<double, double, double>(DoubleMatrixOperators.Scalar_Dense_LeftDivide);
-            operators[view] = new MatrixScalarBinaryOperator<double, double, double>(DoubleMatrixOperators.Scalar_View_LeftDivide);
-            operators[sparse] = new MatrixScalarBinaryOperator<double, double, double>(DoubleMatrixOperators.Scalar_Sparse_LeftDivide);
+            var operators = new MatrixScalarBinaryOperator<Complex, double, Complex>[numberOfStorageSchemes];
+            operators[dense] = new MatrixScalarBinaryOperator<Complex, double, Complex>(
+                DoubleMatrixOperators.Scalar_Dense_RightDivide);
+            operators[sparse] = new MatrixScalarBinaryOperator<Complex, double, Complex>(
+                DoubleMatrixOperators.Scalar_Sparse_RightDivide);
 
             return operators;
         }
-        private static readonly DenseMatrixImplementor<MatrixScalarBinaryOperator<double, double, double>> scalarLeftDivideOperators = ScalarLeftDivideOperators();
+        private static readonly MatrixScalarBinaryOperator<Complex, double, Complex>[]
+            complexScalarRightDivideOperators = ComplexScalarRightDivideOperators();
+
+        /// <summary>
+        /// Determines the division of a matrix by a scalar.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns>
+        /// The result of dividing <paramref name="left"/> by <paramref name="right"/>.
+        /// </returns>
+        /// <remarks>
+        /// <inheritdoc cref="op_Addition(DoubleMatrix,double)" 
+        /// path="para[@id='left.operand']"/>
+        /// <para>
+        /// The method returns a matrix
+        /// having the same dimensions of <paramref name="left"/>, whose generic
+        /// entry is:
+        /// <latex mode="display">\mathit{left}[i,j] / \mathit{right},\hspace{12pt} i=0,\dots,m_L-1,\hspace{12pt} j=0,\dots,n_L-1.</latex> 
+        /// </para>
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="left"/> is <b>null</b>.
+        /// </exception>
+        public static ComplexMatrix operator /(DoubleMatrix left, Complex right)
+        {
+            if (left is null)
+            {
+                throw new ArgumentNullException(nameof(left));
+            }
+            return new ComplexMatrix(complexScalarRightDivideOperators[(int)left.implementor.StorageScheme]
+                (left.implementor, right));
+        }
+
+        /// <inheritdoc cref = "op_Division(DoubleMatrix,Complex)"/>
+        public static ComplexMatrix Divide(DoubleMatrix left, Complex right)
+        {
+            return left / right;
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Left scalar
+
+        #region Double
+
+        private static MatrixScalarBinaryOperator<double, double, double>[] ScalarLeftDivideOperators()
+        {
+            var operators = new MatrixScalarBinaryOperator<double, double, double>[numberOfStorageSchemes];
+            operators[dense] = new MatrixScalarBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Scalar_Dense_LeftDivide);
+            operators[sparse] = new MatrixScalarBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Scalar_Sparse_LeftDivide);
+
+            return operators;
+        }
+        private static readonly MatrixScalarBinaryOperator<double, double, double>[]
+            scalarLeftDivideOperators = ScalarLeftDivideOperators();
 
 
         /// <summary>
@@ -3095,6 +3106,63 @@ namespace Novacta.Analytics
 
         #endregion
 
+        #region Complex
+
+        private static MatrixScalarBinaryOperator<Complex, double, Complex>[] ComplexScalarLeftDivideOperators()
+        {
+            var operators = new MatrixScalarBinaryOperator<Complex, double, Complex>[numberOfStorageSchemes];
+            operators[dense] = new MatrixScalarBinaryOperator<Complex, double, Complex>(
+                DoubleMatrixOperators.Scalar_Dense_LeftDivide);
+            operators[sparse] = new MatrixScalarBinaryOperator<Complex, double, Complex>(
+                DoubleMatrixOperators.Scalar_Sparse_LeftDivide);
+
+            return operators;
+        }
+        private static readonly MatrixScalarBinaryOperator<Complex, double, Complex>[]
+            complexScalarLeftDivideOperators = ComplexScalarLeftDivideOperators();
+
+
+        /// <summary>
+        /// Determines the division of a scalar by a matrix.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns>
+        /// The result of dividing <paramref name="left"/> by <paramref name="right"/>.
+        /// </returns>
+        /// <remarks>
+        /// <inheritdoc cref="op_Addition(double,DoubleMatrix)" 
+        /// path="para[@id='right.operand']"/>
+        /// <para>
+        /// The method returns a matrix having
+        /// the same dimensions of <paramref name="right"/>, whose generic
+        /// entry is:
+        /// <latex mode="display">\mathit{left} / \mathit{right}[i,j],\hspace{12pt} i=0,\dots,m_R-1,\hspace{12pt} j=0,\dots,n_R-1.</latex> 
+        /// </para>
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="right"/> is <b>null</b>.
+        /// </exception>
+        public static ComplexMatrix operator /(Complex left, DoubleMatrix right)
+        {
+            if (right is null)
+            {
+                throw new ArgumentNullException(nameof(right));
+            }
+            return new ComplexMatrix(complexScalarLeftDivideOperators[(int)right.implementor.StorageScheme]
+                (right.implementor, left));
+        }
+
+        /// <inheritdoc cref = "op_Division(Complex,DoubleMatrix)"/>
+        public static ComplexMatrix Divide(Complex left, DoubleMatrix right)
+        {
+            return left / right;
+        }
+
+        #endregion
+
+        #endregion
+
         #endregion
 
         #region Multiply
@@ -3103,22 +3171,22 @@ namespace Novacta.Analytics
 
         private static DenseMatrixImplementor<MatrixBinaryOperator<double, double, double>> MultiplyOperators()
         {
-            var operators = new DenseMatrixImplementor<MatrixBinaryOperator<double, double, double>>(numberOfStorageSchemes, numberOfStorageSchemes);
+            var operators = new DenseMatrixImplementor<MatrixBinaryOperator<double, double, double>>(
+                numberOfStorageSchemes, numberOfStorageSchemes);
 
-            operators[dense, dense] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Dense_Dense_Multiply);
-            operators[dense, view] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Dense_View_Multiply);
-            operators[view, dense] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_View_Dense_Multiply);
-            operators[view, view] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_View_View_Multiply);
-
-            operators[sparse, dense] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Sparse_Dense_Multiply);
-            operators[dense, sparse] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Dense_Sparse_Multiply);
-            operators[sparse, sparse] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Sparse_Sparse_Multiply);
-            operators[sparse, view] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Sparse_View_Multiply);
-            operators[view, sparse] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_View_Sparse_Multiply);
+            operators[dense, dense] = new MatrixBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Matrix_Dense_Dense_Multiply);
+            operators[sparse, dense] = new MatrixBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Matrix_Sparse_Dense_Multiply);
+            operators[dense, sparse] = new MatrixBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Matrix_Dense_Sparse_Multiply);
+            operators[sparse, sparse] = new MatrixBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Matrix_Sparse_Sparse_Multiply);
 
             return operators;
         }
-        private static readonly DenseMatrixImplementor<MatrixBinaryOperator<double, double, double>> multiplyOperators = MultiplyOperators();
+        private static readonly DenseMatrixImplementor<MatrixBinaryOperator<double, double, double>>
+            multiplyOperators = MultiplyOperators();
 
         /// <summary>
         /// Determines the product of two matrices.
@@ -3201,17 +3269,20 @@ namespace Novacta.Analytics
 
         #region scalar
 
-        private static DenseMatrixImplementor<MatrixScalarBinaryOperator<double, double, double>> ScalarMultiplyOperators()
+        #region Double
+
+        private static MatrixScalarBinaryOperator<double, double, double>[] ScalarMultiplyOperators()
         {
-            var operators = new DenseMatrixImplementor<MatrixScalarBinaryOperator<double, double, double>>(numberOfStorageSchemes, 1);
-            operators[dense] = new MatrixScalarBinaryOperator<double, double, double>(DoubleMatrixOperators.Scalar_Dense_Multiply);
-            operators[view] = new MatrixScalarBinaryOperator<double, double, double>(DoubleMatrixOperators.Scalar_View_Multiply);
-            operators[sparse] = new MatrixScalarBinaryOperator<double, double, double>(DoubleMatrixOperators.Scalar_Sparse_Multiply);
+            var operators = new MatrixScalarBinaryOperator<double, double, double>[numberOfStorageSchemes];
+            operators[dense] = new MatrixScalarBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Scalar_Dense_Multiply);
+            operators[sparse] = new MatrixScalarBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Scalar_Sparse_Multiply);
 
             return operators;
         }
-        private static readonly DenseMatrixImplementor<MatrixScalarBinaryOperator<double, double, double>> scalarMultiplyOperators = ScalarMultiplyOperators();
-
+        private static readonly MatrixScalarBinaryOperator<double, double, double>[]
+            scalarMultiplyOperators = ScalarMultiplyOperators();
 
         /// <summary>
         /// Determines the multiplication of a matrix by a scalar.
@@ -3306,6 +3377,98 @@ namespace Novacta.Analytics
 
         #endregion
 
+        #region Complex
+
+        private static MatrixScalarBinaryOperator<Complex, double, Complex>[] ComplexScalarMultiplyOperators()
+        {
+            var operators = new MatrixScalarBinaryOperator<Complex, double, Complex>[numberOfStorageSchemes];
+            operators[dense] = new MatrixScalarBinaryOperator<Complex, double, Complex>(
+                DoubleMatrixOperators.Scalar_Dense_Multiply);
+            operators[sparse] = new MatrixScalarBinaryOperator<Complex, double, Complex>(
+                DoubleMatrixOperators.Scalar_Sparse_Multiply);
+
+            return operators;
+        }
+        private static readonly MatrixScalarBinaryOperator<Complex, double, Complex>[]
+            complexScalarMultiplyOperators = ComplexScalarMultiplyOperators();
+
+        /// <summary>
+        /// Determines the multiplication of a matrix by a scalar.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns>
+        /// The result of multiplying <paramref name="right"/> by <paramref name="left"/>.
+        /// </returns>
+        /// <remarks>
+        /// <inheritdoc cref="op_Addition(DoubleMatrix,double)" 
+        /// path="para[@id='left.operand']"/>
+        /// <para>
+        /// The method returns a matrix
+        /// having the same dimensions of <paramref name="left"/>, whose generic
+        /// entry is:
+        /// <latex mode="display">\mathit{left}[i,j] * \mathit{right},\hspace{12pt} i=0,\dots,m_L-1,\hspace{12pt} j=0,\dots,n_L-1.</latex> 
+        /// </para>
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="left"/> is <b>null</b>.
+        /// </exception>
+        public static ComplexMatrix operator *(DoubleMatrix left, Complex right)
+        {
+            if (left is null)
+            {
+                throw new ArgumentNullException(nameof(left));
+            }
+            return new ComplexMatrix(complexScalarMultiplyOperators[(int)left.implementor.StorageScheme]
+                (left.implementor, right));
+        }
+
+        /// <inheritdoc cref = "op_Multiply(DoubleMatrix,Complex)"/>
+        public static ComplexMatrix Multiply(DoubleMatrix left, Complex right)
+        {
+            return left * right;
+        }
+
+        /// <summary>
+        /// Determines the multiplication of a scalar by a matrix.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns>The result of multiplying <paramref name="right"/> by
+        /// <paramref name="left"/>.</returns>
+        /// <remarks>
+        /// <inheritdoc cref="op_Addition(double,DoubleMatrix)" 
+        /// path="para[@id='right.operand']"/>
+        /// <para>
+        /// The method returns a matrix having
+        /// the same dimensions of <paramref name="right"/>, whose generic
+        /// entry is:
+        /// <latex mode="display">\mathit{left} * \mathit{right}[i,j],\hspace{12pt} i=0,\dots,m_R-1,\hspace{12pt} j=0,\dots,n_R-1.</latex> 
+        /// </para>
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="right"/> is <b>null</b>.
+        /// </exception>
+        public static ComplexMatrix operator *(Complex left, DoubleMatrix right)
+        {
+            if (right is null)
+            {
+                throw new ArgumentNullException(nameof(right));
+            }
+            return new ComplexMatrix(complexScalarMultiplyOperators[(int)right.implementor.StorageScheme]
+                (right.implementor, left));
+        }
+
+        /// <inheritdoc cref = "op_Multiply(Complex,DoubleMatrix)"/>
+        public static ComplexMatrix Multiply(Complex left, DoubleMatrix right)
+        {
+            return left * right;
+        }
+
+        #endregion
+
+        #endregion
+
         #endregion
 
         #region Subtract
@@ -3314,21 +3477,21 @@ namespace Novacta.Analytics
 
         private static DenseMatrixImplementor<MatrixBinaryOperator<double, double, double>> SubtractOperators()
         {
-            var operators = new DenseMatrixImplementor<MatrixBinaryOperator<double, double, double>>(numberOfStorageSchemes, numberOfStorageSchemes);
-            operators[dense, dense] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Dense_Dense_Subtract);
-            operators[dense, view] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Dense_View_Subtract);
-            operators[view, dense] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_View_Dense_Subtract);
-            operators[view, view] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_View_View_Subtract);
-
-            operators[sparse, dense] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Sparse_Dense_Subtract);
-            operators[dense, sparse] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Dense_Sparse_Subtract);
-            operators[sparse, sparse] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Sparse_Sparse_Subtract);
-            operators[sparse, view] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_Sparse_View_Subtract);
-            operators[view, sparse] = new MatrixBinaryOperator<double, double, double>(DoubleMatrixOperators.Matrix_View_Sparse_Subtract);
+            var operators = new DenseMatrixImplementor<MatrixBinaryOperator<double, double, double>>(
+                numberOfStorageSchemes, numberOfStorageSchemes);
+            operators[dense, dense] = new MatrixBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Matrix_Dense_Dense_Subtract);
+            operators[sparse, dense] = new MatrixBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Matrix_Sparse_Dense_Subtract);
+            operators[dense, sparse] = new MatrixBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Matrix_Dense_Sparse_Subtract);
+            operators[sparse, sparse] = new MatrixBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Matrix_Sparse_Sparse_Subtract);
 
             return operators;
         }
-        private static readonly DenseMatrixImplementor<MatrixBinaryOperator<double, double, double>> subtractOperators = SubtractOperators();
+        private static readonly DenseMatrixImplementor<MatrixBinaryOperator<double, double, double>>
+            subtractOperators = SubtractOperators();
 
         /// <summary>
         /// Determines the difference between two matrices.
@@ -3411,16 +3574,20 @@ namespace Novacta.Analytics
 
         #region Right scalar
 
-        private static DenseMatrixImplementor<MatrixScalarBinaryOperator<double, double, double>> ScalarRightSubtractOperators()
+        #region Double
+
+        private static MatrixScalarBinaryOperator<double, double, double>[] ScalarRightSubtractOperators()
         {
-            var operators = new DenseMatrixImplementor<MatrixScalarBinaryOperator<double, double, double>>(numberOfStorageSchemes, 1);
-            operators[dense] = new MatrixScalarBinaryOperator<double, double, double>(DoubleMatrixOperators.Scalar_Dense_RightSubtract);
-            operators[view] = new MatrixScalarBinaryOperator<double, double, double>(DoubleMatrixOperators.Scalar_View_RightSubtract);
-            operators[sparse] = new MatrixScalarBinaryOperator<double, double, double>(DoubleMatrixOperators.Scalar_Sparse_RightSubtract);
+            var operators = new MatrixScalarBinaryOperator<double, double, double>[numberOfStorageSchemes];
+            operators[dense] = new MatrixScalarBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Scalar_Dense_RightSubtract);
+            operators[sparse] = new MatrixScalarBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Scalar_Sparse_RightSubtract);
 
             return operators;
         }
-        private static readonly DenseMatrixImplementor<MatrixScalarBinaryOperator<double, double, double>> scalarRightSubtractOperators = ScalarRightSubtractOperators();
+        private static readonly MatrixScalarBinaryOperator<double, double, double>[]
+            scalarRightSubtractOperators = ScalarRightSubtractOperators();
 
         /// <summary>
         /// Determines the subtraction of a scalar from a matrix.
@@ -3470,18 +3637,78 @@ namespace Novacta.Analytics
 
         #endregion
 
-        #region Left scalar
+        #region Complex
 
-        private static DenseMatrixImplementor<MatrixScalarBinaryOperator<double, double, double>> ScalarLeftSubtractOperators()
+        private static MatrixScalarBinaryOperator<Complex, double, Complex>[] ComplexScalarRightSubtractOperators()
         {
-            var operators = new DenseMatrixImplementor<MatrixScalarBinaryOperator<double, double, double>>(numberOfStorageSchemes, 1);
-            operators[dense] = new MatrixScalarBinaryOperator<double, double, double>(DoubleMatrixOperators.Scalar_Dense_LeftSubtract);
-            operators[view] = new MatrixScalarBinaryOperator<double, double, double>(DoubleMatrixOperators.Scalar_View_LeftSubtract);
-            operators[sparse] = new MatrixScalarBinaryOperator<double, double, double>(DoubleMatrixOperators.Scalar_Sparse_LeftSubtract);
+            var operators = new MatrixScalarBinaryOperator<Complex, double, Complex>[numberOfStorageSchemes];
+            operators[dense] = new MatrixScalarBinaryOperator<Complex, double, Complex>(
+                DoubleMatrixOperators.Scalar_Dense_RightSubtract);
+            operators[sparse] = new MatrixScalarBinaryOperator<Complex, double, Complex>(
+                DoubleMatrixOperators.Scalar_Sparse_RightSubtract);
 
             return operators;
         }
-        private static readonly DenseMatrixImplementor<MatrixScalarBinaryOperator<double, double, double>> scalarLeftSubtractOperators = ScalarLeftSubtractOperators();
+        private static readonly MatrixScalarBinaryOperator<Complex, double, Complex>[]
+            complexScalarRightSubtractOperators = ComplexScalarRightSubtractOperators();
+
+        /// <summary>
+        /// Determines the subtraction of a scalar from a matrix.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns>
+        /// The result of subtracting <paramref name="right"/> from <paramref name="left"/>.
+        /// </returns>
+        /// <remarks>
+        /// <inheritdoc cref="op_Addition(DoubleMatrix,double)" 
+        /// path="para[@id='left.operand']"/>
+        /// <para>
+        /// The method returns a matrix
+        /// having the same dimensions of <paramref name="left"/>, whose generic
+        /// entry is:
+        /// <latex mode="display">\mathit{left}[i,j] - \mathit{right},\hspace{12pt} i=0,\dots,m_L-1,\hspace{12pt} j=0,\dots,n_L-1.</latex> 
+        /// </para>
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="left"/> is <b>null</b>.
+        /// </exception>
+        public static ComplexMatrix operator -(DoubleMatrix left, Complex right)
+        {
+            if (left is null)
+            {
+                throw new ArgumentNullException(nameof(left));
+            }
+            return new ComplexMatrix(complexScalarRightSubtractOperators[(int)left.implementor.StorageScheme]
+                (left.implementor, right));
+        }
+
+        /// <inheritdoc cref = "op_Subtraction(DoubleMatrix,Complex)"/>
+        public static ComplexMatrix Subtract(DoubleMatrix left, Complex right)
+        {
+            return left - right;
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Left scalar
+
+        #region Double
+
+        private static MatrixScalarBinaryOperator<double, double, double>[] ScalarLeftSubtractOperators()
+        {
+            var operators = new MatrixScalarBinaryOperator<double, double, double>[numberOfStorageSchemes];
+            operators[dense] = new MatrixScalarBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Scalar_Dense_LeftSubtract);
+            operators[sparse] = new MatrixScalarBinaryOperator<double, double, double>(
+                DoubleMatrixOperators.Scalar_Sparse_LeftSubtract);
+
+            return operators;
+        }
+        private static readonly MatrixScalarBinaryOperator<double, double, double>[]
+            scalarLeftSubtractOperators = ScalarLeftSubtractOperators();
 
         /// <summary>
         /// Determines the subtraction of a matrix from a scalar.
@@ -3530,19 +3757,73 @@ namespace Novacta.Analytics
 
         #endregion
 
+        #region Complex
+
+        private static MatrixScalarBinaryOperator<Complex, double, Complex>[] ComplexScalarLeftSubtractOperators()
+        {
+            var operators = new MatrixScalarBinaryOperator<Complex, double, Complex>[numberOfStorageSchemes];
+            operators[dense] = new MatrixScalarBinaryOperator<Complex, double, Complex>(
+                DoubleMatrixOperators.Scalar_Dense_LeftSubtract);
+            operators[sparse] = new MatrixScalarBinaryOperator<Complex, double, Complex>(
+                DoubleMatrixOperators.Scalar_Sparse_LeftSubtract);
+
+            return operators;
+        }
+        private static readonly MatrixScalarBinaryOperator<Complex, double, Complex>[]
+            complexScalarLeftSubtractOperators = ComplexScalarLeftSubtractOperators();
+
+        /// <summary>
+        /// Determines the subtraction of a matrix from a scalar.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns>The result of subtracting <paramref name="right"/> from
+        /// <paramref name="left"/>.</returns>
+        /// <remarks>
+        /// <inheritdoc cref="op_Addition(double,DoubleMatrix)" 
+        /// path="para[@id='right.operand']"/>
+        /// <para>
+        /// The method returns a matrix having
+        /// the same dimensions of <paramref name="right"/>, whose generic
+        /// entry is:
+        /// <latex mode="display">\mathit{left} - \mathit{right}[i,j],\hspace{12pt} i=0,\dots,m_R-1,\hspace{12pt} j=0,\dots,n_R-1.</latex> 
+        /// </para>
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="right"/> is <b>null</b>.
+        /// </exception>
+        public static ComplexMatrix operator -(Complex left, DoubleMatrix right)
+        {
+            if (right is null)
+            {
+                throw new ArgumentNullException(nameof(right));
+            }
+            return new ComplexMatrix(complexScalarLeftSubtractOperators[(int)right.implementor.StorageScheme]
+                (right.implementor, left));
+        }
+
+        /// <inheritdoc cref = "op_Subtraction(Complex,DoubleMatrix)"/>
+        public static ComplexMatrix Subtract(Complex left, DoubleMatrix right)
+        {
+            return left - right;
+        }
+
+        #endregion
+
+        #endregion
+
         #endregion
 
         #region Negate
 
-        private static DenseMatrixImplementor<MatrixUnaryOperator<double, double>> NegationOperators()
+        private static MatrixUnaryOperator<double, double>[] NegationOperators()
         {
-            var operators = new DenseMatrixImplementor<MatrixUnaryOperator<double, double>>(numberOfStorageSchemes, 1);
+            var operators = new MatrixUnaryOperator<double, double>[numberOfStorageSchemes];
             operators[dense] = new MatrixUnaryOperator<double, double>(DoubleMatrixOperators.Matrix_Dense_Negation);
-            operators[view] = new MatrixUnaryOperator<double, double>(DoubleMatrixOperators.Matrix_View_Negation);
             operators[sparse] = new MatrixUnaryOperator<double, double>(DoubleMatrixOperators.Matrix_Sparse_Negation);
             return operators;
         }
-        private static readonly DenseMatrixImplementor<MatrixUnaryOperator<double, double>>
+        private static readonly MatrixUnaryOperator<double, double>[]
             negationOperators = NegationOperators();
 
         /// <summary>
@@ -3598,6 +3879,26 @@ namespace Novacta.Analytics
         #endregion
 
         #endregion
+
+        #region IComplexMatrixPatterns
+
+        /// <inheritdoc/>
+        public bool IsHermitian
+        {
+            get
+            {
+                return this.implementor.IsHermitian;
+            }
+        }
+
+        /// <inheritdoc/>
+        public bool IsSkewHermitian
+        {
+            get
+            {
+                return this.implementor.IsSkewHermitian;
+            }
+        }
 
         #region IMatrixPatterns
 
@@ -3820,6 +4121,8 @@ namespace Novacta.Analytics
 
         #endregion
 
+        #endregion
+
         #region IEnumerable
 
         /// <summary>
@@ -3850,7 +4153,6 @@ namespace Novacta.Analytics
         /// </remarks>
         public Double[] AsColumnMajorDenseArray()
         {
-            this.implementor.OnChangingData();
             return this.implementor.AsColumnMajorDenseArray();
         }
 
@@ -3862,11 +4164,9 @@ namespace Novacta.Analytics
         /// <inheritdoc cref="DoubleMatrix" path="para[@id='MinimizeMemoryUsage.0']"/>
         /// <inheritdoc cref="DoubleMatrix" path="para[@id='MinimizeMemoryUsage.1']"/>
         /// <inheritdoc cref="DoubleMatrix" path="para[@id='MinimizeMemoryUsage.1.1']"/>
-        /// <inheritdoc cref="DoubleMatrix" path="para[@id='MinimizeMemoryUsage.3']"/>
         /// </remarks>
         public double[] GetStorage()
         {
-            this.implementor.OnChangingData();
             return this.implementor.Storage;
         }
 
@@ -3929,10 +4229,6 @@ namespace Novacta.Analytics
         /// language="cs" />
         /// </para>
         /// </example>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public double this[int rowIndex, int columnIndex]
         {
             get
@@ -3955,10 +4251,6 @@ namespace Novacta.Analytics
         /// language="cs" />
         /// </para>
         /// </example>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public DoubleMatrix this[int rowIndex, IndexCollection columnIndexes]
         {
             get
@@ -4004,10 +4296,6 @@ namespace Novacta.Analytics
         /// language="cs" />
         /// </para>
         /// </example>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public DoubleMatrix this[int rowIndex, string columnIndexes]
         {
             get
@@ -4075,10 +4363,6 @@ namespace Novacta.Analytics
         /// language="cs" />
         /// </para>
         /// </example>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public DoubleMatrix this[IndexCollection rowIndexes, int columnIndex]
         {
             get
@@ -4124,10 +4408,6 @@ namespace Novacta.Analytics
         /// language="cs" />
         /// </para>
         /// </example>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public DoubleMatrix this[IndexCollection rowIndexes, IndexCollection columnIndexes]
         {
             get
@@ -4138,7 +4418,7 @@ namespace Novacta.Analytics
                 if (null == columnIndexes)
                     throw new ArgumentNullException(nameof(columnIndexes));
 
-                DoubleMatrix subMatrix = new DoubleMatrix(this.implementor[rowIndexes, columnIndexes]);
+                DoubleMatrix subMatrix = new(this.implementor[rowIndexes, columnIndexes]);
 
                 if (this.HasRowNames)
                     ImplementationServices.TrySetMatrixRowNames(
@@ -4179,10 +4459,6 @@ namespace Novacta.Analytics
         /// language="cs" />
         /// </para>
         /// </example>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public DoubleMatrix this[IndexCollection rowIndexes, string columnIndexes]
         {
             get
@@ -4202,7 +4478,7 @@ namespace Novacta.Analytics
                            "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX"));
                 }
 
-                DoubleMatrix subMatrix = new DoubleMatrix(this.implementor[rowIndexes, columnIndexes]);
+                DoubleMatrix subMatrix = new(this.implementor[rowIndexes, columnIndexes]);
 
                 if (this.HasRowNames)
                     ImplementationServices.TrySetMatrixRowNames(
@@ -4255,10 +4531,6 @@ namespace Novacta.Analytics
         /// language="cs" />
         /// </para>
         /// </example>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public DoubleMatrix this[string rowIndexes, int columnIndex]
         {
             get
@@ -4321,10 +4593,6 @@ namespace Novacta.Analytics
         /// language="cs" />
         /// </para>
         /// </example>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public DoubleMatrix this[string rowIndexes, IndexCollection columnIndexes]
         {
             get
@@ -4344,7 +4612,7 @@ namespace Novacta.Analytics
                            "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX"));
                 }
 
-                DoubleMatrix subMatrix = new DoubleMatrix(this.implementor[rowIndexes, columnIndexes]);
+                DoubleMatrix subMatrix = new(this.implementor[rowIndexes, columnIndexes]);
 
                 if (this.HasRowNames)
                     ImplementationServices.SetMatrixRowNames(
@@ -4393,10 +4661,6 @@ namespace Novacta.Analytics
         /// language="cs" />
         /// </para>
         /// </example>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public DoubleMatrix this[string rowIndexes, string columnIndexes]
         {
             get
@@ -4423,7 +4687,7 @@ namespace Novacta.Analytics
                            "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX"));
                 }
 
-                DoubleMatrix subMatrix = new DoubleMatrix(this.implementor[rowIndexes, columnIndexes]);
+                DoubleMatrix subMatrix = new(this.implementor[rowIndexes, columnIndexes]);
 
                 if (this.HasRowNames)
                     ImplementationServices.SetMatrixRowNames(
@@ -4482,15 +4746,38 @@ namespace Novacta.Analytics
         /// <param name="columnIndexes">
         /// The zero-based column indexes of the elements to get.</param>
         /// <param name="avoidDenseAllocations">
-        /// If set to <b>true</b> signals that the returned matrix 
-        /// will not store the elements to get
-        /// applying the <see cref="StorageScheme.Dense">Dense</see> storage scheme.</param>
+        /// If set to <c>true</c> signals that the elements to get will not be stored 
+        /// in the returned matrix 
+        /// applying the <see cref="StorageScheme.Dense">Dense</see> storage scheme.
+        /// Always ignored in the current release.
+        /// </param>
         /// <value>
         /// A tabular collection formed by the elements corresponding to the 
         /// specified row and column indexes.</value>
         /// <remarks>
-        /// <inheritdoc cref="DoubleMatrix" path="para[@id='MinimizeMemoryUsage.3']"/>
-        /// <inheritdoc cref="DoubleMatrix" path="para[@id='MinimizeMemoryUsage.4']"/>
+        /// <note type="caution">
+        /// <para>
+        /// In previous releases, this indexer returned matrices whose entries  
+        /// were, in some cases, not directly stored: if parameter 
+        /// <paramref name="avoidDenseAllocations"/> was <c>true</c> then the 
+        /// indexer tried to minimize memory allocations
+        /// by avoiding the application 
+        /// of the <see cref="StorageScheme.Dense">Dense</see> storage scheme.
+        /// </para>
+        /// <para>
+        /// Indexers that try to avoid dense allocations have been deprecated 
+        /// and their use is not recommended.
+        /// </para>
+        /// <para>
+        /// In the current release, the value passed to parameter
+        /// <paramref name="avoidDenseAllocations"/> is ignored.
+        /// </para>
+        /// <para>
+        /// In future releases, this indexer will be removed from the public API.
+        /// Please use instead indexer
+        /// <see cref="DoubleMatrix.this[IndexCollection,IndexCollection]"/>.
+        /// </para>
+        /// </note>
         /// </remarks>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="rowIndexes"/> is <b>null</b>.<br/>
@@ -4504,70 +4791,12 @@ namespace Novacta.Analytics
         /// <paramref name="columnIndexes"/> contains an index 
         /// which is greater than or equal to the number of columns of this instance.
         /// </exception>
-        /// <example>
-        /// <para>
-        /// In the following example, some matrix elements are simultaneously accessed.
-        /// </para>
-        /// <para>
-        /// <code source="..\Novacta.Analytics.CodeExamples\MatrixIndexerExample11.cs.txt" 
-        /// language="cs" />
-        /// </para>
-        /// </example>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
+        [Obsolete(message: "Use instead indexers having no parameter 'avoidDenseAllocations'.")]
         public DoubleMatrix this[IndexCollection rowIndexes, IndexCollection columnIndexes, bool avoidDenseAllocations]
         {
             get
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
-
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
-
-                DoubleMatrix subMatrix;
-
-                if (avoidDenseAllocations
-                    && this.implementor.StorageScheme == StorageScheme.Dense)
-                {
-                    if (rowIndexes.maxIndex >= this.implementor.NumberOfRows)
-                    {
-                        throw new ArgumentOutOfRangeException(
-                            nameof(rowIndexes),
-                            ImplementationServices.GetResourceString(
-                                "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
-                    }
-                    if (columnIndexes.maxIndex >= this.implementor.NumberOfColumns)
-                    {
-                        throw new ArgumentOutOfRangeException(
-                            nameof(columnIndexes),
-                            ImplementationServices.GetResourceString(
-                                "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
-                    }
-                    IndexCollection[] parentIndexes = new IndexCollection[2] { rowIndexes, columnIndexes };
-                    var subDoubleMatrixImplementor = new ViewDoubleMatrixImplementor(
-                        parentIndexes,
-                        this.implementor);
-                    subMatrix = new DoubleMatrix(subDoubleMatrixImplementor);
-                }
-                else
-                    subMatrix = new DoubleMatrix(this.implementor[rowIndexes, columnIndexes]);
-
-                if (this.HasRowNames)
-                    ImplementationServices.TrySetMatrixRowNames(
-                        subMatrix,
-                        rowIndexes,
-                        this.rowNames);
-
-                if (this.HasColumnNames)
-                    ImplementationServices.TrySetMatrixColumnNames(
-                        subMatrix,
-                        columnIndexes,
-                        this.columnNames);
-
-                return subMatrix;
+                return this[rowIndexes, columnIndexes];
             }
         }
 
@@ -4582,15 +4811,38 @@ namespace Novacta.Analytics
         /// The value must be <c>":"</c>, which means that all valid column indexes
         /// are specified.</param>
         /// <param name="avoidDenseAllocations">
-        /// If set to <b>true</b> signals that the returned matrix 
-        /// will not store the elements to get
-        /// applying the <see cref="StorageScheme.Dense">Dense</see> storage scheme.</param>
+        /// If set to <c>true</c> signals that the elements to get will not be stored 
+        /// in the returned matrix 
+        /// applying the <see cref="StorageScheme.Dense">Dense</see> storage scheme.
+        /// Always ignored in the current release.
+        /// </param>
         /// <value>
         /// A tabular collection formed by the elements corresponding to the 
         /// specified row and column indexes.</value>
         /// <remarks>
-        /// <inheritdoc cref="DoubleMatrix" path="para[@id='MinimizeMemoryUsage.3']"/>
-        /// <inheritdoc cref="DoubleMatrix" path="para[@id='MinimizeMemoryUsage.4']"/>
+        /// <note type="caution">
+        /// <para>
+        /// In previous releases, this indexer returned matrices whose entries  
+        /// were, in some cases, not directly stored: if parameter 
+        /// <paramref name="avoidDenseAllocations"/> was <c>true</c> then the 
+        /// indexer tried to minimize memory allocations
+        /// by avoiding the application 
+        /// of the <see cref="StorageScheme.Dense">Dense</see> storage scheme.
+        /// </para>
+        /// <para>
+        /// Indexers that try to avoid dense allocations have been deprecated 
+        /// and their use is not recommended.
+        /// </para>
+        /// <para>
+        /// In the current release, the value passed to parameter
+        /// <paramref name="avoidDenseAllocations"/> is ignored.
+        /// </para>
+        /// <para>
+        /// In future releases, this indexer will be removed from the public API.
+        /// Please use instead indexer
+        /// <see cref="DoubleMatrix.this[IndexCollection,string]"/>.
+        /// </para>
+        /// </note>
         /// </remarks>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="rowIndexes"/> is <b>null</b>.<br/>
@@ -4604,71 +4856,12 @@ namespace Novacta.Analytics
         /// <paramref name="columnIndexes"/> is not a string reserved for 
         /// tabular collection sub-referencing.
         /// </exception>
-        /// <example>
-        /// <para>
-        /// In the following example, some matrix elements are simultaneously accessed.
-        /// </para>
-        ///   <para>
-        ///     <code source="..\Novacta.Analytics.CodeExamples\MatrixIndexerExample12.cs.txt" language="cs" />
-        ///   </para>
-        /// </example>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
+        [Obsolete(message: "Use instead indexers having no parameter 'avoidDenseAllocations'.")]
         public DoubleMatrix this[IndexCollection rowIndexes, string columnIndexes, bool avoidDenseAllocations]
         {
             get
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
-
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
-
-                // Check if columnIndexes is a string reserved for sub-reference
-                if (0 != string.Compare(columnIndexes, ":", StringComparison.Ordinal))
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(columnIndexes),
-                       ImplementationServices.GetResourceString(
-                           "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX"));
-                }
-
-                DoubleMatrix subMatrix;
-
-                if (avoidDenseAllocations
-                    && this.implementor.StorageScheme == StorageScheme.Dense)
-                {
-                    if (rowIndexes.maxIndex >= this.implementor.NumberOfRows)
-                    {
-                        throw new ArgumentOutOfRangeException(
-                            nameof(rowIndexes),
-                            ImplementationServices.GetResourceString(
-                                "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
-                    }
-                    var columns = IndexCollection.Range(0, this.implementor.NumberOfColumns - 1);
-                    IndexCollection[] parentIndexes = new IndexCollection[2] { rowIndexes, columns };
-                    var subDoubleMatrixImplementor = new ViewDoubleMatrixImplementor(
-                        parentIndexes,
-                        this.implementor);
-                    subMatrix = new DoubleMatrix(subDoubleMatrixImplementor);
-                }
-                else
-                    subMatrix = new DoubleMatrix(this.implementor[rowIndexes, columnIndexes]);
-
-                if (this.HasRowNames)
-                    ImplementationServices.TrySetMatrixRowNames(
-                        subMatrix,
-                        rowIndexes,
-                        this.rowNames);
-
-                if (this.HasColumnNames)
-                    ImplementationServices.SetMatrixColumnNames(
-                        subMatrix,
-                        this.columnNames);
-
-                return subMatrix;
+                return this[rowIndexes, columnIndexes];
             }
         }
 
@@ -4683,15 +4876,38 @@ namespace Novacta.Analytics
         /// <param name="columnIndexes">
         /// The zero-based column indexes of the elements to get.</param>
         /// <param name="avoidDenseAllocations">
-        /// If set to <b>true</b> signals that the returned matrix 
-        /// will not store the elements to get
-        /// applying the <see cref="StorageScheme.Dense">Dense</see> storage scheme.</param>
+        /// If set to <c>true</c> signals that the elements to get will not be stored 
+        /// in the returned matrix 
+        /// applying the <see cref="StorageScheme.Dense">Dense</see> storage scheme.
+        /// Always ignored in the current release.
+        /// </param>
         /// <value>
         /// A tabular collection formed by the entries corresponding to the 
         /// specified row and column indexes.</value>
         /// <remarks>
-        /// <inheritdoc cref="DoubleMatrix" path="para[@id='MinimizeMemoryUsage.3']"/>
-        /// <inheritdoc cref="DoubleMatrix" path="para[@id='MinimizeMemoryUsage.4']"/>
+        /// <note type="caution">
+        /// <para>
+        /// In previous releases, this indexer returned matrices whose entries  
+        /// were, in some cases, not directly stored: if parameter 
+        /// <paramref name="avoidDenseAllocations"/> was <c>true</c> then the 
+        /// indexer tried to minimize memory allocations
+        /// by avoiding the application 
+        /// of the <see cref="StorageScheme.Dense">Dense</see> storage scheme.
+        /// </para>
+        /// <para>
+        /// Indexers that try to avoid dense allocations have been deprecated 
+        /// and their use is not recommended.
+        /// </para>
+        /// <para>
+        /// In the current release, the value passed to parameter
+        /// <paramref name="avoidDenseAllocations"/> is ignored.
+        /// </para>
+        /// <para>
+        /// In future releases, this indexer will be removed from the public API.
+        /// Please use instead indexer
+        /// <see cref="DoubleMatrix.this[string,IndexCollection]"/>.
+        /// </para>
+        /// </note>
         /// </remarks>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="rowIndexes"/> is <b>null</b>.<br/>
@@ -4706,70 +4922,12 @@ namespace Novacta.Analytics
         /// which is greater than or equal to the 
         /// number of columns of this instance.
         /// </exception>
-        /// <example>
-        /// <para>
-        /// In the following example, some matrix elements are simultaneously accessed.
-        /// </para>
-        /// <para>
-        /// <code source="..\Novacta.Analytics.CodeExamples\MatrixIndexerExample21.cs.txt" 
-        /// language="cs" />
-        /// </para>
-        /// </example>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
+        [Obsolete(message: "Use instead indexers having no parameter 'avoidDenseAllocations'.")]
         public DoubleMatrix this[string rowIndexes, IndexCollection columnIndexes, bool avoidDenseAllocations]
         {
             get
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
-
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
-
-                // Check if rowIndexes is a string reserved for sub reference
-                if (0 != string.Compare(rowIndexes, ":", StringComparison.Ordinal))
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(rowIndexes),
-                       ImplementationServices.GetResourceString(
-                           "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX"));
-                }
-
-                DoubleMatrix subMatrix;
-
-                if (avoidDenseAllocations
-                    && this.implementor.StorageScheme == StorageScheme.Dense)
-                {
-                    if (columnIndexes.maxIndex >= this.implementor.NumberOfColumns)
-                    {
-                        throw new ArgumentOutOfRangeException(
-                            nameof(columnIndexes),
-                            ImplementationServices.GetResourceString(
-                                "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
-                    }
-                    IndexCollection rows = IndexCollection.Range(0, this.implementor.NumberOfRows - 1);
-                    IndexCollection[] parentIndexes = new IndexCollection[2] { rows, columnIndexes };
-                    var subDoubleMatrixImplementor = new ViewDoubleMatrixImplementor(parentIndexes, this.implementor);
-                    subMatrix = new DoubleMatrix(subDoubleMatrixImplementor);
-                }
-                else
-                    subMatrix = new DoubleMatrix(this.implementor[rowIndexes, columnIndexes]);
-
-                if (this.HasRowNames)
-                    ImplementationServices.SetMatrixRowNames(
-                        subMatrix,
-                        this.rowNames);
-
-                if (this.HasColumnNames)
-                    ImplementationServices.TrySetMatrixColumnNames(
-                        subMatrix,
-                        columnIndexes,
-                        this.columnNames);
-
-                return subMatrix;
+                return this[rowIndexes, columnIndexes];
             }
         }
 
@@ -4786,15 +4944,38 @@ namespace Novacta.Analytics
         /// The value must be <c>":"</c>, which means that all valid column indexes
         /// are specified.</param>
         /// <param name="avoidDenseAllocations">
-        /// If set to <b>true</b> signals that the returned matrix 
-        /// will not store the elements to get
-        /// applying the <see cref="StorageScheme.Dense">Dense</see> storage scheme.</param>
+        /// If set to <c>true</c> signals that the elements to get will not be stored 
+        /// in the returned matrix 
+        /// applying the <see cref="StorageScheme.Dense">Dense</see> storage scheme.
+        /// Always ignored in the current release.
+        /// </param>
         /// <value>
         /// A tabular collection formed by the elements corresponding to the 
         /// specified row and column indexes.</value>
         /// <remarks>
-        /// <inheritdoc cref="DoubleMatrix" path="para[@id='MinimizeMemoryUsage.3']"/>
-        /// <inheritdoc cref="DoubleMatrix" path="para[@id='MinimizeMemoryUsage.4']"/>
+        /// <note type="caution">
+        /// <para>
+        /// In previous releases, this indexer returned matrices whose entries  
+        /// were, in some cases, not directly stored: if parameter 
+        /// <paramref name="avoidDenseAllocations"/> was <c>true</c> then the 
+        /// indexer tried to minimize memory allocations
+        /// by avoiding the application 
+        /// of the <see cref="StorageScheme.Dense">Dense</see> storage scheme.
+        /// </para>
+        /// <para>
+        /// Indexers that try to avoid dense allocations have been deprecated 
+        /// and their use is not recommended.
+        /// </para>
+        /// <para>
+        /// In the current release, the value passed to parameter
+        /// <paramref name="avoidDenseAllocations"/> is ignored.
+        /// </para>
+        /// <para>
+        /// In future releases, this indexer will be removed from the public API.
+        /// Please use instead indexer
+        /// <see cref="DoubleMatrix.this[string,string]"/>.
+        /// </para>
+        /// </note>
         /// </remarks>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="rowIndexes"/> is <b>null</b>.<br/>
@@ -4808,82 +4989,12 @@ namespace Novacta.Analytics
         /// <paramref name="columnIndexes"/> is not a string reserved 
         /// for tabular collection sub-referencing.
         /// </exception>
-        /// <example>
-        /// <para>
-        /// In the following example, some matrix elements are simultaneously accessed.
-        /// </para>
-        /// <para>
-        /// <code source="..\Novacta.Analytics.CodeExamples\MatrixIndexerExample22.cs.txt" 
-        /// language="cs" />
-        /// </para>
-        /// <para>
-        /// In the following example, a dense matrix is accessed while minimizing 
-        /// memory usage.
-        /// </para>
-        /// <para>
-        /// <code source="..\Novacta.Analytics.CodeExamples\MinimizeMemoryUsageExample0.cs.txt" 
-        /// language="cs" />
-        /// </para>
-        /// <para>
-        /// In the following example, a dense matrix is accessed without 
-        /// memory usage minimization.
-        /// </para>
-        /// <para>
-        /// <code source="..\Novacta.Analytics.CodeExamples\MinimizeMemoryUsageExample1.cs.txt" 
-        /// language="cs" />
-        /// </para>
-        /// </example>
+        [Obsolete(message: "Use instead indexers having no parameter 'avoidDenseAllocations'.")]
         public DoubleMatrix this[string rowIndexes, string columnIndexes, bool avoidDenseAllocations]
         {
             get
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
-
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
-
-                if (0 != string.Compare(rowIndexes, ":", StringComparison.Ordinal))
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(rowIndexes),
-                       ImplementationServices.GetResourceString(
-                           "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX"));
-                }
-
-                if (0 != string.Compare(columnIndexes, ":", StringComparison.Ordinal))
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(columnIndexes),
-                       ImplementationServices.GetResourceString(
-                           "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX"));
-                }
-
-                DoubleMatrix subMatrix;
-
-                if (avoidDenseAllocations
-                    && this.implementor.StorageScheme == StorageScheme.Dense)
-                {
-                    var rows = IndexCollection.Range(0, this.implementor.NumberOfRows - 1);
-                    var columns = IndexCollection.Range(0, this.implementor.NumberOfColumns - 1);
-                    var parentIndexes = new IndexCollection[2] { rows, columns };
-                    var subDoubleMatrixImplementor = new ViewDoubleMatrixImplementor(parentIndexes, this.implementor);
-                    subMatrix = new DoubleMatrix(subDoubleMatrixImplementor);
-                }
-                else
-                    subMatrix = new DoubleMatrix(this.implementor[rowIndexes, columnIndexes]);
-
-                if (this.HasRowNames)
-                    ImplementationServices.SetMatrixRowNames(
-                        subMatrix,
-                        this.rowNames);
-
-                if (this.HasColumnNames)
-                    ImplementationServices.SetMatrixColumnNames(
-                        subMatrix,
-                        this.columnNames);
-
-                return subMatrix;
+                return this[rowIndexes, columnIndexes];
             }
         }
 
@@ -5042,22 +5153,22 @@ namespace Novacta.Analytics
         /// <value><c>true</c> if this instance is read only; otherwise, <c>false</c>.</value>
         public bool IsReadOnly { get => false; }
 
-        private static DenseMatrixImplementor<Func<MatrixImplementor<double>, double, int>> IndexOfOperators()
+        private static Func<MatrixImplementor<double>, double, int>[] IndexOfOperators()
         {
-            var operators = new DenseMatrixImplementor<Func<MatrixImplementor<double>, double, int>>(numberOfStorageSchemes, 1);
+            var operators = new Func<MatrixImplementor<double>, double, int>[numberOfStorageSchemes];
 
             operators[dense] = DoubleMatrixOperators.Dense_IndexOf;
-            operators[view] = DoubleMatrixOperators.View_IndexOf;
             operators[sparse] = DoubleMatrixOperators.Sparse_IndexOf;
 
             return operators;
         }
-        private static readonly DenseMatrixImplementor<Func<MatrixImplementor<double>, double, int>> _IndexOfOperators = IndexOfOperators();
+        private static readonly Func<MatrixImplementor<double>, double, int>[]
+            indexOfOperators = IndexOfOperators();
 
         /// <inheritdoc/>
         public int IndexOf(double item)
         {
-            return _IndexOfOperators[(int)this.implementor.StorageScheme](this.implementor, item);
+            return indexOfOperators[(int)this.implementor.StorageScheme](this.implementor, item);
         }
 
         /// <summary>
@@ -5117,17 +5228,17 @@ namespace Novacta.Analytics
             return -1 != this.IndexOf(item);
         }
 
-        private static DenseMatrixImplementor<Action<MatrixImplementor<double>, double[], int>> CopyToOperators()
+        private static Action<MatrixImplementor<double>, double[], int>[] CopyToOperators()
         {
-            var operators = new DenseMatrixImplementor<Action<MatrixImplementor<double>, double[], int>>(numberOfStorageSchemes, 1);
+            var operators = new Action<MatrixImplementor<double>, double[], int>[numberOfStorageSchemes];
 
             operators[dense] = DoubleMatrixOperators.Dense_CopyTo;
-            operators[view] = DoubleMatrixOperators.View_CopyTo;
             operators[sparse] = DoubleMatrixOperators.Sparse_CopyTo;
 
             return operators;
         }
-        private static readonly DenseMatrixImplementor<Action<MatrixImplementor<double>, double[], int>> _CopyToOperators = CopyToOperators();
+        private static readonly Action<MatrixImplementor<double>, double[], int>[]
+            copyToOperators = CopyToOperators();
 
 
         /// <inheritdoc/>
@@ -5151,7 +5262,7 @@ namespace Novacta.Analytics
                     ImplementationServices.GetResourceString("STR_EXCEPT_PAR_NOT_ENOUGH_SPACE_IN_ARRAY"));
             }
 
-            _CopyToOperators[(int)this.implementor.StorageScheme](this.implementor, array, arrayIndex);
+            copyToOperators[(int)this.implementor.StorageScheme](this.implementor, array, arrayIndex);
         }
 
         /// <summary>

@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Text;
+using System.Numerics;
 using System.Text.Json;
 
 namespace Novacta.Analytics.Tests
@@ -33,6 +33,71 @@ namespace Novacta.Analytics.Tests
                     expectedParameterName: "options");
             }
         }
+        
+        [TestMethod]
+        public void JsonDictionaryInt32StringConverterTest()
+        {
+            // No start object
+            {
+                var strings = new string[]
+                {
+                      @"""0"": ""Row-0"",",
+                      @"""2"": ""Row-2"",",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<Dictionary<int, string>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            #region Pairs
+
+            // No Key int value
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""A"": ""Row-0"",",
+                      @"""2"": ""Row-2""",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<Dictionary<int, string>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            #endregion
+        }
+
+        #region Categorical data
 
         [TestMethod]
         public void JsonCategoricalEntailmentConverterTest()
@@ -876,7 +941,7 @@ namespace Novacta.Analytics.Tests
         {
             // Some premises are empty
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -886,7 +951,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -900,7 +965,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -949,7 +1014,7 @@ namespace Novacta.Analytics.Tests
 
             // No premises are empty
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -959,7 +1024,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -973,7 +1038,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1026,7 +1091,7 @@ namespace Novacta.Analytics.Tests
         {
             // Has not categories - IsReadOnly is true
             {
-                CategoricalVariable serializedVariable = new CategoricalVariable("Variable");
+                CategoricalVariable serializedVariable = new("Variable");
 
                 serializedVariable.SetAsReadOnly();
 
@@ -1067,7 +1132,7 @@ namespace Novacta.Analytics.Tests
 
             // Has not categories - IsReadOnly is false
             {
-                CategoricalVariable serializedVariable = new CategoricalVariable("Variable");
+                CategoricalVariable serializedVariable = new("Variable");
 
                 var options = new JsonSerializerOptions
                 {
@@ -1105,7 +1170,7 @@ namespace Novacta.Analytics.Tests
 
             // Has categories - IsReadOnly is true
             {
-                CategoricalVariable serializedVariable = new CategoricalVariable("Variable")
+                CategoricalVariable serializedVariable = new("Variable")
                 {
                     { 0, "A" },
                     { 1, "B" },
@@ -1152,7 +1217,7 @@ namespace Novacta.Analytics.Tests
 
             // Has categories - IsReadOnly is false
             {
-                CategoricalVariable serializedVariable = new CategoricalVariable("Variable")
+                CategoricalVariable serializedVariable = new("Variable")
                 {
                     { 0, "A" },
                     { 1, "B" },
@@ -1239,7 +1304,7 @@ namespace Novacta.Analytics.Tests
                       @"""Data"": {",
                         @"""Matrix"": {",
                           @"""Implementor"": {",
-                          @"""StorageScheme"": 1,",
+                          @"""StorageScheme"": 0,",
                           @"""NumberOfRows"": 1,",
                           @"""NumberOfColumns"": 3,",
                           @"""Storage"": [",
@@ -1347,7 +1412,7 @@ namespace Novacta.Analytics.Tests
                       @"""Data"": {",
                         @"""Matrix"": {",
                           @"""Implementor"": {",
-                          @"""StorageScheme"": 1,",
+                          @"""StorageScheme"": 0,",
                           @"""NumberOfRows"": 1,",
                           @"""NumberOfColumns"": 3,",
                           @"""Storage"": [",
@@ -1489,7 +1554,7 @@ namespace Novacta.Analytics.Tests
                       @"""Data2"": {",
                         @"""Matrix"": {",
                           @"""Implementor"": {",
-                          @"""StorageScheme"": 1,",
+                          @"""StorageScheme"": 0,",
                           @"""NumberOfRows"": 1,",
                           @"""NumberOfColumns"": 3,",
                           @"""Storage"": [",
@@ -1573,7 +1638,7 @@ namespace Novacta.Analytics.Tests
                       @"""Data"": {",
                         @"""Matrix"": {",
                           @"""Implementor"": {",
-                          @"""StorageScheme"": 1,",
+                          @"""StorageScheme"": 0,",
                           @"""NumberOfRows"": 1,",
                           @"""NumberOfColumns"": 3,",
                           @"""Storage"": [",
@@ -1652,7 +1717,7 @@ namespace Novacta.Analytics.Tests
                       @"""Data"": {",
                         @"""Matrix"": {",
                           @"""Implementor"": {",
-                          @"""StorageScheme"": 1,",
+                          @"""StorageScheme"": 0,",
                           @"""NumberOfRows"": 1,",
                           @"""NumberOfColumns"": 3,",
                           @"""Storage"": [",
@@ -1732,7 +1797,7 @@ namespace Novacta.Analytics.Tests
                       @"""Data"": {",
                         @"""Matrix"": {",
                           @"""Implementor"": {",
-                          @"""StorageScheme"": 1,",
+                          @"""StorageScheme"": 0,",
                           @"""NumberOfRows"": 1,",
                           @"""NumberOfColumns"": 3,",
                           @"""Storage"": [",
@@ -1814,7 +1879,7 @@ namespace Novacta.Analytics.Tests
                       @"""Data"": {",
                         @"""Matrix"": {",
                           @"""Implementor"": {",
-                          @"""StorageScheme"": 1,",
+                          @"""StorageScheme"": 0,",
                           @"""NumberOfRows"": 1,",
                           @"""NumberOfColumns"": 3,",
                           @"""Storage"": [",
@@ -1855,7 +1920,6 @@ namespace Novacta.Analytics.Tests
             }
         }
 
-
         [TestMethod]
         public void JsonCategoricalDataSetSerializationTest()
         {
@@ -1864,7 +1928,7 @@ namespace Novacta.Analytics.Tests
             // Name is not null
             {
                 // Create the feature variables
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "A" },
                     { 1, "B" },
@@ -1874,7 +1938,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "I" },
                     { 1, "II" },
@@ -1884,7 +1948,7 @@ namespace Novacta.Analytics.Tests
                 f1.SetAsReadOnly();
 
                 // Create the response variable
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     0,
                     1,
@@ -1895,7 +1959,7 @@ namespace Novacta.Analytics.Tests
                 // Create a categorical data set containing
                 // observations about such variables
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, r };
+                    new() { f0, f1, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -1953,7 +2017,7 @@ namespace Novacta.Analytics.Tests
             // Name is null
             {
                 // Create the feature variables
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "A" },
                     { 1, "B" },
@@ -1963,7 +2027,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "I" },
                     { 1, "II" },
@@ -1973,7 +2037,7 @@ namespace Novacta.Analytics.Tests
                 f1.SetAsReadOnly();
 
                 // Create the response variable
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     0,
                     1,
@@ -1984,7 +2048,7 @@ namespace Novacta.Analytics.Tests
                 // Create a categorical data set containing
                 // observations about such variables
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, r };
+                    new() { f0, f1, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -2075,8 +2139,8 @@ namespace Novacta.Analytics.Tests
                             "Black,TRUE,-1.1",
                             "Black,FALSE, 4.4" };
 
-                MemoryStream stream = new MemoryStream();
-                StreamWriter writer = new StreamWriter(stream);
+                MemoryStream stream = new();
+                StreamWriter writer = new(stream);
                 for (int i = 0; i < data.Length; i++)
                 {
                     writer.WriteLine(data[i].ToCharArray());
@@ -2110,7 +2174,7 @@ namespace Novacta.Analytics.Tests
                         };
 
                 // Encode the categorical data set
-                StreamReader reader = new StreamReader(stream);
+                StreamReader reader = new(stream);
                 char columnDelimiter = ',';
                 IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
                 bool firstLineContainsColumnHeaders = true;
@@ -2155,8 +2219,8 @@ namespace Novacta.Analytics.Tests
                             "Black,TRUE,-1.1",
                             "Black,FALSE, 4.4" };
 
-                MemoryStream stream = new MemoryStream();
-                StreamWriter writer = new StreamWriter(stream);
+                MemoryStream stream = new();
+                StreamWriter writer = new(stream);
                 for (int i = 0; i < data.Length; i++)
                 {
                     writer.WriteLine(data[i].ToCharArray());
@@ -2190,7 +2254,7 @@ namespace Novacta.Analytics.Tests
                         };
 
                 // Encode the categorical data set
-                StreamReader reader = new StreamReader(stream);
+                StreamReader reader = new(stream);
                 char columnDelimiter = ',';
                 IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
                 bool firstLineContainsColumnHeaders = true;
@@ -2816,68 +2880,9 @@ namespace Novacta.Analytics.Tests
             }
         }
 
-        [TestMethod]
-        public void JsonDictionaryInt32StringConverterTest()
-        {
-            // No start object
-            {
-                var strings = new string[]
-                {
-                      @"""0"": ""Row-0"",",
-                      @"""2"": ""Row-2"",",
-                    "}"
-                };
+        #endregion
 
-                var options = new JsonSerializerOptions
-                {
-                    WriteIndented = true
-                };
-                JsonSerialization.AddDataConverters(options);
-
-                string json = String.Concat(strings);
-
-                ExceptionAssert.Throw(
-                    () =>
-                    {
-                        JsonSerializer.Deserialize<Dictionary<int, string>>(
-                            json,
-                            options);
-                    },
-                    expectedType: typeof(JsonException));
-            }
-
-            #region Pairs
-
-            // No Key int value
-            {
-                var strings = new string[]
-                {
-                    "{",
-                      @"""A"": ""Row-0"",",
-                      @"""2"": ""Row-2""",
-                    "}"
-                };
-
-                var options = new JsonSerializerOptions
-                {
-                    WriteIndented = true
-                };
-                JsonSerialization.AddDataConverters(options);
-
-                string json = String.Concat(strings);
-
-                ExceptionAssert.Throw(
-                    () =>
-                    {
-                        JsonSerializer.Deserialize<Dictionary<int, string>>(
-                            json,
-                            options);
-                    },
-                    expectedType: typeof(JsonException));
-            }
-
-            #endregion
-        }
+        #region Double
 
         [TestMethod]
         public void JsonDoubleMatrixImplementorConverterTest()
@@ -2886,7 +2891,7 @@ namespace Novacta.Analytics.Tests
             {
                 var strings = new string[]
                 {
-                      @"""StorageScheme"": 1,",
+                      @"""StorageScheme"": 0,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2,",
                       @"""Storage"": [",
@@ -2947,7 +2952,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme1"": 1,",
+                      @"""StorageScheme1"": 0,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2,",
                       @"""Storage"": [",
@@ -3050,7 +3055,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 1",
+                      @"""StorageScheme"": 0",
                     "}"
                 };
 
@@ -3077,7 +3082,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 1,",
+                      @"""StorageScheme"": 0,",
                       @"""NumberOfRows2"": 1,",
                       @"""NumberOfColumns"": 2,",
                       @"""Storage"": [",
@@ -3110,7 +3115,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 1,",
+                      @"""StorageScheme"": 0,",
                       @"""NumberOfRows"": null,",
                       @"""NumberOfColumns"": 2,",
                       @"""Storage"": [",
@@ -3147,7 +3152,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 1,",
+                      @"""StorageScheme"": 0,",
                       @"""NumberOfRows"": 1",
                     "}"
                 };
@@ -3175,7 +3180,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 1,",
+                      @"""StorageScheme"": 0,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns3"": 2,",
                       @"""Storage"": [",
@@ -3208,7 +3213,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 1,",
+                      @"""StorageScheme"": 0,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": null,",
                       @"""Storage"": [",
@@ -3247,7 +3252,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 1,",
+                      @"""StorageScheme"": 0,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2",
                     "}"
@@ -3276,7 +3281,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 1,",
+                      @"""StorageScheme"": 0,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2,",
                       @"""Storage4"": [",
@@ -3309,7 +3314,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 1,",
+                      @"""StorageScheme"": 0,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2,",
                       @"""Storage"": true",
@@ -3339,7 +3344,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 1,",
+                      @"""StorageScheme"": 0,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2,",
                       @"""Storage"": [",
@@ -3372,7 +3377,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 1,",
+                      @"""StorageScheme"": 0,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2,",
                       @"""Storage"": [",
@@ -3413,7 +3418,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 2,",
+                      @"""StorageScheme"": 1,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2",
                     "}"
@@ -3442,7 +3447,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 2,",
+                      @"""StorageScheme"": 1,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2,",
                       @"""Capacity4"": 2,",
@@ -3484,7 +3489,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 2,",
+                      @"""StorageScheme"": 1,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2,",
                       @"""Capacity"": null,",
@@ -3530,7 +3535,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 2,",
+                      @"""StorageScheme"": 1,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2,",
                       @"""Capacity"": 2",
@@ -3560,7 +3565,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 2,",
+                      @"""StorageScheme"": 1,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2,",
                       @"""Capacity"": 2,",
@@ -3602,7 +3607,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 2,",
+                      @"""StorageScheme"": 1,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2,",
                       @"""Capacity"": 2,",
@@ -3633,7 +3638,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 2,",
+                      @"""StorageScheme"": 1,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2,",
                       @"""Capacity"": 2,",
@@ -3675,7 +3680,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 2,",
+                      @"""StorageScheme"": 1,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2,",
                       @"""Capacity"": 2,",
@@ -3721,7 +3726,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 2,",
+                      @"""StorageScheme"": 1,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2,",
                       @"""Capacity"": 2,",
@@ -3755,7 +3760,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 2,",
+                      @"""StorageScheme"": 1,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2,",
                       @"""Capacity"": 2,",
@@ -3797,7 +3802,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 2,",
+                      @"""StorageScheme"": 1,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2,",
                       @"""Capacity"": 2,",
@@ -3832,7 +3837,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 2,",
+                      @"""StorageScheme"": 1,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2,",
                       @"""Capacity"": 2,",
@@ -3874,7 +3879,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 2,",
+                      @"""StorageScheme"": 1,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2,",
                       @"""Capacity"": 2,",
@@ -3920,7 +3925,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 2,",
+                      @"""StorageScheme"": 1,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2,",
                       @"""Capacity"": 2,",
@@ -3958,7 +3963,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 2,",
+                      @"""StorageScheme"": 1,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2,",
                       @"""Capacity"": 2,",
@@ -4000,7 +4005,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 2,",
+                      @"""StorageScheme"": 1,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2,",
                       @"""Capacity"": 2,",
@@ -4039,7 +4044,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                    @"""StorageScheme"": 2,",
+                    @"""StorageScheme"": 1,",
                     @"""NumberOfRows"": 1,",
                     @"""NumberOfColumns"": 2,",
                     @"""Capacity"": 2,",
@@ -4081,7 +4086,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                     "{",
-                      @"""StorageScheme"": 2,",
+                      @"""StorageScheme"": 1,",
                       @"""NumberOfRows"": 1,",
                       @"""NumberOfColumns"": 2,",
                       @"""Capacity"": 2,",
@@ -4164,7 +4169,7 @@ namespace Novacta.Analytics.Tests
                 var strings = new string[]
                 {
                       @"""Implementor"": {",
-                        @"""StorageScheme"": 1,",
+                        @"""StorageScheme"": 0,",
                         @"""NumberOfRows"": 1,",
                         @"""NumberOfColumns"": 2,",
                         @"""Storage"": [",
@@ -4230,7 +4235,7 @@ namespace Novacta.Analytics.Tests
                 {
                     "{",
                       @"""Implementor1"": {",
-                        @"""StorageScheme"": 1,",
+                        @"""StorageScheme"": 0,",
                         @"""NumberOfRows"": 1,",
                         @"""NumberOfColumns"": 2,",
                         @"""Storage"": [",
@@ -4272,7 +4277,7 @@ namespace Novacta.Analytics.Tests
                 {
                     "{",
                       @"""Implementor"": {",
-                        @"""StorageScheme"": 1,",
+                        @"""StorageScheme"": 0,",
                         @"""NumberOfRows"": 1,",
                         @"""NumberOfColumns"": 2,",
                         @"""Storage"": [",
@@ -4307,7 +4312,7 @@ namespace Novacta.Analytics.Tests
                 {
                     "{",
                       @"""Implementor"": {",
-                        @"""StorageScheme"": 1,",
+                        @"""StorageScheme"": 0,",
                         @"""NumberOfRows"": 1,",
                         @"""NumberOfColumns"": 2,",
                         @"""Storage"": [",
@@ -4345,7 +4350,7 @@ namespace Novacta.Analytics.Tests
                 {
                     "{",
                       @"""Implementor"": {",
-                        @"""StorageScheme"": 1,",
+                        @"""StorageScheme"": 0,",
                         @"""NumberOfRows"": 1,",
                         @"""NumberOfColumns"": 2,",
                         @"""Storage"": [",
@@ -4387,7 +4392,7 @@ namespace Novacta.Analytics.Tests
                 {
                     "{",
                       @"""Implementor"": {",
-                        @"""StorageScheme"": 1,",
+                        @"""StorageScheme"": 0,",
                         @"""NumberOfRows"": 1,",
                         @"""NumberOfColumns"": 2,",
                         @"""Storage"": [",
@@ -4423,7 +4428,7 @@ namespace Novacta.Analytics.Tests
                 {
                     "{",
                       @"""Implementor"": {",
-                        @"""StorageScheme"": 1,",
+                        @"""StorageScheme"": 0,",
                         @"""NumberOfRows"": 1,",
                         @"""NumberOfColumns"": 2,",
                         @"""Storage"": [",
@@ -4465,7 +4470,7 @@ namespace Novacta.Analytics.Tests
                 {
                     "{",
                       @"""Implementor"": {",
-                        @"""StorageScheme"": 1,",
+                        @"""StorageScheme"": 0,",
                         @"""NumberOfRows"": 1,",
                         @"""NumberOfColumns"": 2,",
                         @"""Storage"": [",
@@ -4502,7 +4507,7 @@ namespace Novacta.Analytics.Tests
                 {
                     "{",
                       @"""Implementor"": {",
-                        @"""StorageScheme"": 1,",
+                        @"""StorageScheme"": 0,",
                         @"""NumberOfRows"": 1,",
                         @"""NumberOfColumns"": 2,",
                         @"""Storage"": [",
@@ -4542,7 +4547,7 @@ namespace Novacta.Analytics.Tests
                 {
                     "{",
                       @"""Implementor"": {",
-                        @"""StorageScheme"": 1,",
+                        @"""StorageScheme"": 0,",
                         @"""NumberOfRows"": 1,",
                         @"""NumberOfColumns"": 2,",
                         @"""Storage"": [",
@@ -4576,349 +4581,6 @@ namespace Novacta.Analytics.Tests
         }
 
         [TestMethod]
-        public void JsonMatrixSerializationTest()
-        {
-            #region DoubleMatrix 
-
-            #region Without names
-
-            // View
-            {
-                var testableMatrix = TestableDoubleMatrix11.Get();
-                var serializedMatrix = testableMatrix.View;
-
-                var options = new JsonSerializerOptions
-                {
-                    WriteIndented = true
-                };
-                JsonSerialization.AddDataConverters(options);
-
-                string json = JsonSerializer.Serialize(
-                    serializedMatrix,
-                    typeof(DoubleMatrix),
-                    options);
-
-                var deserializedMatrix = JsonSerializer.Deserialize<DoubleMatrix>(
-                    json,
-                    options);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            // Dense
-            {
-                var testableMatrix = TestableDoubleMatrix11.Get();
-                var serializedMatrix = testableMatrix.Dense;
-
-                var options = new JsonSerializerOptions
-                {
-                    WriteIndented = true
-                };
-                JsonSerialization.AddDataConverters(options);
-
-                string json = JsonSerializer.Serialize(
-                    serializedMatrix,
-                    typeof(DoubleMatrix),
-                    options);
-
-                var deserializedMatrix = JsonSerializer.Deserialize<DoubleMatrix>(
-                    json,
-                    options);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            // Sparse
-            {
-                var testableMatrix = TestableDoubleMatrix11.Get();
-                var serializedMatrix = testableMatrix.Sparse;
-
-                var options = new JsonSerializerOptions
-                {
-                    WriteIndented = true
-                };
-                JsonSerialization.AddDataConverters(options);
-
-                string json = JsonSerializer.Serialize(
-                    serializedMatrix,
-                    typeof(DoubleMatrix),
-                    options);
-
-                var deserializedMatrix = JsonSerializer.Deserialize<DoubleMatrix>(
-                    json,
-                    options);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            #endregion
-
-            #region With names
-
-            // View
-            {
-                var testableMatrix = TestableDoubleMatrix16.Get();
-                var serializedMatrix = testableMatrix.View;
-
-                var options = new JsonSerializerOptions
-                {
-                    WriteIndented = true
-                };
-                JsonSerialization.AddDataConverters(options);
-
-                string json = JsonSerializer.Serialize(
-                    serializedMatrix,
-                    typeof(DoubleMatrix),
-                    options);
-
-                var deserializedMatrix = JsonSerializer.Deserialize<DoubleMatrix>(
-                    json,
-                    options);
-
-                serializedMatrix[0] = -1001.2;
-                deserializedMatrix[0] = -1001.2;
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            // Dense
-            {
-                var testableMatrix = TestableDoubleMatrix16.Get();
-                var serializedMatrix = testableMatrix.Dense;
-
-                var options = new JsonSerializerOptions
-                {
-                    WriteIndented = true
-                };
-                JsonSerialization.AddDataConverters(options);
-
-                string json = JsonSerializer.Serialize(
-                    serializedMatrix,
-                    typeof(DoubleMatrix),
-                    options);
-
-                var deserializedMatrix = JsonSerializer.Deserialize<DoubleMatrix>(
-                    json,
-                    options);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            // Sparse
-            {
-                var testableMatrix = TestableDoubleMatrix16.Get();
-                var serializedMatrix = testableMatrix.Sparse;
-
-                var options = new JsonSerializerOptions
-                {
-                    WriteIndented = true
-                };
-                JsonSerialization.AddDataConverters(options);
-
-                string json = JsonSerializer.Serialize(
-                    serializedMatrix,
-                    typeof(DoubleMatrix),
-                    options);
-
-                var deserializedMatrix = JsonSerializer.Deserialize<DoubleMatrix>(
-                    json,
-                    options);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            #endregion
-
-            #endregion
-
-            #region ReadOnlyDoubleMatrix 
-
-            #region Without names
-
-            // View
-            {
-                var testableMatrix = TestableDoubleMatrix11.Get();
-                var serializedMatrix = testableMatrix.View.AsReadOnly();
-
-                var options = new JsonSerializerOptions
-                {
-                    WriteIndented = true
-                };
-                JsonSerialization.AddDataConverters(options);
-
-                string json = JsonSerializer.Serialize(
-                    serializedMatrix,
-                    typeof(ReadOnlyDoubleMatrix),
-                    options);
-
-                var deserializedMatrix = JsonSerializer.Deserialize<ReadOnlyDoubleMatrix>(
-                    json,
-                    options);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            // Dense
-            {
-                var testableMatrix = TestableDoubleMatrix11.Get();
-                var serializedMatrix = testableMatrix.Dense.AsReadOnly();
-
-                var options = new JsonSerializerOptions
-                {
-                    WriteIndented = true
-                };
-                JsonSerialization.AddDataConverters(options);
-
-                string json = JsonSerializer.Serialize(
-                    serializedMatrix,
-                    typeof(ReadOnlyDoubleMatrix),
-                    options);
-
-                var deserializedMatrix = JsonSerializer.Deserialize<ReadOnlyDoubleMatrix>(
-                    json,
-                    options);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            // Sparse
-            {
-                var testableMatrix = TestableDoubleMatrix11.Get();
-                var serializedMatrix = testableMatrix.Sparse.AsReadOnly();
-
-                var options = new JsonSerializerOptions
-                {
-                    WriteIndented = true
-                };
-                JsonSerialization.AddDataConverters(options);
-
-                string json = JsonSerializer.Serialize(
-                    serializedMatrix,
-                    typeof(ReadOnlyDoubleMatrix),
-                    options);
-
-                var deserializedMatrix = JsonSerializer.Deserialize<ReadOnlyDoubleMatrix>(
-                    json,
-                    options);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            #endregion
-
-            #region With names
-
-            // View
-            {
-                var testableMatrix = TestableDoubleMatrix16.Get();
-                var serializedMatrix = testableMatrix.View.AsReadOnly();
-
-                var options = new JsonSerializerOptions
-                {
-                    WriteIndented = true
-                };
-                JsonSerialization.AddDataConverters(options);
-
-                string json = JsonSerializer.Serialize(
-                    serializedMatrix,
-                    typeof(ReadOnlyDoubleMatrix),
-                    options);
-
-                var deserializedMatrix = JsonSerializer.Deserialize<ReadOnlyDoubleMatrix>(
-                    json,
-                    options);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            // Dense
-            {
-                var testableMatrix = TestableDoubleMatrix16.Get();
-                var serializedMatrix = testableMatrix.Dense.AsReadOnly();
-
-                var options = new JsonSerializerOptions
-                {
-                    WriteIndented = true
-                };
-                JsonSerialization.AddDataConverters(options);
-
-                string json = JsonSerializer.Serialize(
-                    serializedMatrix,
-                    typeof(ReadOnlyDoubleMatrix),
-                    options);
-
-                var deserializedMatrix = JsonSerializer.Deserialize<ReadOnlyDoubleMatrix>(
-                    json,
-                    options);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            // Sparse
-            {
-                var testableMatrix = TestableDoubleMatrix16.Get();
-                var serializedMatrix = testableMatrix.Sparse.AsReadOnly();
-
-                var options = new JsonSerializerOptions
-                {
-                    WriteIndented = true
-                };
-                JsonSerialization.AddDataConverters(options);
-
-                string json = JsonSerializer.Serialize(
-                    serializedMatrix,
-                    typeof(ReadOnlyDoubleMatrix),
-                    options);
-
-                var deserializedMatrix = JsonSerializer.Deserialize<ReadOnlyDoubleMatrix>(
-                    json,
-                    options);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            #endregion
-
-            #endregion
-        }
-
-        [TestMethod]
         public void JsonReadOnlyDoubleMatrixConverterTest()
         {
             // No start object
@@ -4927,7 +4589,7 @@ namespace Novacta.Analytics.Tests
                 {
                       @"""Matrix"": {",
                         @"""Implementor"": {",
-                          @"""StorageScheme"": 1,",
+                          @"""StorageScheme"": 0,",
                           @"""NumberOfRows"": 1,",
                           @"""NumberOfColumns"": 2,",
                           @"""Storage"": [",
@@ -4995,7 +4657,7 @@ namespace Novacta.Analytics.Tests
                     "{",
                       @"""Matrix1"": {",
                         @"""Implementor"": {",
-                          @"""StorageScheme"": 1,",
+                          @"""StorageScheme"": 0,",
                           @"""NumberOfRows"": 1,",
                           @"""NumberOfColumns"": 2,",
                           @"""Storage"": [",
@@ -5037,7 +4699,7 @@ namespace Novacta.Analytics.Tests
                     "{",
                       @"""Matrix"": {",
                         @"""Implementor"": {",
-                          @"""StorageScheme"": 1,",
+                          @"""StorageScheme"": 0,",
                           @"""NumberOfRows"": 1,",
                           @"""NumberOfColumns"": 2,",
                           @"""Storage"": [",
@@ -5070,5 +4732,2797 @@ namespace Novacta.Analytics.Tests
                     expectedType: typeof(JsonException));
             }
         }
+
+        [TestMethod]
+        public void JsonDoubleMatrixSerializationTest()
+        {
+            #region DoubleMatrix 
+
+            #region Without names
+
+            // Dense
+            {
+                var testableMatrix = TestableDoubleMatrix11.Get();
+                var serializedMatrix = testableMatrix.AsDense;
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = JsonSerializer.Serialize(
+                    serializedMatrix,
+                    typeof(DoubleMatrix),
+                    options);
+
+                var deserializedMatrix = JsonSerializer.Deserialize<DoubleMatrix>(
+                    json,
+                    options);
+
+                DoubleMatrixAssert.AreEqual(
+                    expected: serializedMatrix,
+                    actual: deserializedMatrix,
+                    delta: DoubleMatrixTest.Accuracy);
+            }
+
+            // Sparse
+            {
+                var testableMatrix = TestableDoubleMatrix11.Get();
+                var serializedMatrix = testableMatrix.AsSparse;
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = JsonSerializer.Serialize(
+                    serializedMatrix,
+                    typeof(DoubleMatrix),
+                    options);
+
+                var deserializedMatrix = JsonSerializer.Deserialize<DoubleMatrix>(
+                    json,
+                    options);
+
+                DoubleMatrixAssert.AreEqual(
+                    expected: serializedMatrix,
+                    actual: deserializedMatrix,
+                    delta: DoubleMatrixTest.Accuracy);
+            }
+
+            #endregion
+
+            #region With names
+
+            // Dense
+            {
+                var testableMatrix = TestableDoubleMatrix16.Get();
+                var serializedMatrix = testableMatrix.AsDense;
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = JsonSerializer.Serialize(
+                    serializedMatrix,
+                    typeof(DoubleMatrix),
+                    options);
+
+                var deserializedMatrix = JsonSerializer.Deserialize<DoubleMatrix>(
+                    json,
+                    options);
+
+                DoubleMatrixAssert.AreEqual(
+                    expected: serializedMatrix,
+                    actual: deserializedMatrix,
+                    delta: DoubleMatrixTest.Accuracy);
+            }
+
+            // Sparse
+            {
+                var testableMatrix = TestableDoubleMatrix16.Get();
+                var serializedMatrix = testableMatrix.AsSparse;
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = JsonSerializer.Serialize(
+                    serializedMatrix,
+                    typeof(DoubleMatrix),
+                    options);
+
+                var deserializedMatrix = JsonSerializer.Deserialize<DoubleMatrix>(
+                    json,
+                    options);
+
+                DoubleMatrixAssert.AreEqual(
+                    expected: serializedMatrix,
+                    actual: deserializedMatrix,
+                    delta: DoubleMatrixTest.Accuracy);
+            }
+
+            #endregion
+
+            #endregion
+
+            #region ReadOnlyDoubleMatrix 
+
+            #region Without names
+
+            // Dense
+            {
+                var testableMatrix = TestableDoubleMatrix11.Get();
+                var serializedMatrix = testableMatrix.AsDense.AsReadOnly();
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = JsonSerializer.Serialize(
+                    serializedMatrix,
+                    typeof(ReadOnlyDoubleMatrix),
+                    options);
+
+                var deserializedMatrix = JsonSerializer.Deserialize<ReadOnlyDoubleMatrix>(
+                    json,
+                    options);
+
+                DoubleMatrixAssert.AreEqual(
+                    expected: serializedMatrix,
+                    actual: deserializedMatrix,
+                    delta: DoubleMatrixTest.Accuracy);
+            }
+
+            // Sparse
+            {
+                var testableMatrix = TestableDoubleMatrix11.Get();
+                var serializedMatrix = testableMatrix.AsSparse.AsReadOnly();
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = JsonSerializer.Serialize(
+                    serializedMatrix,
+                    typeof(ReadOnlyDoubleMatrix),
+                    options);
+
+                var deserializedMatrix = JsonSerializer.Deserialize<ReadOnlyDoubleMatrix>(
+                    json,
+                    options);
+
+                DoubleMatrixAssert.AreEqual(
+                    expected: serializedMatrix,
+                    actual: deserializedMatrix,
+                    delta: DoubleMatrixTest.Accuracy);
+            }
+
+            #endregion
+
+            #region With names
+
+            // Dense
+            {
+                var testableMatrix = TestableDoubleMatrix16.Get();
+                var serializedMatrix = testableMatrix.AsDense.AsReadOnly();
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = JsonSerializer.Serialize(
+                    serializedMatrix,
+                    typeof(ReadOnlyDoubleMatrix),
+                    options);
+
+                var deserializedMatrix = JsonSerializer.Deserialize<ReadOnlyDoubleMatrix>(
+                    json,
+                    options);
+
+                DoubleMatrixAssert.AreEqual(
+                    expected: serializedMatrix,
+                    actual: deserializedMatrix,
+                    delta: DoubleMatrixTest.Accuracy);
+            }
+
+            // Sparse
+            {
+                var testableMatrix = TestableDoubleMatrix16.Get();
+                var serializedMatrix = testableMatrix.AsSparse.AsReadOnly();
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = JsonSerializer.Serialize(
+                    serializedMatrix,
+                    typeof(ReadOnlyDoubleMatrix),
+                    options);
+
+                var deserializedMatrix = JsonSerializer.Deserialize<ReadOnlyDoubleMatrix>(
+                    json,
+                    options);
+
+                DoubleMatrixAssert.AreEqual(
+                    expected: serializedMatrix,
+                    actual: deserializedMatrix,
+                    delta: DoubleMatrixTest.Accuracy);
+            }
+
+            #endregion
+
+            #endregion
+        }
+
+        #endregion
+
+        #region Complex
+
+        [TestMethod]
+        public void JsonComplexConverterTest()
+        {
+            // No start object
+            {
+                var strings = new string[]
+                {
+                      @"""Real"": 0,",
+                      @"""Imag"": 0",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<Complex>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            #region Real
+
+            // No Real property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<Complex>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // Wrong Real property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""Real1"": 0,",
+                      @"""Imag"": 0",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<Complex>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // No Real number value
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""Real"": null,",
+                      @"""Imag"": 0",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<Complex>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            #endregion
+
+            #region Imag
+
+            // No Imag property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""Real"": 0",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<Complex>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // Wrong Imag property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""Real"": 0,",
+                      @"""Imag2"": 0",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<Complex>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // No Imag number value
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""Real"": 0,",
+                      @"""Imag"": null",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<Complex>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            #endregion
+
+            // No end object
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""Real"": 0,",
+                      @"""Imag"": 0,",
+                      @"""Go"": 1"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<Complex>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+        }
+
+        [TestMethod]
+        public void JsonComplexMatrixImplementorConverterTest()
+        {
+            // No start object
+            {
+                var strings = new string[]
+                {
+                      @"""StorageScheme"": 0,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Storage"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                      "]",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            #region StorageScheme
+
+            // No StorageScheme property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // Wrong StorageScheme property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme1"": 0,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Storage"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                      "]",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // No StorageScheme int value
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": null,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Storage"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                      "]",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // Unknown StorageScheme int value
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": -1,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Storage"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                      "]",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            #endregion
+
+            #region NumberOfRows
+
+            // No NumberOfRows property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 0",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // Wrong NumberOfRows property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 0,",
+                      @"""NumberOfRows2"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Storage"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                      "]",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // No NumberOfRows int value
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 0,",
+                      @"""NumberOfRows"": null,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Storage"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                      "]",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            #endregion
+
+            #region NumberOfColumns
+
+            // No NumberOfColumns property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 0,",
+                      @"""NumberOfRows"": 1",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // Wrong NumberOfColumns property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 0,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns3"": 2,",
+                      @"""Storage"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                      "]",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // No NumberOfColumns int value
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 0,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": null,",
+                      @"""Storage"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                      "]",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            #endregion
+
+            #region Dense
+
+            #region Storage
+
+            // No Storage property name 
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 0,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // Wrong Storage property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 0,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Storage4"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                      "]",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // No Storage start array
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 0,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Storage"": true",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // No Storage number value
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 0,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Storage"": [",
+                        "null,",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                      "]",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // No Storage end array
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 0,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Storage"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                      "[",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            #endregion
+
+            #endregion
+
+            #region Sparse
+
+            #region Capacity
+
+            // No Capacity property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 1,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // Wrong Capacity property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 1,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Capacity4"": 2,",
+                      @"""Values"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                      "],",
+                      @"""Columns"": [",
+                        "1,",
+                        "0",
+                      "],",
+                      @"""RowIndex"": [",
+                        "0,",
+                        "1",
+                      "]",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // No Capacity int value
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 1,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Capacity"": null,",
+                      @"""Values"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                      "],",
+                      @"""Columns"": [",
+                        "1,",
+                        "0",
+                      "],",
+                      @"""RowIndex"": [",
+                        "0,",
+                        "1",
+                      "]",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            #endregion
+
+            #region Values
+
+            // No Values property name 
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 1,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Capacity"": 2",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // Wrong Values property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 1,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Capacity"": 2,",
+                      @"""Values5"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                      "],",
+                      @"""Columns"": [",
+                        "1,",
+                        "0",
+                      "],",
+                      @"""RowIndex"": [",
+                        "0,",
+                        "1",
+                      "]",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // No Values start array
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 1,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Capacity"": 2,",
+                      @"""Values"": true",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // No Values number value
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 1,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Capacity"": 2,",
+                      @"""Values"": [",
+                        "{",
+                          @"""Real"": null,",
+                          @"""Imag"": 0",
+                        "}",
+                      "],",
+                      @"""Columns"": [",
+                        "1,",
+                        "0",
+                      "],",
+                      @"""RowIndex"": [",
+                        "0,",
+                        "1",
+                      "]",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // No Values end array
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 1,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Capacity"": 2,",
+                      @"""Values"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                      "[,",
+                      @"""Columns"": [",
+                        "1,",
+                        "0",
+                      "],",
+                      @"""RowIndex"": [",
+                        "0,",
+                        "1",
+                      "]",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            #endregion
+
+            #region Columns
+
+            // No Columns property name 
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 1,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Capacity"": 2,",
+                      @"""Values"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                      "]",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // Wrong Columns property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 1,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Capacity"": 2,",
+                      @"""Values"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                      "],",
+                      @"""Columns6"": [",
+                        "1,",
+                        "0",
+                      "],",
+                      @"""RowIndex"": [",
+                        "0,",
+                        "1",
+                      "]",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // No Columns start array
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 1,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Capacity"": 2,",
+                      @"""Values"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                      "],",
+                      @"""Columns"": true",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // No Columns number value
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 1,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Capacity"": 2,",
+                      @"""Values"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                      "],",
+                      @"""Columns"": [",
+                        "null,",
+                        "0",
+                      "],",
+                      @"""RowIndex"": [",
+                        "0,",
+                        "1",
+                      "]",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // No Columns end array
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 1,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Capacity"": 2,",
+                      @"""Values"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                      "],",
+                      @"""Columns"": [",
+                        "1,",
+                        "0,",
+                      "[,",
+                      @"""RowIndex"": [",
+                        "0,",
+                        "1",
+                      "]",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            #endregion
+
+            #region RowIndex
+
+            // No RowIndex property name 
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 1,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Capacity"": 2,",
+                      @"""Values"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                      "],",
+                       @"""Columns"": [",
+                        "1,",
+                        "0",
+                      "]",
+                   "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // Wrong RowIndex property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 1,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Capacity"": 2,",
+                      @"""Values"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                      "],",
+                      @"""Columns"": [",
+                        "1,",
+                        "0",
+                      "],",
+                      @"""RowIndex7"": [",
+                        "0,",
+                        "1",
+                      "]",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // No RowIndex start array
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 1,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Capacity"": 2,",
+                      @"""Values"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                      "],",
+                      @"""Columns"": [",
+                        "1,",
+                        "0",
+                      "],",
+                      @"""RowIndex"": true",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // No RowIndex number value
+            {
+                var strings = new string[]
+                {
+                    "{",
+                    @"""StorageScheme"": 1,",
+                    @"""NumberOfRows"": 1,",
+                    @"""NumberOfColumns"": 2,",
+                    @"""Capacity"": 2,",
+                    @"""Values"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                    "],",
+                    @"""Columns"": [",
+                      "1,",
+                      "0",
+                    "],",
+                    @"""RowIndex"": [",
+                      "null,",
+                      "1",
+                    "]",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // No RowIndex end array
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 1,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Capacity"": 2,",
+                      @"""Values"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                      "],",
+                      @"""Columns"": [",
+                        "1,",
+                        "0",
+                      "],",
+                      @"""RowIndex"": [",
+                        "0,",
+                        "1,",
+                      "[",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            #endregion
+
+            #endregion
+
+            // No end object
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""StorageScheme"": 1,",
+                      @"""NumberOfRows"": 1,",
+                      @"""NumberOfColumns"": 2,",
+                      @"""Storage"": [",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "},",
+                        "{",
+                          @"""Real"": 0,",
+                          @"""Imag"": 0",
+                        "}",
+                      "],",
+                      @"""Go"": 1"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<MatrixImplementor<Complex>>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+        }
+
+        [TestMethod]
+        public void JsonComplexMatrixConverterTest()
+        {
+            // No start object
+            {
+                var strings = new string[]
+                {
+                      @"""Implementor"": {",
+                        @"""StorageScheme"": 0,",
+                        @"""NumberOfRows"": 1,",
+                        @"""NumberOfColumns"": 2,",
+                        @"""Storage"": [",
+                          "{",
+                            @"""Real"": 0,",
+                            @"""Imag"": 0",
+                          "},",
+                          "{",
+                            @"""Real"": 0,",
+                            @"""Imag"": 0",
+                          "}",
+                        "]",
+                      "},",
+                      @"""Name"": ""MyName"",",
+                      @"""RowNames"": null,",
+                      @"""ColumnNames"": null",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<ComplexMatrix>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            #region Implementor
+
+            // No Implementor property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<ComplexMatrix>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // Wrong Implementor property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""Implementor1"": {",
+                        @"""StorageScheme"": 0,",
+                        @"""NumberOfRows"": 1,",
+                        @"""NumberOfColumns"": 2,",
+                        @"""Storage"": [",
+                          "{",
+                            @"""Real"": 0,",
+                            @"""Imag"": 0",
+                          "},",
+                          "{",
+                            @"""Real"": 0,",
+                            @"""Imag"": 0",
+                          "}",
+                        "]",
+                      "},",
+                      @"""Name"": ""MyName"",",
+                      @"""RowNames"": null,",
+                      @"""ColumnNames"": null",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<ComplexMatrix>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            #endregion
+
+            #region Name
+
+            // No Name property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""Implementor"": {",
+                        @"""StorageScheme"": 0,",
+                        @"""NumberOfRows"": 1,",
+                        @"""NumberOfColumns"": 2,",
+                        @"""Storage"": [",
+                          "{",
+                            @"""Real"": 0,",
+                            @"""Imag"": 0",
+                          "},",
+                          "{",
+                            @"""Real"": 0,",
+                            @"""Imag"": 0",
+                          "}",
+                        "]",
+                      "}",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<ComplexMatrix>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // Wrong Name property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""Implementor"": {",
+                        @"""StorageScheme"": 0,",
+                        @"""NumberOfRows"": 1,",
+                        @"""NumberOfColumns"": 2,",
+                        @"""Storage"": [",
+                          "{",
+                            @"""Real"": 0,",
+                            @"""Imag"": 0",
+                          "},",
+                          "{",
+                            @"""Real"": 0,",
+                            @"""Imag"": 0",
+                          "}",
+                        "]",
+                      "},",
+                      @"""Name2"": ""MyName"",",
+                      @"""RowNames"": null,",
+                      @"""ColumnNames"": null",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<ComplexMatrix>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // No Name string or null value
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""Implementor"": {",
+                        @"""StorageScheme"": 0,",
+                        @"""NumberOfRows"": 1,",
+                        @"""NumberOfColumns"": 2,",
+                        @"""Storage"": [",
+                          "{",
+                            @"""Real"": 0,",
+                            @"""Imag"": 0",
+                          "},",
+                          "{",
+                            @"""Real"": 0,",
+                            @"""Imag"": 0",
+                          "}",
+                        "]",
+                      "},",
+                      @"""Name"": true",
+                      @"""RowNames"": null,",
+                      @"""ColumnNames"": null",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<ComplexMatrix>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            #endregion
+
+            #region RowNames
+
+            // No RowNames property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""Implementor"": {",
+                        @"""StorageScheme"": 0,",
+                        @"""NumberOfRows"": 1,",
+                        @"""NumberOfColumns"": 2,",
+                        @"""Storage"": [",
+                          "{",
+                            @"""Real"": 0,",
+                            @"""Imag"": 0",
+                          "},",
+                          "{",
+                            @"""Real"": 0,",
+                            @"""Imag"": 0",
+                          "}",
+                        "]",
+                      "},",
+                      @"""Name"": ""MyName""",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<ComplexMatrix>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // Wrong RowNames property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""Implementor"": {",
+                        @"""StorageScheme"": 0,",
+                        @"""NumberOfRows"": 1,",
+                        @"""NumberOfColumns"": 2,",
+                        @"""Storage"": [",
+                          "{",
+                            @"""Real"": 0,",
+                            @"""Imag"": 0",
+                          "},",
+                          "{",
+                            @"""Real"": 0,",
+                            @"""Imag"": 0",
+                          "}",
+                        "]",
+                      "},",
+                      @"""Name"": ""MyName"",",
+                      @"""RowNames3"": null,",
+                      @"""ColumnNames"": null",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<ComplexMatrix>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            #endregion
+
+            #region ColumnNames
+
+            // No ColumnNames property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""Implementor"": {",
+                        @"""StorageScheme"": 0,",
+                        @"""NumberOfRows"": 1,",
+                        @"""NumberOfColumns"": 2,",
+                        @"""Storage"": [",
+                          "{",
+                            @"""Real"": 0,",
+                            @"""Imag"": 0",
+                          "},",
+                          "{",
+                            @"""Real"": 0,",
+                            @"""Imag"": 0",
+                          "}",
+                        "]",
+                      "},",
+                      @"""Name"": ""MyName"",",
+                      @"""RowNames"": null",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<ComplexMatrix>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // Wrong ColumnNames property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""Implementor"": {",
+                        @"""StorageScheme"": 0,",
+                        @"""NumberOfRows"": 1,",
+                        @"""NumberOfColumns"": 2,",
+                        @"""Storage"": [",
+                          "{",
+                            @"""Real"": 0,",
+                            @"""Imag"": 0",
+                          "},",
+                          "{",
+                            @"""Real"": 0,",
+                            @"""Imag"": 0",
+                          "}",
+                        "]",
+                      "},",
+                      @"""Name"": ""MyName"",",
+                      @"""RowNames"": null,",
+                      @"""ColumnNames4"": null",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<ComplexMatrix>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            #endregion
+
+            // No end object
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""Implementor"": {",
+                        @"""StorageScheme"": 0,",
+                        @"""NumberOfRows"": 1,",
+                        @"""NumberOfColumns"": 2,",
+                        @"""Storage"": [",
+                          "{",
+                            @"""Real"": 0,",
+                            @"""Imag"": 0",
+                          "},",
+                          "{",
+                            @"""Real"": 0,",
+                            @"""Imag"": 0",
+                          "}",
+                        "]",
+                      "},",
+                      @"""Name"": ""MyName"",",
+                      @"""RowNames"": null,",
+                      @"""ColumnNames"": null,",
+                      @"""Go"": 1"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<ComplexMatrix>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+        }
+
+        [TestMethod]
+        public void JsonReadOnlyComplexMatrixConverterTest()
+        {
+            // No start object
+            {
+                var strings = new string[]
+                {
+                      @"""Matrix"": {",
+                        @"""Implementor"": {",
+                          @"""StorageScheme"": 0,",
+                          @"""NumberOfRows"": 1,",
+                          @"""NumberOfColumns"": 2,",
+                          @"""Storage"": [",
+                            "{",
+                              @"""Real"": 0,",
+                              @"""Imag"": 0",
+                            "},",
+                            "{",
+                              @"""Real"": 0,",
+                              @"""Imag"": 0",
+                            "}",
+                          "]",
+                        "},",
+                        @"""Name"": ""MyName"",",
+                        @"""RowNames"": null,",
+                        @"""ColumnNames"": null",
+                      "}",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<ReadOnlyComplexMatrix>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            #region Matrix
+
+            // No Matrix property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<ReadOnlyComplexMatrix>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            // Wrong Matrix property name
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""Matrix1"": {",
+                        @"""Implementor"": {",
+                          @"""StorageScheme"": 0,",
+                          @"""NumberOfRows"": 1,",
+                          @"""NumberOfColumns"": 2,",
+                          @"""Storage"": [",
+                            "{",
+                              @"""Real"": 0,",
+                              @"""Imag"": 0",
+                            "},",
+                            "{",
+                              @"""Real"": 0,",
+                              @"""Imag"": 0",
+                            "}",
+                          "]",
+                        "},",
+                        @"""Name"": ""MyName"",",
+                        @"""RowNames"": null,",
+                        @"""ColumnNames"": null",
+                      "}",
+                    "}"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<ReadOnlyComplexMatrix>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+
+            #endregion
+
+            // No end object
+            {
+                var strings = new string[]
+                {
+                    "{",
+                      @"""Matrix"": {",
+                        @"""Implementor"": {",
+                          @"""StorageScheme"": 0,",
+                          @"""NumberOfRows"": 1,",
+                          @"""NumberOfColumns"": 2,",
+                          @"""Storage"": [",
+                            "{",
+                              @"""Real"": 0,",
+                              @"""Imag"": 0",
+                            "},",
+                            "{",
+                              @"""Real"": 0,",
+                              @"""Imag"": 0",
+                            "}",
+                          "]",
+                        "},",
+                        @"""Name"": ""MyName"",",
+                        @"""RowNames"": null,",
+                        @"""ColumnNames"": null",
+                      "},",
+                      @"""Go"": 1"
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = String.Concat(strings);
+
+                ExceptionAssert.Throw(
+                    () =>
+                    {
+                        JsonSerializer.Deserialize<ReadOnlyComplexMatrix>(
+                            json,
+                            options);
+                    },
+                    expectedType: typeof(JsonException));
+            }
+        }
+
+        [TestMethod]
+        public void JsonComplexMatrixSerializationTest()
+        {
+            #region ComplexMatrix 
+
+            #region Without names
+
+            // Dense
+            {
+                var testableMatrix = TestableComplexMatrix11.Get();
+                var serializedMatrix = testableMatrix.AsDense;
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = JsonSerializer.Serialize(
+                    serializedMatrix,
+                    typeof(ComplexMatrix),
+                    options);
+
+                var deserializedMatrix = JsonSerializer.Deserialize<ComplexMatrix>(
+                    json,
+                    options);
+
+                ComplexMatrixAssert.AreEqual(
+                    expected: serializedMatrix,
+                    actual: deserializedMatrix,
+                    delta: ComplexMatrixTest.Accuracy);
+            }
+
+            // Sparse
+            {
+                var testableMatrix = TestableComplexMatrix11.Get();
+                var serializedMatrix = testableMatrix.AsSparse;
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = JsonSerializer.Serialize(
+                    serializedMatrix,
+                    typeof(ComplexMatrix),
+                    options);
+
+                var deserializedMatrix = JsonSerializer.Deserialize<ComplexMatrix>(
+                    json,
+                    options);
+
+                ComplexMatrixAssert.AreEqual(
+                    expected: serializedMatrix,
+                    actual: deserializedMatrix,
+                    delta: ComplexMatrixTest.Accuracy);
+            }
+
+            #endregion
+
+            #region With names
+
+            // Dense
+            {
+                var testableMatrix = TestableComplexMatrix16.Get();
+                var serializedMatrix = testableMatrix.AsDense;
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = JsonSerializer.Serialize(
+                    serializedMatrix,
+                    typeof(ComplexMatrix),
+                    options);
+
+                var deserializedMatrix = JsonSerializer.Deserialize<ComplexMatrix>(
+                    json,
+                    options);
+
+                ComplexMatrixAssert.AreEqual(
+                    expected: serializedMatrix,
+                    actual: deserializedMatrix,
+                    delta: ComplexMatrixTest.Accuracy);
+            }
+
+            // Sparse
+            {
+                var testableMatrix = TestableComplexMatrix16.Get();
+                var serializedMatrix = testableMatrix.AsSparse;
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = JsonSerializer.Serialize(
+                    serializedMatrix,
+                    typeof(ComplexMatrix),
+                    options);
+
+                var deserializedMatrix = JsonSerializer.Deserialize<ComplexMatrix>(
+                    json,
+                    options);
+
+                ComplexMatrixAssert.AreEqual(
+                    expected: serializedMatrix,
+                    actual: deserializedMatrix,
+                    delta: ComplexMatrixTest.Accuracy);
+            }
+
+            #endregion
+
+            #endregion
+
+            #region ReadOnlyComplexMatrix 
+
+            #region Without names
+
+            // Dense
+            {
+                var testableMatrix = TestableComplexMatrix11.Get();
+                var serializedMatrix = testableMatrix.AsDense.AsReadOnly();
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = JsonSerializer.Serialize(
+                    serializedMatrix,
+                    typeof(ReadOnlyComplexMatrix),
+                    options);
+
+                var deserializedMatrix = JsonSerializer.Deserialize<ReadOnlyComplexMatrix>(
+                    json,
+                    options);
+
+                ComplexMatrixAssert.AreEqual(
+                    expected: serializedMatrix,
+                    actual: deserializedMatrix,
+                    delta: ComplexMatrixTest.Accuracy);
+            }
+
+            // Sparse
+            {
+                var testableMatrix = TestableComplexMatrix11.Get();
+                var serializedMatrix = testableMatrix.AsSparse.AsReadOnly();
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = JsonSerializer.Serialize(
+                    serializedMatrix,
+                    typeof(ReadOnlyComplexMatrix),
+                    options);
+
+                var deserializedMatrix = JsonSerializer.Deserialize<ReadOnlyComplexMatrix>(
+                    json,
+                    options);
+
+                ComplexMatrixAssert.AreEqual(
+                    expected: serializedMatrix,
+                    actual: deserializedMatrix,
+                    delta: ComplexMatrixTest.Accuracy);
+            }
+
+            #endregion
+
+            #region With names
+
+            // Dense
+            {
+                var testableMatrix = TestableComplexMatrix16.Get();
+                var serializedMatrix = testableMatrix.AsDense.AsReadOnly();
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = JsonSerializer.Serialize(
+                    serializedMatrix,
+                    typeof(ReadOnlyComplexMatrix),
+                    options);
+
+                var deserializedMatrix = JsonSerializer.Deserialize<ReadOnlyComplexMatrix>(
+                    json,
+                    options);
+
+                ComplexMatrixAssert.AreEqual(
+                    expected: serializedMatrix,
+                    actual: deserializedMatrix,
+                    delta: ComplexMatrixTest.Accuracy);
+            }
+
+            // Sparse
+            {
+                var testableMatrix = TestableComplexMatrix16.Get();
+                var serializedMatrix = testableMatrix.AsSparse.AsReadOnly();
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                JsonSerialization.AddDataConverters(options);
+
+                string json = JsonSerializer.Serialize(
+                    serializedMatrix,
+                    typeof(ReadOnlyComplexMatrix),
+                    options);
+
+                var deserializedMatrix = JsonSerializer.Deserialize<ReadOnlyComplexMatrix>(
+                    json,
+                    options);
+
+                ComplexMatrixAssert.AreEqual(
+                    expected: serializedMatrix,
+                    actual: deserializedMatrix,
+                    delta: ComplexMatrixTest.Accuracy);
+            }
+
+            #endregion
+
+            #endregion
+        }
+
+        #endregion
     }
 }

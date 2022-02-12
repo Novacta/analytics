@@ -1,23 +1,158 @@
 ﻿<html><head><meta http-equiv="X-UA-Compatible" content="IE=edge" /><link rel="shortcut icon" href="../icons/favicon.ico" /><link rel="stylesheet" type="text/css" href="../styles/branding.css" /><link rel="stylesheet" type="text/css" href="../styles/branding-en-US.css" /><script type="text/javascript" src="../scripts/branding.js">
-          </script><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Testing environment</title><meta name="Language" content="en-us" /><meta name="Microsoft.Help.Id" content="07a926cb-9c3c-432d-998b-0af7eea037f6" /><meta name="Description" content="This topic shows hot to setup a testing environment on each supported platform." /><meta name="Microsoft.Help.ContentType" content="Concepts" /><meta name="BrandingAware" content="true" /><link type="text/css" rel="stylesheet" href="../styles/highlight.css" /><script type="text/javascript" src="../scripts/highlight.js"> </script><link rel="stylesheet" type="text/css" href="../styles/branding-Website.css" /><script type="text/javascript" src="../scripts/jquery-3.3.1.min.js"></script><script type="text/javascript" src="../scripts/branding-Website.js"></script><script type="text/javascript" src="../scripts/clipboard.min.js"></script></head><body onload="OnLoad('cs')"><input type="hidden" id="userDataCache" class="userDataStyle" /><div class="pageHeader" id="PageHeader">Novacta.Analytics Documentation<form id="SearchForm" method="get" action="#" onsubmit="javascript:TransferToSearchPage(); return false;"><input id="SearchTextBox" type="text" maxlength="200" /><button id="SearchButton" type="submit"></button></form></div><div class="pageBody"><div class="leftNav" id="leftNav"><div id="tocNav"><div class="toclevel0" data-toclevel="0" data-childrenloaded="true"><a class="tocExpanded" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/a4ea75a2-ef53-4ea2-a7f4-b493a50f90b3.htm" title="Novacta.Analytics Documentation" tocid="roottoc">Novacta.Analytics Documentation</a></div><div class="toclevel1" data-toclevel="1"><a data-tochassubtree="false" href="../html/a4ea75a2-ef53-4ea2-a7f4-b493a50f90b3.htm" title="Welcome" tocid="a4ea75a2-ef53-4ea2-a7f4-b493a50f90b3">Welcome</a></div><div class="toclevel1" data-toclevel="1"><a data-tochassubtree="false" href="../html/6e0413d7-d042-4781-a888-14641b635d8a.htm" title="License agreement" tocid="6e0413d7-d042-4781-a888-14641b635d8a">License agreement</a></div><div class="toclevel1 current" data-toclevel="1"><a data-tochassubtree="false" href="../html/07a926cb-9c3c-432d-998b-0af7eea037f6.htm" title="Testing environment" tocid="07a926cb-9c3c-432d-998b-0af7eea037f6">Testing environment</a></div><div class="toclevel1" data-toclevel="1"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/98825745-d228-4a65-9fc2-9f3041567e53.htm" title="Version history" tocid="98825745-d228-4a65-9fc2-9f3041567e53">Version history</a></div><div class="toclevel1" data-toclevel="1"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/G_Novacta_Analytics.htm" title="Novacta.Analytics Namespaces" tocid="G_Novacta_Analytics">Novacta.Analytics Namespaces</a></div></div><div id="tocResizableEW" onmousedown="OnMouseDown(event);"></div><div id="TocResize" class="tocResize"><img id="ResizeImageIncrease" src="../icons/TocOpen.gif" onclick="OnIncreaseToc()" alt="Click or drag to resize" title="Click or drag to resize" /><img id="ResizeImageReset" src="../icons/TocClose.gif" style="display:none" onclick="OnResetToc()" alt="Click or drag to resize" title="Click or drag to resize" /></div></div><div class="topicContent" id="TopicContent"><table class="titleTable"><tr><td class="logoColumn"><img src="../icons/Help.png" /></td><td class="titleColumn"><h1>Testing environment</h1></td></tr></table><span class="introStyle"></span> <div class="introduction"><p>
-        This topic shows hot to setup 
-        a testing environment on each supported platform.
-      </p></div><div class="collapsibleAreaRegion" id="sectionWindowsPlatforms"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID1RB')" onkeypress="SectionExpandCollapse_CheckKey('ID1RB', event)" tabindex="0"><img id="ID1RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Windows platforms</span></div><div id="ID1RBSection" class="collapsibleSection"><p>
-          Download and install the latest .NET Core SDK from
-          <a href="https://github.com/dotnet/core" target="_blank">here</a>.
-          From a shell of your choice, change the current directory to folder 
-          <a href="https://github.com/novacta/analytics/blob/master/tests/Novacta.Analytics.Tests" target="_blank">Novacta.Analytics.Tests</a>
-          and execute the following command:
-        </p><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID0EABACAAA_tab1" class="codeSnippetContainerTabSingle">Running tests</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EABACAAA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EABACAAA');return false;" title="Copy">Copy</a></div></div><div id="ID0EABACAAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve">dotnet test</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID0EABACAAA");</script><p>
-          The console outputs showing
-          reports in which is signaled if the corresponding tests were successful.
-        </p></div><div class="collapsibleAreaRegion" id="sectionNonWindowsPlatforms"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID2RB')" onkeypress="SectionExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Linux and macOS platforms</span></div><div id="ID2RBSection" class="collapsibleSection"><p>
-          Download and install the latest .NET Core SDK from
-          <a href="https://github.com/dotnet/core" target="_blank">here</a>.
-          From a shell of your choice, change the current directory to folder
-          <a href="https://github.com/novacta/analytics/blob/master/tests/Novacta.Analytics.Tests" target="_blank">Novacta.Analytics.Tests</a>
-          and execute the following two commands:
-        </p><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID0EACABAAA_tab1" class="codeSnippetContainerTabSingle">Preparing Linux or macOS environments for tests</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EACABAAA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EACABAAA');return false;" title="Copy">Copy</a></div></div><div id="ID0EACABAAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve">export LD_LIBRARY_PATH=.</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID0EACABAAA");</script><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID0EABABAAA_tab1" class="codeSnippetContainerTabSingle">Running tests</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EABABAAA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EABABAAA');return false;" title="Copy">Copy</a></div></div><div id="ID0EABABAAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve">dotnet test</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID0EABABAAA");</script><p>
-          The console outputs showing
-          reports in which is signaled if the corresponding tests were successful.
-        </p></div></div></div><div id="pageFooter" class="pageFooter"><p>Copyright (c) Giovanni Lafratta</p></div></body></html>
+          </script><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Build and test</title><meta name="Language" content="en-us" /><meta name="Microsoft.Help.Id" content="07a926cb-9c3c-432d-998b-0af7eea037f6" /><meta name="Description" content="This topic shows how to setup a build environment and execute unit tests." /><meta name="Microsoft.Help.ContentType" content="Concepts" /><meta name="BrandingAware" content="true" /><link type="text/css" rel="stylesheet" href="../styles/highlight.css" /><script type="text/javascript" src="../scripts/highlight.js"> </script><link rel="stylesheet" type="text/css" href="../styles/branding-Website.css" /><script type="text/javascript" src="../scripts/jquery-3.5.1.min.js"></script><script type="text/javascript" src="../scripts/branding-Website.js"></script><script type="text/javascript" src="../scripts/clipboard.min.js"></script></head><body onload="OnLoad('cs')"><input type="hidden" id="userDataCache" class="userDataStyle" /><div class="pageHeader" id="PageHeader">Novacta.Analytics Documentation<form id="SearchForm" method="get" action="#" onsubmit="javascript:TransferToSearchPage(); return false;"><input id="SearchTextBox" type="text" maxlength="200" /><button id="SearchButton" type="submit"></button></form></div><div class="pageBody"><div class="leftNav" id="leftNav"><div id="tocNav"><div class="toclevel0" data-toclevel="0" data-childrenloaded="true"><a class="tocExpanded" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/a4ea75a2-ef53-4ea2-a7f4-b493a50f90b3.htm" title="Novacta.Analytics Documentation" tocid="roottoc">Novacta.Analytics Documentation</a></div><div class="toclevel1" data-toclevel="1"><a data-tochassubtree="false" href="../html/a4ea75a2-ef53-4ea2-a7f4-b493a50f90b3.htm" title="Welcome" tocid="a4ea75a2-ef53-4ea2-a7f4-b493a50f90b3">Welcome</a></div><div class="toclevel1" data-toclevel="1"><a data-tochassubtree="false" href="../html/6e0413d7-d042-4781-a888-14641b635d8a.htm" title="License agreement" tocid="6e0413d7-d042-4781-a888-14641b635d8a">License agreement</a></div><div class="toclevel1 current" data-toclevel="1"><a data-tochassubtree="false" href="../html/07a926cb-9c3c-432d-998b-0af7eea037f6.htm" title="Build and test" tocid="07a926cb-9c3c-432d-998b-0af7eea037f6">Build and test</a></div><div class="toclevel1" data-toclevel="1"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/98825745-d228-4a65-9fc2-9f3041567e53.htm" title="Version history" tocid="98825745-d228-4a65-9fc2-9f3041567e53">Version history</a></div><div class="toclevel1" data-toclevel="1"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/D9FC3C8F.htm" title="Novacta.Analytics namespaces" tocid="D9FC3C8F">Novacta.Analytics namespaces</a></div></div><div id="tocResizableEW" onmousedown="OnMouseDown(event);"></div><div id="TocResize" class="tocResize"><img id="ResizeImageIncrease" src="../icons/TocOpen.gif" onclick="OnIncreaseToc()" alt="Click or drag to resize" title="Click or drag to resize" /><img id="ResizeImageReset" src="../icons/TocClose.gif" style="display:none" onclick="OnResetToc()" alt="Click or drag to resize" title="Click or drag to resize" /></div></div><div class="topicContent" id="TopicContent"><table class="titleTable"><tr><td class="logoColumn"><img src="../icons/Help.png" /></td><td class="titleColumn"><h1>Build and test</h1></td></tr></table><span class="introStyle"></span> <div class="introduction"><p>
+				This topic shows how to setup a build environment
+				and execute unit tests.
+			</p></div><div class="collapsibleAreaRegion" id="intro"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID0RB')" onkeypress="SectionExpandCollapse_CheckKey('ID0RB', event)" tabindex="0"><img id="ID0RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Introduction</span></div><div id="ID0RBSection" class="collapsibleSection"><p>
+					After cloning the
+					<a href="https://github.com/novacta/analytics" target="_blank" rel="noopener noreferrer">analytics</a>
+					repository, you can build different kinds of
+					projects from the source code:
+				</p><ul><li><p><a href="#build-net-6-projects">
+								.NET 6 projects
+							</a></p></li><li><p><a href="#build-native-projects">
+								Native dependencies
+							</a></p></li><li><p><a href="#build-doc-project">
+								Documentation
+							</a></p></li></ul><p>
+					You can also execute
+					<a href="#unit-tests">
+						unit tests.
+					</a></p></div><div class="collapsibleAreaRegion" id="build-net-6-projects"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID1RB')" onkeypress="SectionExpandCollapse_CheckKey('ID1RB', event)" tabindex="0"><img id="ID1RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Build .NET 6 projects</span></div><div id="ID1RBSection" class="collapsibleSection"><ul><li><p>
+							Download and install the latest .NET SDK from
+							<a href="https://github.com/dotnet/core" target="_blank" rel="noopener noreferrer">here</a>.
+						</p></li><li><p>
+							Select the .NET project you want to build. Available projects
+							are contained in the following repository sub-folders:
+						</p><ul><li><p><a href="https://github.com/novacta/analytics/blob/master/src/Novacta.Analytics" target="_blank" rel="noopener noreferrer">src/Novacta.Analytics</a></p></li><li><p><a href="https://github.com/novacta/analytics/blob/master/src/Novacta.Analytics.CodeExamples" target="_blank" rel="noopener noreferrer">src/Novacta.Analytics.CodeExamples</a></p></li><li><p><a href="https://github.com/novacta/analytics/blob/master/src/BindingToRowCollection" target="_blank" rel="noopener noreferrer">samples/BindingToRowCollection</a></p></li><li><p><a href="https://github.com/novacta/analytics/blob/master/tests/Novacta.Analytics.Tests" target="_blank" rel="noopener noreferrer">tests/Novacta.Analytics.Tests</a></p></li></ul></li><li><p>
+							From a shell of your choice, change the current directory to the folder
+							containing the selected project.
+						</p></li><li><p>
+							Execute the
+							<a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-build" target="_blank" rel="noopener noreferrer">dotnet build</a>
+							command.
+						</p></li></ul></div><div class="collapsibleAreaRegion" id="build-native-projects"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Build native dependencies</span></div><div id="ID3RBSection" class="collapsibleSection"><p>
+    <strong>Novacta.Analytics</strong>
+    relies on native dynamic-link libraries obtained
+    via the Intel®
+    <a href="https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl.html" target="_blank" rel="noopener noreferrer">oneAPI Math Kernel Library</a>
+    customDLL builder, version 2022.1.
+    Such platform-specific dependencies
+    have in turn a dependency on a
+    threaded runtime, as reported in the following table:
+</p><div class="tableSection"><table><tr><th><p>Platform</p></th><th><p>Dependency</p></th><th><p>Runtime</p></th></tr><tr><td><p>win-x64</p></td><td><p>libna.dll</p></td><td><p>libiomp5md.dll</p></td></tr><tr><td><p>linux-x64</p></td><td><p>libna.so</p></td><td><p>libiomp5.so</p></td></tr><tr><td><p>osx-x64</p></td><td><p>libna.dylib</p></td><td><p>libiomp5.dylib</p></td></tr></table></div><p>
+					To prepare the
+					native dependencies specific to a given platform,
+					proceed as follows.
+				</p><ul><li><p>win-x64</p><ul><li><p>
+									On a Windows machine where you cloned the repo, download the Intel®
+									<a href="https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit.html" target="_blank" rel="noopener noreferrer">oneAPI Base Toolkit</a>, version 2022.1.2.154,
+									and install the
+									<a href="https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl.html" target="_blank" rel="noopener noreferrer">oneAPI Math Kernel Library</a>.
+								</p><div class="alert"><table><tr><th><img src="../icons/AlertCaution.png" alt="Caution note" /> Caution</th></tr><tr><td><p>
+										The projects assume that the Windows Intel® oneAPI BaseKit
+										has been installed in its default directory. Otherwise, paths
+										referred to in project properties should
+										be modified according to the location of the currently installed version.
+									</p></td></tr></table></div></li><li><p>
+									Make sure the environmental variable
+									<span class="code">ONEAPI_ROOT</span> is properly set to
+									target the folder where the Intel®
+									<strong>oneAPI Base Toolkit</strong> is installed
+									on your machine.
+								</p></li><li><p>
+									Install
+									<a href="https://visualstudio.microsoft.com/vs/" target="_blank" rel="noopener noreferrer">Visual Studio 2022</a>
+									and customize the installation by adding the
+									<a href="https://docs.microsoft.com/en-us/cpp/build/vscpp-step-0-installation?view=msvc-170" target="_blank" rel="noopener noreferrer">Desktop development with C++</a>
+									workload.
+								</p></li><li><p>
+									Use Visual Studio 2022
+									to build the <span class="code">.vcxproj</span> projects
+									included in the repository sub-folder
+									<a href="https://github.com/novacta/analytics/blob/master/native/platforms/win-x64" target="_blank" rel="noopener noreferrer">native/platforms/win-x64</a>.
+								</p></li></ul></li><li><p>linux-x64</p><ul><li><p>
+									On a Linux machine where you cloned the repo, download the Intel®
+									<a href="https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit.html" target="_blank" rel="noopener noreferrer">oneAPI Base Toolkit</a>, version 2022.1.2.146,
+									and install the
+									<a href="https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl.html" target="_blank" rel="noopener noreferrer">oneAPI Math Kernel Library</a>.
+								</p><div class="alert"><table><tr><th><img src="../icons/AlertCaution.png" alt="Caution note" /> Caution</th></tr><tr><td><p>
+										The following instructions assume that the Linux Intel® oneAPI BaseKit
+										has been installed in its default directory.
+										Otherwise, paths should be modified according to the location of the
+										currently installed version.
+									</p></td></tr></table></div></li><li><p>
+									Set variable <span class="code">LIBNAROOT</span> to the directory
+									where the repo has been cloned on your Linux machine.
+									If, for example, the repo has been cloned under the
+									path <span class="code">/Users/user/Source/Repos</span>,
+									execute the following command:
+								</p><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID2EAACABAADAAA_tab1" class="codeSnippetContainerTabSingle">Set LIBNAROOT</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID2EAACABAADAAA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID2EAACABAADAAA');return false;" title="Copy">Copy</a></div></div><div id="ID2EAACABAADAAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve">export LIBNAROOT=/Users/user/Source/Repos/analytics</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID2EAACABAADAAA");</script></li><li><p>
+									Build the <span class="code">libna.so</span> native dependency:
+								</p><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID2EAABABAADAAA_tab1" class="codeSnippetContainerTabSingle">Build libna.so</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID2EAABABAADAAA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID2EAABABAADAAA');return false;" title="Copy">Copy</a></div></div><div id="ID2EAABABAADAAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve">sudo make intel64 -C /opt/intel/oneapi/mkl/2022.0.2/tools/builder export=$LIBNAROOT/native/exports/mkl_exports_linux.txt name=$LIBNAROOT/src/Novacta.Analytics/runtimes/linux-x64/native/libna</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID2EAABABAADAAA");</script></li><li><p>
+									Copy the required redistributable <span class="code">libiomp5.so</span>:
+								</p><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID2EAAAABAADAAA_tab1" class="codeSnippetContainerTabSingle">Copy libiomp5.so</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID2EAAAABAADAAA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID2EAAAABAADAAA');return false;" title="Copy">Copy</a></div></div><div id="ID2EAAAABAADAAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve">cp /opt/intel/oneapi/compiler/2022.0.2/linux/compiler/lib/intel64/libiomp5.so $LIBNAROOT/src/Novacta.Analytics/runtimes/linux-x64/native</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID2EAAAABAADAAA");</script></li></ul></li><li><p>osx-x64</p><ul><li><p>
+									On a macOS machine where you cloned the repo, download the Intel®
+									<a href="https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit.html" target="_blank" rel="noopener noreferrer">oneAPI Base Toolkit</a>, version 2022.1.0.92,
+									and install the
+									<a href="https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl.html" target="_blank" rel="noopener noreferrer">oneAPI Math Kernel Library</a>.
+								</p><div class="alert"><table><tr><th><img src="../icons/AlertCaution.png" alt="Caution note" /> Caution</th></tr><tr><td><p>
+										The following instructions assume that the macOS Intel® oneAPI BaseKit
+										has been installed in its default directory.
+										Otherwise, paths should be modified according to the location of the
+										currently installed version.
+									</p></td></tr></table></div></li><li><p>
+									Set variable <span class="code">LIBNAROOT</span> to the directory
+									where the repo has been cloned on your macOS machine.
+									If, for example, the repo has been cloned under the
+									path <span class="code">/Users/user/Source/Repos</span>,
+									execute the following command:
+								</p><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID2EAACAAAADAAA_tab1" class="codeSnippetContainerTabSingle">Set LIBNAROOT</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID2EAACAAAADAAA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID2EAACAAAADAAA');return false;" title="Copy">Copy</a></div></div><div id="ID2EAACAAAADAAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve">export LIBNAROOT=/Users/user/Source/Repos/analytics</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID2EAACAAAADAAA");</script></li><li><p>
+									Build the <span class="code">libna.dylib</span> native dependency:
+								</p><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID2EAABAAAADAAA_tab1" class="codeSnippetContainerTabSingle">Build libna.dylib</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID2EAABAAAADAAA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID2EAABAAAADAAA');return false;" title="Copy">Copy</a></div></div><div id="ID2EAABAAAADAAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve">sudo make intel64 -C /opt/intel/oneapi/mkl/2022.0.0/tools/builder export=$LIBNAROOT/native/exports/mkl_exports_osx.txt name=$LIBNAROOT/src/Novacta.Analytics/runtimes/osx-x64/native/libna</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID2EAABAAAADAAA");</script></li><li><p>
+									Copy the required redistributable <span class="code">libiomp5.dylib</span>:
+								</p><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID2EAAAAAAADAAA_tab1" class="codeSnippetContainerTabSingle">Copy libiomp5.dylib</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID2EAAAAAAADAAA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID2EAAAAAAADAAA');return false;" title="Copy">Copy</a></div></div><div id="ID2EAAAAAAADAAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve">cp /opt/intel/oneapi/compiler/2022.0.0/mac/compiler/lib/libiomp5.dylib $LIBNAROOT/src/Novacta.Analytics/runtimes/osx-x64/native</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID2EAAAAAAADAAA");</script></li></ul></li></ul></div><div class="collapsibleAreaRegion" id="build-doc-project"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Build the documentation</span></div><div id="ID4RBSection" class="collapsibleSection"><ul><li><p>
+							Download and install on a Windows machine the latest version of
+							<a href="https://github.com/EWSoftware/SHFB/releases" target="_blank" rel="noopener noreferrer">Sandcastle Help File Builder</a>.
+						</p></li><li><p>
+							Inspect the properties of the SHFB project available in folder
+							<a href="https://github.com/novacta/analytics/blob/master/src/Novacta.Analytics.Documentation" target="_blank" rel="noopener noreferrer">Novacta.Analytics.Documentation</a>.
+						</p><p>
+							Notice that the project relies on the
+							<a href="https://www.nuget.org/packages/Novacta.Shfb.LatexTools" target="_blank" rel="noopener noreferrer">Novacta.Shfb.LatexTools</a> package, which needs to be
+							properly configured in order to manage the LaTeX
+							content required to compile reference and conceptual files.
+							See
+							<a href="https://novacta.github.io/shfb-latex-tools/html/47a5afe5-726c-4f74-9ab1-90740bf0a692.htm" target="_blank" rel="noopener noreferrer">here</a> how to get started with the tools.
+						</p></li><li><p>
+							From the <strong>Components</strong> tab, select
+							the <strong>Novacta.Shfb.LatexComponent</strong>
+							in the <strong>Build Components in this project</strong>
+							list.
+						</p></li><li><p>
+							Push the <strong>Configure</strong> button to set options
+							<strong>LaTeX bin folder</strong> and
+							<strong>DviSvgm bin folder</strong>, in order to target
+							the LaTeX distribution installed on your machine.
+						</p></li><li><p>
+							Build the project from the
+							<a href="http://ewsoftware.github.io/SHFB/html/d5dbf017-25f1-48cb-86db-90f76ee8f4d7.htm" target="_blank" rel="noopener noreferrer">SHFB standalone GUI</a>,
+							or via the
+							<a href="http://ewsoftware.github.io/SHFB/html/78507051-0fc0-479b-9d47-78a10398eaf2.htm#NewProject/" target="_blank" rel="noopener noreferrer">SHFB Visual Studio package</a>
+							for
+							<a href="https://visualstudio.microsoft.com/vs/" target="_blank" rel="noopener noreferrer">Visual Studio 2022</a>.
+						</p></li></ul></div><div class="collapsibleAreaRegion" id="unit-tests"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Unit tests</span></div><div id="ID5RBSection" class="collapsibleSection"><ul><li><p>
+							From a shell of your choice, change the current directory to folder
+							<a href="https://github.com/novacta/analytics/blob/master/tests/Novacta.Analytics.Tests" target="_blank" rel="noopener noreferrer">Novacta.Analytics.Tests</a>.
+						</p><p>
+							Native dependencies are automatically placed in the test directory.
+							However, to resolve the dependencies on a Linux or macOS target machine
+							at runtime, the following commands need to be executed.
+						</p><p>
+							If you are on a Linux machine:
+						</p><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID2EACBAABAAA_tab1" class="codeSnippetContainerTabSingle">Preparing Linux environments for tests</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID2EACBAABAAA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID2EACBAABAAA');return false;" title="Copy">Copy</a></div></div><div id="ID2EACBAABAAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve">export LD_LIBRARY_PATH=.</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID2EACBAABAAA");</script><p>
+							or, if you are on a macOS machine:
+						</p><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID2EAABAABAAA_tab1" class="codeSnippetContainerTabSingle">Preparing macOS environments for tests</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID2EAABAABAAA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID2EAABAABAAA');return false;" title="Copy">Copy</a></div></div><div id="ID2EAABAABAAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve">export DYLD_LIBRARY_PATH=.</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID2EAABAABAAA");</script></li><li><p>
+							To run unit tests, execute the
+							<a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test" target="_blank" rel="noopener noreferrer">dotnet test</a>
+							command.
+						</p></li></ul></div></div></div><div id="pageFooter" class="pageFooter"><p>Copyright (c) Giovanni Lafratta.</p></div></body></html>

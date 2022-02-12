@@ -92,42 +92,28 @@ namespace Novacta.Analytics.Tests.Tools
                 // Dense
                 Succeed(
                     operators: operation.DataWritableOps,
-                    data: operation.Data.Dense,
+                    data: operation.Data.AsDense,
                     sortDirection: operation.SortDirection,
                     expected: result);
 
                 // Sparse
                 Succeed(
                     operators: operation.DataWritableOps,
-                    data: operation.Data.Sparse,
-                    sortDirection: operation.SortDirection,
-                    expected: result);
-
-                // View
-                Succeed(
-                    operators: operation.DataWritableOps,
-                    data: operation.Data.View,
+                    data: operation.Data.AsSparse,
                     sortDirection: operation.SortDirection,
                     expected: result);
 
                 // Dense.AsReadOnly()
                 Succeed(
                     operators: operation.DataReadOnlyOps,
-                    data: operation.Data.Dense.AsReadOnly(),
+                    data: operation.Data.AsDense.AsReadOnly(),
                     sortDirection: operation.SortDirection,
                     expected: result);
 
                 // Sparse.AsReadOnly()
                 Succeed(
                     operators: operation.DataReadOnlyOps,
-                    data: operation.Data.Sparse.AsReadOnly(),
-                    sortDirection: operation.SortDirection,
-                    expected: result);
-
-                // View.AsReadOnly()
-                Succeed(
-                    operators: operation.DataReadOnlyOps,
-                    data: operation.Data.View.AsReadOnly(),
+                    data: operation.Data.AsSparse.AsReadOnly(),
                     sortDirection: operation.SortDirection,
                     expected: result);
             }
@@ -145,42 +131,28 @@ namespace Novacta.Analytics.Tests.Tools
                 // Dense
                 Fail(
                     operators: operation.DataWritableOps,
-                    data: operation.Data.Dense,
+                    data: operation.Data.AsDense,
                     sortDirection: operation.SortDirection,
                     exception: exception);
 
                 // Sparse
                 Fail(
                     operators: operation.DataWritableOps,
-                    data: operation.Data.Sparse,
-                    sortDirection: operation.SortDirection,
-                    exception: exception);
-
-                // View
-                Fail(
-                    operators: operation.DataWritableOps,
-                    data: operation.Data.View,
+                    data: operation.Data.AsSparse,
                     sortDirection: operation.SortDirection,
                     exception: exception);
 
                 // Dense.AsReadOnly()
                 Fail(
                     operators: operation.DataReadOnlyOps,
-                    data: operation.Data.Dense.AsReadOnly(),
+                    data: operation.Data.AsDense.AsReadOnly(),
                     sortDirection: operation.SortDirection,
                     exception: exception);
 
                 // Sparse.AsReadOnly()
                 Fail(
                     operators: operation.DataReadOnlyOps,
-                    data: operation.Data.Sparse.AsReadOnly(),
-                    sortDirection: operation.SortDirection,
-                    exception: exception);
-
-                // View.AsReadOnly()
-                Fail(
-                    operators: operation.DataReadOnlyOps,
-                    data: operation.Data.View.AsReadOnly(),
+                    data: operation.Data.AsSparse.AsReadOnly(),
                     sortDirection: operation.SortDirection,
                     exception: exception);
             }
@@ -267,42 +239,28 @@ namespace Novacta.Analytics.Tests.Tools
                 // Dense
                 Succeed(
                     operators: operation.DataWritableOps,
-                    data: operation.Data.Dense,
+                    data: operation.Data.AsDense,
                     sortDirection: operation.SortDirection,
                     expected: result);
 
                 // Sparse
                 Succeed(
                     operators: operation.DataWritableOps,
-                    data: operation.Data.Sparse,
-                    sortDirection: operation.SortDirection,
-                    expected: result);
-
-                // View
-                Succeed(
-                    operators: operation.DataWritableOps,
-                    data: operation.Data.View,
+                    data: operation.Data.AsSparse,
                     sortDirection: operation.SortDirection,
                     expected: result);
 
                 // Dense.AsReadOnly()
                 Succeed(
                     operators: operation.DataReadOnlyOps,
-                    data: operation.Data.Dense.AsReadOnly(),
+                    data: operation.Data.AsDense.AsReadOnly(),
                     sortDirection: operation.SortDirection,
                     expected: result);
 
                 // Sparse.AsReadOnly()
                 Succeed(
                     operators: operation.DataReadOnlyOps,
-                    data: operation.Data.Sparse.AsReadOnly(),
-                    sortDirection: operation.SortDirection,
-                    expected: result);
-
-                // View.AsReadOnly()
-                Succeed(
-                    operators: operation.DataReadOnlyOps,
-                    data: operation.Data.View.AsReadOnly(),
+                    data: operation.Data.AsSparse.AsReadOnly(),
                     sortDirection: operation.SortDirection,
                     expected: result);
             }
@@ -320,42 +278,28 @@ namespace Novacta.Analytics.Tests.Tools
                 // Dense
                 Fail(
                     operators: operation.DataWritableOps,
-                    data: operation.Data.Dense,
+                    data: operation.Data.AsDense,
                     sortDirection: operation.SortDirection,
                     exception: exception);
 
                 // Sparse
                 Fail(
                     operators: operation.DataWritableOps,
-                    data: operation.Data.Sparse,
-                    sortDirection: operation.SortDirection,
-                    exception: exception);
-
-                // View
-                Fail(
-                    operators: operation.DataWritableOps,
-                    data: operation.Data.View,
+                    data: operation.Data.AsSparse,
                     sortDirection: operation.SortDirection,
                     exception: exception);
 
                 // Dense.AsReadOnly()
                 Fail(
                     operators: operation.DataReadOnlyOps,
-                    data: operation.Data.Dense.AsReadOnly(),
+                    data: operation.Data.AsDense.AsReadOnly(),
                     sortDirection: operation.SortDirection,
                     exception: exception);
 
                 // Sparse.AsReadOnly()
                 Fail(
                     operators: operation.DataReadOnlyOps,
-                    data: operation.Data.Sparse.AsReadOnly(),
-                    sortDirection: operation.SortDirection,
-                    exception: exception);
-
-                // View.AsReadOnly()
-                Fail(
-                    operators: operation.DataReadOnlyOps,
-                    data: operation.Data.View.AsReadOnly(),
+                    data: operation.Data.AsSparse.AsReadOnly(),
                     sortDirection: operation.SortDirection,
                     exception: exception);
             }

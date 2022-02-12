@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Novacta.Analytics.Interop;
 using System.Linq;
+using System.Numerics;
 
 namespace Novacta.Analytics.Infrastructure
 {
@@ -54,43 +55,6 @@ namespace Novacta.Analytics.Infrastructure
             }
         }
 
-        public static void View_CopyTo(
-            MatrixImplementor<double> matrix,
-            double[] array,
-            int arrayIndex)
-        {
-            int numberOfRows = matrix.NumberOfRows;
-            int numberOfColumns = matrix.NumberOfColumns;
-
-            ViewDoubleMatrixImplementor subImplementor = (ViewDoubleMatrixImplementor)(matrix);
-            IndexCollection[] subIndexes = subImplementor.GetReferredImplementor(out MatrixImplementor<double> referredImplementor);
-
-            int index = 0;
-            int[] rowSubIndexes = subIndexes[0].indexes;
-            int[] columnSubIndexes = subIndexes[1].indexes;
-
-            int leadingDim, refIndex;
-
-            switch (referredImplementor.StorageScheme)
-            {
-                case StorageScheme.Dense:
-                    {
-                        double[] refArray = referredImplementor.Storage;
-
-                        leadingDim = referredImplementor.NumberOfRows;
-
-                        for (int j = 0; j < numberOfColumns; j++)
-                        {
-                            refIndex = leadingDim * columnSubIndexes[j];
-
-                            for (int i = 0; i < numberOfRows; i++, index++)
-                                array[arrayIndex + index] = refArray[rowSubIndexes[i] + refIndex];
-                        }
-                    }
-                    break;
-            }
-        }
-
         #endregion
 
         #region Find
@@ -101,13 +65,13 @@ namespace Novacta.Analytics.Infrastructure
             MatrixImplementor<double> matrix)
         {
             IndexCollection result;
-            LinkedList<int> indexList = new LinkedList<int>();
+            LinkedList<int> indexList = new();
 
             double[] matrixArray = matrix.Storage;
 
-            for (int l = 0; l < matrixArray.Length; l++)
-                if (0.0 != matrixArray[l])
-                    indexList.AddLast(l);
+            for (int i = 0; i < matrixArray.Length; i++)
+                if (0.0 != matrixArray[i])
+                    indexList.AddLast(i);
 
             if (indexList.Count == 0)
             {
@@ -123,7 +87,7 @@ namespace Novacta.Analytics.Infrastructure
             MatrixImplementor<double> matrix)
         {
             IndexCollection result;
-            LinkedList<int> indexList = new LinkedList<int>();
+            LinkedList<int> indexList = new();
 
             var sparseMatrix = (SparseCsr3DoubleMatrixImplementor)matrix;
             int numberOfRows = sparseMatrix.numberOfRows;
@@ -159,54 +123,6 @@ namespace Novacta.Analytics.Infrastructure
             return result;
         }
 
-        public static IndexCollection View_FindNonzero
-            (MatrixImplementor<double> matrix)
-        {
-            IndexCollection result;
-            LinkedList<int> indexList = new LinkedList<int>();
-
-            int numberOfRows = matrix.NumberOfRows;
-            int numberOfColumns = matrix.NumberOfColumns;
-
-            ViewDoubleMatrixImplementor subImplementor = (ViewDoubleMatrixImplementor)(matrix);
-            IndexCollection[] subIndexes = subImplementor.GetReferredImplementor(out MatrixImplementor<double> referredImplementor);
-
-            int index = 0;
-            int[] rowSubIndexes = subIndexes[0].indexes;
-            int[] columnSubIndexes = subIndexes[1].indexes;
-
-            int leadingDim, refIndex;
-
-            switch (referredImplementor.StorageScheme)
-            {
-                case StorageScheme.Dense:
-                    {
-                        double[] refArray = referredImplementor.Storage;
-
-                        leadingDim = referredImplementor.NumberOfRows;
-
-                        for (int j = 0; j < numberOfColumns; j++)
-                        {
-                            refIndex = leadingDim * columnSubIndexes[j];
-
-                            for (int i = 0; i < numberOfRows; i++, index++)
-                                if (0.0 != refArray[rowSubIndexes[i] + refIndex])
-                                    indexList.AddLast(index);
-                        }
-                    }
-                    break;
-            }
-
-            if (indexList.Count == 0)
-            {
-                return null;
-            }
-
-            result = new IndexCollection(indexList.ToArray(), false);
-
-            return result;
-        }
-
         #endregion
 
         #region While
@@ -216,13 +132,13 @@ namespace Novacta.Analytics.Infrastructure
             Predicate<double> match)
         {
             IndexCollection result;
-            LinkedList<int> indexList = new LinkedList<int>();
+            LinkedList<int> indexList = new();
 
             double[] matrixArray = matrix.Storage;
 
-            for (int l = 0; l < matrixArray.Length; l++)
-                if (match(matrixArray[l]))
-                    indexList.AddLast(l);
+            for (int i = 0; i < matrixArray.Length; i++)
+                if (match(matrixArray[i]))
+                    indexList.AddLast(i);
 
             if (indexList.Count == 0)
             {
@@ -239,7 +155,7 @@ namespace Novacta.Analytics.Infrastructure
             Predicate<double> match)
         {
             IndexCollection result;
-            LinkedList<int> indexList = new LinkedList<int>();
+            LinkedList<int> indexList = new();
 
             var sparseMatrix = (SparseCsr3DoubleMatrixImplementor)matrix;
             int numberOfRows = sparseMatrix.numberOfRows;
@@ -315,55 +231,6 @@ namespace Novacta.Analytics.Infrastructure
             return result;
         }
 
-        public static IndexCollection View_FindWhile(
-            MatrixImplementor<double> matrix,
-            Predicate<double> match)
-        {
-            IndexCollection result;
-            LinkedList<int> indexList = new LinkedList<int>();
-
-            int numberOfRows = matrix.NumberOfRows;
-            int numberOfColumns = matrix.NumberOfColumns;
-
-            ViewDoubleMatrixImplementor subImplementor = (ViewDoubleMatrixImplementor)(matrix);
-            IndexCollection[] subIndexes = subImplementor.GetReferredImplementor(out MatrixImplementor<double> referredImplementor);
-
-            int index = 0;
-            int[] rowSubIndexes = subIndexes[0].indexes;
-            int[] columnSubIndexes = subIndexes[1].indexes;
-
-            int leadingDim, refIndex;
-
-            switch (referredImplementor.StorageScheme)
-            {
-                case StorageScheme.Dense:
-                    {
-                        double[] refArray = referredImplementor.Storage;
-
-                        leadingDim = referredImplementor.NumberOfRows;
-
-                        for (int j = 0; j < numberOfColumns; j++)
-                        {
-                            refIndex = leadingDim * columnSubIndexes[j];
-
-                            for (int i = 0; i < numberOfRows; i++, index++)
-                                if (match(refArray[rowSubIndexes[i] + refIndex]))
-                                    indexList.AddLast(index);
-                        }
-                    }
-                    break;
-            }
-
-            if (indexList.Count == 0)
-            {
-                return null;
-            }
-
-            result = new IndexCollection(indexList.ToArray(), false);
-
-            return result;
-        }
-
         #endregion
 
         #region Value
@@ -373,13 +240,13 @@ namespace Novacta.Analytics.Infrastructure
             double value)
         {
             IndexCollection result;
-            LinkedList<int> indexList = new LinkedList<int>();
+            LinkedList<int> indexList = new();
 
             double[] matrixArray = matrix.Storage;
 
-            for (int l = 0; l < matrixArray.Length; l++)
-                if (value == matrixArray[l])
-                    indexList.AddLast(l);
+            for (int i = 0; i < matrixArray.Length; i++)
+                if (value == matrixArray[i])
+                    indexList.AddLast(i);
 
             if (indexList.Count == 0)
             {
@@ -396,7 +263,7 @@ namespace Novacta.Analytics.Infrastructure
             double value)
         {
             IndexCollection result;
-            LinkedList<int> indexList = new LinkedList<int>();
+            LinkedList<int> indexList = new();
 
             var sparseMatrix = (SparseCsr3DoubleMatrixImplementor)matrix;
             int numberOfRows = sparseMatrix.numberOfRows;
@@ -462,55 +329,6 @@ namespace Novacta.Analytics.Infrastructure
             return result;
         }
 
-        public static IndexCollection View_FindValue(
-            MatrixImplementor<double> matrix,
-            double value)
-        {
-            IndexCollection result;
-            LinkedList<int> indexList = new LinkedList<int>();
-
-            int numberOfRows = matrix.NumberOfRows;
-            int numberOfColumns = matrix.NumberOfColumns;
-
-            ViewDoubleMatrixImplementor subImplementor = (ViewDoubleMatrixImplementor)(matrix);
-            IndexCollection[] subIndexes = subImplementor.GetReferredImplementor(out MatrixImplementor<double> referredImplementor);
-
-            int index = 0;
-            int[] rowSubIndexes = subIndexes[0].indexes;
-            int[] columnSubIndexes = subIndexes[1].indexes;
-
-            int leadingDim, refIndex;
-
-            switch (referredImplementor.StorageScheme)
-            {
-                case StorageScheme.Dense:
-                    {
-                        double[] refArray = referredImplementor.Storage;
-
-                        leadingDim = referredImplementor.NumberOfRows;
-
-                        for (int j = 0; j < numberOfColumns; j++)
-                        {
-                            refIndex = leadingDim * columnSubIndexes[j];
-
-                            for (int i = 0; i < numberOfRows; i++, index++)
-                                if (value == refArray[rowSubIndexes[i] + refIndex])
-                                    indexList.AddLast(index);
-                        }
-                    }
-                    break;
-            }
-
-            if (indexList.Count == 0)
-            {
-                return null;
-            }
-
-            result = new IndexCollection(indexList.ToArray(), false);
-
-            return result;
-        }
-
         #endregion
 
         #region IndexOf
@@ -525,21 +343,21 @@ namespace Novacta.Analytics.Infrastructure
 
             if (Double.IsNaN(value))
             {
-                for (int l = 0; l < matrixArray.Length; l++)
-                    if (Double.IsNaN(matrixArray[l]))
+                for (int i = 0; i < matrixArray.Length; i++)
+                    if (Double.IsNaN(matrixArray[i]))
                     {
-                        index = l;
+                        index = i;
                         break;
-                    } 
+                    }
             }
             else
             {
-                for (int l = 0; l < matrixArray.Length; l++)
-                    if (value == matrixArray[l])
+                for (int i = 0; i < matrixArray.Length; i++)
+                    if (value == matrixArray[i])
                     {
-                        index = l;
+                        index = i;
                         break;
-                    }  
+                    }
             }
 
             return index;
@@ -549,7 +367,7 @@ namespace Novacta.Analytics.Infrastructure
             MatrixImplementor<double> data,
             double value)
         {
-            LinkedList<int> indexList = new LinkedList<int>();
+            LinkedList<int> indexList = new();
 
             var sparseData = (SparseCsr3DoubleMatrixImplementor)data;
             int numberOfRows = sparseData.numberOfRows;
@@ -628,66 +446,6 @@ namespace Novacta.Analytics.Infrastructure
             return indexList.Min();
         }
 
-        public static int View_IndexOf(
-            MatrixImplementor<double> matrix,
-            double value)
-        {
-            int numberOfRows = matrix.NumberOfRows;
-            int numberOfColumns = matrix.NumberOfColumns;
-
-            ViewDoubleMatrixImplementor subImplementor = (ViewDoubleMatrixImplementor)(matrix);
-            IndexCollection[] subIndexes = subImplementor.GetReferredImplementor(out MatrixImplementor<double> referredImplementor);
-
-            int index = -1, linearIndex = 0;
-            int[] rowSubIndexes = subIndexes[0].indexes;
-            int[] columnSubIndexes = subIndexes[1].indexes;
-
-            int leadingDim, refIndex;
-
-            switch (referredImplementor.StorageScheme)
-            {
-                case StorageScheme.Dense:
-                    {
-                        double[] refArray = referredImplementor.Storage;
-
-                        leadingDim = referredImplementor.NumberOfRows;
-
-                        if (Double.IsNaN(value))
-                        {
-                            for (int j = 0; j < numberOfColumns; j++)
-                            {
-                                refIndex = leadingDim * columnSubIndexes[j];
-
-                                for (int i = 0; i < numberOfRows; i++, linearIndex++)
-                                    if (Double.IsNaN(refArray[rowSubIndexes[i] + refIndex]))
-                                    {
-                                        index = linearIndex;
-                                        goto Finish;
-                                    }
-                            }
-                        }
-                        else
-                        {
-                            for (int j = 0; j < numberOfColumns; j++)
-                            {
-                                refIndex = leadingDim * columnSubIndexes[j];
-
-                                for (int i = 0; i < numberOfRows; i++, linearIndex++)
-                                    if (value == refArray[rowSubIndexes[i] + refIndex])
-                                    {
-                                        index = linearIndex;
-                                        goto Finish;
-                                    }
-                            }
-                        }
-                    }
-                    break;
-            }
-
-        Finish:
-            return index;
-        }
-
         #endregion
 
         #endregion
@@ -750,59 +508,6 @@ namespace Novacta.Analytics.Infrastructure
             return result;
         }
 
-        internal static void View_InPlaceApply(
-            MatrixImplementor<double> matrix,
-            Func<double, double> func)
-        {
-            var subMatrix = (ViewDoubleMatrixImplementor)(matrix);
-
-            subMatrix.parentImplementor.ChangingData -=
-               new EventHandler<EventArgs>
-                  (subMatrix.ChangingDataHandler);
-
-            subMatrix.parentImplementor.ImplementorChanged -=
-               new EventHandler<ImplementorChangedEventArgs>
-                  (subMatrix.ImplementorChangedHandler);
-
-            DenseDoubleMatrixImplementor denseMatrix = subMatrix;
-
-            var args = new ImplementorChangedEventArgs(denseMatrix);
-            subMatrix.OnImplementorChanged(args);
-
-            // Remark: denseMatrix has been created here, hence there are no 
-            //         SubMatrixImplementor.parentImplementor fields
-            //         pointing to it. As a consequence, there's no need to call
-            //
-            //         denseMatrix.OnChangingData()
-            //
-            //         before in-place transposing the dense matrix.
-
-            Dense_InPlaceApply(denseMatrix, func);
-        }
-
-        internal static MatrixImplementor<double> View_OutPlaceApply(
-            MatrixImplementor<double> matrix,
-            Func<double, double> func)
-        {
-            var subMatrix = (ViewDoubleMatrixImplementor)(matrix);
-
-            subMatrix.parentImplementor.ChangingData -=
-               new EventHandler<EventArgs>
-                  (subMatrix.ChangingDataHandler);
-
-            subMatrix.parentImplementor.ImplementorChanged -=
-               new EventHandler<ImplementorChangedEventArgs>
-                  (subMatrix.ImplementorChangedHandler);
-
-            DenseDoubleMatrixImplementor denseMatrix = subMatrix;
-
-            var args = new ImplementorChangedEventArgs(denseMatrix);
-
-            subMatrix.OnImplementorChanged(args);
-
-            return Dense_OutPlaceApply(denseMatrix, func);
-        }
-
         #endregion
 
         #region Transpose
@@ -823,7 +528,7 @@ namespace Novacta.Analytics.Infrastructure
         {
             // Implements in-place transposition: A := alpha*op(A).
 
-            SafeNativeMethods.MKL_Dimatcopy(
+            SafeNativeMethods.TRANS.DIMATCOPY(
                 'c', // ordering, 
                 't', // trans, 
                 numberOfRows,
@@ -938,60 +643,9 @@ namespace Novacta.Analytics.Infrastructure
             return result;
         }
 
-        internal static void View_InPlaceTranspose(
-            MatrixImplementor<double> matrix)
-        {
-            var subMatrix = (ViewDoubleMatrixImplementor)(matrix);
-
-            subMatrix.parentImplementor.ChangingData -=
-               new EventHandler<EventArgs>
-                  (subMatrix.ChangingDataHandler);
-
-            subMatrix.parentImplementor.ImplementorChanged -=
-               new EventHandler<ImplementorChangedEventArgs>
-                  (subMatrix.ImplementorChangedHandler);
-
-            DenseDoubleMatrixImplementor denseMatrix = subMatrix;
-
-            var args = new ImplementorChangedEventArgs(denseMatrix);
-            subMatrix.OnImplementorChanged(args);
-
-            // Remark: denseMatrix has been created here, hence there are no 
-            //         SubMatrixImplementor.parentImplementor fields
-            //         pointing to it. As a consequence, there's no need to call
-            //
-            //         denseMatrix.OnChangingData()
-            //
-            //         before in-place transposing the dense matrix.
-
-            Dense_InPlaceTranspose(denseMatrix);
-        }
-
-        internal static MatrixImplementor<double> View_OutPlaceTranspose(
-            MatrixImplementor<double> matrix)
-        {
-            var subMatrix = (ViewDoubleMatrixImplementor)(matrix);
-
-            subMatrix.parentImplementor.ChangingData -=
-               new EventHandler<EventArgs>
-                  (subMatrix.ChangingDataHandler);
-
-            subMatrix.parentImplementor.ImplementorChanged -=
-               new EventHandler<ImplementorChangedEventArgs>
-                  (subMatrix.ImplementorChangedHandler);
-
-            DenseDoubleMatrixImplementor denseMatrix = subMatrix;
-
-            var args = new ImplementorChangedEventArgs(denseMatrix);
-
-            subMatrix.OnImplementorChanged(args);
-
-            return Dense_OutPlaceTranspose(denseMatrix);
-        }
-
         #endregion
 
-        #region Scalar
+        #region Double scalar
 
         #region ScalarBinaryOperators - Sum
 
@@ -1003,14 +657,10 @@ namespace Novacta.Analytics.Infrastructure
 
             if (0.0 != scalar)
             {
-                double[] matrixArray = matrix.Storage;
-                double[] resultArray = result.Storage;
+                double[] resultArray = result.storage;
 
-                int index;
-                int count = resultArray.Length;
-
-                for (index = 0; index < count; index++)
-                    resultArray[index] = matrixArray[index] + scalar;
+                for (int i = 0; i < resultArray.Length; i++)
+                    resultArray[i] += scalar;
             }
             return result;
         }
@@ -1028,31 +678,10 @@ namespace Novacta.Analytics.Infrastructure
 
             DenseDoubleMatrixImplementor result = (SparseCsr3DoubleMatrixImplementor)matrix;
 
-            var resArray = result.storage;
+            var resultArray = result.storage;
 
-            for (int i = 0; i < resArray.Length; i++)
-                resArray[i] += scalar;
-
-            return result;
-        }
-
-        internal static MatrixImplementor<double> Scalar_View_Sum(
-            MatrixImplementor<double> matrix,
-            double scalar)
-        {
-            ViewDoubleMatrixImplementor subMatrix = (ViewDoubleMatrixImplementor)(matrix);
-
-            DenseDoubleMatrixImplementor result = subMatrix;
-
-            if (0.0 != scalar)
-            {
-                double[] resultArray = result.Storage;
-
-                int count = resultArray.Length;
-
-                for (int Index = 0; Index < count; Index++)
-                    resultArray[Index] += scalar;
-            }
+            for (int i = 0; i < resultArray.Length; i++)
+                resultArray[i] += scalar;
 
             return result;
         }
@@ -1064,17 +693,12 @@ namespace Novacta.Analytics.Infrastructure
         internal static MatrixImplementor<double> Matrix_Dense_Negation(
             MatrixImplementor<double> matrix)
         {
-            MatrixImplementor<double> result =
-                new DenseDoubleMatrixImplementor(matrix.NumberOfRows, matrix.NumberOfColumns);
+            DenseDoubleMatrixImplementor result = (DenseDoubleMatrixImplementor)matrix.Clone();
 
-            double[] matrixArray = matrix.Storage;
-            double[] resultArray = result.Storage;
+            double[] resultArray = result.storage;
 
-            int index;
-            int count = resultArray.Length;
-
-            for (index = 0; index < count; index++)
-                resultArray[index] = -matrixArray[index];
+            for (int i = 0; i < resultArray.Length; i++)
+                resultArray[i] = -resultArray[i];
 
             return result;
         }
@@ -1101,20 +725,6 @@ namespace Novacta.Analytics.Infrastructure
             return result;
         }
 
-        internal static MatrixImplementor<double> Matrix_View_Negation(
-            MatrixImplementor<double> matrix)
-        {
-            var result = new DenseDoubleMatrixImplementor(matrix.NumberOfRows, matrix.NumberOfColumns);
-            double[] resultArray = result.Storage;
-
-            int count = resultArray.Length;
-
-            for (int index = 0; index < count; index++)
-                resultArray[index] = -matrix[index];
-
-            return result;
-        }
-
         #endregion
 
         #region ScalarBinaryOperators - Subtract
@@ -1128,14 +738,10 @@ namespace Novacta.Analytics.Infrastructure
 
             var result = (DenseDoubleMatrixImplementor)(matrix.Clone());
 
-            double[] matrixArray = matrix.Storage;
-            double[] resultArray = result.Storage;
+            double[] resultArray = result.storage;
 
-            int index;
-            int count = resultArray.Length;
-
-            for (index = 0; index < count; index++)
-                resultArray[index] = scalar - matrixArray[index];
+            for (int i = 0; i < resultArray.Length; i++)
+                resultArray[i] = scalar - resultArray[i];
 
             return result;
         }
@@ -1156,36 +762,14 @@ namespace Novacta.Analytics.Infrastructure
 
             var result = new DenseDoubleMatrixImplementor(numberOfRows, numberOfColumns);
 
-            var resArray = result.storage;
+            var resultArray = result.storage;
 
             for (int j = 0; j < numberOfColumns; j++)
             {
                 offset = j * numberOfRows;
                 for (int i = 0; i < numberOfRows; i++)
-                    resArray[i + offset] = scalar - sparseMatrix.GetValue(i, j);
+                    resultArray[i + offset] = scalar - sparseMatrix.GetValue(i, j);
             }
-
-            return result;
-        }
-
-        internal static MatrixImplementor<double> Scalar_View_LeftSubtract(
-            MatrixImplementor<double> matrix,
-            double scalar)
-        {
-            // s - M
-
-            if (0.0 == scalar)
-                return Matrix_View_Negation(matrix);
-
-            var subMatrix = (ViewDoubleMatrixImplementor)(matrix);
-
-            DenseDoubleMatrixImplementor result = subMatrix;
-            double[] resultArray = result.Storage;
-
-            int count = resultArray.Length;
-
-            for (int index = 0; index < count; index++)
-                resultArray[index] = scalar - resultArray[index];
 
             return result;
         }
@@ -1201,14 +785,10 @@ namespace Novacta.Analytics.Infrastructure
             if (0.0 == scalar)
                 return result;
 
-            double[] matrixArray = matrix.Storage;
-            double[] resultArray = result.Storage;
+            double[] resultArray = result.storage;
 
-            int index;
-            int count = resultArray.Length;
-
-            for (index = 0; index < count; index++)
-                resultArray[index] = matrixArray[index] - scalar;
+            for (int i = 0; i < resultArray.Length; i++)
+                resultArray[i] -= scalar;
 
             return result;
         }
@@ -1224,31 +804,10 @@ namespace Novacta.Analytics.Infrastructure
 
             DenseDoubleMatrixImplementor result = (SparseCsr3DoubleMatrixImplementor)matrix;
 
-            var resArray = result.storage;
+            var resultArray = result.storage;
 
-            for (int i = 0; i < resArray.Length; i++)
-                resArray[i] -= scalar;
-
-            return result;
-        }
-
-        internal static MatrixImplementor<double> Scalar_View_RightSubtract(
-            MatrixImplementor<double> matrix,
-            double scalar)
-        {
-            if (0.0 == scalar)
-                return (ViewDoubleMatrixImplementor)matrix.Clone();
-
-            var subMatrix = (ViewDoubleMatrixImplementor)(matrix);
-
-            DenseDoubleMatrixImplementor result = subMatrix;
-
-            double[] resultArray = result.Storage;
-
-            int count = resultArray.Length;
-
-            for (int index = 0; index < count; index++)
-                resultArray[index] -= scalar;
+            for (int i = 0; i < resultArray.Length; i++)
+                resultArray[i] -= scalar;
 
             return result;
         }
@@ -1265,14 +824,10 @@ namespace Novacta.Analytics.Infrastructure
 
             if (1.0 != scalar)
             {
-                double[] matrixArray = matrix.Storage;
-                double[] resultArray = result.Storage;
+                double[] resultArray = result.storage;
 
-                int index;
-                int count = resultArray.Length;
-
-                for (index = 0; index < count; index++)
-                    resultArray[index] = matrixArray[index] * scalar;
+                for (int i = 0; i < resultArray.Length; i++)
+                    resultArray[i] *= scalar;
             }
 
             return result;
@@ -1285,7 +840,6 @@ namespace Novacta.Analytics.Infrastructure
             var sparseMatrix = (SparseCsr3DoubleMatrixImplementor)matrix;
             var result = (SparseCsr3DoubleMatrixImplementor)sparseMatrix.Clone();
 
-
             if (1.0 != scalar)
             {
                 var resultValues = result.values;
@@ -1293,27 +847,6 @@ namespace Novacta.Analytics.Infrastructure
 
                 for (int i = 0; i < numberOfStoredPositions; i++)
                     resultValues[i] *= scalar;
-            }
-
-            return result;
-        }
-
-        internal static MatrixImplementor<double> Scalar_View_Multiply(
-            MatrixImplementor<double> matrix,
-            double scalar)
-        {
-            var subMatrix = (ViewDoubleMatrixImplementor)(matrix);
-
-            DenseDoubleMatrixImplementor result = subMatrix;
-
-            if (1.0 != scalar)
-            {
-                double[] resultArray = result.Storage;
-
-                int count = resultArray.Length;
-
-                for (int index = 0; index < count; index++)
-                    resultArray[index] *= scalar;
             }
 
             return result;
@@ -1329,14 +862,10 @@ namespace Novacta.Analytics.Infrastructure
         {
             var result = (DenseDoubleMatrixImplementor)(matrix.Clone());
 
-            double[] matrixArray = matrix.Storage;
-            double[] resultArray = result.Storage;
+            double[] resultArray = result.storage;
 
-            int index;
-            int NumOfOperations = resultArray.Length;
-
-            for (index = 0; index < NumOfOperations; index++)
-                resultArray[index] = scalar / matrixArray[index];
+            for (int i = 0; i < resultArray.Length; i++)
+                resultArray[i] = scalar / resultArray[i];
 
             return result;
         }
@@ -1355,31 +884,14 @@ namespace Novacta.Analytics.Infrastructure
 
             var result = new DenseDoubleMatrixImplementor(numberOfRows, numberOfColumns);
 
-            var resArray = result.storage;
+            var resultArray = result.storage;
 
             for (int j = 0; j < numberOfColumns; j++)
             {
                 offset = j * numberOfRows;
                 for (int i = 0; i < numberOfRows; i++)
-                    resArray[i + offset] = scalar / sparseMatrix.GetValue(i, j);
+                    resultArray[i + offset] = scalar / sparseMatrix.GetValue(i, j);
             }
-
-            return result;
-        }
-
-        internal static MatrixImplementor<double> Scalar_View_LeftDivide(
-            MatrixImplementor<double> matrix,
-            double scalar)
-        {
-            var subMatrix = (ViewDoubleMatrixImplementor)(matrix);
-
-            DenseDoubleMatrixImplementor result = subMatrix;
-            double[] resultArray = result.Storage;
-
-            int count = resultArray.Length;
-
-            for (int index = 0; index < count; index++)
-                resultArray[index] = scalar / resultArray[index];
 
             return result;
         }
@@ -1392,14 +904,10 @@ namespace Novacta.Analytics.Infrastructure
 
             if (1.0 != scalar)
             {
-                double[] matrixArray = matrix.Storage;
-                double[] resultArray = result.Storage;
+                double[] resultArray = result.storage;
 
-                int index;
-                int count = resultArray.Length;
-
-                for (index = 0; index < count; index++)
-                    resultArray[index] = matrixArray[index] / scalar;
+                for (int i = 0; i < resultArray.Length; i++)
+                    resultArray[i] /= scalar;
             }
 
             return result;
@@ -1423,36 +931,297 @@ namespace Novacta.Analytics.Infrastructure
             int numberOfColumns = sparseMatrix.numberOfColumns;
 
             var result = new DenseDoubleMatrixImplementor(numberOfRows, numberOfColumns);
-            var resArray = result.storage;
+            var resultArray = result.storage;
 
             for (int j = 0; j < numberOfColumns; j++)
             {
                 offset = j * numberOfRows;
                 for (int i = 0; i < numberOfRows; i++)
-                    resArray[i + offset] = sparseMatrix.GetValue(i, j) / scalar;
+                    resultArray[i + offset] = sparseMatrix.GetValue(i, j) / scalar;
             }
 
             return result;
         }
 
-        internal static MatrixImplementor<double> Scalar_View_RightDivide(
+        #endregion
+
+        #endregion
+
+        #region Complex scalar
+
+        #region ScalarBinaryOperators - Sum
+
+        internal static MatrixImplementor<Complex> Scalar_Dense_Sum(
             MatrixImplementor<double> matrix,
-            double scalar)
+            Complex scalar)
         {
-            if (1.0 == scalar)
+            var denseMatrix = (DenseDoubleMatrixImplementor)matrix;
+
+            var result = (DenseComplexMatrixImplementor)denseMatrix;
+
+            if (0.0 != scalar)
             {
-                return (ViewDoubleMatrixImplementor)matrix.Clone();
+                Complex[] resultArray = result.storage;
+
+                for (int i = 0; i < resultArray.Length; i++)
+                    resultArray[i] += scalar;
+            }
+            return result;
+        }
+
+        internal static MatrixImplementor<Complex> Scalar_Sparse_Sum(
+            MatrixImplementor<double> matrix,
+            Complex scalar)
+        {
+            // M + s
+
+            var sparseMatrix =
+                (SparseCsr3ComplexMatrixImplementor)
+                    (SparseCsr3DoubleMatrixImplementor)matrix;
+
+            if (0.0 == scalar)
+                return sparseMatrix;
+
+            var result = (DenseComplexMatrixImplementor)sparseMatrix;
+
+            var resultArray = result.storage;
+
+            for (int i = 0; i < resultArray.Length; i++)
+                resultArray[i] += scalar;
+
+            return result;
+        }
+
+        #endregion
+
+        #region ScalarBinaryOperators - Subtract
+
+        internal static MatrixImplementor<Complex> Scalar_Dense_LeftSubtract(
+            MatrixImplementor<double> matrix,
+            Complex scalar)
+        {
+            var denseMatrix = (DenseDoubleMatrixImplementor)matrix;
+
+            DenseComplexMatrixImplementor result = (DenseComplexMatrixImplementor)denseMatrix;
+
+            Complex[] resultArray = result.storage;
+
+            for (int i = 0; i < resultArray.Length; i++)
+                resultArray[i] = scalar - resultArray[i];
+
+            return result;
+        }
+
+        internal static MatrixImplementor<Complex> Scalar_Sparse_LeftSubtract(
+            MatrixImplementor<double> matrix,
+            Complex scalar)
+        {
+            // s - M
+
+            var sparseMatrix =
+                (SparseCsr3ComplexMatrixImplementor)
+                    (SparseCsr3DoubleMatrixImplementor)matrix;
+
+            int offset;
+            int numberOfRows = sparseMatrix.numberOfRows;
+            int numberOfColumns = sparseMatrix.numberOfColumns;
+
+            var result = new DenseComplexMatrixImplementor(numberOfRows, numberOfColumns);
+
+            var resultArray = result.storage;
+
+            for (int j = 0; j < numberOfColumns; j++)
+            {
+                offset = j * numberOfRows;
+                for (int i = 0; i < numberOfRows; i++)
+                    resultArray[i + offset] = scalar - sparseMatrix.GetValue(i, j);
             }
 
-            var subMatrix = (ViewDoubleMatrixImplementor)(matrix);
+            return result;
+        }
 
-            DenseDoubleMatrixImplementor result = subMatrix;
-            double[] resultArray = result.Storage;
+        internal static MatrixImplementor<Complex> Scalar_Dense_RightSubtract(
+            MatrixImplementor<double> matrix,
+            Complex scalar)
+        {
+            // M - s
 
-            int count = resultArray.Length;
+            var denseMatrix = (DenseDoubleMatrixImplementor)matrix;
 
-            for (int index = 0; index < count; index++)
-                resultArray[index] /= scalar;
+            DenseComplexMatrixImplementor result = (DenseComplexMatrixImplementor)denseMatrix;
+
+            if (0.0 == scalar)
+                return result;
+
+            Complex[] resultArray = result.storage;
+
+            for (int i = 0; i < resultArray.Length; i++)
+                resultArray[i] -= scalar;
+
+            return result;
+        }
+
+        internal static MatrixImplementor<Complex> Scalar_Sparse_RightSubtract(
+            MatrixImplementor<double> matrix,
+            Complex scalar)
+        {
+            // M - s
+
+            var sparseMatrix =
+                (SparseCsr3ComplexMatrixImplementor)
+                    (SparseCsr3DoubleMatrixImplementor)matrix;
+
+            if (0.0 == scalar)
+                return sparseMatrix;
+
+            var result = (DenseComplexMatrixImplementor)sparseMatrix;
+
+            var resultArray = result.storage;
+
+            for (int i = 0; i < resultArray.Length; i++)
+                resultArray[i] -= scalar;
+
+            return result;
+        }
+
+        #endregion
+
+        #region ScalarBinaryOperators - Multiply
+
+        internal static MatrixImplementor<Complex> Scalar_Dense_Multiply(
+            MatrixImplementor<double> matrix,
+            Complex scalar)
+        {
+            var denseMatrix = (DenseDoubleMatrixImplementor)matrix;
+
+            DenseComplexMatrixImplementor result = (DenseComplexMatrixImplementor)denseMatrix;
+
+            if (1.0 != scalar)
+            {
+                Complex[] resultArray = result.storage;
+
+                for (int i = 0; i < resultArray.Length; i++)
+                    resultArray[i] *= scalar;
+            }
+
+            return result;
+        }
+
+        internal static MatrixImplementor<Complex> Scalar_Sparse_Multiply(
+            MatrixImplementor<double> matrix,
+            Complex scalar)
+        {
+            var sparseMatrix =
+                (SparseCsr3ComplexMatrixImplementor)
+                    (SparseCsr3DoubleMatrixImplementor)matrix;
+
+            var result = sparseMatrix;
+
+            if (1.0 != scalar)
+            {
+                var resultValues = result.values;
+                int numberOfStoredPositions = sparseMatrix.rowIndex[sparseMatrix.numberOfRows];
+
+                for (int i = 0; i < numberOfStoredPositions; i++)
+                    resultValues[i] *= scalar;
+            }
+
+            return result;
+        }
+
+        #endregion
+
+        #region ScalarBinaryOperators - Divide
+
+        internal static MatrixImplementor<Complex> Scalar_Dense_LeftDivide(
+            MatrixImplementor<double> matrix,
+            Complex scalar)
+        {
+            var denseMatrix = (DenseDoubleMatrixImplementor)matrix;
+
+            DenseComplexMatrixImplementor result = (DenseComplexMatrixImplementor)denseMatrix;
+
+            Complex[] resultArray = result.storage;
+
+            for (int i = 0; i < resultArray.Length; i++)
+                resultArray[i] = scalar / resultArray[i];
+
+            return result;
+        }
+
+        internal static MatrixImplementor<Complex> Scalar_Sparse_LeftDivide(
+            MatrixImplementor<double> matrix,
+            Complex scalar)
+        {
+            // s / M
+
+            var sparseMatrix =
+                (SparseCsr3ComplexMatrixImplementor)
+                    (SparseCsr3DoubleMatrixImplementor)matrix;
+
+            int offset;
+            int numberOfRows = sparseMatrix.numberOfRows;
+            int numberOfColumns = sparseMatrix.numberOfColumns;
+
+            var result = new DenseComplexMatrixImplementor(numberOfRows, numberOfColumns);
+
+            var resultArray = result.storage;
+
+            for (int j = 0; j < numberOfColumns; j++)
+            {
+                offset = j * numberOfRows;
+                for (int i = 0; i < numberOfRows; i++)
+                    resultArray[i + offset] = scalar / sparseMatrix.GetValue(i, j);
+            }
+
+            return result;
+        }
+
+        internal static MatrixImplementor<Complex> Scalar_Dense_RightDivide(
+            MatrixImplementor<double> matrix,
+            Complex scalar)
+        {
+            var denseMatrix = (DenseDoubleMatrixImplementor)matrix;
+
+            DenseComplexMatrixImplementor result = (DenseComplexMatrixImplementor)denseMatrix;
+
+            if (1.0 != scalar)
+            {
+                Complex[] resultArray = result.storage;
+
+                for (int i = 0; i < resultArray.Length; i++)
+                    resultArray[i] /= scalar;
+            }
+
+            return result;
+        }
+
+        internal static MatrixImplementor<Complex> Scalar_Sparse_RightDivide(
+            MatrixImplementor<double> matrix,
+            Complex scalar)
+        {
+            // M / s
+
+            var sparseMatrix =
+                (SparseCsr3ComplexMatrixImplementor)
+                    (SparseCsr3DoubleMatrixImplementor)matrix;
+
+            if (1.0 == scalar)
+                return sparseMatrix;
+
+            int offset;
+            int numberOfRows = sparseMatrix.numberOfRows;
+            int numberOfColumns = sparseMatrix.numberOfColumns;
+
+            var result = new DenseComplexMatrixImplementor(numberOfRows, numberOfColumns);
+            var resultArray = result.storage;
+
+            for (int j = 0; j < numberOfColumns; j++)
+            {
+                offset = j * numberOfRows;
+                for (int i = 0; i < numberOfRows; i++)
+                    resultArray[i + offset] = sparseMatrix.GetValue(i, j) / scalar;
+            }
 
             return result;
         }
@@ -1462,6 +1231,117 @@ namespace Novacta.Analytics.Infrastructure
         #endregion
 
         #region Matrix
+
+        #region Helper functions
+
+        internal static void CheckElementwiseOperationParameters(
+            MatrixImplementor<double> left,
+            MatrixImplementor<double> right,
+            out int numberOfRows,
+            out int numberOfColumns)
+        {
+            numberOfRows = left.NumberOfRows;
+            numberOfColumns = left.NumberOfColumns;
+
+            int rightNumberOfRows = right.NumberOfRows;
+            int rightNumberOfColumns = right.NumberOfColumns;
+
+            if ((numberOfRows != rightNumberOfRows) || (numberOfColumns != rightNumberOfColumns))
+            {
+                throw new ArgumentException(
+                   message: ImplementationServices.GetResourceString(
+                                "STR_EXCEPT_MAT_ELEMENT_WISE_ALL_DIMS_MUST_MATCH"),
+                   paramName: nameof(right));
+            }
+        }
+
+        internal static void CheckMultiplicationParameters(
+            MatrixImplementor<double> left,
+            MatrixImplementor<double> right,
+            out int numberOfRows,
+            out int numberOfColumns,
+            out int innerDimension)
+        {
+            numberOfRows = left.NumberOfRows;
+            numberOfColumns = right.NumberOfColumns;
+
+            int leftNumberOfColumns = left.NumberOfColumns;
+            innerDimension = right.NumberOfRows;
+
+            if (innerDimension != leftNumberOfColumns)
+            {
+                throw new ArgumentException(
+                   message: ImplementationServices.GetResourceString(
+                                "STR_EXCEPT_MAT_MULTIPLY_INNER_DIMS_MUST_MATCH"),
+                   paramName: nameof(right));
+            }
+        }
+
+        internal static void CheckAdditionParameters(
+            MatrixImplementor<double> left,
+            MatrixImplementor<double> right,
+            out int numberOfRows,
+            out int numberOfColumns)
+        {
+            numberOfRows = left.NumberOfRows;
+            numberOfColumns = left.NumberOfColumns;
+
+            int rightNumberOfRows = right.NumberOfRows;
+            int rightNumberOfColumns = right.NumberOfColumns;
+
+            if ((numberOfRows != rightNumberOfRows) || (numberOfColumns != rightNumberOfColumns))
+            {
+                throw new ArgumentException(
+                   message: ImplementationServices.GetResourceString(
+                                "STR_EXCEPT_MAT_ADD_ALL_DIMS_MUST_MATCH"),
+                   paramName: nameof(right));
+            }
+        }
+
+        internal static void CheckSubtractionParameters(
+            MatrixImplementor<double> left,
+            MatrixImplementor<double> right,
+            out int numberOfRows,
+            out int numberOfColumns)
+        {
+            numberOfRows = left.NumberOfRows;
+            numberOfColumns = left.NumberOfColumns;
+
+            int rightNumberOfRows = right.NumberOfRows;
+            int rightNumberOfColumns = right.NumberOfColumns;
+
+            if ((numberOfRows != rightNumberOfRows) || (numberOfColumns != rightNumberOfColumns))
+            {
+                throw new ArgumentException(
+                   message: ImplementationServices.GetResourceString(
+                                "STR_EXCEPT_MAT_SUBTRACT_ALL_DIMS_MUST_MATCH"),
+                   paramName: nameof(right));
+            }
+        }
+
+        internal static void CheckDivisionParameters(
+            MatrixImplementor<double> left,
+            MatrixImplementor<double> right,
+            out int numberOfRows,
+            out int numberOfColumns,
+            out int innerDimension)
+        {
+            numberOfRows = left.NumberOfRows;
+            numberOfColumns = right.NumberOfColumns;
+
+            int leftNumberOfColumns = left.NumberOfColumns;
+            innerDimension = right.NumberOfRows;
+
+            if (numberOfColumns != leftNumberOfColumns)
+            {
+                throw new ArgumentException(
+                   message: ImplementationServices.GetResourceString(
+                                "STR_EXCEPT_MAT_DIVIDE_COLUMNS_MUST_MATCH"),
+                   paramName: nameof(right));
+            }
+        }
+
+        #endregion
 
         #region ElementWiseMultiply
 
@@ -1477,16 +1357,50 @@ namespace Novacta.Analytics.Infrastructure
 
             var result = new DenseDoubleMatrixImplementor(numberOfRows, numberOfColumns);
 
-            double[] lhsArray = left.Storage;
-            double[] rhsArray = right.Storage;
+            double[] leftArray = left.Storage;
+            double[] rightArray = right.Storage;
             double[] resultArray = result.Storage;
 
-            int index;
-            int count = resultArray.Length;
+            for (int i = 0; i < resultArray.Length; i++)
+                resultArray[i] = leftArray[i] * rightArray[i];
 
+            return result;
+        }
+
+        internal static MatrixImplementor<double> Matrix_Dense_Sparse_ElementWiseMultiply(
+            MatrixImplementor<double> left,
+            MatrixImplementor<double> right)
+        {
+            CheckElementwiseOperationParameters(
+                left,
+                right,
+                out int numberOfRows,
+                out int numberOfColumns);
+
+            var rightSparse = (SparseCsr3DoubleMatrixImplementor)right;
+
+            var result = new SparseCsr3DoubleMatrixImplementor(
+                numberOfRows, numberOfColumns, rightSparse.capacity);
+            rightSparse.columns.CopyTo(result.columns, 0);
+            rightSparse.rowIndex.CopyTo(result.rowIndex, 0);
+
+            double[] leftArray = left.Storage;
+            double[] rightValues = rightSparse.values;
+
+            int[] columns = result.columns;
+            int[] rowIndex = result.rowIndex;
+
+            double[] resValues = result.values;
+
+            int j;
+            for (int i = 0; i < numberOfRows; i++)
             {
-                for (index = 0; index < count; index++)
-                    resultArray[index] = lhsArray[index] * rhsArray[index];
+                for (int p = rowIndex[i]; p < rowIndex[i + 1]; p++)
+                {
+                    j = columns[p];
+
+                    resValues[p] = rightValues[p] * leftArray[i + j * numberOfRows];
+                }
             }
 
             return result;
@@ -1502,15 +1416,15 @@ namespace Novacta.Analytics.Infrastructure
                 out int numberOfRows,
                 out int numberOfColumns);
 
-            var lhsSparse = (SparseCsr3DoubleMatrixImplementor)left;
+            var leftSparse = (SparseCsr3DoubleMatrixImplementor)left;
 
             var result = new SparseCsr3DoubleMatrixImplementor(
-                numberOfRows, numberOfColumns, lhsSparse.capacity);
-            lhsSparse.columns.CopyTo(result.columns, 0);
-            lhsSparse.rowIndex.CopyTo(result.rowIndex, 0);
+                numberOfRows, numberOfColumns, leftSparse.capacity);
+            leftSparse.columns.CopyTo(result.columns, 0);
+            leftSparse.rowIndex.CopyTo(result.rowIndex, 0);
 
-            double[] rhsArray = right.Storage;
-            double[] lhsValues = lhsSparse.values;
+            double[] rightArray = right.Storage;
+            double[] leftValues = leftSparse.values;
 
             int[] columns = result.columns;
             int[] rowIndex = result.rowIndex;
@@ -1524,7 +1438,7 @@ namespace Novacta.Analytics.Infrastructure
                 {
                     j = columns[p];
 
-                    resValues[p] = lhsValues[p] * rhsArray[i + j * numberOfRows];
+                    resValues[p] = leftValues[p] * rightArray[i + j * numberOfRows];
                 }
             }
 
@@ -1541,44 +1455,43 @@ namespace Novacta.Analytics.Infrastructure
                 out int numberOfRows,
                 out int numberOfColumns);
 
-            var lhsSparse = (SparseCsr3DoubleMatrixImplementor)left;
-            var lhsValues = lhsSparse.values;
-            var lhsColumns = lhsSparse.columns;
-            var lhsRowIndex = lhsSparse.rowIndex;
-            int lhsNumberOfStoredPositions = lhsRowIndex[numberOfRows];
+            var leftSparse = (SparseCsr3DoubleMatrixImplementor)left;
+            var leftValues = leftSparse.values;
+            var leftColumns = leftSparse.columns;
+            var leftRowIndex = leftSparse.rowIndex;
+            int leftNumberOfStoredPositions = leftRowIndex[numberOfRows];
 
-            var rhsSparse = (SparseCsr3DoubleMatrixImplementor)right;
-            var rhsValues = rhsSparse.values;
-            var rhsRowIndex = rhsSparse.rowIndex;
-            int rhsNumberOfStoredPositions = rhsRowIndex[numberOfRows];
+            var rightSparse = (SparseCsr3DoubleMatrixImplementor)right;
+            var rightValues = rightSparse.values;
+            var rightRowIndex = rightSparse.rowIndex;
+            int rightNumberOfStoredPositions = rightRowIndex[numberOfRows];
 
-            double resultLength = rhsSparse.Count;
+            double resultLength = rightSparse.Count;
             int resultCapacity = Convert.ToInt32(Math.Ceiling(
-                lhsNumberOfStoredPositions * rhsNumberOfStoredPositions / resultLength));
+                leftNumberOfStoredPositions * rightNumberOfStoredPositions / resultLength));
             var result = new SparseCsr3DoubleMatrixImplementor(
                 numberOfRows, numberOfColumns, resultCapacity);
 
-            HashSet<int> inspectedSet = new HashSet<int>();
+            HashSet<int> inspectedSet = new();
 
-            double lhsValue, rhsValue;
+            double leftValue, rightValue;
             int j, index;
             for (int i = 0; i < numberOfRows; i++)
             {
-
-                for (int p = lhsRowIndex[i]; p < lhsRowIndex[i + 1]; p++)
+                for (int p = leftRowIndex[i]; p < leftRowIndex[i + 1]; p++)
                 {
-                    j = lhsColumns[p];
+                    j = leftColumns[p];
                     index = i + j * numberOfRows;
                     inspectedSet.Add(index);
-                    lhsValue = lhsValues[p];
-                    if (lhsValue != 0.0)
+                    leftValue = leftValues[p];
+                    if (leftValue != 0.0)
                     {
-                        if (rhsSparse.TryGetPosition(i, j, out int positionIndex))
+                        if (rightSparse.TryGetPosition(i, j, out int positionIndex))
                         {
-                            rhsValue = rhsValues[positionIndex];
-                            if (rhsValue != 0.0)
+                            rightValue = rightValues[positionIndex];
+                            if (rightValue != 0.0)
                             {
-                                result.SetValue(i, j, lhsValue * rhsValue);
+                                result.SetValue(i, j, leftValue * rightValue);
                             }
                         }
                     }
@@ -1593,441 +1506,11 @@ namespace Novacta.Analytics.Infrastructure
             return result;
         }
 
-        internal static MatrixImplementor<double> Matrix_Dense_Sparse_ElementWiseMultiply(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            CheckElementwiseOperationParameters(
-                left,
-                right,
-                out int numberOfRows,
-                out int numberOfColumns);
-
-            var rhsSparse = (SparseCsr3DoubleMatrixImplementor)right;
-
-            var result = new SparseCsr3DoubleMatrixImplementor(
-                numberOfRows, numberOfColumns, rhsSparse.capacity);
-            rhsSparse.columns.CopyTo(result.columns, 0);
-            rhsSparse.rowIndex.CopyTo(result.rowIndex, 0);
-
-            double[] lhsArray = left.Storage;
-            double[] rhsValues = rhsSparse.values;
-
-            int[] columns = result.columns;
-            int[] rowIndex = result.rowIndex;
-
-            double[] resValues = result.values;
-
-            int j;
-            for (int i = 0; i < numberOfRows; i++)
-            {
-                for (int p = rowIndex[i]; p < rowIndex[i + 1]; p++)
-                {
-                    j = columns[p];
-
-                    resValues[p] = rhsValues[p] * lhsArray[i + j * numberOfRows];
-                }
-            }
-
-            return result;
-        }
-
-        internal static MatrixImplementor<double> Matrix_Sparse_View_ElementWiseMultiply(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            CheckElementwiseOperationParameters(
-                left,
-                right,
-                out int numberOfRows,
-                out int numberOfColumns);
-
-            var lhsSparse = (SparseCsr3DoubleMatrixImplementor)left;
-            var result = new SparseCsr3DoubleMatrixImplementor(
-                numberOfRows, numberOfColumns, lhsSparse.capacity);
-
-            lhsSparse.columns.CopyTo(result.columns, 0);
-            lhsSparse.rowIndex.CopyTo(result.rowIndex, 0);
-
-            double[] lhsValues = lhsSparse.values;
-
-            int[] columns = result.columns;
-            int[] rowIndex = result.rowIndex;
-
-            double[] resValues = result.values;
-
-
-            ViewDoubleMatrixImplementor rhsSub = (ViewDoubleMatrixImplementor)(right);
-            IndexCollection[] rhsSubIndexes =
-                rhsSub.GetReferredImplementor(out MatrixImplementor<double> rhsParentImplementor);
-
-            int[] rhsRowSubIndexes = rhsSubIndexes[0].indexes;
-            int[] rhsColSubIndexes = rhsSubIndexes[1].indexes;
-
-            int refOffset, offset;
-
-            switch (rhsParentImplementor.StorageScheme)
-            {
-                case StorageScheme.Dense:
-                    {
-                        double[] rhsArray = rhsParentImplementor.Storage;
-
-                        refOffset = rhsParentImplementor.NumberOfRows;
-
-                        int j;
-                        for (int i = 0; i < numberOfRows; i++)
-                        {
-                            for (int p = rowIndex[i]; p < rowIndex[i + 1]; p++)
-                            {
-                                j = columns[p];
-                                offset = refOffset * rhsColSubIndexes[j];
-
-                                resValues[p] = lhsValues[p] * rhsArray[rhsRowSubIndexes[i] + offset];
-                            }
-                        }
-                    }
-                    break;
-            }
-
-            return result;
-        }
-
-        internal static MatrixImplementor<double> Matrix_View_Sparse_ElementWiseMultiply(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            CheckElementwiseOperationParameters(
-                left,
-                right,
-                out int numberOfRows,
-                out int numberOfColumns);
-
-            var rhsSparse = (SparseCsr3DoubleMatrixImplementor)right;
-            var result = new SparseCsr3DoubleMatrixImplementor(
-                numberOfRows, numberOfColumns, rhsSparse.capacity);
-
-            rhsSparse.columns.CopyTo(result.columns, 0);
-            rhsSparse.rowIndex.CopyTo(result.rowIndex, 0);
-
-            double[] rhsValues = rhsSparse.values;
-
-            int[] columns = result.columns;
-            int[] rowIndex = result.rowIndex;
-
-            double[] resValues = result.values;
-
-
-            ViewDoubleMatrixImplementor lhsSub = (ViewDoubleMatrixImplementor)(left);
-            IndexCollection[] lhsSubIndexes =
-                lhsSub.GetReferredImplementor(out MatrixImplementor<double> lhsReferredImplementor);
-
-            int[] lhsRowSubIndexes = lhsSubIndexes[0].indexes;
-            int[] lhsColSubIndexes = lhsSubIndexes[1].indexes;
-
-            int refOffset, offset;
-
-            switch (lhsReferredImplementor.StorageScheme)
-            {
-                case StorageScheme.Dense:
-                    {
-                        double[] rhsArray = lhsReferredImplementor.Storage;
-
-                        refOffset = lhsReferredImplementor.NumberOfRows;
-
-                        int j;
-                        for (int i = 0; i < numberOfRows; i++)
-                        {
-                            for (int p = rowIndex[i]; p < rowIndex[i + 1]; p++)
-                            {
-                                j = columns[p];
-                                offset = refOffset * lhsColSubIndexes[j];
-
-                                resValues[p] = rhsValues[p] * rhsArray[lhsRowSubIndexes[i] + offset];
-                            }
-                        }
-                    }
-                    break;
-            }
-
-            return result;
-        }
-
-        internal static MatrixImplementor<double> Matrix_View_Dense_ElementWiseMultiply(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            CheckElementwiseOperationParameters(
-                left,
-                right,
-                out int numberOfRows,
-                out int numberOfColumns);
-
-            var result =
-               new DenseDoubleMatrixImplementor(numberOfRows, numberOfColumns);
-
-            double[] rhsArray = right.Storage;
-            double[] resultArray = result.Storage;
-
-            ViewDoubleMatrixImplementor lhsSub = (ViewDoubleMatrixImplementor)(left);
-            IndexCollection[] LhsSubIndexes = lhsSub.GetReferredImplementor(out MatrixImplementor<double> lhsParentImplementor);
-
-            int index = 0;
-            int[] lhsRowSubIndexes = LhsSubIndexes[0].indexes;
-            int[] lhsColSubIndexes = LhsSubIndexes[1].indexes;
-
-            int leadingDim, refIndex;
-
-            switch (lhsParentImplementor.StorageScheme)
-            {
-                case StorageScheme.Dense:
-                    {
-                        double[] lhsArray = lhsParentImplementor.Storage;
-
-                        leadingDim = lhsParentImplementor.NumberOfRows;
-
-                        for (int j = 0; j < numberOfColumns; j++)
-                        {
-                            refIndex = leadingDim * lhsColSubIndexes[j];
-
-                            for (int i = 0; i < numberOfRows; i++, index++)
-                                resultArray[index] = lhsArray[lhsRowSubIndexes[i] + refIndex] *
-                                                    rhsArray[index];
-                        }
-                    }
-                    break;
-            }
-
-            return result;
-        }
-
-
-        internal static MatrixImplementor<double> Matrix_Dense_View_ElementWiseMultiply(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            CheckElementwiseOperationParameters(
-                left,
-                right,
-                out int numberOfRows,
-                out int numberOfColumns);
-
-            var result = new DenseDoubleMatrixImplementor(numberOfRows, numberOfColumns);
-
-            double[] lhsArray = left.Storage;
-            double[] resultArray = result.Storage;
-
-            ViewDoubleMatrixImplementor rhsSub = (ViewDoubleMatrixImplementor)(right);
-            IndexCollection[] rhsSubIndexes = rhsSub.GetReferredImplementor(out MatrixImplementor<double> rhsParentImplementor);
-
-            int index = 0;
-            int[] rhsRowSubIndexes = rhsSubIndexes[0].indexes;
-            int[] rhsColSubIndexes = rhsSubIndexes[1].indexes;
-
-            int leadingDim, refIndex;
-
-            switch (rhsParentImplementor.StorageScheme)
-            {
-                case StorageScheme.Dense:
-                    {
-                        double[] rhsArray = rhsParentImplementor.Storage;
-
-                        leadingDim = rhsParentImplementor.NumberOfRows;
-
-                        for (int j = 0; j < numberOfColumns; j++)
-                        {
-                            refIndex = leadingDim * rhsColSubIndexes[j];
-
-                            for (int i = 0; i < numberOfRows; i++, index++)
-                                resultArray[index] = lhsArray[index] *
-                                                    rhsArray[rhsRowSubIndexes[i] + refIndex];
-                        }
-                    }
-                    break;
-            }
-
-            return result;
-        }
-
-
-        internal static MatrixImplementor<double> Matrix_View_View_ElementWiseMultiply(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            CheckElementwiseOperationParameters(
-                left,
-                right,
-                out int numberOfRows,
-                out int numberOfColumns);
-
-            var result = new DenseDoubleMatrixImplementor(numberOfRows, numberOfColumns);
-
-            double[] resultArray = result.Storage;
-
-            ViewDoubleMatrixImplementor lhsSub = (ViewDoubleMatrixImplementor)(left);
-
-
-            IndexCollection[] lhsSubIndexes = lhsSub.GetReferredImplementor(out MatrixImplementor<double> lhsParentImplementor);
-
-            ViewDoubleMatrixImplementor rhsSub = (ViewDoubleMatrixImplementor)(right);
-            IndexCollection[] rhsSubIndexes = rhsSub.GetReferredImplementor(out MatrixImplementor<double> rhsParentImplementor);
-
-            int index = 0;
-            int[] lhsRowSubIndexes = lhsSubIndexes[0].indexes;
-            int[] lhsColSubIndexes = lhsSubIndexes[1].indexes;
-
-            int[] rhsRowSubIndexes = rhsSubIndexes[0].indexes;
-            int[] rhsColSubIndexes = rhsSubIndexes[1].indexes;
-
-            int lhsLeadingDim, lhsRefIndex, rhsLeadingDim, rhsRefIndex;
-
-            if (StorageScheme.Dense == lhsParentImplementor.StorageScheme)
-            {
-                if (StorageScheme.Dense == rhsParentImplementor.StorageScheme)
-                {
-                    double[] lhsArray = lhsParentImplementor.Storage;
-                    double[] rhsArray = rhsParentImplementor.Storage;
-
-                    lhsLeadingDim = lhsParentImplementor.NumberOfRows;
-                    rhsLeadingDim = rhsParentImplementor.NumberOfRows;
-
-                    for (int j = 0; j < numberOfColumns; j++)
-                    {
-                        lhsRefIndex = lhsLeadingDim * lhsColSubIndexes[j];
-                        rhsRefIndex = rhsLeadingDim * rhsColSubIndexes[j];
-
-                        for (int i = 0; i < numberOfRows; i++, index++)
-                            resultArray[index] = lhsArray[lhsRowSubIndexes[i] + lhsRefIndex] *
-                                                rhsArray[rhsRowSubIndexes[i] + rhsRefIndex];
-                    }
-                }
-            }
-
-            return result;
-        }
-
-        #endregion
-
-        #region Helper functions
-        //
-        // Helper functions
-        //
-        internal static void CheckElementwiseOperationParameters(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right,
-            out int numberOfRows,
-            out int numberOfColumns)
-        {
-            numberOfRows = left.NumberOfRows;
-            numberOfColumns = left.NumberOfColumns;
-
-            int rhsNumberOfRows = right.NumberOfRows;
-            int rhsNumberOfColumns = right.NumberOfColumns;
-
-            if ((numberOfRows != rhsNumberOfRows) || (numberOfColumns != rhsNumberOfColumns))
-            {
-                throw new ArgumentException(
-                   message: ImplementationServices.GetResourceString(
-                                "STR_EXCEPT_MAT_ELEMENT_WISE_ALL_DIMS_MUST_MATCH"),
-                   paramName: nameof(right));
-            }
-        }
-
-        internal static void CheckSubtractionParameters(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right,
-            out int numberOfRows,
-            out int numberOfColumns)
-        {
-            numberOfRows = left.NumberOfRows;
-            numberOfColumns = left.NumberOfColumns;
-
-            int rhsNumberOfRows = right.NumberOfRows;
-            int rhsNumberOfColumns = right.NumberOfColumns;
-
-            if ((numberOfRows != rhsNumberOfRows) || (numberOfColumns != rhsNumberOfColumns))
-            {
-                throw new ArgumentException(
-                   message: ImplementationServices.GetResourceString(
-                                "STR_EXCEPT_MAT_SUBTRACT_ALL_DIMS_MUST_MATCH"),
-                   paramName: nameof(right));
-            }
-        }
-
-        internal static void CheckAdditionParameters(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right,
-            out int numberOfRows,
-            out int numberOfColumns)
-        {
-            numberOfRows = left.NumberOfRows;
-            numberOfColumns = left.NumberOfColumns;
-
-            int rhsNumberOfRows = right.NumberOfRows;
-            int rhsNumberOfColumns = right.NumberOfColumns;
-
-            if ((numberOfRows != rhsNumberOfRows) || (numberOfColumns != rhsNumberOfColumns))
-            {
-                throw new ArgumentException(
-                   message: ImplementationServices.GetResourceString(
-                                "STR_EXCEPT_MAT_ADD_ALL_DIMS_MUST_MATCH"),
-                   paramName: nameof(right));
-            }
-        }
-
-        internal static void CheckDivisionParameters(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right,
-            out int numberOfRows,
-            out int numberOfColumns,
-            out int innerDimension)
-        {
-            // Implements L / u as the solution of L = X * u, or X = L * inverse( u )
-            //                                    KxN KxM MxN
-
-            // int thisNumberOfRows, thisNumberOfColumns, InnerDimension; // K, N, and M, respectively
-
-            numberOfRows = left.NumberOfRows;
-            numberOfColumns = right.NumberOfColumns;
-
-            int lhsNumberOfColumns = left.NumberOfColumns;
-            innerDimension = right.NumberOfRows;
-
-            if (numberOfColumns != lhsNumberOfColumns)
-            {
-                throw new ArgumentException(
-                   message: ImplementationServices.GetResourceString(
-                                "STR_EXCEPT_MAT_DIVIDE_COLUMNS_MUST_MATCH"),
-                   paramName: nameof(right));
-            }
-        }
-
-        internal static void CheckMultiplicationParameters(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right,
-            out int numberOfRows,
-            out int numberOfColumns,
-            out int innerDimension)
-        {
-            numberOfRows = left.NumberOfRows;
-            numberOfColumns = right.NumberOfColumns;
-
-            int lhsNumberOfColumns = left.NumberOfColumns;
-            innerDimension = right.NumberOfRows;
-
-            if (innerDimension != lhsNumberOfColumns)
-            {
-                throw new ArgumentException(
-                   message: ImplementationServices.GetResourceString(
-                                "STR_EXCEPT_MAT_MULTIPLY_INNER_DIMS_MUST_MATCH"),
-                   paramName: nameof(right));
-            }
-        }
-
         #endregion
 
         #region Multiply
 
-        internal static MatrixImplementor<double> Matrix_Sparse_Dense_Multiply(
+        internal static MatrixImplementor<double> Matrix_Dense_Dense_Multiply(
             MatrixImplementor<double> left,
             MatrixImplementor<double> right)
         {
@@ -2035,7 +1518,8 @@ namespace Novacta.Analytics.Infrastructure
                 return Scalar_Dense_Multiply(right, left[0]);
 
             if (1 == right.Count)
-                return Scalar_Sparse_Multiply(left, right[0]);
+                return Scalar_Dense_Multiply(left, right[0]);
+
             CheckMultiplicationParameters(
                 left,
                 right,
@@ -2045,31 +1529,27 @@ namespace Novacta.Analytics.Infrastructure
 
             var result = new DenseDoubleMatrixImplementor(numberOfRows, numberOfColumns);
 
-            var lhsSparse = (SparseCsr3DoubleMatrixImplementor)left;
-            var lhsValues = lhsSparse.values;
-            var lhsColumns = lhsSparse.columns;
-            var lhsRowIndex = lhsSparse.rowIndex;
+            double[] leftArray = left.Storage;
 
-            var rhsDense = (DenseDoubleMatrixImplementor)right;
-            var rhsArray = rhsDense.storage;
-            var resArray = result.storage;
+            double[] rightArray = right.Storage;
 
-            Parallel.For(0, numberOfRows, i =>
-            {
-                double lhsValue, value;
-                int k;
-                for (int p = lhsRowIndex[i]; p < lhsRowIndex[i + 1]; p++)
-                {
-                    k = lhsColumns[p];
-                    lhsValue = lhsValues[p];
-                    for (int j = 0; j < numberOfColumns; j++)
-                    {
-                        value = lhsValue * rhsArray[k + j * innerDimension];
-                        if (value != 0.0)
-                            resArray[i + j * numberOfRows] += value;
-                    }
-                }
-            });
+            double[] resultArray = result.Storage;
+
+            SafeNativeMethods.BLAS.DGEMM(
+                SafeNativeMethods.BLAS.ORDER.ColMajor,
+                SafeNativeMethods.BLAS.TRANSPOSE.NoTrans, //'N', // transA
+                SafeNativeMethods.BLAS.TRANSPOSE.NoTrans, //'N', // transB
+                numberOfRows, // M 
+                numberOfColumns, //N
+                innerDimension, // K
+                1.0, // alpha, 
+                leftArray, //constant double *A,
+                numberOfRows,
+                rightArray, //constant double *B, 
+                innerDimension,
+                0.0, // beta, 
+                resultArray, //double *C, 
+                numberOfRows);
 
             return result;
         }
@@ -2083,6 +1563,7 @@ namespace Novacta.Analytics.Infrastructure
 
             if (1 == right.Count)
                 return Scalar_Dense_Multiply(left, right[0]);
+
             CheckMultiplicationParameters(
                 left,
                 right,
@@ -2092,28 +1573,76 @@ namespace Novacta.Analytics.Infrastructure
 
             var result = new DenseDoubleMatrixImplementor(numberOfRows, numberOfColumns);
 
-            var rhsSparse = (SparseCsr3DoubleMatrixImplementor)right;
-            var rhsValues = rhsSparse.values;
-            var rhsColumns = rhsSparse.columns;
-            var rhsRowIndex = rhsSparse.rowIndex;
+            var rightSparse = (SparseCsr3DoubleMatrixImplementor)right;
+            var rightValues = rightSparse.values;
+            var rightColumns = rightSparse.columns;
+            var rightRowIndex = rightSparse.rowIndex;
 
-            var lhsDense = (DenseDoubleMatrixImplementor)left.Clone();
-            var lhsArray = lhsDense.storage;
+            var leftDense = (DenseDoubleMatrixImplementor)left;
+            var leftArray = leftDense.storage;
 
             Parallel.For(0, numberOfRows, i =>
             {
                 int j, offset;
-                double rhsValue, value;
+                double rightValue, value;
                 for (int k = 0; k < innerDimension; k++)
                 {
                     offset = k * numberOfRows;
-                    for (int p = rhsRowIndex[k]; p < rhsRowIndex[k + 1]; p++)
+                    for (int p = rightRowIndex[k]; p < rightRowIndex[k + 1]; p++)
                     {
-                        j = rhsColumns[p];
-                        rhsValue = rhsValues[p];
-                        value = rhsValue * lhsArray[i + offset];
+                        j = rightColumns[p];
+                        rightValue = rightValues[p];
+                        value = rightValue * leftArray[i + offset];
                         if (value != 0.0)
                             result[i + j * numberOfRows] += value;
+                    }
+                }
+            });
+
+            return result;
+        }
+
+        internal static MatrixImplementor<double> Matrix_Sparse_Dense_Multiply(
+            MatrixImplementor<double> left,
+            MatrixImplementor<double> right)
+        {
+            if (1 == left.Count)
+                return Scalar_Dense_Multiply(right, left[0]);
+
+            if (1 == right.Count)
+                return Scalar_Sparse_Multiply(left, right[0]);
+
+            CheckMultiplicationParameters(
+                left,
+                right,
+                out int numberOfRows,
+                out int numberOfColumns,
+                out int innerDimension);
+
+            var result = new DenseDoubleMatrixImplementor(numberOfRows, numberOfColumns);
+
+            var leftSparse = (SparseCsr3DoubleMatrixImplementor)left;
+            var leftValues = leftSparse.values;
+            var leftColumns = leftSparse.columns;
+            var leftRowIndex = leftSparse.rowIndex;
+
+            var rightDense = (DenseDoubleMatrixImplementor)right;
+            var rightArray = rightDense.storage;
+            var resultArray = result.storage;
+
+            Parallel.For(0, numberOfRows, i =>
+            {
+                double leftValue, value;
+                int k;
+                for (int p = leftRowIndex[i]; p < leftRowIndex[i + 1]; p++)
+                {
+                    k = leftColumns[p];
+                    leftValue = leftValues[p];
+                    for (int j = 0; j < numberOfColumns; j++)
+                    {
+                        value = leftValue * rightArray[k + j * innerDimension];
+                        if (value != 0.0)
+                            resultArray[i + j * numberOfRows] += value;
                     }
                 }
             });
@@ -2130,6 +1659,7 @@ namespace Novacta.Analytics.Infrastructure
 
             if (1 == right.Count)
                 return Scalar_Sparse_Multiply(left, right[0]);
+
             CheckMultiplicationParameters(
                 left,
                 right,
@@ -2139,33 +1669,33 @@ namespace Novacta.Analytics.Infrastructure
 
             var result = new DenseDoubleMatrixImplementor(numberOfRows, numberOfColumns);
 
-            var lhsSparse = (SparseCsr3DoubleMatrixImplementor)left;
-            var lhsValues = lhsSparse.values;
-            var lhsColumns = lhsSparse.columns;
-            var lhsRowIndex = lhsSparse.rowIndex;
-            int lhsNumberOfStoredPositions = lhsRowIndex[numberOfRows];
+            var leftSparse = (SparseCsr3DoubleMatrixImplementor)left;
+            var leftValues = leftSparse.values;
+            var leftColumns = leftSparse.columns;
+            var leftRowIndex = leftSparse.rowIndex;
+            int leftNumberOfStoredPositions = leftRowIndex[numberOfRows];
 
-            var rhsSparse = (SparseCsr3DoubleMatrixImplementor)right;
-            var rhsValues = rhsSparse.values;
-            var rhsColumns = rhsSparse.columns;
-            var rhsRowIndex = rhsSparse.rowIndex;
-            int rhsNumberOfStoredPositions = rhsRowIndex[innerDimension];
+            var rightSparse = (SparseCsr3DoubleMatrixImplementor)right;
+            var rightValues = rightSparse.values;
+            var rightColumns = rightSparse.columns;
+            var rightRowIndex = rightSparse.rowIndex;
+            int rightNumberOfStoredPositions = rightRowIndex[innerDimension];
 
-            var resArray = result.storage;
+            var resultArray = result.storage;
 
             Parallel.For(0, numberOfRows, i =>
             {
-                double lhsValue, value;
+                double leftValue, value;
                 int k;
-                for (int p = lhsRowIndex[i]; p < lhsRowIndex[i + 1]; p++)
+                for (int p = leftRowIndex[i]; p < leftRowIndex[i + 1]; p++)
                 {
-                    k = lhsColumns[p];
-                    lhsValue = lhsValues[p];
+                    k = leftColumns[p];
+                    leftValue = leftValues[p];
                     for (int j = 0; j < numberOfColumns; j++)
                     {
-                        if (rhsSparse.TryGetPosition(k, j, out int positionIndex))
+                        if (rightSparse.TryGetPosition(k, j, out int positionIndex))
                         {
-                            value = lhsValue * rhsValues[positionIndex];
+                            value = leftValue * rightValues[positionIndex];
                             if (value != 0.0)
                                 result[i + j * numberOfRows] += value;
                         }
@@ -2181,177 +1711,76 @@ namespace Novacta.Analytics.Infrastructure
             return result;
         }
 
-        internal static MatrixImplementor<double> Matrix_Dense_Dense_Multiply(
+        #endregion
+
+        #region Add
+
+        internal static MatrixImplementor<double> Matrix_Dense_Dense_Sum(
             MatrixImplementor<double> left,
             MatrixImplementor<double> right)
         {
             if (1 == left.Count)
-                return Scalar_Dense_Multiply(right, left[0]);
+                return Scalar_Dense_Sum(right, left[0]);
 
             if (1 == right.Count)
-                return Scalar_Dense_Multiply(left, right[0]);
-            CheckMultiplicationParameters(
+                return Scalar_Dense_Sum(left, right[0]);
+
+            CheckAdditionParameters(
                 left,
                 right,
                 out int numberOfRows,
-                out int numberOfColumns,
-                out int innerDimension);
+                out int numberOfColumns);
 
             var result = new DenseDoubleMatrixImplementor(numberOfRows, numberOfColumns);
 
-            double[] lhsArray = left.Storage;
-
-            double[] rhsArray = right.Storage;
-
+            double[] leftArray = left.Storage;
+            double[] rightArray = right.Storage;
             double[] resultArray = result.Storage;
 
-            SafeNativeMethods.BLAS_dgemm(
-                SafeNativeMethods.BLAS.ORDER.ColMajor,
-                SafeNativeMethods.BLAS.TRANSPOSE.NoTrans, //'N', // transA
-                SafeNativeMethods.BLAS.TRANSPOSE.NoTrans, //'N', // transB
-                numberOfRows, // M 
-                numberOfColumns, //N
-                innerDimension, // K
-                1.0, // alpha, 
-                lhsArray, //constant double *A,
-                numberOfRows,
-                rhsArray, //constant double *B, 
-                innerDimension,
-                0.0, // beta, 
-                resultArray, //double *C, 
-                numberOfRows);
+            for (int i = 0; i < resultArray.Length; i++)
+                resultArray[i] = leftArray[i] + rightArray[i];
 
             return result;
         }
 
-        internal static MatrixImplementor<double> Matrix_Dense_View_Multiply(
+        internal static MatrixImplementor<double> Matrix_Dense_Sparse_Sum(
             MatrixImplementor<double> left,
             MatrixImplementor<double> right)
         {
-            ViewDoubleMatrixImplementor rhsSub = (ViewDoubleMatrixImplementor)(right);
+            if (1 == left.Count)
+                return Scalar_Sparse_Sum(right, left[0]);
 
-            rhsSub.parentImplementor.ChangingData -=
-               new EventHandler<EventArgs>
-                  (rhsSub.ChangingDataHandler);
+            if (1 == right.Count)
+                return Scalar_Dense_Sum(left, right[0]);
 
-            rhsSub.parentImplementor.ImplementorChanged -=
-               new EventHandler<ImplementorChangedEventArgs>
-                  (rhsSub.ImplementorChangedHandler);
+            CheckAdditionParameters(
+                left,
+                right,
+                out int numberOfRows,
+                out _);
 
-            DenseDoubleMatrixImplementor rhsDenseMatrix = rhsSub;
+            var rightSparse = (SparseCsr3DoubleMatrixImplementor)right;
 
-            ImplementorChangedEventArgs args = new ImplementorChangedEventArgs(rhsDenseMatrix);
-            rhsSub.OnImplementorChanged(args);
+            double[] rightValues = rightSparse.values;
+            int[] rightColumns = rightSparse.columns;
+            int[] rightRowIndex = rightSparse.rowIndex;
 
-            return Matrix_Dense_Dense_Multiply(left, rhsDenseMatrix);
+            var result = (DenseDoubleMatrixImplementor)left.Clone();
+            double[] resultArray = result.Storage;
+
+            int j, index;
+            for (int i = 0; i < numberOfRows; i++)
+            {
+                for (int p = rightRowIndex[i]; p < rightRowIndex[i + 1]; p++)
+                {
+                    j = rightColumns[p];
+                    index = i + j * numberOfRows;
+                    resultArray[index] += rightValues[p];
+                }
+            }
+
+            return result;
         }
-
-        internal static MatrixImplementor<double> Matrix_Sparse_View_Multiply(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            ViewDoubleMatrixImplementor rhsSub = (ViewDoubleMatrixImplementor)(right);
-
-            rhsSub.parentImplementor.ChangingData -=
-               new EventHandler<EventArgs>
-                  (rhsSub.ChangingDataHandler);
-
-            rhsSub.parentImplementor.ImplementorChanged -=
-               new EventHandler<ImplementorChangedEventArgs>
-                  (rhsSub.ImplementorChangedHandler);
-
-            DenseDoubleMatrixImplementor rhsDenseMatrix = rhsSub;
-
-            ImplementorChangedEventArgs args = new ImplementorChangedEventArgs(rhsDenseMatrix);
-            rhsSub.OnImplementorChanged(args);
-
-            return Matrix_Sparse_Dense_Multiply(left, rhsDenseMatrix);
-        }
-
-        internal static MatrixImplementor<double> Matrix_View_Dense_Multiply(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            ViewDoubleMatrixImplementor lhsSub = (ViewDoubleMatrixImplementor)(left);
-
-            lhsSub.parentImplementor.ChangingData -=
-               new EventHandler<EventArgs>
-                  (lhsSub.ChangingDataHandler);
-
-            lhsSub.parentImplementor.ImplementorChanged -=
-               new EventHandler<ImplementorChangedEventArgs>
-                  (lhsSub.ImplementorChangedHandler);
-
-            DenseDoubleMatrixImplementor lhsDenseMatrix = lhsSub;
-
-            ImplementorChangedEventArgs args = new ImplementorChangedEventArgs(lhsDenseMatrix);
-            lhsSub.OnImplementorChanged(args);
-
-            return Matrix_Dense_Dense_Multiply(lhsDenseMatrix, right);
-        }
-
-        internal static MatrixImplementor<double> Matrix_View_Sparse_Multiply(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            ViewDoubleMatrixImplementor lhsSub = (ViewDoubleMatrixImplementor)(left);
-
-            lhsSub.parentImplementor.ChangingData -=
-               new EventHandler<EventArgs>
-                  (lhsSub.ChangingDataHandler);
-
-            lhsSub.parentImplementor.ImplementorChanged -=
-               new EventHandler<ImplementorChangedEventArgs>
-                  (lhsSub.ImplementorChangedHandler);
-
-            DenseDoubleMatrixImplementor lhsDenseMatrix = lhsSub;
-
-            ImplementorChangedEventArgs args = new ImplementorChangedEventArgs(lhsDenseMatrix);
-            lhsSub.OnImplementorChanged(args);
-
-            return Matrix_Dense_Sparse_Multiply(lhsDenseMatrix, right);
-        }
-
-        internal static MatrixImplementor<double> Matrix_View_View_Multiply(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            ViewDoubleMatrixImplementor lhsSub = (ViewDoubleMatrixImplementor)(left);
-
-            lhsSub.parentImplementor.ChangingData -=
-               new EventHandler<EventArgs>
-                  (lhsSub.ChangingDataHandler);
-
-            lhsSub.parentImplementor.ImplementorChanged -=
-               new EventHandler<ImplementorChangedEventArgs>
-                  (lhsSub.ImplementorChangedHandler);
-
-            DenseDoubleMatrixImplementor lhsDenseMatrix = lhsSub;
-
-            ImplementorChangedEventArgs lArgs = new ImplementorChangedEventArgs(lhsDenseMatrix);
-            lhsSub.OnImplementorChanged(lArgs);
-
-            ViewDoubleMatrixImplementor rhsSub = (ViewDoubleMatrixImplementor)(right);
-
-            rhsSub.parentImplementor.ChangingData -=
-               new EventHandler<EventArgs>
-                  (rhsSub.ChangingDataHandler);
-
-            rhsSub.parentImplementor.ImplementorChanged -=
-               new EventHandler<ImplementorChangedEventArgs>
-                  (rhsSub.ImplementorChangedHandler);
-
-            DenseDoubleMatrixImplementor rhsDenseMatrix = rhsSub;
-
-            ImplementorChangedEventArgs rArgs = new ImplementorChangedEventArgs(rhsDenseMatrix);
-            rhsSub.OnImplementorChanged(rArgs);
-
-            return Matrix_Dense_Dense_Multiply(lhsDenseMatrix, rhsDenseMatrix);
-        }
-
-        #endregion
-
-        #region Add
 
         internal static MatrixImplementor<double> Matrix_Sparse_Dense_Sum(
             MatrixImplementor<double> left,
@@ -2362,29 +1791,30 @@ namespace Novacta.Analytics.Infrastructure
 
             if (1 == right.Count)
                 return Scalar_Sparse_Sum(left, right[0]);
+
             CheckAdditionParameters(
                 left,
                 right,
                 out int numberOfRows,
                 out _);
 
-            var lhsSparse = (SparseCsr3DoubleMatrixImplementor)left;
+            var leftSparse = (SparseCsr3DoubleMatrixImplementor)left;
 
-            double[] lhsValues = lhsSparse.values;
-            int[] lhsColumns = lhsSparse.columns;
-            int[] lhsRowIndex = lhsSparse.rowIndex;
+            double[] leftValues = leftSparse.values;
+            int[] leftColumns = leftSparse.columns;
+            int[] leftRowIndex = leftSparse.rowIndex;
 
             var result = (DenseDoubleMatrixImplementor)right.Clone();
-            double[] resArray = result.Storage;
+            double[] resultArray = result.Storage;
 
             int j, index;
             for (int i = 0; i < numberOfRows; i++)
             {
-                for (int p = lhsRowIndex[i]; p < lhsRowIndex[i + 1]; p++)
+                for (int p = leftRowIndex[i]; p < leftRowIndex[i + 1]; p++)
                 {
-                    j = lhsColumns[p];
+                    j = leftColumns[p];
                     index = i + j * numberOfRows;
-                    resArray[index] += lhsValues[p];
+                    resultArray[index] += leftValues[p];
                 }
             }
 
@@ -2400,61 +1830,62 @@ namespace Novacta.Analytics.Infrastructure
 
             if (1 == right.Count)
                 return Scalar_Sparse_Sum(left, right[0]);
+
             CheckAdditionParameters(
                 left,
                 right,
                 out int numberOfRows,
                 out int numberOfColumns);
 
-            var lhsSparse = (SparseCsr3DoubleMatrixImplementor)left;
-            var lhsValues = lhsSparse.values;
-            var lhsColumns = lhsSparse.columns;
-            var lhsRowIndex = lhsSparse.rowIndex;
-            int lhsNumberOfStoredPositions = lhsRowIndex[numberOfRows];
+            var leftSparse = (SparseCsr3DoubleMatrixImplementor)left;
+            var leftValues = leftSparse.values;
+            var leftColumns = leftSparse.columns;
+            var leftRowIndex = leftSparse.rowIndex;
+            int leftNumberOfStoredPositions = leftRowIndex[numberOfRows];
 
-            var rhsSparse = (SparseCsr3DoubleMatrixImplementor)right;
-            var rhsValues = rhsSparse.values;
-            var rhsColumns = rhsSparse.columns;
-            var rhsRowIndex = rhsSparse.rowIndex;
-            int rhsNumberOfStoredPositions = rhsRowIndex[numberOfRows];
+            var rightSparse = (SparseCsr3DoubleMatrixImplementor)right;
+            var rightValues = rightSparse.values;
+            var rightColumns = rightSparse.columns;
+            var rightRowIndex = rightSparse.rowIndex;
+            int rightNumberOfStoredPositions = rightRowIndex[numberOfRows];
 
-            int resultCapacity = lhsNumberOfStoredPositions + rhsNumberOfStoredPositions;
+            int resultCapacity = leftNumberOfStoredPositions + rightNumberOfStoredPositions;
             var result = new SparseCsr3DoubleMatrixImplementor(numberOfRows, numberOfColumns, resultCapacity);
 
-            HashSet<int> inspectedSet = new HashSet<int>();
+            HashSet<int> inspectedSet = new();
 
-            double lhsValue, rhsValue, value;
+            double leftValue, rightValue, value;
             int j, index;
             for (int i = 0; i < numberOfRows; i++)
             {
-                for (int p = lhsRowIndex[i]; p < lhsRowIndex[i + 1]; p++)
+                for (int p = leftRowIndex[i]; p < leftRowIndex[i + 1]; p++)
                 {
-                    j = lhsColumns[p];
+                    j = leftColumns[p];
                     index = i + j * numberOfRows;
                     inspectedSet.Add(index);
-                    lhsValue = lhsValues[p];
-                    if (rhsSparse.TryGetPosition(i, j, out int positionIndex))
+                    leftValue = leftValues[p];
+                    if (rightSparse.TryGetPosition(i, j, out int positionIndex))
                     {
-                        value = lhsValue + rhsValues[positionIndex];
+                        value = leftValue + rightValues[positionIndex];
                         if (value != 0.0)
                             result.SetValue(i, j, value);
                     }
                     else
                     {
-                        if (lhsValue != 0.0)
-                            result.SetValue(i, j, lhsValue);
+                        if (leftValue != 0.0)
+                            result.SetValue(i, j, leftValue);
                     }
                 }
 
-                for (int p = rhsRowIndex[i]; p < rhsRowIndex[i + 1]; p++)
+                for (int p = rightRowIndex[i]; p < rightRowIndex[i + 1]; p++)
                 {
-                    j = rhsColumns[p];
+                    j = rightColumns[p];
                     index = i + j * numberOfRows;
                     if (inspectedSet.Add(index))
                     {
-                        rhsValue = rhsValues[p];
-                        if (rhsValue != 0.0)
-                            result.SetValue(i, j, rhsValue);
+                        rightValue = rightValues[p];
+                        if (rightValue != 0.0)
+                            result.SetValue(i, j, rightValue);
                     }
                 }
 
@@ -2464,320 +1895,6 @@ namespace Novacta.Analytics.Infrastructure
                 // neither in the left matrix, nor in the right one, 
                 // and hence both matrices are zero
                 // at l.
-            }
-
-            return result;
-        }
-
-        internal static MatrixImplementor<double> Matrix_Dense_Sparse_Sum(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            if (1 == left.Count)
-                return Scalar_Sparse_Sum(right, left[0]);
-
-            if (1 == right.Count)
-                return Scalar_Dense_Sum(left, right[0]);
-            CheckAdditionParameters(
-                left,
-                right,
-                out int numberOfRows,
-                out _);
-
-            var rhsSparse = (SparseCsr3DoubleMatrixImplementor)right;
-
-            double[] rhsValues = rhsSparse.values;
-            int[] rhsColumns = rhsSparse.columns;
-            int[] rhsRowIndex = rhsSparse.rowIndex;
-
-            var result = (DenseDoubleMatrixImplementor)left.Clone();
-            double[] resArray = result.Storage;
-
-            int j, index;
-            for (int i = 0; i < numberOfRows; i++)
-            {
-                for (int p = rhsRowIndex[i]; p < rhsRowIndex[i + 1]; p++)
-                {
-                    j = rhsColumns[p];
-                    index = i + j * numberOfRows;
-                    resArray[index] += rhsValues[p];
-                }
-            }
-
-            return result;
-        }
-
-        internal static MatrixImplementor<double> Matrix_Dense_Dense_Sum(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            if (1 == left.Count)
-                return Scalar_Dense_Sum(right, left[0]);
-
-            if (1 == right.Count)
-                return Scalar_Dense_Sum(left, right[0]);
-            CheckAdditionParameters(
-                left,
-                right,
-                out int numberOfRows,
-                out int numberOfColumns);
-
-            var result = new DenseDoubleMatrixImplementor(numberOfRows, numberOfColumns);
-
-            double[] lhsArray = left.Storage;
-            double[] rhsArray = right.Storage;
-            double[] resultArray = result.Storage;
-
-            int index;
-            int count = resultArray.Length;
-
-            for (index = 0; index < count; index++)
-                resultArray[index] = lhsArray[index] + rhsArray[index];
-
-            return result;
-        }
-
-        internal static MatrixImplementor<double> Matrix_Dense_View_Sum(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            if (1 == left.Count)
-                return Scalar_View_Sum(right, left[0]);
-
-            if (1 == right.Count)
-                return Scalar_Dense_Sum(left, right[0]);
-            CheckAdditionParameters(
-                left,
-                right,
-                out int numberOfRows,
-                out int numberOfColumns);
-
-            var result = new DenseDoubleMatrixImplementor(numberOfRows, numberOfColumns);
-
-            double[] lhsArray = left.Storage;
-            double[] resultArray = result.Storage;
-
-            ViewDoubleMatrixImplementor rhsSub = (ViewDoubleMatrixImplementor)(right);
-            IndexCollection[] rhsSubIndexes = rhsSub.GetReferredImplementor(out MatrixImplementor<double> rhsParentImplementor);
-
-            int index = 0;
-            int[] rhsRowSubIndexes = rhsSubIndexes[0].indexes;
-            int[] rhsColSubIndexes = rhsSubIndexes[1].indexes;
-
-            int leadingDim, refIndex;
-
-            switch (rhsParentImplementor.StorageScheme)
-            {
-                case StorageScheme.Dense:
-                    {
-                        double[] rhsArray = rhsParentImplementor.Storage;
-
-                        leadingDim = rhsParentImplementor.NumberOfRows;
-
-                        for (int j = 0; j < numberOfColumns; j++)
-                        {
-                            refIndex = leadingDim * rhsColSubIndexes[j];
-
-                            for (int i = 0; i < numberOfRows; i++, index++)
-                                resultArray[index] = lhsArray[index] +
-                                                    rhsArray[rhsRowSubIndexes[i] + refIndex];
-                        }
-                    }
-                    break;
-
-            }
-
-            return result;
-        }
-
-        internal static MatrixImplementor<double> Matrix_View_Sparse_Sum(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            if (1 == left.Count)
-                return Scalar_Sparse_Sum(right, left[0]);
-
-            if (1 == right.Count)
-                return Scalar_View_Sum(left, right[0]);
-            CheckAdditionParameters(
-                left,
-                right,
-                out int numberOfRows,
-                out _);
-
-            var rhsSparse = (SparseCsr3DoubleMatrixImplementor)right;
-
-            double[] rhsValues = rhsSparse.values;
-            int[] rhsColumns = rhsSparse.columns;
-            int[] rhsRowIndex = rhsSparse.rowIndex;
-
-            DenseDoubleMatrixImplementor result = (ViewDoubleMatrixImplementor)left;
-            double[] resArray = result.Storage;
-
-            int j, index;
-            for (int i = 0; i < numberOfRows; i++)
-            {
-                for (int p = rhsRowIndex[i]; p < rhsRowIndex[i + 1]; p++)
-                {
-                    j = rhsColumns[p];
-                    index = i + j * numberOfRows;
-                    resArray[index] += rhsValues[p];
-                }
-            }
-
-            return result;
-        }
-
-        internal static MatrixImplementor<double> Matrix_Sparse_View_Sum(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            if (1 == left.Count)
-                return Scalar_View_Sum(right, left[0]);
-
-            if (1 == right.Count)
-                return Scalar_Sparse_Sum(left, right[0]);
-            CheckAdditionParameters(
-                left,
-                right,
-                out int numberOfRows,
-                out _);
-
-            var lhsSparse = (SparseCsr3DoubleMatrixImplementor)left;
-
-            double[] lhsValues = lhsSparse.values;
-            int[] lhsColumns = lhsSparse.columns;
-            int[] lhsRowIndex = lhsSparse.rowIndex;
-
-            DenseDoubleMatrixImplementor result = (ViewDoubleMatrixImplementor)right;
-            double[] resArray = result.Storage;
-
-            int j, index;
-            for (int i = 0; i < numberOfRows; i++)
-            {
-                for (int p = lhsRowIndex[i]; p < lhsRowIndex[i + 1]; p++)
-                {
-                    j = lhsColumns[p];
-                    index = i + j * numberOfRows;
-                    resArray[index] += lhsValues[p];
-                }
-            }
-
-            return result;
-        }
-
-        internal static MatrixImplementor<double> Matrix_View_Dense_Sum(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            if (1 == left.Count)
-                return Scalar_Dense_Sum(right, left[0]);
-
-            if (1 == right.Count)
-                return Scalar_View_Sum(left, right[0]);
-            CheckAdditionParameters(
-                left,
-                right,
-                out int numberOfRows,
-                out int numberOfColumns);
-
-            var result = new DenseDoubleMatrixImplementor(numberOfRows, numberOfColumns);
-
-            double[] rhsArray = right.Storage;
-            double[] resultArray = result.Storage;
-
-            ViewDoubleMatrixImplementor lhsSub = (ViewDoubleMatrixImplementor)(left);
-            IndexCollection[] lhsSubIndexes = lhsSub.GetReferredImplementor(out MatrixImplementor<double> lhsParentImplementor);
-
-            int index = 0;
-            int[] lhsRowSubIndexes = lhsSubIndexes[0].indexes;
-            int[] lhsColSubIndexes = lhsSubIndexes[1].indexes;
-
-            int leadingDim, refIndex;
-
-            switch (lhsParentImplementor.StorageScheme)
-            {
-                case StorageScheme.Dense:
-                    {
-                        double[] lhsArray = lhsParentImplementor.Storage;
-
-                        leadingDim = lhsParentImplementor.NumberOfRows;
-
-                        for (int j = 0; j < numberOfColumns; j++)
-                        {
-                            refIndex = leadingDim * lhsColSubIndexes[j];
-
-                            for (int i = 0; i < numberOfRows; i++, index++)
-                                resultArray[index] = lhsArray[lhsRowSubIndexes[i] + refIndex] +
-                                                    rhsArray[index];
-                        }
-                    }
-                    break;
-            }
-
-            return result;
-        }
-
-
-        //
-        // SUM - DOUBLE - SUB - SUB
-        //
-
-
-        internal static MatrixImplementor<double> Matrix_View_View_Sum(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            if (1 == left.Count)
-                return Scalar_View_Sum(right, left[0]);
-
-            if (1 == right.Count)
-                return Scalar_View_Sum(left, right[0]);
-            CheckAdditionParameters(
-                left,
-                right,
-                out int numberOfRows,
-                out int numberOfColumns);
-
-            var result = new DenseDoubleMatrixImplementor(numberOfRows, numberOfColumns);
-
-            double[] resultArray = result.Storage;
-
-            ViewDoubleMatrixImplementor lhsSub = (ViewDoubleMatrixImplementor)(left);
-            IndexCollection[] lhsSubIndexes = lhsSub.GetReferredImplementor(out MatrixImplementor<double> lhsParentImplementor);
-
-            ViewDoubleMatrixImplementor rhsSub = (ViewDoubleMatrixImplementor)(right);
-            IndexCollection[] rhsSubIndexes = rhsSub.GetReferredImplementor(out MatrixImplementor<double> rhsParentImplementor);
-
-            int index = 0;
-            int[] lhsRowSubIndexes = lhsSubIndexes[0].indexes;
-            int[] lhsColSubIndexes = lhsSubIndexes[1].indexes;
-
-            int[] rhsRowSubIndexes = rhsSubIndexes[0].indexes;
-            int[] rhsColSubIndexes = rhsSubIndexes[1].indexes;
-
-            int lhsLeadingDim, lhsRefIndex, rhsLeadingDim, rhsRefIndex;
-
-            if (StorageScheme.Dense == lhsParentImplementor.StorageScheme)
-            {
-                if (StorageScheme.Dense == rhsParentImplementor.StorageScheme)
-                {
-                    double[] lhsArray = lhsParentImplementor.Storage;
-                    double[] rhsArray = rhsParentImplementor.Storage;
-
-                    lhsLeadingDim = lhsParentImplementor.NumberOfRows;
-                    rhsLeadingDim = rhsParentImplementor.NumberOfRows;
-
-                    for (int j = 0; j < numberOfColumns; j++)
-                    {
-                        lhsRefIndex = lhsLeadingDim * lhsColSubIndexes[j];
-                        rhsRefIndex = rhsLeadingDim * rhsColSubIndexes[j];
-
-                        for (int i = 0; i < numberOfRows; i++, index++)
-                            resultArray[index] = lhsArray[lhsRowSubIndexes[i] + lhsRefIndex] +
-                                                rhsArray[rhsRowSubIndexes[i] + rhsRefIndex];
-                    }
-                }
             }
 
             return result;
@@ -2796,6 +1913,7 @@ namespace Novacta.Analytics.Infrastructure
 
             if (1 == right.Count)
                 return Scalar_Dense_RightSubtract(left, right[0]);
+
             CheckSubtractionParameters(
                 left,
                 right,
@@ -2804,93 +1922,12 @@ namespace Novacta.Analytics.Infrastructure
 
             var result = new DenseDoubleMatrixImplementor(numberOfRows, numberOfColumns);
 
-            double[] lhsArray = left.Storage;
-            double[] rhsArray = right.Storage;
+            double[] leftArray = left.Storage;
+            double[] rightArray = right.Storage;
             double[] resultArray = result.Storage;
 
-            int index;
-            int count = resultArray.Length;
-
-            for (index = 0; index < count; index++)
-                resultArray[index] = lhsArray[index] - rhsArray[index];
-
-            return result;
-        }
-
-        internal static MatrixImplementor<double> Matrix_Sparse_Sparse_Subtract(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            if (1 == left.Count)
-                return Scalar_Sparse_LeftSubtract(right, left[0]);
-
-            if (1 == right.Count)
-                return Scalar_Sparse_RightSubtract(left, right[0]);
-            CheckSubtractionParameters(
-                left,
-                right,
-                out int numberOfRows,
-                out int numberOfColumns);
-
-            var lhsSparse = (SparseCsr3DoubleMatrixImplementor)left;
-            var lhsValues = lhsSparse.values;
-            var lhsColumns = lhsSparse.columns;
-            var lhsRowIndex = lhsSparse.rowIndex;
-            int lhsNumberOfStoredPositions = lhsRowIndex[numberOfRows];
-
-            var rhsSparse = (SparseCsr3DoubleMatrixImplementor)right;
-            var rhsValues = rhsSparse.values;
-            var rhsColumns = rhsSparse.columns;
-            var rhsRowIndex = rhsSparse.rowIndex;
-            int rhsNumberOfStoredPositions = rhsRowIndex[numberOfRows];
-
-            int resultCapacity = lhsNumberOfStoredPositions + rhsNumberOfStoredPositions;
-            var result = new SparseCsr3DoubleMatrixImplementor(
-                numberOfRows, numberOfColumns, resultCapacity);
-
-            HashSet<int> inspectedSet = new HashSet<int>();
-
-            double lhsValue, rhsValue, value;
-            int j, index;
-            for (int i = 0; i < numberOfRows; i++)
-            {
-
-                for (int p = lhsRowIndex[i]; p < lhsRowIndex[i + 1]; p++)
-                {
-                    j = lhsColumns[p];
-                    index = i + j * numberOfRows;
-                    inspectedSet.Add(index);
-                    lhsValue = lhsValues[p];
-                    if (rhsSparse.TryGetPosition(i, j, out int positionIndex))
-                    {
-                        value = lhsValue - rhsValues[positionIndex];
-                        if (value != 0.0)
-                            result.SetValue(i, j, value);
-                    }
-                    else
-                    {
-                        if (lhsValue != 0.0)
-                            result.SetValue(i, j, lhsValue);
-                    }
-                }
-
-                for (int p = rhsRowIndex[i]; p < rhsRowIndex[i + 1]; p++)
-                {
-                    j = rhsColumns[p];
-                    index = i + j * numberOfRows;
-                    if (inspectedSet.Add(index))
-                    {
-                        rhsValue = rhsValues[p];
-                        if (rhsValue != 0.0)
-                            result.SetValue(i, j, -rhsValue);
-                    }
-                }
-
-                // inspectedSet contains the positions which are stored at least in one matrix.
-                // If position l is not in inspectedSet, then l is stored
-                // neither in the left matrix, nor in the right one, and hence both matrices are zero
-                // at l.
-            }
+            for (int i = 0; i < resultArray.Length; i++)
+                resultArray[i] = leftArray[i] - rightArray[i];
 
             return result;
         }
@@ -2904,29 +1941,30 @@ namespace Novacta.Analytics.Infrastructure
 
             if (1 == right.Count)
                 return Scalar_Dense_RightSubtract(left, right[0]);
+
             CheckSubtractionParameters(
                 left,
                 right,
                 out int numberOfRows,
                 out _);
 
-            var rhsSparse = (SparseCsr3DoubleMatrixImplementor)right;
+            var rightSparse = (SparseCsr3DoubleMatrixImplementor)right;
 
-            double[] rhsValues = rhsSparse.values;
-            int[] rhsColumns = rhsSparse.columns;
-            int[] rhsRowIndex = rhsSparse.rowIndex;
+            double[] rightValues = rightSparse.values;
+            int[] rightColumns = rightSparse.columns;
+            int[] rightRowIndex = rightSparse.rowIndex;
 
             var result = (DenseDoubleMatrixImplementor)left.Clone();
-            double[] resArray = result.Storage;
+            double[] resultArray = result.Storage;
 
             int j, index;
             for (int i = 0; i < numberOfRows; i++)
             {
-                for (int p = rhsRowIndex[i]; p < rhsRowIndex[i + 1]; p++)
+                for (int p = rightRowIndex[i]; p < rightRowIndex[i + 1]; p++)
                 {
-                    j = rhsColumns[p];
+                    j = rightColumns[p];
                     index = i + j * numberOfRows;
-                    resArray[index] -= rhsValues[p];
+                    resultArray[index] -= rightValues[p];
                 }
             }
 
@@ -2942,6 +1980,7 @@ namespace Novacta.Analytics.Infrastructure
 
             if (1 == right.Count)
                 return Scalar_Sparse_RightSubtract(left, right[0]);
+
             CheckSubtractionParameters(
                 left,
                 right,
@@ -2950,10 +1989,10 @@ namespace Novacta.Analytics.Infrastructure
 
             var result = new DenseDoubleMatrixImplementor(numberOfRows, numberOfColumns);
 
-            var lhsSparse = (SparseCsr3DoubleMatrixImplementor)left;
+            var leftSparse = (SparseCsr3DoubleMatrixImplementor)left;
 
-            double[] rhsArray = right.Storage;
-            double[] resArray = result.Storage;
+            double[] rightArray = right.Storage;
+            double[] resultArray = result.Storage;
 
             int offset, index;
             for (int j = 0; j < numberOfColumns; j++)
@@ -2962,66 +2001,14 @@ namespace Novacta.Analytics.Infrastructure
                 for (int i = 0; i < numberOfRows; i++)
                 {
                     index = i + offset;
-                    resArray[index] = lhsSparse.GetValue(i, j) - rhsArray[index];
+                    resultArray[index] = leftSparse.GetValue(i, j) - rightArray[index];
                 }
             }
 
             return result;
         }
 
-        internal static MatrixImplementor<double> Matrix_Dense_View_Subtract(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            if (1 == left.Count)
-                return Scalar_View_LeftSubtract(right, left[0]);
-
-            if (1 == right.Count)
-                return Scalar_Dense_RightSubtract(left, right[0]);
-            CheckSubtractionParameters(
-                left,
-                right,
-                out int numberOfRows,
-                out int numberOfColumns);
-
-            var result = new DenseDoubleMatrixImplementor(numberOfRows, numberOfColumns);
-
-            double[] lhsArray = left.Storage;
-            double[] resultArray = result.Storage;
-
-            ViewDoubleMatrixImplementor rhsSub = (ViewDoubleMatrixImplementor)(right);
-            IndexCollection[] rhsSubIndexes = rhsSub.GetReferredImplementor(out MatrixImplementor<double> rhsParentImplementor);
-
-            int index = 0;
-            int[] rhsRowSubIndexes = rhsSubIndexes[0].indexes;
-            int[] rhsColSubIndexes = rhsSubIndexes[1].indexes;
-
-            int leadingDim, refIndex;
-
-            switch (rhsParentImplementor.StorageScheme)
-            {
-                case StorageScheme.Dense:
-                    {
-                        double[] rhsArray = rhsParentImplementor.Storage;
-
-                        leadingDim = rhsParentImplementor.NumberOfRows;
-
-                        for (int j = 0; j < numberOfColumns; j++)
-                        {
-                            refIndex = leadingDim * rhsColSubIndexes[j];
-
-                            for (int i = 0; i < numberOfRows; i++, index++)
-                                resultArray[index] = lhsArray[index] -
-                                                    rhsArray[rhsRowSubIndexes[i] + refIndex];
-                        }
-                    }
-                    break;
-            }
-
-            return result;
-        }
-
-        internal static MatrixImplementor<double> Matrix_View_Sparse_Subtract(
+        internal static MatrixImplementor<double> Matrix_Sparse_Sparse_Subtract(
             MatrixImplementor<double> left,
             MatrixImplementor<double> right)
         {
@@ -3029,201 +2016,72 @@ namespace Novacta.Analytics.Infrastructure
                 return Scalar_Sparse_LeftSubtract(right, left[0]);
 
             if (1 == right.Count)
-                return Scalar_View_RightSubtract(left, right[0]);
+                return Scalar_Sparse_RightSubtract(left, right[0]);
+
             CheckSubtractionParameters(
                 left,
                 right,
                 out int numberOfRows,
-                out _);
+                out int numberOfColumns);
 
-            var rhsSparse = (SparseCsr3DoubleMatrixImplementor)right;
+            var leftSparse = (SparseCsr3DoubleMatrixImplementor)left;
+            var leftValues = leftSparse.values;
+            var leftColumns = leftSparse.columns;
+            var leftRowIndex = leftSparse.rowIndex;
+            int leftNumberOfStoredPositions = leftRowIndex[numberOfRows];
 
-            double[] rhsValues = rhsSparse.values;
-            int[] rhsColumns = rhsSparse.columns;
-            int[] rhsRowIndex = rhsSparse.rowIndex;
+            var rightSparse = (SparseCsr3DoubleMatrixImplementor)right;
+            var rightValues = rightSparse.values;
+            var rightColumns = rightSparse.columns;
+            var rightRowIndex = rightSparse.rowIndex;
+            int rightNumberOfStoredPositions = rightRowIndex[numberOfRows];
 
-            DenseDoubleMatrixImplementor result = (ViewDoubleMatrixImplementor)left;
-            double[] resArray = result.Storage;
+            int resultCapacity = leftNumberOfStoredPositions + rightNumberOfStoredPositions;
+            var result = new SparseCsr3DoubleMatrixImplementor(
+                numberOfRows, numberOfColumns, resultCapacity);
 
+            HashSet<int> inspectedSet = new();
+
+            double leftValue, rightValue, value;
             int j, index;
             for (int i = 0; i < numberOfRows; i++)
             {
-                for (int p = rhsRowIndex[i]; p < rhsRowIndex[i + 1]; p++)
+
+                for (int p = leftRowIndex[i]; p < leftRowIndex[i + 1]; p++)
                 {
-                    j = rhsColumns[p];
+                    j = leftColumns[p];
                     index = i + j * numberOfRows;
-                    resArray[index] -= rhsValues[p];
+                    inspectedSet.Add(index);
+                    leftValue = leftValues[p];
+                    if (rightSparse.TryGetPosition(i, j, out int positionIndex))
+                    {
+                        value = leftValue - rightValues[positionIndex];
+                        if (value != 0.0)
+                            result.SetValue(i, j, value);
+                    }
+                    else
+                    {
+                        if (leftValue != 0.0)
+                            result.SetValue(i, j, leftValue);
+                    }
                 }
-            }
 
-            return result;
-        }
-
-        internal static MatrixImplementor<double> Matrix_Sparse_View_Subtract(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            if (1 == left.Count)
-                return Scalar_View_LeftSubtract(right, left[0]);
-
-            if (1 == right.Count)
-                return Scalar_Sparse_RightSubtract(left, right[0]);
-            CheckSubtractionParameters(
-                left,
-                right,
-                out int numberOfRows,
-                out int numberOfColumns);
-
-            var result = new DenseDoubleMatrixImplementor(numberOfRows, numberOfColumns);
-
-            var lhsSparse = (SparseCsr3DoubleMatrixImplementor)left;
-            double[] resArray = result.Storage;
-
-            ViewDoubleMatrixImplementor rhsSub = (ViewDoubleMatrixImplementor)(right);
-            // = RhsSub.m_parentImplementor;
-            IndexCollection[] rhsSubIndexes = rhsSub.GetReferredImplementor(out MatrixImplementor<double> rhsReferredImplementor);
-
-            int l = 0;
-            int[] rhsRowSubIndexes = rhsSubIndexes[0].indexes;
-            int[] rhsColSubIndexes = rhsSubIndexes[1].indexes;
-
-            int refOffset, offset;
-
-            switch (rhsReferredImplementor.StorageScheme)
-            {
-                case StorageScheme.Dense:
-                    {
-                        double[] rhsArray = rhsReferredImplementor.Storage;
-
-                        refOffset = rhsReferredImplementor.NumberOfRows;
-
-                        for (int j = 0; j < numberOfColumns; j++)
-                        {
-                            offset = refOffset * rhsColSubIndexes[j];
-
-                            for (int i = 0; i < numberOfRows; i++, l++)
-                                resArray[l] = lhsSparse.GetValue(i, j) -
-                                    rhsArray[rhsRowSubIndexes[i] + offset];
-                        }
-                    }
-                    break;
-            }
-
-            return result;
-        }
-
-        internal static MatrixImplementor<double> Matrix_View_Dense_Subtract(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            if (1 == left.Count)
-                return Scalar_Dense_LeftSubtract(right, left[0]);
-
-            if (1 == right.Count)
-                return Scalar_View_RightSubtract(left, right[0]);
-            CheckSubtractionParameters(
-                left,
-                right,
-                out int numberOfRows,
-                out int numberOfColumns);
-
-
-            var result = new DenseDoubleMatrixImplementor(numberOfRows, numberOfColumns);
-
-            double[] rhsArray = right.Storage;
-            double[] resultArray = result.Storage;
-
-            ViewDoubleMatrixImplementor lhsSub = (ViewDoubleMatrixImplementor)(left);
-            IndexCollection[] lhsSubIndexes = lhsSub.GetReferredImplementor(out MatrixImplementor<double> lhsParentImplementor);
-
-            int index = 0;
-            int[] lhsRowSubIndexes = lhsSubIndexes[0].indexes;
-            int[] lhsColSubIndexes = lhsSubIndexes[1].indexes;
-
-            int leadingDim, refIndex;
-
-            switch (lhsParentImplementor.StorageScheme)
-            {
-                case StorageScheme.Dense:
-                    {
-                        double[] lhsArray = lhsParentImplementor.Storage;
-
-                        leadingDim = lhsParentImplementor.NumberOfRows;
-
-                        for (int j = 0; j < numberOfColumns; j++)
-                        {
-                            refIndex = leadingDim * lhsColSubIndexes[j];
-
-                            for (int i = 0; i < numberOfRows; i++, index++)
-                                resultArray[index] = lhsArray[lhsRowSubIndexes[i] + refIndex] -
-                                                    rhsArray[index];
-                        }
-                    }
-                    break;
-            }
-
-            return result;
-        }
-
-
-        //
-        // SUBTRACT - DOUBLE - SUB - SUB
-        //
-
-        internal static MatrixImplementor<double> Matrix_View_View_Subtract(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            if (1 == left.Count)
-                return Scalar_View_LeftSubtract(right, left[0]);
-
-            if (1 == right.Count)
-                return Scalar_View_RightSubtract(left, right[0]);
-            CheckSubtractionParameters(
-                left,
-                right,
-                out int numberOfRows,
-                out int numberOfColumns);
-
-            var result = new DenseDoubleMatrixImplementor(numberOfRows, numberOfColumns);
-
-            double[] resultArray = result.Storage;
-
-            ViewDoubleMatrixImplementor lhsSub = (ViewDoubleMatrixImplementor)(left);
-            IndexCollection[] lhsSubIndexes = lhsSub.GetReferredImplementor(out MatrixImplementor<double> lhsParentImplementor);
-
-            ViewDoubleMatrixImplementor rhsSub = (ViewDoubleMatrixImplementor)(right);
-            IndexCollection[] rhsSubIndexes = rhsSub.GetReferredImplementor(out MatrixImplementor<double> rhsParentImplementor);
-
-            int index = 0;
-            int[] lhsRowSubIndexes = lhsSubIndexes[0].indexes;
-            int[] lhsColSubIndexes = lhsSubIndexes[1].indexes;
-
-            int[] rhsRowSubIndexes = rhsSubIndexes[0].indexes;
-            int[] rhsColSubIndexes = rhsSubIndexes[1].indexes;
-
-            int lhsLeadingDim, lhsRefIndex, rhsLeadingDim, rhsRefIndex;
-
-            if (StorageScheme.Dense == lhsParentImplementor.StorageScheme)
-            {
-                if (StorageScheme.Dense == rhsParentImplementor.StorageScheme)
+                for (int p = rightRowIndex[i]; p < rightRowIndex[i + 1]; p++)
                 {
-                    double[] lhsArray = lhsParentImplementor.Storage;
-                    double[] rhsArray = rhsParentImplementor.Storage;
-
-                    lhsLeadingDim = lhsParentImplementor.NumberOfRows;
-                    rhsLeadingDim = rhsParentImplementor.NumberOfRows;
-
-                    for (int j = 0; j < numberOfColumns; j++)
+                    j = rightColumns[p];
+                    index = i + j * numberOfRows;
+                    if (inspectedSet.Add(index))
                     {
-                        lhsRefIndex = lhsLeadingDim * lhsColSubIndexes[j];
-                        rhsRefIndex = rhsLeadingDim * rhsColSubIndexes[j];
-
-                        for (int i = 0; i < numberOfRows; i++, index++)
-                            resultArray[index] = lhsArray[lhsRowSubIndexes[i] + lhsRefIndex] -
-                                                rhsArray[rhsRowSubIndexes[i] + rhsRefIndex];
+                        rightValue = rightValues[p];
+                        if (rightValue != 0.0)
+                            result.SetValue(i, j, -rightValue);
                     }
                 }
+
+                // inspectedSet contains the positions which are stored at least in one matrix.
+                // If position l is not in inspectedSet, then l is stored
+                // neither in the left matrix, nor in the right one, and hence both matrices are zero
+                // at l.
             }
 
             return result;
@@ -3260,7 +2118,6 @@ namespace Novacta.Analytics.Infrastructure
 
             MatrixImplementor<double> result;
             double[] leftArray = left.Storage;
-
             double[] rightArray = right.Storage;
 
             if (rightNumberOfRows == numberOfColumns) // R is square
@@ -3270,13 +2127,13 @@ namespace Novacta.Analytics.Infrastructure
 
                 double[] resultArray = result.Storage;
 
-                int rhsLowerBandwidth = right.LowerBandwidth;
+                int rightLowerBandwidth = right.LowerBandwidth;
 
-                if (0 == rhsLowerBandwidth) // ( right.IsUpperTriangular ) // Execute back substitution
+                if (0 == rightLowerBandwidth) // ( right.IsUpperTriangular ) // Execute back substitution
                 {
                     leftArray.CopyTo(resultArray, 0);
 
-                    SafeNativeMethods.BLAS_dtrsm(
+                    SafeNativeMethods.BLAS.DTRSM(
                         SafeNativeMethods.BLAS.ORDER.ColMajor,
                         SafeNativeMethods.BLAS.SIDE.Right, //CblasRight,
                         SafeNativeMethods.BLAS.UPLO.Upper, //CblasUpper, 
@@ -3299,7 +2156,7 @@ namespace Novacta.Analytics.Infrastructure
                     {
                         leftArray.CopyTo(resultArray, 0);
 
-                        SafeNativeMethods.BLAS_dtrsm(
+                        SafeNativeMethods.BLAS.DTRSM(
                             SafeNativeMethods.BLAS.ORDER.ColMajor,
                             SafeNativeMethods.BLAS.SIDE.Right, //CblasRight,
                             SafeNativeMethods.BLAS.UPLO.Lower, //CblasLower, 
@@ -3349,11 +2206,11 @@ namespace Novacta.Analytics.Infrastructure
                             // Note also that, since "matrix_order" is RowMajor, leadingA and leadingB must 
                             // represent the number of columns in R' and L', respectively.
 
-                            int lapackInfo = SafeNativeMethods.LAPACK_dposv(
+                            int lapackInfo = SafeNativeMethods.LAPACK.DPOSV(
                                 SafeNativeMethods.LAPACK.ORDER.RowMajor,
                                 uplo,
                                 numberOfColumns, // numberOfIndividuals, 
-                                leftNumberOfRows, // rhsNumber, 
+                                leftNumberOfRows, // rightNumber, 
                                 clonedRightArray, // a, the R matrix
                                 rightNumberOfRows, // ldA
                                 resultArray, // b, the L' matrix
@@ -3384,7 +2241,7 @@ namespace Novacta.Analytics.Infrastructure
                     double[] transposedRightFactorsArray = transposedRightFactors.Storage;
                     int[] ipiv = new int[numberOfColumns];
 
-                    int lapackInfo = SafeNativeMethods.LAPACK_dgetrf(
+                    int lapackInfo = SafeNativeMethods.LAPACK.DGETRF(
                         SafeNativeMethods.LAPACK.ORDER.RowMajor,
                         rightNumberOfRows,
                         numberOfColumns,
@@ -3422,7 +2279,7 @@ namespace Novacta.Analytics.Infrastructure
                         //SByte trans = Convert.ToSByte('N');
                         char trans = 'N';
 
-                        _ = SafeNativeMethods.LAPACK_dgetrs(
+                        _ = SafeNativeMethods.LAPACK.DGETRS(
                             SafeNativeMethods.LAPACK.ORDER.RowMajor,
                             trans,
                             rightNumberOfRows,
@@ -3465,10 +2322,10 @@ namespace Novacta.Analytics.Infrastructure
                 // trans = 'N' (since col(R) = row(R'), hence we don't need to transpose).
                 // m = N = numberOfColumns (the number of rows of R').
                 // n = M = rightNumberOfRows (number of columns of R').
-                // nRHS = K = leftNumberOfRows (number of columns of L').
+                // nright = K = leftNumberOfRows (number of columns of L').
                 // a = row major ordered array which represents R'.
                 // ldA = rightNumberOfRows (number of columns in R', since "matrix_order" is RowMajor). 
-                // b = row major ordered array which represents a matrix of dimensions max(m,n) by nRHS,
+                // b = row major ordered array which represents a matrix of dimensions max(m,n) by nright,
                 //     containing the information described below.
                 //
                 //
@@ -3476,7 +2333,7 @@ namespace Novacta.Analytics.Infrastructure
                 //
                 //     --> ON ENTRY
                 //     b represents the following matrix:
-                //                                        nRHS, K, leftNumberOfRows
+                //                                        nright, K, leftNumberOfRows
                 //                                     
                 //                                           --       --
                 //                                           |         |
@@ -3488,17 +2345,17 @@ namespace Novacta.Analytics.Infrastructure
                 //     rightNumberOfRows - numberOfColumns   |         |
                 //                                           --       --
                 //     --> ON EXIT
-                //     b represents row(X'), hence col(X), the (n by nRHS) solution.
+                //     b represents row(X'), hence col(X), the (n by nright) solution.
                 //
                 //
                 //     CASE ii: m >= n (i.e. N >= M, numberOfColumns >= rightNumberOfRows).
                 //
                 //     --> ON ENTRY
-                //     b represents row(L'), hence col(L), the (m by nRHS) matrix of right hand side vectors.
+                //     b represents row(L'), hence col(L), the (m by nright) matrix of right hand side vectors.
                 //
                 //     --> ON EXIT
                 //     b represents the following matrix:
-                //                                        nRHS, K, leftNumberOfRows
+                //                                        nright, K, leftNumberOfRows
                 //                                     
                 //                                           --       --
                 //                                           |         |
@@ -3543,12 +2400,12 @@ namespace Novacta.Analytics.Infrastructure
                 double[] clonedLeftArray = new double[maxRightDimension * leftNumberOfRows];
                 leftArray.CopyTo(clonedLeftArray, 0);
 
-                lapackInfo = SafeNativeMethods.LAPACK_dgels(
+                lapackInfo = SafeNativeMethods.LAPACK.DGELS(
                     SafeNativeMethods.LAPACK.ORDER.RowMajor,
                     trans, // 'N'
                     numberOfColumns, // m
                     rightNumberOfRows, // n
-                    leftNumberOfRows, // nRHS
+                    leftNumberOfRows, // nright
                     clonedRightArray, // a = col(R) = row(R')
                     rightNumberOfRows,
                     clonedLeftArray,
@@ -3581,162 +2438,33 @@ namespace Novacta.Analytics.Infrastructure
             return result;
         }
 
-        internal static MatrixImplementor<double> Matrix_Sparse_View_Divide(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            ViewDoubleMatrixImplementor rhsSub = (ViewDoubleMatrixImplementor)(right);
-
-            rhsSub.parentImplementor.ChangingData -=
-               new EventHandler<EventArgs>
-                  (rhsSub.ChangingDataHandler);
-
-            rhsSub.parentImplementor.ImplementorChanged -=
-               new EventHandler<ImplementorChangedEventArgs>
-                  (rhsSub.ImplementorChangedHandler);
-
-            DenseDoubleMatrixImplementor rhsDenseMatrix = rhsSub;
-
-            ImplementorChangedEventArgs args = new ImplementorChangedEventArgs(rhsDenseMatrix);
-            rhsSub.OnImplementorChanged(args);
-
-            DenseDoubleMatrixImplementor denseLhsMatrix = (SparseCsr3DoubleMatrixImplementor)left;
-
-            return Matrix_Dense_Dense_Divide(denseLhsMatrix, rhsDenseMatrix);
-        }
-
-        internal static MatrixImplementor<double> Matrix_Dense_View_Divide(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            ViewDoubleMatrixImplementor rhsSub = (ViewDoubleMatrixImplementor)(right);
-
-            rhsSub.parentImplementor.ChangingData -=
-               new EventHandler<EventArgs>
-                  (rhsSub.ChangingDataHandler);
-
-            rhsSub.parentImplementor.ImplementorChanged -=
-               new EventHandler<ImplementorChangedEventArgs>
-                  (rhsSub.ImplementorChangedHandler);
-
-            DenseDoubleMatrixImplementor rhsDenseMatrix = rhsSub;
-
-            ImplementorChangedEventArgs args = new ImplementorChangedEventArgs(rhsDenseMatrix);
-            rhsSub.OnImplementorChanged(args);
-
-            return Matrix_Dense_Dense_Divide(left, rhsDenseMatrix);
-        }
-
-        internal static MatrixImplementor<double> Matrix_View_Dense_Divide(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            ViewDoubleMatrixImplementor lhsSub = (ViewDoubleMatrixImplementor)(left);
-
-            lhsSub.parentImplementor.ChangingData -=
-               new EventHandler<EventArgs>
-                  (lhsSub.ChangingDataHandler);
-
-            lhsSub.parentImplementor.ImplementorChanged -=
-               new EventHandler<ImplementorChangedEventArgs>
-                  (lhsSub.ImplementorChangedHandler);
-
-            DenseDoubleMatrixImplementor lhsDenseMatrix = lhsSub;
-
-            ImplementorChangedEventArgs args = new ImplementorChangedEventArgs(lhsDenseMatrix);
-            lhsSub.OnImplementorChanged(args);
-
-            return Matrix_Dense_Dense_Divide(lhsDenseMatrix, right);
-        }
-
-        internal static MatrixImplementor<double> Matrix_View_Sparse_Divide(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            ViewDoubleMatrixImplementor lhsSub = (ViewDoubleMatrixImplementor)(left);
-
-            lhsSub.parentImplementor.ChangingData -=
-               new EventHandler<EventArgs>
-                  (lhsSub.ChangingDataHandler);
-
-            lhsSub.parentImplementor.ImplementorChanged -=
-               new EventHandler<ImplementorChangedEventArgs>
-                  (lhsSub.ImplementorChangedHandler);
-
-            DenseDoubleMatrixImplementor lhsDenseMatrix = lhsSub;
-
-            ImplementorChangedEventArgs args = new ImplementorChangedEventArgs(lhsDenseMatrix);
-            lhsSub.OnImplementorChanged(args);
-
-            DenseDoubleMatrixImplementor rhsDenseMatrix = (SparseCsr3DoubleMatrixImplementor)right;
-
-            return Matrix_Dense_Dense_Divide(lhsDenseMatrix, rhsDenseMatrix);
-        }
-
-        internal static MatrixImplementor<double> Matrix_Sparse_Sparse_Divide(
-            MatrixImplementor<double> left,
-            MatrixImplementor<double> right)
-        {
-            DenseDoubleMatrixImplementor lhsDenseMatrix = (SparseCsr3DoubleMatrixImplementor)left;
-
-            DenseDoubleMatrixImplementor rhsDenseMatrix = (SparseCsr3DoubleMatrixImplementor)right;
-
-            return Matrix_Dense_Dense_Divide(lhsDenseMatrix, rhsDenseMatrix);
-        }
-
         internal static MatrixImplementor<double> Matrix_Dense_Sparse_Divide(
             MatrixImplementor<double> left,
             MatrixImplementor<double> right)
         {
-            DenseDoubleMatrixImplementor rhsDenseMatrix = (SparseCsr3DoubleMatrixImplementor)right;
+            DenseDoubleMatrixImplementor rightDenseMatrix = (SparseCsr3DoubleMatrixImplementor)right;
 
-            return Matrix_Dense_Dense_Divide(left, rhsDenseMatrix);
+            return Matrix_Dense_Dense_Divide(left, rightDenseMatrix);
         }
 
         internal static MatrixImplementor<double> Matrix_Sparse_Dense_Divide(
             MatrixImplementor<double> left,
             MatrixImplementor<double> right)
         {
-            DenseDoubleMatrixImplementor lhsDenseMatrix = (SparseCsr3DoubleMatrixImplementor)left;
+            DenseDoubleMatrixImplementor leftDenseMatrix = (SparseCsr3DoubleMatrixImplementor)left;
 
-            return Matrix_Dense_Dense_Divide(lhsDenseMatrix, right);
+            return Matrix_Dense_Dense_Divide(leftDenseMatrix, right);
         }
 
-        internal static MatrixImplementor<double> Matrix_View_View_Divide(
+        internal static MatrixImplementor<double> Matrix_Sparse_Sparse_Divide(
             MatrixImplementor<double> left,
             MatrixImplementor<double> right)
         {
-            ViewDoubleMatrixImplementor lhsSub = (ViewDoubleMatrixImplementor)(left);
+            DenseDoubleMatrixImplementor leftDenseMatrix = (SparseCsr3DoubleMatrixImplementor)left;
 
-            lhsSub.parentImplementor.ChangingData -=
-               new EventHandler<EventArgs>
-                  (lhsSub.ChangingDataHandler);
+            DenseDoubleMatrixImplementor rightDenseMatrix = (SparseCsr3DoubleMatrixImplementor)right;
 
-            lhsSub.parentImplementor.ImplementorChanged -=
-               new EventHandler<ImplementorChangedEventArgs>
-                  (lhsSub.ImplementorChangedHandler);
-
-            DenseDoubleMatrixImplementor lhsDenseMatrix = lhsSub;
-
-            ImplementorChangedEventArgs lArgs = new ImplementorChangedEventArgs(lhsDenseMatrix);
-            lhsSub.OnImplementorChanged(lArgs);
-
-            ViewDoubleMatrixImplementor rhsSub = (ViewDoubleMatrixImplementor)(right);
-
-            rhsSub.parentImplementor.ChangingData -=
-               new EventHandler<EventArgs>
-                  (rhsSub.ChangingDataHandler);
-
-            rhsSub.parentImplementor.ImplementorChanged -=
-               new EventHandler<ImplementorChangedEventArgs>
-                  (rhsSub.ImplementorChangedHandler);
-
-            DenseDoubleMatrixImplementor rhsDenseMatrix = rhsSub;
-
-            ImplementorChangedEventArgs rArgs = new ImplementorChangedEventArgs(rhsDenseMatrix);
-            rhsSub.OnImplementorChanged(rArgs);
-
-            return Matrix_Dense_Dense_Divide(lhsDenseMatrix, rhsDenseMatrix);
+            return Matrix_Dense_Dense_Divide(leftDenseMatrix, rightDenseMatrix);
         }
 
         #endregion

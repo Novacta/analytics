@@ -159,7 +159,8 @@ namespace Novacta.Analytics
                 throw new ArgumentNullException(nameof(arguments));
             }
 
-            double[] a = arguments.AsColumnMajorDenseArray();
+            double[] a = arguments.StorageScheme == StorageScheme.Dense ?
+                arguments.GetStorage() : arguments.AsColumnMajorDenseArray();
 
             int numberOfArguments = arguments.Count;
 
@@ -173,7 +174,7 @@ namespace Novacta.Analytics
             {
                 fixed (double* yPointer = &y[0], aPointer = &a[0]) 
                 {
-                    SafeNativeMethods.VML_vdCdfNormInv(
+                    SafeNativeMethods.VML.vdCdfNormInv(
                         numberOfArguments, 
                         aPointer, 
                         yPointer);
@@ -205,7 +206,7 @@ namespace Novacta.Analytics
 
             unsafe
             {
-                SafeNativeMethods.VML_vdCdfNormInv(1, &argument, &y);
+                SafeNativeMethods.VML.vdCdfNormInv(1, &argument, &y);
             }
 
             return y * sigma + mu;

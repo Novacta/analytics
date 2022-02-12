@@ -1,51 +1,56 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.0</Version>
+    <TargetFramework>net6.0</TargetFramework>
+    <Version>2.0.0</Version>
     <Authors>Giovanni Lafratta</Authors>
     <owners>novacta</owners>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Description>This package provides functionality for data analysis by implementing matrix algebra operations, statistical methods, and optimization algorithms.</Description>
-    <PackageReleaseNotes>Initial release of the assembly.</PackageReleaseNotes>
+    <PackageReleaseNotes>* Added types to operate with matrices of complex values.
+* Added matrix singular value decompositions and spectral decompositions of symmetric/Hermitian matrices.
+* (Breaking) Indexers that try to avoid dense allocations have been deprecated.
+* (Breaking) The 32-bit generation of the x86 architecture is no longer supported.
+	</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Novacta/analytics</RepositoryUrl>
     <Copyright>Copyright © Giovanni Lafratta</Copyright>
-    <PackageTags>Matrix Algebra Statistics Optimization Machine Learning</PackageTags>
+    <PackageTags>Complex Matrix Algebra Statistics Optimization Machine Learning Cross-Entropy</PackageTags>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Novacta/analytics</PackageProjectUrl>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <FileVersion>2.0.0</FileVersion>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netstandard2.0\Novacta.Analytics.xml</DocumentationFile>
+    <DocumentationFile></DocumentationFile>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netstandard2.0\Novacta.Analytics.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\net6.0\Novacta.Analytics.xml</DocumentationFile>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
     <!--linux-x64-->
-    <Content Include="runtimes/linux-x64/native/libna.so">
-      <PackagePath>runtimes/linux-x64/native/libna.so</PackagePath>
-      <Pack>true</Pack>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="runtimes/linux-x64/native/libiomp5.so">
-      <PackagePath>runtimes/linux-x64/native/libiomp5.so</PackagePath>
-      <Pack>true</Pack>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <!--osx-x64-->
+	  <Content Include="runtimes/linux-x64/native/libna.so">
+		  <PackagePath>runtimes/linux-x64/native/libna.so</PackagePath>
+		  <Pack>true</Pack>
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="runtimes/linux-x64/native/libiomp5.so">
+		  <PackagePath>runtimes/linux-x64/native/libiomp5.so</PackagePath>
+		  <Pack>true</Pack>
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <!--osx-x64-->
     <Content Include="runtimes/osx-x64/native/libna.dylib">
       <PackagePath>runtimes/osx-x64/native/libna.dylib</PackagePath>
       <Pack>true</Pack>
@@ -67,25 +72,10 @@
       <Pack>true</Pack>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <!--win-x86-->
-    <Content Include="runtimes/win-x86/native/libna.dll">
-      <PackagePath>runtimes/win-x86/native/libna.dll</PackagePath>
-      <Pack>true</Pack>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="runtimes/win-x86/native/libiomp5md.dll">
-      <PackagePath>runtimes/win-x86/native/libiomp5md.dll</PackagePath>
-      <Pack>true</Pack>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="System.Text.Json" Version="4.7.1" />
+    <PackageReference Include="System.Text.Json" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -101,6 +91,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="runtimes\linux-x64\native\" />
   </ItemGroup>
 
 </Project>

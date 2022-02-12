@@ -48,12 +48,15 @@ namespace Novacta.Analytics.Tests.Tools
 
             var expectedMessage = expectedPartialMessage;
 
-            if (!(expectedParameterName is null))
+            if (expectedParameterName is not null)
             {
-                expectedMessage += 
-                    Environment.NewLine + "Parameter name: " + expectedParameterName;
+                expectedMessage +=
+                    " (Parameter '" + expectedParameterName + "')";
+
+                //expectedMessage += 
+                //    Environment.NewLine + "Parameter name: " + expectedParameterName;
             }
-                
+
             bool isThrown = false;
             string actualMessage = null;
             Type actualType = null;

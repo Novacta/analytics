@@ -85,7 +85,7 @@ namespace Novacta.Analytics.Tests.Tools
         /// </summary>
         /// <param name="matrix">The matrix.</param>
         /// <param name="rowNames">The row names.</param>
-        void SetRowNames(DoubleMatrix matrix, Dictionary<int, string> rowNames)
+        static void SetRowNames(DoubleMatrix matrix, Dictionary<int, string> rowNames)
         {
             if (rowNames != null)
             {
@@ -101,7 +101,7 @@ namespace Novacta.Analytics.Tests.Tools
         /// </summary>
         /// <param name="matrix">The matrix.</param>
         /// <param name="columnNames">The column names.</param>
-        void SetColumnNames(DoubleMatrix matrix, Dictionary<int, string> columnNames)
+        static void SetColumnNames(DoubleMatrix matrix, Dictionary<int, string> columnNames)
         {
             if (columnNames != null)
             {
@@ -124,7 +124,7 @@ namespace Novacta.Analytics.Tests.Tools
         /// </summary>
         /// <returns>A dense implemented <see cref="DoubleMatrix"/> having
         /// the state specified by this instance.</returns>
-        public virtual DoubleMatrix GetDenseDoubleMatrix()
+        public  DoubleMatrix AsDense()
         {
             var matrix = DoubleMatrix.Dense(
                 this.NumberOfRows,
@@ -132,32 +132,10 @@ namespace Novacta.Analytics.Tests.Tools
                 this.AsColumnMajorDenseArray);
 
             matrix.Name = this.Name;
-            this.SetRowNames(matrix, this.RowNames);
-            this.SetColumnNames(matrix, this.ColumnNames);
+            SetRowNames(matrix, this.RowNames);
+            SetColumnNames(matrix, this.ColumnNames);
 
             return matrix;
-        }
-
-        /// <summary>
-        /// Gets a view implemented <see cref="DoubleMatrix"/> having
-        /// the state specified by this instance.
-        /// </summary>
-        /// <returns>A view implemented <see cref="DoubleMatrix"/> having
-        /// the state specified by this instance.</returns>
-        public virtual DoubleMatrix GetViewDoubleMatrix()
-        {
-            var matrix = DoubleMatrix.Dense(
-                this.NumberOfRows,
-                this.NumberOfColumns,
-                this.AsColumnMajorDenseArray);
-
-            var subMatrix = matrix[":", ":", avoidDenseAllocations: true];
-
-            subMatrix.Name = this.Name;
-            this.SetRowNames(subMatrix, this.RowNames);
-            this.SetColumnNames(subMatrix, this.ColumnNames);
-
-            return subMatrix;
         }
 
         /// <summary>
@@ -166,7 +144,7 @@ namespace Novacta.Analytics.Tests.Tools
         /// </summary>
         /// <returns>A sparse implemented <see cref="DoubleMatrix"/> having
         /// the state specified by this instance.</returns>
-        public virtual DoubleMatrix GetSparseDoubleMatrix()
+        public  DoubleMatrix AsSparse()
         {
             var matrix = DoubleMatrix.Sparse(
                 this.NumberOfRows,
@@ -181,8 +159,8 @@ namespace Novacta.Analytics.Tests.Tools
             }
 
             matrix.Name = this.Name;
-            this.SetRowNames(matrix, this.RowNames);
-            this.SetColumnNames(matrix, this.ColumnNames);
+            SetRowNames(matrix, this.RowNames);
+            SetColumnNames(matrix, this.ColumnNames);
 
             return matrix;
         }

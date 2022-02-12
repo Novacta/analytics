@@ -88,7 +88,7 @@ namespace Novacta.Analytics.Infrastructure
 
             public override string ToString()
             {
-                StringBuilder stringBuilder = new StringBuilder();
+                StringBuilder stringBuilder = new();
                 stringBuilder.Append("(");
                 stringBuilder.Append(this.m_l);
                 stringBuilder.Append(", ");
@@ -131,7 +131,7 @@ namespace Novacta.Analytics.Infrastructure
             // Stack initialization
             int n = data.Length;
             int stackCapacity = (int)Math.Floor(Math.Log((n + 1) / (partialQuichSortMaxDataLength + 2), 2.0));
-            Stack<QuickSortStackItem> stack = new Stack<QuickSortStackItem>(stackCapacity);
+            Stack<QuickSortStackItem> stack = new(stackCapacity);
             QuickSortStackItem item;
 
             // Q1: Initialize
@@ -468,7 +468,7 @@ namespace Novacta.Analytics.Infrastructure
             // Stack initialization
             int n = data.Length;
             int stackCapacity = (int)Math.Floor(Math.Log((n + 1) / (partialQuichSortMaxDataLength + 2), 2.0));
-            Stack<QuickSortStackItem> stack = new Stack<QuickSortStackItem>(stackCapacity);
+            Stack<QuickSortStackItem> stack = new(stackCapacity);
             QuickSortStackItem item;
 
             // Q1: Initialize
@@ -801,7 +801,7 @@ namespace Novacta.Analytics.Infrastructure
             int n = data.Length;
 
             int stackCapacity = (int)Math.Floor(Math.Log((n + 1) / (partialQuichSortMaxDataLength + 2), 2.0));
-            Stack<QuickSortStackItem> stack = new Stack<QuickSortStackItem>(stackCapacity);
+            Stack<QuickSortStackItem> stack = new(stackCapacity);
             QuickSortStackItem item;
 
             // Q1: Initialize

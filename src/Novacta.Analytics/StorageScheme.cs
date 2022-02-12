@@ -7,14 +7,9 @@ namespace Novacta.Analytics
     /// <summary>
     /// Specifies the scheme followed when storing matrix entries
     /// </summary>
+    /// <seealso href="https://en.wikipedia.org/wiki/Sparse_matrix#Compressed_sparse_row_(CSR,_CRS_or_Yale_format)"/>
     public enum StorageScheme
     {
-        /// <summary>
-        /// Entries are not directly stored. Another matrix is referred to 
-        /// as the data source, and row and column indexes are stored to 
-        /// identify the data which in the source correspond to the target entries.
-        /// </summary>
-        View,
         /// <summary>
         /// All entries are stored in a one-dimensional array.
         /// </summary>

@@ -244,7 +244,7 @@ namespace Novacta.Analytics.Advanced
     /// B_t = B_{t-l}, \quad l=1,\dots,m, 
     /// </latex>
     /// can be verified,
-    /// the method returns <b>true</b>; otherwise <b>false</b> is returned.
+    /// the method returns <c>true</c>; otherwise <c>false</c> is returned.
     /// Equivalently, the algorithm converges if the indexes of 
     /// the largest <latex>k</latex> probabilities coincide
     /// <latex>m</latex> times in a row of iterations.
@@ -321,7 +321,7 @@ namespace Novacta.Analytics.Advanced
         #region State
 
         private readonly LinkedList<SortedSet<int>> largestProbabilityPositions =
-            new LinkedList<SortedSet<int>>();
+            new();
 
         private readonly Func<DoubleMatrix, double> objectiveFunction;
 
@@ -775,7 +775,7 @@ namespace Novacta.Analytics.Advanced
         /// B_t = B_{t-l}, \quad l=1,\dots,m, 
         /// </latex>
         /// can be verified,
-        /// the method returns <b>true</b>; otherwise <b>false</b> is returned.
+        /// the method returns <c>true</c>; otherwise <c>false</c> is returned.
         /// The algorithm thus converges if the indexes of 
         /// the largest <latex>k</latex> probabilities coincide
         /// <latex>m</latex> times in a row of iterations.

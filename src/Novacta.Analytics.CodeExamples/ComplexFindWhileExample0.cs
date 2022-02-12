@@ -1,0 +1,41 @@
+﻿using Novacta.Documentation.CodeExamples;
+using System;
+using System.Numerics;
+
+namespace Novacta.Analytics.CodeExamples
+{
+    public class ComplexFindWhileExample0 : ICodeExample
+    {
+        public void Main()
+        {
+            // Create a matrix.
+            var data = new Complex[6] {
+                new Complex(0,  0), new Complex(5, -5),
+                new Complex(2, -2), new Complex(0,  0),
+                new Complex(0,  0), new Complex(2, -2)
+            };
+            var matrix = ComplexMatrix.Dense(3, 2, data, StorageOrder.RowMajor);
+            Console.WriteLine("The data matrix:");
+            Console.WriteLine(matrix);
+
+            // Match entries having magnitude less than 2.
+            static bool match(Complex value) { return value.Magnitude < 2.0; }
+
+            // Find the linear indexes of matched entries in data.
+            var indexes = matrix.FindWhile(match);
+
+            Console.WriteLine();
+            Console.WriteLine("Linear indexes of matched entries in data:");
+            Console.WriteLine(indexes);
+
+            // FindWhile is available for read-only matrices:
+            // find matched entries using a read-only wrapper of the data matrix.
+            ReadOnlyComplexMatrix readOnlyMatrix = matrix.AsReadOnly();
+            indexes = readOnlyMatrix.FindWhile(match);
+
+            Console.WriteLine();
+            Console.WriteLine("Using read-only data. Linear indexes of matched entries:");
+            Console.WriteLine(indexes);
+        }
+    }
+}

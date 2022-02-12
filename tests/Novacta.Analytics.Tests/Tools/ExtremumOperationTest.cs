@@ -140,37 +140,25 @@ namespace Novacta.Analytics.Tests.Tools
             // Dense
             Succeed(
                 operators: operation.DataWritableOps,
-                data: operation.Data.Dense,
+                data: operation.Data.AsDense,
                 expected: result);
 
             // Sparse
             Succeed(
                 operators: operation.DataWritableOps,
-                data: operation.Data.Sparse,
-                expected: result);
-
-            // View
-            Succeed(
-                operators: operation.DataWritableOps,
-                data: operation.Data.View,
+                data: operation.Data.AsSparse,
                 expected: result);
 
             // Dense.AsReadOnly()
             Succeed(
                 operators: operation.DataReadOnlyOps,
-                data: operation.Data.Dense.AsReadOnly(),
+                data: operation.Data.AsDense.AsReadOnly(),
                 expected: result);
 
             // Sparse.AsReadOnly()
             Succeed(
                 operators: operation.DataReadOnlyOps,
-                data: operation.Data.Sparse.AsReadOnly(),
-                expected: result);
-
-            // View.AsReadOnly()
-            Succeed(
-                operators: operation.DataReadOnlyOps,
-                data: operation.Data.View.AsReadOnly(),
+                data: operation.Data.AsSparse.AsReadOnly(),
                 expected: result);
         }
 
@@ -186,42 +174,28 @@ namespace Novacta.Analytics.Tests.Tools
             // Dense
             Succeed(
                 operators: operation.DataWritableOps,
-                data: operation.Data.Dense,
+                data: operation.Data.AsDense,
                 dataOperation: operation.DataOperation,
                 expected: result);
 
             // Sparse
             Succeed(
                 operators: operation.DataWritableOps,
-                data: operation.Data.Sparse,
-                dataOperation: operation.DataOperation,
-                expected: result);
-
-            // View
-            Succeed(
-                operators: operation.DataWritableOps,
-                data: operation.Data.View,
+                data: operation.Data.AsSparse,
                 dataOperation: operation.DataOperation,
                 expected: result);
 
             // Dense.AsReadOnly()
             Succeed(
                 operators: operation.DataReadOnlyOps,
-                data: operation.Data.Dense.AsReadOnly(),
+                data: operation.Data.AsDense.AsReadOnly(),
                 dataOperation: operation.DataOperation,
                 expected: result);
 
             // Sparse.AsReadOnly()
             Succeed(
                 operators: operation.DataReadOnlyOps,
-                data: operation.Data.Sparse.AsReadOnly(),
-                dataOperation: operation.DataOperation,
-                expected: result);
-
-            // View.AsReadOnly()
-            Succeed(
-                operators: operation.DataReadOnlyOps,
-                data: operation.Data.View.AsReadOnly(),
+                data: operation.Data.AsSparse.AsReadOnly(),
                 dataOperation: operation.DataOperation,
                 expected: result);
         }
@@ -239,37 +213,25 @@ namespace Novacta.Analytics.Tests.Tools
             // Dense
             Fail(
                 operators: operation.DataWritableOps,
-                data: operation.Data.Dense,
+                data: operation.Data.AsDense,
                 exception: exception);
 
             // Sparse
             Fail(
                 operators: operation.DataWritableOps,
-                data: operation.Data.Sparse,
-                exception: exception);
-
-            // View
-            Fail(
-                operators: operation.DataWritableOps,
-                data: operation.Data.View,
+                data: operation.Data.AsSparse,
                 exception: exception);
 
             // Dense.AsReadOnly()
             Fail(
                 operators: operation.DataReadOnlyOps,
-                data: operation.Data.Dense.AsReadOnly(),
+                data: operation.Data.AsDense.AsReadOnly(),
                 exception: exception);
 
             // Sparse.AsReadOnly()
             Fail(
                 operators: operation.DataReadOnlyOps,
-                data: operation.Data.Sparse.AsReadOnly(),
-                exception: exception);
-
-            // View.AsReadOnly()
-            Fail(
-                operators: operation.DataReadOnlyOps,
-                data: operation.Data.View.AsReadOnly(),
+                data: operation.Data.AsSparse.AsReadOnly(),
                 exception: exception);
         }
 
@@ -286,42 +248,28 @@ namespace Novacta.Analytics.Tests.Tools
             // Dense
             Fail(
                 operators: operation.DataWritableOps,
-                data: operation.Data.Dense,
+                data: operation.Data.AsDense,
                 dataOperation: operation.DataOperation,
                 exception: exception);
 
             // Sparse
             Fail(
                 operators: operation.DataWritableOps,
-                data: operation.Data.Sparse,
-                dataOperation: operation.DataOperation,
-                exception: exception);
-
-            // View
-            Fail(
-                operators: operation.DataWritableOps,
-                data: operation.Data.View,
+                data: operation.Data.AsSparse,
                 dataOperation: operation.DataOperation,
                 exception: exception);
 
             // Dense.AsReadOnly()
             Fail(
                 operators: operation.DataReadOnlyOps,
-                data: operation.Data.Dense.AsReadOnly(),
+                data: operation.Data.AsDense.AsReadOnly(),
                 dataOperation: operation.DataOperation,
                 exception: exception);
 
             // Sparse.AsReadOnly()
             Fail(
                 operators: operation.DataReadOnlyOps,
-                data: operation.Data.Sparse.AsReadOnly(),
-                dataOperation: operation.DataOperation,
-                exception: exception);
-
-            // View.AsReadOnly()
-            Fail(
-                operators: operation.DataReadOnlyOps,
-                data: operation.Data.View.AsReadOnly(),
+                data: operation.Data.AsSparse.AsReadOnly(),
                 dataOperation: operation.DataOperation,
                 exception: exception);
         }

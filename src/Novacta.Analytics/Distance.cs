@@ -95,9 +95,9 @@ namespace Novacta.Analytics
         /// </exception>
         internal static double Euclidean(DoubleMatrix left, DoubleMatrix right)
         {
-            Debug.Assert(!(left is null));
+            Debug.Assert(left is not null);
 
-            Debug.Assert(!(right is null));
+            Debug.Assert(right is not null);
 
             int numberOfItems = left.Count;
 
@@ -183,10 +183,6 @@ namespace Novacta.Analytics
         /// <paramref name="right"/> has not the same <see cref="DoubleMatrix.NumberOfColumns"/> of 
         /// <paramref name="left"/>.
         /// </exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Design", 
-            "CA1062:Validate arguments of public methods", 
-            Justification = "Input validation delegated to ValidateLinkageInput.")]
         public static double SingleLinkage(DoubleMatrix left, DoubleMatrix right)
         {
             Distance.ValidateLinkageInput(left, right);
@@ -235,10 +231,6 @@ namespace Novacta.Analytics
         /// <paramref name="right"/> has not the same <see cref="DoubleMatrix.NumberOfColumns"/> of 
         /// <paramref name="left"/>.
         /// </exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Design", 
-            "CA1062:Validate arguments of public methods", 
-            Justification = "Input validation delegated to ValidateLinkageInput.")]
         public static double CompleteLinkage(DoubleMatrix left, DoubleMatrix right)
         {
             Distance.ValidateLinkageInput(left, right);
@@ -287,10 +279,6 @@ namespace Novacta.Analytics
         /// <paramref name="right"/> has not the same <see cref="DoubleMatrix.NumberOfColumns"/> of 
         /// <paramref name="left"/>.
         /// </exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Design", 
-            "CA1062:Validate arguments of public methods", 
-            Justification = "Input validation delegated to ValidateLinkageInput.")]
         public static double AverageLinkage(DoubleMatrix left, DoubleMatrix right)
         {
             Distance.ValidateLinkageInput(left, right);

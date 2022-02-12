@@ -12,26 +12,6 @@ using System.ComponentModel;
 
 namespace Novacta.Analytics.Tests
 {
-    internal class PropertyChangedSubscriber
-    {
-        public PropertyChangedSubscriber()
-        {
-            this.PropertyNames = new List<string>
-            {
-                ""
-            };
-        }
-
-        public List<string> PropertyNames { get; set; }
-
-        public void PropertyChangedEventHandler(object sender,
-            PropertyChangedEventArgs e)
-        {
-            this.PropertyNames.Add(e.PropertyName);
-        }
-
-    }
-
     [TestClass()]
     public class DoubleMatrixRowTests
     {
@@ -533,7 +513,6 @@ namespace Novacta.Analytics.Tests
 
             Assert.AreEqual(expected, actual);
 
-            Assert.AreEqual(expected, actual);
             Assert.IsFalse(thisRow < otherRow);
             Assert.IsFalse(thisRow <= otherRow);
             Assert.IsTrue(thisRow > otherRow);
@@ -555,7 +534,6 @@ namespace Novacta.Analytics.Tests
 
             Assert.AreEqual(expected, actual);
 
-            Assert.AreEqual(expected, actual);
             Assert.IsFalse(thisRow < otherRow);
             Assert.IsTrue(thisRow <= otherRow);
             Assert.IsFalse(thisRow > otherRow);

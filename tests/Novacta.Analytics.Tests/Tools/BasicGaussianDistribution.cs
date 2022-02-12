@@ -153,7 +153,7 @@ namespace Novacta.Analytics.Tests.Tools
 
             unsafe
             {
-                SafeNativeMethods.VML_vdCdfNormInv(1, &argument, &y);
+                SafeNativeMethods.VML.vdCdfNormInv(1, &argument, &y);
             }
 
             return y * sigma + mu;

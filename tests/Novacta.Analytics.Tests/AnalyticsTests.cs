@@ -84,9 +84,6 @@ namespace Novacta.Analytics.Tests
                     case Architecture.X64:
                         DeployNativeAssets("win-x64");
                         break;
-                    case Architecture.X86:
-                        DeployNativeAssets("win-x86");
-                        break;
                     default:
                         throw new PlatformNotSupportedException();
                 }

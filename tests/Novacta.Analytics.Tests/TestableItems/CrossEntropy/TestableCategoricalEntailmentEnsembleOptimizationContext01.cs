@@ -39,7 +39,7 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
             Justification = "Performance is not a concern.")]
         static TestableCategoricalEntailmentEnsembleOptimizationContext01()
         {
-            CategoricalVariable f0 = new CategoricalVariable("F-0")
+            CategoricalVariable f0 = new("F-0")
             {
                 { 0, "0" },
                 { 1, "1" },
@@ -51,10 +51,10 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
             f0.SetAsReadOnly();
 
             List<int> featureCategoryCounts =
-                new List<int>(1) {
+                new(1) {
                     f0.NumberOfCategories };
 
-            CategoricalVariable r = new CategoricalVariable("R")
+            CategoricalVariable r = new("R")
             {
                 { 0, "0" },
                 { 1, "1" }
@@ -62,7 +62,7 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
             r.SetAsReadOnly();
 
             List<CategoricalVariable> variables =
-                new List<CategoricalVariable>() { f0, r };
+                new() { f0, r };
 
             DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -230,7 +230,7 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
             foreach (var code in responseCodes)
             {
                 IndexCollection codePredictedIndexes = predictedResponses.Data.Find(code);
-                if (!(codePredictedIndexes is null))
+                if (codePredictedIndexes is not null)
                 {
                     DoubleMatrix correspondingActualResponses =
                         actualResponses.Data.Vec(codePredictedIndexes);

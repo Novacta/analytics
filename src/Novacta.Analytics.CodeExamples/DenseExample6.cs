@@ -33,7 +33,7 @@ namespace Novacta.Analytics.CodeExamples
 
             data[2005, 1] = 1.0; data[2005, 2] = 2.0; 
             data[2006, 1] = 3.0; data[2006, 2] = 4.0; 
-            data[2007, 1] = 5.0; data[2007, 2] = 5.0;
+            data[2007, 1] = 5.0; data[2007, 2] = 6.0;
 
             // Create the matrix. 
             matrix = DoubleMatrix.Dense(data);

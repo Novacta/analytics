@@ -16,10 +16,6 @@ using Novacta.Analytics.Tests.Tools;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Novacta.Analytics.Tests
 {
@@ -34,7 +30,7 @@ namespace Novacta.Analytics.Tests
         /// <returns>The list of available <see cref="TestableDoubleMatrix"/> instances.</returns>
         static List<TestableDoubleMatrix> GetTestableMatrices()
         {
-            List<TestableDoubleMatrix> TestableItems = new List<TestableDoubleMatrix>
+            List<TestableDoubleMatrix> TestableItems = new()
             {
                 TestableDoubleMatrix00.Get(),
                 TestableDoubleMatrix01.Get(),
@@ -94,7 +90,7 @@ namespace Novacta.Analytics.Tests
                 TestableDoubleMatrix55.Get(),
                 TestableDoubleMatrix56.Get(),
                 TestableDoubleMatrix57.Get(),
-                TestableDoubleMatrix58.Get()
+                TestableDoubleMatrix58.Get(),
             };
 
             return TestableItems;
@@ -121,6 +117,20 @@ namespace Novacta.Analytics.Tests
         }
 
         #endregion
+
+        #region IComplexMatrixPatterns
+
+        [TestMethod()]
+        public void IsHermitianTest()
+        {
+            TestAction(DoubleMatrixTest.IsHermitian, GetTestableMatrices());
+        }
+
+        [TestMethod()]
+        public void IsSkewHermitianTest()
+        {
+            TestAction(DoubleMatrixTest.IsSkewHermitian, GetTestableMatrices());
+        }
 
         #region IMatrixPatterns
 
@@ -243,6 +253,8 @@ namespace Novacta.Analytics.Tests
         {
             TestAction(DoubleMatrixTest.UpperBandwidth, GetTestableMatrices());
         }
+
+        #endregion
 
         #endregion
 
@@ -597,7 +609,7 @@ namespace Novacta.Analytics.Tests
         {
             var testableMatrix = TestableDoubleMatrix00.Get();
 
-            var matrix = testableMatrix.Dense;
+            var matrix = testableMatrix.AsDense;
 
             matrix.Name = null;
 
@@ -634,7 +646,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var matrix = TestableDoubleMatrix00.Get().Dense;
+                        var matrix = TestableDoubleMatrix00.Get().AsDense;
                         matrix.TryGetRowName(-1, out rowName);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
@@ -644,7 +656,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var matrix = TestableDoubleMatrix00.Get().Dense;
+                        var matrix = TestableDoubleMatrix00.Get().AsDense;
                         matrix.TryGetRowName(matrix.NumberOfRows, out rowName);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
@@ -654,7 +666,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var matrix = TestableDoubleMatrix00.Get().Dense;
+                        var matrix = TestableDoubleMatrix00.Get().AsDense;
                         matrix.AsReadOnly().TryGetRowName(-1, out rowName);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
@@ -664,7 +676,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var matrix = TestableDoubleMatrix00.Get().Dense;
+                        var matrix = TestableDoubleMatrix00.Get().AsDense;
                         matrix.AsReadOnly().TryGetRowName(matrix.NumberOfRows, out rowName);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
@@ -679,7 +691,7 @@ namespace Novacta.Analytics.Tests
             {
                 bool indexFound;
 
-                var matrix = TestableDoubleMatrix00.Get().Dense;
+                var matrix = TestableDoubleMatrix00.Get().AsDense;
                 matrix.RemoveAllRowNames();
 
                 indexFound = matrix.TryGetRowName(0, out string rowName);
@@ -728,7 +740,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var matrix = TestableDoubleMatrix00.Get().Dense;
+                        var matrix = TestableDoubleMatrix00.Get().AsDense;
                         matrix.SetRowName(-1, "Name");
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
@@ -738,7 +750,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var matrix = TestableDoubleMatrix00.Get().Dense;
+                        var matrix = TestableDoubleMatrix00.Get().AsDense;
                         matrix.SetRowName(matrix.NumberOfRows, "Name");
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
@@ -764,7 +776,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var matrix = TestableDoubleMatrix00.Get().Dense;
+                        var matrix = TestableDoubleMatrix00.Get().AsDense;
                         matrix.SetRowName(0, ":");
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
@@ -774,7 +786,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var matrix = TestableDoubleMatrix00.Get().Dense;
+                        var matrix = TestableDoubleMatrix00.Get().AsDense;
                         matrix.SetRowName(0, null);
                     },
                     expectedType: typeof(ArgumentNullException),
@@ -784,7 +796,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var matrix = TestableDoubleMatrix00.Get().Dense;
+                        var matrix = TestableDoubleMatrix00.Get().AsDense;
                         matrix.SetRowName(0, "");
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
@@ -794,7 +806,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var matrix = TestableDoubleMatrix00.Get().Dense;
+                        var matrix = TestableDoubleMatrix00.Get().AsDense;
                         matrix.SetRowName(0, "  ");
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
@@ -807,7 +819,7 @@ namespace Novacta.Analytics.Tests
             #region Basic usage
 
             {
-                var matrix = TestableDoubleMatrix00.Get().Dense;
+                var matrix = TestableDoubleMatrix00.Get().AsDense;
 
                 var rowIndex = matrix.NumberOfRows - 1;
                 var expectedName = "Name";
@@ -838,7 +850,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var matrix = TestableDoubleMatrix00.Get().Dense;
+                        var matrix = TestableDoubleMatrix00.Get().AsDense;
                         matrix.RemoveRowName(-1);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
@@ -848,7 +860,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var matrix = TestableDoubleMatrix00.Get().Dense;
+                        var matrix = TestableDoubleMatrix00.Get().AsDense;
                         matrix.RemoveRowName(matrix.NumberOfRows);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
@@ -862,7 +874,7 @@ namespace Novacta.Analytics.Tests
 
             {
                 // No names in this matrix
-                var matrix = TestableDoubleMatrix00.Get().Dense;
+                var matrix = TestableDoubleMatrix00.Get().AsDense;
 
                 bool rowHasIndex = matrix.RemoveRowName(0);
                 Assert.AreEqual(expected: false, actual: rowHasIndex);
@@ -870,7 +882,7 @@ namespace Novacta.Analytics.Tests
 
             {
                 // This matrix has names
-                var matrix = TestableDoubleMatrix16.Get().Dense;
+                var matrix = TestableDoubleMatrix16.Get().AsDense;
 
                 var rowIndex = matrix.NumberOfRows - 1;
 
@@ -887,7 +899,7 @@ namespace Novacta.Analytics.Tests
         [TestMethod()]
         public void RemoveAllRowNamesTest()
         {
-            var matrix = TestableDoubleMatrix16.Get().Dense;
+            var matrix = TestableDoubleMatrix16.Get().AsDense;
 
             Assert.AreEqual(expected: true, actual: matrix.HasRowNames);
 
@@ -920,7 +932,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var matrix = TestableDoubleMatrix00.Get().Dense;
+                        var matrix = TestableDoubleMatrix00.Get().AsDense;
                         matrix.TryGetColumnName(-1, out columnName);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
@@ -930,7 +942,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var matrix = TestableDoubleMatrix00.Get().Dense;
+                        var matrix = TestableDoubleMatrix00.Get().AsDense;
                         matrix.TryGetColumnName(matrix.NumberOfColumns, out columnName);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
@@ -945,7 +957,7 @@ namespace Novacta.Analytics.Tests
             {
                 bool indexFound;
 
-                var matrix = TestableDoubleMatrix00.Get().Dense;
+                var matrix = TestableDoubleMatrix00.Get().AsDense;
                 matrix.RemoveAllColumnNames();
 
                 indexFound = matrix.TryGetColumnName(0, out string columnName);
@@ -994,7 +1006,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var matrix = TestableDoubleMatrix00.Get().Dense;
+                        var matrix = TestableDoubleMatrix00.Get().AsDense;
                         matrix.SetColumnName(-1, "Name");
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
@@ -1004,7 +1016,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var matrix = TestableDoubleMatrix00.Get().Dense;
+                        var matrix = TestableDoubleMatrix00.Get().AsDense;
                         matrix.SetColumnName(matrix.NumberOfColumns, "Name");
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
@@ -1030,7 +1042,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var matrix = TestableDoubleMatrix00.Get().Dense;
+                        var matrix = TestableDoubleMatrix00.Get().AsDense;
                         matrix.SetColumnName(0, ":");
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
@@ -1040,7 +1052,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var matrix = TestableDoubleMatrix00.Get().Dense;
+                        var matrix = TestableDoubleMatrix00.Get().AsDense;
                         matrix.SetColumnName(0, null);
                     },
                     expectedType: typeof(ArgumentNullException),
@@ -1050,7 +1062,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var matrix = TestableDoubleMatrix00.Get().Dense;
+                        var matrix = TestableDoubleMatrix00.Get().AsDense;
                         matrix.SetColumnName(0, "");
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
@@ -1060,7 +1072,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var matrix = TestableDoubleMatrix00.Get().Dense;
+                        var matrix = TestableDoubleMatrix00.Get().AsDense;
                         matrix.SetColumnName(0, "  ");
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
@@ -1073,7 +1085,7 @@ namespace Novacta.Analytics.Tests
             #region Basic usage
 
             {
-                var matrix = TestableDoubleMatrix00.Get().Dense;
+                var matrix = TestableDoubleMatrix00.Get().AsDense;
 
                 var columnIndex = matrix.NumberOfColumns - 1;
                 var expectedName = "Name";
@@ -1104,7 +1116,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var matrix = TestableDoubleMatrix00.Get().Dense;
+                        var matrix = TestableDoubleMatrix00.Get().AsDense;
                         matrix.RemoveColumnName(-1);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
@@ -1114,7 +1126,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var matrix = TestableDoubleMatrix00.Get().Dense;
+                        var matrix = TestableDoubleMatrix00.Get().AsDense;
                         matrix.RemoveColumnName(matrix.NumberOfColumns);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
@@ -1128,7 +1140,7 @@ namespace Novacta.Analytics.Tests
 
             {
                 // No names in this matrix
-                var matrix = TestableDoubleMatrix00.Get().Dense;
+                var matrix = TestableDoubleMatrix00.Get().AsDense;
 
                 bool columnHasIndex = matrix.RemoveColumnName(0);
                 Assert.AreEqual(expected: false, actual: columnHasIndex);
@@ -1136,7 +1148,7 @@ namespace Novacta.Analytics.Tests
 
             {
                 // This matrix has names
-                var matrix = TestableDoubleMatrix16.Get().Dense;
+                var matrix = TestableDoubleMatrix16.Get().AsDense;
 
                 var columnIndex = matrix.NumberOfColumns - 1;
 
@@ -1153,7 +1165,7 @@ namespace Novacta.Analytics.Tests
         [TestMethod()]
         public void RemoveAllColumnNamesTest()
         {
-            var matrix = TestableDoubleMatrix16.Get().Dense;
+            var matrix = TestableDoubleMatrix16.Get().AsDense;
 
             Assert.AreEqual(expected: true, actual: matrix.HasColumnNames);
 
@@ -1400,11 +1412,11 @@ namespace Novacta.Analytics.Tests
 
                 // value is not scalar
                 {
-                    string STR_EXCEPT_MAT_CONVERTED_TO_DOUBLE_MUST_BE_SCALAR =
+                    string STR_EXCEPT_MAT_CONVERTED_TO_ENTRY_TYPE_MUST_BE_SCALAR =
                         (string)Reflector.ExecuteStaticMember(
                             typeof(ImplementationServices),
                             "GetResourceString",
-                            new string[] { "STR_EXCEPT_MAT_CONVERTED_TO_DOUBLE_MUST_BE_SCALAR" });
+                            new string[] { "STR_EXCEPT_MAT_CONVERTED_TO_ENTRY_TYPE_MUST_BE_SCALAR" });
 
                     ArgumentExceptionAssert.Throw(
                         () =>
@@ -1412,7 +1424,7 @@ namespace Novacta.Analytics.Tests
                             double actual = ((double)DoubleMatrix.Dense(2, 3));
                         },
                         expectedType: typeof(ArgumentException),
-                        expectedPartialMessage: STR_EXCEPT_MAT_CONVERTED_TO_DOUBLE_MUST_BE_SCALAR,
+                        expectedPartialMessage: STR_EXCEPT_MAT_CONVERTED_TO_ENTRY_TYPE_MUST_BE_SCALAR,
                         expectedParameterName: parameterName);
 
                     ArgumentExceptionAssert.Throw(
@@ -1421,7 +1433,7 @@ namespace Novacta.Analytics.Tests
                             double actual = DoubleMatrix.ToDouble(DoubleMatrix.Dense(2, 3));
                         },
                         expectedType: typeof(ArgumentException),
-                        expectedPartialMessage: STR_EXCEPT_MAT_CONVERTED_TO_DOUBLE_MUST_BE_SCALAR,
+                        expectedPartialMessage: STR_EXCEPT_MAT_CONVERTED_TO_ENTRY_TYPE_MUST_BE_SCALAR,
                         expectedParameterName: parameterName);
                 }
 
@@ -1463,11 +1475,11 @@ namespace Novacta.Analytics.Tests
 
                 // value is not scalar
                 {
-                    string STR_EXCEPT_MAT_CONVERTED_TO_DOUBLE_MUST_BE_SCALAR =
+                    string STR_EXCEPT_MAT_CONVERTED_TO_ENTRY_TYPE_MUST_BE_SCALAR =
                         (string)Reflector.ExecuteStaticMember(
                             typeof(ImplementationServices),
                             "GetResourceString",
-                            new string[] { "STR_EXCEPT_MAT_CONVERTED_TO_DOUBLE_MUST_BE_SCALAR" });
+                            new string[] { "STR_EXCEPT_MAT_CONVERTED_TO_ENTRY_TYPE_MUST_BE_SCALAR" });
 
                     ArgumentExceptionAssert.Throw(
                         () =>
@@ -1475,7 +1487,7 @@ namespace Novacta.Analytics.Tests
                             double actual = ((double)DoubleMatrix.Dense(2, 3).AsReadOnly());
                         },
                         expectedType: typeof(ArgumentException),
-                        expectedPartialMessage: STR_EXCEPT_MAT_CONVERTED_TO_DOUBLE_MUST_BE_SCALAR,
+                        expectedPartialMessage: STR_EXCEPT_MAT_CONVERTED_TO_ENTRY_TYPE_MUST_BE_SCALAR,
                         expectedParameterName: parameterName);
 
                     ArgumentExceptionAssert.Throw(
@@ -1485,7 +1497,7 @@ namespace Novacta.Analytics.Tests
                                 DoubleMatrix.Dense(2, 3).AsReadOnly());
                         },
                         expectedType: typeof(ArgumentException),
-                        expectedPartialMessage: STR_EXCEPT_MAT_CONVERTED_TO_DOUBLE_MUST_BE_SCALAR,
+                        expectedPartialMessage: STR_EXCEPT_MAT_CONVERTED_TO_ENTRY_TYPE_MUST_BE_SCALAR,
                         expectedParameterName: parameterName);
                 }
 
@@ -1667,13 +1679,9 @@ namespace Novacta.Analytics.Tests
         {
             DoubleMatrix target = DoubleMatrix.Dense(2, 3);
 
-            DoubleMatrix view = target[":", ":", true];
-
-            // Here view.matrixImplementor is of type ViewDoubleMatrixImplementor.
+            DoubleMatrix view = target[":", ":"];
 
             target.Dispose();
-
-            // Here view.matrixImplementor is of type DenseDoubleMatrixImplementor.
 
             Assert.AreEqual(
                 StorageScheme.Dense,
@@ -2540,41 +2548,41 @@ namespace Novacta.Analytics.Tests
             // (Matrix, Matrix) 
 
             // ----- Null operands
-            BinaryOperationTest.LeftMatrixRightMatrix.LeftIsNull(LeftIsNullMatrixMatrixAddition.Get());
-            BinaryOperationTest.LeftMatrixRightMatrix.RightIsNull(RightIsNullMatrixMatrixAddition.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.LeftIsNull(LeftIsNullDoubleMatrixDoubleMatrixAddition.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.RightIsNull(RightIsNullDoubleMatrixDoubleMatrixAddition.Get());
 
             // ----- Mismatched operands
-            BinaryOperationTest.LeftMatrixRightMatrix.Fail(RightWrongRowsMatrixMatrixAddition.Get());
-            BinaryOperationTest.LeftMatrixRightMatrix.Fail(RightWrongColsMatrixMatrixAddition.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Fail(RightWrongRowsDoubleMatrixDoubleMatrixAddition.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Fail(RightWrongColsDoubleMatrixDoubleMatrixAddition.Get());
 
             // ----- Scalar operands
-            BinaryOperationTest.LeftMatrixRightMatrix.Succeed(LeftIsScalarMatrixMatrixAddition.Get());
-            BinaryOperationTest.LeftMatrixRightMatrix.Succeed(RightIsScalarMatrixMatrixAddition.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Succeed(LeftIsScalarDoubleMatrixDoubleMatrixAddition.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Succeed(RightIsScalarDoubleMatrixDoubleMatrixAddition.Get());
 
             // ----- Typical Matrix operands
-            BinaryOperationTest.LeftMatrixRightMatrix.Succeed(TypicalMatrixMatrixAddition.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Succeed(TypicalDoubleMatrixDoubleMatrixAddition.Get());
 
             // (Matrix, Scalar)
 
             // ----- Left null operand
-            BinaryOperationTest.LeftMatrixRightScalar.LeftIsNull(LeftIsNullMatrixScalarAddition.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleScalar.LeftIsNull(LeftIsNullDoubleMatrixDoubleScalarAddition.Get());
 
             // ----- Right operand is neutral
-            BinaryOperationTest.LeftMatrixRightScalar.Succeed(RightIsNeutralMatrixScalarAddition.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleScalar.Succeed(RightIsNeutralDoubleMatrixDoubleScalarAddition.Get());
 
             // ----- Typical operands
-            BinaryOperationTest.LeftMatrixRightScalar.Succeed(TypicalMatrixScalarAddition.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleScalar.Succeed(TypicalDoubleMatrixDoubleScalarAddition.Get());
 
             // (Scalar, Matrix)
 
             // ----- Right null operand
-            BinaryOperationTest.LeftScalarRightMatrix.RightIsNull(RightIsNullScalarMatrixAddition.Get());
+            BinaryOperationTest.LeftDoubleScalarRightDoubleMatrix.RightIsNull(RightIsNullDoubleScalarDoubleMatrixAddition.Get());
 
             // ----- Left operand is neutral
-            BinaryOperationTest.LeftScalarRightMatrix.Succeed(LeftIsNeutralScalarMatrixAddition.Get());
+            BinaryOperationTest.LeftDoubleScalarRightDoubleMatrix.Succeed(LeftIsNeutralDoubleScalarDoubleMatrixAddition.Get());
 
             // ----- Typical operands
-            BinaryOperationTest.LeftScalarRightMatrix.Succeed(TypicalScalarMatrixAddition.Get());
+            BinaryOperationTest.LeftDoubleScalarRightDoubleMatrix.Succeed(TypicalDoubleScalarDoubleMatrixAddition.Get());
         }
 
         [TestMethod()]
@@ -2583,47 +2591,47 @@ namespace Novacta.Analytics.Tests
             // (Matrix, Matrix) 
 
             // ----- Null operands
-            BinaryOperationTest.LeftMatrixRightMatrix.LeftIsNull(LeftIsNullMatrixMatrixDivision.Get());
-            BinaryOperationTest.LeftMatrixRightMatrix.RightIsNull(RightIsNullMatrixMatrixDivision.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.LeftIsNull(LeftIsNullDoubleMatrixDoubleMatrixDivision.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.RightIsNull(RightIsNullDoubleMatrixDoubleMatrixDivision.Get());
 
             // ----- Mismatched operands
-            BinaryOperationTest.LeftMatrixRightMatrix.Fail(RightWrongColsMatrixMatrixDivision.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Fail(RightWrongColsDoubleMatrixDoubleMatrixDivision.Get());
 
             // ----- Unsquare, rank deficient right operand
-            BinaryOperationTest.LeftMatrixRightMatrix.Fail(RightIsRectangularAndRankDeficientMatrixMatrixDivision.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Fail(RightIsRectangularAndRankDeficientDoubleMatrixDoubleMatrixDivision.Get());
 
             // ----- Scalar operands
-            BinaryOperationTest.LeftMatrixRightMatrix.Succeed(LeftIsScalarMatrixMatrixDivision.Get());
-            BinaryOperationTest.LeftMatrixRightMatrix.Succeed(RightIsScalarMatrixMatrixDivision.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Succeed(LeftIsScalarDoubleMatrixDoubleMatrixDivision.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Succeed(RightIsScalarDoubleMatrixDoubleMatrixDivision.Get());
 
             // ----- Typical Matrix operands
-            BinaryOperationTest.LeftMatrixRightMatrix.Succeed(RightIsNoPatternedSquareMatrixMatrixDivision.Get());
-            BinaryOperationTest.LeftMatrixRightMatrix.Succeed(RightIsLowerTriangularMatrixMatrixDivision.Get());
-            BinaryOperationTest.LeftMatrixRightMatrix.Succeed(RightIsUpperTriangularMatrixMatrixDivision.Get());
-            BinaryOperationTest.LeftMatrixRightMatrix.Succeed(RightIsHessenbergMatrixMatrixDivision.Get());
-            BinaryOperationTest.LeftMatrixRightMatrix.Succeed(RightIsSymmetricMatrixMatrixDivision.Get());
-            BinaryOperationTest.LeftMatrixRightMatrix.Succeed(RightIsSymmetricAndNonPosDefiniteMatrixMatrixDivision.Get());
-            BinaryOperationTest.LeftMatrixRightMatrix.Succeed(RightIsRectangularLessRowsThanColsMatrixMatrixDivision.Get());
-            BinaryOperationTest.LeftMatrixRightMatrix.Succeed(RightIsRectangularNotLessRowsThanColsMatrixMatrixDivision.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Succeed(RightIsNoPatternedSquareDoubleMatrixDoubleMatrixDivision.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Succeed(RightIsLowerTriangularDoubleMatrixDoubleMatrixDivision.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Succeed(RightIsUpperTriangularDoubleMatrixDoubleMatrixDivision.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Succeed(RightIsHessenbergDoubleMatrixDoubleMatrixDivision.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Succeed(RightIsSymmetricDoubleMatrixDoubleMatrixDivision.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Succeed(RightIsSymmetricAndNonPosDefiniteDoubleMatrixDoubleMatrixDivision.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Succeed(RightIsRectangularLessRowsThanColsDoubleMatrixDoubleMatrixDivision.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Succeed(RightIsRectangularNotLessRowsThanColsDoubleMatrixDoubleMatrixDivision.Get());
 
             // (Matrix, Scalar)
 
             // ----- Left null operand
-            BinaryOperationTest.LeftMatrixRightScalar.LeftIsNull(LeftIsNullMatrixScalarDivision.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleScalar.LeftIsNull(LeftIsNullDoubleMatrixDoubleScalarDivision.Get());
 
             // ----- Right operand is neutral
-            BinaryOperationTest.LeftMatrixRightScalar.Succeed(RightIsNeutralMatrixScalarDivision.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleScalar.Succeed(RightIsNeutralDoubleMatrixDoubleScalarDivision.Get());
 
             // ----- Typical operands
-            BinaryOperationTest.LeftMatrixRightScalar.Succeed(TypicalMatrixScalarDivision.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleScalar.Succeed(TypicalDoubleMatrixDoubleScalarDivision.Get());
 
             // (Scalar, Matrix)
 
             // ----- Right null operand
-            BinaryOperationTest.LeftScalarRightMatrix.RightIsNull(RightIsNullScalarMatrixDivision.Get());
+            BinaryOperationTest.LeftDoubleScalarRightDoubleMatrix.RightIsNull(RightIsNullDoubleScalarDoubleMatrixDivision.Get());
 
             // ----- Typical operands
-            BinaryOperationTest.LeftScalarRightMatrix.Succeed(TypicalScalarMatrixDivision.Get());
+            BinaryOperationTest.LeftDoubleScalarRightDoubleMatrix.Succeed(TypicalDoubleScalarDoubleMatrixDivision.Get());
         }
 
         [TestMethod()]
@@ -2632,15 +2640,15 @@ namespace Novacta.Analytics.Tests
             // (Matrix, Matrix) 
 
             // ----- Null operands
-            BinaryOperationTest.LeftMatrixRightMatrix.LeftIsNull(LeftIsNullMatrixMatrixElementWiseMultiplication.Get());
-            BinaryOperationTest.LeftMatrixRightMatrix.RightIsNull(RightIsNullMatrixMatrixElementWiseMultiplication.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.LeftIsNull(LeftIsNullDoubleMatrixDoubleMatrixElementWiseMultiplication.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.RightIsNull(RightIsNullDoubleMatrixDoubleMatrixElementWiseMultiplication.Get());
 
             // ----- Mismatched operands
-            BinaryOperationTest.LeftMatrixRightMatrix.Fail(RightWrongRowsMatrixMatrixElementWiseMultiplication.Get());
-            BinaryOperationTest.LeftMatrixRightMatrix.Fail(RightWrongColsMatrixMatrixElementWiseMultiplication.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Fail(RightWrongRowsDoubleMatrixDoubleMatrixElementWiseMultiplication.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Fail(RightWrongColsDoubleMatrixDoubleMatrixElementWiseMultiplication.Get());
 
             // ----- Typical Matrix operands
-            BinaryOperationTest.LeftMatrixRightMatrix.Succeed(TypicalMatrixMatrixElementWiseMultiplication.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Succeed(TypicalDoubleMatrixDoubleMatrixElementWiseMultiplication.Get());
         }
 
         [TestMethod()]
@@ -2649,50 +2657,50 @@ namespace Novacta.Analytics.Tests
             // (Matrix, Matrix) 
 
             // ----- Null operands
-            BinaryOperationTest.LeftMatrixRightMatrix.LeftIsNull(LeftIsNullMatrixMatrixMultiplication.Get());
-            BinaryOperationTest.LeftMatrixRightMatrix.RightIsNull(RightIsNullMatrixMatrixMultiplication.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.LeftIsNull(LeftIsNullDoubleMatrixDoubleMatrixMultiplication.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.RightIsNull(RightIsNullDoubleMatrixDoubleMatrixMultiplication.Get());
 
             // ----- Mismatched operands
-            BinaryOperationTest.LeftMatrixRightMatrix.Fail(RightWrongRowsMatrixMatrixMultiplication.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Fail(RightWrongRowsDoubleMatrixDoubleMatrixMultiplication.Get());
 
             // ----- Scalar operands
-            BinaryOperationTest.LeftMatrixRightMatrix.Succeed(LeftIsScalarMatrixMatrixMultiplication.Get());
-            BinaryOperationTest.LeftMatrixRightMatrix.Succeed(RightIsScalarMatrixMatrixMultiplication.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Succeed(LeftIsScalarDoubleMatrixDoubleMatrixMultiplication.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Succeed(RightIsScalarDoubleMatrixDoubleMatrixMultiplication.Get());
 
             // ----- Typical Matrix operands
-            BinaryOperationTest.LeftMatrixRightMatrix.Succeed(TypicalMatrixMatrixMultiplication.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Succeed(TypicalDoubleMatrixDoubleMatrixMultiplication.Get());
 
             // (Matrix, Scalar)
 
             // ----- Left null operand
-            BinaryOperationTest.LeftMatrixRightScalar.LeftIsNull(LeftIsNullMatrixScalarMultiplication.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleScalar.LeftIsNull(LeftIsNullDoubleMatrixDoubleScalarMultiplication.Get());
 
             // ----- Right operand is neutral
-            BinaryOperationTest.LeftMatrixRightScalar.Succeed(RightIsNeutralMatrixScalarMultiplication.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleScalar.Succeed(RightIsNeutralDoubleMatrixDoubleScalarMultiplication.Get());
 
             // ----- Typical operands
-            BinaryOperationTest.LeftMatrixRightScalar.Succeed(TypicalMatrixScalarMultiplication.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleScalar.Succeed(TypicalDoubleMatrixDoubleScalarMultiplication.Get());
 
             // (Scalar, Matrix)
 
             // ----- Right null operand
-            BinaryOperationTest.LeftScalarRightMatrix.RightIsNull(RightIsNullScalarMatrixMultiplication.Get());
+            BinaryOperationTest.LeftDoubleScalarRightDoubleMatrix.RightIsNull(RightIsNullDoubleScalarDoubleMatrixMultiplication.Get());
 
             // ----- Left operand is neutral
-            BinaryOperationTest.LeftScalarRightMatrix.Succeed(LeftIsNeutralScalarMatrixMultiplication.Get());
+            BinaryOperationTest.LeftDoubleScalarRightDoubleMatrix.Succeed(LeftIsNeutralDoubleScalarDoubleMatrixMultiplication.Get());
 
             // ----- Typical operands
-            BinaryOperationTest.LeftScalarRightMatrix.Succeed(TypicalScalarMatrixMultiplication.Get());
+            BinaryOperationTest.LeftDoubleScalarRightDoubleMatrix.Succeed(TypicalDoubleScalarDoubleMatrixMultiplication.Get());
         }
 
         [TestMethod()]
         public void NegateTest()
         {
             // ----- Null operand
-            UnaryOperationTest.OperandIsNull(OperandIsNullMatrixNegation.Get());
+            UnaryOperationTest.OperandIsNull(OperandIsNullDoubleMatrixNegation.Get());
 
             // ----- Typical operand
-            UnaryOperationTest.Succeed(TypicalMatrixNegation.Get());
+            UnaryOperationTest.Succeed(TypicalDoubleMatrixNegation.Get());
         }
 
         [TestMethod()]
@@ -2701,395 +2709,44 @@ namespace Novacta.Analytics.Tests
             // (Matrix, Matrix) 
 
             // ----- Null operands
-            BinaryOperationTest.LeftMatrixRightMatrix.LeftIsNull(LeftIsNullMatrixMatrixSubtraction.Get());
-            BinaryOperationTest.LeftMatrixRightMatrix.RightIsNull(RightIsNullMatrixMatrixSubtraction.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.LeftIsNull(LeftIsNullMatrixMatrixSubtraction.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.RightIsNull(RightIsNullDoubleMatrixDoubleMatrixSubtraction.Get());
 
             // ----- Mismatched operands
-            BinaryOperationTest.LeftMatrixRightMatrix.Fail(RightWrongRowsMatrixMatrixSubtraction.Get());
-            BinaryOperationTest.LeftMatrixRightMatrix.Fail(RightWrongColsMatrixMatrixSubtraction.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Fail(RightWrongRowsDoubleMatrixDoubleMatrixSubtraction.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Fail(RightWrongColsDoubleMatrixDoubleMatrixSubtraction.Get());
 
             // ----- Scalar operands
-            BinaryOperationTest.LeftMatrixRightMatrix.Succeed(LeftIsScalarMatrixMatrixSubtraction.Get());
-            BinaryOperationTest.LeftMatrixRightMatrix.Succeed(RightIsScalarMatrixMatrixSubtraction.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Succeed(LeftIsScalarDoubleMatrixDoubleMatrixSubtraction.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Succeed(RightIsScalarDoubleMatrixDoubleMatrixSubtraction.Get());
 
             // ----- Typical Matrix operands
-            BinaryOperationTest.LeftMatrixRightMatrix.Succeed(TypicalMatrixMatrixSubtraction.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Succeed(TypicalDoubleMatrixDoubleMatrixSubtraction.Get());
 
             // (Matrix, Scalar)
 
             // ----- Left null operand
-            BinaryOperationTest.LeftMatrixRightScalar.LeftIsNull(LeftIsNullMatrixScalarSubtraction.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleScalar.LeftIsNull(LeftIsNullDoubleMatrixDoubleScalarSubtraction.Get());
 
             // ----- Right operand is neutral
-            BinaryOperationTest.LeftMatrixRightScalar.Succeed(RightIsNeutralMatrixScalarSubtraction.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleScalar.Succeed(RightIsNeutralDoubleMatrixDoubleScalarSubtraction.Get());
 
             // ----- Typical operands
-            BinaryOperationTest.LeftMatrixRightScalar.Succeed(TypicalMatrixScalarSubtraction.Get());
+            BinaryOperationTest.LeftDoubleMatrixRightDoubleScalar.Succeed(TypicalDoubleMatrixDoubleScalarSubtraction.Get());
 
             // (Scalar, Matrix)
 
             // ----- Right null operand
-            BinaryOperationTest.LeftScalarRightMatrix.RightIsNull(RightIsNullScalarMatrixSubtraction.Get());
+            BinaryOperationTest.LeftDoubleScalarRightDoubleMatrix.RightIsNull(RightIsNullDoubleScalarDoubleMatrixSubtraction.Get());
 
             // ----- Left operand is neutral
-            BinaryOperationTest.LeftScalarRightMatrix.Succeed(LeftIsNeutralScalarMatrixSubtraction.Get());
+            BinaryOperationTest.LeftDoubleScalarRightDoubleMatrix.Succeed(LeftIsNeutralDoubleScalarDoubleMatrixSubtraction.Get());
 
             // ----- Typical operands
-            BinaryOperationTest.LeftScalarRightMatrix.Succeed(TypicalScalarMatrixSubtraction.Get());
+            BinaryOperationTest.LeftDoubleScalarRightDoubleMatrix.Succeed(TypicalDoubleScalarDoubleMatrixSubtraction.Get());
         }
 
         #endregion
-
-        [TestMethod]
-        public void GetObjectDataTest()
-        {
-            // info is null
-            {
-                var testableMatrix = TestableDoubleMatrix00.Get();
-                var matrix = testableMatrix.Dense;
-
-                ArgumentExceptionAssert.Throw(
-                    () =>
-                    {
-                        matrix.GetObjectData(
-                            info: null,
-                            context: new System.Runtime.Serialization.StreamingContext());
-                    },
-                    expectedType: typeof(ArgumentNullException),
-                    expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
-                    expectedParameterName: "info");
-            }
-        }
-
-        [TestMethod]
-        public void SerializableTest()
-        {
-            #region DoubleMatrix 
-
-            // info is null
-            {
-                string parameterName = "info";
-                string innerMessage =
-                    ArgumentExceptionAssert.NullPartialMessage +
-                        Environment.NewLine + "Parameter name: " + parameterName;
-
-                ConstructorInfo serializationCtor = null;
-                TypeInfo t = typeof(DoubleMatrix).GetTypeInfo();
-                IEnumerable<ConstructorInfo> ctors = t.DeclaredConstructors;
-                foreach (var ctor in ctors)
-                {
-                    var parameters = ctor.GetParameters();
-                    if (parameters.Length == 2)
-                    {
-                        if ((parameters[0].ParameterType == typeof(SerializationInfo))
-                            &&
-                            (parameters[1].ParameterType == typeof(StreamingContext)))
-                        {
-                            serializationCtor = ctor;
-                            break;
-                        }
-                    }
-                }
-
-                ExceptionAssert.InnerThrow(
-                    () =>
-                    {
-                        serializationCtor.Invoke(
-                            new object[] { null, new StreamingContext() });
-                    },
-                    expectedInnerType: typeof(ArgumentNullException),
-                    expectedInnerMessage: innerMessage);
-            }
-
-            #region Without names
-
-            // View
-            {
-                MemoryStream ms = new MemoryStream();
-
-                var testableMatrix = TestableDoubleMatrix11.Get();
-                var serializedMatrix = testableMatrix.View;
-
-                BinaryFormatter formatter = new BinaryFormatter();
-
-                formatter.Serialize(ms, serializedMatrix);
-
-                // Reset stream position
-                ms.Position = 0;
-
-                var deserializedMatrix = (DoubleMatrix)formatter.Deserialize(ms);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            // Dense
-            {
-                MemoryStream ms = new MemoryStream();
-
-                var testableMatrix = TestableDoubleMatrix11.Get();
-                var serializedMatrix = testableMatrix.Dense;
-
-                BinaryFormatter formatter = new BinaryFormatter();
-
-                formatter.Serialize(ms, serializedMatrix);
-
-                // Reset stream position
-                ms.Position = 0;
-
-                var deserializedMatrix = (DoubleMatrix)formatter.Deserialize(ms);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            // Sparse
-            {
-                MemoryStream ms = new MemoryStream();
-
-                var testableMatrix = TestableDoubleMatrix11.Get();
-                var serializedMatrix = testableMatrix.Sparse;
-
-                BinaryFormatter formatter = new BinaryFormatter();
-
-                formatter.Serialize(ms, serializedMatrix);
-
-                // Reset stream position
-                ms.Position = 0;
-
-                var deserializedMatrix = (DoubleMatrix)formatter.Deserialize(ms);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            #endregion
-
-            #region With names
-
-            // View
-            {
-                MemoryStream ms = new MemoryStream();
-
-                var testableMatrix = TestableDoubleMatrix16.Get();
-                var serializedMatrix = testableMatrix.View;
-
-                BinaryFormatter formatter = new BinaryFormatter();
-
-                formatter.Serialize(ms, serializedMatrix);
-
-                // Reset stream position
-                ms.Position = 0;
-
-                var deserializedMatrix = (DoubleMatrix)formatter.Deserialize(ms);
-
-                serializedMatrix[0] = -1001.2;
-                deserializedMatrix[0] = -1001.2;
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            // Dense
-            {
-                MemoryStream ms = new MemoryStream();
-
-                var testableMatrix = TestableDoubleMatrix16.Get();
-                var serializedMatrix = testableMatrix.Dense;
-
-                BinaryFormatter formatter = new BinaryFormatter();
-
-                formatter.Serialize(ms, serializedMatrix);
-
-                // Reset stream position
-                ms.Position = 0;
-
-                var deserializedMatrix = (DoubleMatrix)formatter.Deserialize(ms);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            // Sparse
-            {
-                MemoryStream ms = new MemoryStream();
-
-                var testableMatrix = TestableDoubleMatrix16.Get();
-                var serializedMatrix = testableMatrix.Sparse;
-
-                BinaryFormatter formatter = new BinaryFormatter();
-
-                formatter.Serialize(ms, serializedMatrix);
-
-                // Reset stream position
-                ms.Position = 0;
-
-                var deserializedMatrix = (DoubleMatrix)formatter.Deserialize(ms);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            #endregion
-
-            #endregion
-
-            #region ReadOnlyDoubleMatrix 
-
-            #region Without names
-
-            // View
-            {
-                MemoryStream ms = new MemoryStream();
-
-                var testableMatrix = TestableDoubleMatrix11.Get();
-                var serializedMatrix = testableMatrix.View.AsReadOnly();
-
-                BinaryFormatter formatter = new BinaryFormatter();
-
-                formatter.Serialize(ms, serializedMatrix);
-
-                // Reset stream position
-                ms.Position = 0;
-
-                var deserializedMatrix = (ReadOnlyDoubleMatrix)formatter.Deserialize(ms);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            // Dense
-            {
-                MemoryStream ms = new MemoryStream();
-
-                var testableMatrix = TestableDoubleMatrix11.Get();
-                var serializedMatrix = testableMatrix.Dense.AsReadOnly();
-
-                BinaryFormatter formatter = new BinaryFormatter();
-
-                formatter.Serialize(ms, serializedMatrix);
-
-                // Reset stream position
-                ms.Position = 0;
-
-                var deserializedMatrix = (ReadOnlyDoubleMatrix)formatter.Deserialize(ms);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            // Sparse
-            {
-                MemoryStream ms = new MemoryStream();
-
-                var testableMatrix = TestableDoubleMatrix11.Get();
-                var serializedMatrix = testableMatrix.Sparse.AsReadOnly();
-
-                BinaryFormatter formatter = new BinaryFormatter();
-
-                formatter.Serialize(ms, serializedMatrix);
-
-                // Reset stream position
-                ms.Position = 0;
-
-                var deserializedMatrix = (ReadOnlyDoubleMatrix)formatter.Deserialize(ms);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            #endregion
-
-            #region With names
-
-            // View
-            {
-                MemoryStream ms = new MemoryStream();
-
-                var testableMatrix = TestableDoubleMatrix16.Get();
-                var serializedMatrix = testableMatrix.View.AsReadOnly();
-
-                BinaryFormatter formatter = new BinaryFormatter();
-
-                formatter.Serialize(ms, serializedMatrix);
-
-                // Reset stream position
-                ms.Position = 0;
-
-                var deserializedMatrix = (ReadOnlyDoubleMatrix)formatter.Deserialize(ms);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            // Dense
-            {
-                MemoryStream ms = new MemoryStream();
-
-                var testableMatrix = TestableDoubleMatrix16.Get();
-                var serializedMatrix = testableMatrix.Dense.AsReadOnly();
-
-                BinaryFormatter formatter = new BinaryFormatter();
-
-                formatter.Serialize(ms, serializedMatrix);
-
-                // Reset stream position
-                ms.Position = 0;
-
-                var deserializedMatrix = (ReadOnlyDoubleMatrix)formatter.Deserialize(ms);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            // Sparse
-            {
-                MemoryStream ms = new MemoryStream();
-
-                var testableMatrix = TestableDoubleMatrix16.Get();
-                var serializedMatrix = testableMatrix.Sparse.AsReadOnly();
-
-                BinaryFormatter formatter = new BinaryFormatter();
-
-                formatter.Serialize(ms, serializedMatrix);
-
-                // Reset stream position
-                ms.Position = 0;
-
-                var deserializedMatrix = (ReadOnlyDoubleMatrix)formatter.Deserialize(ms);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: serializedMatrix,
-                    actual: deserializedMatrix,
-                    delta: DoubleMatrixTest.Accuracy);
-            }
-
-            #endregion
-
-            #endregion
-        }
 
         [TestMethod()]
         public void GetEnumeratorTest()
@@ -3400,7 +3057,6 @@ namespace Novacta.Analytics.Tests
             }
         }
 
-
         [TestMethod()]
         public void TransposeTest()
         {
@@ -3526,7 +3182,7 @@ namespace Novacta.Analytics.Tests
                     DoubleMatrix target;
 
                     // Dense
-                    target = TestableDoubleMatrix00.Get().Dense;
+                    target = TestableDoubleMatrix00.Get().AsDense;
 
                     ArgumentExceptionAssert.Throw(
                         () =>
@@ -3538,19 +3194,7 @@ namespace Novacta.Analytics.Tests
                         expectedParameterName: parameterName);
 
                     // Sparse
-                    target = TestableDoubleMatrix00.Get().Sparse;
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var actual = target.Vec(IndexCollection.Range(0, target.Count));
-                        },
-                        expectedType: typeof(ArgumentOutOfRangeException),
-                        expectedPartialMessage: STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS,
-                        expectedParameterName: parameterName);
-
-                    // View
-                    target = TestableDoubleMatrix00.Get().View;
+                    target = TestableDoubleMatrix00.Get().AsSparse;
 
                     ArgumentExceptionAssert.Throw(
                         () =>
@@ -3668,7 +3312,7 @@ namespace Novacta.Analytics.Tests
         {
             // DoubleMatrix
             {
-                var target = TestableDoubleMatrix00.Get().Dense;
+                var target = TestableDoubleMatrix00.Get().AsDense;
                 ExceptionAssert.Throw(
                     () =>
                     {
@@ -3680,7 +3324,7 @@ namespace Novacta.Analytics.Tests
 
             // ReadOnlyDoubleMatrix
             {
-                var target = TestableDoubleMatrix00.Get().Dense.AsReadOnly();
+                var target = TestableDoubleMatrix00.Get().AsDense.AsReadOnly();
                 ExceptionAssert.Throw(
                     () =>
                     {
@@ -3696,7 +3340,7 @@ namespace Novacta.Analytics.Tests
         {
             // DoubleMatrix
             {
-                var target = TestableDoubleMatrix00.Get().Dense;
+                var target = TestableDoubleMatrix00.Get().AsDense;
                 ExceptionAssert.Throw(
                     () =>
                     {
@@ -3708,7 +3352,7 @@ namespace Novacta.Analytics.Tests
 
             // ReadOnlyDoubleMatrix
             {
-                var target = TestableDoubleMatrix00.Get().Dense.AsReadOnly();
+                var target = TestableDoubleMatrix00.Get().AsDense.AsReadOnly();
                 ExceptionAssert.Throw(
                     () =>
                     {
@@ -3752,7 +3396,7 @@ namespace Novacta.Analytics.Tests
         {
             // DoubleMatrix
             {
-                var target = TestableDoubleMatrix00.Get().Dense;
+                var target = TestableDoubleMatrix00.Get().AsDense;
                 ExceptionAssert.Throw(
                     () =>
                     {
@@ -3764,7 +3408,7 @@ namespace Novacta.Analytics.Tests
 
             // ReadOnlyDoubleMatrix
             {
-                var target = TestableDoubleMatrix00.Get().Dense.AsReadOnly();
+                var target = TestableDoubleMatrix00.Get().AsDense.AsReadOnly();
                 ExceptionAssert.Throw(
                     () =>
                     {
@@ -3780,7 +3424,7 @@ namespace Novacta.Analytics.Tests
         {
             // DoubleMatrix
             {
-                var target = TestableDoubleMatrix00.Get().Dense;
+                var target = TestableDoubleMatrix00.Get().AsDense;
                 ExceptionAssert.Throw(
                     () =>
                     {
@@ -3792,7 +3436,7 @@ namespace Novacta.Analytics.Tests
 
             // ReadOnlyDoubleMatrix
             {
-                var target = TestableDoubleMatrix00.Get().Dense.AsReadOnly();
+                var target = TestableDoubleMatrix00.Get().AsDense.AsReadOnly();
                 ExceptionAssert.Throw(
                     () =>
                     {
@@ -3815,7 +3459,7 @@ namespace Novacta.Analytics.Tests
         {
             // DoubleMatrix
             {
-                var target = TestableDoubleMatrix00.Get().Dense;
+                var target = TestableDoubleMatrix00.Get().AsDense;
                 ExceptionAssert.Throw(
                     () =>
                     {
@@ -3827,7 +3471,7 @@ namespace Novacta.Analytics.Tests
 
             // ReadOnlyDoubleMatrix
             {
-                var target = TestableDoubleMatrix00.Get().Dense.AsReadOnly();
+                var target = TestableDoubleMatrix00.Get().AsDense.AsReadOnly();
                 ExceptionAssert.Throw(
                     () =>
                     {

@@ -33,23 +33,23 @@ namespace Novacta.Analytics.Tests.TestableItems.Quantile
                     expected: new DoubleMatrixState[3] {
                         new DoubleMatrixState(
                             asColumnMajorDenseArray:
-                                TestableDoubleMatrix53.Get().Dense[0,":"].AsColumnMajorDenseArray(),
-                            numberOfRows: TestableDoubleMatrix53.Get().Dense.NumberOfColumns,
+                                TestableDoubleMatrix53.Get().AsDense[0,":"].AsColumnMajorDenseArray(),
+                            numberOfRows: TestableDoubleMatrix53.Get().AsDense.NumberOfColumns,
                             numberOfColumns: 1),
                         new DoubleMatrixState(
                             asColumnMajorDenseArray:
-                                TestableDoubleMatrix53.Get().Dense[1,":"].AsColumnMajorDenseArray(),
-                            numberOfRows: TestableDoubleMatrix53.Get().Dense.NumberOfColumns,
+                                TestableDoubleMatrix53.Get().AsDense[1,":"].AsColumnMajorDenseArray(),
+                            numberOfRows: TestableDoubleMatrix53.Get().AsDense.NumberOfColumns,
                             numberOfColumns: 1),
                         new DoubleMatrixState(
                             asColumnMajorDenseArray:
-                                TestableDoubleMatrix53.Get().Dense[2,":"].AsColumnMajorDenseArray(),
-                            numberOfRows: TestableDoubleMatrix53.Get().Dense.NumberOfColumns,
+                                TestableDoubleMatrix53.Get().AsDense[2,":"].AsColumnMajorDenseArray(),
+                            numberOfRows: TestableDoubleMatrix53.Get().AsDense.NumberOfColumns,
                             numberOfColumns: 1)
                     },
                     data: TestableDoubleMatrix53.Get(),
                     probabilities: GetKnownProbabilities(
-                        TestableDoubleMatrix53.Get().Dense.NumberOfColumns),
+                        TestableDoubleMatrix53.Get().AsDense.NumberOfColumns),
                     dataOperation: DataOperation.OnRows
                 )
         {

@@ -32,7 +32,7 @@ namespace Novacta.Analytics.Tests.TestableItems.GDA
     {
         static readonly double[] variableCoefficients = 
             new double[2] { 9, 4 };
-        static readonly Basis a = new Basis(
+        static readonly Basis a = new(
             DoubleMatrix.Dense(2, 2, new double[4] 
                 { Math.Sqrt(variableCoefficients[0]),
                   0,
@@ -203,9 +203,9 @@ namespace Novacta.Analytics.Tests.TestableItems.GDA
         /// <see cref="TestablePrincipalProjections00" /> class.
         /// </summary>
         /// <param name="asPrincipalComponents">
-        /// <b>true</b> if <see cref="TestablePrincipalProjections.PrincipalProjections"/>
+        /// <c>true</c> if <see cref="TestablePrincipalProjections.PrincipalProjections"/>
         /// must be created as a <see cref="PrincipalComponents"/> instance;
-        /// otherwise <b>false</b>.
+        /// otherwise <c>false</c>.
         /// </param>
         TestablePrincipalProjections00(bool asPrincipalComponents) : base(
             principalProjections:
@@ -237,9 +237,9 @@ namespace Novacta.Analytics.Tests.TestableItems.GDA
         /// <see cref="TestablePrincipalProjections00"/> class.
         /// </summary>
         /// <param name="asPrincipalComponents">
-        /// <b>true</b> if <see cref="TestablePrincipalProjections.PrincipalProjections"/>
+        /// <c>true</c> if <see cref="TestablePrincipalProjections.PrincipalProjections"/>
         /// must be created as a <see cref="PrincipalComponents"/> instance;
-        /// otherwise <b>false</b>.
+        /// otherwise <c>false</c>.
         /// </param>
         /// <returns>An instance of the 
         /// <see cref="TestablePrincipalProjections00"/> class.</returns>

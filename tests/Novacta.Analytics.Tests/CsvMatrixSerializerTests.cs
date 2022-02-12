@@ -22,13 +22,13 @@ namespace Novacta.Analytics.Tests
         /// <summary>
         /// Gets a matrix testable for CSV serialization.
         /// </summary>
-        private TestableDoubleMatrix GetTestableMatrix(
+        private static TestableDoubleMatrix GetTestableMatrix(
             bool hasName,
             bool hasRowNames,
             bool hasColumnNames,
             out string partialPath)
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new();
 
             string matrixName = null;
             if (hasName)
@@ -103,15 +103,18 @@ namespace Novacta.Analytics.Tests
             return testableMatrix;
         }
 
-        private void TestSerializationToPath(
+#pragma warning disable CS0618 // Type or member is obsolete
+
+        private static void TestSerializationToPath(
             TestableDoubleMatrix testableMatrix,
             string partialPath)
         {
             // dense
             {
-                var expected = testableMatrix.Dense;
+                var expected = testableMatrix.AsDense;
 
                 var path = "dense-" + partialPath;
+
 
                 CsvMatrixSerializer.Serialize(path, expected);
 
@@ -122,7 +125,7 @@ namespace Novacta.Analytics.Tests
 
             // sparse
             {
-                var expected = testableMatrix.Sparse;
+                var expected = testableMatrix.AsSparse;
 
                 var path = "sparse-" + partialPath;
 
@@ -133,22 +136,9 @@ namespace Novacta.Analytics.Tests
                 DoubleMatrixAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
             }
 
-            // view
-            {
-                var expected = testableMatrix.View;
-
-                var path = "view-" + partialPath;
-
-                CsvMatrixSerializer.Serialize(path, expected);
-
-                var actual = CsvMatrixSerializer.Deserialize(path);
-
-                DoubleMatrixAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
-            }
-
             // read-only dense
             {
-                var expected = testableMatrix.Dense;
+                var expected = testableMatrix.AsDense;
 
                 var path = "read-only-dense-" + partialPath;
 
@@ -161,7 +151,7 @@ namespace Novacta.Analytics.Tests
 
             // read-only sparse
             {
-                var expected = testableMatrix.Sparse;
+                var expected = testableMatrix.AsSparse;
 
                 var path = "read-only-sparse-" + partialPath;
 
@@ -171,29 +161,16 @@ namespace Novacta.Analytics.Tests
 
                 DoubleMatrixAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
             }
-
-            // read-only view
-            {
-                var expected = testableMatrix.View;
-
-                var path = "read-only-view-" + partialPath;
-
-                CsvMatrixSerializer.Serialize(path, expected.AsReadOnly());
-
-                var actual = CsvMatrixSerializer.Deserialize(path);
-
-                DoubleMatrixAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
-            }
         }
 
-        private void TestSerializationToStream(
+        private static void TestSerializationToStream(
             TestableDoubleMatrix testableMatrix)
         {
             // dense
             {
-                var expected = testableMatrix.Dense;
+                var expected = testableMatrix.AsDense;
 
-                MemoryStream stream = new MemoryStream();
+                MemoryStream stream = new();
 
                 var textWriter = new StreamWriter(stream);
 
@@ -210,28 +187,9 @@ namespace Novacta.Analytics.Tests
 
             // sparse
             {
-                var expected = testableMatrix.Sparse;
+                var expected = testableMatrix.AsSparse;
 
-                MemoryStream stream = new MemoryStream();
-
-                var textWriter = new StreamWriter(stream);
-
-                CsvMatrixSerializer.Serialize(textWriter, expected);
-
-                stream.Position = 0;
-
-                var textReader = new StreamReader(stream);
-
-                var actual = CsvMatrixSerializer.Deserialize(textReader);
-
-                DoubleMatrixAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
-            }
-
-            // view
-            {
-                var expected = testableMatrix.View;
-
-                MemoryStream stream = new MemoryStream();
+                MemoryStream stream = new();
 
                 var textWriter = new StreamWriter(stream);
 
@@ -248,9 +206,9 @@ namespace Novacta.Analytics.Tests
 
             // read-only dense
             {
-                var expected = testableMatrix.Dense;
+                var expected = testableMatrix.AsDense;
 
-                MemoryStream stream = new MemoryStream();
+                MemoryStream stream = new();
 
                 var textWriter = new StreamWriter(stream);
 
@@ -267,28 +225,9 @@ namespace Novacta.Analytics.Tests
 
             // read-only sparse
             {
-                var expected = testableMatrix.Sparse;
+                var expected = testableMatrix.AsSparse;
 
-                MemoryStream stream = new MemoryStream();
-
-                var textWriter = new StreamWriter(stream);
-
-                CsvMatrixSerializer.Serialize(textWriter, expected.AsReadOnly());
-
-                stream.Position = 0;
-
-                var textReader = new StreamReader(stream);
-
-                var actual = CsvMatrixSerializer.Deserialize(textReader);
-
-                DoubleMatrixAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
-            }
-
-            // read-only view
-            {
-                var expected = testableMatrix.View;
-
-                MemoryStream stream = new MemoryStream();
+                MemoryStream stream = new();
 
                 var textWriter = new StreamWriter(stream);
 
@@ -474,8 +413,8 @@ namespace Novacta.Analytics.Tests
                 "row1,2.0,6.0"};
 
                 // Create a stream containing the CSV content.
-                MemoryStream stream = new MemoryStream();
-                StreamWriter writer = new StreamWriter(stream);
+                MemoryStream stream = new();
+                StreamWriter writer = new(stream);
                 for (int i = 0; i < data.Length; i++)
                 {
                     writer.WriteLine(data[i].ToCharArray());
@@ -484,7 +423,7 @@ namespace Novacta.Analytics.Tests
                 stream.Position = 0;
 
                 // Create a reader for the stream.
-                StreamReader reader = new StreamReader(stream);
+                StreamReader reader = new(stream);
 
                 ExceptionAssert.Throw(
                     () =>
@@ -505,8 +444,8 @@ namespace Novacta.Analytics.Tests
                 "0,Row0"};
 
                 // Create a stream containing the CSV content.
-                MemoryStream stream = new MemoryStream();
-                StreamWriter writer = new StreamWriter(stream);
+                MemoryStream stream = new();
+                StreamWriter writer = new(stream);
                 for (int i = 0; i < data.Length; i++)
                 {
                     writer.WriteLine(data[i].ToCharArray());
@@ -515,7 +454,7 @@ namespace Novacta.Analytics.Tests
                 stream.Position = 0;
 
                 // Create a reader for the stream.
-                StreamReader reader = new StreamReader(stream);
+                StreamReader reader = new(stream);
 
                 ExceptionAssert.Throw(
                     () =>
@@ -529,8 +468,8 @@ namespace Novacta.Analytics.Tests
 
             // matrix is null
             {
-                MemoryStream stream = new MemoryStream();
-                StreamWriter writer = new StreamWriter(stream);
+                MemoryStream stream = new();
+                StreamWriter writer = new(stream);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -580,5 +519,8 @@ namespace Novacta.Analytics.Tests
                 TestSerializationToStream(testableMatrix);
             }
         }
+
+#pragma warning restore CS0618 // Type or member is obsolete
+
     }
 }

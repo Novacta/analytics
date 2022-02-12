@@ -121,7 +121,7 @@ namespace Novacta.Analytics.Tests.Tools
             // Row names
 
             // Both have row names
-            bool expectedHasRowNames = !(expectedState.RowNames is null);
+            bool expectedHasRowNames = expectedState.RowNames is not null;
 
             Assert.AreEqual(expectedHasRowNames, actualMatrix.HasRowNames);
 
@@ -133,7 +133,7 @@ namespace Novacta.Analytics.Tests.Tools
             // Column names
 
             // Both have column names
-            bool expectedHasColumnNames = !(expectedState.ColumnNames is null);
+            bool expectedHasColumnNames = expectedState.ColumnNames is not null;
 
             Assert.AreEqual(expectedHasColumnNames, actualMatrix.HasColumnNames);
 

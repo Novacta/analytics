@@ -53,7 +53,7 @@ namespace BindingToRowCollection
 
             for (int j = 0; j < this.matrix.NumberOfColumns; j++)
             {
-                DataGridTextColumn column = new DataGridTextColumn
+                DataGridTextColumn column = new()
                 {
                     Binding = new Binding("[" + j + "]")
                     {

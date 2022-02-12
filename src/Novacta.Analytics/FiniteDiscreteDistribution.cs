@@ -119,10 +119,6 @@ namespace Novacta.Analytics
         /// dimensions of  
         /// <see cref="Values"/>.
         /// </exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Design", 
-            "CA1062:Validate arguments of public methods", 
-            Justification = "Input validation delegated to ValidateMasses.")]
         public void SetMasses(DoubleMatrix masses)
         {
             FiniteDiscreteDistribution.ValidateMasses(masses, this.values.matrix);
@@ -162,10 +158,6 @@ namespace Novacta.Analytics
         /// dimensions of  
         /// <see cref="Values"/>.
         /// </exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Design", 
-            "CA1062:Validate arguments of public methods", 
-            Justification = "Input validation delegated to other constructor.")]
         public FiniteDiscreteDistribution(
             DoubleMatrix values, DoubleMatrix masses)
             : this(values, masses, fromPublicAPI: true)
@@ -233,7 +225,7 @@ namespace Novacta.Analytics
             DoubleMatrix difference = (DoubleMatrix)this.masses;
             this.aliases = new int[numberOfValues];
 
-            LinkedList<int> s = new LinkedList<int>(IndexCollection.Range(0, numberOfValues - 1));
+            LinkedList<int> s = new(IndexCollection.Range(0, numberOfValues - 1));
             IndexCollection currentIndex;
             DoubleMatrix currentDifference;
 

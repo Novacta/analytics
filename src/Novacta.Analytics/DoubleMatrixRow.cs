@@ -103,10 +103,6 @@ namespace Novacta.Analytics
     /// </para>
     /// </example>
     /// <seealso href="https://en.wikipedia.org/wiki/Lexicographical_order"/>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage(
-        "Microsoft.Naming", 
-        "CA1710:IdentifiersShouldHaveCorrectSuffix",
-        Justification = "Type is a data structure.")]
     public sealed class DoubleMatrixRow :
         IEnumerable<double>,
         INotifyPropertyChanged,
@@ -652,7 +648,7 @@ namespace Novacta.Analytics
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString()
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new();
 
             NumberFormatInfo numberFormatInfo = CultureInfo.InvariantCulture.NumberFormat;
 
@@ -678,7 +674,7 @@ namespace Novacta.Analytics
             string nomberFormatSpecifier = "{0,-17:g10}";
             bool columnsHaveNames = matrix.HasColumnNames;
             string rowName = this.Name;
-            bool rowHasName = !(rowName is null);
+            bool rowHasName = rowName is not null;
 
             int numberOfColumns = this.Length;
 
@@ -713,7 +709,7 @@ namespace Novacta.Analytics
                         if (columnNameLength > maximumNameLength)
                         {
                             columnName = columnName.Insert(maximumNameLength - 1, "*")
-                                .Substring(0, maximumNameLength);
+                                [..maximumNameLength];
                             stringBuilder.AppendFormat(
                                 CultureInfo.InvariantCulture,
                                 truncatedNamesFormatSpecifier,
@@ -746,7 +742,7 @@ namespace Novacta.Analytics
                 if (rowNameLength > maximumNameLength)
                 {
                     rowName = rowName.Insert(maximumNameLength - 1, "*")
-                        .Substring(0, maximumNameLength);
+                        [..maximumNameLength];
                     stringBuilder.AppendFormat(
                         CultureInfo.InvariantCulture,
                         truncatedNamesFormatSpecifier, 
@@ -933,8 +929,8 @@ namespace Novacta.Analytics
         /// </summary>
         /// <param name="left">The first instance to compare.</param>
         /// <param name="right">The second instance to compare.</param>
-        /// <returns><b>true</b> if <i>left</i> is less than <i>right</i>;
-        /// otherwise, <b>false</b>.
+        /// <returns><c>true</c> if <i>left</i> is less than <i>right</i>;
+        /// otherwise, <c>false</c>.
         /// </returns>
         /// <remarks>
         /// <inheritdoc cref="DoubleMatrixRow" 
@@ -945,7 +941,7 @@ namespace Novacta.Analytics
         {
             if (left is null)
             {
-                return right is null ? false : true;
+                return right is not null;
             }
 
             return left.CompareTo(right) < 0;
@@ -957,8 +953,8 @@ namespace Novacta.Analytics
         /// </summary>
         /// <param name="left">The first instance to compare.</param>
         /// <param name="right">The second instance to compare.</param>
-        /// <returns><b>true</b> if <i>left</i> is less than or equal to <i>right</i>;
-        /// otherwise, <b>false</b>.
+        /// <returns><c>true</c> if <i>left</i> is less than or equal to <i>right</i>;
+        /// otherwise, <c>false</c>.
         /// </returns>
         /// <remarks>
         /// <inheritdoc cref="DoubleMatrixRow" 
@@ -983,8 +979,8 @@ namespace Novacta.Analytics
         /// </summary>
         /// <param name="left">The first instance to compare.</param>
         /// <param name="right">The second instance to compare.</param>
-        /// <returns><b>true</b> if <i>left</i> is greater than <i>right</i>;
-        /// otherwise, <b>false</b>.
+        /// <returns><c>true</c> if <i>left</i> is greater than <i>right</i>;
+        /// otherwise, <c>false</c>.
         /// </returns>
         /// <remarks>
         /// <inheritdoc cref="DoubleMatrixRow" 
@@ -995,7 +991,7 @@ namespace Novacta.Analytics
         {
             if (right is null)
             {
-                return left is null ? false : true;
+                return left is not null;
             }
 
             return right.CompareTo(left) < 0;
@@ -1007,8 +1003,8 @@ namespace Novacta.Analytics
         /// </summary>
         /// <param name="left">The first instance to compare.</param>
         /// <param name="right">The second instance to compare.</param>
-        /// <returns><b>true</b> if <i>left</i> is greater than or equal to <i>right</i>;
-        /// otherwise, <b>false</b>.
+        /// <returns><c>true</c> if <i>left</i> is greater than or equal to <i>right</i>;
+        /// otherwise, <c>false</c>.
         /// </returns>
         /// <remarks>
         /// <inheritdoc cref="DoubleMatrixRow" 
@@ -1031,8 +1027,8 @@ namespace Novacta.Analytics
         /// Indicates whether the current object is equal to another object of the same type.
         /// </summary>
         /// <param name="other">An object to compare with this object.</param>
-        /// <returns><b>true</b> if the current object is equal to the <paramref name="other" /> 
-        /// parameter; otherwise, <b>false</b>.</returns>
+        /// <returns><c>true</c> if the current object is equal to the <paramref name="other" /> 
+        /// parameter; otherwise, <c>false</c>.</returns>
         /// <remarks>
         /// <inheritdoc cref="DoubleMatrixRow" 
         /// path="para[@id='quasi.lexicographic.order']"/>
@@ -1050,8 +1046,8 @@ namespace Novacta.Analytics
         /// is equal to the current <see cref="System.Object" />.
         /// </summary>
         /// <param name="obj">The object to compare with the current object.</param>
-        /// <returns><b>true</b> if the specified object is equal to the current object; 
-        /// otherwise, <b>false</b>.</returns>
+        /// <returns><c>true</c> if the specified object is equal to the current object; 
+        /// otherwise, <c>false</c>.</returns>
         /// <remarks>
         /// <inheritdoc cref="DoubleMatrixRow" 
         /// path="para[@id='quasi.lexicographic.order']"/>
@@ -1076,8 +1072,8 @@ namespace Novacta.Analytics
         /// </summary>
         /// <param name="left">The first instance to compare.</param>
         /// <param name="right">The second instance to compare.</param>
-        /// <returns><b>true</b> if <i>left</i> is equal to <i>right</i>;
-        /// otherwise, <b>false</b>.
+        /// <returns><c>true</c> if <i>left</i> is equal to <i>right</i>;
+        /// otherwise, <c>false</c>.
         /// </returns>
         /// <remarks>
         /// <inheritdoc cref="DoubleMatrixRow" 
@@ -1090,7 +1086,7 @@ namespace Novacta.Analytics
         {
             if (left is null)
             {
-                return right is null ? true : false;
+                return right is null;
             }
 
             return left.Equals(right);
@@ -1102,8 +1098,8 @@ namespace Novacta.Analytics
         /// </summary>
         /// <param name="left">The first instance to compare.</param>
         /// <param name="right">The second instance to compare.</param>
-        /// <returns><b>true</b> if <i>left</i> is not equal to <i>right</i>;
-        /// otherwise, <b>false</b>.
+        /// <returns><c>true</c> if <i>left</i> is not equal to <i>right</i>;
+        /// otherwise, <c>false</c>.
         /// </returns>
         /// <remarks>
         /// <inheritdoc cref="DoubleMatrixRow" 

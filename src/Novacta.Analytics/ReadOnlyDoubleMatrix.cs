@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.ObjectModel;
 
 using Novacta.Analytics.Infrastructure;
+using System.Numerics;
 
 namespace Novacta.Analytics
 {
@@ -16,15 +17,12 @@ namespace Novacta.Analytics
     /// Provides methods to operate algebraically on matrices when operands are
     /// both writable and read only.
     ///</summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage(
-        "Microsoft.Naming", 
-        "CA1710:IdentifiersShouldHaveCorrectSuffix",
-        Justification = "Type is a data structure."), Serializable]
+    ///<seealso cref="DoubleMatrix"/>
     public class ReadOnlyDoubleMatrix :
         IEnumerable<double>,
         IList<double>,
         IReadOnlyList<double>,
-        IMatrixPatterns,
+        IComplexMatrixPatterns,
         IReadOnlyTabularCollection<double, DoubleMatrix>,
         ITabularCollection<double, DoubleMatrix>
     {
@@ -197,6 +195,8 @@ namespace Novacta.Analytics
 
         #endregion
 
+        #region ElementWiseMultiply
+
         /// <inheritdoc cref="DoubleMatrix.ElementWiseMultiply(DoubleMatrix, DoubleMatrix)"/>
         public static DoubleMatrix ElementWiseMultiply(ReadOnlyDoubleMatrix left, ReadOnlyDoubleMatrix right)
         {
@@ -226,6 +226,8 @@ namespace Novacta.Analytics
 
             return DoubleMatrix.ElementWiseMultiply(left, right.matrix);
         }
+
+        #endregion
 
         #region Add
 
@@ -277,6 +279,8 @@ namespace Novacta.Analytics
             return left + right;
         }
 
+        #region Double
+
         /// <inheritdoc cref = "DoubleMatrix.op_Addition(DoubleMatrix,double)"/>
         public static DoubleMatrix operator +(ReadOnlyDoubleMatrix left, double right)
         {
@@ -306,6 +310,42 @@ namespace Novacta.Analytics
         {
             return left + right;
         }
+
+        #endregion
+
+        #region Complex
+
+        /// <inheritdoc cref = "DoubleMatrix.op_Addition(DoubleMatrix,Complex)"/>
+        public static ComplexMatrix operator +(ReadOnlyDoubleMatrix left, Complex right)
+        {
+            if (left is null)
+                throw new ArgumentNullException(nameof(left));
+
+            return left.matrix + right;
+        }
+
+        /// <inheritdoc cref = "DoubleMatrix.op_Addition(DoubleMatrix,Complex)"/>
+        public static ComplexMatrix Add(ReadOnlyDoubleMatrix left, Complex right)
+        {
+            return left + right;
+        }
+
+        /// <inheritdoc cref = "DoubleMatrix.op_Addition(Complex,DoubleMatrix)"/>
+        public static ComplexMatrix operator +(Complex left, ReadOnlyDoubleMatrix right)
+        {
+            if (right is null)
+                throw new ArgumentNullException(nameof(right));
+
+            return left + right.matrix;
+        }
+
+        /// <inheritdoc cref = "DoubleMatrix.op_Addition(Complex,DoubleMatrix)"/>
+        public static ComplexMatrix Add(Complex left, ReadOnlyDoubleMatrix right)
+        {
+            return left + right;
+        }
+
+        #endregion
 
         #endregion
 
@@ -362,6 +402,8 @@ namespace Novacta.Analytics
             return left / right;
         }
 
+        #region Double
+
         /// <inheritdoc cref = "DoubleMatrix.op_Division(DoubleMatrix,double)"/>
         public static DoubleMatrix operator /(ReadOnlyDoubleMatrix left, double right)
         {
@@ -391,6 +433,42 @@ namespace Novacta.Analytics
         {
             return left / right;
         }
+
+        #endregion
+
+        #region Complex
+
+        /// <inheritdoc cref = "DoubleMatrix.op_Division(DoubleMatrix,Complex)"/>
+        public static ComplexMatrix operator /(ReadOnlyDoubleMatrix left, Complex right)
+        {
+            if (left is null)
+                throw new ArgumentNullException(nameof(left));
+
+            return left.matrix / right;
+        }
+
+        /// <inheritdoc cref = "DoubleMatrix.op_Division(DoubleMatrix,Complex)"/>
+        public static ComplexMatrix Divide(ReadOnlyDoubleMatrix left, Complex right)
+        {
+            return left / right;
+        }
+
+        /// <inheritdoc cref = "DoubleMatrix.op_Division(Complex,DoubleMatrix)"/>
+        public static ComplexMatrix operator /(Complex left, ReadOnlyDoubleMatrix right)
+        {
+            if (right is null)
+                throw new ArgumentNullException(nameof(right));
+
+            return left / right.matrix;
+        }
+
+        /// <inheritdoc cref = "DoubleMatrix.op_Division(Complex,DoubleMatrix)"/>
+        public static ComplexMatrix Divide(Complex left, ReadOnlyDoubleMatrix right)
+        {
+            return left / right;
+        }
+
+        #endregion
 
         #endregion
 
@@ -444,6 +522,8 @@ namespace Novacta.Analytics
             return left * right;
         }
 
+        #region Double
+
         /// <inheritdoc cref = "DoubleMatrix.op_Multiply(DoubleMatrix,double)"/>
         public static DoubleMatrix operator *(ReadOnlyDoubleMatrix left, double right)
         {
@@ -473,6 +553,42 @@ namespace Novacta.Analytics
         {
             return left * right;
         }
+
+        #endregion
+
+        #region Complex
+
+        /// <inheritdoc cref = "DoubleMatrix.op_Multiply(DoubleMatrix,Complex)"/>
+        public static ComplexMatrix operator *(ReadOnlyDoubleMatrix left, Complex right)
+        {
+            if (left is null)
+                throw new ArgumentNullException(nameof(left));
+
+            return left.matrix * right;
+        }
+
+        /// <inheritdoc cref = "DoubleMatrix.op_Multiply(DoubleMatrix,Complex)"/>
+        public static ComplexMatrix Multiply(ReadOnlyDoubleMatrix left, Complex right)
+        {
+            return left * right;
+        }
+
+        /// <inheritdoc cref = "DoubleMatrix.op_Multiply(Complex,DoubleMatrix)"/>
+        public static ComplexMatrix operator *(Complex left, ReadOnlyDoubleMatrix right)
+        {
+            if (right is null)
+                throw new ArgumentNullException(nameof(right));
+
+            return left * right.matrix;
+        }
+
+        /// <inheritdoc cref = "DoubleMatrix.op_Multiply(Complex,DoubleMatrix)"/>
+        public static ComplexMatrix Multiply(Complex left, ReadOnlyDoubleMatrix right)
+        {
+            return left * right;
+        }
+
+        #endregion
 
         #endregion
 
@@ -526,6 +642,8 @@ namespace Novacta.Analytics
             return left - right;
         }
 
+        #region Double
+
         /// <inheritdoc cref = "DoubleMatrix.op_Subtraction(DoubleMatrix,double)"/>
         public static DoubleMatrix operator -(ReadOnlyDoubleMatrix left, double right)
         {
@@ -555,6 +673,42 @@ namespace Novacta.Analytics
         {
             return left - right;
         }
+
+        #endregion
+
+        #region Complex
+
+        /// <inheritdoc cref = "DoubleMatrix.op_Subtraction(DoubleMatrix,Complex)"/>
+        public static ComplexMatrix operator -(ReadOnlyDoubleMatrix left, Complex right)
+        {
+            if (left is null)
+                throw new ArgumentNullException(nameof(left));
+
+            return left.matrix - right;
+        }
+
+        /// <inheritdoc cref = "DoubleMatrix.op_Subtraction(DoubleMatrix,Complex)"/>
+        public static ComplexMatrix Subtract(ReadOnlyDoubleMatrix left, Complex right)
+        {
+            return left - right;
+        }
+
+        /// <inheritdoc cref = "DoubleMatrix.op_Subtraction(Complex,DoubleMatrix)"/>
+        public static ComplexMatrix operator -(Complex left, ReadOnlyDoubleMatrix right)
+        {
+            if (right is null)
+                throw new ArgumentNullException(nameof(right));
+
+            return left - right.matrix;
+        }
+
+        /// <inheritdoc cref = "DoubleMatrix.op_Subtraction(Complex,DoubleMatrix)"/>
+        public static ComplexMatrix Subtract(Complex left, ReadOnlyDoubleMatrix right)
+        {
+            return left - right;
+        }
+
+        #endregion
 
         #endregion
 
@@ -598,6 +752,20 @@ namespace Novacta.Analytics
         }
 
         #endregion
+
+        #region IcomplexMatrixPatterns 
+
+        /// <inheritdoc/>
+        public bool IsHermitian
+        {
+            get { return this.matrix.IsHermitian; }
+        }
+
+        /// <inheritdoc/>
+        public bool IsSkewHermitian
+        {
+            get { return this.matrix.IsSkewHermitian; }
+        }
 
         #region IMatrixPatterns
 
@@ -732,6 +900,8 @@ namespace Novacta.Analytics
 
         #endregion
 
+        #endregion
+
         #region IEnumerable
 
         /// <summary>
@@ -827,9 +997,9 @@ namespace Novacta.Analytics
         /// Always thrown if the property is set.
         /// </exception>
         DoubleMatrix ITabularCollection<double, DoubleMatrix>.this[string rowIndexes, IndexCollection columnIndexes]
-        { 
-        //    /// <inheritdoc cref="IReadOnlyTabularCollection{TValue,TCollection}.this[string,IndexCollection]" 
-        ///// path="param|value|exception"/>
+        {
+            //    /// <inheritdoc cref="IReadOnlyTabularCollection{TValue,TCollection}.this[string,IndexCollection]" 
+            ///// path="param|value|exception"/>
 
             get => this[rowIndexes, columnIndexes];
             set => throw new NotSupportedException(
@@ -946,30 +1116,18 @@ namespace Novacta.Analytics
         #region this[int, *]
 
         /// <inheritdoc />
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design", 
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public double this[int rowIndex, int columnIndex]
         {
             get { return this.matrix[rowIndex, columnIndex]; }
         }
 
         /// <inheritdoc />
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design", 
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public DoubleMatrix this[int rowIndex, IndexCollection columnIndexes]
         {
             get { return this.matrix[rowIndex, columnIndexes]; }
         }
 
         /// <inheritdoc />
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design", 
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public DoubleMatrix this[int rowIndex, string columnIndexes]
         {
             get { return this.matrix[rowIndex, columnIndexes]; }
@@ -980,30 +1138,18 @@ namespace Novacta.Analytics
         #region IndexCollection, *
 
         /// <inheritdoc />
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design", 
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public DoubleMatrix this[IndexCollection rowIndexes, int columnIndex]
         {
             get { return this.matrix[rowIndexes, columnIndex]; }
         }
 
         /// <inheritdoc />
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design", 
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public DoubleMatrix this[IndexCollection rowIndexes, IndexCollection columnIndexes]
         {
             get { return this.matrix[rowIndexes, columnIndexes]; }
         }
 
         /// <inheritdoc />
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design", 
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public DoubleMatrix this[IndexCollection rowIndexes, string columnIndexes]
         {
             get { return this.matrix[rowIndexes, columnIndexes]; }
@@ -1014,30 +1160,18 @@ namespace Novacta.Analytics
         #region string, *
 
         /// <inheritdoc />
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design", 
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public DoubleMatrix this[string rowIndexes, int columnIndex]
         {
             get { return this.matrix[rowIndexes, columnIndex]; }
         }
 
         /// <inheritdoc />
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design", 
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public DoubleMatrix this[string rowIndexes, IndexCollection columnIndexes]
         {
             get { return this.matrix[rowIndexes, columnIndexes]; }
         }
 
         /// <inheritdoc />
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design", 
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public DoubleMatrix this[string rowIndexes, string columnIndexes]
         {
             get { return this.matrix[rowIndexes, columnIndexes]; }

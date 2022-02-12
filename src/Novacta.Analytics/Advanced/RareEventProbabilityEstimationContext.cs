@@ -496,7 +496,7 @@ namespace Novacta.Analytics.Advanced
                 case EliteSampleDefinition.LowerThanLevel:
                     eliteFirstIndex = 0;
                     eliteLastIndex = Convert.ToInt32(
-                        Math.Floor(sampleSize * rarity));
+                        Math.Ceiling(sampleSize * rarity));
 
                     level = performanceArray[eliteLastIndex];
                     if (level < thresholdLevel)

@@ -1,0 +1,162 @@
+﻿<html><head><meta http-equiv="X-UA-Compatible" content="IE=edge" /><link rel="shortcut icon" href="../icons/favicon.ico" /><link rel="stylesheet" type="text/css" href="../styles/branding.css" /><link rel="stylesheet" type="text/css" href="../styles/branding-en-US.css" /><script type="text/javascript" src="../scripts/branding.js"> </script><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Stat.StandardDeviation Method (ReadOnlyDoubleMatrix, Boolean, DataOperation)</title><meta name="Language" content="en-us" /><meta name="Microsoft.Help.Id" content="M:Novacta.Analytics.Stat.StandardDeviation(Novacta.Analytics.ReadOnlyDoubleMatrix,System.Boolean,Novacta.Analytics.DataOperation)" /><meta name="Description" content="Returns the standard deviation of each row or column in the specified data, eventually adjusted for bias." /><meta name="Microsoft.Help.ContentType" content="Reference" /><meta name="BrandingAware" content="true" /><meta name="container" content="Novacta.Analytics" /><meta name="file" content="5F86D353" /><meta name="guid" content="5F86D353" /><link type="text/css" rel="stylesheet" href="../styles/highlight.css" /><script type="text/javascript" src="../scripts/highlight.js"> </script><link rel="stylesheet" type="text/css" href="../styles/branding-Website.css" /><script type="text/javascript" src="../scripts/jquery-3.5.1.min.js"></script><script type="text/javascript" src="../scripts/branding-Website.js"></script><script type="text/javascript" src="../scripts/clipboard.min.js"></script></head><body onload="OnLoad('cs')"><input type="hidden" id="userDataCache" class="userDataStyle" /><div class="pageHeader" id="PageHeader">Novacta.Analytics Documentation<form id="SearchForm" method="get" action="#" onsubmit="javascript:TransferToSearchPage(); return false;"><input id="SearchTextBox" type="text" maxlength="200" /><button id="SearchButton" type="submit"></button></form></div><div class="pageBody"><div class="leftNav" id="leftNav"><div id="tocNav"><div class="toclevel0" data-toclevel="0"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/a4ea75a2-ef53-4ea2-a7f4-b493a50f90b3.htm" title="Novacta.Analytics Documentation" tocid="roottoc">Novacta.Analytics Documentation</a></div><div class="toclevel0" data-toclevel="0"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/D9FC3C8F.htm" title="Novacta.Analytics namespaces" tocid="D9FC3C8F">Novacta.Analytics namespaces</a></div><div class="toclevel0" data-toclevel="0"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/2406EB43.htm" title="Novacta.Analytics" tocid="2406EB43">Novacta.Analytics</a></div><div class="toclevel0" data-toclevel="0"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/ADDA5F5.htm" title="Stat Class" tocid="ADDA5F5">Stat Class</a></div><div class="toclevel0" data-toclevel="0"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/77832DF6.htm" title="Stat Methods" tocid="77832DF6">Stat Methods</a></div><div class="toclevel1" data-toclevel="1" data-childrenloaded="true"><a class="tocExpanded" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/684D5846.htm" title="StandardDeviation Method " tocid="684D5846">StandardDeviation Method </a></div><div class="toclevel2" data-toclevel="2"><a data-tochassubtree="false" href="../html/407CEDEF.htm" title="StandardDeviation Method (DoubleMatrix, Boolean)" tocid="407CEDEF">StandardDeviation Method (DoubleMatrix, Boolean)</a></div><div class="toclevel2" data-toclevel="2"><a data-tochassubtree="false" href="../html/D421D353.htm" title="StandardDeviation Method (ReadOnlyDoubleMatrix, Boolean)" tocid="D421D353">StandardDeviation Method (ReadOnlyDoubleMatrix, Boolean)</a></div><div class="toclevel2" data-toclevel="2"><a data-tochassubtree="false" href="../html/7650D353.htm" title="StandardDeviation Method (DoubleMatrix, Boolean, DataOperation)" tocid="7650D353">StandardDeviation Method (DoubleMatrix, Boolean, DataOperation)</a></div><div class="toclevel2 current" data-toclevel="2"><a data-tochassubtree="false" href="../html/5F86D353.htm" title="StandardDeviation Method (ReadOnlyDoubleMatrix, Boolean, DataOperation)" tocid="5F86D353">StandardDeviation Method (ReadOnlyDoubleMatrix, Boolean, DataOperation)</a></div></div><div id="tocResizableEW" onmousedown="OnMouseDown(event);"></div><div id="TocResize" class="tocResize"><img id="ResizeImageIncrease" src="../icons/TocOpen.gif" onclick="OnIncreaseToc()" alt="Click or drag to resize" title="Click or drag to resize" /><img id="ResizeImageReset" src="../icons/TocClose.gif" style="display:none" onclick="OnResetToc()" alt="Click or drag to resize" title="Click or drag to resize" /></div></div><div class="topicContent" id="TopicContent"><table class="titleTable"><tr><td class="logoColumn"><img src="../icons/Help.png" /></td><td class="titleColumn"><h1>Stat<span id="LST3A8D1245_0"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST3A8D1245_0?cpp=::|nu=.");</script>StandardDeviation Method (ReadOnlyDoubleMatrix, Boolean, DataOperation)</h1></td></tr></table><span class="introStyle"></span> <div class="summary">
+            Returns the standard deviation of each row or column 
+            in the specified data, eventually adjusted for bias.
+            </div><p> </p>
+    <strong>Namespace:</strong> 
+   <a href="2406EB43.htm">Novacta.Analytics</a><br />
+    <strong>Assembly:</strong>
+   Novacta.Analytics (in Novacta.Analytics.dll) Version: 2.0.0<div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID1RB')" onkeypress="SectionExpandCollapse_CheckKey('ID1RB', event)" tabindex="0"><img id="ID1RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Syntax</span></div><div id="ID1RBSection" class="collapsibleSection"><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID0EDCA_tab1" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID0EDCA','cs','1','4');return false;">C#</a></div><div id="ID0EDCA_tab2" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID0EDCA','vb','2','4');return false;">VB</a></div><div id="ID0EDCA_tab3" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID0EDCA','cpp','3','4');return false;">C++</a></div><div id="ID0EDCA_tab4" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID0EDCA','fs','4','4');return false;">F#</a></div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EDCA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EDCA');return false;" title="Copy">Copy</a></div></div><div id="ID0EDCA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="keyword">public</span> <span class="keyword">static</span> <span class="identifier">DoubleMatrix</span> <span class="identifier">StandardDeviation</span>(
+	<span class="identifier">ReadOnlyDoubleMatrix</span> <span class="parameter">data</span>,
+	<span class="identifier">bool</span> <span class="parameter">adjustForBias</span>,
+	<span class="identifier">DataOperation</span> <span class="parameter">dataOperation</span>
+)</pre></div><div id="ID0EDCA_code_Div2" class="codeSnippetContainerCode" style="display: none"><pre xml:space="preserve"><span class="keyword">Public</span> <span class="keyword">Shared</span> <span class="keyword">Function</span> <span class="identifier">StandardDeviation</span> ( 
+	<span class="parameter">data</span> <span class="keyword">As</span> <span class="identifier">ReadOnlyDoubleMatrix</span>,
+	<span class="parameter">adjustForBias</span> <span class="keyword">As</span> <span class="identifier">Boolean</span>,
+	<span class="parameter">dataOperation</span> <span class="keyword">As</span> <span class="identifier">DataOperation</span>
+) <span class="keyword">As</span> <span class="identifier">DoubleMatrix</span></pre></div><div id="ID0EDCA_code_Div3" class="codeSnippetContainerCode" style="display: none"><pre xml:space="preserve"><span class="keyword">public</span>:
+<span class="keyword">static</span> <span class="identifier">DoubleMatrix</span>^ <span class="identifier">StandardDeviation</span>(
+	<span class="identifier">ReadOnlyDoubleMatrix</span>^ <span class="parameter">data</span>, 
+	<span class="identifier">bool</span> <span class="parameter">adjustForBias</span>, 
+	<span class="identifier">DataOperation</span> <span class="parameter">dataOperation</span>
+)</pre></div><div id="ID0EDCA_code_Div4" class="codeSnippetContainerCode" style="display: none"><pre xml:space="preserve"><span class="keyword">static</span> <span class="keyword">member</span> <span class="identifier">StandardDeviation</span> : 
+        <span class="parameter">data</span> : <span class="identifier">ReadOnlyDoubleMatrix</span> * 
+        <span class="parameter">adjustForBias</span> : <span class="identifier">bool</span> * 
+        <span class="parameter">dataOperation</span> : <span class="identifier">DataOperation</span> <span class="keyword">-&gt;</span> <span class="identifier">DoubleMatrix</span> 
+</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID0EDCA");</script><h4 class="subHeading">Parameters</h4><dl><dt><span class="parameter">data</span></dt><dd>Type: <a href="9FFC4131.htm">Novacta.Analytics<span id="LST3A8D1245_1"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST3A8D1245_1?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>ReadOnlyDoubleMatrix</a><br />The data.</dd><dt><span class="parameter">adjustForBias</span></dt><dd>Type: <a href="https://docs.microsoft.com/dotnet/api/system.boolean" target="_blank" rel="noopener noreferrer">System<span id="LST3A8D1245_2"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST3A8D1245_2?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>Boolean</a><br />If set to <span class="code">true</span> signals that the  
+            standard deviation is adjusted for bias.
+            </dd><dt><span class="parameter">dataOperation</span></dt><dd>Type: <a href="D941926F.htm">Novacta.Analytics<span id="LST3A8D1245_3"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST3A8D1245_3?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>DataOperation</a><br />A constant to specify if the standard deviation 
+            is to be computed for rows or columns.
+            </dd></dl><h4 class="subHeading">Return Value</h4>Type: <a href="1DED9EB1.htm">DoubleMatrix</a><br />
+            The standard deviation of each row or column in the specified data, 
+            eventually adjusted for bias. 
+            </div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID2RB')" onkeypress="SectionExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Exceptions</span></div><div id="ID2RBSection" class="collapsibleSection"><div class="tableSection"><table><tr><th>Exception</th><th>Condition</th></tr><tr><td><a href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception" target="_blank" rel="noopener noreferrer">ArgumentNullException</a></td><td><span class="parameter">data</span> is <b>null</b>.
+            </td></tr><tr><td><a href="https://docs.microsoft.com/dotnet/api/system.argumentexception" target="_blank" rel="noopener noreferrer">ArgumentException</a></td><td><span class="parameter">dataOperation</span> is not a field of 
+            <a href="D941926F.htm">DataOperation</a>.<br />
+            -or<br /><span class="parameter">adjustForBias</span> is <span class="code">true</span>,
+            <span class="parameter">dataOperation</span> is <a href="D941926F.htm">OnRows</a> 
+            and the <span class="parameter">data</span> number of columns 
+            is less than <span class="code">2</span>.<br />
+            -or-<br /><span class="parameter">adjustForBias</span> is <span class="code">true</span>,
+            <span class="parameter">dataOperation</span> is <a href="D941926F.htm">OnColumns</a> 
+            and the <span class="parameter">data</span> number of rows 
+            is less than <span class="code">2</span>.
+            </td></tr></table></div></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID3RBSection" class="collapsibleSection"><p>
+            The standard deviation of a random variable <img alt="LaTeX equation" src="../media/latex_3759.svg" style="vertical-align: -0px" /> 
+            can be defined as follows:
+            <br /><br /><img alt="LaTeX equation" src="../media/latex_3760.svg" /><br /><br />        
+            where
+            <br /><br /><img alt="LaTeX equation" src="../media/latex_3761.svg" /><br /><br />        
+            is the <img alt="LaTeX equation" src="../media/latex_3762.svg" style="vertical-align: -0px" /> central moment 
+            of order <img alt="LaTeX equation" src="../media/latex_3763.svg" style="vertical-align: -0px" />.
+            </p><p>
+            By interpreting rows or columns of <span class="parameter">data</span> as samples drawn from
+            random variables, this method returns the standard deviation estimates of such variables.
+            Let <img alt="LaTeX equation" src="../media/latex_3764.svg" style="vertical-align: -0px" /> and  
+            <img alt="LaTeX equation" src="../media/latex_3765.svg" style="vertical-align: -0px" /> be the <span class="parameter">data</span>
+            number of rows and columns, respectively, and define
+            <br /><br /><img alt="LaTeX equation" src="../media/latex_3766.svg" /><br /><br /></p><p><b>Operating on rows</b></p><p>
+            If <span class="parameter">dataOperation</span> is <a href="D941926F.htm">OnRows</a>,
+            then the method returns a column vector
+            whose length
+            equals the number of rows of <span class="parameter">data</span>.
+            The <i>i</i>-th entry of such column returns the standard deviation of the <i>i</i>-th 
+            <span class="parameter">data</span> row. 
+            </p><p>
+            If <span class="parameter">adjustForBias</span> is set to <span class="code">false</span>, then 
+            the standard deviation of the <i>i</i>-th row is estimated through 
+            the coefficient
+            <br /><br /><img alt="LaTeX equation" src="../media/latex_3767.svg" /><br /><br />
+            where
+            <br /><br /><img alt="LaTeX equation" src="../media/latex_3768.svg" /><br /><br />
+            is the sample <img alt="LaTeX equation" src="../media/latex_3769.svg" style="vertical-align: -0px" />-th central moment of the 
+            <i>i</i>-th row.
+            </p><p>
+            Such estimator is biased. If <span class="parameter">adjustForBias</span> is set to <span class="code">true</span>, then 
+            the variance estimator is corrected for bias
+            and the <i>i</i>-th standard deviation is evaluated through the coefficient
+            <br /><br /><img alt="LaTeX equation" src="../media/latex_3770.svg" /><br /><br /></p><p><b>Operating on columns</b></p><p>
+            If <span class="parameter">dataOperation</span> is <a href="D941926F.htm">OnColumns</a>,
+            then the method returns a row vector 
+            whose length is the <span class="parameter">data</span> number of columns.
+            The <i>j</i>-th entry of the returned row exposes the standard deviation 
+            of the <i>j</i>-th 
+            <span class="parameter">data</span> column. 
+            </p><p>
+            If <span class="parameter">adjustForBias</span> is set to <span class="code">false</span>, then 
+            the standard deviation of the <i>j</i>-th column is estimated through 
+            the coefficient
+            <br /><br /><img alt="LaTeX equation" src="../media/latex_3771.svg" /><br /><br />
+            where
+            <br /><br /><img alt="LaTeX equation" src="../media/latex_3772.svg" /><br /><br />
+            is the sample <img alt="LaTeX equation" src="../media/latex_3773.svg" style="vertical-align: -0px" />-th central moment of the 
+            <i>j</i>-th column.
+            </p><p>
+            Such estimator is biased. If <span class="parameter">adjustForBias</span> is set to <span class="code">true</span>, 
+            then the variance estimator is corrected for bias
+            and the <i>j</i>-th standard deviation is evaluated through the coefficient
+            <br /><br /><img alt="LaTeX equation" src="../media/latex_3774.svg" /><br /><br /></p></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Examples</span></div><div id="ID4RBSection" class="collapsibleSection"><p>
+            In the following example, row and column standard deviation estimates in a data matrix 
+            are computed.
+            </p><p><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID0EAAAEBA_tab1" class="codeSnippetContainerTabSingle">C#</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EAAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID0EAAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-keyword">using</span> System;
+
+<span class="highlight-keyword">namespace</span> Novacta.Analytics.CodeExamples
+{
+    <span class="highlight-keyword">public</span> <span class="highlight-keyword">class</span> StandardDeviationExample0  
+    {
+        <span class="highlight-keyword">public</span> <span class="highlight-keyword">void</span> Main()
+        {
+            <span class="highlight-comment">// Create a matrix.</span>
+            <span class="highlight-keyword">var</span> data = <span class="highlight-keyword">new</span> <span class="highlight-keyword">double</span>[<span class="highlight-number">20</span>] {
+                <span class="highlight-number">1</span>, <span class="highlight-number">2</span>, <span class="highlight-number">-3</span>,  <span class="highlight-number">6</span>, <span class="highlight-number">-2</span>,
+                <span class="highlight-number">2</span>, <span class="highlight-number">2</span>,  <span class="highlight-number">2</span>,  <span class="highlight-number">0</span>,  <span class="highlight-number">7</span>,
+               <span class="highlight-number">-3</span>, <span class="highlight-number">2</span>,  <span class="highlight-number">3</span>,  <span class="highlight-number">2</span>,  <span class="highlight-number">9</span>,
+                <span class="highlight-number">5</span>, <span class="highlight-number">2</span>,  <span class="highlight-number">7</span>, <span class="highlight-number">-1</span>, <span class="highlight-number">-4</span>
+            };
+            <span class="highlight-keyword">var</span> matrix = DoubleMatrix.Dense(<span class="highlight-number">4</span>, <span class="highlight-number">5</span>, data, StorageOrder.RowMajor);
+            Console.WriteLine(<span class="highlight-literal">"The data matrix:"</span>);
+            Console.WriteLine(matrix);
+
+            <span class="highlight-comment">// StandardDeviation can be adjusted for bias.</span>
+            <span class="highlight-keyword">bool</span> adjustForBias = <span class="highlight-keyword">true</span>;
+
+            <span class="highlight-comment">// Compute the standard deviation on columns.</span>
+            <span class="highlight-keyword">var</span> stdDevOnColumns = Stat.StandardDeviation(matrix, adjustForBias, DataOperation.OnColumns);
+
+            Console.WriteLine();
+            Console.WriteLine(<span class="highlight-literal">"StandardDeviation on columns:"</span>);
+            Console.WriteLine(stdDevOnColumns);
+
+            <span class="highlight-comment">// StandardDeviation is overloaded to accept data as a read-only matrix:</span>
+            <span class="highlight-comment">// compute the standard deviation on rows using a read-only wrapper of the data matrix.</span>
+            ReadOnlyDoubleMatrix readOnlyMatrix = matrix.AsReadOnly();
+            <span class="highlight-keyword">var</span> stdDevOnRows = Stat.StandardDeviation(readOnlyMatrix, adjustForBias, DataOperation.OnRows);
+
+            Console.WriteLine();
+            Console.WriteLine(<span class="highlight-literal">"StandardDeviation on rows:"</span>);
+            Console.WriteLine(stdDevOnRows);
+        }
+    }
+}
+
+<span class="highlight-comment">// Executing method Main() produces the following output:</span>
+<span class="highlight-comment">// </span>
+<span class="highlight-comment">// The data matrix:</span>
+<span class="highlight-comment">// 1                2                -3               6                -2               </span>
+<span class="highlight-comment">// 2                2                2                0                7                </span>
+<span class="highlight-comment">// -3               2                3                2                9                </span>
+<span class="highlight-comment">// 5                2                7                -1               -4               </span>
+<span class="highlight-comment">// </span>
+<span class="highlight-comment">// </span>
+<span class="highlight-comment">// </span>
+<span class="highlight-comment">// StandardDeviation on columns:</span>
+<span class="highlight-comment">// 3.30403793       0                4.11298756       3.09569594       6.45497224       </span>
+<span class="highlight-comment">// </span>
+<span class="highlight-comment">// </span>
+<span class="highlight-comment">// </span>
+<span class="highlight-comment">// StandardDeviation on rows:</span>
+<span class="highlight-comment">// 3.56370594       </span>
+<span class="highlight-comment">// 2.60768096       </span>
+<span class="highlight-comment">// 4.27784993       </span>
+<span class="highlight-comment">// 4.4384682        </span>
+<span class="highlight-comment">// </span>
+</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID0EAAAEBA");</script></p></div><div class="collapsibleAreaRegion" id="seeAlsoSection"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />See Also</span></div><div id="ID5RBSection" class="collapsibleSection"><h4 class="subHeading">Reference</h4><div class="seeAlsoStyle"><a href="ADDA5F5.htm">Stat Class</a></div><div class="seeAlsoStyle"><a href="684D5846.htm">StandardDeviation Overload</a></div><div class="seeAlsoStyle"><a href="2406EB43.htm">Novacta.Analytics Namespace</a></div><h4 class="subHeading">Other Resources</h4><div class="seeAlsoStyle"><a href="http://en.wikipedia.org/wiki/Standard_deviation" target="_blank" rel="noopener noreferrer">http://en.wikipedia.org/wiki/Standard_deviation</a></div></div></div></div><div id="pageFooter" class="pageFooter"><p>Copyright (c) Giovanni Lafratta.</p> </div></body></html>

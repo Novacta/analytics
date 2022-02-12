@@ -18,7 +18,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Quantile
             base(
                 expected: new DoubleMatrixState(
                     asColumnMajorDenseArray: new double[1] {
-                        TestableDoubleMatrix19.Get().Dense[0] },
+                        TestableDoubleMatrix19.Get().AsDense[0] },
                     numberOfRows: 1,
                     numberOfColumns: 1),
                 data: TestableDoubleMatrix19.Get(),

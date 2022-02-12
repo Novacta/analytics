@@ -179,7 +179,7 @@ namespace Novacta.Analytics.Infrastructure
             var responseVariable = response.Variables[0];
             var featureVariables = features.Variables;
 
-            List<int> featureCategoryCounts = new List<int>(featureVariables.Count);
+            List<int> featureCategoryCounts = new(featureVariables.Count);
             int overallNumberOfFeatureCategories = 0;
             for (int j = 0; j < featureVariables.Count; j++)
             {
@@ -225,7 +225,7 @@ namespace Novacta.Analytics.Infrastructure
             #region Create the ensemble of categorical entailments
 
             List<CategoricalEntailment> entailments = 
-                new List<CategoricalEntailment>(this.entailments);
+                new(this.entailments);
 
             int numberOfSelectedCategoricalEntailments =
                 this.trainSequentially 
@@ -316,7 +316,7 @@ namespace Novacta.Analytics.Infrastructure
             foreach (var code in responseCodes)
             {
                 IndexCollection codePredictedIndexes = predictedResponses.Data.Find(code);
-                if (!(codePredictedIndexes is null))
+                if (codePredictedIndexes is not null)
                 {
                     DoubleMatrix correspondingActualResponses =
                         actualResponses.Vec(codePredictedIndexes);

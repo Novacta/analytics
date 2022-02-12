@@ -5,9 +5,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Security;
-using System.Security.Permissions;
 using System.Text;
 
 using Novacta.Analytics.Infrastructure;
@@ -198,7 +195,7 @@ namespace Novacta.Analytics
                 indexLists[part].Add(element);
             }
 
-            IndexPartition<T> partition = new IndexPartition<T>();
+            IndexPartition<T> partition = new();
 
             foreach (var identifer in distinctPartIdentifiers) {
                 partition[identifer] = new IndexCollection(
@@ -251,7 +248,7 @@ namespace Novacta.Analytics
                 indexLists[element].Add(i++);
             }
 
-            IndexPartition<T> partition = new IndexPartition<T>();
+            IndexPartition<T> partition = new();
 
             foreach (var element in distinctElements) {
                 partition[element] = new IndexCollection(
@@ -305,7 +302,7 @@ namespace Novacta.Analytics
                 indexLists[currentElement].Add(i);
             }
 
-            IndexPartition<double> partition = new IndexPartition<double>();
+            IndexPartition<double> partition = new();
 
             foreach (var element in distinctElements) {
                 partition[element] = new IndexCollection(
@@ -343,9 +340,9 @@ namespace Novacta.Analytics
             }
 
             SortedSet<DoubleMatrixRow> distinctElements =
-                new SortedSet<DoubleMatrixRow>();
+                new();
             Dictionary<DoubleMatrixRow, List<int>> indexLists =
-                new Dictionary<DoubleMatrixRow, List<int>>();
+                new();
 
             bool isNotAlreadyInElementSet;
             int i = 0;
@@ -361,7 +358,7 @@ namespace Novacta.Analytics
             }
 
             IndexPartition<DoubleMatrixRow> partition =
-                new IndexPartition<DoubleMatrixRow>();
+                new();
 
             foreach (var element in distinctElements) {
                 partition[element] = new IndexCollection(
@@ -700,77 +697,13 @@ namespace Novacta.Analytics
     /// </para>
     /// </remarks>
     /// <seealso cref="IndexPartition"/>
-    [Serializable]
-    public sealed class IndexPartition<T> : ISerializable
+    public sealed class IndexPartition<T>
     {
-        #region ISerializable
-
-        /// <summary>
-        /// Initializes a new instance of the 
-        /// <see cref="IndexPartition{T}"/> class with serialized data.
-        /// </summary>
-        /// <param name="info">
-        /// The object that holds the serialized object data.
-        /// </param>
-        /// <param name="context">
-        /// The contextual information about the source or destination.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="info"/> is <b>null</b>.
-        /// </exception>
-        [SecurityPermission(
-            SecurityAction.Demand,
-            SerializationFormatter = true),
-         System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Naming",
-            "CA1801:ReviewUnusedParameters",
-            Justification = "Constructor requires parameter context.")]
-        private IndexPartition(
-            SerializationInfo info,
-            StreamingContext context)
-        {
-            if (null == info)
-                throw new ArgumentNullException(nameof(info));
-
-            this.parts =
-                (Dictionary<T, IndexCollection>)info.GetValue(
-                    "parts",
-                    typeof(Dictionary<T, IndexCollection>));
-
-            this.partIndetifiers =
-                (List<T>)info.GetValue(
-                    "partIndetifiers",
-                    typeof(List<T>));
-        }
-
-        /// <inheritdoc/>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="info"/> is <b>null</b>.
-        /// </exception>
-        [SecurityCritical]
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            if (null == info)
-                throw new ArgumentNullException(nameof(info));
-
-            info.AddValue(
-                "parts",
-                this.parts,
-                typeof(Dictionary<T, IndexCollection>));
-
-            info.AddValue(
-                "partIndetifiers",
-                this.partIndetifiers,
-                typeof(List<T>));
-        }
-
-        #endregion
-
         internal Dictionary<T, IndexCollection> parts =
-            new Dictionary<T, IndexCollection>();
+            new();
 
         internal List<T> partIndetifiers =
-            new List<T>();
+            new();
 
         internal IndexPartition()
         {
@@ -851,10 +784,10 @@ namespace Novacta.Analytics
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString()
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new();
 
             foreach (KeyValuePair<T, IndexCollection> pair in this.parts) {
-                stringBuilder.Append("[");
+                stringBuilder.Append('[');
                 stringBuilder.Append("(");
                 stringBuilder.Append(pair.Key);
                 stringBuilder.Append("),  ");

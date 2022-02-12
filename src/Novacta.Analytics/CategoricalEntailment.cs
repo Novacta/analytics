@@ -6,9 +6,6 @@ using Novacta.Analytics.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Runtime.Serialization;
-using System.Security;
-using System.Security.Permissions;
 using System.Text;
 
 namespace Novacta.Analytics
@@ -92,114 +89,8 @@ namespace Novacta.Analytics
     /// </remarks>
     /// <seealso cref="CategoricalEntailmentEnsembleClassifier"/>
     /// <seealso cref="Advanced.CategoricalEntailmentEnsembleOptimizationContext"/>
-    [Serializable]
-    public class CategoricalEntailment : ISerializable
+    public class CategoricalEntailment 
     {
-        #region ISerializable
-
-        /// <summary>
-        /// Initializes a new instance of the 
-        /// <see cref="CategoricalEntailment"/> class with serialized data.
-        /// </summary>
-        /// <param name="info">
-        /// The object that holds the serialized object data.
-        /// </param>
-        /// <param name="context">
-        /// The contextual information about the source or destination.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="info"/> is <b>null</b>.
-        /// </exception>
-        [SecurityPermission(
-            SecurityAction.Demand,
-            SerializationFormatter = true),
-         System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Naming",
-            "CA1801:ReviewUnusedParameters",
-            Justification = "Constructor requires parameter context.")]
-        protected CategoricalEntailment(
-            SerializationInfo info,
-            StreamingContext context)
-        {
-            if (null == info)
-                throw new ArgumentNullException(nameof(info));
-
-            this.FeatureVariables =
-                (List<CategoricalVariable>)info.GetValue(
-                    "FeatureVariables",
-                    typeof(List<CategoricalVariable>));
-
-            this.ResponseVariable =
-                (CategoricalVariable)info.GetValue(
-                    "ResponseVariable",
-                    typeof(CategoricalVariable));
-
-            this.isNonemptyProperPremise =
-                (bool[])info.GetValue(
-                    "isNonemptyProperPremise",
-                    typeof(bool[]));
-
-            this.featurePremises =
-                (List<SortedSet<double>>)info.GetValue(
-                    "featurePremises",
-                    typeof(List<SortedSet<double>>));
-
-            this.FeaturePremises = this.featurePremises;
-
-            this.ResponseConclusion =
-                (double)info.GetValue(
-                    "ResponseConclusion",
-                    typeof(double));
-
-            this.truthValue =
-                (double)info.GetValue(
-                    "truthValue",
-                    typeof(double));
-        }
-
-        /// <inheritdoc/>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="info"/> is <b>null</b>.
-        /// </exception>
-        [SecurityCritical]
-        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            if (null == info)
-                throw new ArgumentNullException(nameof(info));
-
-            info.AddValue(
-                "FeatureVariables",
-                this.FeatureVariables,
-                typeof(List<CategoricalVariable>));
-
-            info.AddValue(
-                "ResponseVariable",
-                this.ResponseVariable,
-                typeof(CategoricalVariable));
-
-            info.AddValue(
-                "isNonemptyProperPremise",
-                this.isNonemptyProperPremise,
-                typeof(bool[]));
-
-            info.AddValue(
-                "featurePremises",
-                this.featurePremises,
-                typeof(List<SortedSet<double>>));
-
-            info.AddValue(
-                "ResponseConclusion",
-                this.ResponseConclusion,
-                typeof(double));
-
-            info.AddValue(
-                "truthValue",
-                this.truthValue,
-                typeof(double));
-        }
-
-        #endregion
-
         #region State
 
         private readonly List<SortedSet<double>> featurePremises;
@@ -624,7 +515,7 @@ namespace Novacta.Analytics
 
             #endregion
 
-            List<int> validatedItemIndexes = new List<int>();
+            List<int> validatedItemIndexes = new();
 
             for (int i = 0; i < dataSet.NumberOfRows; i++)
             {
@@ -664,7 +555,7 @@ namespace Novacta.Analytics
         /// </returns>
         public override string ToString()
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new();
 
             stringBuilder.AppendLine(" IF ");
             int numberOfFeatures = this.featurePremises.Count;

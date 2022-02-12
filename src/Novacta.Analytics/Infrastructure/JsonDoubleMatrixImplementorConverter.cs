@@ -336,7 +336,6 @@ namespace Novacta.Analytics.Infrastructure
                 for (int i = 0; i < denseDoubleMatrixImplementor.storage.Length; i++)
                 {
                     writer.WriteNumberValue(denseDoubleMatrixImplementor.storage[i]);
-
                 }
                 writer.WriteEndArray();
             }
@@ -360,7 +359,6 @@ namespace Novacta.Analytics.Infrastructure
                 for (int i = 0; i < sparseDoubleMatrixImplementor.columns.Length; i++)
                 {
                     writer.WriteNumberValue(sparseDoubleMatrixImplementor.columns[i]);
-
                 }
                 writer.WriteEndArray();
 
@@ -368,21 +366,6 @@ namespace Novacta.Analytics.Infrastructure
                 for (int i = 0; i < sparseDoubleMatrixImplementor.rowIndex.Length; i++)
                 {
                     writer.WriteNumberValue(sparseDoubleMatrixImplementor.rowIndex[i]);
-
-                }
-                writer.WriteEndArray();
-            }
-            else if (value is ViewDoubleMatrixImplementor viewDoubleMatrixImplementor)
-            {
-                writer.WriteNumber("StorageScheme", (int)StorageScheme.Dense);
-                writer.WriteNumber("NumberOfRows", viewDoubleMatrixImplementor.NumberOfRows);
-                writer.WriteNumber("NumberOfColumns", viewDoubleMatrixImplementor.NumberOfColumns);
-
-                writer.WriteStartArray("Storage");
-                for (int i = 0; i < viewDoubleMatrixImplementor.Count; i++)
-                {
-                    writer.WriteNumberValue(viewDoubleMatrixImplementor[i]);
-
                 }
                 writer.WriteEndArray();
             }

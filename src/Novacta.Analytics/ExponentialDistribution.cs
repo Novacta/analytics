@@ -150,10 +150,6 @@ namespace Novacta.Analytics
 
 
         /// <inheritdoc/>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Design", 
-            "CA1062:Validate arguments of public methods", 
-            Justification = "Input validation delegated to ProbabilityDistribution.ValidateSampleInput.")]
         protected sealed override void OnSample(
             int sampleSize, double[] destinationArray, int destinationIndex)
         {

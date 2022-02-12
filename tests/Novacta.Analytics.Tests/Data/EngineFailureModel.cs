@@ -36,7 +36,7 @@ namespace Novacta.Analytics.Tests.Data
         /// A matrix representing failure times (first column)
         /// and related corrosion levels (second column).
         /// </summary>
-        public static DoubleMatrix Data = DoubleMatrix.Dense(32, 2, 
+        internal static DoubleMatrix Data = DoubleMatrix.Dense(32, 2, 
             new double[64]{
                 // Failure times
                 5.23123756299729160000,
@@ -115,7 +115,7 @@ namespace Novacta.Analytics.Tests.Data
         /// parameters <latex>a,\,b</latex>, respectively.
         /// </para>
         /// </remarks>
-        public static DoubleMatrix EstimatedParameters
+        internal static DoubleMatrix EstimatedParameters
             = DoubleMatrix.Dense(1, 2,
                 new double[2] {
                     // a

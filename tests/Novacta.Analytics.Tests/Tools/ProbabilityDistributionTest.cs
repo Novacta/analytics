@@ -205,18 +205,13 @@ namespace Novacta.Analytics.Tests.Tools
 
                 DoubleMatrixAssert.AreEqual(
                     expected: values,
-                    actual: matrixFunc(arguments.Dense),
+                    actual: matrixFunc(arguments.AsDense),
                     delta: ProbabilityDistributionTest.Accuracy);
 
                 DoubleMatrixAssert.AreEqual(
                    expected: values,
-                   actual: matrixFunc(arguments.Sparse),
+                   actual: matrixFunc(arguments.AsSparse),
                    delta: ProbabilityDistributionTest.Accuracy);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: values,
-                    actual: matrixFunc(arguments.View),
-                    delta: ProbabilityDistributionTest.Accuracy);
             }
         }
 
@@ -240,18 +235,13 @@ namespace Novacta.Analytics.Tests.Tools
 
                 DoubleMatrixAssert.AreEqual(
                     expected: values,
-                    actual: matrixFunc(arguments.Dense.AsReadOnly()),
+                    actual: matrixFunc(arguments.AsDense.AsReadOnly()),
                     delta: ProbabilityDistributionTest.Accuracy);
 
                 DoubleMatrixAssert.AreEqual(
                     expected: values,
-                    actual: matrixFunc(arguments.Sparse.AsReadOnly()),
+                    actual: matrixFunc(arguments.AsSparse.AsReadOnly()),
                     delta: DoubleMatrixTest.Accuracy);
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: values,
-                    actual: matrixFunc(arguments.View.AsReadOnly()),
-                    delta: ProbabilityDistributionTest.Accuracy);
             }
         }
 
@@ -273,10 +263,9 @@ namespace Novacta.Analytics.Tests.Tools
                     arguments.Expected.NumberOfColumns,
                     values.NumberOfColumns);
 
-                var args = new DoubleMatrix[3] {
-                    arguments.Dense,
-                    arguments.Sparse,
-                    arguments.View
+                var args = new DoubleMatrix[2] {
+                    arguments.AsDense,
+                    arguments.AsSparse
                 };
                 for (int j = 0; j < args.Length; j++)
                 {

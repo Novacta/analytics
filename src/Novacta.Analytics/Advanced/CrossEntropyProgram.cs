@@ -173,13 +173,15 @@ namespace Novacta.Analytics.Advanced
 
         private readonly Lazy<ConcurrentDictionary<int, RandomNumberGenerator>>
             randomNumberGeneratorPool =
-                new Lazy<ConcurrentDictionary<int, RandomNumberGenerator>>();
+                new();
 
         private ParallelOptions performanceEvaluationParallelOptions =
-            new ParallelOptions { MaxDegreeOfParallelism = -1 };
+            new()
+            { MaxDegreeOfParallelism = -1 };
 
         private ParallelOptions sampleGenerationParallelOptions =
-            new ParallelOptions { MaxDegreeOfParallelism = -1 };
+            new()
+            { MaxDegreeOfParallelism = -1 };
 
         /// <summary>
         /// Gets or sets options that configure the operation of the 
@@ -287,6 +289,19 @@ namespace Novacta.Analytics.Advanced
         /// -or-<br/>
         /// <paramref name="rarity"/> is not less than 1.
         /// </exception>
+        /// <exception cref="ArgumentException">
+        /// The <see cref="EliteSampleDefinition"/> of <paramref name="context"/>
+        /// is <see cref="EliteSampleDefinition.HigherThanLevel"/> and applying
+        /// <see cref="Math.Ceiling(double)"/> to expression
+        /// <c><paramref name="sampleSize"/>*(1.0 -<paramref name="rarity"/>)</c>
+        /// is not lower than <paramref name="sampleSize"/>.<br/>
+        /// -or-<br/>
+        /// The <see cref="EliteSampleDefinition"/> of <paramref name="context"/>
+        /// is <see cref="EliteSampleDefinition.LowerThanLevel"/> and applying
+        /// <see cref="Math.Ceiling(double)"/> to expression
+        /// <c><paramref name="sampleSize"/>*(<paramref name="rarity"/>)</c>
+        /// is not lower than <paramref name="sampleSize"/>.
+        /// </exception>
         protected CrossEntropyResults Run(
             CrossEntropyContext context,
             int sampleSize,
@@ -319,9 +334,44 @@ namespace Novacta.Analytics.Advanced
                         1.0));
             }
 
+            var eliteSampleDefinition = context.EliteSampleDefinition;
+
+            switch (eliteSampleDefinition)
+            {
+                case EliteSampleDefinition.HigherThanLevel:
+                    {
+                        if (Convert.ToInt32(
+                                Math.Ceiling(sampleSize * (1 - rarity)))>=sampleSize)
+                        {
+                            throw new ArgumentException(
+                                string.Format(
+                                    CultureInfo.InvariantCulture,
+                                    ImplementationServices.GetResourceString(
+                                        "STR_EXCEPT_CEM_TOO_LOW_RARITY"),
+                                    nameof(sampleSize)),
+                                nameof(rarity));
+                        }
+                        break;
+                    }   
+                case EliteSampleDefinition.LowerThanLevel:
+                    {
+                        if (Convert.ToInt32(
+                                Math.Ceiling(sampleSize * rarity))>=sampleSize)
+                        {
+                            throw new ArgumentException(
+                                string.Format(
+                                    CultureInfo.InvariantCulture,
+                                    ImplementationServices.GetResourceString(
+                                        "STR_EXCEPT_CEM_TOO_HIGH_RARITY"),
+                                    nameof(sampleSize)),
+                                nameof(rarity));
+                        }
+                        break; 
+                    }
+            }
+
             #endregion
 
-            var eliteSampleDefinition = context.EliteSampleDefinition;
 
             var parameters = new LinkedList<DoubleMatrix>();
             parameters.AddFirst(context.InitialParameter);

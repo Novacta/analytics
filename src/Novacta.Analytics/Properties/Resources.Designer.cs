@@ -19,7 +19,7 @@ namespace Novacta.Analytics.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -61,6 +61,15 @@ namespace Novacta.Analytics.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The algorithm failed to converge..
+        /// </summary>
+        internal static string STR_EXCEPT_ALG_NOT_CONVERGING {
+            get {
+                return ResourceManager.GetString("STR_EXCEPT_ALG_NOT_CONVERGING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A category already exists in the variable having the same code or label..
         /// </summary>
         internal static string STR_EXCEPT_CAT_ALREADY_EXISTS_IN_VARIABLE_LIST {
@@ -79,7 +88,7 @@ namespace Novacta.Analytics.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The dictionary cannot contain keys not included in collection parameter {0}..
+        ///   Looks up a localized string similar to The dictionary cannot contain keys not included in collection parameter &apos;{0}&apos;..
         /// </summary>
         internal static string STR_EXCEPT_CAT_CATEGORIZER_REFERS_TO_IRRELEVANT_KEY {
             get {
@@ -88,7 +97,7 @@ namespace Novacta.Analytics.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The paremeter is not a category code in the variable represented by parameter {0}..
+        ///   Looks up a localized string similar to The paremeter is not a category code in the variable represented by parameter &apos;{0}&apos;..
         /// </summary>
         internal static string STR_EXCEPT_CAT_CODE_NOT_IN_VARIABLE_LIST {
             get {
@@ -106,7 +115,7 @@ namespace Novacta.Analytics.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The parameter must have a number of columns equal to the number of items in parameter {0}..
+        ///   Looks up a localized string similar to The parameter must have a number of columns equal to the number of items in parameter &apos;{0}&apos;..
         /// </summary>
         internal static string STR_EXCEPT_CAT_COLUMNS_NOT_EQUAL_TO_VARIABLES_COUNT {
             get {
@@ -219,6 +228,24 @@ namespace Novacta.Analytics.Properties {
         internal static string STR_EXCEPT_CEE_VARIABLE_IS_EMPTY {
             get {
                 return ResourceManager.GetString("STR_EXCEPT_CEE_VARIABLE_IS_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Given the current context, the parameter&apos;s value is incompatible with that of parameter &apos;{0}&apos;. To achieve compatibility, &apos;rarity&apos; should be decreased..
+        /// </summary>
+        internal static string STR_EXCEPT_CEM_TOO_HIGH_RARITY {
+            get {
+                return ResourceManager.GetString("STR_EXCEPT_CEM_TOO_HIGH_RARITY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Given the current context, the parameter&apos;s value is incompatible with that of parameter &apos;{0}&apos;. To achieve compatibility, &apos;rarity&apos; should be increased..
+        /// </summary>
+        internal static string STR_EXCEPT_CEM_TOO_LOW_RARITY {
+            get {
+                return ResourceManager.GetString("STR_EXCEPT_CEM_TOO_LOW_RARITY", resourceCulture);
             }
         }
         
@@ -349,11 +376,11 @@ namespace Novacta.Analytics.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A matrix can be converted to a double only if it is scalar..
+        ///   Looks up a localized string similar to A matrix can be converted to the type of its entries only if it is scalar..
         /// </summary>
-        internal static string STR_EXCEPT_MAT_CONVERTED_TO_DOUBLE_MUST_BE_SCALAR {
+        internal static string STR_EXCEPT_MAT_CONVERTED_TO_ENTRY_TYPE_MUST_BE_SCALAR {
             get {
-                return ResourceManager.GetString("STR_EXCEPT_MAT_CONVERTED_TO_DOUBLE_MUST_BE_SCALAR", resourceCulture);
+                return ResourceManager.GetString("STR_EXCEPT_MAT_CONVERTED_TO_ENTRY_TYPE_MUST_BE_SCALAR", resourceCulture);
             }
         }
         
@@ -565,7 +592,7 @@ namespace Novacta.Analytics.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The parameter has or contains a value which is not a valid {0} index for parameter {1}..
+        ///   Looks up a localized string similar to The parameter has or contains a value which is not a valid {0} index for parameter &apos;{1}&apos;..
         /// </summary>
         internal static string STR_EXCEPT_PAR_INDEX_EXCEEDS_OTHER_PAR_DIMS {
             get {
@@ -610,7 +637,7 @@ namespace Novacta.Analytics.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parameter {0} must be greater than parameter {1}..
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; must be greater than parameter &apos;{1}&apos;..
         /// </summary>
         internal static string STR_EXCEPT_PAR_MUST_BE_GREATER_THAN_OTHER {
             get {
@@ -628,7 +655,16 @@ namespace Novacta.Analytics.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parameter {0} must be less than parameter {1}..
+        ///   Looks up a localized string similar to The parameter must be a Hermitian matrix..
+        /// </summary>
+        internal static string STR_EXCEPT_PAR_MUST_BE_HERMITIAN {
+            get {
+                return ResourceManager.GetString("STR_EXCEPT_PAR_MUST_BE_HERMITIAN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; must be less than parameter &apos;{1}&apos;..
         /// </summary>
         internal static string STR_EXCEPT_PAR_MUST_BE_LESS_THAN_OTHER {
             get {
@@ -637,7 +673,7 @@ namespace Novacta.Analytics.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parameter {0} must be less than the number of columns in parameter {1}..
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; must be less than the number of columns in parameter &apos;{1}&apos;..
         /// </summary>
         internal static string STR_EXCEPT_PAR_MUST_BE_LESS_THAN_OTHER_COLUMNS {
             get {
@@ -646,7 +682,7 @@ namespace Novacta.Analytics.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parameter {0} must be less than the number of rows in parameter {1}..
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; must be less than the number of rows in parameter &apos;{1}&apos;..
         /// </summary>
         internal static string STR_EXCEPT_PAR_MUST_BE_LESS_THAN_OTHER_ROWS {
             get {
@@ -700,7 +736,7 @@ namespace Novacta.Analytics.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parameter {0} must be less than or equal to parameter {1}..
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; must be less than or equal to parameter &apos;{1}&apos;..
         /// </summary>
         internal static string STR_EXCEPT_PAR_MUST_BE_NOT_GREATER_THAN_OTHER {
             get {
@@ -736,7 +772,16 @@ namespace Novacta.Analytics.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The parameter&apos;s count must be equal to that of parameter {0}..
+        ///   Looks up a localized string similar to The parameter must be a symmetric matrix..
+        /// </summary>
+        internal static string STR_EXCEPT_PAR_MUST_BE_SYMMETRIC {
+            get {
+                return ResourceManager.GetString("STR_EXCEPT_PAR_MUST_BE_SYMMETRIC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The parameter&apos;s count must be equal to that of parameter &apos;{0}&apos;..
         /// </summary>
         internal static string STR_EXCEPT_PAR_MUST_HAVE_SAME_COUNT {
             get {
@@ -745,7 +790,7 @@ namespace Novacta.Analytics.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The parameter must have a number of columns equal to that of parameter {0}..
+        ///   Looks up a localized string similar to The parameter must have a number of columns equal to that of parameter &apos;{0}&apos;..
         /// </summary>
         internal static string STR_EXCEPT_PAR_MUST_HAVE_SAME_NUM_OF_COLUMNS {
             get {
@@ -754,7 +799,7 @@ namespace Novacta.Analytics.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The parameter must have a number of rows equal to that of parameter {0}..
+        ///   Looks up a localized string similar to The parameter must have a number of rows equal to that of parameter &apos;{0}&apos;..
         /// </summary>
         internal static string STR_EXCEPT_PAR_MUST_HAVE_SAME_NUM_OF_ROWS {
             get {
@@ -826,11 +871,20 @@ namespace Novacta.Analytics.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parameter {0} must be less than or equal to the difference between the length of parameter {1} and {2}..
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; must be less than or equal to the difference between the lengths of parameters &apos;{1}&apos; and &apos;{2}&apos;..
         /// </summary>
         internal static string STR_EXCEPT_PDF_SAMPLESIZE_ARRAYLENGTH_MISMATCH {
             get {
                 return ResourceManager.GetString("STR_EXCEPT_PDF_SAMPLESIZE_ARRAYLENGTH_MISMATCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Csv document declares entry type &apos;{0}&apos; but the serializer expects &apos;{1}&apos;..
+        /// </summary>
+        internal static string STR_EXCEPT_REP_DESERIALIZE_UNEXPECTED_ENTRY_TYPE {
+            get {
+                return ResourceManager.GetString("STR_EXCEPT_REP_DESERIALIZE_UNEXPECTED_ENTRY_TYPE", resourceCulture);
             }
         }
         

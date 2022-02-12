@@ -217,8 +217,8 @@ namespace Novacta.Analytics.Advanced
         /// The basis which the point coordinates are 
         /// referred to.</param>
         /// <param name="copyData">
-        /// <b>true</b> if <paramref name="coordinates"/> and <paramref name="weights"/>
-        /// must be copied before instantiation; otherwise <b>false</b>.
+        /// <c>true</c> if <paramref name="coordinates"/> and <paramref name="weights"/>
+        /// must be copied before instantiation; otherwise <c>false</c>.
         /// </param>
         /// <remarks>
         /// <para>
@@ -240,7 +240,7 @@ namespace Novacta.Analytics.Advanced
         /// constructor prevents the copy
         /// of the elements in <paramref name="coordinates"/> and
         /// <paramref name="weights"/> before instantiation 
-        /// if <paramref name="copyData"/> evaluates to <b>false</b>: the 
+        /// if <paramref name="copyData"/> evaluates to <c>false</c>: the 
         /// returned <see cref="Cloud"/> instance will instead use a direct 
         /// reference to <paramref name="coordinates"/> and <paramref name="weights"/>.
         /// </para>

@@ -150,6 +150,62 @@ namespace Novacta.Analytics.Advanced.Tests
                     expectedParameterName: parameterName);
             }
 
+            // rarity is too low given context and sample size
+            {
+                var STR_EXCEPT_CEM_TOO_LOW_RARITY =
+                    String.Format(
+                        ImplementationServices.GetResourceString(
+                            "STR_EXCEPT_CEM_TOO_LOW_RARITY"), "sampleSize");
+
+                string parameterName = "rarity";
+
+                var estimator = new RareEventProbabilityEstimator();
+
+                ArgumentExceptionAssert.Throw(
+                    () =>
+                    {
+                        estimator.Estimate(
+                            context:
+                                TestableRareEventProbabilityEstimationContext00
+                                    .Get().Context,
+                            rarity: .01,
+                            sampleSize: 50,
+                            estimationSampleSize: 10000);
+                    },
+                    expectedType: typeof(ArgumentException),
+                    expectedPartialMessage:
+                        STR_EXCEPT_CEM_TOO_LOW_RARITY,
+                    expectedParameterName: parameterName);
+            }
+
+            // rarity is too high given context and sample size
+            {
+                var STR_EXCEPT_CEM_TOO_HIGH_RARITY =
+                    String.Format(
+                        ImplementationServices.GetResourceString(
+                            "STR_EXCEPT_CEM_TOO_HIGH_RARITY"), "sampleSize");
+
+                string parameterName = "rarity";
+
+                var estimator = new RareEventProbabilityEstimator();
+
+                ArgumentExceptionAssert.Throw(
+                    () =>
+                    {
+                        estimator.Estimate(
+                            context:
+                                TestableRareEventProbabilityEstimationContext01
+                                    .Get().Context,
+                            rarity: .99,
+                            sampleSize: 50,
+                            estimationSampleSize: 10000);
+                    },
+                    expectedType: typeof(ArgumentException),
+                    expectedPartialMessage:
+                        STR_EXCEPT_CEM_TOO_HIGH_RARITY,
+                    expectedParameterName: parameterName);
+            }
+
             // sampleSize is not positive
             {
                 var STR_EXCEPT_PAR_MUST_BE_POSITIVE =

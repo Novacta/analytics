@@ -27,7 +27,7 @@ namespace Novacta.Analytics.Tests.TestableItems.GDA
                 new double[6] { 0.2, 0.1, 0.2, 0.3, 0.1, 0.1 });
         static readonly DoubleMatrix inv_sqrt_f_c = f_c.Apply(
             x => 1.0 / Math.Sqrt(x));
-        static readonly Basis a = new Basis(
+        static readonly Basis a = new(
             DoubleMatrix.Diagonal(inv_sqrt_f_c));
 
         static readonly DoubleMatrix x_sa =

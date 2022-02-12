@@ -11,7 +11,6 @@ namespace Novacta.Analytics.Infrastructure
     /// Implements the three-array variation of the Compressed Sparse Row 
     /// storage format, with zero-based indexing.
     /// </summary>  
-    [Serializable]
     internal sealed class SparseCsr3DoubleMatrixImplementor : MatrixImplementor<double>
     {
         internal double[] values;
@@ -28,22 +27,6 @@ namespace Novacta.Analytics.Infrastructure
         private static readonly int[] emptyColumns = Array.Empty<int>();
 
         #region Constructors
-
-        public sealed override object Clone()
-        {
-            var implementorClone = new SparseCsr3DoubleMatrixImplementor(
-                this.numberOfRows, this.numberOfColumns, this.capacity);
-
-            int numberOfStoredPositions = this.rowIndex[this.numberOfRows];
-            if (0 < numberOfStoredPositions)
-            {
-                this.values.CopyTo(implementorClone.values, 0);
-                this.columns.CopyTo(implementorClone.columns, 0);
-                this.rowIndex.CopyTo(implementorClone.rowIndex, 0);
-            }
-
-            return implementorClone;
-        }
 
         internal SparseCsr3DoubleMatrixImplementor(int numberOfRows,
             int numberOfColumns, int capacity)
@@ -77,6 +60,9 @@ namespace Novacta.Analytics.Infrastructure
             this.capacity = capacity;
         }
 
+        #endregion
+
+        #region Conversion operators
 
         public static implicit operator DenseDoubleMatrixImplementor(
             SparseCsr3DoubleMatrixImplementor sparseDoubleMatrixImplementor)
@@ -86,6 +72,49 @@ namespace Novacta.Analytics.Infrastructure
                 sparseDoubleMatrixImplementor.numberOfColumns,
                 sparseDoubleMatrixImplementor.AsColumnMajorDenseArray(),
                 StorageOrder.ColumnMajor);
+        }
+
+        public static explicit operator SparseCsr3ComplexMatrixImplementor(
+            SparseCsr3DoubleMatrixImplementor sparseDoubleMatrixImplementor)
+        {
+            var sparseComplexMatrixImplementor = new
+                SparseCsr3ComplexMatrixImplementor(
+                    numberOfRows: sparseDoubleMatrixImplementor.numberOfRows,
+                    numberOfColumns: sparseDoubleMatrixImplementor.numberOfColumns,
+                    capacity: 0)
+            {
+                columns =
+                    sparseDoubleMatrixImplementor.columns,
+
+                rowIndex =
+                    sparseDoubleMatrixImplementor.rowIndex,
+
+                values =
+                    ImplementationServices.ToComplexArray(
+                        sparseDoubleMatrixImplementor.values)
+            };
+
+            return sparseComplexMatrixImplementor;
+        }
+
+        #endregion
+
+        #region ICloneable
+
+        public sealed override object Clone()
+        {
+            var implementorClone = new SparseCsr3DoubleMatrixImplementor(
+                this.numberOfRows, this.numberOfColumns, this.capacity);
+
+            int numberOfStoredPositions = this.rowIndex[this.numberOfRows];
+            if (0 < numberOfStoredPositions)
+            {
+                this.values.CopyTo(implementorClone.values, 0);
+                this.columns.CopyTo(implementorClone.columns, 0);
+                this.rowIndex.CopyTo(implementorClone.rowIndex, 0);
+            }
+
+            return implementorClone;
         }
 
         #endregion
@@ -295,17 +324,10 @@ namespace Novacta.Analytics.Infrastructure
                             "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
                 }
 
-                // Advertise that this implementor is going to change its data
-                this.OnChangingData();
-
                 this.SetValue(linearIndex, value);
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design", 
-            "CA1062:Validate parameters of public methods",
-            Justification = "Validation is delegated to DoubleMatrix indexers.", MessageId = "0")]
         internal sealed override MatrixImplementor<double> this[IndexCollection linearIndexes]
         {
             get
@@ -321,7 +343,7 @@ namespace Novacta.Analytics.Infrastructure
                 int[] linears = linearIndexes.indexes;
 
                 DenseDoubleMatrixImplementor subMatrix = new
-                    DenseDoubleMatrixImplementor(linears.Length, 1);
+(linears.Length, 1);
                 double[] subStorage = subMatrix.storage;
                 var values = this.values;
 
@@ -337,17 +359,13 @@ namespace Novacta.Analytics.Infrastructure
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design", 
-            "CA1062:Validate parameters of public methods",
-            Justification = "Validation is delegated to DoubleMatrix indexers.", MessageId = "0")]
         internal sealed override MatrixImplementor<double> this[string linearIndexes]
         {
             get
             {
                 int length = this.Count;
                 DenseDoubleMatrixImplementor subMatrix = new
-                    DenseDoubleMatrixImplementor(length, 1);
+(length, 1);
                 double[] subStorage = subMatrix.storage;
 
                 var values = this.values;
@@ -411,17 +429,10 @@ namespace Novacta.Analytics.Infrastructure
                             "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
                 }
 
-                // Advertise this implementor is going to change its data
-                this.OnChangingData();
-
                 this.SetValue(rowIndex, columnIndex, value);
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design", 
-            "CA1062:Validate parameters of public methods",
-            Justification = "Validation is delegated to DoubleMatrix indexers.", MessageId = "0")]
         internal sealed override MatrixImplementor<double> this[int rowIndex, IndexCollection columnIndexes]
         {
             get
@@ -483,9 +494,6 @@ namespace Novacta.Analytics.Infrastructure
                 // Test for mismatched matrix dimensions
                 ImplementationServices.ThrowOnMismatchedMatrixDimensions(1, columnIndexes.Count, value);
 
-                // Advertise that this implementor is going to change its data
-                this.OnChangingData();
-
                 MatrixImplementor<double> sourceImplementor;
 
                 // if the source is this, clone the data before writing
@@ -526,30 +534,6 @@ namespace Novacta.Analytics.Infrastructure
                             for (int j = 0; j < columns.Length; j++)
                             {
                                 this.SetValue(rowIndex, columns[j], sourceStorage[j]);
-                            }
-                        }
-                        break;
-                    case StorageScheme.View:
-                        {
-                            ViewDoubleMatrixImplementor subSource = (ViewDoubleMatrixImplementor)sourceImplementor;
-                            IndexCollection[] subIndexes = subSource.GetReferredImplementor(out MatrixImplementor<double> referredImplementor);
-                            int[] subRows = subIndexes[0].indexes;
-                            int[] subColumns = subIndexes[1].indexes;
-                            switch (referredImplementor.StorageScheme)
-                            {
-                                case StorageScheme.Dense:
-                                    {
-                                        DenseDoubleMatrixImplementor source = (DenseDoubleMatrixImplementor)referredImplementor;
-                                        double[] sourceStorage = source.storage;
-                                        int sourceNumberOfRows = source.numberOfRows;
-                                        int subOffset;
-                                        for (int j = 0; j < columns.Length; j++)
-                                        {
-                                            subOffset = sourceNumberOfRows * subColumns[j];
-                                            this.SetValue(rowIndex, columns[j], sourceStorage[subRows[0] + subOffset]);
-                                        }
-                                    }
-                                    break;
                             }
                         }
                         break;
@@ -601,9 +585,6 @@ namespace Novacta.Analytics.Infrastructure
                 // Test for mismatched matrix dimensions
                 ImplementationServices.ThrowOnMismatchedMatrixDimensions(1, this.numberOfColumns, value);
 
-                // Advertise that this implementor is going to change its data
-                this.OnChangingData();
-
                 MatrixImplementor<double> sourceImplementor;
 
                 // if the source is this, clone the data before writing
@@ -646,31 +627,6 @@ namespace Novacta.Analytics.Infrastructure
                             }
                         }
                         break;
-                    case StorageScheme.View:
-                        {
-                            ViewDoubleMatrixImplementor subSource = (ViewDoubleMatrixImplementor)sourceImplementor;
-                            IndexCollection[] subIndexes = subSource.GetReferredImplementor(out MatrixImplementor<double> referredImplementor);
-                            int[] subRows = subIndexes[0].indexes;
-                            int[] subColumns = subIndexes[1].indexes;
-
-                            switch (referredImplementor.StorageScheme)
-                            {
-                                case StorageScheme.Dense:
-                                    {
-                                        DenseDoubleMatrixImplementor source = (DenseDoubleMatrixImplementor)referredImplementor;
-                                        double[] sourceStorage = source.storage;
-                                        int sourceNumberOfRows = source.numberOfRows;
-                                        int subOffset;
-                                        for (int j = 0; j < columnsLength; j++)
-                                        {
-                                            subOffset = sourceNumberOfRows * subColumns[j];
-                                            this.SetValue(rowIndex, j, sourceStorage[subRows[0] + subOffset]);
-                                        }
-                                    }
-                                    break;
-                            }
-                        }
-                        break;
                 }
             }
         }
@@ -679,10 +635,6 @@ namespace Novacta.Analytics.Infrastructure
 
         #region this[IndexCollection, *]
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design", 
-            "CA1062:Validate parameters of public methods",
-            Justification = "Validation is delegated to DoubleMatrix indexers.", MessageId = "0")]
         internal sealed override MatrixImplementor<double> this[IndexCollection rowIndexes, int columnIndex]
         {
             get
@@ -744,9 +696,6 @@ namespace Novacta.Analytics.Infrastructure
                 // Test for mismatched matrix dimensions
                 ImplementationServices.ThrowOnMismatchedMatrixDimensions(rowIndexes.Count, 1, value);
 
-                // Advertise that this implementor is going to change its data
-                this.OnChangingData();
-
                 MatrixImplementor<double> sourceImplementor;
 
                 // if the source is this, clone the data before writing
@@ -783,36 +732,10 @@ namespace Novacta.Analytics.Infrastructure
                                 this.SetValue(rows[i], columnIndex, sourceStorage[i]);
                         }
                         break;
-                    case StorageScheme.View:
-                        {
-                            ViewDoubleMatrixImplementor subSource = (ViewDoubleMatrixImplementor)sourceImplementor;
-                            IndexCollection[] subIndexes = subSource.GetReferredImplementor(out MatrixImplementor<double> referredImplementor);
-                            int[] subRows = subIndexes[0].indexes;
-                            int[] subColumns = subIndexes[1].indexes;
-
-                            switch (referredImplementor.StorageScheme)
-                            {
-                                case StorageScheme.Dense:
-                                    {
-                                        DenseDoubleMatrixImplementor source = (DenseDoubleMatrixImplementor)referredImplementor;
-                                        double[] sourceStorage = source.storage;
-                                        int sourceNumberOfRows = source.numberOfRows;
-                                        int subOffset = sourceNumberOfRows * subColumns[0];
-                                        for (int i = 0; i < rows.Length; i++)
-                                            this.SetValue(rows[i], columnIndex, sourceStorage[subRows[i] + subOffset]);
-                                    }
-                                    break;
-                            }
-                        }
-                        break;
                 }
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design", 
-            "CA1062:Validate parameters of public methods",
-            Justification = "Validation is delegated to DoubleMatrix indexers.", MessageId = "0")]
         internal sealed override MatrixImplementor<double> this[IndexCollection rowIndexes, IndexCollection columnIndexes]
         {
             get
@@ -880,9 +803,6 @@ namespace Novacta.Analytics.Infrastructure
                 ImplementationServices.ThrowOnMismatchedMatrixDimensions(
                     rowIndexes.Count, columnIndexes.Count, value);
 
-                // Advertise that this implementor is going to change its data
-                this.OnChangingData();
-
                 MatrixImplementor<double> sourceImplementor;
 
                 // if the source is this, clone the data before writing
@@ -931,40 +851,10 @@ namespace Novacta.Analytics.Infrastructure
                             }
                         }
                         break;
-                    case StorageScheme.View:
-                        {
-                            ViewDoubleMatrixImplementor subSource = (ViewDoubleMatrixImplementor)sourceImplementor;
-                            IndexCollection[] subIndexes = subSource.GetReferredImplementor(out MatrixImplementor<double> referredImplementor);
-                            int[] subRows = subIndexes[0].indexes;
-                            int[] subColumns = subIndexes[1].indexes;
-                            switch (referredImplementor.StorageScheme)
-                            {
-                                case StorageScheme.Dense:
-                                    {
-                                        DenseDoubleMatrixImplementor source = (DenseDoubleMatrixImplementor)referredImplementor;
-                                        double[] sourceStorage = source.storage;
-                                        int sourceNumberOfRows = source.numberOfRows;
-                                        int subOffset;
-                                        for (int j = 0; j < columns.Length; j++)
-                                        {
-                                            column = columns[j];
-                                            subOffset = sourceNumberOfRows * subColumns[j];
-                                            for (int i = 0; i < rows.Length; i++)
-                                                this.SetValue(rows[i], column, sourceStorage[subRows[i] + subOffset]);
-                                        }
-                                    }
-                                    break;
-                            }
-                        }
-                        break;
                 }
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design", 
-            "CA1062:Validate parameters of public methods",
-            Justification = "Validation is delegated to DoubleMatrix indexers.")]
         internal sealed override MatrixImplementor<double> this[IndexCollection rowIndexes, string columnIndexes]
         {
             get
@@ -1014,9 +904,6 @@ namespace Novacta.Analytics.Infrastructure
                 // Test for mismatched matrix dimensions
                 ImplementationServices.ThrowOnMismatchedMatrixDimensions(rowIndexes.Count, this.numberOfColumns, value);
 
-                // Advertise that this implementor is going to change its data
-                this.OnChangingData();
-
                 MatrixImplementor<double> sourceImplementor;
 
                 // if the source is this, clone the data before writing
@@ -1061,31 +948,6 @@ namespace Novacta.Analytics.Infrastructure
                             {
                                 for (int i = 0; i < rows.Length; i++, index++)
                                     this.SetValue(rows[i], j, sourceStorage[index]);
-                            }
-                        }
-                        break;
-                    case StorageScheme.View:
-                        {
-                            ViewDoubleMatrixImplementor subSource = (ViewDoubleMatrixImplementor)sourceImplementor;
-                            IndexCollection[] subIndexes = subSource.GetReferredImplementor(out MatrixImplementor<double> referredImplementor);
-                            int[] subRows = subIndexes[0].indexes;
-                            int[] subColumns = subIndexes[1].indexes;
-                            int subOffset;
-                            switch (referredImplementor.StorageScheme)
-                            {
-                                case StorageScheme.Dense:
-                                    {
-                                        DenseDoubleMatrixImplementor source = (DenseDoubleMatrixImplementor)referredImplementor;
-                                        double[] sourceStorage = source.storage;
-                                        int sourceNumberOfRows = source.numberOfRows;
-                                        for (int j = 0; j < columnsLength; j++)
-                                        {
-                                            subOffset = sourceNumberOfRows * subColumns[j];
-                                            for (int i = 0; i < rows.Length; i++)
-                                                this.SetValue(rows[i], j, sourceStorage[subRows[i] + subOffset]);
-                                        }
-                                    }
-                                    break;
                             }
                         }
                         break;
@@ -1145,9 +1007,6 @@ namespace Novacta.Analytics.Infrastructure
                 // Test for mismatched matrix dimensions
                 ImplementationServices.ThrowOnMismatchedMatrixDimensions(thisNumberOfRows, 1, value);
 
-                // Advertise that this implementor is going to change its data
-                this.OnChangingData();
-
                 MatrixImplementor<double> sourceImplementor;
 
                 // if the source is this, clone the data before writing
@@ -1185,37 +1044,10 @@ namespace Novacta.Analytics.Infrastructure
                                 this.SetValue(i, columnIndex, sourceStorage[index]);
                         }
                         break;
-                    case StorageScheme.View:
-                        {
-                            ViewDoubleMatrixImplementor subSource = (ViewDoubleMatrixImplementor)sourceImplementor;
-                            IndexCollection[] subIndexes = subSource.GetReferredImplementor(out MatrixImplementor<double> referredImplementor);
-                            int[] subRows = subIndexes[0].indexes;
-                            int[] subColumns = subIndexes[1].indexes;
-                            int subOffset;
-                            switch (referredImplementor.StorageScheme)
-                            {
-                                case StorageScheme.Dense:
-                                    {
-                                        DenseDoubleMatrixImplementor source = (DenseDoubleMatrixImplementor)referredImplementor;
-                                        double[] sourceStorage = source.storage;
-                                        int sourceNumberOfRows = source.numberOfRows;
-
-                                        subOffset = sourceNumberOfRows * subColumns[0];
-                                        for (int i = 0; i < thisNumberOfRows; i++)
-                                            this.SetValue(i, columnIndex, sourceStorage[subRows[i] + subOffset]);
-                                    }
-                                    break;
-                            }
-                        }
-                        break;
                 }
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design", 
-            "CA1062:Validate parameters of public methods",
-            Justification = "Validation is delegated to DoubleMatrix indexers.", MessageId = "1")]
         internal sealed override MatrixImplementor<double> this[string rowIndexes, IndexCollection columnIndexes]
         {
             get
@@ -1271,9 +1103,6 @@ namespace Novacta.Analytics.Infrastructure
                 ImplementationServices.ThrowOnMismatchedMatrixDimensions(
                     thisNumberOfRows, columnIndexes.Count, value);
 
-                // Advertise that this implementor is going to change its data
-                this.OnChangingData();
-
                 MatrixImplementor<double> sourceImplementor;
 
                 // if the source is this, clone the data before writing
@@ -1322,41 +1151,10 @@ namespace Novacta.Analytics.Infrastructure
                             }
                         }
                         break;
-                    case StorageScheme.View:
-                        {
-                            ViewDoubleMatrixImplementor subSource = (ViewDoubleMatrixImplementor)sourceImplementor;
-                            IndexCollection[] subIndexes = subSource.GetReferredImplementor(out MatrixImplementor<double> referredImplementor);
-                            int[] subRows = subIndexes[0].indexes;
-                            int[] subColumns = subIndexes[1].indexes;
-                            int subOffset;
-                            switch (referredImplementor.StorageScheme)
-                            {
-                                case StorageScheme.Dense:
-                                    {
-                                        DenseDoubleMatrixImplementor source = (DenseDoubleMatrixImplementor)referredImplementor;
-                                        double[] sourceStorage = source.storage;
-                                        int sourceNumberOfRows = source.numberOfRows;
-
-                                        for (int j = 0; j < columns.Length; j++)
-                                        {
-                                            column = columns[j];
-                                            subOffset = sourceNumberOfRows * subColumns[j];
-                                            for (int i = 0; i < thisNumberOfRows; i++)
-                                                this.SetValue(i, column, sourceStorage[subRows[i] + subOffset]);
-                                        }
-                                    }
-                                    break;
-                            }
-                        }
-                        break;
                 }
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design", 
-            "CA1062:Validate parameters of public methods",
-            Justification = "Validation is delegated to DoubleMatrix indexers.", MessageId = "0")]
         internal sealed override MatrixImplementor<double> this[string rowIndexes, string columnIndexes]
         {
             get
@@ -1368,10 +1166,6 @@ namespace Novacta.Analytics.Infrastructure
                 // Test for mismatched matrix dimensions
                 ImplementationServices.ThrowOnMismatchedMatrixDimensions(
                     this.numberOfRows, this.numberOfColumns, value);
-
-                // Advertise that this implementor is going to change its data
-                this.OnChangingData();
-
 
                 // if the source is this, nothing has to be done
                 if (object.ReferenceEquals(this, value))
@@ -1414,35 +1208,6 @@ namespace Novacta.Analytics.Infrastructure
                             {
                                 for (int i = 0; i < rowsLength; i++, index++)
                                     this.SetValue(i, j, sourceStorage[index]);
-                            }
-                        }
-                        break;
-                    case StorageScheme.View:
-                        {
-                            ViewDoubleMatrixImplementor subSource =
-                                (ViewDoubleMatrixImplementor)sourceImplementor;
-                            IndexCollection[] subIndexes =
-                                subSource.GetReferredImplementor(out MatrixImplementor<double> referredImplementor);
-                            int[] subRows = subIndexes[0].indexes;
-                            int[] subColumns = subIndexes[1].indexes;
-                            int subOffset;
-                            switch (referredImplementor.StorageScheme)
-                            {
-                                case StorageScheme.Dense:
-                                    {
-                                        DenseDoubleMatrixImplementor source =
-                                            (DenseDoubleMatrixImplementor)referredImplementor;
-                                        double[] sourceStorage = source.storage;
-                                        int sourceNumberOfRows = source.numberOfRows;
-
-                                        for (int j = 0; j < columnsLength; j++)
-                                        {
-                                            subOffset = sourceNumberOfRows * subColumns[j];
-                                            for (int i = 0; i < rowsLength; i++)
-                                                this.SetValue(i, j, sourceStorage[subRows[i] + subOffset]);
-                                        }
-                                    }
-                                    break;
                             }
                         }
                         break;
@@ -1576,6 +1341,22 @@ namespace Novacta.Analytics.Infrastructure
                 }
 
                 return true;
+            }
+        }
+
+        internal sealed override bool IsHermitian
+        {
+            get
+            {
+                return this.IsSymmetric;
+            }
+        }
+
+        internal sealed override bool IsSkewHermitian
+        {
+            get
+            {
+                return this.IsSkewSymmetric;
             }
         }
 

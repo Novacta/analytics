@@ -205,42 +205,28 @@ namespace Novacta.Analytics.Tests.Tools
             // Dense
             Succeed(
                 operators: operation.DataWritableOps,
-                data: operation.Data.Dense,
+                data: operation.Data.AsDense,
                 probabilities: operation.Probabilities,
                 expected: result);
 
             // Sparse
             Succeed(
                 operators: operation.DataWritableOps,
-                data: operation.Data.Sparse,
-                probabilities: operation.Probabilities,
-                expected: result);
-
-            // View
-            Succeed(
-                operators: operation.DataWritableOps,
-                data: operation.Data.View,
+                data: operation.Data.AsSparse,
                 probabilities: operation.Probabilities,
                 expected: result);
 
             // Dense.AsReadOnly()
             Succeed(
                 operators: operation.DataReadOnlyOps,
-                data: operation.Data.Dense.AsReadOnly(),
+                data: operation.Data.AsDense.AsReadOnly(),
                 probabilities: operation.Probabilities,
                 expected: result);
 
             // Sparse.AsReadOnly()
             Succeed(
                 operators: operation.DataReadOnlyOps,
-                data: operation.Data.Sparse.AsReadOnly(),
-                probabilities: operation.Probabilities,
-                expected: result);
-
-            // View.AsReadOnly()
-            Succeed(
-                operators: operation.DataReadOnlyOps,
-                data: operation.Data.View.AsReadOnly(),
+                data: operation.Data.AsSparse.AsReadOnly(),
                 probabilities: operation.Probabilities,
                 expected: result);
         }
@@ -257,7 +243,7 @@ namespace Novacta.Analytics.Tests.Tools
             // Dense
             Succeed(
                 operators: operation.DataWritableOps,
-                data: operation.Data.Dense,
+                data: operation.Data.AsDense,
                 probabilities: operation.Probabilities,
                 dataOperation: operation.DataOperation,
                 expected: result);
@@ -265,15 +251,7 @@ namespace Novacta.Analytics.Tests.Tools
             // Sparse
             Succeed(
                 operators: operation.DataWritableOps,
-                data: operation.Data.Sparse,
-                probabilities: operation.Probabilities,
-                dataOperation: operation.DataOperation,
-                expected: result);
-
-            // View
-            Succeed(
-                operators: operation.DataWritableOps,
-                data: operation.Data.View,
+                data: operation.Data.AsSparse,
                 probabilities: operation.Probabilities,
                 dataOperation: operation.DataOperation,
                 expected: result);
@@ -281,7 +259,7 @@ namespace Novacta.Analytics.Tests.Tools
             // Dense.AsReadOnly()
             Succeed(
                 operators: operation.DataReadOnlyOps,
-                data: operation.Data.Dense.AsReadOnly(),
+                data: operation.Data.AsDense.AsReadOnly(),
                 probabilities: operation.Probabilities,
                 dataOperation: operation.DataOperation,
                 expected: result);
@@ -289,15 +267,7 @@ namespace Novacta.Analytics.Tests.Tools
             // Sparse.AsReadOnly()
             Succeed(
                 operators: operation.DataReadOnlyOps,
-                data: operation.Data.Sparse.AsReadOnly(),
-                probabilities: operation.Probabilities,
-                dataOperation: operation.DataOperation,
-                expected: result);
-
-            // View.AsReadOnly()
-            Succeed(
-                operators: operation.DataReadOnlyOps,
-                data: operation.Data.View.AsReadOnly(),
+                data: operation.Data.AsSparse.AsReadOnly(),
                 probabilities: operation.Probabilities,
                 dataOperation: operation.DataOperation,
                 expected: result);
@@ -316,42 +286,28 @@ namespace Novacta.Analytics.Tests.Tools
             // Dense
             Fail(
                 operators: operation.DataWritableOps,
-                data: operation.Data.Dense,
+                data: operation.Data.AsDense,
                 probabilities: operation.Probabilities,
                 exception: exception);
 
             // Sparse
             Fail(
                 operators: operation.DataWritableOps,
-                data: operation.Data.Sparse,
-                probabilities: operation.Probabilities,
-                exception: exception);
-
-            // View
-            Fail(
-                operators: operation.DataWritableOps,
-                data: operation.Data.View,
+                data: operation.Data.AsSparse,
                 probabilities: operation.Probabilities,
                 exception: exception);
 
             // Dense.AsReadOnly()
             Fail(
                 operators: operation.DataReadOnlyOps,
-                data: operation.Data.Dense.AsReadOnly(),
+                data: operation.Data.AsDense.AsReadOnly(),
                 probabilities: operation.Probabilities,
                 exception: exception);
 
             // Sparse.AsReadOnly()
             Fail(
                 operators: operation.DataReadOnlyOps,
-                data: operation.Data.Sparse.AsReadOnly(),
-                probabilities: operation.Probabilities,
-                exception: exception);
-
-            // View.AsReadOnly()
-            Fail(
-                operators: operation.DataReadOnlyOps,
-                data: operation.Data.View.AsReadOnly(),
+                data: operation.Data.AsSparse.AsReadOnly(),
                 probabilities: operation.Probabilities,
                 exception: exception);
         }
@@ -369,7 +325,7 @@ namespace Novacta.Analytics.Tests.Tools
             // Dense
             Fail(
                 operators: operation.DataWritableOps,
-                data: operation.Data.Dense,
+                data: operation.Data.AsDense,
                 probabilities: operation.Probabilities,
                 dataOperation: operation.DataOperation,
                 exception: exception);
@@ -377,15 +333,7 @@ namespace Novacta.Analytics.Tests.Tools
             // Sparse
             Fail(
                 operators: operation.DataWritableOps,
-                data: operation.Data.Sparse,
-                probabilities: operation.Probabilities,
-                dataOperation: operation.DataOperation,
-                exception: exception);
-
-            // View
-            Fail(
-                operators: operation.DataWritableOps,
-                data: operation.Data.View,
+                data: operation.Data.AsSparse,
                 probabilities: operation.Probabilities,
                 dataOperation: operation.DataOperation,
                 exception: exception);
@@ -393,7 +341,7 @@ namespace Novacta.Analytics.Tests.Tools
             // Dense.AsReadOnly()
             Fail(
                 operators: operation.DataReadOnlyOps,
-                data: operation.Data.Dense.AsReadOnly(),
+                data: operation.Data.AsDense.AsReadOnly(),
                 probabilities: operation.Probabilities,
                 dataOperation: operation.DataOperation,
                 exception: exception);
@@ -401,15 +349,7 @@ namespace Novacta.Analytics.Tests.Tools
             // Sparse.AsReadOnly()
             Fail(
                 operators: operation.DataReadOnlyOps,
-                data: operation.Data.Sparse.AsReadOnly(),
-                probabilities: operation.Probabilities,
-                dataOperation: operation.DataOperation,
-                exception: exception);
-
-            // View.AsReadOnly()
-            Fail(
-                operators: operation.DataReadOnlyOps,
-                data: operation.Data.View.AsReadOnly(),
+                data: operation.Data.AsSparse.AsReadOnly(),
                 probabilities: operation.Probabilities,
                 dataOperation: operation.DataOperation,
                 exception: exception);

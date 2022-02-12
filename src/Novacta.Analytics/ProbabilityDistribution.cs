@@ -359,10 +359,6 @@ namespace Novacta.Analytics
         /// consists, on input, of zeroed entries.
         /// </para>
         /// </remarks>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Design", 
-            "CA1062:Validate arguments of public methods", 
-            Justification = "Input validation delegated to ProbabilityDistribution.ValidateSampleInput.")]
         protected virtual void OnSample(
             int sampleSize,
             double[] destinationArray,

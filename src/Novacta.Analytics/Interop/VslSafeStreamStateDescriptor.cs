@@ -17,7 +17,6 @@ namespace Novacta.Analytics.Interop
     /// state descriptor.
     /// </para>
     /// </remarks>
-    /// <seealso href="https://software.intel.com/en-us/mkl-vsnotes"/>
     class VslSafeStreamStateDescriptor : SafeHandle
     {
         /// <summary>
@@ -30,7 +29,7 @@ namespace Novacta.Analytics.Interop
         /// <para>
         /// This constructor calls the base <see cref="SafeHandle" /> one,
         /// with <see cref="IntPtr.Zero" /> as the invalid handle value
-        /// and <b>true</b> to signal that this instance will own the
+        /// and <c>true</c> to signal that this instance will own the
         /// handle during the finalization phase.
         /// </para>
         /// </remarks>
@@ -41,8 +40,8 @@ namespace Novacta.Analytics.Interop
         }
 
         /// <summary>
-        /// Creates the specified VSL stream state descriptor
-        /// having the specified basic random number generator and seed.
+        /// Creates a VSL stream state descriptor
+        /// for the specified matrix.
         /// </summary>
         /// <param name="brng">The basic random number generator index
         /// to initialize the stream.</param>
@@ -58,7 +57,7 @@ namespace Novacta.Analytics.Interop
            int seed)
         {
             var streamStateDescriptor = IntPtr.Zero;
-            var status = SafeNativeMethods.VSL_NewStream(
+            var status = SafeNativeMethods.VSL.NewStream(
                 ref streamStateDescriptor, brng, seed);
 
             if (status != SafeNativeMethods.VSL.STATUS.VSL_STATUS_OK)
@@ -74,7 +73,7 @@ namespace Novacta.Analytics.Interop
         /// <inheritdoc/>
         protected override bool ReleaseHandle()
         {
-            var status = SafeNativeMethods.VSL_DeleteStream(ref this.handle);
+            var status = SafeNativeMethods.VSL.DeleteStream(ref this.handle);
             return status == SafeNativeMethods.VSL.STATUS.VSL_STATUS_OK;
         }
 

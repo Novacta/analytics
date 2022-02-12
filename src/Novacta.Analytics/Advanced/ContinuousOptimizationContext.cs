@@ -241,7 +241,7 @@ namespace Novacta.Analytics.Advanced
     /// w_{t,1,j} &lt; \epsilon, \quad j=0,\dots,n-1, 
     /// </latex>
     /// and, if so,
-    /// return <b>true</b>; otherwise returns <b>false</b>.
+    /// return <c>true</c>; otherwise returns <c>false</c>.
     /// </para>
     /// <para><b>Instantiating a context for continuous optimization</b></para>
     /// <para>
@@ -522,11 +522,6 @@ namespace Novacta.Analytics.Advanced
         /// <paramref name="maximumNumberOfIterations"/> is
         /// not positive.
         /// </exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Design", 
-            "CA1062:Validate arguments of public methods", 
-            Justification = 
-                "Input validation partially delegated to GetStateDimension.")]
         public ContinuousOptimizationContext(
             Func<DoubleMatrix, double> objectiveFunction,
             DoubleMatrix initialArgument,

@@ -2,12 +2,10 @@
 // Licensed under the MIT license. 
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Diagnostics;
 
 namespace Novacta.Analytics.Infrastructure
 {
-    [Serializable]
     internal sealed class DenseMatrixImplementor<T>
     {
         private readonly T[] storage;

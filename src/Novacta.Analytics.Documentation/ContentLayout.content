@@ -6,15 +6,16 @@
     </HelpKeywords>
   </Topic>
   <Topic id="6e0413d7-d042-4781-a888-14641b635d8a" visible="True" title="License agreement" />
-  <Topic id="07a926cb-9c3c-432d-998b-0af7eea037f6" visible="True" title="Testing environment" />
+  <Topic id="07a926cb-9c3c-432d-998b-0af7eea037f6" visible="True" isSelected="true" title="Build and test" />
   <Topic id="98825745-d228-4a65-9fc2-9f3041567e53" visible="True" isExpanded="true" title="Version history">
     <HelpKeywords>
       <HelpKeyword index="K" term="version, history" />
     </HelpKeywords>
-    <Topic id="41221eed-891e-4925-a654-ecf8b2d38c65" visible="True" isSelected="true" title="Version 1.0.0">
+    <Topic id="41221eed-891e-4925-a654-ecf8b2d38c65" visible="True" title="Version 1.0.0">
       <HelpKeywords>
         <HelpKeyword index="K" term="version, 1.0.0" />
       </HelpKeywords>
     </Topic>
+    <Topic id="e6a1e4b5-02ef-4f97-9bd4-3bf049441535" visible="True" title="Version 2.0.0" />
   </Topic>
 </Topics>

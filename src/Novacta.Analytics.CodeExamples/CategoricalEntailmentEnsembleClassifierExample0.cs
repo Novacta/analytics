@@ -9,7 +9,7 @@ namespace Novacta.Analytics.CodeExamples
         public void Main()
         {
             // Create the feature variables.
-            CategoricalVariable f0 = new CategoricalVariable("F-0")
+            CategoricalVariable f0 = new("F-0")
             {
                 { 0, "A" },
                 { 1, "B" },
@@ -19,7 +19,7 @@ namespace Novacta.Analytics.CodeExamples
             };
             f0.SetAsReadOnly();
 
-            CategoricalVariable f1 = new CategoricalVariable("F-1")
+            CategoricalVariable f1 = new("F-1")
             {
                 { 0, "I" },
                 { 1, "II" },
@@ -29,7 +29,7 @@ namespace Novacta.Analytics.CodeExamples
             f1.SetAsReadOnly();
 
             // Create the response variable.
-            CategoricalVariable r = new CategoricalVariable("R")
+            CategoricalVariable r = new("R")
             {
                 0,
                 1,
@@ -40,7 +40,7 @@ namespace Novacta.Analytics.CodeExamples
             // Create a categorical data set containing
             // observations about such variables.
             List<CategoricalVariable> variables =
-                new List<CategoricalVariable>() { f0, f1, r };
+                new() { f0, f1, r };
 
             DoubleMatrix data = DoubleMatrix.Dense(
                 new double[20, 3] {

@@ -6,9 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Novacta.Analytics.Infrastructure;
 using Novacta.Analytics.Tests.Tools;
@@ -19,321 +16,6 @@ namespace Novacta.Analytics.Tests
     [DeploymentItem("Data", "Data")]
     public class CategoricalDataSetTests
     {
-        [TestMethod]
-        public void GetObjectDataTest()
-        {
-            // info is null
-            {
-                // Create the feature variables
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
-                {
-                    { 0, "A" },
-                    { 1, "B" },
-                    { 2, "C" },
-                    { 3, "D" },
-                    { 4, "E" }
-                };
-                f0.SetAsReadOnly();
-
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
-                {
-                    { 0, "I" },
-                    { 1, "II" },
-                    { 2, "III" },
-                    { 3, "IV" }
-                };
-                f1.SetAsReadOnly();
-
-                // Create the response variable
-                CategoricalVariable r = new CategoricalVariable("R")
-                {
-                    0,
-                    1,
-                    2
-                };
-                r.SetAsReadOnly();
-
-                // Create a categorical data set containing
-                // observations about such variables
-                List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, r };
-
-                DoubleMatrix data = DoubleMatrix.Dense(
-                    new double[20, 3] {
-                    { 0, 0, 0 },
-                    { 0, 1, 0 },
-                    { 0, 2, 2 },
-                    { 0, 3, 2 },
-
-                    { 1, 0, 0 },
-                    { 1, 1, 0 },
-                    { 1, 2, 2 },
-                    { 1, 3, 2 },
-
-                    { 2, 0, 0 },
-                    { 2, 1, 0 },
-                    { 2, 2, 2 },
-                    { 2, 3, 2 },
-
-                    { 3, 0, 1 },
-                    { 3, 1, 1 },
-                    { 3, 2, 1 },
-                    { 3, 3, 1 },
-
-                    { 4, 0, 1 },
-                    { 4, 1, 1 },
-                    { 4, 2, 1 },
-                    { 4, 3, 1 } });
-
-                CategoricalDataSet dataSet = CategoricalDataSet.FromEncodedData(
-                    variables,
-                    data);
-
-                ArgumentExceptionAssert.Throw(
-                    () =>
-                    {
-                        dataSet.GetObjectData(
-                            info: null,
-                            context: new System.Runtime.Serialization.StreamingContext());
-                    },
-                    expectedType: typeof(ArgumentNullException),
-                    expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
-                    expectedParameterName: "info");
-            }
-        }
-
-        [TestMethod]
-        public void SerializableTest()
-        {
-            // info is null
-            {
-                string parameterName = "info";
-                string innerMessage =
-                    ArgumentExceptionAssert.NullPartialMessage +
-                        Environment.NewLine + "Parameter name: " + parameterName;
-
-                ConstructorInfo serializationCtor = null;
-                TypeInfo t = typeof(CategoricalDataSet).GetTypeInfo();
-                IEnumerable<ConstructorInfo> ctors = t.DeclaredConstructors;
-                foreach (var ctor in ctors)
-                {
-                    var parameters = ctor.GetParameters();
-                    if (parameters.Length == 2)
-                    {
-                        if ((parameters[0].ParameterType == typeof(SerializationInfo))
-                            &&
-                            (parameters[1].ParameterType == typeof(StreamingContext)))
-                        {
-                            serializationCtor = ctor;
-                            break;
-                        }
-                    }
-                }
-
-                ExceptionAssert.InnerThrow(
-                    () =>
-                    {
-                        serializationCtor.Invoke(
-                            new object[] { null, new StreamingContext() });
-                    },
-                    expectedInnerType: typeof(ArgumentNullException),
-                    expectedInnerMessage: innerMessage);
-            }
-
-            // Name is not null
-            {
-
-                MemoryStream ms = new MemoryStream();
-
-                // Create the feature variables
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
-                {
-                    { 0, "A" },
-                    { 1, "B" },
-                    { 2, "C" },
-                    { 3, "D" },
-                    { 4, "E" }
-                };
-                f0.SetAsReadOnly();
-
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
-                {
-                    { 0, "I" },
-                    { 1, "II" },
-                    { 2, "III" },
-                    { 3, "IV" }
-                };
-                f1.SetAsReadOnly();
-
-                // Create the response variable
-                CategoricalVariable r = new CategoricalVariable("R")
-                {
-                    0,
-                    1,
-                    2
-                };
-                r.SetAsReadOnly();
-
-                // Create a categorical data set containing
-                // observations about such variables
-                List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, r };
-
-                DoubleMatrix data = DoubleMatrix.Dense(
-                    new double[20, 3] {
-                    { 0, 0, 0 },
-                    { 0, 1, 0 },
-                    { 0, 2, 2 },
-                    { 0, 3, 2 },
-
-                    { 1, 0, 0 },
-                    { 1, 1, 0 },
-                    { 1, 2, 2 },
-                    { 1, 3, 2 },
-
-                    { 2, 0, 0 },
-                    { 2, 1, 0 },
-                    { 2, 2, 2 },
-                    { 2, 3, 2 },
-
-                    { 3, 0, 1 },
-                    { 3, 1, 1 },
-                    { 3, 2, 1 },
-                    { 3, 3, 1 },
-
-                    { 4, 0, 1 },
-                    { 4, 1, 1 },
-                    { 4, 2, 1 },
-                    { 4, 3, 1 } });
-
-                CategoricalDataSet serializedDataSet = CategoricalDataSet.FromEncodedData(
-                    variables,
-                    data);
-
-                serializedDataSet.Name = "Name";
-
-                BinaryFormatter formatter = new BinaryFormatter();
-
-                formatter.Serialize(ms, serializedDataSet);
-
-                // Reset stream position
-                ms.Position = 0;
-
-                var deserializedDataSet = (CategoricalDataSet)formatter.Deserialize(ms);
-
-                CategoricalDataSetAssert.AreEqual(
-                    expected: serializedDataSet,
-                    actual: deserializedDataSet);
-            }
-
-            // Name is null
-            {
-
-                MemoryStream ms = new MemoryStream();
-
-                // Create the feature variables
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
-                {
-                    { 0, "A" },
-                    { 1, "B" },
-                    { 2, "C" },
-                    { 3, "D" },
-                    { 4, "E" }
-                };
-                f0.SetAsReadOnly();
-
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
-                {
-                    { 0, "I" },
-                    { 1, "II" },
-                    { 2, "III" },
-                    { 3, "IV" }
-                };
-                f1.SetAsReadOnly();
-
-                // Create the response variable
-                CategoricalVariable r = new CategoricalVariable("R")
-                {
-                    0,
-                    1,
-                    2
-                };
-                r.SetAsReadOnly();
-
-                // Create a categorical data set containing
-                // observations about such variables
-                List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, r };
-
-                DoubleMatrix data = DoubleMatrix.Dense(
-                    new double[20, 3] {
-                    { 0, 0, 0 },
-                    { 0, 1, 0 },
-                    { 0, 2, 2 },
-                    { 0, 3, 2 },
-
-                    { 1, 0, 0 },
-                    { 1, 1, 0 },
-                    { 1, 2, 2 },
-                    { 1, 3, 2 },
-
-                    { 2, 0, 0 },
-                    { 2, 1, 0 },
-                    { 2, 2, 2 },
-                    { 2, 3, 2 },
-
-                    { 3, 0, 1 },
-                    { 3, 1, 1 },
-                    { 3, 2, 1 },
-                    { 3, 3, 1 },
-
-                    { 4, 0, 1 },
-                    { 4, 1, 1 },
-                    { 4, 2, 1 },
-                    { 4, 3, 1 } });
-
-                CategoricalDataSet serializedDataSet = CategoricalDataSet.FromEncodedData(
-                    variables,
-                    data);
-
-                BinaryFormatter formatter = new BinaryFormatter();
-
-                formatter.Serialize(ms, serializedDataSet);
-
-                // Reset stream position
-                ms.Position = 0;
-
-                var deserializedDataSet = (CategoricalDataSet)formatter.Deserialize(ms);
-
-                var deserializedData =
-                    (DoubleMatrix)Reflector.GetField(deserializedDataSet, "data");
-
-                DoubleMatrixAssert.AreEqual(
-                    expected: deserializedData,
-                    actual: deserializedDataSet.Data,
-                    DoubleMatrixTest.Accuracy);
-
-                var deserializedVariables =
-                    (List<CategoricalVariable>)
-                        Reflector.GetField(deserializedDataSet, "variables");
-
-                Assert.AreEqual(
-                    deserializedDataSet.Variables.Count,
-                    deserializedVariables.Count);
-
-                for (int i = 0; i < deserializedVariables.Count; i++)
-                {
-                    CategoricalVariableAssert.AreEqual(
-                        expected: deserializedVariables[i],
-                        actual: deserializedDataSet.Variables[i]);
-                }
-
-                CategoricalDataSetAssert.AreEqual(
-                    expected: serializedDataSet,
-                    actual: deserializedDataSet);
-            }
-        }
-
         [TestMethod()]
         public void CategorizeTest()
         {
@@ -404,7 +86,7 @@ namespace Novacta.Analytics.Tests
             // data is null
             {
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>();
+                    new();
                 DoubleMatrix data = null;
 
                 ArgumentExceptionAssert.Throw(
@@ -422,7 +104,7 @@ namespace Novacta.Analytics.Tests
             // variables count unequal to data number of columns
             {
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>()
+                    new()
                     {
                         new CategoricalVariable("var0"),
                         new CategoricalVariable("var1")
@@ -448,7 +130,7 @@ namespace Novacta.Analytics.Tests
             // category not included in variable
             {
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>()
+                    new()
                     {
                         new CategoricalVariable("var0"),
                         new CategoricalVariable("var1")
@@ -484,8 +166,8 @@ namespace Novacta.Analytics.Tests
                     "Black,-1.1",
                     "Black, 4.4" };
 
-                MemoryStream stream = new MemoryStream();
-                StreamWriter writer = new StreamWriter(stream);
+                MemoryStream stream = new();
+                StreamWriter writer = new(stream);
                 for (int i = 0; i < data.Length; i++)
                 {
                     writer.WriteLine(data[i].ToCharArray());
@@ -519,7 +201,7 @@ namespace Novacta.Analytics.Tests
                 };
 
                 // Encode the categorical data set
-                StreamReader streamReader = new StreamReader(stream);
+                StreamReader streamReader = new(stream);
                 char columnDelimiter = ',';
                 IndexCollection extractedColumns = IndexCollection.Range(0, 1);
                 bool firstLineContainsColumnHeaders = true;
@@ -531,7 +213,7 @@ namespace Novacta.Analytics.Tests
                     specialCategorizers,
                     CultureInfo.InvariantCulture);
 
-                CategoricalVariable color = new CategoricalVariable("COLOR")
+                CategoricalVariable color = new("COLOR")
                 {
                     { 0, "Red" },
                     { 1, "Green" },
@@ -539,7 +221,7 @@ namespace Novacta.Analytics.Tests
                 };
                 color.SetAsReadOnly();
 
-                CategoricalVariable number = new CategoricalVariable("NUMBER")
+                CategoricalVariable number = new("NUMBER")
                 {
                     { 0, "Negative" },
                     { 1, "Zero" },
@@ -548,7 +230,7 @@ namespace Novacta.Analytics.Tests
                 number.SetAsReadOnly();
 
                 List<CategoricalVariable> expectedVariables =
-                    new List<CategoricalVariable>() { color, number };
+                    new() { color, number };
 
                 DoubleMatrix expectedData = DoubleMatrix.Dense(5, 2);
                 expectedData[0, 0] = 0;
@@ -592,8 +274,8 @@ namespace Novacta.Analytics.Tests
                         "Blue,Negative",
                         "Blue,Positive" };
 
-                MemoryStream stream = new MemoryStream();
-                StreamWriter writer = new StreamWriter(stream);
+                MemoryStream stream = new();
+                StreamWriter writer = new(stream);
                 for (int i = 0; i < data.Length; i++)
                 {
                     writer.WriteLine(data[i].ToCharArray());
@@ -602,7 +284,7 @@ namespace Novacta.Analytics.Tests
                 stream.Position = 0;
 
                 // Encode the categorical data set
-                StreamReader streamReader = new StreamReader(stream);
+                StreamReader streamReader = new(stream);
                 char columnDelimiter = ',';
                 IndexCollection extractedColumns = IndexCollection.Range(0, 1);
                 bool firstLineContainsColumnHeaders = true;
@@ -655,8 +337,8 @@ namespace Novacta.Analytics.Tests
                         "Blue,Negative",
                         "Blue,Positive" };
 
-                MemoryStream stream = new MemoryStream();
-                StreamWriter writer = new StreamWriter(stream);
+                MemoryStream stream = new();
+                StreamWriter writer = new(stream);
                 for (int i = 0; i < data.Length; i++)
                 {
                     writer.WriteLine(data[i].ToCharArray());
@@ -665,7 +347,7 @@ namespace Novacta.Analytics.Tests
                 stream.Position = 0;
 
                 // Encode the categorical data set
-                StreamReader streamReader = new StreamReader(stream);
+                StreamReader streamReader = new(stream);
                 char columnDelimiter = ',';
                 IndexCollection extractedColumns = IndexCollection.Range(0, 1);
                 bool firstLineContainsColumnHeaders = true;
@@ -712,8 +394,8 @@ namespace Novacta.Analytics.Tests
                         "Blue,Negative",
                         "Blue,Positive" };
 
-                MemoryStream stream = new MemoryStream();
-                StreamWriter writer = new StreamWriter(stream);
+                MemoryStream stream = new();
+                StreamWriter writer = new(stream);
                 for (int i = 0; i < data.Length; i++)
                 {
                     writer.WriteLine(data[i].ToCharArray());
@@ -722,7 +404,7 @@ namespace Novacta.Analytics.Tests
                 stream.Position = 0;
 
                 // Encode the categorical data set
-                StreamReader streamReader = new StreamReader(stream);
+                StreamReader streamReader = new(stream);
                 char columnDelimiter = ',';
                 IndexCollection extractedColumns = IndexCollection.Range(0, 1);
                 bool firstLineContainsColumnHeaders = true;
@@ -778,8 +460,8 @@ namespace Novacta.Analytics.Tests
                 "Black,TRUE,-1.1",
                 "Black,FALSE, 4.4" };
 
-            MemoryStream stream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(stream);
+            MemoryStream stream = new();
+            StreamWriter writer = new(stream);
             for (int i = 0; i < data.Length; i++)
             {
                 writer.WriteLine(data[i].ToCharArray());
@@ -813,7 +495,7 @@ namespace Novacta.Analytics.Tests
             };
 
             // Encode the categorical data set
-            StreamReader reader = new StreamReader(stream);
+            StreamReader reader = new(stream);
             char columnDelimiter = ',';
             IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
             bool firstLineContainsColumnHeaders = true;
@@ -865,7 +547,7 @@ namespace Novacta.Analytics.Tests
         [TestMethod()]
         public void NumberOfRowsTest()
         {
-            CategoricalVariable color = new CategoricalVariable("COLOR")
+            CategoricalVariable color = new("COLOR")
             {
                 { 0, "Red" },
                 { 1, "Green" },
@@ -873,7 +555,7 @@ namespace Novacta.Analytics.Tests
             };
             color.SetAsReadOnly();
 
-            CategoricalVariable number = new CategoricalVariable("NUMBER")
+            CategoricalVariable number = new("NUMBER")
             {
                 { 0, "Negative" },
                 { 1, "Zero" },
@@ -882,7 +564,7 @@ namespace Novacta.Analytics.Tests
             number.SetAsReadOnly();
 
             List<CategoricalVariable> sourceVariables =
-                new List<CategoricalVariable>() { color, number };
+                new() { color, number };
 
             DoubleMatrix sourceData = DoubleMatrix.Dense(5, 2);
             sourceData[0, 0] = 0;
@@ -909,7 +591,7 @@ namespace Novacta.Analytics.Tests
         [TestMethod()]
         public void NumberOfColumnsTest()
         {
-            CategoricalVariable color = new CategoricalVariable("COLOR")
+            CategoricalVariable color = new("COLOR")
             {
                 { 0, "Red" },
                 { 1, "Green" },
@@ -917,7 +599,7 @@ namespace Novacta.Analytics.Tests
             };
             color.SetAsReadOnly();
 
-            CategoricalVariable number = new CategoricalVariable("NUMBER")
+            CategoricalVariable number = new("NUMBER")
             {
                 { 0, "Negative" },
                 { 1, "Zero" },
@@ -926,7 +608,7 @@ namespace Novacta.Analytics.Tests
             number.SetAsReadOnly();
 
             List<CategoricalVariable> sourceVariables =
-                new List<CategoricalVariable>() { color, number };
+                new() { color, number };
 
             DoubleMatrix sourceData = DoubleMatrix.Dense(5, 2);
             sourceData[0, 0] = 0;
@@ -953,7 +635,7 @@ namespace Novacta.Analytics.Tests
         [TestMethod()]
         public void IndexerGetTest()
         {
-            CategoricalVariable color = new CategoricalVariable("COLOR")
+            CategoricalVariable color = new("COLOR")
             {
                 { 0, "Red" },
                 { 1, "Green" },
@@ -961,7 +643,7 @@ namespace Novacta.Analytics.Tests
             };
             color.SetAsReadOnly();
 
-            CategoricalVariable number = new CategoricalVariable("NUMBER")
+            CategoricalVariable number = new("NUMBER")
             {
                 { 0, "Negative" },
                 { 1, "Zero" },
@@ -970,7 +652,7 @@ namespace Novacta.Analytics.Tests
             number.SetAsReadOnly();
 
             List<CategoricalVariable> sourceVariables =
-                new List<CategoricalVariable>() { color, number };
+                new() { color, number };
 
             DoubleMatrix sourceData = DoubleMatrix.Dense(5, 2);
             sourceData[0, 0] = 0;

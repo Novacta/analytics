@@ -1,19 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <!-- The configuration and platform will be used to determine which assemblies to include from solution and
 				 project documentation sources -->
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>b58f628e-8563-4571-beaa-8d2387497730</ProjectGuid>
+    <ProjectGuid>{6a700957-2283-4287-9dbd-21b47e2e19bf}</ProjectGuid>
     <SHFBSchemaVersion>2017.9.26.0</SHFBSchemaVersion>
     <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual Studio adds them anyway -->
     <AssemblyName>Novacta.Analytics.Documentation</AssemblyName>
     <RootNamespace>Novacta.Analytics.Documentation</RootNamespace>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <Name>Novacta.Analytics.Documentation</Name>
     <!-- SHFB properties -->
-    <FrameworkVersion>Cross-platform (.NET Core/.NET Standard)</FrameworkVersion>
+    <FrameworkVersion>.NET Core/.NET Standard/.NET 5.0+</FrameworkVersion>
     <OutputPath>.\Help\</OutputPath>
     <HtmlHelpName>Novacta.Analytics.Documentation</HtmlHelpName>
     <Language>en-US</Language>
@@ -28,18 +30,18 @@
     </TransformComponentArguments>
     <HelpFileFormat>Website</HelpFileFormat>
     <SyntaxFilters>Standard</SyntaxFilters>
-    <PresentationStyle>VS2013</PresentationStyle>
+    <PresentationStyle>Novacta.Shfb.LatexTools.VS2013</PresentationStyle>
     <CleanIntermediates>True</CleanIntermediates>
     <KeepLogFile>True</KeepLogFile>
     <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
     <IndentHtml>False</IndentHtml>
-    <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
+    <BuildAssemblerVerbosity>AllMessages</BuildAssemblerVerbosity>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
     <ComponentConfigurations>
-      <ComponentConfig id="LaTeX Component" enabled="True">
-        <component id="LaTeX Component">
+      <ComponentConfig id="Novacta.Shfb.LatexComponent" enabled="True">
+        <component id="Novacta.Shfb.LatexComponent">
           <documentClass value="article" />
-          <imageFileFormat value="SVG" />
+          <imageFileFormat value="svg" />
           <additionalPreambleCommands>
             <line>\DeclareMathOperator{\Grad}{grad}</line>
             <line>\DeclareMathOperator{\VecOp}{vec}</line>
@@ -152,8 +154,8 @@
           <imageDepthCorrection value="0" />
           <imageScalePercentage value="100" />
           <redirectFileProcessors value="false" />
-          <dvisvgmBinPath value="C:\Program Files\MiKTeX 2.9\miktex\bin\x64" />
-          <latexBinPath value="C:\Program Files\MiKTeX 2.9\miktex\bin\x64" />
+          <dvisvgmBinPath value="C:\Users\giova\AppData\Local\Programs\MiKTeX\miktex\bin\x64" />
+          <latexBinPath value="C:\Users\giova\AppData\Local\Programs\MiKTeX\miktex\bin\x64" />
           <helpType value="{@HelpFileFormat}" />
           <basePath value="{@WorkingFolder}" />
           <languagefilter value="true" />
@@ -161,9 +163,6 @@
       </ComponentConfig>
     </ComponentConfigurations>
     <PlugInConfigurations>
-      <PlugInConfig id="LaTeX Support in MS Help Viewer files - SVG Fix" enabled="True">
-        <configuration />
-      </PlugInConfig>
       <PlugInConfig id="Bibliography Support" enabled="True">
         <configuration>
           <bibliography path="C:\Users\giova\Source\Repos\AzureDevOps\analytics\src\Novacta.Analytics.Documentation\Biblography.xml" />
@@ -175,23 +174,25 @@
     </DocumentationSources>
     <HelpTitle>Novacta.Analytics Documentation</HelpTitle>
     <HelpFileVersion>1.0.0.0</HelpFileVersion>
-    <NamingMethod>MemberName</NamingMethod>
-    <RootNamespaceContainer>False</RootNamespaceContainer>
+    <NamingMethod>HashedMemberName</NamingMethod>
+    <RootNamespaceContainer>True</RootNamespaceContainer>
     <NamespaceGrouping>True</NamespaceGrouping>
     <MaximumGroupParts>2</MaximumGroupParts>
     <Preliminary>False</Preliminary>
     <SdkLinkTarget>Blank</SdkLinkTarget>
     <MissingTags>Summary, Parameter, Returns, Value, AutoDocumentCtors, Namespace, TypeParameter, IncludeTargets, AutoDocumentDispose</MissingTags>
     <VisibleItems>ExplicitInterfaceImplementations, InheritedMembers, InheritedFrameworkMembers, Protected, SealedProtected, ProtectedInternalAsProtected, NonBrowsable</VisibleItems>
-    <ProjectSummary>The Novacta.Analytics assembly provides functionality for data analysis in .NET Standard 2.0 projects.</ProjectSummary>
+    <ProjectSummary>The Novacta.Analytics assembly provides functionality for data analysis in .NET projects.</ProjectSummary>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="(global)" isDocumented="True">This project provides functionality for data analysis.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Novacta.Analytics (Group)" isGroup="True" isDocumented="True">These namespaces contain types implementing matrix algebra operations, statistical methods, and optimization algorithms.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Novacta.Analytics" isDocumented="True">This namespace contains core types useful to execute common data analytics pipelines.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Novacta.Analytics.Infrastructure" isDocumented="False" />
-<NamespaceSummaryItem name="Novacta.Analytics.Advanced" isDocumented="True">This namespace provides types to support advanced computing scenarios in which algorithms must be specialized by the user.</NamespaceSummaryItem></NamespaceSummaries>
-    <CopyrightText>Copyright %28c%29 Giovanni Lafratta</CopyrightText>
+      <NamespaceSummaryItem name="Novacta.Analytics" isDocumented="True">This namespace contains core types useful to execute common data analytics pipelines.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Novacta.Analytics.Infrastructure" isDocumented="False" />
+      <NamespaceSummaryItem name="Novacta.Analytics.Advanced" isDocumented="True">This namespace provides types to support advanced computing scenarios in which algorithms must be specialized by the user.</NamespaceSummaryItem>
+    </NamespaceSummaries>
+    <CopyrightText>Copyright %28c%29 Giovanni Lafratta.</CopyrightText>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
+    <RootNamespaceTitle>Novacta.Analytics namespaces</RootNamespaceTitle>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
@@ -220,8 +221,9 @@
   <ItemGroup>
     <None Include="Biblography.xml" />
     <None Include="Content\License.aml" />
-    <None Include="Content\Tests.aml" />
+    <None Include="Content\BuildAndTest.aml" />
     <None Include="Content\VersionHistory\v1.0.0.aml" />
+    <None Include="Content\VersionHistory\v2.0.0.aml" />
     <None Include="Content\VersionHistory\VersionHistory.aml" />
     <None Include="Content\Welcome.aml" />
   </ItemGroup>
@@ -243,8 +245,14 @@
       <CopyToMedia>True</CopyToMedia>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Novacta.Shfb.LatexTools">
+      <Version>1.0.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="'$(MSBuildRestoreSessionId)' != ''" />
   <!-- Import the SHFB build targets -->
-  <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" />
+  <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" Condition="'$(MSBuildRestoreSessionId)' == ''" />
   <!-- The pre-build and post-build event properties must appear *after* the targets file import in order to be
 			 evaluated correctly. -->
   <PropertyGroup>

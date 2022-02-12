@@ -197,7 +197,7 @@ namespace Novacta.Analytics.Advanced.Tests
                     new double[2] { 2.0 / 3.0, -1.0 / 3.0 });
                 var currentBasisMatrix = DoubleMatrix.Dense(2, 2,
                     new double[4] { 1, 1, -1, 2 });
-                Basis currentBasis = new Basis(currentBasisMatrix);
+                Basis currentBasis = new(currentBasisMatrix);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -219,7 +219,7 @@ namespace Novacta.Analytics.Advanced.Tests
                 DoubleMatrix currentCoordinates = null;
                 var currentBasisMatrix = DoubleMatrix.Dense(2, 2,
                     new double[4] { 1, 1, -1, 2 });
-                Basis currentBasis = new Basis(currentBasisMatrix);
+                Basis currentBasis = new(currentBasisMatrix);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -263,7 +263,7 @@ namespace Novacta.Analytics.Advanced.Tests
                     new double[2] { 2.0 / 3.0, -1.0 / 3.0 });
                 var currentBasisMatrix = DoubleMatrix.Dense(2, 2,
                     new double[4] { 1, 1, -1, 2 });
-                Basis currentBasis = new Basis(currentBasisMatrix);
+                Basis currentBasis = new(currentBasisMatrix);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -286,7 +286,7 @@ namespace Novacta.Analytics.Advanced.Tests
                 var currentCoordinates = DoubleMatrix.Dense(1, 3);
                 var currentBasisMatrix = DoubleMatrix.Dense(2, 2,
                     new double[4] { 1, 1, -1, 2 });
-                Basis currentBasis = new Basis(currentBasisMatrix);
+                Basis currentBasis = new(currentBasisMatrix);
 
                 ArgumentExceptionAssert.Throw(
                     () =>

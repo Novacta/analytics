@@ -385,10 +385,6 @@ namespace Novacta.Analytics.Advanced
         /// -or-<br/>
         /// <paramref name="rarity"/> is not less than 1.
         /// </exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Design",
-            "CA1062:Validate arguments of public methods",
-            Justification = "Input validation delegated to CrossEntropyProgram.Run.")]
         public SystemPerformanceOptimizationResults Optimize(
             SystemPerformanceOptimizationContext context,
             double rarity,

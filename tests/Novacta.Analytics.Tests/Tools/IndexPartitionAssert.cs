@@ -120,7 +120,7 @@ namespace Novacta.Analytics.Tests.Tools
                 throw new AssertFailedException(
                     "IndexPartition instances have not the same number of parts.");
 
-            List<T> availableIds = new List<T>(actual.Identifiers);
+            List<T> availableIds = new(actual.Identifiers);
             for (int i = 0; i < expected.Count; i++)
             {
                 bool expectedPartIsMissing = true;

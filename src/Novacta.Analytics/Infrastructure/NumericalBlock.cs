@@ -216,7 +216,7 @@ namespace Novacta.Analytics.Infrastructure
                     if (mergeRequired) {
                         i = j - 1; // Skip merged bins
                         NumericalBlock mergedBlock = new
-                            NumericalBlock(
+(
                             currentBin.firstPosition,
                             mergeAttributeValue,
                             targetCodes)
@@ -305,7 +305,7 @@ namespace Novacta.Analytics.Infrastructure
         /// A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString()
         {
-            StringBuilder builder = new StringBuilder();
+            StringBuilder builder = new();
 
             builder.AppendFormat(
                 CultureInfo.InvariantCulture,

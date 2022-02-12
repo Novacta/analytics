@@ -9,9 +9,6 @@ using System.Globalization;
 
 using Novacta.Analytics.Infrastructure;
 using System.Collections;
-using System.Runtime.Serialization;
-using System.Security;
-using System.Security.Permissions;
 
 namespace Novacta.Analytics
 {
@@ -71,89 +68,12 @@ namespace Novacta.Analytics
     /// </remarks>
     /// <seealso cref="Category"/>
     /// <seealso cref="CategoricalDataSet"/>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage(
-        "Naming", 
-        "CA1710:Identifiers should have correct suffix", 
-        Justification = "Type holds an arbitrary set of diverse items."), Serializable]
-    public class CategoricalVariable : IEnumerable<Category>, ISerializable
+    public class CategoricalVariable : IEnumerable<Category>
     {
-        #region ISerializable
-
-        /// <summary>
-        /// Initializes a new instance of the 
-        /// <see cref="CategoricalVariable"/> class with serialized data.
-        /// </summary>
-        /// <param name="info">
-        /// The object that holds the serialized object data.
-        /// </param>
-        /// <param name="context">
-        /// The contextual information about the source or destination.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="info"/> is <b>null</b>.
-        /// </exception>
-        [SecurityPermission(
-            SecurityAction.Demand,
-            SerializationFormatter = true),
-         System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Naming",
-            "CA1801:ReviewUnusedParameters",
-            Justification = "Constructor requires parameter context.")]
-        protected CategoricalVariable(
-            SerializationInfo info,
-            StreamingContext context)
-        {
-            if (null == info)
-                throw new ArgumentNullException(nameof(info));
-
-            this.categories =
-                (List<Category>)info.GetValue(
-                    "categories",
-                    typeof(List<Category>));
-
-            this.name =
-                (string)info.GetValue(
-                    "name",
-                    typeof(string));
-
-            this.IsReadOnly =
-                (bool)info.GetValue(
-                    "IsReadOnly",
-                    typeof(bool));
-        }
-
-        /// <inheritdoc/>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="info"/> is <b>null</b>.
-        /// </exception>
-        [SecurityCritical]
-        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            if (null == info)
-                throw new ArgumentNullException(nameof(info));
-
-            info.AddValue(
-                "categories",
-                this.categories,
-                typeof(List<Category>));
-
-            info.AddValue(
-                "name",
-                this.name,
-                typeof(string));
-
-            info.AddValue(
-                "IsReadOnly",
-                this.IsReadOnly,
-                typeof(bool));
-        }
-
-        #endregion
-
         #region Status
 
         private string name;
-        private readonly List<Category> categories = new List<Category>();
+        private readonly List<Category> categories = new();
 
         /// <summary>
         /// Gets a value indicating whether this instance is read only.
@@ -277,7 +197,7 @@ namespace Novacta.Analytics
         /// represents this instance.</returns>
         public override string ToString()
         {
-            StringBuilder builder = new StringBuilder();
+            StringBuilder builder = new();
 
             // Variable Name
             builder.Append(this.Name);
@@ -493,9 +413,9 @@ namespace Novacta.Analytics
         /// <param name="label">
         /// The label of the category to be removed.</param>
         /// <returns>
-        /// <b>true</b> if the element is successfully found and 
+        /// <c>true</c> if the element is successfully found and 
         /// removed; otherwise,
-        /// <b>false</b>. This method returns <b>false</b> 
+        /// <c>false</c>. This method returns <c>false</c> 
         /// if there is no category in the 
         /// current object having label equal to <paramref name="label"/>.
         /// </returns>

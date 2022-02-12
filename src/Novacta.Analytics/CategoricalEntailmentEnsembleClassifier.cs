@@ -1089,7 +1089,7 @@ namespace Novacta.Analytics
                 IndexCollection codePredictedIndexes =
                     predictedResponses.Find(code);
 
-                if (!(codePredictedIndexes is null))
+                if (codePredictedIndexes is not null)
                 {
                     var correspondingActualResponses =
                         actualResponses.Vec(codePredictedIndexes);

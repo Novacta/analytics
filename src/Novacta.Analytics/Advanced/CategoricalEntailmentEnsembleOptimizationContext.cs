@@ -1142,7 +1142,7 @@ namespace Novacta.Analytics.Advanced
                 for (int r = 0; r < numberOfResponseCategories; r++)
                 {
                     var responseCategoryIndexes = responseSample.Find(responseCategoryCodes[r]);
-                    if (!(responseCategoryIndexes is null))
+                    if (responseCategoryIndexes is not null)
                     {
                         for (int i = 0; i < responseCategoryIndexes.Count; i++)
                         {

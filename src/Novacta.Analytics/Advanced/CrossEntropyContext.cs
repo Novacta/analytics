@@ -137,7 +137,7 @@ namespace Novacta.Analytics.Advanced
     /// int, LinkedList{double}, 
     /// LinkedList{DoubleMatrix})">StopExecution</see>, and 
     /// the program stops iterating if it returns
-    /// <b>true</b>. 
+    /// <c>true</c>. 
     /// By overriding the method in a derived context class, it determines
     /// at what conditions the Cross-Entropy program should stop 
     /// at iteration completion.
@@ -205,15 +205,15 @@ namespace Novacta.Analytics.Advanced
         /// </summary>
         /// <remarks>
         /// <para>
-        /// If set to <b>true</b>, information about the execution
+        /// If set to <c>true</c>, information about the execution
         /// of a <see cref="CrossEntropyProgram"/> in this context 
         /// is provided as output of methods defined in the
         /// <see cref="Trace"/> class.
         /// </para>
         /// </remarks>
         /// <value>
-        /// <b>true</b> if the context must be instrumented;
-        /// otherwise, <b>false</b>.
+        /// <c>true</c> if the context must be instrumented;
+        /// otherwise, <c>false</c>.
         /// </value>
         public bool TraceExecution { get; set; }
 
@@ -479,7 +479,7 @@ namespace Novacta.Analytics.Advanced
         /// path="para[@id='StoppingCriterion']"/>
         /// </remarks>
         /// <returns>
-        /// <b>true</b> to stop the program; <b>false</b> otherwise.
+        /// <c>true</c> to stop the program; <c>false</c> otherwise.
         /// </returns>
         protected internal abstract bool StopExecution(
             int iteration,

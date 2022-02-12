@@ -4,7 +4,7 @@
     <introduction>
       <para>
         The topics in this section describe the various changes made to the
-        Novacta.Analytics Project over the
+        Novacta.Analytics library over the
         life of the project.
       </para>
     </introduction>
@@ -20,10 +20,14 @@
               <link xlink:href="41221eed-891e-4925-a654-ecf8b2d38c65" />
             </para>
           </listItem>
-
+			<listItem>
+				<para>
+					<link xlink:href="e6a1e4b5-02ef-4f97-9bd4-3bf049441535" />
+				</para>
+			</listItem>
         </list>
 
-      </content>
+	  </content>
     </section>
 
     <relatedTopics>

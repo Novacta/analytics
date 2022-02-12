@@ -25,26 +25,6 @@ namespace Novacta.Analytics.Infrastructure
 
         #endregion
 
-        #region Events
-
-        [field:NonSerialized()]
-        internal event EventHandler<EventArgs> ChangingData;
-
-        [field: NonSerialized()]
-        internal event EventHandler<ImplementorChangedEventArgs> ImplementorChanged;
-
-        internal void OnChangingData()
-        {
-            ChangingData?.Invoke(this, EventArgs.Empty);
-        }
-
-        internal void OnImplementorChanged(ImplementorChangedEventArgs e)
-        {
-            ImplementorChanged?.Invoke(this, e);
-        }
-
-        #endregion
-
         #region Indexers
 
         #region Linear indexers
@@ -100,6 +80,12 @@ namespace Novacta.Analytics.Infrastructure
         #endregion
 
         #region Patterns
+
+        internal abstract bool IsHermitian
+        { get; }
+
+        internal abstract bool IsSkewHermitian
+        { get; }
 
         internal abstract bool IsSymmetric
         { get; }

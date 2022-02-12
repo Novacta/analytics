@@ -1,0 +1,527 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="07a926cb-9c3c-432d-998b-0af7eea037f6" revisionNumber="1">
+	<developerConceptualDocument
+	  xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+	  xmlns:xlink="http://www.w3.org/1999/xlink">
+		<introduction>
+			<para>
+				This topic shows how to setup a build environment
+				and execute unit tests.
+			</para>
+		</introduction>
+
+		<section address="intro">
+			<title>Introduction</title>
+			<content>
+				<para>
+					After cloning the
+					<externalLink>
+						<linkText>analytics</linkText>
+						<linkUri>https://github.com/novacta/analytics</linkUri>
+					</externalLink>
+					repository, you can build different kinds of
+					projects from the source code:
+				</para>
+				<list class="bullet">
+					<listItem>
+						<para>
+							<link xlink:href="#build-net-6-projects">
+								.NET 6 projects
+							</link>
+						</para>
+					</listItem>
+					<listItem>
+						<para>
+							<link xlink:href="#build-native-projects">
+								Native dependencies
+							</link>
+						</para>
+					</listItem>
+					<listItem>
+						<para>
+							<link xlink:href="#build-doc-project">
+								Documentation
+							</link>
+						</para>
+					</listItem>
+				</list>
+				<para>
+					You can also execute
+					<link xlink:href="#unit-tests">
+						unit tests.
+					</link>
+				</para>
+			</content>
+		</section>
+		<section address="build-net-6-projects">
+			<title>Build .NET 6 projects</title>
+			<content>
+				<list class="bullet">
+					<listItem>
+						<para>
+							Download and install the latest .NET SDK from
+							<externalLink>
+								<linkText>here</linkText>
+								<linkUri>https://github.com/dotnet/core</linkUri>
+							</externalLink>.
+						</para>
+					</listItem>
+					<listItem>
+						<para>
+							Select the .NET project you want to build. Available projects
+							are contained in the following repository sub-folders:
+						</para>
+						<list class="bullet">
+							<listItem>
+								<para>
+									<externalLink>
+										<linkText>
+											src/Novacta.Analytics
+										</linkText>
+										<linkUri>https://github.com/novacta/analytics/blob/master/src/Novacta.Analytics</linkUri>
+									</externalLink>
+								</para>
+							</listItem>
+							<listItem>
+								<para>
+									<externalLink>
+										<linkText>
+											src/Novacta.Analytics.CodeExamples
+										</linkText>
+										<linkUri>https://github.com/novacta/analytics/blob/master/src/Novacta.Analytics.CodeExamples</linkUri>
+									</externalLink>
+								</para>
+							</listItem>
+							<listItem>
+								<para>
+									<externalLink>
+										<linkText>
+											samples/BindingToRowCollection
+										</linkText>
+										<linkUri>https://github.com/novacta/analytics/blob/master/src/BindingToRowCollection</linkUri>
+									</externalLink>
+								</para>
+							</listItem>
+							<listItem>
+								<para>
+									<externalLink>
+										<linkText>
+											tests/Novacta.Analytics.Tests
+										</linkText>
+										<linkUri>https://github.com/novacta/analytics/blob/master/tests/Novacta.Analytics.Tests</linkUri>
+									</externalLink>
+								</para>
+							</listItem>
+						</list>
+					</listItem>
+					<listItem>
+						<para>
+							From a shell of your choice, change the current directory to the folder
+							containing the selected project.
+						</para>
+					</listItem>
+					<listItem>
+						<para>
+							Execute the
+							<externalLink>
+								<linkText>dotnet build</linkText>
+								<linkUri>
+									https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-build
+								</linkUri>
+							</externalLink>
+							command.
+						</para>
+					</listItem>
+				</list>
+			</content>
+		</section>
+		<section address="build-native-projects">
+			<title>Build native dependencies</title>
+			<content>
+				<para>
+					<legacyBold>Novacta.Analytics</legacyBold> 
+					relies on native dynamic-link libraries obtained
+					via the Intel®
+					<externalLink>
+						<linkText>oneAPI Math Kernel Library</linkText>
+						<linkUri>
+							https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl.html
+						</linkUri>
+					</externalLink>
+					customDLL builder, version 2022.1.
+				    Such platform-specific dependencies 
+					have in turn a dependency on a
+					threaded runtime, as reported in the following table:
+				</para>
+				<table>
+					<tableHeader>
+						<row>
+							<entry>
+								<para>Platform</para>
+							</entry>
+							<entry>
+								<para>Dependency</para>
+							</entry>
+							<entry>
+								<para>Runtime</para>
+							</entry>
+						</row>
+					</tableHeader>
+					<row>
+						<entry>
+							<para>win-x64</para>
+						</entry>
+						<entry>
+							<para>libna.dll</para>
+						</entry>
+						<entry>
+							<para>libiomp5md.dll</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>linux-x64</para>
+						</entry>
+						<entry>
+							<para>libna.so</para>
+						</entry>
+						<entry>
+							<para>libiomp5.so</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>osx-x64</para>
+						</entry>
+						<entry>
+							<para>libna.dylib</para>
+						</entry>
+						<entry>
+							<para>libiomp5.dylib</para>
+						</entry>
+					</row>
+				</table>
+				<para>
+					To prepare the
+					native dependencies specific to a given platform,
+					proceed as follows.
+				</para>
+				<list class="bullet">
+					<listItem>
+						<para>win-x64</para>
+						<list class="bullet">
+							<listItem>
+								<para>
+									On a Windows machine where you cloned the repo, download the Intel®
+									<externalLink>
+										<linkText>oneAPI Base Toolkit</linkText>
+										<linkUri>
+											https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit.html
+										</linkUri>
+									</externalLink>, version 2022.1.2.154,
+									and install the
+									<externalLink>
+										<linkText>oneAPI Math Kernel Library</linkText>
+										<linkUri>
+											https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl.html
+										</linkUri>
+									</externalLink>.
+								</para>
+								<alert class="caution">
+									<para>
+										The projects assume that the Windows Intel® oneAPI BaseKit
+										has been installed in its default directory. Otherwise, paths
+										referred to in project properties should
+										be modified according to the location of the currently installed version.
+									</para>
+								</alert>
+							</listItem>
+							<listItem>
+								<para>
+									Make sure the environmental variable
+									<codeInline>ONEAPI_ROOT</codeInline> is properly set to
+									target the folder where the Intel®
+									<legacyBold>oneAPI Base Toolkit</legacyBold> is installed
+									on your machine.
+								</para>
+							</listItem>
+							<listItem>
+								<para>
+									Install
+									<externalLink>
+										<linkText>Visual Studio 2022</linkText>
+										<linkUri>https://visualstudio.microsoft.com/vs/</linkUri>
+									</externalLink>
+									and customize the installation by adding the
+									<externalLink>
+										<linkText>Desktop development with C++</linkText>
+										<linkUri>https://docs.microsoft.com/en-us/cpp/build/vscpp-step-0-installation?view=msvc-170</linkUri>
+									</externalLink>
+									workload.
+								</para>
+							</listItem>
+							<listItem>
+								<para>
+									Use Visual Studio 2022
+									to build the <codeInline>.vcxproj</codeInline> projects
+									included in the repository sub-folder
+									<externalLink>
+										<linkText>
+											native/platforms/win-x64
+										</linkText>
+										<linkUri>https://github.com/novacta/analytics/blob/master/native/platforms/win-x64</linkUri>
+									</externalLink>.
+								</para>
+							</listItem>
+						</list>
+					</listItem>
+					<listItem>
+						<para>linux-x64</para>
+						<list class="bullet">
+							<listItem>
+								<para>
+									On a Linux machine where you cloned the repo, download the Intel®
+									<externalLink>
+										<linkText>oneAPI Base Toolkit</linkText>
+										<linkUri>
+											https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit.html
+										</linkUri>
+									</externalLink>, version 2022.1.2.146,
+									and install the
+									<externalLink>
+										<linkText>oneAPI Math Kernel Library</linkText>
+										<linkUri>
+											https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl.html
+										</linkUri>
+									</externalLink>.
+								</para>
+								<alert class="caution">
+									<para>
+										The following instructions assume that the Linux Intel® oneAPI BaseKit
+										has been installed in its default directory.
+										Otherwise, paths should be modified according to the location of the
+										currently installed version.
+									</para>
+								</alert>
+							</listItem>
+							<listItem>
+								<para>
+									Set variable <codeInline>LIBNAROOT</codeInline> to the directory
+									where the repo has been cloned on your Linux machine.
+									If, for example, the repo has been cloned under the
+									path <codeInline>/Users/user/Source/Repos</codeInline>,
+									execute the following command:
+								</para>
+								<code language="none" title="Set LIBNAROOT">
+									export LIBNAROOT=/Users/user/Source/Repos/analytics
+								</code>
+							</listItem>
+							<listItem>
+								<para>
+									Build the <codeInline>libna.so</codeInline> native dependency:
+								</para>
+								<code language="none" title="Build libna.so">
+									sudo make intel64 -C /opt/intel/oneapi/mkl/2022.0.2/tools/builder export=$LIBNAROOT/native/exports/mkl_exports_linux.txt name=$LIBNAROOT/src/Novacta.Analytics/runtimes/linux-x64/native/libna
+								</code>
+							</listItem>
+							<listItem>
+								<para>
+									Copy the required redistributable <codeInline>libiomp5.so</codeInline>:
+								</para>
+								<code language="none" title="Copy libiomp5.so">
+									cp /opt/intel/oneapi/compiler/2022.0.2/linux/compiler/lib/intel64/libiomp5.so $LIBNAROOT/src/Novacta.Analytics/runtimes/linux-x64/native
+								</code>
+							</listItem>
+						</list>
+					</listItem>
+					<listItem>
+						<para>osx-x64</para>
+						<list class="bullet">
+							<listItem>
+								<para>
+									On a macOS machine where you cloned the repo, download the Intel®
+									<externalLink>
+										<linkText>oneAPI Base Toolkit</linkText>
+										<linkUri>
+											https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit.html
+										</linkUri>
+									</externalLink>, version 2022.1.0.92,
+									and install the
+									<externalLink>
+										<linkText>oneAPI Math Kernel Library</linkText>
+										<linkUri>
+											https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl.html
+										</linkUri>
+									</externalLink>.
+								</para>
+								<alert class="caution">
+									<para>
+										The following instructions assume that the macOS Intel® oneAPI BaseKit
+										has been installed in its default directory.
+										Otherwise, paths should be modified according to the location of the
+										currently installed version.
+									</para>
+								</alert>
+							</listItem>
+							<listItem>
+								<para>
+									Set variable <codeInline>LIBNAROOT</codeInline> to the directory
+									where the repo has been cloned on your macOS machine.
+									If, for example, the repo has been cloned under the
+									path <codeInline>/Users/user/Source/Repos</codeInline>,
+									execute the following command:
+								</para>
+								<code language="none" title="Set LIBNAROOT">
+									export LIBNAROOT=/Users/user/Source/Repos/analytics
+								</code>
+							</listItem>
+							<listItem>
+								<para>
+									Build the <codeInline>libna.dylib</codeInline> native dependency:
+								</para>
+								<code language="none" title="Build libna.dylib">
+									sudo make intel64 -C /opt/intel/oneapi/mkl/2022.0.0/tools/builder export=$LIBNAROOT/native/exports/mkl_exports_osx.txt name=$LIBNAROOT/src/Novacta.Analytics/runtimes/osx-x64/native/libna
+								</code>
+							</listItem>
+							<listItem>
+								<para>
+									Copy the required redistributable <codeInline>libiomp5.dylib</codeInline>:
+								</para>
+								<code language="none" title="Copy libiomp5.dylib">
+									cp /opt/intel/oneapi/compiler/2022.0.0/mac/compiler/lib/libiomp5.dylib $LIBNAROOT/src/Novacta.Analytics/runtimes/osx-x64/native
+								</code>
+							</listItem>
+						</list>
+					</listItem>
+				</list>
+			</content>
+		</section>
+		<section address="build-doc-project">
+			<title>Build the documentation</title>
+			<content>
+				<list class="bullet">
+					<listItem>
+						<para>
+							Download and install on a Windows machine the latest version of
+							<externalLink>
+								<linkText>Sandcastle Help File Builder</linkText>
+								<linkUri>https://github.com/EWSoftware/SHFB/releases</linkUri>
+							</externalLink>.
+						</para>
+					</listItem>
+					<listItem>
+						<para>
+							Inspect the properties of the SHFB project available in folder
+							<externalLink>
+								<linkText>
+									Novacta.Analytics.Documentation
+								</linkText>
+								<linkUri>https://github.com/novacta/analytics/blob/master/src/Novacta.Analytics.Documentation</linkUri>
+							</externalLink>.
+						</para>
+						<para>
+							Notice that the project relies on the
+							<externalLink>
+								<linkText>Novacta.Shfb.LatexTools</linkText>
+								<linkUri>https://www.nuget.org/packages/Novacta.Shfb.LatexTools</linkUri>
+							</externalLink> package, which needs to be
+							properly configured in order to manage the LaTeX
+							content required to compile reference and conceptual files.
+							See
+							<externalLink>
+								<linkText>here</linkText>
+								<linkUri>https://novacta.github.io/shfb-latex-tools/html/47a5afe5-726c-4f74-9ab1-90740bf0a692.htm</linkUri>
+							</externalLink> how to get started with the tools.
+						</para>
+					</listItem>
+					<listItem>
+						<para>
+							From the <legacyBold>Components</legacyBold> tab, select
+							the <legacyBold>Novacta.Shfb.LatexComponent</legacyBold>
+							in the <legacyBold>Build Components in this project</legacyBold>
+							list.
+						</para>
+					</listItem>
+					<listItem>
+						<para>
+							Push the <legacyBold>Configure</legacyBold> button to set options
+							<legacyBold>LaTeX bin folder</legacyBold> and
+							<legacyBold>DviSvgm bin folder</legacyBold>, in order to target
+							the LaTeX distribution installed on your machine.
+						</para>
+					</listItem>
+					<listItem>
+						<para>
+							Build the project from the
+							<externalLink>
+								<linkText>SHFB standalone GUI</linkText>
+								<linkUri>http://ewsoftware.github.io/SHFB/html/d5dbf017-25f1-48cb-86db-90f76ee8f4d7.htm</linkUri>
+							</externalLink>,
+							or via the
+							<externalLink>
+								<linkText>SHFB Visual Studio package</linkText>
+								<linkUri>http://ewsoftware.github.io/SHFB/html/78507051-0fc0-479b-9d47-78a10398eaf2.htm#NewProject/</linkUri>
+							</externalLink>
+							for
+							<externalLink>
+								<linkText>Visual Studio 2022</linkText>
+								<linkUri>https://visualstudio.microsoft.com/vs/</linkUri>
+							</externalLink>.
+						</para>
+					</listItem>
+				</list>
+			</content>
+		</section>
+		<section address="unit-tests">
+			<title>Unit tests</title>
+			<content>
+				<list class="bullet">
+					<listItem>
+						<para>
+							From a shell of your choice, change the current directory to folder
+							<externalLink>
+								<linkText>
+									Novacta.Analytics.Tests
+								</linkText>
+								<linkUri>https://github.com/novacta/analytics/blob/master/tests/Novacta.Analytics.Tests</linkUri>
+							</externalLink>.
+						</para>
+						<para>
+							Native dependencies are automatically placed in the test directory.
+							However, to resolve the dependencies on a Linux or macOS target machine
+							at runtime, the following commands need to be executed.
+						</para>
+						<para>
+							If you are on a Linux machine:
+						</para>
+						<code language="none" title="Preparing Linux environments for tests">
+							export LD_LIBRARY_PATH=.
+						</code>
+						<para>
+							or, if you are on a macOS machine:
+						</para>
+						<code language="none" title="Preparing macOS environments for tests">
+							export DYLD_LIBRARY_PATH=.
+						</code>
+					</listItem>
+					<listItem>
+						<para>
+							To run unit tests, execute the
+							<externalLink>
+								<linkText>dotnet test</linkText>
+								<linkUri>
+									https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test
+								</linkUri>
+							</externalLink>
+							command.
+						</para>
+					</listItem>
+				</list>
+
+			</content>
+		</section>
+
+		<relatedTopics>
+		</relatedTopics>
+	</developerConceptualDocument>
+</topic>

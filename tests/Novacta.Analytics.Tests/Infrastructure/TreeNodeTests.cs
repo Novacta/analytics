@@ -298,7 +298,7 @@ namespace Novacta.Analytics.Infrastructure.Tests
         [TestMethod()]
         public void ToStringTest()
         {
-            TreeNode<string> root = new TreeNode<string>("A");
+            TreeNode<string> root = new("A");
             var childB = root.AddChild("B");
             root.AddChild("C");
 
@@ -333,7 +333,7 @@ namespace Novacta.Analytics.Infrastructure.Tests
         [TestMethod()]
         public void AddChildTest()
         {
-            TreeNode<string> root = new TreeNode<string>("A");
+            TreeNode<string> root = new("A");
             root.AddChild("B");
             root.AddChild("C");
 
@@ -377,7 +377,7 @@ namespace Novacta.Analytics.Infrastructure.Tests
         [TestMethod()]
         public void RemoveChildTest()
         {
-            TreeNode<string> root = new TreeNode<string>("A");
+            TreeNode<string> root = new("A");
             root.AddChild("B");
             root.AddChild("C");
 

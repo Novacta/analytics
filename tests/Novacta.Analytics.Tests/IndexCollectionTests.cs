@@ -9,96 +9,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Novacta.Analytics.Infrastructure;
 using Novacta.Analytics.Tests.Tools;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization;
-using System.Reflection;
 
 namespace Novacta.Analytics.Tests
 {
     [TestClass]
     public class IndexCollectionTests
     {
-        [TestMethod]
-        public void GetObjectDataTest()
-        {
-            // info is null
-            {
-                var indexes = IndexCollection.FromArray(
-                    new int[] { 0, 3, 5, 8 });
-
-                ArgumentExceptionAssert.Throw(
-                    () =>
-                    {
-                        indexes.GetObjectData(
-                            info: null,
-                            context: new System.Runtime.Serialization.StreamingContext());
-                    },
-                    expectedType: typeof(ArgumentNullException),
-                    expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
-                    expectedParameterName: "info");
-            }
-        }
-
-        [TestMethod]
-        public void SerializableTest()
-        {
-            // info is null
-            {
-                string parameterName = "info";
-                string innerMessage =
-                    ArgumentExceptionAssert.NullPartialMessage +
-                        Environment.NewLine + "Parameter name: " + parameterName;
-
-                ConstructorInfo serializationCtor = null;
-                TypeInfo t = typeof(IndexCollection).GetTypeInfo();
-                IEnumerable<ConstructorInfo> ctors = t.DeclaredConstructors;
-                foreach (var ctor in ctors)
-                {
-                    var parameters = ctor.GetParameters();
-                    if (parameters.Length == 2)
-                    {
-                        if ((parameters[0].ParameterType == typeof(SerializationInfo))
-                            &&
-                            (parameters[1].ParameterType == typeof(StreamingContext)))
-                        {
-                            serializationCtor = ctor;
-                            break;
-                        }
-                    }
-                }
-
-                ExceptionAssert.InnerThrow(
-                    () =>
-                    {
-                        serializationCtor.Invoke(
-                            new object[] { null, new StreamingContext() });
-                    },
-                    expectedInnerType: typeof(ArgumentNullException),
-                    expectedInnerMessage: innerMessage);
-            }
-
-            {
-                MemoryStream ms = new MemoryStream();
-
-                var serializedIndexes = IndexCollection.FromArray(
-                    new int[] { 0, 3, 5, 8 });
-
-                BinaryFormatter formatter = new BinaryFormatter();
-
-                formatter.Serialize(ms, serializedIndexes);
-
-                // Reset stream position
-                ms.Position = 0;
-
-                var deserializedIndexes = (IndexCollection)formatter.Deserialize(ms);
-
-                IndexCollectionAssert.AreEqual(
-                    expected: serializedIndexes,
-                    actual: deserializedIndexes);
-            }
-        }
-
         [TestMethod]
         public void CloneTest()
         {

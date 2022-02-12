@@ -656,9 +656,9 @@ namespace Novacta.Analytics
 
             var n_c = Stat.Sum(data, DataOperation.OnColumns);
 
-            if (!(n_r.FindWhile(x => x <= 0.0) is null)
+            if (n_r.FindWhile(x => x <= 0.0) is not null
                 ||
-                !(n_c.FindWhile(x => x <= 0.0) is null))
+                n_c.FindWhile(x => x <= 0.0) is not null)
             {
                 throw new ArgumentOutOfRangeException(nameof(data),
                    ImplementationServices.GetResourceString(
@@ -719,7 +719,7 @@ namespace Novacta.Analytics
 
             int info;
             double[] superb = new double[p - 1];
-            info = SafeNativeMethods.LAPACK_dgesvd(
+            info = SafeNativeMethods.LAPACK.DGESVD(
                 matrix_layout: SafeNativeMethods.LAPACK.ORDER.ColMajor,
                 jobu: job_u,
                 jobvt: job_v_t,
@@ -952,7 +952,7 @@ namespace Novacta.Analytics
             int ldvt = lda;
             int lapackInfo;
             double[] superb = new double[k - 1];
-            lapackInfo = SafeNativeMethods.LAPACK_dgesvd(
+            lapackInfo = SafeNativeMethods.LAPACK.DGESVD(
                 SafeNativeMethods.LAPACK.ORDER.ColMajor,
                 jobu,
                 jobvt,

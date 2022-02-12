@@ -276,7 +276,7 @@ namespace Novacta.Analytics.Advanced
     /// By default, the method controls if, in the last 
     /// <see cref="MinimumNumberOfIterations"/> iterations, the 
     /// levels achieved by the program remain constant, and, if so,
-    /// return <b>true</b>; otherwise returns <b>false</b>.
+    /// return <c>true</c>; otherwise returns <c>false</c>.
     /// </para>
     /// <para>
     /// You can override <see cref="StopAtIntermediateIteration(int, 
@@ -685,7 +685,7 @@ namespace Novacta.Analytics.Advanced
                 case EliteSampleDefinition.LowerThanLevel:
                     eliteFirstIndex = 0;
                     eliteLastIndex = Convert.ToInt32(
-                        Math.Floor(sampleSize * rarity));
+                        Math.Ceiling(sampleSize * rarity));
                     level = performanceArray[eliteLastIndex];
                     break;
             }
@@ -735,8 +735,8 @@ namespace Novacta.Analytics.Advanced
         /// in this context.
         /// </param>
         /// <returns>
-        /// <b>true</b> if the optimization program must be stopped; 
-        /// otherwise, <b>false</b>.
+        /// <c>true</c> if the optimization program must be stopped; 
+        /// otherwise, <c>false</c>.
         /// </returns>
         /// <remarks>
         /// <inheritdoc cref="SystemPerformanceOptimizationContext" 

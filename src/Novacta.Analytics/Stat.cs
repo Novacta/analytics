@@ -16,9 +16,8 @@ namespace Novacta.Analytics
     public static class Stat
     {
         private const int dense = (int)StorageScheme.Dense;
-        private const int view = (int)StorageScheme.View;
         private const int sparse = (int)StorageScheme.CompressedRow;
-        private const int numberOfStorageSchemes = 3;
+        private const int numberOfStorageSchemes = 2;
 
         #region Correlations
 
@@ -122,10 +121,6 @@ namespace Novacta.Analytics
         /// <see cref="DataOperation"/>.
         /// </exception>
         /// <seealso href="http://en.wikipedia.org/wiki/Correlation"/>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Design",
-            "CA1062:Validate arguments of public methods",
-            Justification = "Input validation delegated to Stat.Covariance.")]
         public static DoubleMatrix Correlation(
             DoubleMatrix data,
             DataOperation dataOperation)
@@ -171,7 +166,7 @@ namespace Novacta.Analytics
         /// of the specified data, eventually adjusted for bias.
         /// </summary>
         /// <param name="data">The data.</param>
-        /// <param name="adjustForBias">If set to <b>true</b> signals 
+        /// <param name="adjustForBias">If set to <c>true</c> signals 
         /// that the covariances 
         /// are adjusted for bias.
         /// </param>
@@ -207,7 +202,7 @@ namespace Novacta.Analytics
         /// of <paramref name="data"/>.
         /// </para>
         /// <para>
-        /// If <paramref name="adjustForBias"/> is set to <b>false</b>, then 
+        /// If <paramref name="adjustForBias"/> is set to <c>false</c>, then 
         /// <latex mode="inline">\sigma_{l,k}</latex> is estimated through 
         /// the coefficient
         /// <latex mode="display">
@@ -222,7 +217,7 @@ namespace Novacta.Analytics
         /// </para>
         /// <para>
         /// Such estimator is biased. If <paramref name="adjustForBias"/> is set 
-        /// to <b>true</b>, then 
+        /// to <c>true</c>, then 
         /// the estimator is corrected for bias
         /// and <latex mode="inline">\sigma_{l,k}</latex> is evaluated through 
         /// the coefficient
@@ -239,7 +234,7 @@ namespace Novacta.Analytics
         /// of <paramref name="data"/>.
         /// </para>
         /// <para>
-        /// If <paramref name="adjustForBias"/> is set to <b>false</b>, then 
+        /// If <paramref name="adjustForBias"/> is set to <c>false</c>, then 
         /// <latex mode="inline">\sigma_{l,k}</latex> is estimated through the coefficient
         /// <latex mode="display">
         /// \hat{\sigma}_{l,k} = \frac{1}{m}\sum_{i=0}^{m-1} \left ( x_{i,l} - \overline{x}_{\cdot,l} \right )\left ( x_{i,k} - \overline{x}_{\cdot,k} \right ),\hspace{12pt} l,k=0,\dots,n-1,
@@ -252,7 +247,7 @@ namespace Novacta.Analytics
         /// <i>j</i>-th column.
         /// </para>
         /// <para>
-        /// Such estimator is biased. If <paramref name="adjustForBias"/> is set to <b>true</b>, then 
+        /// Such estimator is biased. If <paramref name="adjustForBias"/> is set to <c>true</c>, then 
         /// the estimator is corrected for bias
         /// and <latex mode="inline">\sigma_{l,k}</latex> is evaluated through the coefficient
         /// <latex mode="display">
@@ -283,12 +278,12 @@ namespace Novacta.Analytics
         /// <paramref name="dataOperation"/> is not a field of 
         /// <see cref="DataOperation"/>.<br/> 
         /// -or-<br/> 
-        /// <paramref name="adjustForBias"/> is <b>true</b>,
+        /// <paramref name="adjustForBias"/> is <c>true</c>,
         /// <paramref name="dataOperation"/> is <see cref="DataOperation.OnRows"/> 
         /// and the <paramref name="data"/> number of columns 
         /// is less than 2.<br/> 
         /// -or-<br/>
-        /// <paramref name="adjustForBias"/> is <b>true</b>,
+        /// <paramref name="adjustForBias"/> is <c>true</c>,
         /// <paramref name="dataOperation"/> is <see cref="DataOperation.OnColumns"/> 
         /// and the <paramref name="data"/> number of rows 
         /// is less than 2.
@@ -459,7 +454,6 @@ namespace Novacta.Analytics
         {
             var operators = new DenseMatrixImplementor<ByDimensionSummaryOperator<double>>(numberOfStorageSchemes, 1);
             operators[dense] = new ByDimensionSummaryOperator<double>(StatisticOperators.Dense_Kurtosis);
-            operators[view] = new ByDimensionSummaryOperator<double>(StatisticOperators.View_Kurtosis);
             operators[sparse] = new ByDimensionSummaryOperator<double>(StatisticOperators.Sparse_Kurtosis);
             return operators;
         }
@@ -471,7 +465,6 @@ namespace Novacta.Analytics
         {
             var operators = new DenseMatrixImplementor<SummaryOperator<double>>(numberOfStorageSchemes, 1);
             operators[dense] = new SummaryOperator<double>(StatisticOperators.Dense_Kurtosis);
-            operators[view] = new SummaryOperator<double>(StatisticOperators.View_Kurtosis);
             operators[sparse] = new SummaryOperator<double>(StatisticOperators.Sparse_Kurtosis);
             return operators;
         }
@@ -484,7 +477,7 @@ namespace Novacta.Analytics
         /// eventually adjusted for bias.
         /// </summary>
         /// <param name="data">The data.</param>
-        /// <param name="adjustForBias">If set to <b>true</b> signals that the kurtosis 
+        /// <param name="adjustForBias">If set to <c>true</c> signals that the kurtosis 
         /// is adjusted for bias.
         /// </param>
         /// <remarks>
@@ -539,13 +532,13 @@ namespace Novacta.Analytics
         /// </latex>
         /// </para>
         /// <para>
-        /// If <paramref name="adjustForBias"/> is set to <b>false</b>, 
+        /// If <paramref name="adjustForBias"/> is set to <c>false</c>, 
         /// this method returns <latex mode="inline">g_2</latex> if it
         /// is defined, otherwise <see cref="System.Double.NaN"/> is
         /// returned.
         /// </para>
         /// <para>
-        /// If <paramref name="adjustForBias"/> is set to <b>true</b>, 
+        /// If <paramref name="adjustForBias"/> is set to <c>true</c>, 
         /// then this methods operates as follows.
         /// <list type="bullet">
         /// <item>
@@ -577,7 +570,7 @@ namespace Novacta.Analytics
         /// <paramref name="data" /> is <b>null</b>.
         /// </exception>
         /// <exception cref="ArgumentException">
-        /// <paramref name="adjustForBias"/> is <b>true</b> and the number of
+        /// <paramref name="adjustForBias"/> is <c>true</c> and the number of
         /// entries in
         /// <paramref name="data"/> is less than 4.
         /// </exception>
@@ -616,7 +609,7 @@ namespace Novacta.Analytics
         /// data, eventually adjusted for bias.
         /// </summary>
         /// <param name="data">The data.</param>
-        /// <param name="adjustForBias">If set to <b>true</b> signals that the kurtosis 
+        /// <param name="adjustForBias">If set to <c>true</c> signals that the kurtosis 
         /// is adjusted for bias.
         /// </param>
         /// <param name="dataOperation">A constant to specify if the kurtosis 
@@ -677,14 +670,14 @@ namespace Novacta.Analytics
         /// </latex>
         /// </para>
         /// <para>
-        /// If <paramref name="adjustForBias"/> is set to <b>false</b>, 
+        /// If <paramref name="adjustForBias"/> is set to <c>false</c>, 
         /// then <latex mode="inline">\gamma_{2,i,\cdot}</latex> is estimated 
         /// through <latex mode="inline">g_{2,i,\cdot}</latex> if it is 
         /// defined, otherwise the <i>i</i>-th position in the returned 
         /// value evaluates to <see cref="System.Double.NaN"/>.  
         /// </para>
         /// <para>
-        /// If <paramref name="adjustForBias"/> is set to <b>true</b>, then 
+        /// If <paramref name="adjustForBias"/> is set to <c>true</c>, then 
         /// this method operates as follows.
         /// <list type="bullet">
         /// <item>
@@ -741,14 +734,14 @@ namespace Novacta.Analytics
         /// </latex>
         /// </para>
         /// <para>
-        /// If <paramref name="adjustForBias"/> is set to <b>false</b>, 
+        /// If <paramref name="adjustForBias"/> is set to <c>false</c>, 
         /// then <latex mode="inline">\gamma_{2,\cdot,j}</latex> is estimated 
         /// through <latex mode="inline">g_{2,\cdot,j}</latex> if it is 
         /// defined, otherwise the <i>j</i>-th position in the returned 
         /// value evaluates to <see cref="System.Double.NaN"/>.  
         /// </para>
         /// <para>
-        /// If <paramref name="adjustForBias"/> is set to <b>true</b>, then 
+        /// If <paramref name="adjustForBias"/> is set to <c>true</c>, then 
         /// this method operates as follows.
         /// <list type="bullet">
         /// <item>
@@ -786,12 +779,12 @@ namespace Novacta.Analytics
         /// <paramref name="dataOperation"/> is not a field of 
         /// <see cref="DataOperation"/>.<br/>
         /// -or-<br/>
-        /// <paramref name="adjustForBias"/> is <b>true</b>, 
+        /// <paramref name="adjustForBias"/> is <c>true</c>, 
         /// <paramref name="dataOperation"/> is <see cref="DataOperation.OnRows"/> and
         /// the number of columns
         /// of <paramref name="data"/> is less than <c>4</c>.<br/>
         /// -or-<br/>
-        /// <paramref name="adjustForBias"/> is <b>true</b>, 
+        /// <paramref name="adjustForBias"/> is <c>true</c>, 
         /// <paramref name="dataOperation"/> is <see cref="DataOperation.OnColumns"/> and
         /// the <paramref name="data"/> number of rows 
         /// is less than <c>4</c>.
@@ -878,7 +871,6 @@ namespace Novacta.Analytics
         {
             var operators = new DenseMatrixImplementor<ByDimensionExtremeFindOperator<double>>(numberOfStorageSchemes, 1);
             operators[dense] = new ByDimensionExtremeFindOperator<double>(StatisticOperators.Dense_Max);
-            operators[view] = new ByDimensionExtremeFindOperator<double>(StatisticOperators.View_Max);
             operators[sparse] = new ByDimensionExtremeFindOperator<double>(StatisticOperators.Sparse_Max);
 
             return operators;
@@ -891,7 +883,6 @@ namespace Novacta.Analytics
         {
             var operators = new DenseMatrixImplementor<FindExtremumOperator<double>>(numberOfStorageSchemes, 1);
             operators[dense] = new FindExtremumOperator<double>(StatisticOperators.Dense_Max);
-            operators[view] = new FindExtremumOperator<double>(StatisticOperators.View_Max);
             operators[sparse] = new FindExtremumOperator<double>(StatisticOperators.Sparse_Max);
 
             return operators;
@@ -1218,7 +1209,6 @@ namespace Novacta.Analytics
         {
             var operators = new DenseMatrixImplementor<ByDimensionExtremeFindOperator<double>>(numberOfStorageSchemes, 1);
             operators[dense] = new ByDimensionExtremeFindOperator<double>(StatisticOperators.Dense_Min);
-            operators[view] = new ByDimensionExtremeFindOperator<double>(StatisticOperators.Vew_Min);
             operators[sparse] = new ByDimensionExtremeFindOperator<double>(StatisticOperators.Sparse_Min);
             return operators;
         }
@@ -1230,7 +1220,6 @@ namespace Novacta.Analytics
         {
             var operators = new DenseMatrixImplementor<FindExtremumOperator<double>>(numberOfStorageSchemes, 1);
             operators[dense] = new FindExtremumOperator<double>(StatisticOperators.Dense_Min);
-            operators[view] = new FindExtremumOperator<double>(StatisticOperators.View_Min);
             operators[sparse] = new FindExtremumOperator<double>(StatisticOperators.Sparse_Min);
 
             return operators;
@@ -1973,7 +1962,6 @@ namespace Novacta.Analytics
         {
             var operators = new DenseMatrixImplementor<ByDimensionSummaryOperator<double>>(numberOfStorageSchemes, 1);
             operators[dense] = new ByDimensionSummaryOperator<double>(StatisticOperators.Dense_Skewness);
-            operators[view] = new ByDimensionSummaryOperator<double>(StatisticOperators.View_Skewness);
             operators[sparse] = new ByDimensionSummaryOperator<double>(StatisticOperators.Sparse_Skewness);
             return operators;
         }
@@ -1985,7 +1973,6 @@ namespace Novacta.Analytics
         {
             var operators = new DenseMatrixImplementor<SummaryOperator<double>>(numberOfStorageSchemes, 1);
             operators[dense] = new SummaryOperator<double>(StatisticOperators.Dense_Skewness);
-            operators[view] = new SummaryOperator<double>(StatisticOperators.View_Skewness);
             operators[sparse] = new SummaryOperator<double>(StatisticOperators.Sparse_Skewness);
             return operators;
         }
@@ -1997,7 +1984,7 @@ namespace Novacta.Analytics
         /// Returns the skewness of the specified data, eventually adjusted for bias.
         /// </summary>
         /// <param name="data">The data.</param>
-        /// <param name="adjustForBias">If set to <b>true</b> signals that the skewness 
+        /// <param name="adjustForBias">If set to <c>true</c> signals that the skewness 
         /// is adjusted for bias.
         /// </param>
         /// <remarks>
@@ -2055,12 +2042,12 @@ namespace Novacta.Analytics
         /// </latex>
         /// </para>
         /// <para>
-        /// If <paramref name="adjustForBias"/> is set to <b>false</b>, then
+        /// If <paramref name="adjustForBias"/> is set to <c>false</c>, then
         /// this method returns <latex mode="inline">g_1</latex> if
         /// it is defined, otherwise <see cref="Double.NaN"/> is returned.
         /// </para>
         /// <para>
-        /// If <paramref name="adjustForBias"/> is set to <b>true</b>, 
+        /// If <paramref name="adjustForBias"/> is set to <c>true</c>, 
         /// then this methods operates as follows.
         /// <list type="bullet">
         /// <item>
@@ -2092,7 +2079,7 @@ namespace Novacta.Analytics
         /// <paramref name="data" /> is <b>null</b>.
         /// </exception>
         /// <exception cref="ArgumentException">
-        /// <paramref name="adjustForBias"/> is <b>true</b> and the number of entries 
+        /// <paramref name="adjustForBias"/> is <c>true</c> and the number of entries 
         /// in <paramref name="data"/> is less than <c>3</c>.
         /// </exception>
         /// <seealso href="http://en.wikipedia.org/wiki/Skewness"/>
@@ -2138,7 +2125,7 @@ namespace Novacta.Analytics
         /// in the specified data, eventually adjusted for bias.
         /// </summary>
         /// <param name="data">The data.</param>
-        /// <param name="adjustForBias">If set to <b>true</b> signals that the skewness 
+        /// <param name="adjustForBias">If set to <c>true</c> signals that the skewness 
         /// is adjusted for bias.
         /// </param>
         /// <param name="dataOperation">A constant to specify if the skewness 
@@ -2199,14 +2186,14 @@ namespace Novacta.Analytics
         /// </latex>
         /// </para>
         /// <para>
-        /// If <paramref name="adjustForBias"/> is set to <b>false</b>, 
+        /// If <paramref name="adjustForBias"/> is set to <c>false</c>, 
         /// then <latex mode="inline">\gamma_{1,i,\cdot}</latex> is estimated 
         /// through <latex mode="inline">g_{1,i,\cdot}</latex> if it is 
         /// defined, otherwise the <i>i</i>-th position in the returned 
         /// value evaluates to <see cref="System.Double.NaN"/>.  
         /// </para>
         /// <para>
-        /// If <paramref name="adjustForBias"/> is set to <b>true</b>, then 
+        /// If <paramref name="adjustForBias"/> is set to <c>true</c>, then 
         /// this method operates as follows.
         /// <list type="bullet">
         /// <item>
@@ -2262,14 +2249,14 @@ namespace Novacta.Analytics
         /// </latex>
         /// </para>
         /// <para>
-        /// If <paramref name="adjustForBias"/> is set to <b>false</b>, 
+        /// If <paramref name="adjustForBias"/> is set to <c>false</c>, 
         /// then <latex mode="inline">\gamma_{1,\cdot,j}</latex> is estimated 
         /// through <latex mode="inline">g_{1,\cdot,j}</latex> if it is 
         /// defined, otherwise the <i>j</i>-th position in the returned 
         /// value evaluates to <see cref="System.Double.NaN"/>.  
         /// </para>
         /// <para>
-        /// If <paramref name="adjustForBias"/> is set to <b>true</b>, then 
+        /// If <paramref name="adjustForBias"/> is set to <c>true</c>, then 
         /// this method operates as follows.
         /// <list type="bullet">
         /// <item>
@@ -2307,12 +2294,12 @@ namespace Novacta.Analytics
         /// <paramref name="dataOperation"/> is not a field of 
         /// <see cref="DataOperation"/>.<br/>
         /// -or-<br/>
-        /// <paramref name="adjustForBias"/> is <b>true</b>, 
+        /// <paramref name="adjustForBias"/> is <c>true</c>, 
         /// <paramref name="dataOperation"/> is <see cref="DataOperation.OnRows"/> and
         /// the <paramref name="data"/> number of columns 
         /// is less than 3.<br/>
         /// -or-<br/>
-        /// <paramref name="adjustForBias"/> is <b>true</b>, <paramref name="dataOperation"/> is <see cref="DataOperation.OnColumns"/> and
+        /// <paramref name="adjustForBias"/> is <c>true</c>, <paramref name="dataOperation"/> is <see cref="DataOperation.OnColumns"/> and
         /// the <paramref name="data"/> number of rows 
         /// is less than 3.
         /// </exception>
@@ -2381,7 +2368,6 @@ namespace Novacta.Analytics
         {
             var operators = new DenseMatrixImplementor<SortOperator<double>>(numberOfStorageSchemes, 1);
             operators[dense] = new SortOperator<double>(StatisticOperators.Dense_Sort);
-            operators[view] = new SortOperator<double>(StatisticOperators.View_Sort);
             operators[sparse] = new SortOperator<double>(StatisticOperators.Sparse_Sort);
 
             return operators;
@@ -2397,10 +2383,6 @@ namespace Novacta.Analytics
 
             operators[dense] =
                 new SortIndexTableOperator<double>(StatisticOperators.Dense_Sort_IndexTable);
-
-            operators[view] =
-                new SortIndexTableOperator<double>(StatisticOperators.View_Sort_IndexTable);
-
             operators[sparse] =
                 new SortIndexTableOperator<double>(StatisticOperators.Sparse_Sort_IndexTable);
 
@@ -2532,7 +2514,7 @@ namespace Novacta.Analytics
             var implementor = sortedData.implementor;
             sortIndexTableDoubleOperators[(int)implementor.StorageScheme](implementor, sortDirection, out IndexCollection indexTable);
 
-            SortIndexResults results = new SortIndexResults
+            SortIndexResults results = new()
             {
                 SortedData = sortedData,
                 SortedIndexes = indexTable
@@ -2573,7 +2555,7 @@ namespace Novacta.Analytics
         /// Returns the standard deviation of the specified data, eventually adjusted for bias.
         /// </summary>
         /// <param name="data">The data.</param>
-        /// <param name="adjustForBias">If set to <b>true</b> signals that the  
+        /// <param name="adjustForBias">If set to <c>true</c> signals that the  
         /// standard deviation is adjusted for bias.
         /// </param>
         /// <remarks>
@@ -2591,7 +2573,7 @@ namespace Novacta.Analytics
         /// of order <latex mode="inline">r</latex>.
         /// </para>
         /// <para>
-        /// If <paramref name="adjustForBias"/> is set to <b>false</b>, then 
+        /// If <paramref name="adjustForBias"/> is set to <c>false</c>, then 
         /// the standard deviation is estimated through the coefficient
         /// <latex mode="display">
         /// \hat{\sigma}=\sqrt{\hat{\mu}_2},
@@ -2609,7 +2591,7 @@ namespace Novacta.Analytics
         /// </latex>
         /// </para>
         /// <para>
-        /// Such estimator is biased. If <paramref name="adjustForBias"/> is set to <b>true</b>, then 
+        /// Such estimator is biased. If <paramref name="adjustForBias"/> is set to <c>true</c>, then 
         /// the variance estimator is corrected for bias
         /// and the standard deviation is evaluated through the coefficient
         /// <latex mode="display">
@@ -2633,7 +2615,7 @@ namespace Novacta.Analytics
         /// <paramref name="data" /> is <b>null</b>.
         /// </exception>
         /// <exception cref="ArgumentException">
-        /// <paramref name="adjustForBias"/> is <b>true</b> and the number of entries
+        /// <paramref name="adjustForBias"/> is <c>true</c> and the number of entries
         /// in <paramref name="data"/> is less than <c>2</c>.
         /// </exception>
         /// <seealso href="http://en.wikipedia.org/wiki/Standard_deviation"/>
@@ -2649,7 +2631,7 @@ namespace Novacta.Analytics
         /// in the specified data, eventually adjusted for bias.
         /// </summary>
         /// <param name="data">The data.</param>
-        /// <param name="adjustForBias">If set to <b>true</b> signals that the  
+        /// <param name="adjustForBias">If set to <c>true</c> signals that the  
         /// standard deviation is adjusted for bias.
         /// </param>
         /// <param name="dataOperation">A constant to specify if the standard deviation 
@@ -2678,7 +2660,7 @@ namespace Novacta.Analytics
         /// <paramref name="data"/> row. 
         /// </para>
         /// <para>
-        /// If <paramref name="adjustForBias"/> is set to <b>false</b>, then 
+        /// If <paramref name="adjustForBias"/> is set to <c>false</c>, then 
         /// the standard deviation of the <i>i</i>-th row is estimated through 
         /// the coefficient
         /// <latex mode="display">
@@ -2692,7 +2674,7 @@ namespace Novacta.Analytics
         /// <i>i</i>-th row.
         /// </para>
         /// <para>
-        /// Such estimator is biased. If <paramref name="adjustForBias"/> is set to <b>true</b>, then 
+        /// Such estimator is biased. If <paramref name="adjustForBias"/> is set to <c>true</c>, then 
         /// the variance estimator is corrected for bias
         /// and the <i>i</i>-th standard deviation is evaluated through the coefficient
         /// <latex mode="display">
@@ -2709,7 +2691,7 @@ namespace Novacta.Analytics
         /// <paramref name="data"/> column. 
         /// </para>
         /// <para>
-        /// If <paramref name="adjustForBias"/> is set to <b>false</b>, then 
+        /// If <paramref name="adjustForBias"/> is set to <c>false</c>, then 
         /// the standard deviation of the <i>j</i>-th column is estimated through 
         /// the coefficient
         /// <latex mode="display">
@@ -2723,7 +2705,7 @@ namespace Novacta.Analytics
         /// <i>j</i>-th column.
         /// </para>
         /// <para>
-        /// Such estimator is biased. If <paramref name="adjustForBias"/> is set to <b>true</b>, 
+        /// Such estimator is biased. If <paramref name="adjustForBias"/> is set to <c>true</c>, 
         /// then the variance estimator is corrected for bias
         /// and the <i>j</i>-th standard deviation is evaluated through the coefficient
         /// <latex mode="display">
@@ -2752,12 +2734,12 @@ namespace Novacta.Analytics
         /// <paramref name="dataOperation"/> is not a field of 
         /// <see cref="DataOperation"/>.<br/>
         /// -or<br/>
-        /// <paramref name="adjustForBias"/> is <b>true</b>,
+        /// <paramref name="adjustForBias"/> is <c>true</c>,
         /// <paramref name="dataOperation"/> is <see cref="DataOperation.OnRows"/> 
         /// and the <paramref name="data"/> number of columns 
         /// is less than <c>2</c>.<br/>
         /// -or-<br/>
-        /// <paramref name="adjustForBias"/> is <b>true</b>,
+        /// <paramref name="adjustForBias"/> is <c>true</c>,
         /// <paramref name="dataOperation"/> is <see cref="DataOperation.OnColumns"/> 
         /// and the <paramref name="data"/> number of rows 
         /// is less than <c>2</c>.
@@ -2814,9 +2796,6 @@ namespace Novacta.Analytics
                 new DenseMatrixImplementor<ByDimensionSummaryOperator<double>>(numberOfStorageSchemes, 1);
 
             operators[dense] = new ByDimensionSummaryOperator<double>(StatisticOperators.Dense_Sum);
-
-            operators[view] = new ByDimensionSummaryOperator<double>(StatisticOperators.View_Sum);
-
             operators[sparse] = new ByDimensionSummaryOperator<double>(StatisticOperators.Sparse_Sum);
 
             return operators;
@@ -2831,8 +2810,6 @@ namespace Novacta.Analytics
                 new DenseMatrixImplementor<SummaryOperator<double>>(numberOfStorageSchemes, 1);
 
             operators[dense] = new SummaryOperator<double>(StatisticOperators.Dense_Sum);
-
-            operators[view] = new SummaryOperator<double>(StatisticOperators.View_Sum);
 
             operators[sparse] = new SummaryOperator<double>(StatisticOperators.Sparse_Sum);
 
@@ -3016,7 +2993,6 @@ namespace Novacta.Analytics
         {
             var operators = new DenseMatrixImplementor<ByDimensionSummaryOperator<double>>(numberOfStorageSchemes, 1);
             operators[dense] = new ByDimensionSummaryOperator<double>(StatisticOperators.Dense_SumOfSquaredDeviations);
-            operators[view] = new ByDimensionSummaryOperator<double>(StatisticOperators.View_SumOfSquaredDeviations);
             operators[sparse] = new ByDimensionSummaryOperator<double>(StatisticOperators.Sparse_SumOfSquaredDeviations);
             return operators;
         }
@@ -3028,7 +3004,6 @@ namespace Novacta.Analytics
         {
             var operators = new DenseMatrixImplementor<SummaryOperator<double>>(numberOfStorageSchemes, 1);
             operators[dense] = new SummaryOperator<double>(StatisticOperators.Dense_SumOfSquaredDeviations);
-            operators[view] = new SummaryOperator<double>(StatisticOperators.View_SumOfSquaredDeviations);
             operators[sparse] = new SummaryOperator<double>(StatisticOperators.Sparse_SumOfSquaredDeviations);
             return operators;
         }
@@ -3231,7 +3206,7 @@ namespace Novacta.Analytics
         /// Returns the variance of the specified data, eventually adjusted for bias.
         /// </summary>
         /// <param name="data">The data.</param>
-        /// <param name="adjustForBias">If set to <b>true</b> signals that the variance 
+        /// <param name="adjustForBias">If set to <c>true</c> signals that the variance 
         /// is adjusted for bias.
         /// </param>
         /// <remarks>
@@ -3249,7 +3224,7 @@ namespace Novacta.Analytics
         /// of order <latex mode="inline">r</latex>.
         /// </para>
         /// <para>
-        /// If <paramref name="adjustForBias"/> is set to <b>false</b>, then 
+        /// If <paramref name="adjustForBias"/> is set to <c>false</c>, then 
         /// the variance is estimated through the coefficient
         /// <latex mode="display">
         /// \hat{\sigma}^2=\hat{\mu}_2,
@@ -3267,7 +3242,7 @@ namespace Novacta.Analytics
         /// </latex>
         /// </para>
         /// <para>
-        /// Such estimator is biased. If <paramref name="adjustForBias"/> is set to <b>true</b>, 
+        /// Such estimator is biased. If <paramref name="adjustForBias"/> is set to <c>true</c>, 
         /// then the estimator is corrected for bias
         /// and the variance is evaluated through the coefficient
         /// <latex mode="display">
@@ -3291,7 +3266,7 @@ namespace Novacta.Analytics
         /// <paramref name="data" /> is <b>null</b>.
         /// </exception>
         /// <exception cref="ArgumentException">
-        /// <paramref name="adjustForBias"/> is <b>true</b> and the number of entries
+        /// <paramref name="adjustForBias"/> is <c>true</c> and the number of entries
         /// in <paramref name="data"/> is less than <c>2</c>.
         /// </exception>
         /// <seealso href="http://en.wikipedia.org/wiki/Variance"/>
@@ -3328,7 +3303,7 @@ namespace Novacta.Analytics
         /// in the specified data, eventually adjusted for bias.
         /// </summary>
         /// <param name="data">The data.</param>
-        /// <param name="adjustForBias">If set to <b>true</b> signals that the variance 
+        /// <param name="adjustForBias">If set to <c>true</c> signals that the variance 
         /// is adjusted for bias.
         /// </param>
         /// <param name="dataOperation">A constant to specify if the variance 
@@ -3357,7 +3332,7 @@ namespace Novacta.Analytics
         /// <paramref name="data"/> row. 
         /// </para>
         /// <para>
-        /// If <paramref name="adjustForBias"/> is set to <b>false</b>, then 
+        /// If <paramref name="adjustForBias"/> is set to <c>false</c>, then 
         /// the variance of the <i>i</i>-th row is estimated through 
         /// the coefficient
         /// <latex mode="display">
@@ -3371,7 +3346,7 @@ namespace Novacta.Analytics
         /// <i>i</i>-th row.
         /// </para>
         /// <para>
-        /// Such estimator is biased. If <paramref name="adjustForBias"/> is set to <b>true</b>, then 
+        /// Such estimator is biased. If <paramref name="adjustForBias"/> is set to <c>true</c>, then 
         /// the estimator is corrected for bias
         /// and the <i>i</i>-th variance is evaluated through the coefficient
         /// <latex mode="display">
@@ -3387,7 +3362,7 @@ namespace Novacta.Analytics
         /// <paramref name="data"/> column. 
         /// </para>
         /// <para>
-        /// If <paramref name="adjustForBias"/> is set to <b>false</b>, 
+        /// If <paramref name="adjustForBias"/> is set to <c>false</c>, 
         /// then the variance of the <i>j</i>-th column is estimated through 
         /// the coefficient
         /// <latex mode="display">
@@ -3401,7 +3376,7 @@ namespace Novacta.Analytics
         /// <i>j</i>-th column.
         /// </para>
         /// <para>
-        /// Such estimator is biased. If <paramref name="adjustForBias"/> is set to <b>true</b>, 
+        /// Such estimator is biased. If <paramref name="adjustForBias"/> is set to <c>true</c>, 
         /// then the estimator is corrected for bias
         /// and the <i>j</i>-th variance is evaluated through the coefficient
         /// <latex mode="display">
@@ -3430,12 +3405,12 @@ namespace Novacta.Analytics
         /// <paramref name="dataOperation"/> is not a field of 
         /// <see cref="DataOperation"/>.<br/>
         /// -or-<br/>
-        /// <paramref name="adjustForBias"/> is <b>true</b>,
+        /// <paramref name="adjustForBias"/> is <c>true</c>,
         /// <paramref name="dataOperation"/> is <see cref="DataOperation.OnRows"/> 
         /// and the <paramref name="data"/> number of columns 
         /// is less than <c>2</c>.<br/> 
         /// -or-<br/>
-        /// <paramref name="adjustForBias"/> is <b>true</b>,
+        /// <paramref name="adjustForBias"/> is <c>true</c>,
         /// <paramref name="dataOperation"/> is <see cref="DataOperation.OnColumns"/> 
         /// and the <paramref name="data"/> number of rows 
         /// is less than <c>2</c>.

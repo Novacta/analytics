@@ -18,8 +18,8 @@ namespace Novacta.Analytics.CodeExamples
                         "Blue,Negative",
                         "Blue,Positive" };
 
-            MemoryStream stream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(stream);
+            MemoryStream stream = new();
+            StreamWriter writer = new(stream);
             for (int i = 0; i < data.Length; i++)
             {
                 writer.WriteLine(data[i].ToCharArray());
@@ -28,7 +28,7 @@ namespace Novacta.Analytics.CodeExamples
             stream.Position = 0;
 
             // Encode the categorical data set.
-            StreamReader streamReader = new StreamReader(stream);
+            StreamReader streamReader = new(stream);
             char columnDelimiter = ',';
             IndexCollection extractedColumns = IndexCollection.Range(0, 1);
             bool firstLineContainsColumnHeaders = true;

@@ -14,7 +14,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Matrices
     /// </summary>
     /// <remarks>
     /// <para>
-    /// The <see cref="TestableDoubleMatrix.Sparse"/> method is overridden
+    /// The <see cref="TestableDoubleMatrix.AsSparse"/> method is overridden
     /// in order to obtain that positions 1, 7, and 10 are a stored ones,
     /// even if they contain a zero value.
     /// </para>
@@ -46,11 +46,11 @@ namespace Novacta.Analytics.Tests.TestableItems.Matrices
         }
 
         /// <inheritdoc/>
-        public override DoubleMatrix Sparse
+        public override DoubleMatrix AsSparse
         {
             get
             {
-                var sparse = base.Sparse;
+                var sparse = base.AsSparse;
 
                 // Force storage for position 1.
                 sparse[1] = 1.0;

@@ -31,7 +31,7 @@ namespace Novacta.Analytics.Advanced
     /// </para>
     /// <para>
     /// Property <see cref="CrossEntropyResults.HasConverged"/>
-    /// returns <b>true</b> only if the program stops
+    /// returns <c>true</c> only if the program stops
     /// before having executed the maximum allowed number 
     /// of iterations, as specified by 
     /// <see cref="SystemPerformanceOptimizationContext

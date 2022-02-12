@@ -8,13 +8,9 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections.ObjectModel;
-using Novacta.Analytics.Advanced;
 using Novacta.Analytics.Infrastructure;
 using static System.Math;
 using System.Text;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
-using System.Security;
 
 namespace Novacta.Analytics
 {
@@ -83,92 +79,18 @@ namespace Novacta.Analytics
     /// can be obtained by method 
     /// <see cref="Disjoin(DoubleMatrix)"/>.
     /// </para>
+    /// <para><b>Serialization</b></para>
+    /// <para>
+    /// Categorical data sets can be represented as JSON strings, 
+    /// see <see cref="JsonSerialization"/>.
+    /// </para>
     /// </remarks>
     /// <seealso cref="CategoricalVariable"/>
     /// <seealso cref="Category"/>
     /// <seealso cref="MultipleCorrespondence"/>
-    [Serializable]
     public class CategoricalDataSet
-        : IReadOnlyTabularCollection<Category, CategoricalDataSet>, ISerializable
+        : IReadOnlyTabularCollection<Category, CategoricalDataSet>
     {
-        #region ISerializable
-
-        /// <summary>
-        /// Initializes a new instance of the 
-        /// <see cref="CategoricalDataSet"/> class with serialized data.
-        /// </summary>
-        /// <param name="info">
-        /// The object that holds the serialized object data.
-        /// </param>
-        /// <param name="context">
-        /// The contextual information about the source or destination.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="info"/> is <b>null</b>.
-        /// </exception>
-        [SecurityPermission(
-            SecurityAction.Demand,
-            SerializationFormatter = true),
-         System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Naming",
-            "CA1801:ReviewUnusedParameters",
-            Justification = "Constructor requires parameter context.")]
-        protected CategoricalDataSet(
-            SerializationInfo info,
-            StreamingContext context)
-        {
-            if (null == info)
-                throw new ArgumentNullException(nameof(info));
-
-            this.variables =
-                (List<CategoricalVariable>)info.GetValue(
-                    "variables",
-                    typeof(List<CategoricalVariable>));
-
-            this.Variables =
-                new ReadOnlyCollection<CategoricalVariable>(this.variables);
-
-            this.data =
-                (DoubleMatrix)info.GetValue(
-                    "data",
-                    typeof(DoubleMatrix));
-
-            this.Name =
-                (string)info.GetValue(
-                    "Name",
-                    typeof(string));
-
-            this.Data = this.data.AsReadOnly();
-        }
-
-        /// <inheritdoc/>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="info"/> is <b>null</b>.
-        /// </exception>
-        [SecurityCritical]
-        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            if (null == info)
-                throw new ArgumentNullException(nameof(info));
-
-            info.AddValue(
-                "Name",
-                this.Name,
-                typeof(string));
-
-            info.AddValue(
-                "variables",
-                this.variables,
-                typeof(List<CategoricalVariable>));
-
-            info.AddValue(
-                "data",
-                this.data,
-                typeof(DoubleMatrix));
-        }
-
-        #endregion
-
         #region State
 
         private readonly List<CategoricalVariable> variables;
@@ -337,9 +259,9 @@ namespace Novacta.Analytics
                 numberOfColumns: columnVariable.NumberOfCategories);
 
             SortedSet<DoubleMatrixRow> distinctRows =
-                new SortedSet<DoubleMatrixRow>();
+                new();
             Dictionary<DoubleMatrixRow, int> counts =
-                new Dictionary<DoubleMatrixRow, int>();
+                new();
 
             var rows = this.data[":",
                 new IndexCollection(
@@ -649,7 +571,7 @@ namespace Novacta.Analytics
 
             var variables = new List<CategoricalVariable>(numberOfVariables);
 
-            List<double> rawData = new List<double>(100 * numberOfVariables);
+            List<double> rawData = new(100 * numberOfVariables);
 
             double[] nextAvailableCodes = new double[numberOfVariables];
             bool[] isSpecialColumn = new bool[numberOfVariables];
@@ -917,7 +839,7 @@ namespace Novacta.Analytics
             IndexCollection extractedColumns,
             bool firstLineContainsVariableNames)
         {
-            using (StreamReader reader = new StreamReader(path))
+            using (StreamReader reader = new(path))
             {
                 return Encode(
                      reader,
@@ -1020,7 +942,7 @@ namespace Novacta.Analytics
             Dictionary<int, Categorizer> specialCategorizers,
             IFormatProvider provider)
         {
-            using (StreamReader reader = new StreamReader(path))
+            using (StreamReader reader = new(path))
             {
                 return Encode(
                      reader,
@@ -1262,10 +1184,6 @@ namespace Novacta.Analytics
         /// <see cref="Data"/> of 
         /// the <see cref="CategoricalDataSet"/>.
         /// </exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public CategoricalDataSet this[
             IndexCollection rowIndexes,
             IndexCollection columnIndexes]
@@ -1338,10 +1256,6 @@ namespace Novacta.Analytics
         /// -or-<br/>
         /// <paramref name="columnIndexes"/> is not a string reserved 
         /// for matrix sub-referencing.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public CategoricalDataSet this[
             IndexCollection rowIndexes,
             string columnIndexes]
@@ -1403,10 +1317,6 @@ namespace Novacta.Analytics
         /// <see cref="Data"/> of 
         /// the <see cref="CategoricalDataSet"/>.
         /// </exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public CategoricalDataSet this[
             IndexCollection rowIndexes,
             int columnIndex]
@@ -1476,10 +1386,6 @@ namespace Novacta.Analytics
         /// <see cref="Data"/> of 
         /// the <see cref="CategoricalDataSet"/>.
         /// </exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public CategoricalDataSet this[
             string rowIndexes,
             IndexCollection columnIndexes]
@@ -1551,10 +1457,6 @@ namespace Novacta.Analytics
         /// <paramref name="columnIndexes"/> is not a string reserved 
         /// for matrix sub-referencing.
         /// </exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public CategoricalDataSet this[
             string rowIndexes,
             string columnIndexes]
@@ -1619,10 +1521,6 @@ namespace Novacta.Analytics
         /// <see cref="Data"/> of 
         /// the <see cref="CategoricalDataSet"/>.
         /// </exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public CategoricalDataSet this[
             string rowIndexes,
             int columnIndex]
@@ -1688,10 +1586,6 @@ namespace Novacta.Analytics
         /// <see cref="Data"/> of 
         /// the <see cref="CategoricalDataSet"/>.
         /// </exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public CategoricalDataSet this[
             int rowIndex,
             IndexCollection columnIndexes]
@@ -1755,10 +1649,6 @@ namespace Novacta.Analytics
         /// -or-<br/>
         /// <paramref name="columnIndexes"/> is not a string reserved 
         /// for matrix sub-referencing.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public CategoricalDataSet this[
             int rowIndex,
             string columnIndexes]
@@ -1814,10 +1704,6 @@ namespace Novacta.Analytics
         /// <see cref="Data"/> of 
         /// the <see cref="CategoricalDataSet"/>.
         /// </exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1023:IndexersShouldNotBeMultidimensional",
-            Justification = "Matrix indexers must be bi-dimensional.")]
         public Category this[
             int rowIndex,
             int columnIndex]
@@ -1941,7 +1827,7 @@ namespace Novacta.Analytics
             int targetColumn,
             IFormatProvider provider)
         {
-            using (StreamReader reader = new StreamReader(path))
+            using (StreamReader reader = new(path))
             {
                 return CategorizeByEntropyMinimization(
                      reader,
@@ -2102,7 +1988,7 @@ namespace Novacta.Analytics
             int numberOfNumericalVariables = numericalColumns.Count;
 
             List<double> rawData =
-                new List<double>(100 * numberOfNumericalVariables);
+                new(100 * numberOfNumericalVariables);
 
             string line;
             string[] tokens;
@@ -2302,7 +2188,7 @@ namespace Novacta.Analytics
                     node => node.IsTerminal).ToArray();
             var categories =
                 new Tuple<string, Predicate<double>>[terminalNodes.Length];
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new();
 
             for (int i = 0; i < terminalNodes.Length; i++)
             {

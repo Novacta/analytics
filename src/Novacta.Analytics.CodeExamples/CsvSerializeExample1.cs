@@ -28,15 +28,15 @@ namespace Novacta.Analytics.CodeExamples
             Console.WriteLine();
 
             // Create a stream to serialize the matrix.
-            MemoryStream stream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(stream);
+            MemoryStream stream = new();
+            StreamWriter writer = new(stream);
 
             // Serialize the matrix.
-            CsvMatrixSerializer.Serialize(writer, matrix);
+            CsvDoubleMatrixSerializer.Serialize(writer, matrix);
 
             // Read the CSV representation of the matrix from the stream.
             stream.Position = 0;
-            StreamReader reader = new StreamReader(stream);
+            StreamReader reader = new(stream);
             string line;
             Console.WriteLine("CSV representation of the matrix:");
             while ((line = reader.ReadLine()) != null) {
@@ -46,7 +46,8 @@ namespace Novacta.Analytics.CodeExamples
 
             // Deserialize the matrix from the stream.
             stream.Position = 0;
-            var deserializedMatrix = CsvMatrixSerializer.Deserialize(reader);
+            var deserializedMatrix = 
+                CsvDoubleMatrixSerializer.Deserialize(reader);
 
             // Show the deserialized matrix.
             Console.WriteLine("Deserialized matrix:");
@@ -55,15 +56,16 @@ namespace Novacta.Analytics.CodeExamples
             // Serialize is overloaded to accept data as a read-only matrix:
             // serialize a read-only wrapper of the matrix.
             stream.Position = 0;
-            CsvMatrixSerializer.Serialize(writer, matrix.AsReadOnly());
+            CsvDoubleMatrixSerializer.Serialize(writer, matrix.AsReadOnly());
 
             // Deserialize again the matrix.
             stream.Position = 0;
-            deserializedMatrix = CsvMatrixSerializer.Deserialize(reader);
+            var deserializedReadOnlyMatrix = 
+                CsvDoubleMatrixSerializer.Deserialize(reader);
 
             // Show the deserialized matrix.
             Console.WriteLine("Deserialized matrix after serialization of a read-only matrix:");
-            Console.WriteLine(deserializedMatrix);
+            Console.WriteLine(deserializedReadOnlyMatrix);
         }
     }
 }

@@ -31,12 +31,12 @@ namespace Novacta.Analytics.Tests.TestableItems.Quantile
                 base(
                     expected: new DoubleMatrixState(
                         asColumnMajorDenseArray: 
-                            TestableDoubleMatrix52.Get().Dense.AsColumnMajorDenseArray(),
-                        numberOfRows: TestableDoubleMatrix52.Get().Dense.Count,
+                            TestableDoubleMatrix52.Get().AsDense.AsColumnMajorDenseArray(),
+                        numberOfRows: TestableDoubleMatrix52.Get().AsDense.Count,
                         numberOfColumns: 1),
                     data: TestableDoubleMatrix52.Get(),
                     probabilities: GetKnownProbabilities(
-                        TestableDoubleMatrix52.Get().Dense.Count))
+                        TestableDoubleMatrix52.Get().AsDense.Count))
         {
         }
 

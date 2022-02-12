@@ -42,7 +42,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Matrices
             return new TestableDoubleMatrix09();
         }
 
-        public override DoubleMatrix Sparse
+        public override DoubleMatrix AsSparse
         {
             get
             {

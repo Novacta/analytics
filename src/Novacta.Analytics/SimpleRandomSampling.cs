@@ -160,7 +160,7 @@ namespace Novacta.Analytics
             double u;
             double numberOfSampledUnits = 0;
             int numberOfInspectedUnits = 0;
-            List<int> sampleList = new List<int>(sampleSize);
+            List<int> sampleList = new(sampleSize);
             for (int i = 0; i < populationSize; i++)
             {
                 u = this.RandomNumberGenerator.DefaultUniform();

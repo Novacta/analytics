@@ -41,8 +41,8 @@ namespace Novacta.Analytics.CodeExamples
             "9,C",
             "9,C" };
 
-            MemoryStream stream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(stream);
+            MemoryStream stream = new();
+            StreamWriter writer = new(stream);
             for (int i = 0; i < data.Length; i++) {
                 writer.WriteLine(data[i].ToCharArray());
                 writer.Flush();
@@ -50,7 +50,7 @@ namespace Novacta.Analytics.CodeExamples
             stream.Position = 0;
 
             // Identify the special categorizer for variable NUMERICAL.
-            StreamReader streamReader = new StreamReader(stream);
+            StreamReader streamReader = new(stream);
             char columnDelimiter = ',';
             IndexCollection numericalColumns = IndexCollection.Range(0, 0);
             bool firstLineContainsColumnHeaders = true;

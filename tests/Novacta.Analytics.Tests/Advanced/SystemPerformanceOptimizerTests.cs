@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Novacta.Analytics.Infrastructure;
 using Novacta.Analytics.Tests.TestableItems.CrossEntropy;
@@ -22,7 +21,7 @@ namespace Novacta.Analytics.Advanced.Tests
                 string parameterName = "context";
                 string innerMessage =
                     ArgumentExceptionAssert.NullPartialMessage +
-                        Environment.NewLine + "Parameter name: " + parameterName;
+                        " (Parameter '" + parameterName + "')";
 
                 var optimizer = new SystemPerformanceOptimizer();
 
@@ -49,7 +48,7 @@ namespace Novacta.Analytics.Advanced.Tests
                 string parameterName = "context";
                 string innerMessage =
                     ArgumentExceptionAssert.NullPartialMessage +
-                        Environment.NewLine + "Parameter name: " + parameterName;
+                        " (Parameter '" + parameterName + "')";
 
                 var optimizer = new SystemPerformanceOptimizer();
 
@@ -72,7 +71,7 @@ namespace Novacta.Analytics.Advanced.Tests
                 string parameterName = "sample";
                 string innerMessage =
                     ArgumentExceptionAssert.NullPartialMessage +
-                        Environment.NewLine + "Parameter name: " + parameterName;
+                        " (Parameter '" + parameterName + "')";
 
                 var optimizer = new SystemPerformanceOptimizer();
 
@@ -97,7 +96,7 @@ namespace Novacta.Analytics.Advanced.Tests
                 string innerMessage =
                     ImplementationServices.GetResourceString(
                         "STR_EXCEPT_CEP_SAMPLE_IS_CONTEXT_INCOMPATIBLE") +
-                    Environment.NewLine + "Parameter name: " + parameterName;
+                        " (Parameter '" + parameterName + "')";
 
                 var optimizer = new SystemPerformanceOptimizer();
 
@@ -250,6 +249,60 @@ namespace Novacta.Analytics.Advanced.Tests
                     expectedParameterName: parameterName);
             }
 
+            // rarity is too low given context and sample size
+            {
+                var STR_EXCEPT_CEM_TOO_LOW_RARITY =
+                    String.Format(
+                        ImplementationServices.GetResourceString(
+                            "STR_EXCEPT_CEM_TOO_LOW_RARITY"), "sampleSize");
+
+                string parameterName = "rarity";
+
+                var optimizer = new SystemPerformanceOptimizer();
+
+                ArgumentExceptionAssert.Throw(
+                    () =>
+                    {
+                        optimizer.Optimize(
+                            context:
+                                TestableSystemPerformanceOptimizationContext02
+                                    .Get().Context,
+                            rarity: .01,
+                            sampleSize: 50);
+                    },
+                    expectedType: typeof(ArgumentException),
+                    expectedPartialMessage:
+                        STR_EXCEPT_CEM_TOO_LOW_RARITY,
+                    expectedParameterName: parameterName);
+            }
+
+            // rarity is too high given context and sample size
+            {
+                var STR_EXCEPT_CEM_TOO_HIGH_RARITY =
+                    String.Format(
+                        ImplementationServices.GetResourceString(
+                            "STR_EXCEPT_CEM_TOO_HIGH_RARITY"), "sampleSize");
+
+                string parameterName = "rarity";
+
+                var optimizer = new SystemPerformanceOptimizer();
+
+                ArgumentExceptionAssert.Throw(
+                    () =>
+                    {
+                        optimizer.Optimize(
+                            context:
+                                TestableSystemPerformanceOptimizationContext00
+                                    .Get().Context,
+                            rarity: .99,
+                            sampleSize: 50);
+                    },
+                    expectedType: typeof(ArgumentException),
+                    expectedPartialMessage:
+                        STR_EXCEPT_CEM_TOO_HIGH_RARITY,
+                    expectedParameterName: parameterName);
+            }
+
             // sampleSize is not positive
             {
                 var STR_EXCEPT_PAR_MUST_BE_POSITIVE =
@@ -367,7 +420,7 @@ namespace Novacta.Analytics.Advanced.Tests
                 string parameterName = "context";
                 string innerMessage =
                     ArgumentExceptionAssert.NullPartialMessage +
-                        Environment.NewLine + "Parameter name: " + parameterName;
+                        " (Parameter '" + parameterName + "')";
 
                 var optimizer = new SystemPerformanceOptimizer();
 
@@ -390,7 +443,7 @@ namespace Novacta.Analytics.Advanced.Tests
                 string parameterName = "parameter";
                 string innerMessage =
                     ArgumentExceptionAssert.NullPartialMessage +
-                        Environment.NewLine + "Parameter name: " + parameterName;
+                        " (Parameter '" + parameterName + "')";
 
                 var optimizer = new SystemPerformanceOptimizer();
 
@@ -414,7 +467,7 @@ namespace Novacta.Analytics.Advanced.Tests
                 string innerMessage =
                     ImplementationServices.GetResourceString(
                         "STR_EXCEPT_PAR_MUST_BE_POSITIVE") +
-                        Environment.NewLine + "Parameter name: " + parameterName;
+                        " (Parameter '" + parameterName + "')";
 
                 var optimizer = new SystemPerformanceOptimizer();
 
@@ -441,7 +494,7 @@ namespace Novacta.Analytics.Advanced.Tests
                 string innerMessage =
                     ImplementationServices.GetResourceString(
                         "STR_EXCEPT_PAR_MUST_BE_POSITIVE") +
-                        Environment.NewLine + "Parameter name: " + parameterName;
+                        " (Parameter '" + parameterName + "')";
 
                 var optimizer = new SystemPerformanceOptimizer();
 
@@ -468,7 +521,7 @@ namespace Novacta.Analytics.Advanced.Tests
                 string innerMessage =
                     ImplementationServices.GetResourceString(
                         "STR_EXCEPT_CEP_PARAMETER_IS_CONTEXT_INCOMPATIBLE") +
-                        Environment.NewLine + "Parameter name: " + parameterName;
+                        " (Parameter '" + parameterName + "')";
 
                 var optimizer = new SystemPerformanceOptimizer();
 
@@ -497,7 +550,7 @@ namespace Novacta.Analytics.Advanced.Tests
                 string innerMessage =
                     ImplementationServices.GetResourceString(
                         "STR_EXCEPT_CEP_PARAMETER_IS_CONTEXT_INCOMPATIBLE") +
-                        Environment.NewLine + "Parameter name: " + parameterName;
+                        " (Parameter '" + parameterName + "')";
 
                 var optimizer = new SystemPerformanceOptimizer();
 

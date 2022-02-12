@@ -147,7 +147,7 @@ namespace Novacta.Analytics
 
             unsafe
             {
-                SafeNativeMethods.VSL_viRngUniform(
+                SafeNativeMethods.VSL.viRngUniform(
                     0,
                     this.descriptor.DangerousGetHandle().ToPointer(),
                     1,
@@ -191,10 +191,6 @@ namespace Novacta.Analytics
         /// </exception>
         /// <seealso href="https://en.wikipedia.org/wiki/Uniform_distribution_(discrete)"/>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Design", 
-            "CA1062:Validate arguments of public methods", 
-            Justification = "Input validation delegated to other methods.")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Performance",
             "CA1806:Do not ignore method results",
             Justification =
@@ -221,7 +217,7 @@ namespace Novacta.Analytics
             unsafe
             {
                 fixed (int* destinationPointer = &destinationArray[destinationIndex]) {
-                    SafeNativeMethods.VSL_viRngUniform(
+                    SafeNativeMethods.VSL.viRngUniform(
                         0,
                         this.descriptor.DangerousGetHandle().ToPointer(),
                         sampleSize,
@@ -269,10 +265,6 @@ namespace Novacta.Analytics
         /// </exception>
         /// <seealso href="https://en.wikipedia.org/wiki/Uniform_distribution_(continuous)"/>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Design",
-            "CA1062:Validate arguments of public methods",
-            Justification = "Input validation delegated to other methods.")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Performance", 
             "CA1806:Do not ignore method results", 
             Justification =
@@ -299,7 +291,7 @@ namespace Novacta.Analytics
             unsafe
             {
                 fixed (double* destinationPointer = &destinationArray[destinationIndex]) {
-                    SafeNativeMethods.VSL_vdRngUniform(
+                    SafeNativeMethods.VSL.vdRngUniform(
                         0,
                         this.descriptor.DangerousGetHandle().ToPointer(),
                         sampleSize,
@@ -340,10 +332,6 @@ namespace Novacta.Analytics
         /// </exception>
         /// <seealso href="https://en.wikipedia.org/wiki/Uniform_distribution_(continuous)"/>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Design",
-            "CA1062:Validate arguments of public methods",
-            Justification = "Input validation delegated to ProbabilityDistribution.ValidateSampleInput.")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Performance",
             "CA1806:Do not ignore method results",
             Justification =
@@ -364,7 +352,7 @@ namespace Novacta.Analytics
             unsafe
             {
                 fixed (double* destinationPointer = &destinationArray[destinationIndex]) {
-                    SafeNativeMethods.VSL_vdRngUniform(
+                    SafeNativeMethods.VSL.vdRngUniform(
                         0,
                         this.descriptor.DangerousGetHandle().ToPointer(),
                         sampleSize,
@@ -410,7 +398,7 @@ namespace Novacta.Analytics
 
             unsafe
             {
-                SafeNativeMethods.VSL_vdRngUniform(
+                SafeNativeMethods.VSL.vdRngUniform(
                     0,
                     this.descriptor.DangerousGetHandle().ToPointer(),
                     1,
@@ -445,7 +433,7 @@ namespace Novacta.Analytics
 
             unsafe
             {
-                SafeNativeMethods.VSL_vdRngUniform(
+                SafeNativeMethods.VSL.vdRngUniform(
                     0,
                     this.descriptor.DangerousGetHandle().ToPointer(),
                     1,
@@ -493,10 +481,6 @@ namespace Novacta.Analytics
         /// </exception>
         /// <seealso href="https://en.wikipedia.org/wiki/Gaussian_distribution"/>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Design",
-            "CA1062:Validate arguments of public methods",
-            Justification = "Input validation partially delegated to ProbabilityDistribution.ValidateSampleInput")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Performance",
             "CA1806:Do not ignore method results",
             Justification =
@@ -525,7 +509,7 @@ namespace Novacta.Analytics
             unsafe
             {
                 fixed (double* destinationPointer = &destinationArray[destinationIndex]) {
-                    SafeNativeMethods.VSL_vdRngGaussian(
+                    SafeNativeMethods.VSL.vdRngGaussian(
                         0,
                         this.descriptor.DangerousGetHandle().ToPointer(),
                         sampleSize,
@@ -572,7 +556,7 @@ namespace Novacta.Analytics
 
             unsafe
             {
-                SafeNativeMethods.VSL_vdRngGaussian(
+                SafeNativeMethods.VSL.vdRngGaussian(
                     0,
                     this.descriptor.DangerousGetHandle().ToPointer(),
                     1,

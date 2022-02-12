@@ -51,7 +51,7 @@ namespace Novacta.Analytics
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (!(obj is IndexValuePair))
+            if (obj is not IndexValuePair)
                 return false;
 
             return Equals((IndexValuePair)obj);
@@ -61,8 +61,8 @@ namespace Novacta.Analytics
         /// Indicates whether the current object is equal to another object of the same type.
         /// </summary>
         /// <param name="other">An object to compare with this object.</param>
-        /// <returns><b>true</b> if the current object is equal to the <paramref name="other" /> 
-        /// parameter; otherwise, <b>false</b>.</returns>
+        /// <returns><c>true</c> if the current object is equal to the <paramref name="other" /> 
+        /// parameter; otherwise, <c>false</c>.</returns>
         public bool Equals(IndexValuePair other)
         {
             if (this.index != other.index)
@@ -84,8 +84,8 @@ namespace Novacta.Analytics
         /// </summary>
         /// <param name="left">The first instance to compare.</param>
         /// <param name="right">The second instance to compare.</param>
-        /// <returns><b>true</b> if <paramref name="left"/> is equal to <paramref name="right"/>;
-        /// otherwise, <b>false</b>.
+        /// <returns><c>true</c> if <paramref name="left"/> is equal to <paramref name="right"/>;
+        /// otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(IndexValuePair left, IndexValuePair right)
         {
@@ -99,8 +99,8 @@ namespace Novacta.Analytics
         /// </summary>
         /// <param name="left">The first instance to compare.</param>
         /// <param name="right">The second instance to compare.</param>
-        /// <returns><b>true</b> if <paramref name="left"/> is not equal to <paramref name="right"/>;
-        /// otherwise, <b>false</b>.
+        /// <returns><c>true</c> if <paramref name="left"/> is not equal to <paramref name="right"/>;
+        /// otherwise, <c>false</c>.
         /// </returns>
         public static bool operator !=(IndexValuePair left, IndexValuePair right)
         {

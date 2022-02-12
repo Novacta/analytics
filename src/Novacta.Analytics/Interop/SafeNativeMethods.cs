@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Numerics;
 using System.Runtime.InteropServices;
 
 namespace Novacta.Analytics.Interop
@@ -59,6 +60,11 @@ namespace Novacta.Analytics.Interop
                 /// Conjugate matrix transposition. 
                 /// </summary>
                 internal static int ConjTrans = 113; /* trans='C' */
+
+                /// <summary>
+                /// Conjugate matrix transposition. 
+                /// </summary>
+                internal static int Conj = 114; /* trans='R' */
             };
 
             /// <summary>
@@ -111,56 +117,123 @@ namespace Novacta.Analytics.Interop
                 /// </summary>
                 internal static int Right = 142; /* side='R' */
             };
+
+            #region Double (d)
+
+            [DllImport("libna",
+                EntryPoint = "cblas_dgemm",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern void DGEMM(
+                     int order,
+                     int transA,
+                     int transB,
+                     int m,
+                     int n,
+                     int k,
+                     double alpha,
+                     [In] double[] a,
+                     int lda,
+                     [In] double[] b,
+                     int ldb,
+                     double beta,
+                     [In, Out] double[] c,
+                     int ldc);
+
+            [DllImport("libna",
+                EntryPoint = "cblas_dtrsm",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern void DTRSM(
+                    int order,
+                    int side,
+                    int uplo,
+                    int transA,
+                    int diag,
+                    int m,
+                    int n,
+                    double alpha,
+                    [In] double[] a,
+                    int lda,
+                    [In, Out] double[] b,
+                    int ldb);
+
+            #endregion
+
+            #region Complex (z)
+
+            [DllImport("libna",
+                EntryPoint = "cblas_zgemm",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern unsafe void ZGEMM(
+                     int order,
+                     int transA,
+                     int transB,
+                     int m,
+                     int n,
+                     int k,
+                     Complex* alpha,
+                     Complex* a,
+                     int lda,
+                     Complex* b,
+                     int ldb,
+                     Complex* beta,
+                     Complex* c,
+                     int ldc);
+
+            [DllImport("libna",
+                EntryPoint = "cblas_ztrsm",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern unsafe void ZTRSM(
+                    int order,
+                    int side,
+                    int uplo,
+                    int transA,
+                    int diag,
+                    int m,
+                    int n,
+                    Complex* alpha,
+                    Complex* a,
+                    int lda,
+                    Complex* b,
+                    int ldb);
+
+            #endregion
         }
 
-        [DllImport("libna",
-            EntryPoint = "cblas_dgemm",
-            CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void BLAS_dgemm(
-                 int order,
-                 int transA,
-                 int transB,
-                 int m,
-                 int n,
-                 int k,
-                 double alpha,
-                 [In] double[] a,
-                 int lda,
-                 [In] double[] b,
-                 int ldb,
-                 double beta,
-                 [In, Out] double[] c,
-                 int ldc);
+        #endregion
 
-        [DllImport("libna",
-            EntryPoint = "cblas_dtrsm",
-            CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void BLAS_dtrsm(
-                int order,
-                int side,
-                int uplo,
-                int transA,
-                int diag,
-                int m,
-                int n,
-                double alpha,
-                [In] double[] a,
-                int lda,
-                [In, Out] double[] b,
-                int ldb);
+        #region TRANS
 
-        [DllImport("libna",
-            EntryPoint = "MKL_Dimatcopy",
-            CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void MKL_Dimatcopy(
-                char ordering,
-                char trans,
-                int rows,
-                int cols,
-                double alpha,
-                [In, Out] double[] ab,
-                int lda,
-                int ldb);
+        /// <summary>
+        /// Provides support to operate with selected native transposition routines.
+        /// </summary>
+        internal static class TRANS
+        {
+            [DllImport("libna",
+                EntryPoint = "MKL_Dimatcopy",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern void DIMATCOPY(
+                    char ordering,
+                    char trans,
+                    int rows,
+                    int cols,
+                    double alpha,
+                    [In, Out] double[] ab,
+                    int lda,
+                    int ldb);
+
+            [DllImport("libna",
+                EntryPoint = "MKL_Zimatcopy",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern void ZIMATCOPY(
+                    char ordering,
+                    char trans,
+                    int rows,
+                    int cols,
+                    Complex alpha,
+                    [In, Out] Complex[] ab,
+                    int lda,
+                    int ldb);
+        }
 
         #endregion
 
@@ -189,99 +262,198 @@ namespace Novacta.Analytics.Interop
                 /// </summary>
                 internal static int RowMajor = 101; //LAPACK_ROW_MAJOR;
             };
+
+            #region Double (d)
+
+            [DllImport("libna",
+                EntryPoint = "LAPACKE_dgels",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern int DGELS(
+                int matrix_order,
+                char trans,
+                int m,
+                int n,
+                int nrhs,
+                [In, Out] double[] a,
+                int lda,
+                [In, Out] double[] b,
+                int ldb);
+
+            [DllImport("libna",
+                EntryPoint = "LAPACKE_dgetrs",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern int DGETRS(
+                int matrix_order,
+                char trans,
+                int n,
+                int nrhs,
+                [In] double[] a,
+                int lda,
+                [In] int[] ipiv,
+                [In, Out] double[] b,
+                int ldb);
+
+            [DllImport("libna",
+                EntryPoint = "LAPACKE_dgetrf",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern int DGETRF(
+                int matrix_order,
+                int m,
+                int n,
+                [In, Out] double[] a,
+                int lda,
+                [Out] int[] ipiv);
+
+            [DllImport("libna",
+                EntryPoint = "LAPACKE_dposv",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern int DPOSV(
+                int matrix_order,
+                char uplo,
+                int n,
+                int nrhs,
+                [In, Out] double[] a,
+                int lda,
+                [In, Out] double[] b,
+                int ldb);
+
+            [DllImport("libna",
+                EntryPoint = "LAPACKE_dgesvd",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern int DGESVD(
+                int matrix_layout,
+                char jobu,
+                char jobvt,
+                int m,
+                int n,
+                [In, Out] double[] a,
+                int lda,
+                [In, Out] double[] s,
+                [In, Out] double[] u,
+                int ldu,
+                [In, Out] double[] vt,
+                int ldvt,
+                [In, Out] double[] superb);
+
+            [DllImport("libna",
+                EntryPoint = "LAPACKE_dsyev",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern int DSYEV(
+                int matrix_layout,
+                char jobz,
+                char uplo,
+                int n,
+                [In, Out] double[] a,
+                int lda,
+                [In, Out] double[] w);
+
+            #endregion
+
+            #region Complex (z)
+
+            [DllImport("libna",
+                EntryPoint = "LAPACKE_zgels",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern int ZGELS(
+                int matrix_order,
+                char trans,
+                int m,
+                int n,
+                int nrhs,
+                [In, Out] Complex[] a,
+                int lda,
+                [In, Out] Complex[] b,
+                int ldb);
+
+            [DllImport("libna",
+                EntryPoint = "LAPACKE_zgetrs",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern int ZGETRS(
+                int matrix_order,
+                char trans,
+                int n,
+                int nrhs,
+                [In] Complex[] a,
+                int lda,
+                [In] int[] ipiv,
+                [In, Out] Complex[] b,
+                int ldb);
+
+            [DllImport("libna",
+                EntryPoint = "LAPACKE_zgetrf",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern int ZGETRF(
+                int matrix_order,
+                int m,
+                int n,
+                [In, Out] Complex[] a,
+                int lda,
+                [Out] int[] ipiv);
+
+            [DllImport("libna",
+                EntryPoint = "LAPACKE_zposv",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern int ZPOSV(
+                int matrix_order,
+                char uplo,
+                int n,
+                int nrhs,
+                [In, Out] Complex[] a,
+                int lda,
+                [In, Out] Complex[] b,
+                int ldb);
+
+            [DllImport("libna",
+                EntryPoint = "LAPACKE_zgesvd",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern int ZGESVD(
+                int matrix_layout,
+                char jobu,
+                char jobvt,
+                int m,
+                int n,
+                [In, Out] Complex[] a,
+                int lda,
+                [In, Out] double[] s,
+                [In, Out] Complex[] u,
+                int ldu,
+                [In, Out] Complex[] vt,
+                int ldvt,
+                [In, Out] double[] superb);
+
+            [DllImport("libna",
+                EntryPoint = "LAPACKE_zheev",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern int ZHEEV(
+                int matrix_layout,
+                char jobz,
+                char uplo,
+                int n,
+                [In, Out] Complex[] a,
+                int lda,
+                [In, Out] double[] w);
+
+            #endregion
         }
 
-        [DllImport("libna",
-            EntryPoint = "LAPACKE_dgels",
-            CallingConvention = CallingConvention.Cdecl)]
-        internal static extern int LAPACK_dgels(
-            int matrix_order,
-            char trans,
-            int m,
-            int n,
-            int nrhs,
-            [In, Out] double[] a,
-            int lda,
-            [In, Out] double[] b,
-            int ldb);
-
-        [DllImport("libna",
-            EntryPoint = "LAPACKE_dgetrs",
-            CallingConvention = CallingConvention.Cdecl)]
-        internal static extern int LAPACK_dgetrs(
-            int matrix_order,
-            char trans,
-            int n,
-            int nrhs,
-            [In] double[] a,
-            int lda,
-            [In] int[] ipiv,
-            [In, Out] double[] b,
-            int ldb);
-
-        [DllImport("libna",
-            EntryPoint = "LAPACKE_dgetrf",
-            CallingConvention = CallingConvention.Cdecl)]
-        internal static extern int LAPACK_dgetrf(
-            int matrix_order,
-            int m,
-            int n,
-            [In, Out] double[] a,
-            int lda,
-            [Out] int[] ipiv);
-
-        [DllImport("libna",
-            EntryPoint = "LAPACKE_dpotrf",
-            CallingConvention = CallingConvention.Cdecl)]
-        internal static extern int LAPACK_dpotrf(
-            int matrix_order,
-            char uplo,
-            int n,
-            [In, Out] double[] a,
-            int lda);
-
-        [DllImport("libna",
-            EntryPoint = "LAPACKE_dposv",
-            CallingConvention = CallingConvention.Cdecl)]
-        internal static extern int LAPACK_dposv(
-            int matrix_order,
-            char uplo,
-            int n,
-            int nrhs,
-            [In, Out] double[] a,
-            int lda,
-            [In, Out] double[] b,
-            int ldb);
-
-        [DllImport("libna",
-            EntryPoint = "LAPACKE_dgesvd",
-            CallingConvention = CallingConvention.Cdecl)]
-        internal static extern int LAPACK_dgesvd(
-            int matrix_layout,
-            char jobu,
-            char jobvt,
-            int m,
-            int n,
-            [In, Out] double[] a,
-            int lda,
-            [In, Out] double[] s,
-            [In, Out] double[] u,
-            int ldu,
-            [In, Out] double[] vt,
-            int ldvt,
-            [In, Out] double[] superb);
 
         #endregion
 
         #region VML
 
-        [DllImport("libna",
-            EntryPoint = "vdCdfNormInv",
-            CallingConvention = CallingConvention.Cdecl)]
-        internal static extern unsafe void VML_vdCdfNormInv(
-            int n,
-            double* a,
-            double* y);
+        /// <summary>
+        /// Provides support to operate with selected VML native routines.
+        /// </summary>
+        internal static class VML
+        {
+            [DllImport("libna",
+                EntryPoint = "vdCdfNormInv",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern unsafe void vdCdfNormInv(
+                int n,
+                double* a,
+                double* y);
+        }
 
         #endregion
 
@@ -332,119 +504,60 @@ namespace Novacta.Analytics.Interop
                 internal static int VSL_BRNG_ARS5 = (VSL_BRNG_NONDETERM + VSL_BRNG_INC);
                 internal static int VSL_BRNG_PHILOX4X32X10 = (VSL_BRNG_ARS5 + VSL_BRNG_INC);
             };
+
+            #region Random streams
+
+            // Methods to operate with VSL Random Streams.
+
+            [DllImport("libna",
+                EntryPoint = "vslNewStream",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern int NewStream(
+                ref IntPtr stream,
+                int brng,
+                int seed);
+
+            [DllImport("libna",
+                EntryPoint = "vslDeleteStream",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern int DeleteStream(
+                ref IntPtr stream);
+
+            [DllImport("libna",
+                EntryPoint = "vdRngUniform",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern unsafe int vdRngUniform(
+                int method,
+                void* stream,
+                int n,
+                double* r,
+                double a,
+                double b);
+
+            [DllImport("libna",
+                EntryPoint = "viRngUniform",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern unsafe int viRngUniform(
+                int method, // Must be 0
+                void* stream,
+                int n,
+                int* r,
+                int a,
+                int b);
+
+            [DllImport("libna",
+                EntryPoint = "vdRngGaussian",
+                CallingConvention = CallingConvention.Cdecl)]
+            internal static extern unsafe int vdRngGaussian(
+                int method,
+                void* stream,
+                int n,
+                double* r,
+                double mu,
+                double sigma);
+
+            #endregion
         }
-
-        #region Summary statistics
-
-        // Methods to operate with VSL Summary Statistics. 
-
-        [DllImport("libna",
-            EntryPoint = "vsldSSNewTask",
-            CallingConvention = CallingConvention.Cdecl)]
-        internal unsafe static extern int VSL_dSSNewTask(
-            ref IntPtr task,
-            int* p,
-            int* n,
-            int* xstorage,
-            double* x,
-            double* w,
-            int* indices);
-
-        [DllImport("libna",
-            EntryPoint = "vsldSSEditQuantiles",
-            CallingConvention = CallingConvention.Cdecl)]
-        internal static extern unsafe int VSL_dSSEditQuantiles(
-            IntPtr task,
-            int* quant_order_n,
-            double* quant_order,
-            double* quants,
-            double* order_stats,
-            int* order_stats_storage);
-
-        [DllImport("libna",
-            EntryPoint = "vsldSSEditTask",
-            CallingConvention = CallingConvention.Cdecl)]
-        internal static extern unsafe int VSL_dSSEditTask(
-            IntPtr task,
-            int parameter,
-            double* par_addr);
-
-        [DllImport("libna",
-            EntryPoint = "vsliSSEditTask",
-            CallingConvention = CallingConvention.Cdecl)]
-        internal static extern unsafe int VSL_iSSEditTask(
-            void* task,
-            int parameter,
-            int* par_addr);
-
-        [DllImport("libna",
-            EntryPoint = "vsldSSCompute",
-            CallingConvention = CallingConvention.Cdecl)]
-        internal static extern unsafe int VSL_dSSCompute(
-            void* task,
-            ulong parameters,
-            int method);
-
-        [DllImport("libna",
-            EntryPoint = "vslSSDeleteTask",
-            CallingConvention = CallingConvention.Cdecl)]
-        internal static extern unsafe int VSL_SSDeleteTask(
-            ref IntPtr task);
-
-        #endregion
-
-        #region Random streams
-
-        // Methods to operate with VSL Random Streams.
-
-        [DllImport("libna",
-            EntryPoint = "vslNewStream",
-            CallingConvention = CallingConvention.Cdecl)]
-        internal static extern int VSL_NewStream(
-            ref IntPtr stream,
-            int brng,
-            int seed);
-
-        [DllImport("libna",
-            EntryPoint = "vslDeleteStream",
-            CallingConvention = CallingConvention.Cdecl)]
-        internal static extern int VSL_DeleteStream(
-            ref IntPtr stream);
-
-        [DllImport("libna",
-            EntryPoint = "vdRngUniform",
-            CallingConvention = CallingConvention.Cdecl)]
-        internal static extern unsafe int VSL_vdRngUniform(
-            int method,
-            void* stream,
-            int n,
-            double* r,
-            double a,
-            double b);
-
-        [DllImport("libna",
-            EntryPoint = "viRngUniform",
-            CallingConvention = CallingConvention.Cdecl)]
-        internal unsafe static extern int VSL_viRngUniform(
-            int method, // Must be 0
-            void* stream,
-            int n,
-            int* r,
-            int a,
-            int b);
-
-        [DllImport("libna",
-            EntryPoint = "vdRngGaussian",
-            CallingConvention = CallingConvention.Cdecl)]
-        internal unsafe static extern int VSL_vdRngGaussian(
-            int method,
-            void* stream,
-            int n,
-            double* r,
-            double mu,
-            double sigma);
-
-        #endregion
 
         #endregion
     }

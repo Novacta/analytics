@@ -4,9 +4,6 @@
 
 using System;
 using System.Globalization;
-using System.Runtime.Serialization;
-using System.Security;
-using System.Security.Permissions;
 using System.Text;
 using Novacta.Analytics.Infrastructure;
 
@@ -41,72 +38,8 @@ namespace Novacta.Analytics
     /// label of the category to be added.</para>
     /// </remarks>
     /// <seealso cref="CategoricalVariable"/>
-    [Serializable]
-    public class Category : ISerializable
+    public class Category
     {
-        #region ISerializable
-
-        /// <summary>
-        /// Initializes a new instance of the 
-        /// <see cref="Category"/> class with serialized data.
-        /// </summary>
-        /// <param name="info">
-        /// The object that holds the serialized object data.
-        /// </param>
-        /// <param name="context">
-        /// The contextual information about the source or destination.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="info"/> is <b>null</b>.
-        /// </exception>
-        [SecurityPermission(
-            SecurityAction.Demand,
-            SerializationFormatter = true),
-         System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Naming",
-            "CA1801:ReviewUnusedParameters",
-            Justification = "Constructor requires parameter context.")]
-        protected Category(
-            SerializationInfo info,
-            StreamingContext context)
-        {
-            if (null == info)
-                throw new ArgumentNullException(nameof(info));
-
-            this.Code =
-                (double)info.GetValue(
-                    "Code",
-                    typeof(double));
-
-            this.Label =
-                (string)info.GetValue(
-                    "Label",
-                    typeof(string));
-        }
-
-        /// <inheritdoc/>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="info"/> is <b>null</b>.
-        /// </exception>
-        [SecurityCritical]
-        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            if (null == info)
-                throw new ArgumentNullException(nameof(info));
-
-            info.AddValue(
-                "Code",
-                this.Code,
-                typeof(double));
-
-            info.AddValue(
-                "Label",
-                this.Label,
-                typeof(string));
-        }
-
-        #endregion
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Category"/> class.
         /// </summary>
@@ -158,7 +91,7 @@ namespace Novacta.Analytics
         /// </returns>
         public override string ToString()
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new();
 
             stringBuilder.Append(this.Code.ToString(CultureInfo.InvariantCulture));
 

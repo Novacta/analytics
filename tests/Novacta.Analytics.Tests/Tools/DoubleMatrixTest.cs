@@ -7,6 +7,7 @@ using Novacta.Analytics.Infrastructure;
 using Novacta.Analytics.Tests.TestableItems;
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 
 namespace Novacta.Analytics.Tests.Tools
 {
@@ -28,10 +29,26 @@ namespace Novacta.Analytics.Tests.Tools
 
         public static Action<DoubleMatrix, DoubleMatrix> AreEqual { get; set; }
 
+        //public static Action<double, double> ScalarsAreEqual { get; set; }
         static DoubleMatrixTest()
         {
             Accuracy = 1e-2;
             AreEqual = (expected, actual) => { DoubleMatrixAssert.AreEqual(expected, actual, Accuracy); };
+            //ScalarsAreEqual = (expected, actual) =>
+            //{
+            //    if (double.IsNaN(expected))
+            //    {
+            //        Assert.IsTrue(double.IsNaN(actual));
+            //    }
+            //    else
+            //    {
+            //        Assert.AreEqual(expected.Real, actual.Real, Accuracy,
+            //           String.Format("Unexpected real value."));
+
+            //        Assert.AreEqual(expected.Imaginary, actual.Imaginary, Accuracy,
+            //           String.Format("Unexpected imaginary value."));
+            //    }
+            //};
         }
 
         #endregion
@@ -67,27 +84,19 @@ namespace Novacta.Analytics.Tests.Tools
                     double subtractOne(double x) { return x - 1.0; }
 
                     // Dense
-                    target = testableMatrix.Dense;
+                    target = testableMatrix.AsDense;
                     target.InPlaceApply(addOne);
                     target.InPlaceApply(subtractOne);
                     actual = target;
-                    expected = testableMatrix.Dense;
+                    expected = testableMatrix.AsDense;
                     DoubleMatrixAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
 
                     // Sparse
-                    target = testableMatrix.Sparse;
+                    target = testableMatrix.AsSparse;
                     target.InPlaceApply(addOne);
                     target.InPlaceApply(subtractOne);
                     actual = target;
-                    expected = testableMatrix.Sparse;
-                    DoubleMatrixAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
-
-                    // View
-                    target = testableMatrix.View;
-                    target.InPlaceApply(addOne);
-                    target.InPlaceApply(subtractOne);
-                    actual = target;
-                    expected = testableMatrix.View;
+                    expected = testableMatrix.AsSparse;
                     DoubleMatrixAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
                 }
 
@@ -106,7 +115,7 @@ namespace Novacta.Analytics.Tests.Tools
                     ArgumentExceptionAssert.Throw(
                         () =>
                         {
-                            testableMatrix.Dense.InPlaceApply(null);
+                            testableMatrix.AsDense.InPlaceApply(null);
                         },
                         expectedType: typeof(ArgumentNullException),
                         expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
@@ -116,17 +125,7 @@ namespace Novacta.Analytics.Tests.Tools
                     ArgumentExceptionAssert.Throw(
                         () =>
                         {
-                            testableMatrix.Sparse.InPlaceApply(null);
-                        },
-                        expectedType: typeof(ArgumentNullException),
-                        expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
-                        expectedParameterName: parameterName);
-
-                    // View
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            testableMatrix.View.InPlaceApply(null);
+                            testableMatrix.AsSparse.InPlaceApply(null);
                         },
                         expectedType: typeof(ArgumentNullException),
                         expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
@@ -158,27 +157,19 @@ namespace Novacta.Analytics.Tests.Tools
                     DoubleMatrix actual;
 
                     // Dense
-                    actual = testableMatrix.Dense.Apply(func);
+                    actual = testableMatrix.AsDense.Apply(func);
                     DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
 
                     // Sparse
-                    actual = testableMatrix.Sparse.Apply(func);
-                    DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
-
-                    // View
-                    actual = testableMatrix.View.Apply(func);
+                    actual = testableMatrix.AsSparse.Apply(func);
                     DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
 
                     // Dense.AsReadOnly()
-                    actual = testableMatrix.Dense.AsReadOnly().Apply(func);
+                    actual = testableMatrix.AsDense.AsReadOnly().Apply(func);
                     DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
 
                     // Sparse.AsReadOnly()
-                    actual = testableMatrix.Sparse.AsReadOnly().Apply(func);
-                    DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
-
-                    // View.AsReadOnly()
-                    actual = testableMatrix.View.AsReadOnly().Apply(func);
+                    actual = testableMatrix.AsSparse.AsReadOnly().Apply(func);
                     DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
                 }
 
@@ -198,7 +189,7 @@ namespace Novacta.Analytics.Tests.Tools
                     ArgumentExceptionAssert.Throw(
                         () =>
                         {
-                            testableMatrix.Dense.Apply(null);
+                            testableMatrix.AsDense.Apply(null);
                         },
                         expectedType: typeof(ArgumentNullException),
                         expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
@@ -208,17 +199,7 @@ namespace Novacta.Analytics.Tests.Tools
                     ArgumentExceptionAssert.Throw(
                         () =>
                         {
-                            testableMatrix.Sparse.Apply(null);
-                        },
-                        expectedType: typeof(ArgumentNullException),
-                        expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
-                        expectedParameterName: parameterName);
-
-                    // View
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            testableMatrix.View.Apply(null);
+                            testableMatrix.AsSparse.Apply(null);
                         },
                         expectedType: typeof(ArgumentNullException),
                         expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
@@ -228,7 +209,7 @@ namespace Novacta.Analytics.Tests.Tools
                     ArgumentExceptionAssert.Throw(
                         () =>
                         {
-                            testableMatrix.Dense.AsReadOnly().Apply(null);
+                            testableMatrix.AsDense.AsReadOnly().Apply(null);
                         },
                         expectedType: typeof(ArgumentNullException),
                         expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
@@ -238,17 +219,7 @@ namespace Novacta.Analytics.Tests.Tools
                     ArgumentExceptionAssert.Throw(
                         () =>
                         {
-                            testableMatrix.Sparse.AsReadOnly().Apply(null);
-                        },
-                        expectedType: typeof(ArgumentNullException),
-                        expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
-                        expectedParameterName: parameterName);
-
-                    // View.AsReadOnly()
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            testableMatrix.View.AsReadOnly().Apply(null);
+                            testableMatrix.AsSparse.AsReadOnly().Apply(null);
                         },
                         expectedType: typeof(ArgumentNullException),
                         expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
@@ -274,27 +245,19 @@ namespace Novacta.Analytics.Tests.Tools
             double[] actual;
 
             // Dense
-            actual = testableMatrix.Dense.AsColumnMajorDenseArray();
+            actual = testableMatrix.AsDense.AsColumnMajorDenseArray();
             DoubleArrayAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
 
             // Sparse
-            actual = testableMatrix.Sparse.AsColumnMajorDenseArray();
-            DoubleArrayAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
-
-            // View
-            actual = testableMatrix.View.AsColumnMajorDenseArray();
+            actual = testableMatrix.AsSparse.AsColumnMajorDenseArray();
             DoubleArrayAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
 
             // Dense.AsReadOnly()
-            actual = testableMatrix.Dense.AsReadOnly().AsColumnMajorDenseArray();
+            actual = testableMatrix.AsDense.AsReadOnly().AsColumnMajorDenseArray();
             DoubleArrayAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
 
             // Sparse.AsReadOnly()
-            actual = testableMatrix.Sparse.AsReadOnly().AsColumnMajorDenseArray();
-            DoubleArrayAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
-
-            // View.AsReadOnly()
-            actual = testableMatrix.View.AsReadOnly().AsColumnMajorDenseArray();
+            actual = testableMatrix.AsSparse.AsReadOnly().AsColumnMajorDenseArray();
             DoubleArrayAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
         }
 
@@ -313,16 +276,12 @@ namespace Novacta.Analytics.Tests.Tools
             ReadOnlyDoubleMatrix actual;
 
             // Dense
-            actual = testableMatrix.Dense.AsReadOnly();
-            DoubleMatrixAssert.AreEqual(testableMatrix.Dense, actual.matrix, DoubleMatrixTest.Accuracy);
+            actual = testableMatrix.AsDense.AsReadOnly();
+            DoubleMatrixAssert.AreEqual(testableMatrix.AsDense, actual.matrix, DoubleMatrixTest.Accuracy);
 
             // Sparse
-            actual = testableMatrix.Sparse.AsReadOnly();
-            DoubleMatrixAssert.AreEqual(testableMatrix.Sparse, actual.matrix, DoubleMatrixTest.Accuracy);
-
-            // View
-            actual = testableMatrix.View.AsReadOnly();
-            DoubleMatrixAssert.AreEqual(testableMatrix.View, actual.matrix, DoubleMatrixTest.Accuracy);
+            actual = testableMatrix.AsSparse.AsReadOnly();
+            DoubleMatrixAssert.AreEqual(testableMatrix.AsSparse, actual.matrix, DoubleMatrixTest.Accuracy);
         }
 
         #endregion
@@ -342,19 +301,51 @@ namespace Novacta.Analytics.Tests.Tools
             DoubleMatrix actual;
 
             // Dense
-            actual = testableMatrix.Dense.Clone();
+            actual = testableMatrix.AsDense.Clone();
             DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
 
             // Sparse
-            actual = testableMatrix.Sparse.Clone();
-            DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
-
-            // View
-            actual = testableMatrix.View.Clone();
+            actual = testableMatrix.AsSparse.Clone();
             DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
         }
 
         #endregion
+
+        #region IComplexMatrixPatterns
+
+        /// <summary>
+        /// Tests the 
+        /// <see cref="IComplexMatrixPatterns.IsHermitian"/> property for 
+        /// <see cref="DoubleMatrix"/> and <see cref="ReadOnlyDoubleMatrix"/> 
+        /// instances.
+        /// </summary>
+        public static void IsHermitian(TestableDoubleMatrix testableMatrix)
+        {
+            var expected = testableMatrix.Expected.IsSymmetric;
+
+            Assert.AreEqual(expected, testableMatrix.AsDense.IsHermitian);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.IsHermitian);
+
+            Assert.AreEqual(expected, testableMatrix.AsDense.AsReadOnly().IsHermitian);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.AsReadOnly().IsHermitian);
+        }
+
+        /// <summary>
+        /// Tests the 
+        /// <see cref="IComplexMatrixPatterns.IsSkewHermitian"/> property for 
+        /// <see cref="DoubleMatrix"/> and <see cref="ReadOnlyDoubleMatrix"/> 
+        /// instances.
+        /// </summary>
+        public static void IsSkewHermitian(TestableDoubleMatrix testableMatrix)
+        {
+            var expected = testableMatrix.Expected.IsSkewSymmetric;
+
+            Assert.AreEqual(expected, testableMatrix.AsDense.IsSkewHermitian);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.IsSkewHermitian);
+
+            Assert.AreEqual(expected, testableMatrix.AsDense.AsReadOnly().IsSkewHermitian);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.AsReadOnly().IsSkewHermitian);
+        }
 
         #region IMatrixPatterns
 
@@ -368,13 +359,11 @@ namespace Novacta.Analytics.Tests.Tools
         {
             var expected = testableMatrix.Expected.IsSymmetric;
 
-            Assert.AreEqual(expected, testableMatrix.Dense.IsSymmetric);
-            Assert.AreEqual(expected, testableMatrix.View.IsSymmetric);
-            Assert.AreEqual(expected, testableMatrix.Sparse.IsSymmetric);
+            Assert.AreEqual(expected, testableMatrix.AsDense.IsSymmetric);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.IsSymmetric);
 
-            Assert.AreEqual(expected, testableMatrix.Dense.AsReadOnly().IsSymmetric);
-            Assert.AreEqual(expected, testableMatrix.View.AsReadOnly().IsSymmetric);
-            Assert.AreEqual(expected, testableMatrix.Sparse.AsReadOnly().IsSymmetric);
+            Assert.AreEqual(expected, testableMatrix.AsDense.AsReadOnly().IsSymmetric);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.AsReadOnly().IsSymmetric);
         }
 
         /// <summary>
@@ -387,13 +376,11 @@ namespace Novacta.Analytics.Tests.Tools
         {
             var expected = testableMatrix.Expected.IsSkewSymmetric;
 
-            Assert.AreEqual(expected, testableMatrix.Dense.IsSkewSymmetric);
-            Assert.AreEqual(expected, testableMatrix.View.IsSkewSymmetric);
-            Assert.AreEqual(expected, testableMatrix.Sparse.IsSkewSymmetric);
+            Assert.AreEqual(expected, testableMatrix.AsDense.IsSkewSymmetric);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.IsSkewSymmetric);
 
-            Assert.AreEqual(expected, testableMatrix.Dense.AsReadOnly().IsSkewSymmetric);
-            Assert.AreEqual(expected, testableMatrix.View.AsReadOnly().IsSkewSymmetric);
-            Assert.AreEqual(expected, testableMatrix.Sparse.AsReadOnly().IsSkewSymmetric);
+            Assert.AreEqual(expected, testableMatrix.AsDense.AsReadOnly().IsSkewSymmetric);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.AsReadOnly().IsSkewSymmetric);
         }
 
         /// <summary>
@@ -409,13 +396,11 @@ namespace Novacta.Analytics.Tests.Tools
                 ||
                 testableMatrix.Expected.NumberOfColumns == 1;
 
-            Assert.AreEqual(expected, testableMatrix.Dense.IsVector);
-            Assert.AreEqual(expected, testableMatrix.View.IsVector);
-            Assert.AreEqual(expected, testableMatrix.Sparse.IsVector);
+            Assert.AreEqual(expected, testableMatrix.AsDense.IsVector);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.IsVector);
 
-            Assert.AreEqual(expected, testableMatrix.Dense.AsReadOnly().IsVector);
-            Assert.AreEqual(expected, testableMatrix.View.AsReadOnly().IsVector);
-            Assert.AreEqual(expected, testableMatrix.Sparse.AsReadOnly().IsVector);
+            Assert.AreEqual(expected, testableMatrix.AsDense.AsReadOnly().IsVector);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.AsReadOnly().IsVector);
         }
 
         /// <summary>
@@ -428,13 +413,11 @@ namespace Novacta.Analytics.Tests.Tools
         {
             var expected = testableMatrix.Expected.NumberOfRows == 1;
 
-            Assert.AreEqual(expected, testableMatrix.Dense.IsRowVector);
-            Assert.AreEqual(expected, testableMatrix.View.IsRowVector);
-            Assert.AreEqual(expected, testableMatrix.Sparse.IsRowVector);
+            Assert.AreEqual(expected, testableMatrix.AsDense.IsRowVector);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.IsRowVector);
 
-            Assert.AreEqual(expected, testableMatrix.Dense.AsReadOnly().IsRowVector);
-            Assert.AreEqual(expected, testableMatrix.View.AsReadOnly().IsRowVector);
-            Assert.AreEqual(expected, testableMatrix.Sparse.AsReadOnly().IsRowVector);
+            Assert.AreEqual(expected, testableMatrix.AsDense.AsReadOnly().IsRowVector);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.AsReadOnly().IsRowVector);
         }
 
         /// <summary>
@@ -447,13 +430,11 @@ namespace Novacta.Analytics.Tests.Tools
         {
             var expected = testableMatrix.Expected.NumberOfColumns == 1;
 
-            Assert.AreEqual(expected, testableMatrix.Dense.IsColumnVector);
-            Assert.AreEqual(expected, testableMatrix.View.IsColumnVector);
-            Assert.AreEqual(expected, testableMatrix.Sparse.IsColumnVector);
+            Assert.AreEqual(expected, testableMatrix.AsDense.IsColumnVector);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.IsColumnVector);
 
-            Assert.AreEqual(expected, testableMatrix.Dense.AsReadOnly().IsColumnVector);
-            Assert.AreEqual(expected, testableMatrix.View.AsReadOnly().IsColumnVector);
-            Assert.AreEqual(expected, testableMatrix.Sparse.AsReadOnly().IsColumnVector);
+            Assert.AreEqual(expected, testableMatrix.AsDense.AsReadOnly().IsColumnVector);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.AsReadOnly().IsColumnVector);
         }
 
         /// <summary>
@@ -469,13 +450,11 @@ namespace Novacta.Analytics.Tests.Tools
                 &&
                 testableMatrix.Expected.NumberOfColumns == 1;
 
-            Assert.AreEqual(expected, testableMatrix.Dense.IsScalar);
-            Assert.AreEqual(expected, testableMatrix.View.IsScalar);
-            Assert.AreEqual(expected, testableMatrix.Sparse.IsScalar);
+            Assert.AreEqual(expected, testableMatrix.AsDense.IsScalar);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.IsScalar);
 
-            Assert.AreEqual(expected, testableMatrix.Dense.AsReadOnly().IsScalar);
-            Assert.AreEqual(expected, testableMatrix.View.AsReadOnly().IsScalar);
-            Assert.AreEqual(expected, testableMatrix.Sparse.AsReadOnly().IsScalar);
+            Assert.AreEqual(expected, testableMatrix.AsDense.AsReadOnly().IsScalar);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.AsReadOnly().IsScalar);
         }
 
         /// <summary>
@@ -491,13 +470,11 @@ namespace Novacta.Analytics.Tests.Tools
                 ==
                 testableMatrix.Expected.NumberOfColumns;
 
-            Assert.AreEqual(expected, testableMatrix.Dense.IsSquare);
-            Assert.AreEqual(expected, testableMatrix.View.IsSquare);
-            Assert.AreEqual(expected, testableMatrix.Sparse.IsSquare);
+            Assert.AreEqual(expected, testableMatrix.AsDense.IsSquare);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.IsSquare);
 
-            Assert.AreEqual(expected, testableMatrix.Dense.AsReadOnly().IsSquare);
-            Assert.AreEqual(expected, testableMatrix.View.AsReadOnly().IsSquare);
-            Assert.AreEqual(expected, testableMatrix.Sparse.AsReadOnly().IsSquare);
+            Assert.AreEqual(expected, testableMatrix.AsDense.AsReadOnly().IsSquare);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.AsReadOnly().IsSquare);
         }
 
         /// <summary>
@@ -513,13 +490,11 @@ namespace Novacta.Analytics.Tests.Tools
                 &&
                 testableMatrix.Expected.IsUpperTriangular;
 
-            Assert.AreEqual(expected, testableMatrix.Dense.IsDiagonal);
-            Assert.AreEqual(expected, testableMatrix.View.IsDiagonal);
-            Assert.AreEqual(expected, testableMatrix.Sparse.IsDiagonal);
+            Assert.AreEqual(expected, testableMatrix.AsDense.IsDiagonal);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.IsDiagonal);
 
-            Assert.AreEqual(expected, testableMatrix.Dense.AsReadOnly().IsDiagonal);
-            Assert.AreEqual(expected, testableMatrix.View.AsReadOnly().IsDiagonal);
-            Assert.AreEqual(expected, testableMatrix.Sparse.AsReadOnly().IsDiagonal);
+            Assert.AreEqual(expected, testableMatrix.AsDense.AsReadOnly().IsDiagonal);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.AsReadOnly().IsDiagonal);
         }
 
         /// <summary>
@@ -535,13 +510,11 @@ namespace Novacta.Analytics.Tests.Tools
                 ||
                 testableMatrix.Expected.IsUpperHessenberg;
 
-            Assert.AreEqual(expected, testableMatrix.Dense.IsHessenberg);
-            Assert.AreEqual(expected, testableMatrix.View.IsHessenberg);
-            Assert.AreEqual(expected, testableMatrix.Sparse.IsHessenberg);
+            Assert.AreEqual(expected, testableMatrix.AsDense.IsHessenberg);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.IsHessenberg);
 
-            Assert.AreEqual(expected, testableMatrix.Dense.AsReadOnly().IsHessenberg);
-            Assert.AreEqual(expected, testableMatrix.View.AsReadOnly().IsHessenberg);
-            Assert.AreEqual(expected, testableMatrix.Sparse.AsReadOnly().IsHessenberg);
+            Assert.AreEqual(expected, testableMatrix.AsDense.AsReadOnly().IsHessenberg);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.AsReadOnly().IsHessenberg);
         }
 
         /// <summary>
@@ -554,13 +527,11 @@ namespace Novacta.Analytics.Tests.Tools
         {
             var expected = testableMatrix.Expected.IsLowerHessenberg;
 
-            Assert.AreEqual(expected, testableMatrix.Dense.IsLowerHessenberg);
-            Assert.AreEqual(expected, testableMatrix.View.IsLowerHessenberg);
-            Assert.AreEqual(expected, testableMatrix.Sparse.IsLowerHessenberg);
+            Assert.AreEqual(expected, testableMatrix.AsDense.IsLowerHessenberg);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.IsLowerHessenberg);
 
-            Assert.AreEqual(expected, testableMatrix.Dense.AsReadOnly().IsLowerHessenberg);
-            Assert.AreEqual(expected, testableMatrix.View.AsReadOnly().IsLowerHessenberg);
-            Assert.AreEqual(expected, testableMatrix.Sparse.AsReadOnly().IsLowerHessenberg);
+            Assert.AreEqual(expected, testableMatrix.AsDense.AsReadOnly().IsLowerHessenberg);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.AsReadOnly().IsLowerHessenberg);
         }
 
         /// <summary>
@@ -573,13 +544,11 @@ namespace Novacta.Analytics.Tests.Tools
         {
             var expected = testableMatrix.Expected.IsUpperHessenberg;
 
-            Assert.AreEqual(expected, testableMatrix.Dense.IsUpperHessenberg);
-            Assert.AreEqual(expected, testableMatrix.View.IsUpperHessenberg);
-            Assert.AreEqual(expected, testableMatrix.Sparse.IsUpperHessenberg);
+            Assert.AreEqual(expected, testableMatrix.AsDense.IsUpperHessenberg);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.IsUpperHessenberg);
 
-            Assert.AreEqual(expected, testableMatrix.Dense.AsReadOnly().IsUpperHessenberg);
-            Assert.AreEqual(expected, testableMatrix.View.AsReadOnly().IsUpperHessenberg);
-            Assert.AreEqual(expected, testableMatrix.Sparse.AsReadOnly().IsUpperHessenberg);
+            Assert.AreEqual(expected, testableMatrix.AsDense.AsReadOnly().IsUpperHessenberg);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.AsReadOnly().IsUpperHessenberg);
         }
 
         /// <summary>
@@ -595,13 +564,11 @@ namespace Novacta.Analytics.Tests.Tools
                 ||
                 testableMatrix.Expected.IsUpperTriangular;
 
-            Assert.AreEqual(expected, testableMatrix.Dense.IsTriangular);
-            Assert.AreEqual(expected, testableMatrix.View.IsTriangular);
-            Assert.AreEqual(expected, testableMatrix.Sparse.IsTriangular);
+            Assert.AreEqual(expected, testableMatrix.AsDense.IsTriangular);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.IsTriangular);
 
-            Assert.AreEqual(expected, testableMatrix.Dense.AsReadOnly().IsTriangular);
-            Assert.AreEqual(expected, testableMatrix.View.AsReadOnly().IsTriangular);
-            Assert.AreEqual(expected, testableMatrix.Sparse.AsReadOnly().IsTriangular);
+            Assert.AreEqual(expected, testableMatrix.AsDense.AsReadOnly().IsTriangular);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.AsReadOnly().IsTriangular);
         }
 
         /// <summary>
@@ -614,13 +581,11 @@ namespace Novacta.Analytics.Tests.Tools
         {
             var expected = testableMatrix.Expected.IsLowerTriangular;
 
-            Assert.AreEqual(expected, testableMatrix.Dense.IsLowerTriangular);
-            Assert.AreEqual(expected, testableMatrix.View.IsLowerTriangular);
-            Assert.AreEqual(expected, testableMatrix.Sparse.IsLowerTriangular);
+            Assert.AreEqual(expected, testableMatrix.AsDense.IsLowerTriangular);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.IsLowerTriangular);
 
-            Assert.AreEqual(expected, testableMatrix.Dense.AsReadOnly().IsLowerTriangular);
-            Assert.AreEqual(expected, testableMatrix.View.AsReadOnly().IsLowerTriangular);
-            Assert.AreEqual(expected, testableMatrix.Sparse.AsReadOnly().IsLowerTriangular);
+            Assert.AreEqual(expected, testableMatrix.AsDense.AsReadOnly().IsLowerTriangular);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.AsReadOnly().IsLowerTriangular);
         }
 
         /// <summary>
@@ -633,13 +598,11 @@ namespace Novacta.Analytics.Tests.Tools
         {
             var expected = testableMatrix.Expected.IsUpperTriangular;
 
-            Assert.AreEqual(expected, testableMatrix.Dense.IsUpperTriangular);
-            Assert.AreEqual(expected, testableMatrix.View.IsUpperTriangular);
-            Assert.AreEqual(expected, testableMatrix.Sparse.IsUpperTriangular);
+            Assert.AreEqual(expected, testableMatrix.AsDense.IsUpperTriangular);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.IsUpperTriangular);
 
-            Assert.AreEqual(expected, testableMatrix.Dense.AsReadOnly().IsUpperTriangular);
-            Assert.AreEqual(expected, testableMatrix.View.AsReadOnly().IsUpperTriangular);
-            Assert.AreEqual(expected, testableMatrix.Sparse.AsReadOnly().IsUpperTriangular);
+            Assert.AreEqual(expected, testableMatrix.AsDense.AsReadOnly().IsUpperTriangular);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.AsReadOnly().IsUpperTriangular);
         }
 
         /// <summary>
@@ -655,13 +618,11 @@ namespace Novacta.Analytics.Tests.Tools
                 &&
                 testableMatrix.Expected.IsUpperHessenberg;
 
-            Assert.AreEqual(expected, testableMatrix.Dense.IsTridiagonal);
-            Assert.AreEqual(expected, testableMatrix.View.IsTridiagonal);
-            Assert.AreEqual(expected, testableMatrix.Sparse.IsTridiagonal);
+            Assert.AreEqual(expected, testableMatrix.AsDense.IsTridiagonal);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.IsTridiagonal);
 
-            Assert.AreEqual(expected, testableMatrix.Dense.AsReadOnly().IsTridiagonal);
-            Assert.AreEqual(expected, testableMatrix.View.AsReadOnly().IsTridiagonal);
-            Assert.AreEqual(expected, testableMatrix.Sparse.AsReadOnly().IsTridiagonal);
+            Assert.AreEqual(expected, testableMatrix.AsDense.AsReadOnly().IsTridiagonal);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.AsReadOnly().IsTridiagonal);
         }
 
         /// <summary>
@@ -685,13 +646,11 @@ namespace Novacta.Analytics.Tests.Tools
                      testableMatrix.Expected.UpperBandwidth == 0)
                 );
 
-            Assert.AreEqual(expected, testableMatrix.Dense.IsBidiagonal);
-            Assert.AreEqual(expected, testableMatrix.View.IsBidiagonal);
-            Assert.AreEqual(expected, testableMatrix.Sparse.IsBidiagonal);
+            Assert.AreEqual(expected, testableMatrix.AsDense.IsBidiagonal);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.IsBidiagonal);
 
-            Assert.AreEqual(expected, testableMatrix.Dense.AsReadOnly().IsBidiagonal);
-            Assert.AreEqual(expected, testableMatrix.View.AsReadOnly().IsBidiagonal);
-            Assert.AreEqual(expected, testableMatrix.Sparse.AsReadOnly().IsBidiagonal);
+            Assert.AreEqual(expected, testableMatrix.AsDense.AsReadOnly().IsBidiagonal);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.AsReadOnly().IsBidiagonal);
         }
 
         /// <summary>
@@ -709,13 +668,11 @@ namespace Novacta.Analytics.Tests.Tools
                 &&
                 testableMatrix.Expected.UpperBandwidth == 0;
 
-            Assert.AreEqual(expected, testableMatrix.Dense.IsLowerBidiagonal);
-            Assert.AreEqual(expected, testableMatrix.View.IsLowerBidiagonal);
-            Assert.AreEqual(expected, testableMatrix.Sparse.IsLowerBidiagonal);
+            Assert.AreEqual(expected, testableMatrix.AsDense.IsLowerBidiagonal);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.IsLowerBidiagonal);
 
-            Assert.AreEqual(expected, testableMatrix.Dense.AsReadOnly().IsLowerBidiagonal);
-            Assert.AreEqual(expected, testableMatrix.View.AsReadOnly().IsLowerBidiagonal);
-            Assert.AreEqual(expected, testableMatrix.Sparse.AsReadOnly().IsLowerBidiagonal);
+            Assert.AreEqual(expected, testableMatrix.AsDense.AsReadOnly().IsLowerBidiagonal);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.AsReadOnly().IsLowerBidiagonal);
         }
 
         /// <summary>
@@ -733,13 +690,11 @@ namespace Novacta.Analytics.Tests.Tools
                 &&
                 testableMatrix.Expected.UpperBandwidth <= 1;
 
-            Assert.AreEqual(expected, testableMatrix.Dense.IsUpperBidiagonal);
-            Assert.AreEqual(expected, testableMatrix.View.IsUpperBidiagonal);
-            Assert.AreEqual(expected, testableMatrix.Sparse.IsUpperBidiagonal);
+            Assert.AreEqual(expected, testableMatrix.AsDense.IsUpperBidiagonal);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.IsUpperBidiagonal);
 
-            Assert.AreEqual(expected, testableMatrix.Dense.AsReadOnly().IsUpperBidiagonal);
-            Assert.AreEqual(expected, testableMatrix.View.AsReadOnly().IsUpperBidiagonal);
-            Assert.AreEqual(expected, testableMatrix.Sparse.AsReadOnly().IsUpperBidiagonal);
+            Assert.AreEqual(expected, testableMatrix.AsDense.AsReadOnly().IsUpperBidiagonal);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.AsReadOnly().IsUpperBidiagonal);
         }
 
         /// <summary>
@@ -752,13 +707,11 @@ namespace Novacta.Analytics.Tests.Tools
         {
             var expected = testableMatrix.Expected.LowerBandwidth;
 
-            Assert.AreEqual(expected, testableMatrix.Dense.LowerBandwidth);
-            Assert.AreEqual(expected, testableMatrix.View.LowerBandwidth);
-            Assert.AreEqual(expected, testableMatrix.Sparse.LowerBandwidth);
+            Assert.AreEqual(expected, testableMatrix.AsDense.LowerBandwidth);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.LowerBandwidth);
 
-            Assert.AreEqual(expected, testableMatrix.Dense.AsReadOnly().LowerBandwidth);
-            Assert.AreEqual(expected, testableMatrix.View.AsReadOnly().LowerBandwidth);
-            Assert.AreEqual(expected, testableMatrix.Sparse.AsReadOnly().LowerBandwidth);
+            Assert.AreEqual(expected, testableMatrix.AsDense.AsReadOnly().LowerBandwidth);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.AsReadOnly().LowerBandwidth);
         }
 
         /// <summary>
@@ -771,14 +724,14 @@ namespace Novacta.Analytics.Tests.Tools
         {
             var expected = testableMatrix.Expected.UpperBandwidth;
 
-            Assert.AreEqual(expected, testableMatrix.Dense.UpperBandwidth);
-            Assert.AreEqual(expected, testableMatrix.View.UpperBandwidth);
-            Assert.AreEqual(expected, testableMatrix.Sparse.UpperBandwidth);
+            Assert.AreEqual(expected, testableMatrix.AsDense.UpperBandwidth);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.UpperBandwidth);
 
-            Assert.AreEqual(expected, testableMatrix.Dense.AsReadOnly().UpperBandwidth);
-            Assert.AreEqual(expected, testableMatrix.View.AsReadOnly().UpperBandwidth);
-            Assert.AreEqual(expected, testableMatrix.Sparse.AsReadOnly().UpperBandwidth);
+            Assert.AreEqual(expected, testableMatrix.AsDense.AsReadOnly().UpperBandwidth);
+            Assert.AreEqual(expected, testableMatrix.AsSparse.AsReadOnly().UpperBandwidth);
         }
+
+        #endregion
 
         #endregion
 
@@ -796,13 +749,11 @@ namespace Novacta.Analytics.Tests.Tools
         {
             var expected = testableMatrix.Expected.NumberOfRows;
 
-            TabularCollectionTest.NumberOfRows.Get(expected, testableMatrix.Dense);
-            TabularCollectionTest.NumberOfRows.Get(expected, testableMatrix.View);
-            TabularCollectionTest.NumberOfRows.Get(expected, testableMatrix.Sparse);
+            TabularCollectionTest.NumberOfRows.Get(expected, testableMatrix.AsDense);
+            TabularCollectionTest.NumberOfRows.Get(expected, testableMatrix.AsSparse);
 
-            TabularCollectionTest.NumberOfRows.Get(expected, testableMatrix.Dense.AsReadOnly());
-            TabularCollectionTest.NumberOfRows.Get(expected, testableMatrix.View.AsReadOnly());
-            TabularCollectionTest.NumberOfRows.Get(expected, testableMatrix.Sparse.AsReadOnly());
+            TabularCollectionTest.NumberOfRows.Get(expected, testableMatrix.AsDense.AsReadOnly());
+            TabularCollectionTest.NumberOfRows.Get(expected, testableMatrix.AsSparse.AsReadOnly());
         }
 
         /// <summary>
@@ -817,13 +768,11 @@ namespace Novacta.Analytics.Tests.Tools
         {
             var expected = testableMatrix.Expected.NumberOfColumns;
 
-            TabularCollectionTest.NumberOfColumns.Get(expected, testableMatrix.Dense);
-            TabularCollectionTest.NumberOfColumns.Get(expected, testableMatrix.View);
-            TabularCollectionTest.NumberOfColumns.Get(expected, testableMatrix.Sparse);
+            TabularCollectionTest.NumberOfColumns.Get(expected, testableMatrix.AsDense);
+            TabularCollectionTest.NumberOfColumns.Get(expected, testableMatrix.AsSparse);
 
-            TabularCollectionTest.NumberOfColumns.Get(expected, testableMatrix.Dense.AsReadOnly());
-            TabularCollectionTest.NumberOfColumns.Get(expected, testableMatrix.View.AsReadOnly());
-            TabularCollectionTest.NumberOfColumns.Get(expected, testableMatrix.Sparse.AsReadOnly());
+            TabularCollectionTest.NumberOfColumns.Get(expected, testableMatrix.AsDense.AsReadOnly());
+            TabularCollectionTest.NumberOfColumns.Get(expected, testableMatrix.AsSparse.AsReadOnly());
         }
 
         /// <summary>
@@ -845,117 +794,13 @@ namespace Novacta.Analytics.Tests.Tools
             /// on which to invoke the property getter.</param>
             public static void AnyRowIndexIsOutOfRange(TestableDoubleMatrix testableMatrix)
             {
-                TabularCollectionTest.Indexer.Get.AnyRowIndexIsOutOfRange(testableMatrix.Dense);
-                TabularCollectionTest.Indexer.Get.AnyRowIndexIsOutOfRange(testableMatrix.View);
-                TabularCollectionTest.Indexer.Get.AnyRowIndexIsOutOfRange(testableMatrix.Sparse);
+                TabularCollectionTest.Indexer.Get.AnyRowIndexIsOutOfRange(testableMatrix.AsDense);
+                TabularCollectionTest.Indexer.Get.AnyRowIndexIsOutOfRange(testableMatrix.AsSparse);
 
                 TabularCollectionTest.Indexer.Get
-                    .AnyRowIndexIsOutOfRange(testableMatrix.Dense.AsReadOnly());
+                    .AnyRowIndexIsOutOfRange(testableMatrix.AsDense.AsReadOnly());
                 TabularCollectionTest.Indexer.Get
-                    .AnyRowIndexIsOutOfRange(testableMatrix.View.AsReadOnly());
-                TabularCollectionTest.Indexer.Get
-                    .AnyRowIndexIsOutOfRange(testableMatrix.Sparse.AsReadOnly());
-
-                #region Special Behavior of View Implementors
-
-                {
-                    // This region contains assertions about the expected
-                    // behavior of dense implementors on which getters 
-                    // having at least an IndexCollection argument are 
-                    // invoked while avoiding dense storage allocations.
-
-                    string STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS =
-                        (string)Reflector.ExecuteStaticMember(
-                            typeof(ImplementationServices),
-                            "GetResourceString",
-                            new string[] { "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS" });
-
-                    var STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX =
-                        (string)Reflector.ExecuteStaticMember(
-                            typeof(ImplementationServices),
-                            "GetResourceString",
-                            new string[] { "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX" });
-
-                    var source = testableMatrix.Dense;
-
-                    var parameterName = "rowIndexes";
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub =
-                                source[
-                                    IndexCollection.Range(0, source.NumberOfRows),
-                                    IndexCollection.Range(0, source.NumberOfColumns - 1),
-                                    avoidDenseAllocations: true];
-                        },
-                        expectedType: typeof(ArgumentOutOfRangeException),
-                        expectedPartialMessage: STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS,
-                        expectedParameterName: parameterName);
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub =
-                                source[IndexCollection.Range(0, source.NumberOfRows), ":",
-                                avoidDenseAllocations: true];
-                        },
-                        expectedType: typeof(ArgumentOutOfRangeException),
-                        expectedPartialMessage: STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS,
-                        expectedParameterName: parameterName);
-
-                    // IndexCollection
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub =
-                                source[
-                                    "",
-                                    IndexCollection.Range(0, source.NumberOfColumns - 1),
-                                    true];
-                        },
-                        expectedType: typeof(ArgumentOutOfRangeException),
-                        expectedPartialMessage: STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX,
-                        expectedParameterName: parameterName);
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub =
-                                source[
-                                    "end",
-                                    IndexCollection.Range(0, source.NumberOfColumns - 1),
-                                    true];
-                        },
-                        expectedType: typeof(ArgumentOutOfRangeException),
-                        expectedPartialMessage: STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX,
-                        expectedParameterName: parameterName);
-
-                    // String
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub =
-                                source["", ":", true];
-                        },
-                        expectedType: typeof(ArgumentOutOfRangeException),
-                        expectedPartialMessage: STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX,
-                        expectedParameterName: parameterName);
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub =
-                                source["end", ":", true];
-                        },
-                        expectedType: typeof(ArgumentOutOfRangeException),
-                        expectedPartialMessage: STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX,
-                        expectedParameterName: parameterName);
-                }
-
-                #endregion
+                    .AnyRowIndexIsOutOfRange(testableMatrix.AsSparse.AsReadOnly());
             }
 
             /// <summary>
@@ -967,117 +812,13 @@ namespace Novacta.Analytics.Tests.Tools
             /// on which to invoke the property getter.</param>
             public static void AnyColumnIndexIsOutOfRange(TestableDoubleMatrix testableMatrix)
             {
-                TabularCollectionTest.Indexer.Get.AnyColumnIndexIsOutOfRange(testableMatrix.Dense);
-                TabularCollectionTest.Indexer.Get.AnyColumnIndexIsOutOfRange(testableMatrix.View);
-                TabularCollectionTest.Indexer.Get.AnyColumnIndexIsOutOfRange(testableMatrix.Sparse);
+                TabularCollectionTest.Indexer.Get.AnyColumnIndexIsOutOfRange(testableMatrix.AsDense);
+                TabularCollectionTest.Indexer.Get.AnyColumnIndexIsOutOfRange(testableMatrix.AsSparse);
 
                 TabularCollectionTest.Indexer.Get
-                    .AnyColumnIndexIsOutOfRange(testableMatrix.Dense.AsReadOnly());
+                    .AnyColumnIndexIsOutOfRange(testableMatrix.AsDense.AsReadOnly());
                 TabularCollectionTest.Indexer.Get
-                    .AnyColumnIndexIsOutOfRange(testableMatrix.View.AsReadOnly());
-                TabularCollectionTest.Indexer.Get
-                    .AnyColumnIndexIsOutOfRange(testableMatrix.Sparse.AsReadOnly());
-
-                #region Special Behavior of View Implementors
-
-                {
-                    // This region contains assertions about the expected
-                    // behavior of dense implementors on which getters 
-                    // having at least an IndexCollection argument are 
-                    // invoked while avoiding dense storage allocations.
-
-                    string STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS =
-                        (string)Reflector.ExecuteStaticMember(
-                            typeof(ImplementationServices),
-                            "GetResourceString",
-                            new string[] { "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS" });
-
-                    var STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX =
-                        (string)Reflector.ExecuteStaticMember(
-                            typeof(ImplementationServices),
-                            "GetResourceString",
-                            new string[] { "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX" });
-
-                    var source = testableMatrix.Dense;
-
-                    var parameterName = "columnIndexes";
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub =
-                                source[
-                                    IndexCollection.Range(0, source.NumberOfRows - 1),
-                                    IndexCollection.Range(0, source.NumberOfColumns),
-                                    avoidDenseAllocations: true];
-                        },
-                        expectedType: typeof(ArgumentOutOfRangeException),
-                        expectedPartialMessage: STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS,
-                        expectedParameterName: parameterName);
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub =
-                                source[":", IndexCollection.Range(0, source.NumberOfColumns),
-                                avoidDenseAllocations: true];
-                        },
-                        expectedType: typeof(ArgumentOutOfRangeException),
-                        expectedPartialMessage: STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS,
-                        expectedParameterName: parameterName);
-
-                    // IndexCollection
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub =
-                                source[
-                                    IndexCollection.Range(0, source.NumberOfRows - 1),
-                                    "",
-                                    true];
-                        },
-                        expectedType: typeof(ArgumentOutOfRangeException),
-                        expectedPartialMessage: STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX,
-                        expectedParameterName: parameterName);
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub =
-                                source[
-                                    IndexCollection.Range(0, source.NumberOfRows - 1),
-                                    "end",
-                                    true];
-                        },
-                        expectedType: typeof(ArgumentOutOfRangeException),
-                        expectedPartialMessage: STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX,
-                        expectedParameterName: parameterName);
-
-                    // String
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub =
-                                source[":", "", true];
-                        },
-                        expectedType: typeof(ArgumentOutOfRangeException),
-                        expectedPartialMessage: STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX,
-                        expectedParameterName: parameterName);
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub =
-                                source[":", "end", true];
-                        },
-                        expectedType: typeof(ArgumentOutOfRangeException),
-                        expectedPartialMessage: STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX,
-                        expectedParameterName: parameterName);
-                }
-
-                #endregion
+                    .AnyColumnIndexIsOutOfRange(testableMatrix.AsSparse.AsReadOnly());
             }
 
             /// <summary>
@@ -1089,80 +830,13 @@ namespace Novacta.Analytics.Tests.Tools
             /// on which to invoke the property getter.</param>
             public static void RowIndexesIsNull(TestableDoubleMatrix testableMatrix)
             {
-                TabularCollectionTest.Indexer.Get.RowIndexesIsNull(testableMatrix.Dense);
-                TabularCollectionTest.Indexer.Get.RowIndexesIsNull(testableMatrix.View);
-                TabularCollectionTest.Indexer.Get.RowIndexesIsNull(testableMatrix.Sparse);
-
-                #region Special Behavior of View Implementors
-
-                {
-                    // This region contains assertions about the expected
-                    // behavior of dense implementors on which getters 
-                    // having at least an IndexCollection argument are 
-                    // invoked while avoiding dense storage allocations.
-
-                    string parameterName = "rowIndexes";
-                    var source = testableMatrix.Dense;
-
-                    // IndexCollection
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub =
-                                source[
-                                    (IndexCollection)null,
-                                    IndexCollection.Range(0, source.NumberOfColumns - 1),
-                                    true];
-                        },
-                        expectedType: typeof(ArgumentNullException),
-                        expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
-                        expectedParameterName: parameterName);
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub =
-                                source[(IndexCollection)null, ":", true];
-                        },
-                        expectedType: typeof(ArgumentNullException),
-                        expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
-                        expectedParameterName: parameterName);
-
-                    // String 
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub =
-                                source[
-                                    (string)null,
-                                    IndexCollection.Range(0, source.NumberOfColumns - 1),
-                                    true];
-                        },
-                        expectedType: typeof(ArgumentNullException),
-                        expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
-                        expectedParameterName: parameterName);
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub =
-                                source[(string)null, ":", true];
-                        },
-                        expectedType: typeof(ArgumentNullException),
-                        expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
-                        expectedParameterName: parameterName);
-                }
-
-                #endregion
+                TabularCollectionTest.Indexer.Get.RowIndexesIsNull(testableMatrix.AsDense);
+                TabularCollectionTest.Indexer.Get.RowIndexesIsNull(testableMatrix.AsSparse);
 
                 TabularCollectionTest.Indexer.Get
-                    .RowIndexesIsNull(testableMatrix.Dense.AsReadOnly());
+                    .RowIndexesIsNull(testableMatrix.AsDense.AsReadOnly());
                 TabularCollectionTest.Indexer.Get
-                    .RowIndexesIsNull(testableMatrix.View.AsReadOnly());
-                TabularCollectionTest.Indexer.Get
-                    .RowIndexesIsNull(testableMatrix.Sparse.AsReadOnly());
+                    .RowIndexesIsNull(testableMatrix.AsSparse.AsReadOnly());
             }
 
             /// <summary>
@@ -1174,80 +848,13 @@ namespace Novacta.Analytics.Tests.Tools
             /// on which to invoke the property getter.</param>
             public static void ColumnIndexesIsNull(TestableDoubleMatrix testableMatrix)
             {
-                TabularCollectionTest.Indexer.Get.ColumnIndexesIsNull(testableMatrix.Dense);
-                TabularCollectionTest.Indexer.Get.ColumnIndexesIsNull(testableMatrix.View);
-                TabularCollectionTest.Indexer.Get.ColumnIndexesIsNull(testableMatrix.Sparse);
-
-                #region Special Behavior of View Implementors
-
-                {
-                    // This region contains assertions about the expected
-                    // behavior of dense implementors on which getters 
-                    // having at least an IndexCollection argument are 
-                    // invoked while avoiding dense storage allocations.
-
-                    string parameterName = "columnIndexes";
-                    var source = testableMatrix.Dense;
-
-                    // IndexCollection
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub =
-                                source[
-                                    IndexCollection.Range(0, source.NumberOfColumns - 1),
-                                    (IndexCollection)null,
-                                    true];
-                        },
-                        expectedType: typeof(ArgumentNullException),
-                        expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
-                        expectedParameterName: parameterName);
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub =
-                                source[":", (IndexCollection)null, true];
-                        },
-                        expectedType: typeof(ArgumentNullException),
-                        expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
-                        expectedParameterName: parameterName);
-
-                    // String
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub =
-                                source[
-                                    IndexCollection.Range(0, source.NumberOfColumns - 1),
-                                    (string)null,
-                                    true];
-                        },
-                        expectedType: typeof(ArgumentNullException),
-                        expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
-                        expectedParameterName: parameterName);
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub =
-                                source[":", (string)null, true];
-                        },
-                        expectedType: typeof(ArgumentNullException),
-                        expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
-                        expectedParameterName: parameterName);
-                }
-
-                #endregion
+                TabularCollectionTest.Indexer.Get.ColumnIndexesIsNull(testableMatrix.AsDense);
+                TabularCollectionTest.Indexer.Get.ColumnIndexesIsNull(testableMatrix.AsSparse);
 
                 TabularCollectionTest.Indexer.Get
-                    .ColumnIndexesIsNull(testableMatrix.Dense.AsReadOnly());
+                    .ColumnIndexesIsNull(testableMatrix.AsDense.AsReadOnly());
                 TabularCollectionTest.Indexer.Get
-                    .ColumnIndexesIsNull(testableMatrix.View.AsReadOnly());
-                TabularCollectionTest.Indexer.Get
-                    .ColumnIndexesIsNull(testableMatrix.Sparse.AsReadOnly());
+                    .ColumnIndexesIsNull(testableMatrix.AsSparse.AsReadOnly());
             }
 
             #endregion
@@ -1257,9 +864,9 @@ namespace Novacta.Analytics.Tests.Tools
             /// <summary>
             /// Tests property 
             /// <see cref="ITabularCollection{TValue, TCollection}.this[int,int]"/> by 
-            /// comparing the actual result of its getter method to an expected <see cref="Double"/>.
+            /// comparing the actual result of its getter method to an expected <see cref="double"/>.
             /// </summary>
-            /// <param name="expected">The <see cref="Double"/> expected to be returned by 
+            /// <param name="expected">The <see cref="double"/> expected to be returned by 
             /// the property getter.</param>
             /// <param name="testableMatrix">The testable matrix providing the instances 
             /// on which to invoke the property getter.</param>
@@ -1271,44 +878,29 @@ namespace Novacta.Analytics.Tests.Tools
                 int rowIndex,
                 int columnIndex)
             {
-                void areEqual(double expectedValue, double actualValue)
-                { Assert.AreEqual(expectedValue, actualValue, Accuracy); }
-
                 TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: areEqual,
+                    areEqual: (e, a) => Assert.AreEqual(e, a, Accuracy),
                     expected: expected,
-                    source: testableMatrix.Dense,
+                    source: testableMatrix.AsDense,
                     rowIndex: rowIndex,
                     columnIndex: columnIndex);
                 TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: areEqual,
+                    areEqual: (e, a) => Assert.AreEqual(e, a, Accuracy),
                     expected: expected,
-                    source: testableMatrix.View,
-                    rowIndex: rowIndex,
-                    columnIndex: columnIndex);
-                TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: areEqual,
-                    expected: expected,
-                    source: testableMatrix.Sparse,
+                    source: testableMatrix.AsSparse,
                     rowIndex: rowIndex,
                     columnIndex: columnIndex);
 
                 TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: areEqual,
+                    areEqual: (e, a) => Assert.AreEqual(e, a, Accuracy),
                     expected: expected,
-                    source: testableMatrix.Dense.AsReadOnly(),
+                    source: testableMatrix.AsDense.AsReadOnly(),
                     rowIndex: rowIndex,
                     columnIndex: columnIndex);
                 TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: areEqual,
+                    areEqual: (e, a) => Assert.AreEqual(e, a, Accuracy),
                     expected: expected,
-                    source: testableMatrix.View.AsReadOnly(),
-                    rowIndex: rowIndex,
-                    columnIndex: columnIndex);
-                TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: areEqual,
-                    expected: expected,
-                    source: testableMatrix.Sparse.AsReadOnly(),
+                    source: testableMatrix.AsSparse.AsReadOnly(),
                     rowIndex: rowIndex,
                     columnIndex: columnIndex);
             }
@@ -1332,39 +924,27 @@ namespace Novacta.Analytics.Tests.Tools
             {
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetDenseDoubleMatrix(),
-                    source: testableMatrix.Dense,
+                    expected: expectedState.AsDense(),
+                    source: testableMatrix.AsDense,
                     rowIndex: rowIndex,
                     columnIndexes: columnIndexes);
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetViewDoubleMatrix(),
-                    source: testableMatrix.View,
-                    rowIndex: rowIndex,
-                    columnIndexes: columnIndexes);
-                TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: AreEqual,
-                    expected: expectedState.GetSparseDoubleMatrix(),
-                    source: testableMatrix.Sparse,
+                    expected: expectedState.AsSparse(),
+                    source: testableMatrix.AsSparse,
                     rowIndex: rowIndex,
                     columnIndexes: columnIndexes);
 
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetDenseDoubleMatrix(),
-                    source: testableMatrix.Dense.AsReadOnly(),
+                    expected: expectedState.AsDense(),
+                    source: testableMatrix.AsDense.AsReadOnly(),
                     rowIndex: rowIndex,
                     columnIndexes: columnIndexes);
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetViewDoubleMatrix(),
-                    source: testableMatrix.View.AsReadOnly(),
-                    rowIndex: rowIndex,
-                    columnIndexes: columnIndexes);
-                TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: AreEqual,
-                    expected: expectedState.GetSparseDoubleMatrix(),
-                    source: testableMatrix.Sparse.AsReadOnly(),
+                    expected: expectedState.AsSparse(),
+                    source: testableMatrix.AsSparse.AsReadOnly(),
                     rowIndex: rowIndex,
                     columnIndexes: columnIndexes);
             }
@@ -1388,39 +968,27 @@ namespace Novacta.Analytics.Tests.Tools
             {
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetDenseDoubleMatrix(),
-                    source: testableMatrix.Dense,
+                    expected: expectedState.AsDense(),
+                    source: testableMatrix.AsDense,
                     rowIndex: rowIndex,
                     columnIndexes: columnIndexes);
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetViewDoubleMatrix(),
-                    source: testableMatrix.View,
-                    rowIndex: rowIndex,
-                    columnIndexes: columnIndexes);
-                TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: AreEqual,
-                    expected: expectedState.GetSparseDoubleMatrix(),
-                    source: testableMatrix.Sparse,
+                    expected: expectedState.AsSparse(),
+                    source: testableMatrix.AsSparse,
                     rowIndex: rowIndex,
                     columnIndexes: columnIndexes);
 
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetDenseDoubleMatrix(),
-                    source: testableMatrix.Dense.AsReadOnly(),
+                    expected: expectedState.AsDense(),
+                    source: testableMatrix.AsDense.AsReadOnly(),
                     rowIndex: rowIndex,
                     columnIndexes: columnIndexes);
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetViewDoubleMatrix(),
-                    source: testableMatrix.View.AsReadOnly(),
-                    rowIndex: rowIndex,
-                    columnIndexes: columnIndexes);
-                TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: AreEqual,
-                    expected: expectedState.GetSparseDoubleMatrix(),
-                    source: testableMatrix.Sparse.AsReadOnly(),
+                    expected: expectedState.AsSparse(),
+                    source: testableMatrix.AsSparse.AsReadOnly(),
                     rowIndex: rowIndex,
                     columnIndexes: columnIndexes);
             }
@@ -1444,46 +1012,34 @@ namespace Novacta.Analytics.Tests.Tools
             {
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetDenseDoubleMatrix(),
-                    source: testableMatrix.Dense,
+                    expected: expectedState.AsDense(),
+                    source: testableMatrix.AsDense,
                     rowIndexes: rowIndexes,
                     columnIndex: columnIndex);
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetViewDoubleMatrix(),
-                    source: testableMatrix.View,
-                    rowIndexes: rowIndexes,
-                    columnIndex: columnIndex);
-                TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: AreEqual,
-                    expected: expectedState.GetSparseDoubleMatrix(),
-                    source: testableMatrix.Sparse,
+                    expected: expectedState.AsSparse(),
+                    source: testableMatrix.AsSparse,
                     rowIndexes: rowIndexes,
                     columnIndex: columnIndex);
 
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetDenseDoubleMatrix(),
-                    source: testableMatrix.Dense.AsReadOnly(),
+                    expected: expectedState.AsDense(),
+                    source: testableMatrix.AsDense.AsReadOnly(),
                     rowIndexes: rowIndexes,
                     columnIndex: columnIndex);
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetViewDoubleMatrix(),
-                    source: testableMatrix.View.AsReadOnly(),
-                    rowIndexes: rowIndexes,
-                    columnIndex: columnIndex);
-                TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: AreEqual,
-                    expected: expectedState.GetSparseDoubleMatrix(),
-                    source: testableMatrix.Sparse.AsReadOnly(),
+                    expected: expectedState.AsSparse(),
+                    source: testableMatrix.AsSparse.AsReadOnly(),
                     rowIndexes: rowIndexes,
                     columnIndex: columnIndex);
             }
 
             /// <summary>
             /// Tests property
-            /// <see cref="DoubleMatrix.this[IndexCollection,IndexCollection,bool]" /> by
+            /// <see cref="DoubleMatrix.this[IndexCollection,IndexCollection]" /> by
             /// comparing the actual result of its getter method to an expected collection.
             /// </summary>
             /// <param name="areEqual">A method that verifies if its
@@ -1499,15 +1055,21 @@ namespace Novacta.Analytics.Tests.Tools
                 DoubleMatrix expected,
                 DoubleMatrix source,
                 IndexCollection rowIndexes,
-                IndexCollection columnIndexes,
-                bool avoidDenseAllocations)
+                IndexCollection columnIndexes)
             {
                 Assert.IsNotNull(expected);
                 Assert.IsNotNull(source);
                 Assert.IsNotNull(rowIndexes);
                 Assert.IsNotNull(columnIndexes);
 
-                var actual = source[rowIndexes, columnIndexes, avoidDenseAllocations];
+#pragma warning disable CS0618 // Type or member is obsolete
+                var actual = source[rowIndexes, columnIndexes, true];
+#pragma warning restore CS0618 // Type or member is obsolete
+                areEqual(expected, actual);
+
+#pragma warning disable CS0618 // Type or member is obsolete
+                actual = source[rowIndexes, columnIndexes, false];
+#pragma warning restore CS0618 // Type or member is obsolete
                 areEqual(expected, actual);
             }
 
@@ -1528,64 +1090,48 @@ namespace Novacta.Analytics.Tests.Tools
                 IndexCollection rowIndexes,
                 IndexCollection columnIndexes)
             {
-                TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: AreEqual,
-                    expected: expectedState.GetDenseDoubleMatrix(),
-                    source: testableMatrix.Dense,
-                    rowIndexes: rowIndexes,
-                    columnIndexes: columnIndexes);
-
                 SubMatrix(
                     areEqual: AreEqual,
-                    expected: expectedState.GetDenseDoubleMatrix(),
-                    source: testableMatrix.Dense,
+                    expected: expectedState.AsDense(),
+                    source: testableMatrix.AsDense,
                     rowIndexes: rowIndexes,
-                    columnIndexes: columnIndexes,
-                    avoidDenseAllocations: false);
+                    columnIndexes: columnIndexes);
                 SubMatrix(
                     areEqual: AreEqual,
-                    expected: expectedState.GetDenseDoubleMatrix(),
-                    source: testableMatrix.Dense,
-                    rowIndexes: rowIndexes,
-                    columnIndexes: columnIndexes,
-                    avoidDenseAllocations: true);
-
-                TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: AreEqual,
-                    expected: expectedState.GetViewDoubleMatrix(),
-                    source: testableMatrix.View,
-                    rowIndexes: rowIndexes,
-                    columnIndexes: columnIndexes);
-                TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: AreEqual,
-                    expected: expectedState.GetSparseDoubleMatrix(),
-                    source: testableMatrix.Sparse,
+                    expected: expectedState.AsSparse(),
+                    source: testableMatrix.AsSparse,
                     rowIndexes: rowIndexes,
                     columnIndexes: columnIndexes);
 
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetDenseDoubleMatrix(),
-                    source: testableMatrix.Dense.AsReadOnly(),
+                    expected: expectedState.AsDense(),
+                    source: testableMatrix.AsDense,
                     rowIndexes: rowIndexes,
                     columnIndexes: columnIndexes);
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetViewDoubleMatrix(),
-                    source: testableMatrix.View.AsReadOnly(),
+                    expected: expectedState.AsSparse(),
+                    source: testableMatrix.AsSparse,
                     rowIndexes: rowIndexes,
                     columnIndexes: columnIndexes);
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetSparseDoubleMatrix(),
-                    source: testableMatrix.Sparse.AsReadOnly(),
+                    expected: expectedState.AsDense(),
+                    source: testableMatrix.AsDense.AsReadOnly(),
+                    rowIndexes: rowIndexes,
+                    columnIndexes: columnIndexes);
+                TabularCollectionTest.Indexer.Get.SubCollection(
+                    areEqual: AreEqual,
+                    expected: expectedState.AsSparse(),
+                    source: testableMatrix.AsSparse.AsReadOnly(),
                     rowIndexes: rowIndexes,
                     columnIndexes: columnIndexes);
             }
 
             /// <summary>
             /// Tests property
-            /// <see cref="DoubleMatrix.this[IndexCollection,string,bool]" /> by
+            /// <see cref="DoubleMatrix.this[IndexCollection,string]" /> by
             /// comparing the actual result of its getter method to an expected collection.
             /// </summary>
             /// <param name="areEqual">A method that verifies if its
@@ -1595,21 +1141,26 @@ namespace Novacta.Analytics.Tests.Tools
             /// <param name="source">The source instance on which to invoke the property getter.</param>
             /// <param name="rowIndexes">The row indexes to get.</param>
             /// <param name="columnIndexes">The column indexes to get.</param>
-            /// <param name="avoidDenseAllocations">if set to <c>true</c> avoid dense allocations.</param>
             public static void SubMatrix(
                 Action<DoubleMatrix, DoubleMatrix> areEqual,
                 DoubleMatrix expected,
                 DoubleMatrix source,
                 IndexCollection rowIndexes,
-                string columnIndexes,
-                bool avoidDenseAllocations)
+                string columnIndexes)
             {
                 Assert.IsNotNull(expected);
                 Assert.IsNotNull(source);
                 Assert.IsNotNull(rowIndexes);
                 Assert.IsNotNull(columnIndexes);
 
-                var actual = source[rowIndexes, columnIndexes, avoidDenseAllocations];
+#pragma warning disable CS0618 // Type or member is obsolete
+                var actual = source[rowIndexes, columnIndexes, true];
+#pragma warning restore CS0618 // Type or member is obsolete
+                areEqual(expected, actual);
+
+#pragma warning disable CS0618 // Type or member is obsolete
+                actual = source[rowIndexes, columnIndexes, false];
+#pragma warning restore CS0618 // Type or member is obsolete
                 areEqual(expected, actual);
             }
 
@@ -1630,57 +1181,41 @@ namespace Novacta.Analytics.Tests.Tools
                 IndexCollection rowIndexes,
                 string columnIndexes)
             {
-                TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: AreEqual,
-                    expected: expectedState.GetDenseDoubleMatrix(),
-                    source: testableMatrix.Dense,
-                    rowIndexes: rowIndexes,
-                    columnIndexes: columnIndexes);
-
                 SubMatrix(
                     areEqual: AreEqual,
-                    expected: expectedState.GetDenseDoubleMatrix(),
-                    source: testableMatrix.Dense,
+                    expected: expectedState.AsDense(),
+                    source: testableMatrix.AsDense,
                     rowIndexes: rowIndexes,
-                    columnIndexes: columnIndexes,
-                    avoidDenseAllocations: false);
+                    columnIndexes: columnIndexes);
                 SubMatrix(
                     areEqual: AreEqual,
-                    expected: expectedState.GetDenseDoubleMatrix(),
-                    source: testableMatrix.Dense,
-                    rowIndexes: rowIndexes,
-                    columnIndexes: columnIndexes,
-                    avoidDenseAllocations: true);
-
-                TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: AreEqual,
-                    expected: expectedState.GetViewDoubleMatrix(),
-                    source: testableMatrix.View,
-                    rowIndexes: rowIndexes,
-                    columnIndexes: columnIndexes);
-                TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: AreEqual,
-                    expected: expectedState.GetSparseDoubleMatrix(),
-                    source: testableMatrix.Sparse,
+                    expected: expectedState.AsSparse(),
+                    source: testableMatrix.AsSparse,
                     rowIndexes: rowIndexes,
                     columnIndexes: columnIndexes);
 
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetDenseDoubleMatrix(),
-                    source: testableMatrix.Dense.AsReadOnly(),
+                    expected: expectedState.AsDense(),
+                    source: testableMatrix.AsDense,
                     rowIndexes: rowIndexes,
                     columnIndexes: columnIndexes);
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetViewDoubleMatrix(),
-                    source: testableMatrix.View.AsReadOnly(),
+                    expected: expectedState.AsSparse(),
+                    source: testableMatrix.AsSparse,
                     rowIndexes: rowIndexes,
                     columnIndexes: columnIndexes);
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetSparseDoubleMatrix(),
-                    source: testableMatrix.Sparse.AsReadOnly(),
+                    expected: expectedState.AsDense(),
+                    source: testableMatrix.AsDense.AsReadOnly(),
+                    rowIndexes: rowIndexes,
+                    columnIndexes: columnIndexes);
+                TabularCollectionTest.Indexer.Get.SubCollection(
+                    areEqual: AreEqual,
+                    expected: expectedState.AsSparse(),
+                    source: testableMatrix.AsSparse.AsReadOnly(),
                     rowIndexes: rowIndexes,
                     columnIndexes: columnIndexes);
             }
@@ -1704,46 +1239,34 @@ namespace Novacta.Analytics.Tests.Tools
             {
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetDenseDoubleMatrix(),
-                    source: testableMatrix.Dense,
+                    expected: expectedState.AsDense(),
+                    source: testableMatrix.AsDense,
                     rowIndexes: rowIndexes,
                     columnIndex: columnIndex);
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetViewDoubleMatrix(),
-                    source: testableMatrix.View,
-                    rowIndexes: rowIndexes,
-                    columnIndex: columnIndex);
-                TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: AreEqual,
-                    expected: expectedState.GetSparseDoubleMatrix(),
-                    source: testableMatrix.Sparse,
+                    expected: expectedState.AsSparse(),
+                    source: testableMatrix.AsSparse,
                     rowIndexes: rowIndexes,
                     columnIndex: columnIndex);
 
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetDenseDoubleMatrix(),
-                    source: testableMatrix.Dense.AsReadOnly(),
+                    expected: expectedState.AsDense(),
+                    source: testableMatrix.AsDense.AsReadOnly(),
                     rowIndexes: rowIndexes,
                     columnIndex: columnIndex);
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetViewDoubleMatrix(),
-                    source: testableMatrix.View.AsReadOnly(),
-                    rowIndexes: rowIndexes,
-                    columnIndex: columnIndex);
-                TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: AreEqual,
-                    expected: expectedState.GetSparseDoubleMatrix(),
-                    source: testableMatrix.Sparse.AsReadOnly(),
+                    expected: expectedState.AsSparse(),
+                    source: testableMatrix.AsSparse.AsReadOnly(),
                     rowIndexes: rowIndexes,
                     columnIndex: columnIndex);
             }
 
             /// <summary>
             /// Tests property
-            /// <see cref="DoubleMatrix.this[string,IndexCollection,bool]" /> by
+            /// <see cref="DoubleMatrix.this[string,IndexCollection]" /> by
             /// comparing the actual result of its getter method to an expected collection.
             /// </summary>
             /// <param name="areEqual">A method that verifies if its
@@ -1759,15 +1282,21 @@ namespace Novacta.Analytics.Tests.Tools
                 DoubleMatrix expected,
                 DoubleMatrix source,
                 string rowIndexes,
-                IndexCollection columnIndexes,
-                bool avoidDenseAllocations)
+                IndexCollection columnIndexes)
             {
                 Assert.IsNotNull(expected);
                 Assert.IsNotNull(source);
                 Assert.IsNotNull(rowIndexes);
                 Assert.IsNotNull(columnIndexes);
 
-                var actual = source[rowIndexes, columnIndexes, avoidDenseAllocations];
+#pragma warning disable CS0618 // Type or member is obsolete
+                var actual = source[rowIndexes, columnIndexes, true];
+#pragma warning restore CS0618 // Type or member is obsolete
+                areEqual(expected, actual);
+
+#pragma warning disable CS0618 // Type or member is obsolete
+                actual = source[rowIndexes, columnIndexes, false];
+#pragma warning restore CS0618 // Type or member is obsolete
                 areEqual(expected, actual);
             }
 
@@ -1788,64 +1317,48 @@ namespace Novacta.Analytics.Tests.Tools
                 string rowIndexes,
                 IndexCollection columnIndexes)
             {
-                TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: AreEqual,
-                    expected: expectedState.GetDenseDoubleMatrix(),
-                    source: testableMatrix.Dense,
-                    rowIndexes: rowIndexes,
-                    columnIndexes: columnIndexes);
-
                 SubMatrix(
                     areEqual: AreEqual,
-                    expected: expectedState.GetDenseDoubleMatrix(),
-                    source: testableMatrix.Dense,
+                    expected: expectedState.AsDense(),
+                    source: testableMatrix.AsDense,
                     rowIndexes: rowIndexes,
-                    columnIndexes: columnIndexes,
-                    avoidDenseAllocations: false);
+                    columnIndexes: columnIndexes);
                 SubMatrix(
                     areEqual: AreEqual,
-                    expected: expectedState.GetDenseDoubleMatrix(),
-                    source: testableMatrix.Dense,
-                    rowIndexes: rowIndexes,
-                    columnIndexes: columnIndexes,
-                    avoidDenseAllocations: true);
-
-                TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: AreEqual,
-                    expected: expectedState.GetViewDoubleMatrix(),
-                    source: testableMatrix.View,
-                    rowIndexes: rowIndexes,
-                    columnIndexes: columnIndexes);
-                TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: AreEqual,
-                    expected: expectedState.GetSparseDoubleMatrix(),
-                    source: testableMatrix.Sparse,
+                    expected: expectedState.AsSparse(),
+                    source: testableMatrix.AsSparse,
                     rowIndexes: rowIndexes,
                     columnIndexes: columnIndexes);
 
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetDenseDoubleMatrix(),
-                    source: testableMatrix.Dense.AsReadOnly(),
+                    expected: expectedState.AsDense(),
+                    source: testableMatrix.AsDense,
                     rowIndexes: rowIndexes,
                     columnIndexes: columnIndexes);
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetViewDoubleMatrix(),
-                    source: testableMatrix.View.AsReadOnly(),
+                    expected: expectedState.AsSparse(),
+                    source: testableMatrix.AsSparse,
                     rowIndexes: rowIndexes,
                     columnIndexes: columnIndexes);
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetSparseDoubleMatrix(),
-                    source: testableMatrix.Sparse.AsReadOnly(),
+                    expected: expectedState.AsDense(),
+                    source: testableMatrix.AsDense.AsReadOnly(),
+                    rowIndexes: rowIndexes,
+                    columnIndexes: columnIndexes);
+                TabularCollectionTest.Indexer.Get.SubCollection(
+                    areEqual: AreEqual,
+                    expected: expectedState.AsSparse(),
+                    source: testableMatrix.AsSparse.AsReadOnly(),
                     rowIndexes: rowIndexes,
                     columnIndexes: columnIndexes);
             }
 
             /// <summary>
             /// Tests property
-            /// <see cref="DoubleMatrix.this[string,string,bool]" /> by
+            /// <see cref="DoubleMatrix.this[string,string]" /> by
             /// comparing the actual result of its getter method to an expected collection.
             /// </summary>
             /// <param name="areEqual">A method that verifies if its
@@ -1855,21 +1368,26 @@ namespace Novacta.Analytics.Tests.Tools
             /// <param name="source">The source instance on which to invoke the property getter.</param>
             /// <param name="rowIndexes">The row indexes to get.</param>
             /// <param name="columnIndexes">The column indexes to get.</param>
-            /// <param name="avoidDenseAllocations">if set to <c>true</c> avoid dense allocations.</param>
             public static void SubMatrix(
                 Action<DoubleMatrix, DoubleMatrix> areEqual,
                 DoubleMatrix expected,
                 DoubleMatrix source,
                 string rowIndexes,
-                string columnIndexes,
-                bool avoidDenseAllocations)
+                string columnIndexes)
             {
                 Assert.IsNotNull(expected);
                 Assert.IsNotNull(source);
                 Assert.IsNotNull(rowIndexes);
                 Assert.IsNotNull(columnIndexes);
 
-                var actual = source[rowIndexes, columnIndexes, avoidDenseAllocations];
+#pragma warning disable CS0618 // Type or member is obsolete
+                var actual = source[rowIndexes, columnIndexes, true];
+#pragma warning restore CS0618 // Type or member is obsolete
+                areEqual(expected, actual);
+
+#pragma warning disable CS0618 // Type or member is obsolete
+                actual = source[rowIndexes, columnIndexes, false];
+#pragma warning restore CS0618 // Type or member is obsolete
                 areEqual(expected, actual);
             }
 
@@ -1890,57 +1408,41 @@ namespace Novacta.Analytics.Tests.Tools
                 string rowIndexes,
                 string columnIndexes)
             {
-                TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: AreEqual,
-                    expected: expectedState.GetDenseDoubleMatrix(),
-                    source: testableMatrix.Dense,
-                    rowIndexes: rowIndexes,
-                    columnIndexes: columnIndexes);
-
                 SubMatrix(
                     areEqual: AreEqual,
-                    expected: expectedState.GetDenseDoubleMatrix(),
-                    source: testableMatrix.Dense,
+                    expected: expectedState.AsDense(),
+                    source: testableMatrix.AsDense,
                     rowIndexes: rowIndexes,
-                    columnIndexes: columnIndexes,
-                    avoidDenseAllocations: false);
+                    columnIndexes: columnIndexes);
                 SubMatrix(
-                   areEqual: AreEqual,
-                   expected: expectedState.GetDenseDoubleMatrix(),
-                   source: testableMatrix.Dense,
-                   rowIndexes: rowIndexes,
-                   columnIndexes: columnIndexes,
-                   avoidDenseAllocations: true);
-
-                TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetViewDoubleMatrix(),
-                    source: testableMatrix.View,
-                    rowIndexes: rowIndexes,
-                    columnIndexes: columnIndexes);
-                TabularCollectionTest.Indexer.Get.SubCollection(
-                    areEqual: AreEqual,
-                    expected: expectedState.GetSparseDoubleMatrix(),
-                    source: testableMatrix.Sparse,
+                    expected: expectedState.AsSparse(),
+                    source: testableMatrix.AsSparse,
                     rowIndexes: rowIndexes,
                     columnIndexes: columnIndexes);
 
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetDenseDoubleMatrix(),
-                    source: testableMatrix.Dense.AsReadOnly(),
+                    expected: expectedState.AsDense(),
+                    source: testableMatrix.AsDense,
                     rowIndexes: rowIndexes,
                     columnIndexes: columnIndexes);
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetViewDoubleMatrix(),
-                    source: testableMatrix.View.AsReadOnly(),
+                    expected: expectedState.AsSparse(),
+                    source: testableMatrix.AsSparse,
                     rowIndexes: rowIndexes,
                     columnIndexes: columnIndexes);
                 TabularCollectionTest.Indexer.Get.SubCollection(
                     areEqual: AreEqual,
-                    expected: expectedState.GetSparseDoubleMatrix(),
-                    source: testableMatrix.Sparse.AsReadOnly(),
+                    expected: expectedState.AsDense(),
+                    source: testableMatrix.AsDense.AsReadOnly(),
+                    rowIndexes: rowIndexes,
+                    columnIndexes: columnIndexes);
+                TabularCollectionTest.Indexer.Get.SubCollection(
+                    areEqual: AreEqual,
+                    expected: expectedState.AsSparse(),
+                    source: testableMatrix.AsSparse.AsReadOnly(),
                     rowIndexes: rowIndexes,
                     columnIndexes: columnIndexes);
             }
@@ -1967,9 +1469,8 @@ namespace Novacta.Analytics.Tests.Tools
             /// on which to invoke the property setter.</param>
             public static void AnyRowIndexIsOutOrRange(TestableDoubleMatrix testableMatrix)
             {
-                TabularCollectionTest.Indexer.Set.AnyRowIndexIsOutOrRange(testableMatrix.Dense);
-                TabularCollectionTest.Indexer.Set.AnyRowIndexIsOutOrRange(testableMatrix.View);
-                TabularCollectionTest.Indexer.Set.AnyRowIndexIsOutOrRange(testableMatrix.Sparse);
+                TabularCollectionTest.Indexer.Set.AnyRowIndexIsOutOrRange(testableMatrix.AsDense);
+                TabularCollectionTest.Indexer.Set.AnyRowIndexIsOutOrRange(testableMatrix.AsSparse);
             }
 
             /// <summary>
@@ -1981,9 +1482,8 @@ namespace Novacta.Analytics.Tests.Tools
             /// on which to invoke the property setter.</param>
             public static void AnyColumnIndexIsOutOrRange(TestableDoubleMatrix testableMatrix)
             {
-                TabularCollectionTest.Indexer.Set.AnyColumnIndexIsOutOrRange(testableMatrix.Dense);
-                TabularCollectionTest.Indexer.Set.AnyColumnIndexIsOutOrRange(testableMatrix.View);
-                TabularCollectionTest.Indexer.Set.AnyColumnIndexIsOutOrRange(testableMatrix.Sparse);
+                TabularCollectionTest.Indexer.Set.AnyColumnIndexIsOutOrRange(testableMatrix.AsDense);
+                TabularCollectionTest.Indexer.Set.AnyColumnIndexIsOutOrRange(testableMatrix.AsSparse);
             }
 
             /// <summary>
@@ -1995,9 +1495,8 @@ namespace Novacta.Analytics.Tests.Tools
             /// on which to invoke the property setter.</param>
             public static void RowIndexesIsnull(TestableDoubleMatrix testableMatrix)
             {
-                TabularCollectionTest.Indexer.Set.RowIndexesIsNull(testableMatrix.Dense);
-                TabularCollectionTest.Indexer.Set.RowIndexesIsNull(testableMatrix.View);
-                TabularCollectionTest.Indexer.Set.RowIndexesIsNull(testableMatrix.Sparse);
+                TabularCollectionTest.Indexer.Set.RowIndexesIsNull(testableMatrix.AsDense);
+                TabularCollectionTest.Indexer.Set.RowIndexesIsNull(testableMatrix.AsSparse);
             }
 
             /// <summary>
@@ -2009,9 +1508,8 @@ namespace Novacta.Analytics.Tests.Tools
             /// on which to invoke the property setter.</param>
             public static void ColumnIndexesIsnull(TestableDoubleMatrix testableMatrix)
             {
-                TabularCollectionTest.Indexer.Set.ColumnIndexesIsNull(testableMatrix.Dense);
-                TabularCollectionTest.Indexer.Set.ColumnIndexesIsNull(testableMatrix.View);
-                TabularCollectionTest.Indexer.Set.ColumnIndexesIsNull(testableMatrix.Sparse);
+                TabularCollectionTest.Indexer.Set.ColumnIndexesIsNull(testableMatrix.AsDense);
+                TabularCollectionTest.Indexer.Set.ColumnIndexesIsNull(testableMatrix.AsSparse);
             }
 
             /// <summary>
@@ -2024,9 +1522,8 @@ namespace Novacta.Analytics.Tests.Tools
             /// on which to invoke the property setter.</param>
             public static void CollectionValueIsNull(TestableDoubleMatrix testableMatrix)
             {
-                TabularCollectionTest.Indexer.Set.CollectionValueIsNull(testableMatrix.Dense);
-                TabularCollectionTest.Indexer.Set.CollectionValueIsNull(testableMatrix.View);
-                TabularCollectionTest.Indexer.Set.CollectionValueIsNull(testableMatrix.Sparse);
+                TabularCollectionTest.Indexer.Set.CollectionValueIsNull(testableMatrix.AsDense);
+                TabularCollectionTest.Indexer.Set.CollectionValueIsNull(testableMatrix.AsSparse);
             }
 
             /// <summary>
@@ -2039,9 +1536,8 @@ namespace Novacta.Analytics.Tests.Tools
             /// on which to invoke the property setter.</param>
             public static void MismatchedCollectionDimensions(TestableDoubleMatrix testableMatrix)
             {
-                TabularCollectionTest.Indexer.Set.MismatchedCollectionDimensions(testableMatrix.Dense);
-                TabularCollectionTest.Indexer.Set.MismatchedCollectionDimensions(testableMatrix.View);
-                TabularCollectionTest.Indexer.Set.MismatchedCollectionDimensions(testableMatrix.Sparse);
+                TabularCollectionTest.Indexer.Set.MismatchedCollectionDimensions(testableMatrix.AsDense);
+                TabularCollectionTest.Indexer.Set.MismatchedCollectionDimensions(testableMatrix.AsSparse);
             }
 
             #endregion
@@ -2057,11 +1553,11 @@ namespace Novacta.Analytics.Tests.Tools
             /// <summary>
             /// Tests property 
             /// <see cref="ITabularCollection{TValue, TCollection}.this[int,int]"/> by 
-            /// setting an expected <see cref="Double"/> at the specified 
+            /// setting an expected <see cref="double"/> at the specified 
             /// row and column indexes and then comparing it with the actual result of getting 
             /// at the same indexes.
             /// </summary>
-            /// <param name="expected">The <see cref="Double"/> expected to be returned by 
+            /// <param name="expected">The <see cref="double"/> expected to be returned by 
             /// the property getter.</param>
             /// <param name="testableMatrix">The testable matrix providing the instances 
             /// on which to invoke the property setter and getter.</param>
@@ -2073,25 +1569,16 @@ namespace Novacta.Analytics.Tests.Tools
                 int rowIndex,
                 int columnIndex)
             {
-                void areEqual(double expectedValue, double actualValue)
-                { Assert.AreEqual(expectedValue, actualValue, Accuracy); }
-
                 TabularCollectionTest.Indexer.Set.SubCollection(
-                    areEqual: areEqual,
+                    areEqual: (e, a) => Assert.AreEqual(e, a, Accuracy),
                     expected: expected,
-                    source: testableMatrix.Dense,
+                    source: testableMatrix.AsDense,
                     rowIndex: rowIndex,
                     columnIndex: columnIndex);
                 TabularCollectionTest.Indexer.Set.SubCollection(
-                    areEqual: areEqual,
+                    areEqual: (e, a) => Assert.AreEqual(e, a, Accuracy),
                     expected: expected,
-                    source: testableMatrix.View,
-                    rowIndex: rowIndex,
-                    columnIndex: columnIndex);
-                TabularCollectionTest.Indexer.Set.SubCollection(
-                    areEqual: areEqual,
-                    expected: expected,
-                    source: testableMatrix.Sparse,
+                    source: testableMatrix.AsSparse,
                     rowIndex: rowIndex,
                     columnIndex: columnIndex);
 
@@ -2099,9 +1586,9 @@ namespace Novacta.Analytics.Tests.Tools
                     () =>
                     {
                         TabularCollectionTest.Indexer.Set.SubCollection(
-                            areEqual: areEqual,
+                            areEqual: (e, a) => Assert.AreEqual(e, a, Accuracy),
                             expected: expected,
-                            source: testableMatrix.Dense.AsReadOnly(),
+                            source: testableMatrix.AsDense.AsReadOnly(),
                             rowIndex: rowIndex,
                             columnIndex: columnIndex);
                     },
@@ -2112,24 +1599,11 @@ namespace Novacta.Analytics.Tests.Tools
                     () =>
                     {
                         TabularCollectionTest.Indexer.Set.SubCollection(
-                            areEqual: areEqual,
+                            areEqual: (e, a) => Assert.AreEqual(e, a, Accuracy),
                             expected: expected,
-                            source: testableMatrix.View.AsReadOnly(),
+                            source: testableMatrix.AsSparse.AsReadOnly(),
                             rowIndex: rowIndex,
                             columnIndex: columnIndex);
-                    },
-                    expectedType: typeof(NotSupportedException),
-                    expectedMessage: STR_EXCEPT_TAB_IS_READ_ONLY);
-
-                ExceptionAssert.Throw(
-                    () =>
-                    {
-                        TabularCollectionTest.Indexer.Set.SubCollection(
-                           areEqual: areEqual,
-                           expected: expected,
-                           source: testableMatrix.Sparse.AsReadOnly(),
-                           rowIndex: rowIndex,
-                           columnIndex: columnIndex);
                     },
                     expectedType: typeof(NotSupportedException),
                     expectedMessage: STR_EXCEPT_TAB_IS_READ_ONLY);
@@ -2159,43 +1633,14 @@ namespace Novacta.Analytics.Tests.Tools
 
                     TabularCollectionTest.Indexer.Set.SubCollection(
                        areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.Dense,
+                       expected: expectedState.AsDense(),
+                       source: testableMatrix.AsDense,
                        rowIndex: rowIndex,
                        columnIndexes: columnIndexes);
                     TabularCollectionTest.Indexer.Set.SubCollection(
                         areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.Dense,
-                        rowIndex: rowIndex,
-                        columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.Dense,
-                        rowIndex: rowIndex,
-                        columnIndexes: columnIndexes);
-
-                    #endregion
-
-                    #region View
-
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                       areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.View,
-                       rowIndex: rowIndex,
-                       columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.View,
-                        rowIndex: rowIndex,
-                        columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.View,
+                        expected: expectedState.AsSparse(),
+                        source: testableMatrix.AsDense,
                         rowIndex: rowIndex,
                         columnIndexes: columnIndexes);
 
@@ -2205,20 +1650,14 @@ namespace Novacta.Analytics.Tests.Tools
 
                     TabularCollectionTest.Indexer.Set.SubCollection(
                        areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.Sparse,
+                       expected: expectedState.AsDense(),
+                       source: testableMatrix.AsSparse,
                        rowIndex: rowIndex,
                        columnIndexes: columnIndexes);
                     TabularCollectionTest.Indexer.Set.SubCollection(
                         areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.Sparse,
-                        rowIndex: rowIndex,
-                        columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.Sparse,
+                        expected: expectedState.AsSparse(),
+                        source: testableMatrix.AsSparse,
                         rowIndex: rowIndex,
                         columnIndexes: columnIndexes);
 
@@ -2230,8 +1669,8 @@ namespace Novacta.Analytics.Tests.Tools
                     {
                         TabularCollectionTest.Indexer.Set.SubCollection(
                             areEqual: AreEqual,
-                            expected: expectedState.GetDenseDoubleMatrix(),
-                            source: testableMatrix.Dense.AsReadOnly(),
+                            expected: expectedState.AsDense(),
+                            source: testableMatrix.AsDense.AsReadOnly(),
                             rowIndex: rowIndex,
                             columnIndexes: columnIndexes);
                     },
@@ -2243,21 +1682,8 @@ namespace Novacta.Analytics.Tests.Tools
                     {
                         TabularCollectionTest.Indexer.Set.SubCollection(
                             areEqual: AreEqual,
-                            expected: expectedState.GetViewDoubleMatrix(),
-                            source: testableMatrix.View.AsReadOnly(),
-                            rowIndex: rowIndex,
-                            columnIndexes: columnIndexes);
-                    },
-                    expectedType: typeof(NotSupportedException),
-                    expectedMessage: STR_EXCEPT_TAB_IS_READ_ONLY);
-
-                ExceptionAssert.Throw(
-                    () =>
-                    {
-                        TabularCollectionTest.Indexer.Set.SubCollection(
-                            areEqual: AreEqual,
-                            expected: expectedState.GetSparseDoubleMatrix(),
-                            source: testableMatrix.Sparse.AsReadOnly(),
+                            expected: expectedState.AsSparse(),
+                            source: testableMatrix.AsSparse.AsReadOnly(),
                             rowIndex: rowIndex,
                             columnIndexes: columnIndexes);
                     },
@@ -2289,43 +1715,14 @@ namespace Novacta.Analytics.Tests.Tools
 
                     TabularCollectionTest.Indexer.Set.SubCollection(
                        areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.Dense,
+                       expected: expectedState.AsDense(),
+                       source: testableMatrix.AsDense,
                        rowIndex: rowIndex,
                        columnIndexes: columnIndexes);
                     TabularCollectionTest.Indexer.Set.SubCollection(
                         areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.Dense,
-                        rowIndex: rowIndex,
-                        columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.Dense,
-                        rowIndex: rowIndex,
-                        columnIndexes: columnIndexes);
-
-                    #endregion
-
-                    #region View
-
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                       areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.View,
-                       rowIndex: rowIndex,
-                       columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.View,
-                        rowIndex: rowIndex,
-                        columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.View,
+                        expected: expectedState.AsSparse(),
+                        source: testableMatrix.AsDense,
                         rowIndex: rowIndex,
                         columnIndexes: columnIndexes);
 
@@ -2335,20 +1732,14 @@ namespace Novacta.Analytics.Tests.Tools
 
                     TabularCollectionTest.Indexer.Set.SubCollection(
                        areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.Sparse,
+                       expected: expectedState.AsDense(),
+                       source: testableMatrix.AsSparse,
                        rowIndex: rowIndex,
                        columnIndexes: columnIndexes);
                     TabularCollectionTest.Indexer.Set.SubCollection(
                         areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.Sparse,
-                        rowIndex: rowIndex,
-                        columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.Sparse,
+                        expected: expectedState.AsSparse(),
+                        source: testableMatrix.AsSparse,
                         rowIndex: rowIndex,
                         columnIndexes: columnIndexes);
 
@@ -2360,8 +1751,8 @@ namespace Novacta.Analytics.Tests.Tools
                     {
                         TabularCollectionTest.Indexer.Set.SubCollection(
                             areEqual: AreEqual,
-                            expected: expectedState.GetDenseDoubleMatrix(),
-                            source: testableMatrix.Dense.AsReadOnly(),
+                            expected: expectedState.AsDense(),
+                            source: testableMatrix.AsDense.AsReadOnly(),
                             rowIndex: rowIndex,
                             columnIndexes: columnIndexes);
                     },
@@ -2373,21 +1764,8 @@ namespace Novacta.Analytics.Tests.Tools
                     {
                         TabularCollectionTest.Indexer.Set.SubCollection(
                             areEqual: AreEqual,
-                            expected: expectedState.GetViewDoubleMatrix(),
-                            source: testableMatrix.View.AsReadOnly(),
-                            rowIndex: rowIndex,
-                            columnIndexes: columnIndexes);
-                    },
-                    expectedType: typeof(NotSupportedException),
-                    expectedMessage: STR_EXCEPT_TAB_IS_READ_ONLY);
-
-                ExceptionAssert.Throw(
-                    () =>
-                    {
-                        TabularCollectionTest.Indexer.Set.SubCollection(
-                            areEqual: AreEqual,
-                            expected: expectedState.GetSparseDoubleMatrix(),
-                            source: testableMatrix.Sparse.AsReadOnly(),
+                            expected: expectedState.AsSparse(),
+                            source: testableMatrix.AsSparse.AsReadOnly(),
                             rowIndex: rowIndex,
                             columnIndexes: columnIndexes);
                     },
@@ -2419,43 +1797,14 @@ namespace Novacta.Analytics.Tests.Tools
 
                     TabularCollectionTest.Indexer.Set.SubCollection(
                        areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.Dense,
+                       expected: expectedState.AsDense(),
+                       source: testableMatrix.AsDense,
                        rowIndexes: rowIndexes,
                        columnIndex: columnIndex);
                     TabularCollectionTest.Indexer.Set.SubCollection(
                         areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.Dense,
-                        rowIndexes: rowIndexes,
-                        columnIndex: columnIndex);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.Dense,
-                        rowIndexes: rowIndexes,
-                        columnIndex: columnIndex);
-
-                    #endregion
-
-                    #region View
-
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                       areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.View,
-                       rowIndexes: rowIndexes,
-                       columnIndex: columnIndex);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.View,
-                        rowIndexes: rowIndexes,
-                        columnIndex: columnIndex);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.View,
+                        expected: expectedState.AsSparse(),
+                        source: testableMatrix.AsDense,
                         rowIndexes: rowIndexes,
                         columnIndex: columnIndex);
 
@@ -2465,20 +1814,14 @@ namespace Novacta.Analytics.Tests.Tools
 
                     TabularCollectionTest.Indexer.Set.SubCollection(
                        areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.Sparse,
+                       expected: expectedState.AsDense(),
+                       source: testableMatrix.AsSparse,
                        rowIndexes: rowIndexes,
                        columnIndex: columnIndex);
                     TabularCollectionTest.Indexer.Set.SubCollection(
                         areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.Sparse,
-                        rowIndexes: rowIndexes,
-                        columnIndex: columnIndex);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.Sparse,
+                        expected: expectedState.AsSparse(),
+                        source: testableMatrix.AsSparse,
                         rowIndexes: rowIndexes,
                         columnIndex: columnIndex);
 
@@ -2490,8 +1833,8 @@ namespace Novacta.Analytics.Tests.Tools
                     {
                         TabularCollectionTest.Indexer.Set.SubCollection(
                             areEqual: AreEqual,
-                            expected: expectedState.GetDenseDoubleMatrix(),
-                            source: testableMatrix.Dense.AsReadOnly(),
+                            expected: expectedState.AsDense(),
+                            source: testableMatrix.AsDense.AsReadOnly(),
                             rowIndexes: rowIndexes,
                             columnIndex: columnIndex);
                     },
@@ -2503,21 +1846,8 @@ namespace Novacta.Analytics.Tests.Tools
                     {
                         TabularCollectionTest.Indexer.Set.SubCollection(
                             areEqual: AreEqual,
-                            expected: expectedState.GetViewDoubleMatrix(),
-                            source: testableMatrix.View.AsReadOnly(),
-                            rowIndexes: rowIndexes,
-                            columnIndex: columnIndex);
-                    },
-                    expectedType: typeof(NotSupportedException),
-                    expectedMessage: STR_EXCEPT_TAB_IS_READ_ONLY);
-
-                ExceptionAssert.Throw(
-                    () =>
-                    {
-                        TabularCollectionTest.Indexer.Set.SubCollection(
-                            areEqual: AreEqual,
-                            expected: expectedState.GetSparseDoubleMatrix(),
-                            source: testableMatrix.Sparse.AsReadOnly(),
+                            expected: expectedState.AsSparse(),
+                            source: testableMatrix.AsSparse.AsReadOnly(),
                             rowIndexes: rowIndexes,
                             columnIndex: columnIndex);
                     },
@@ -2549,43 +1879,14 @@ namespace Novacta.Analytics.Tests.Tools
 
                     TabularCollectionTest.Indexer.Set.SubCollection(
                        areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.Dense,
+                       expected: expectedState.AsDense(),
+                       source: testableMatrix.AsDense,
                        rowIndexes: rowIndexes,
                        columnIndexes: columnIndexes);
                     TabularCollectionTest.Indexer.Set.SubCollection(
                         areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.Dense,
-                        rowIndexes: rowIndexes,
-                        columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.Dense,
-                        rowIndexes: rowIndexes,
-                        columnIndexes: columnIndexes);
-
-                    #endregion
-
-                    #region View
-
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                       areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.View,
-                       rowIndexes: rowIndexes,
-                       columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.View,
-                        rowIndexes: rowIndexes,
-                        columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.View,
+                        expected: expectedState.AsSparse(),
+                        source: testableMatrix.AsDense,
                         rowIndexes: rowIndexes,
                         columnIndexes: columnIndexes);
 
@@ -2595,20 +1896,14 @@ namespace Novacta.Analytics.Tests.Tools
 
                     TabularCollectionTest.Indexer.Set.SubCollection(
                        areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.Sparse,
+                       expected: expectedState.AsDense(),
+                       source: testableMatrix.AsSparse,
                        rowIndexes: rowIndexes,
                        columnIndexes: columnIndexes);
                     TabularCollectionTest.Indexer.Set.SubCollection(
                         areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.Sparse,
-                        rowIndexes: rowIndexes,
-                        columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.Sparse,
+                        expected: expectedState.AsSparse(),
+                        source: testableMatrix.AsSparse,
                         rowIndexes: rowIndexes,
                         columnIndexes: columnIndexes);
 
@@ -2620,8 +1915,8 @@ namespace Novacta.Analytics.Tests.Tools
                     {
                         TabularCollectionTest.Indexer.Set.SubCollection(
                             areEqual: AreEqual,
-                            expected: expectedState.GetDenseDoubleMatrix(),
-                            source: testableMatrix.Dense.AsReadOnly(),
+                            expected: expectedState.AsDense(),
+                            source: testableMatrix.AsDense.AsReadOnly(),
                             rowIndexes: rowIndexes,
                             columnIndexes: columnIndexes);
                     },
@@ -2633,21 +1928,8 @@ namespace Novacta.Analytics.Tests.Tools
                     {
                         TabularCollectionTest.Indexer.Set.SubCollection(
                             areEqual: AreEqual,
-                            expected: expectedState.GetViewDoubleMatrix(),
-                            source: testableMatrix.View.AsReadOnly(),
-                            rowIndexes: rowIndexes,
-                            columnIndexes: columnIndexes);
-                    },
-                    expectedType: typeof(NotSupportedException),
-                    expectedMessage: STR_EXCEPT_TAB_IS_READ_ONLY);
-
-                ExceptionAssert.Throw(
-                    () =>
-                    {
-                        TabularCollectionTest.Indexer.Set.SubCollection(
-                            areEqual: AreEqual,
-                            expected: expectedState.GetSparseDoubleMatrix(),
-                            source: testableMatrix.Sparse.AsReadOnly(),
+                            expected: expectedState.AsSparse(),
+                            source: testableMatrix.AsSparse.AsReadOnly(),
                             rowIndexes: rowIndexes,
                             columnIndexes: columnIndexes);
                     },
@@ -2679,43 +1961,14 @@ namespace Novacta.Analytics.Tests.Tools
 
                     TabularCollectionTest.Indexer.Set.SubCollection(
                        areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.Dense,
+                       expected: expectedState.AsDense(),
+                       source: testableMatrix.AsDense,
                        rowIndexes: rowIndexes,
                        columnIndexes: columnIndexes);
                     TabularCollectionTest.Indexer.Set.SubCollection(
                         areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.Dense,
-                        rowIndexes: rowIndexes,
-                        columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.Dense,
-                        rowIndexes: rowIndexes,
-                        columnIndexes: columnIndexes);
-
-                    #endregion
-
-                    #region View
-
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                       areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.View,
-                       rowIndexes: rowIndexes,
-                       columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.View,
-                        rowIndexes: rowIndexes,
-                        columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.View,
+                        expected: expectedState.AsSparse(),
+                        source: testableMatrix.AsDense,
                         rowIndexes: rowIndexes,
                         columnIndexes: columnIndexes);
 
@@ -2725,20 +1978,14 @@ namespace Novacta.Analytics.Tests.Tools
 
                     TabularCollectionTest.Indexer.Set.SubCollection(
                        areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.Sparse,
+                       expected: expectedState.AsDense(),
+                       source: testableMatrix.AsSparse,
                        rowIndexes: rowIndexes,
                        columnIndexes: columnIndexes);
                     TabularCollectionTest.Indexer.Set.SubCollection(
                         areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.Sparse,
-                        rowIndexes: rowIndexes,
-                        columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.Sparse,
+                        expected: expectedState.AsSparse(),
+                        source: testableMatrix.AsSparse,
                         rowIndexes: rowIndexes,
                         columnIndexes: columnIndexes);
 
@@ -2750,21 +1997,8 @@ namespace Novacta.Analytics.Tests.Tools
                     {
                         TabularCollectionTest.Indexer.Set.SubCollection(
                             areEqual: AreEqual,
-                            expected: expectedState.GetDenseDoubleMatrix(),
-                            source: testableMatrix.Dense.AsReadOnly(),
-                            rowIndexes: rowIndexes,
-                            columnIndexes: columnIndexes);
-                    },
-                    expectedType: typeof(NotSupportedException),
-                    expectedMessage: STR_EXCEPT_TAB_IS_READ_ONLY);
-
-                ExceptionAssert.Throw(
-                    () =>
-                    {
-                        TabularCollectionTest.Indexer.Set.SubCollection(
-                            areEqual: AreEqual,
-                            expected: expectedState.GetViewDoubleMatrix(),
-                            source: testableMatrix.View.AsReadOnly(),
+                            expected: expectedState.AsDense(),
+                            source: testableMatrix.AsDense.AsReadOnly(),
                             rowIndexes: rowIndexes,
                             columnIndexes: columnIndexes);
                     },
@@ -2776,8 +2010,8 @@ namespace Novacta.Analytics.Tests.Tools
                     {
                         TabularCollectionTest.Indexer.Set.SubCollection(
                            areEqual: AreEqual,
-                           expected: expectedState.GetSparseDoubleMatrix(),
-                           source: testableMatrix.Sparse.AsReadOnly(),
+                           expected: expectedState.AsSparse(),
+                           source: testableMatrix.AsSparse.AsReadOnly(),
                            rowIndexes: rowIndexes,
                            columnIndexes: columnIndexes);
                     },
@@ -2809,43 +2043,14 @@ namespace Novacta.Analytics.Tests.Tools
 
                     TabularCollectionTest.Indexer.Set.SubCollection(
                        areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.Dense,
+                       expected: expectedState.AsDense(),
+                       source: testableMatrix.AsDense,
                        rowIndexes: rowIndexes,
                        columnIndex: columnIndex);
                     TabularCollectionTest.Indexer.Set.SubCollection(
                         areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.Dense,
-                        rowIndexes: rowIndexes,
-                        columnIndex: columnIndex);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.Dense,
-                        rowIndexes: rowIndexes,
-                        columnIndex: columnIndex);
-
-                    #endregion
-
-                    #region View
-
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                       areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.View,
-                       rowIndexes: rowIndexes,
-                       columnIndex: columnIndex);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.View,
-                        rowIndexes: rowIndexes,
-                        columnIndex: columnIndex);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.View,
+                        expected: expectedState.AsSparse(),
+                        source: testableMatrix.AsDense,
                         rowIndexes: rowIndexes,
                         columnIndex: columnIndex);
 
@@ -2855,20 +2060,14 @@ namespace Novacta.Analytics.Tests.Tools
 
                     TabularCollectionTest.Indexer.Set.SubCollection(
                        areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.Sparse,
+                       expected: expectedState.AsDense(),
+                       source: testableMatrix.AsSparse,
                        rowIndexes: rowIndexes,
                        columnIndex: columnIndex);
                     TabularCollectionTest.Indexer.Set.SubCollection(
                         areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.Sparse,
-                        rowIndexes: rowIndexes,
-                        columnIndex: columnIndex);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.Sparse,
+                        expected: expectedState.AsSparse(),
+                        source: testableMatrix.AsSparse,
                         rowIndexes: rowIndexes,
                         columnIndex: columnIndex);
 
@@ -2880,8 +2079,8 @@ namespace Novacta.Analytics.Tests.Tools
                     {
                         TabularCollectionTest.Indexer.Set.SubCollection(
                             areEqual: AreEqual,
-                            expected: expectedState.GetDenseDoubleMatrix(),
-                            source: testableMatrix.Dense.AsReadOnly(),
+                            expected: expectedState.AsDense(),
+                            source: testableMatrix.AsDense.AsReadOnly(),
                             rowIndexes: rowIndexes,
                             columnIndex: columnIndex);
                     },
@@ -2893,21 +2092,8 @@ namespace Novacta.Analytics.Tests.Tools
                     {
                         TabularCollectionTest.Indexer.Set.SubCollection(
                             areEqual: AreEqual,
-                            expected: expectedState.GetViewDoubleMatrix(),
-                            source: testableMatrix.View.AsReadOnly(),
-                            rowIndexes: rowIndexes,
-                            columnIndex: columnIndex);
-                    },
-                    expectedType: typeof(NotSupportedException),
-                    expectedMessage: STR_EXCEPT_TAB_IS_READ_ONLY);
-
-                ExceptionAssert.Throw(
-                    () =>
-                    {
-                        TabularCollectionTest.Indexer.Set.SubCollection(
-                            areEqual: AreEqual,
-                            expected: expectedState.GetSparseDoubleMatrix(),
-                            source: testableMatrix.Sparse.AsReadOnly(),
+                            expected: expectedState.AsSparse(),
+                            source: testableMatrix.AsSparse.AsReadOnly(),
                             rowIndexes: rowIndexes,
                             columnIndex: columnIndex);
                     },
@@ -2939,43 +2125,14 @@ namespace Novacta.Analytics.Tests.Tools
 
                     TabularCollectionTest.Indexer.Set.SubCollection(
                        areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.Dense,
+                       expected: expectedState.AsDense(),
+                       source: testableMatrix.AsDense,
                        rowIndexes: rowIndexes,
                        columnIndexes: columnIndexes);
                     TabularCollectionTest.Indexer.Set.SubCollection(
                         areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.Dense,
-                        rowIndexes: rowIndexes,
-                        columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.Dense,
-                        rowIndexes: rowIndexes,
-                        columnIndexes: columnIndexes);
-
-                    #endregion
-
-                    #region View
-
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                       areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.View,
-                       rowIndexes: rowIndexes,
-                       columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.View,
-                        rowIndexes: rowIndexes,
-                        columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.View,
+                        expected: expectedState.AsSparse(),
+                        source: testableMatrix.AsDense,
                         rowIndexes: rowIndexes,
                         columnIndexes: columnIndexes);
 
@@ -2985,20 +2142,14 @@ namespace Novacta.Analytics.Tests.Tools
 
                     TabularCollectionTest.Indexer.Set.SubCollection(
                        areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.Sparse,
+                       expected: expectedState.AsDense(),
+                       source: testableMatrix.AsSparse,
                        rowIndexes: rowIndexes,
                        columnIndexes: columnIndexes);
                     TabularCollectionTest.Indexer.Set.SubCollection(
                         areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.Sparse,
-                        rowIndexes: rowIndexes,
-                        columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.Sparse,
+                        expected: expectedState.AsSparse(),
+                        source: testableMatrix.AsSparse,
                         rowIndexes: rowIndexes,
                         columnIndexes: columnIndexes);
 
@@ -3010,8 +2161,8 @@ namespace Novacta.Analytics.Tests.Tools
                     {
                         TabularCollectionTest.Indexer.Set.SubCollection(
                            areEqual: AreEqual,
-                           expected: expectedState.GetDenseDoubleMatrix(),
-                           source: testableMatrix.Dense.AsReadOnly(),
+                           expected: expectedState.AsDense(),
+                           source: testableMatrix.AsDense.AsReadOnly(),
                            rowIndexes: rowIndexes,
                            columnIndexes: columnIndexes);
                     },
@@ -3023,21 +2174,8 @@ namespace Novacta.Analytics.Tests.Tools
                     {
                         TabularCollectionTest.Indexer.Set.SubCollection(
                             areEqual: AreEqual,
-                            expected: expectedState.GetViewDoubleMatrix(),
-                            source: testableMatrix.View.AsReadOnly(),
-                            rowIndexes: rowIndexes,
-                            columnIndexes: columnIndexes);
-                    },
-                    expectedType: typeof(NotSupportedException),
-                    expectedMessage: STR_EXCEPT_TAB_IS_READ_ONLY);
-
-                ExceptionAssert.Throw(
-                    () =>
-                    {
-                        TabularCollectionTest.Indexer.Set.SubCollection(
-                            areEqual: AreEqual,
-                            expected: expectedState.GetSparseDoubleMatrix(),
-                            source: testableMatrix.Sparse.AsReadOnly(),
+                            expected: expectedState.AsSparse(),
+                            source: testableMatrix.AsSparse.AsReadOnly(),
                             rowIndexes: rowIndexes,
                             columnIndexes: columnIndexes);
                     },
@@ -3069,43 +2207,14 @@ namespace Novacta.Analytics.Tests.Tools
 
                     TabularCollectionTest.Indexer.Set.SubCollection(
                        areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.Dense,
+                       expected: expectedState.AsDense(),
+                       source: testableMatrix.AsDense,
                        rowIndexes: rowIndexes,
                        columnIndexes: columnIndexes);
                     TabularCollectionTest.Indexer.Set.SubCollection(
                         areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.Dense,
-                        rowIndexes: rowIndexes,
-                        columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.Dense,
-                        rowIndexes: rowIndexes,
-                        columnIndexes: columnIndexes);
-
-                    #endregion
-
-                    #region View
-
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                       areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.View,
-                       rowIndexes: rowIndexes,
-                       columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.View,
-                        rowIndexes: rowIndexes,
-                        columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.View,
+                        expected: expectedState.AsSparse(),
+                        source: testableMatrix.AsDense,
                         rowIndexes: rowIndexes,
                         columnIndexes: columnIndexes);
 
@@ -3115,20 +2224,14 @@ namespace Novacta.Analytics.Tests.Tools
 
                     TabularCollectionTest.Indexer.Set.SubCollection(
                        areEqual: AreEqual,
-                       expected: expectedState.GetDenseDoubleMatrix(),
-                       source: testableMatrix.Sparse,
+                       expected: expectedState.AsDense(),
+                       source: testableMatrix.AsSparse,
                        rowIndexes: rowIndexes,
                        columnIndexes: columnIndexes);
                     TabularCollectionTest.Indexer.Set.SubCollection(
                         areEqual: AreEqual,
-                        expected: expectedState.GetViewDoubleMatrix(),
-                        source: testableMatrix.Sparse,
-                        rowIndexes: rowIndexes,
-                        columnIndexes: columnIndexes);
-                    TabularCollectionTest.Indexer.Set.SubCollection(
-                        areEqual: AreEqual,
-                        expected: expectedState.GetSparseDoubleMatrix(),
-                        source: testableMatrix.Sparse,
+                        expected: expectedState.AsSparse(),
+                        source: testableMatrix.AsSparse,
                         rowIndexes: rowIndexes,
                         columnIndexes: columnIndexes);
 
@@ -3140,8 +2243,8 @@ namespace Novacta.Analytics.Tests.Tools
                     {
                         TabularCollectionTest.Indexer.Set.SubCollection(
                             areEqual: AreEqual,
-                            expected: expectedState.GetDenseDoubleMatrix(),
-                            source: testableMatrix.Dense.AsReadOnly(),
+                            expected: expectedState.AsDense(),
+                            source: testableMatrix.AsDense.AsReadOnly(),
                             rowIndexes: rowIndexes,
                             columnIndexes: columnIndexes);
                     },
@@ -3153,21 +2256,8 @@ namespace Novacta.Analytics.Tests.Tools
                     {
                         TabularCollectionTest.Indexer.Set.SubCollection(
                             areEqual: AreEqual,
-                            expected: expectedState.GetViewDoubleMatrix(),
-                            source: testableMatrix.View.AsReadOnly(),
-                            rowIndexes: rowIndexes,
-                            columnIndexes: columnIndexes);
-                    },
-                    expectedType: typeof(NotSupportedException),
-                    expectedMessage: STR_EXCEPT_TAB_IS_READ_ONLY);
-
-                ExceptionAssert.Throw(
-                    () =>
-                    {
-                        TabularCollectionTest.Indexer.Set.SubCollection(
-                            areEqual: AreEqual,
-                            expected: expectedState.GetSparseDoubleMatrix(),
-                            source: testableMatrix.Sparse.AsReadOnly(),
+                            expected: expectedState.AsSparse(),
+                            source: testableMatrix.AsSparse.AsReadOnly(),
                             rowIndexes: rowIndexes,
                             columnIndexes: columnIndexes);
                     },
@@ -3195,19 +2285,13 @@ namespace Novacta.Analytics.Tests.Tools
             {
                 DoubleMatrix source, actual, expected;
 
-                source = testableMatrix.Dense[rowIndex, columnIndexes];
+                source = testableMatrix.AsDense[rowIndex, columnIndexes];
                 expected = source;
                 source[rowIndex, columnIndexes] = expected;
                 actual = source[rowIndex, columnIndexes];
                 AreEqual(expected, actual);
 
-                source = testableMatrix.View[rowIndex, columnIndexes];
-                expected = source;
-                source[rowIndex, columnIndexes] = expected;
-                actual = source[rowIndex, columnIndexes];
-                AreEqual(expected, actual);
-
-                source = testableMatrix.Sparse[rowIndex, columnIndexes];
+                source = testableMatrix.AsSparse[rowIndex, columnIndexes];
                 expected = source;
                 source[rowIndex, columnIndexes] = expected;
                 actual = source[rowIndex, columnIndexes];
@@ -3230,19 +2314,13 @@ namespace Novacta.Analytics.Tests.Tools
             {
                 DoubleMatrix source, actual, expected;
 
-                source = testableMatrix.Dense[rowIndex, columnIndexes];
+                source = testableMatrix.AsDense[rowIndex, columnIndexes];
                 expected = source;
                 source[rowIndex, columnIndexes] = expected;
                 actual = source[rowIndex, columnIndexes];
                 AreEqual(expected, actual);
 
-                source = testableMatrix.View[rowIndex, columnIndexes];
-                expected = source;
-                source[rowIndex, columnIndexes] = expected;
-                actual = source[rowIndex, columnIndexes];
-                AreEqual(expected, actual);
-
-                source = testableMatrix.Sparse[rowIndex, columnIndexes];
+                source = testableMatrix.AsSparse[rowIndex, columnIndexes];
                 expected = source;
                 source[rowIndex, columnIndexes] = expected;
                 actual = source[rowIndex, columnIndexes];
@@ -3265,19 +2343,13 @@ namespace Novacta.Analytics.Tests.Tools
             {
                 DoubleMatrix source, actual, expected;
 
-                source = testableMatrix.Dense[rowIndexes, columnIndex];
+                source = testableMatrix.AsDense[rowIndexes, columnIndex];
                 expected = source;
                 source[rowIndexes, columnIndex] = expected;
                 actual = source[rowIndexes, columnIndex];
                 AreEqual(expected, actual);
 
-                source = testableMatrix.View[rowIndexes, columnIndex];
-                expected = source;
-                source[rowIndexes, columnIndex] = expected;
-                actual = source[rowIndexes, columnIndex];
-                AreEqual(expected, actual);
-
-                source = testableMatrix.Sparse[rowIndexes, columnIndex];
+                source = testableMatrix.AsSparse[rowIndexes, columnIndex];
                 expected = source;
                 source[rowIndexes, columnIndex] = expected;
                 actual = source[rowIndexes, columnIndex];
@@ -3300,19 +2372,13 @@ namespace Novacta.Analytics.Tests.Tools
             {
                 DoubleMatrix source, actual, expected;
 
-                source = testableMatrix.Dense[rowIndexes, columnIndexes];
+                source = testableMatrix.AsDense[rowIndexes, columnIndexes];
                 expected = source;
                 source[rowIndexes, columnIndexes] = expected;
                 actual = source[rowIndexes, columnIndexes];
                 AreEqual(expected, actual);
 
-                source = testableMatrix.View[rowIndexes, columnIndexes];
-                expected = source;
-                source[rowIndexes, columnIndexes] = expected;
-                actual = source[rowIndexes, columnIndexes];
-                AreEqual(expected, actual);
-
-                source = testableMatrix.Sparse[rowIndexes, columnIndexes];
+                source = testableMatrix.AsSparse[rowIndexes, columnIndexes];
                 expected = source;
                 source[rowIndexes, columnIndexes] = expected;
                 actual = source[rowIndexes, columnIndexes];
@@ -3335,19 +2401,13 @@ namespace Novacta.Analytics.Tests.Tools
             {
                 DoubleMatrix source, actual, expected;
 
-                source = testableMatrix.Dense[rowIndexes, columnIndexes];
+                source = testableMatrix.AsDense[rowIndexes, columnIndexes];
                 expected = source;
                 source[rowIndexes, columnIndexes] = expected;
                 actual = source[rowIndexes, columnIndexes];
                 AreEqual(expected, actual);
 
-                source = testableMatrix.View[rowIndexes, columnIndexes];
-                expected = source;
-                source[rowIndexes, columnIndexes] = expected;
-                actual = source[rowIndexes, columnIndexes];
-                AreEqual(expected, actual);
-
-                source = testableMatrix.Sparse[rowIndexes, columnIndexes];
+                source = testableMatrix.AsSparse[rowIndexes, columnIndexes];
                 expected = source;
                 source[rowIndexes, columnIndexes] = expected;
                 actual = source[rowIndexes, columnIndexes];
@@ -3370,19 +2430,13 @@ namespace Novacta.Analytics.Tests.Tools
             {
                 DoubleMatrix source, actual, expected;
 
-                source = testableMatrix.Dense[rowIndexes, columnIndex];
+                source = testableMatrix.AsDense[rowIndexes, columnIndex];
                 expected = source;
                 source[rowIndexes, columnIndex] = expected;
                 actual = source[rowIndexes, columnIndex];
                 AreEqual(expected, actual);
 
-                source = testableMatrix.View[rowIndexes, columnIndex];
-                expected = source;
-                source[rowIndexes, columnIndex] = expected;
-                actual = source[rowIndexes, columnIndex];
-                AreEqual(expected, actual);
-
-                source = testableMatrix.Sparse[rowIndexes, columnIndex];
+                source = testableMatrix.AsSparse[rowIndexes, columnIndex];
                 expected = source;
                 source[rowIndexes, columnIndex] = expected;
                 actual = source[rowIndexes, columnIndex];
@@ -3405,19 +2459,13 @@ namespace Novacta.Analytics.Tests.Tools
             {
                 DoubleMatrix source, actual, expected;
 
-                source = testableMatrix.Dense[rowIndexes, columnIndexes];
+                source = testableMatrix.AsDense[rowIndexes, columnIndexes];
                 expected = source;
                 source[rowIndexes, columnIndexes] = expected;
                 actual = source[rowIndexes, columnIndexes];
                 AreEqual(expected, actual);
 
-                source = testableMatrix.View[rowIndexes, columnIndexes];
-                expected = source;
-                source[rowIndexes, columnIndexes] = expected;
-                actual = source[rowIndexes, columnIndexes];
-                AreEqual(expected, actual);
-
-                source = testableMatrix.Sparse[rowIndexes, columnIndexes];
+                source = testableMatrix.AsSparse[rowIndexes, columnIndexes];
                 expected = source;
                 source[rowIndexes, columnIndexes] = expected;
                 actual = source[rowIndexes, columnIndexes];
@@ -3440,19 +2488,13 @@ namespace Novacta.Analytics.Tests.Tools
             {
                 DoubleMatrix source, actual, expected;
 
-                source = testableMatrix.Dense[rowIndexes, columnIndexes];
+                source = testableMatrix.AsDense[rowIndexes, columnIndexes];
                 expected = source;
                 source[rowIndexes, columnIndexes] = expected;
                 actual = source[rowIndexes, columnIndexes];
                 AreEqual(expected, actual);
 
-                source = testableMatrix.View[rowIndexes, columnIndexes];
-                expected = source;
-                source[rowIndexes, columnIndexes] = expected;
-                actual = source[rowIndexes, columnIndexes];
-                AreEqual(expected, actual);
-
-                source = testableMatrix.Sparse[rowIndexes, columnIndexes];
+                source = testableMatrix.AsSparse[rowIndexes, columnIndexes];
                 expected = source;
                 source[rowIndexes, columnIndexes] = expected;
                 actual = source[rowIndexes, columnIndexes];
@@ -3487,27 +2529,19 @@ namespace Novacta.Analytics.Tests.Tools
                 IndexCollection actual;
 
                 // Dense
-                actual = testableMatrix.Dense.Find(value);
+                actual = testableMatrix.AsDense.Find(value);
                 IndexCollectionAssert.AreEqual(expected, actual);
 
                 // Sparse
-                actual = testableMatrix.Sparse.Find(value);
-                IndexCollectionAssert.AreEqual(expected, actual);
-
-                // View
-                actual = testableMatrix.View.Find(value);
+                actual = testableMatrix.AsSparse.Find(value);
                 IndexCollectionAssert.AreEqual(expected, actual);
 
                 // Dense.AsReadOnly()
-                actual = testableMatrix.Dense.AsReadOnly().Find(value);
+                actual = testableMatrix.AsDense.AsReadOnly().Find(value);
                 IndexCollectionAssert.AreEqual(expected, actual);
 
                 // Sparse.AsReadOnly()
-                actual = testableMatrix.Sparse.AsReadOnly().Find(value);
-                IndexCollectionAssert.AreEqual(expected, actual);
-
-                // View.AsReadOnly()
-                actual = testableMatrix.View.AsReadOnly().Find(value);
+                actual = testableMatrix.AsSparse.AsReadOnly().Find(value);
                 IndexCollectionAssert.AreEqual(expected, actual);
             }
 
@@ -3524,27 +2558,19 @@ namespace Novacta.Analytics.Tests.Tools
                 IndexCollection actual;
 
                 // Dense
-                actual = testableMatrix.Dense.FindNonzero();
+                actual = testableMatrix.AsDense.FindNonzero();
                 IndexCollectionAssert.AreEqual(expected, actual);
 
                 // Sparse
-                actual = testableMatrix.Sparse.FindNonzero();
-                IndexCollectionAssert.AreEqual(expected, actual);
-
-                // View
-                actual = testableMatrix.View.FindNonzero();
+                actual = testableMatrix.AsSparse.FindNonzero();
                 IndexCollectionAssert.AreEqual(expected, actual);
 
                 // Dense.AsReadOnly()
-                actual = testableMatrix.Dense.AsReadOnly().FindNonzero();
+                actual = testableMatrix.AsDense.AsReadOnly().FindNonzero();
                 IndexCollectionAssert.AreEqual(expected, actual);
 
                 // Sparse.AsReadOnly()
-                actual = testableMatrix.Sparse.AsReadOnly().FindNonzero();
-                IndexCollectionAssert.AreEqual(expected, actual);
-
-                // View.AsReadOnly()
-                actual = testableMatrix.View.AsReadOnly().FindNonzero();
+                actual = testableMatrix.AsSparse.AsReadOnly().FindNonzero();
                 IndexCollectionAssert.AreEqual(expected, actual);
             }
 
@@ -3566,7 +2592,7 @@ namespace Novacta.Analytics.Tests.Tools
                     ArgumentExceptionAssert.Throw(
                         () =>
                         {
-                            testableMatrix.Dense.FindWhile(null);
+                            testableMatrix.AsDense.FindWhile(null);
                         },
                         expectedType: typeof(ArgumentNullException),
                         expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
@@ -3576,17 +2602,7 @@ namespace Novacta.Analytics.Tests.Tools
                     ArgumentExceptionAssert.Throw(
                         () =>
                         {
-                            testableMatrix.Sparse.FindWhile(null);
-                        },
-                        expectedType: typeof(ArgumentNullException),
-                        expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
-                        expectedParameterName: "match");
-
-                    // View
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            testableMatrix.View.FindWhile(null);
+                            testableMatrix.AsSparse.FindWhile(null);
                         },
                         expectedType: typeof(ArgumentNullException),
                         expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
@@ -3596,7 +2612,7 @@ namespace Novacta.Analytics.Tests.Tools
                     ArgumentExceptionAssert.Throw(
                         () =>
                         {
-                            testableMatrix.Dense.AsReadOnly().FindWhile(null);
+                            testableMatrix.AsDense.AsReadOnly().FindWhile(null);
                         },
                         expectedType: typeof(ArgumentNullException),
                         expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
@@ -3606,22 +2622,11 @@ namespace Novacta.Analytics.Tests.Tools
                     ArgumentExceptionAssert.Throw(
                         () =>
                         {
-                            testableMatrix.Sparse.AsReadOnly().FindWhile(null);
+                            testableMatrix.AsSparse.AsReadOnly().FindWhile(null);
                         },
                         expectedType: typeof(ArgumentNullException),
                         expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
                         expectedParameterName: "match");
-
-                    // View.AsReadOnly()
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            testableMatrix.View.AsReadOnly().FindWhile(null);
-                        },
-                        expectedType: typeof(ArgumentNullException),
-                        expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
-                        expectedParameterName: "match");
-
                 }
 
                 /// <summary>
@@ -3639,27 +2644,19 @@ namespace Novacta.Analytics.Tests.Tools
                     IndexCollection actual;
 
                     // Dense
-                    actual = testableMatrix.Dense.FindWhile(match);
+                    actual = testableMatrix.AsDense.FindWhile(match);
                     IndexCollectionAssert.AreEqual(expected, actual);
 
                     // Sparse
-                    actual = testableMatrix.Sparse.FindWhile(match);
-                    IndexCollectionAssert.AreEqual(expected, actual);
-
-                    // View
-                    actual = testableMatrix.View.FindWhile(match);
+                    actual = testableMatrix.AsSparse.FindWhile(match);
                     IndexCollectionAssert.AreEqual(expected, actual);
 
                     // Dense.AsReadOnly()
-                    actual = testableMatrix.Dense.AsReadOnly().FindWhile(match);
+                    actual = testableMatrix.AsDense.AsReadOnly().FindWhile(match);
                     IndexCollectionAssert.AreEqual(expected, actual);
 
                     // Sparse.AsReadOnly()
-                    actual = testableMatrix.Sparse.AsReadOnly().FindWhile(match);
-                    IndexCollectionAssert.AreEqual(expected, actual);
-
-                    // View.AsReadOnly()
-                    actual = testableMatrix.View.AsReadOnly().FindWhile(match);
+                    actual = testableMatrix.AsSparse.AsReadOnly().FindWhile(match);
                     IndexCollectionAssert.AreEqual(expected, actual);
                 }
             }
@@ -3690,7 +2687,7 @@ namespace Novacta.Analytics.Tests.Tools
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        testableMatrix.Dense.CopyTo(null, 0);
+                        testableMatrix.AsDense.CopyTo(null, 0);
                     },
                     expectedType: typeof(ArgumentNullException),
                     expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
@@ -3700,17 +2697,7 @@ namespace Novacta.Analytics.Tests.Tools
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        testableMatrix.Sparse.CopyTo(null, 0);
-                    },
-                    expectedType: typeof(ArgumentNullException),
-                    expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
-                    expectedParameterName: parameterName);
-
-                // View
-                ArgumentExceptionAssert.Throw(
-                    () =>
-                    {
-                        testableMatrix.View.CopyTo(null, 0);
+                        testableMatrix.AsSparse.CopyTo(null, 0);
                     },
                     expectedType: typeof(ArgumentNullException),
                     expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
@@ -3720,7 +2707,7 @@ namespace Novacta.Analytics.Tests.Tools
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        testableMatrix.Dense.AsReadOnly().CopyTo(null, 0);
+                        testableMatrix.AsDense.AsReadOnly().CopyTo(null, 0);
                     },
                     expectedType: typeof(ArgumentNullException),
                     expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
@@ -3730,22 +2717,11 @@ namespace Novacta.Analytics.Tests.Tools
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        testableMatrix.Sparse.AsReadOnly().CopyTo(null, 0);
+                        testableMatrix.AsSparse.AsReadOnly().CopyTo(null, 0);
                     },
                     expectedType: typeof(ArgumentNullException),
                     expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
                     expectedParameterName: parameterName);
-
-                // View.AsReadOnly()
-                ArgumentExceptionAssert.Throw(
-                    () =>
-                    {
-                        testableMatrix.View.AsReadOnly().CopyTo(null, 0);
-                    },
-                    expectedType: typeof(ArgumentNullException),
-                    expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
-                    expectedParameterName: parameterName);
-
             }
 
             /// <summary>
@@ -3767,7 +2743,7 @@ namespace Novacta.Analytics.Tests.Tools
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        testableMatrix.Dense.CopyTo(new double[1], -1);
+                        testableMatrix.AsDense.CopyTo(new double[1], -1);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
                     expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_NON_NEGATIVE,
@@ -3777,17 +2753,7 @@ namespace Novacta.Analytics.Tests.Tools
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        testableMatrix.Sparse.CopyTo(new double[1], -1);
-                    },
-                    expectedType: typeof(ArgumentOutOfRangeException),
-                    expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_NON_NEGATIVE,
-                    expectedParameterName: parameterName);
-
-                // View
-                ArgumentExceptionAssert.Throw(
-                    () =>
-                    {
-                        testableMatrix.View.CopyTo(new double[1], -1);
+                        testableMatrix.AsSparse.CopyTo(new double[1], -1);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
                     expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_NON_NEGATIVE,
@@ -3797,7 +2763,7 @@ namespace Novacta.Analytics.Tests.Tools
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        testableMatrix.Dense.AsReadOnly().CopyTo(new double[1], -1);
+                        testableMatrix.AsDense.AsReadOnly().CopyTo(new double[1], -1);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
                     expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_NON_NEGATIVE,
@@ -3807,17 +2773,7 @@ namespace Novacta.Analytics.Tests.Tools
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        testableMatrix.Sparse.AsReadOnly().CopyTo(new double[1], -1);
-                    },
-                    expectedType: typeof(ArgumentOutOfRangeException),
-                    expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_NON_NEGATIVE,
-                    expectedParameterName: parameterName);
-
-                // View.AsReadOnly()
-                ArgumentExceptionAssert.Throw(
-                    () =>
-                    {
-                        testableMatrix.View.AsReadOnly().CopyTo(new double[1], -1);
+                        testableMatrix.AsSparse.AsReadOnly().CopyTo(new double[1], -1);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
                     expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_NON_NEGATIVE,
@@ -3852,7 +2808,7 @@ namespace Novacta.Analytics.Tests.Tools
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        testableMatrix.Dense.CopyTo(array, arrayIndex);
+                        testableMatrix.AsDense.CopyTo(array, arrayIndex);
                     },
                     expectedType: typeof(ArgumentException),
                     expectedPartialMessage: STR_EXCEPT_PAR_NOT_ENOUGH_SPACE_IN_ARRAY,
@@ -3862,17 +2818,7 @@ namespace Novacta.Analytics.Tests.Tools
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        testableMatrix.Sparse.CopyTo(array, arrayIndex);
-                    },
-                    expectedType: typeof(ArgumentException),
-                    expectedPartialMessage: STR_EXCEPT_PAR_NOT_ENOUGH_SPACE_IN_ARRAY,
-                    expectedParameterName: null);
-
-                // View
-                ArgumentExceptionAssert.Throw(
-                    () =>
-                    {
-                        testableMatrix.View.CopyTo(array, arrayIndex);
+                        testableMatrix.AsSparse.CopyTo(array, arrayIndex);
                     },
                     expectedType: typeof(ArgumentException),
                     expectedPartialMessage: STR_EXCEPT_PAR_NOT_ENOUGH_SPACE_IN_ARRAY,
@@ -3882,7 +2828,7 @@ namespace Novacta.Analytics.Tests.Tools
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        testableMatrix.Dense.AsReadOnly().CopyTo(array, arrayIndex);
+                        testableMatrix.AsDense.AsReadOnly().CopyTo(array, arrayIndex);
                     },
                     expectedType: typeof(ArgumentException),
                     expectedPartialMessage: STR_EXCEPT_PAR_NOT_ENOUGH_SPACE_IN_ARRAY,
@@ -3892,17 +2838,7 @@ namespace Novacta.Analytics.Tests.Tools
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        testableMatrix.Sparse.AsReadOnly().CopyTo(array, arrayIndex);
-                    },
-                    expectedType: typeof(ArgumentException),
-                    expectedPartialMessage: STR_EXCEPT_PAR_NOT_ENOUGH_SPACE_IN_ARRAY,
-                    expectedParameterName: null);
-
-                // View.AsReadOnly()
-                ArgumentExceptionAssert.Throw(
-                    () =>
-                    {
-                        testableMatrix.View.AsReadOnly().CopyTo(array, arrayIndex);
+                        testableMatrix.AsSparse.AsReadOnly().CopyTo(array, arrayIndex);
                     },
                     expectedType: typeof(ArgumentException),
                     expectedPartialMessage: STR_EXCEPT_PAR_NOT_ENOUGH_SPACE_IN_ARRAY,
@@ -3926,27 +2862,19 @@ namespace Novacta.Analytics.Tests.Tools
                 double delta)
             {
                 // Dense
-                testableMatrix.Dense.CopyTo(array, arrayIndex);
+                testableMatrix.AsDense.CopyTo(array, arrayIndex);
                 DoubleArrayAssert.AreEqual(expected, array, delta);
 
                 // Sparse
-                testableMatrix.Sparse.CopyTo(array, arrayIndex);
-                DoubleArrayAssert.AreEqual(expected, array, delta);
-
-                // View
-                testableMatrix.View.CopyTo(array, arrayIndex);
+                testableMatrix.AsSparse.CopyTo(array, arrayIndex);
                 DoubleArrayAssert.AreEqual(expected, array, delta);
 
                 // Dense.AsReadOnly()
-                testableMatrix.Dense.AsReadOnly().CopyTo(array, arrayIndex);
+                testableMatrix.AsDense.AsReadOnly().CopyTo(array, arrayIndex);
                 DoubleArrayAssert.AreEqual(expected, array, delta);
 
                 // Sparse.AsReadOnly()
-                testableMatrix.Sparse.AsReadOnly().CopyTo(array, arrayIndex);
-                DoubleArrayAssert.AreEqual(expected, array, delta);
-
-                // View.AsReadOnly()
-                testableMatrix.View.AsReadOnly().CopyTo(array, arrayIndex);
+                testableMatrix.AsSparse.AsReadOnly().CopyTo(array, arrayIndex);
                 DoubleArrayAssert.AreEqual(expected, array, delta);
             }
         }
@@ -3967,27 +2895,19 @@ namespace Novacta.Analytics.Tests.Tools
             bool actual;
 
             // Dense
-            actual = testableMatrix.Dense.Contains(value);
+            actual = testableMatrix.AsDense.Contains(value);
             Assert.AreEqual(expected, actual);
 
             // Sparse
-            actual = testableMatrix.Sparse.Contains(value);
-            Assert.AreEqual(expected, actual);
-
-            // View
-            actual = testableMatrix.View.Contains(value);
+            actual = testableMatrix.AsSparse.Contains(value);
             Assert.AreEqual(expected, actual);
 
             // Dense.AsReadOnly()
-            actual = testableMatrix.Dense.AsReadOnly().Contains(value);
+            actual = testableMatrix.AsDense.AsReadOnly().Contains(value);
             Assert.AreEqual(expected, actual);
 
             // Sparse.AsReadOnly()
-            actual = testableMatrix.Sparse.AsReadOnly().Contains(value);
-            Assert.AreEqual(expected, actual);
-
-            // View.AsReadOnly()
-            actual = testableMatrix.View.AsReadOnly().Contains(value);
+            actual = testableMatrix.AsSparse.AsReadOnly().Contains(value);
             Assert.AreEqual(expected, actual);
         }
 
@@ -4027,7 +2947,7 @@ namespace Novacta.Analytics.Tests.Tools
                     ArgumentExceptionAssert.Throw(
                         () =>
                         {
-                            var sub = testableMatrix.Dense[-1];
+                            var sub = testableMatrix.AsDense[-1];
                         },
                         expectedType: typeof(ArgumentOutOfRangeException),
                         expectedPartialMessage: STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS,
@@ -4036,7 +2956,7 @@ namespace Novacta.Analytics.Tests.Tools
                     ArgumentExceptionAssert.Throw(
                         () =>
                         {
-                            var sub = testableMatrix.Dense[testableMatrix.Dense.Count];
+                            var sub = testableMatrix.AsDense[testableMatrix.AsDense.Count];
                         },
                         expectedType: typeof(ArgumentOutOfRangeException),
                         expectedPartialMessage: STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS,
@@ -4048,7 +2968,7 @@ namespace Novacta.Analytics.Tests.Tools
                     ArgumentExceptionAssert.Throw(
                         () =>
                         {
-                            var sub = testableMatrix.Sparse[-1];
+                            var sub = testableMatrix.AsSparse[-1];
                         },
                         expectedType: typeof(ArgumentOutOfRangeException),
                         expectedPartialMessage: STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS,
@@ -4057,28 +2977,7 @@ namespace Novacta.Analytics.Tests.Tools
                     ArgumentExceptionAssert.Throw(
                         () =>
                         {
-                            var sub = testableMatrix.Sparse[testableMatrix.Sparse.Count];
-                        },
-                        expectedType: typeof(ArgumentOutOfRangeException),
-                        expectedPartialMessage: STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS,
-                        expectedParameterName: parameterName);
-                }
-
-                // View
-                {
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub = testableMatrix.View[-1];
-                        },
-                        expectedType: typeof(ArgumentOutOfRangeException),
-                        expectedPartialMessage: STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS,
-                        expectedParameterName: parameterName);
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub = testableMatrix.View[testableMatrix.View.Count];
+                            var sub = testableMatrix.AsSparse[testableMatrix.AsSparse.Count];
                         },
                         expectedType: typeof(ArgumentOutOfRangeException),
                         expectedPartialMessage: STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS,
@@ -4090,7 +2989,7 @@ namespace Novacta.Analytics.Tests.Tools
                     ArgumentExceptionAssert.Throw(
                         () =>
                         {
-                            var sub = testableMatrix.Dense.AsReadOnly()[-1];
+                            var sub = testableMatrix.AsDense.AsReadOnly()[-1];
                         },
                         expectedType: typeof(ArgumentOutOfRangeException),
                         expectedPartialMessage: STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS,
@@ -4099,8 +2998,8 @@ namespace Novacta.Analytics.Tests.Tools
                     ArgumentExceptionAssert.Throw(
                         () =>
                         {
-                            var sub = testableMatrix.Dense.AsReadOnly()[
-                                testableMatrix.Dense.AsReadOnly().Count];
+                            var sub = testableMatrix.AsDense.AsReadOnly()[
+                                testableMatrix.AsDense.AsReadOnly().Count];
                         },
                         expectedType: typeof(ArgumentOutOfRangeException),
                         expectedPartialMessage: STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS,
@@ -4112,7 +3011,7 @@ namespace Novacta.Analytics.Tests.Tools
                     ArgumentExceptionAssert.Throw(
                         () =>
                         {
-                            var sub = testableMatrix.Sparse.AsReadOnly()[-1];
+                            var sub = testableMatrix.AsSparse.AsReadOnly()[-1];
                         },
                         expectedType: typeof(ArgumentOutOfRangeException),
                         expectedPartialMessage: STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS,
@@ -4121,30 +3020,8 @@ namespace Novacta.Analytics.Tests.Tools
                     ArgumentExceptionAssert.Throw(
                         () =>
                         {
-                            var sub = testableMatrix.Sparse.AsReadOnly()[
-                                testableMatrix.Sparse.AsReadOnly().Count];
-                        },
-                        expectedType: typeof(ArgumentOutOfRangeException),
-                        expectedPartialMessage: STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS,
-                        expectedParameterName: parameterName);
-                }
-
-                // View.AsReadOnly()
-                {
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub = testableMatrix.View.AsReadOnly()[-1];
-                        },
-                        expectedType: typeof(ArgumentOutOfRangeException),
-                        expectedPartialMessage: STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS,
-                        expectedParameterName: parameterName);
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            var sub = testableMatrix.View.AsReadOnly()[
-                                testableMatrix.View.AsReadOnly().Count];
+                            var sub = testableMatrix.AsSparse.AsReadOnly()[
+                                testableMatrix.AsSparse.AsReadOnly().Count];
                         },
                         expectedType: typeof(ArgumentOutOfRangeException),
                         expectedPartialMessage: STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS,
@@ -4167,46 +3044,32 @@ namespace Novacta.Analytics.Tests.Tools
                 double actual;
 
                 // Dense
-                actual = testableMatrix.Dense[linearIndex];
-                Assert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
+                actual = testableMatrix.AsDense[linearIndex];
+                Assert.AreEqual(expected, actual, Accuracy);
 
-                actual = ((IList<double>)testableMatrix.Dense)[linearIndex];
-                Assert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
+                actual = ((IList<double>)testableMatrix.AsDense)[linearIndex];
+                Assert.AreEqual(expected, actual, Accuracy);
 
                 // Sparse
-                actual = testableMatrix.Sparse[linearIndex];
-                Assert.AreEqual(expected, actual);
+                actual = testableMatrix.AsSparse[linearIndex];
+                Assert.AreEqual(expected, actual, Accuracy);
 
-                actual = ((IList<double>)testableMatrix.Sparse)[linearIndex];
-                Assert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
-
-                // View
-                actual = testableMatrix.View[linearIndex];
-                Assert.AreEqual(expected, actual);
-
-                actual = ((IList<double>)testableMatrix.View)[linearIndex];
-                Assert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
+                actual = ((IList<double>)testableMatrix.AsSparse)[linearIndex];
+                Assert.AreEqual(expected, actual, Accuracy);
 
                 // Dense.AsReadOnly()
-                actual = testableMatrix.Dense.AsReadOnly()[linearIndex];
-                Assert.AreEqual(expected, actual);
+                actual = testableMatrix.AsDense.AsReadOnly()[linearIndex];
+                Assert.AreEqual(expected, actual, Accuracy);
 
-                actual = ((IList<double>)testableMatrix.Dense.AsReadOnly())[linearIndex];
-                Assert.AreEqual(expected, actual);
+                actual = ((IList<double>)testableMatrix.AsDense.AsReadOnly())[linearIndex];
+                Assert.AreEqual(expected, actual, Accuracy);
 
                 // Sparse.AsReadOnly()
-                actual = testableMatrix.Sparse.AsReadOnly()[linearIndex];
-                Assert.AreEqual(expected, actual);
+                actual = testableMatrix.AsSparse.AsReadOnly()[linearIndex];
+                Assert.AreEqual(expected, actual, Accuracy);
 
-                actual = ((IList<double>)testableMatrix.Sparse.AsReadOnly())[linearIndex];
-                Assert.AreEqual(expected, actual);
-
-                // View.AsReadOnly()
-                actual = testableMatrix.View.AsReadOnly()[linearIndex];
-                Assert.AreEqual(expected, actual);
-
-                actual = ((IList<double>)testableMatrix.View.AsReadOnly())[linearIndex];
-                Assert.AreEqual(expected, actual);
+                actual = ((IList<double>)testableMatrix.AsSparse.AsReadOnly())[linearIndex];
+                Assert.AreEqual(expected, actual, Accuracy);
             }
         }
 
@@ -4228,27 +3091,19 @@ namespace Novacta.Analytics.Tests.Tools
             int actual;
 
             // Dense
-            actual = testableMatrix.Dense.IndexOf(value);
+            actual = testableMatrix.AsDense.IndexOf(value);
             Assert.AreEqual(expected, actual);
 
             // Sparse
-            actual = testableMatrix.Sparse.IndexOf(value);
-            Assert.AreEqual(expected, actual);
-
-            // View
-            actual = testableMatrix.View.IndexOf(value);
+            actual = testableMatrix.AsSparse.IndexOf(value);
             Assert.AreEqual(expected, actual);
 
             // Dense.AsReadOnly()
-            actual = testableMatrix.Dense.AsReadOnly().IndexOf(value);
+            actual = testableMatrix.AsDense.AsReadOnly().IndexOf(value);
             Assert.AreEqual(expected, actual);
 
             // Sparse.AsReadOnly()
-            actual = testableMatrix.Sparse.AsReadOnly().IndexOf(value);
-            Assert.AreEqual(expected, actual);
-
-            // View.AsReadOnly()
-            actual = testableMatrix.View.AsReadOnly().IndexOf(value);
+            actual = testableMatrix.AsSparse.AsReadOnly().IndexOf(value);
             Assert.AreEqual(expected, actual);
         }
 
@@ -4268,27 +3123,19 @@ namespace Novacta.Analytics.Tests.Tools
             bool actual;
 
             // Dense
-            actual = testableMatrix.Dense.IsReadOnly;
+            actual = testableMatrix.AsDense.IsReadOnly;
             Assert.AreEqual(false, actual);
 
             // Sparse
-            actual = testableMatrix.Sparse.IsReadOnly;
-            Assert.AreEqual(false, actual);
-
-            // View
-            actual = testableMatrix.View.IsReadOnly;
+            actual = testableMatrix.AsSparse.IsReadOnly;
             Assert.AreEqual(false, actual);
 
             // Dense.AsReadOnly()
-            actual = testableMatrix.Dense.AsReadOnly().IsReadOnly;
+            actual = testableMatrix.AsDense.AsReadOnly().IsReadOnly;
             Assert.AreEqual(true, actual);
 
             // Sparse.AsReadOnly()
-            actual = testableMatrix.Sparse.AsReadOnly().IsReadOnly;
-            Assert.AreEqual(true, actual);
-
-            // View.AsReadOnly()
-            actual = testableMatrix.View.AsReadOnly().IsReadOnly;
+            actual = testableMatrix.AsSparse.AsReadOnly().IsReadOnly;
             Assert.AreEqual(true, actual);
         }
 
@@ -4328,7 +3175,7 @@ namespace Novacta.Analytics.Tests.Tools
                     ArgumentExceptionAssert.Throw(
                         () =>
                         {
-                            testableMatrix.Dense[-1] = 1.0;
+                            testableMatrix.AsDense[-1] = 1.0;
                         },
                         expectedType: typeof(ArgumentOutOfRangeException),
                         expectedPartialMessage: STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS,
@@ -4337,7 +3184,7 @@ namespace Novacta.Analytics.Tests.Tools
                     ArgumentExceptionAssert.Throw(
                         () =>
                         {
-                            testableMatrix.Dense[testableMatrix.Dense.Count] = 1.0;
+                            testableMatrix.AsDense[testableMatrix.AsDense.Count] = 1.0;
                         },
                         expectedType: typeof(ArgumentOutOfRangeException),
                         expectedPartialMessage: STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS,
@@ -4349,7 +3196,7 @@ namespace Novacta.Analytics.Tests.Tools
                     ArgumentExceptionAssert.Throw(
                         () =>
                         {
-                            testableMatrix.Sparse[-1] = 1.0;
+                            testableMatrix.AsSparse[-1] = 1.0;
                         },
                         expectedType: typeof(ArgumentOutOfRangeException),
                         expectedPartialMessage: STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS,
@@ -4358,28 +3205,7 @@ namespace Novacta.Analytics.Tests.Tools
                     ArgumentExceptionAssert.Throw(
                         () =>
                         {
-                            testableMatrix.Sparse[testableMatrix.Sparse.Count] = 1.0;
-                        },
-                        expectedType: typeof(ArgumentOutOfRangeException),
-                        expectedPartialMessage: STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS,
-                        expectedParameterName: parameterName);
-                }
-
-                // View
-                {
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            testableMatrix.View[-1] = 1.0;
-                        },
-                        expectedType: typeof(ArgumentOutOfRangeException),
-                        expectedPartialMessage: STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS,
-                        expectedParameterName: parameterName);
-
-                    ArgumentExceptionAssert.Throw(
-                        () =>
-                        {
-                            testableMatrix.View[testableMatrix.View.Count] = 1.0;
+                            testableMatrix.AsSparse[testableMatrix.AsSparse.Count] = 1.0;
                         },
                         expectedType: typeof(ArgumentOutOfRangeException),
                         expectedPartialMessage: STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS,
@@ -4406,7 +3232,7 @@ namespace Novacta.Analytics.Tests.Tools
                     ExceptionAssert.Throw(
                         () =>
                         {
-                            var target = (IList<double>)testableMatrix.Dense.AsReadOnly();
+                            var target = (IList<double>)testableMatrix.AsDense.AsReadOnly();
                             target[0] = 1.0;
                         },
                         expectedType: typeof(NotSupportedException),
@@ -4418,19 +3244,7 @@ namespace Novacta.Analytics.Tests.Tools
                     ExceptionAssert.Throw(
                         () =>
                         {
-                            var target = (IList<double>)testableMatrix.Sparse.AsReadOnly();
-                            target[0] = 1.0;
-                        },
-                        expectedType: typeof(NotSupportedException),
-                        expectedMessage: expectedMessage);
-                }
-
-                // View.AsReadOnly()
-                {
-                    ExceptionAssert.Throw(
-                        () =>
-                        {
-                            var target = (IList<double>)testableMatrix.View.AsReadOnly();
+                            var target = (IList<double>)testableMatrix.AsSparse.AsReadOnly();
                             target[0] = 1.0;
                         },
                         expectedType: typeof(NotSupportedException),
@@ -4453,19 +3267,14 @@ namespace Novacta.Analytics.Tests.Tools
                 double actual;
 
                 // Dense
-                testableMatrix.Dense[linearIndex] = expected;
-                actual = testableMatrix.Dense[linearIndex];
-                Assert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
+                testableMatrix.AsDense[linearIndex] = expected;
+                actual = testableMatrix.AsDense[linearIndex];
+                Assert.AreEqual(expected, actual, Accuracy);
 
                 // Sparse
-                testableMatrix.Sparse[linearIndex] = expected;
-                actual = testableMatrix.Sparse[linearIndex];
-                Assert.AreEqual(expected, actual);
-
-                // View
-                testableMatrix.View[linearIndex] = expected;
-                actual = testableMatrix.View[linearIndex];
-                Assert.AreEqual(expected, actual);
+                testableMatrix.AsSparse[linearIndex] = expected;
+                actual = testableMatrix.AsSparse[linearIndex];
+                Assert.AreEqual(expected, actual, Accuracy);
             }
         }
 
@@ -4494,27 +3303,19 @@ namespace Novacta.Analytics.Tests.Tools
                 DoubleMatrix target, actual, expected;
 
                 // Dense
-                target = testableMatrix.Dense;
+                target = testableMatrix.AsDense;
                 target.InPlaceTranspose();
                 target.InPlaceTranspose();
                 actual = target;
-                expected = testableMatrix.Dense;
+                expected = testableMatrix.AsDense;
                 DoubleMatrixAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
 
                 // Sparse
-                target = testableMatrix.Sparse;
+                target = testableMatrix.AsSparse;
                 target.InPlaceTranspose();
                 target.InPlaceTranspose();
                 actual = target;
-                expected = testableMatrix.Sparse;
-                DoubleMatrixAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
-
-                // View
-                target = testableMatrix.View;
-                target.InPlaceTranspose();
-                target.InPlaceTranspose();
-                actual = target;
-                expected = testableMatrix.View;
+                expected = testableMatrix.AsSparse;
                 DoubleMatrixAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
             }
 
@@ -4532,27 +3333,19 @@ namespace Novacta.Analytics.Tests.Tools
                 DoubleMatrix actual;
 
                 // Dense
-                actual = testableMatrix.Dense.Transpose();
+                actual = testableMatrix.AsDense.Transpose();
                 DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
 
                 // Sparse
-                actual = testableMatrix.Sparse.Transpose();
-                DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
-
-                // View
-                actual = testableMatrix.View.Transpose();
+                actual = testableMatrix.AsSparse.Transpose();
                 DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
 
                 // Dense.AsReadOnly()
-                actual = testableMatrix.Dense.AsReadOnly().Transpose();
+                actual = testableMatrix.AsDense.AsReadOnly().Transpose();
                 DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
 
                 // Sparse.AsReadOnly()
-                actual = testableMatrix.Sparse.AsReadOnly().Transpose();
-                DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
-
-                // View.AsReadOnly()
-                actual = testableMatrix.View.AsReadOnly().Transpose();
+                actual = testableMatrix.AsSparse.AsReadOnly().Transpose();
                 DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
             }
         }
@@ -4582,27 +3375,19 @@ namespace Novacta.Analytics.Tests.Tools
                 DoubleMatrix actual;
 
                 // Dense
-                actual = testableMatrix.Dense.Vec();
+                actual = testableMatrix.AsDense.Vec();
                 DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
 
                 // Sparse
-                actual = testableMatrix.Sparse.Vec();
-                DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
-
-                // View
-                actual = testableMatrix.View.Vec();
+                actual = testableMatrix.AsSparse.Vec();
                 DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
 
                 // Dense.AsReadOnly()
-                actual = testableMatrix.Dense.AsReadOnly().Vec();
+                actual = testableMatrix.AsDense.AsReadOnly().Vec();
                 DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
 
                 // Sparse.AsReadOnly()
-                actual = testableMatrix.Sparse.AsReadOnly().Vec();
-                DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
-
-                // View.AsReadOnly()
-                actual = testableMatrix.View.AsReadOnly().Vec();
+                actual = testableMatrix.AsSparse.AsReadOnly().Vec();
                 DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
             }
 
@@ -4629,14 +3414,14 @@ namespace Novacta.Analytics.Tests.Tools
                     double[] asColumnMajorDenseExpectedArray = new double[linearIndexes.Count];
                     for (int i = 0; i < linearIndexes.Count; i++)
                     {
-                        asColumnMajorDenseExpectedArray[i] = testableMatrix.Dense[linearIndexes[i]];
+                        asColumnMajorDenseExpectedArray[i] = testableMatrix.AsDense[linearIndexes[i]];
                     }
                     var expected = new DoubleMatrixState(
                         asColumnMajorDenseArray: asColumnMajorDenseExpectedArray,
                         numberOfRows: linearIndexes.Count,
                         numberOfColumns: 1);
 
-                    actual = testableMatrix.Dense.Vec(linearIndexes);
+                    actual = testableMatrix.AsDense.Vec(linearIndexes);
                     DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
                 }
 
@@ -4645,30 +3430,14 @@ namespace Novacta.Analytics.Tests.Tools
                     double[] asColumnMajorDenseExpectedArray = new double[linearIndexes.Count];
                     for (int i = 0; i < linearIndexes.Count; i++)
                     {
-                        asColumnMajorDenseExpectedArray[i] = testableMatrix.Sparse[linearIndexes[i]];
+                        asColumnMajorDenseExpectedArray[i] = testableMatrix.AsSparse[linearIndexes[i]];
                     }
                     var expected = new DoubleMatrixState(
                         asColumnMajorDenseArray: asColumnMajorDenseExpectedArray,
                         numberOfRows: linearIndexes.Count,
                         numberOfColumns: 1);
 
-                    actual = testableMatrix.Sparse.Vec(linearIndexes);
-                    DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
-                }
-
-                // View
-                {
-                    double[] asColumnMajorDenseExpectedArray = new double[linearIndexes.Count];
-                    for (int i = 0; i < linearIndexes.Count; i++)
-                    {
-                        asColumnMajorDenseExpectedArray[i] = testableMatrix.View[linearIndexes[i]];
-                    }
-                    var expected = new DoubleMatrixState(
-                        asColumnMajorDenseArray: asColumnMajorDenseExpectedArray,
-                        numberOfRows: linearIndexes.Count,
-                        numberOfColumns: 1);
-
-                    actual = testableMatrix.View.Vec(linearIndexes);
+                    actual = testableMatrix.AsSparse.Vec(linearIndexes);
                     DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
                 }
 
@@ -4677,14 +3446,14 @@ namespace Novacta.Analytics.Tests.Tools
                     double[] asColumnMajorDenseExpectedArray = new double[linearIndexes.Count];
                     for (int i = 0; i < linearIndexes.Count; i++)
                     {
-                        asColumnMajorDenseExpectedArray[i] = testableMatrix.Dense[linearIndexes[i]];
+                        asColumnMajorDenseExpectedArray[i] = testableMatrix.AsDense[linearIndexes[i]];
                     }
                     var expected = new DoubleMatrixState(
                         asColumnMajorDenseArray: asColumnMajorDenseExpectedArray,
                         numberOfRows: linearIndexes.Count,
                         numberOfColumns: 1);
 
-                    actual = testableMatrix.Dense.AsReadOnly().Vec(linearIndexes);
+                    actual = testableMatrix.AsDense.AsReadOnly().Vec(linearIndexes);
                     DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
                 }
 
@@ -4693,30 +3462,14 @@ namespace Novacta.Analytics.Tests.Tools
                     double[] asColumnMajorDenseExpectedArray = new double[linearIndexes.Count];
                     for (int i = 0; i < linearIndexes.Count; i++)
                     {
-                        asColumnMajorDenseExpectedArray[i] = testableMatrix.Sparse[linearIndexes[i]];
+                        asColumnMajorDenseExpectedArray[i] = testableMatrix.AsSparse[linearIndexes[i]];
                     }
                     var expected = new DoubleMatrixState(
                         asColumnMajorDenseArray: asColumnMajorDenseExpectedArray,
                         numberOfRows: linearIndexes.Count,
                         numberOfColumns: 1);
 
-                    actual = testableMatrix.Sparse.AsReadOnly().Vec(linearIndexes);
-                    DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
-                }
-
-                // View.AsReadOnly()
-                {
-                    double[] asColumnMajorDenseExpectedArray = new double[linearIndexes.Count];
-                    for (int i = 0; i < linearIndexes.Count; i++)
-                    {
-                        asColumnMajorDenseExpectedArray[i] = testableMatrix.View[linearIndexes[i]];
-                    }
-                    var expected = new DoubleMatrixState(
-                        asColumnMajorDenseArray: asColumnMajorDenseExpectedArray,
-                        numberOfRows: linearIndexes.Count,
-                        numberOfColumns: 1);
-
-                    actual = testableMatrix.View.AsReadOnly().Vec(linearIndexes);
+                    actual = testableMatrix.AsSparse.AsReadOnly().Vec(linearIndexes);
                     DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
                 }
             }

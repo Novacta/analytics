@@ -273,7 +273,7 @@ namespace Novacta.Analytics.Advanced
     /// B_t = B_{t-l}, \quad l=1,\dots,m, 
     /// </latex>
     /// can be verified,
-    /// the method returns <b>true</b>; otherwise <b>false</b> is returned.
+    /// the method returns <c>true</c>; otherwise <c>false</c> is returned.
     /// Equivalently, the algorithm converges if the indexes of 
     /// the largest probabilities in each of the <latex>n</latex> columns of 
     /// the reference parameter coincide
@@ -354,7 +354,7 @@ namespace Novacta.Analytics.Advanced
         private readonly DoubleMatrix partIdentifiers;
 
         private readonly LinkedList<IndexValuePair[]> maxProbabilities =
-            new LinkedList<IndexValuePair[]>();
+            new();
 
         private readonly Func<DoubleMatrix, double> objectiveFunction;
 
@@ -823,7 +823,7 @@ namespace Novacta.Analytics.Advanced
         /// can be verified,
         /// where <latex>m</latex> is
         /// <see cref="SystemPerformanceOptimizationContext.MinimumNumberOfIterations"/>,
-        /// the method returns <b>true</b>; otherwise <b>false</b> is returned.
+        /// the method returns <c>true</c>; otherwise <c>false</c> is returned.
         /// Equivalently, the algorithm converges if the indexes of 
         /// the largest probabilities in each of the <latex>n</latex> columns of 
         /// the reference parameter coincide

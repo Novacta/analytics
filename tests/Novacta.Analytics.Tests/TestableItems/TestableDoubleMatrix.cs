@@ -73,38 +73,29 @@ namespace Novacta.Analytics.Tests.TestableItems
         }
 
         /// <summary>
-        /// Gets a dense implemented <see cref="DoubleMatrix"/> to test.
+        /// Returns a dense implemented <see cref="DoubleMatrix"/> 
+        /// having the state expected by this instance.
         /// </summary>
-        /// <value>The dense implemented matrix to test.</value>
-        public virtual DoubleMatrix Dense
+        /// <value>
+        /// A dense implemented matrix to test.</value>
+        public virtual DoubleMatrix AsDense
         {
             get
             {
-                return this.Expected.GetDenseDoubleMatrix();
+                return this.Expected.AsDense();
             }
         }
 
         /// <summary>
-        /// Gets a view implemented <see cref="DoubleMatrix"/> to test.
+        /// Returns a sparse implemented <see cref="DoubleMatrix"/> 
+        /// having the state expected by this instance.
         /// </summary>
-        /// <value>The sub implemented matrix to test.</value>
-        public virtual DoubleMatrix View
+        /// <value>A sparse implemented matrix to test.</value>
+        public virtual DoubleMatrix AsSparse
         {
             get
             {
-                return this.Expected.GetViewDoubleMatrix();
-            }
-        }
-
-        /// <summary>
-        /// Gets a sparse implemented <see cref="DoubleMatrix"/> to test.
-        /// </summary>
-        /// <value>The sparse implemented matrix to test.</value>
-        public virtual DoubleMatrix Sparse
-        {
-            get
-            {
-                return this.Expected.GetSparseDoubleMatrix();
+                return this.Expected.AsSparse();
             }
         }
 

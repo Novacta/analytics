@@ -22,6 +22,7 @@ namespace Novacta.Analytics
     /// adds to a given <see cref="JsonSerializerOptions"/> instance
     /// the converters required for the JSON serialization of the following types: 
     /// <see cref="DoubleMatrix"/>, <see cref="ReadOnlyDoubleMatrix"/>, 
+    /// <see cref="ComplexMatrix"/>, <see cref="ReadOnlyComplexMatrix"/>, 
     /// <see cref="Category"/>,
     /// <see cref="CategoricalVariable"/>, <see cref="CategoricalEntailment"/>, 
     /// and <see cref="CategoricalDataSet"/>.
@@ -78,10 +79,15 @@ namespace Novacta.Analytics
             }
 
             options.Converters.Add(new JsonDictionaryInt32StringConverter());
+
             options.Converters.Add(new JsonDoubleMatrixImplementorConverter());
             options.Converters.Add(new JsonReadOnlyDoubleMatrixConverter());
             options.Converters.Add(new JsonDoubleMatrixConverter());
 
+            options.Converters.Add(new JsonComplexConverter());
+            options.Converters.Add(new JsonComplexMatrixImplementorConverter());
+            options.Converters.Add(new JsonReadOnlyComplexMatrixConverter());
+            options.Converters.Add(new JsonComplexMatrixConverter());
             options.Converters.Add(new JsonCategoryConverter());
             options.Converters.Add(new JsonCategoricalVariableConverter());
             options.Converters.Add(new JsonCategoricalEntailmentConverter());

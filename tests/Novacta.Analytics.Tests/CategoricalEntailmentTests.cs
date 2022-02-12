@@ -8,267 +8,19 @@ using Novacta.Analytics.Tests.Tools;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Novacta.Analytics.Tests
 {
     [TestClass()]
     public class CategoricalEntailmentTests
     {
-        [TestMethod]
-        public void GetObjectDataTest()
-        {
-            // info is null
-            {
-                MemoryStream ms = new MemoryStream();
-
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
-                {
-                    { 0, "0" },
-                    { 1, "1" },
-                    { 2, "2" },
-                    { 3, "3" },
-                    { 4, "4" }
-                };
-                f0.SetAsReadOnly();
-
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
-                {
-                    { 0, "0" },
-                    { 1, "1" },
-                    { 2, "2" },
-                    { 3, "3" }
-                };
-                f1.SetAsReadOnly();
-
-                var featureVariables =
-                    new List<CategoricalVariable>(2) {
-                        f0,
-                        f1 };
-
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
-                {
-                    { 0, "0" },
-                    { 1, "1" },
-                    { 2, "2" }
-                };
-                responseVariable.SetAsReadOnly();
-
-                var featurePremises
-                    = new List<SortedSet<double>>(2) {
-                        new SortedSet<double>() { 0.0, 1.0 },
-                        new SortedSet<double>() { 2.0 } };
-
-                double responseConclusion = responseVariable.Categories[1].Code;
-                double truthValue = .9;
-
-                var entailment = new CategoricalEntailment(
-                    featureVariables: featureVariables,
-                    responseVariable: responseVariable,
-                    featurePremises: featurePremises,
-                    responseConclusion: responseConclusion,
-                    truthValue: truthValue);
-
-                ArgumentExceptionAssert.Throw(
-                    () =>
-                    {
-                        entailment.GetObjectData(
-                            info: null,
-                            context: new StreamingContext());
-                    },
-                    expectedType: typeof(ArgumentNullException),
-                    expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
-                    expectedParameterName: "info");
-            }
-        }
-
-        [TestMethod]
-        public void SerializableTest()
-        {
-            // info is null
-            {
-                string parameterName = "info";
-                string innerMessage =
-                    ArgumentExceptionAssert.NullPartialMessage +
-                        Environment.NewLine + "Parameter name: " + parameterName;
-
-                ConstructorInfo serializationCtor = null;
-                TypeInfo t = typeof(CategoricalEntailment).GetTypeInfo();
-                IEnumerable<ConstructorInfo> ctors = t.DeclaredConstructors;
-                foreach (var ctor in ctors)
-                {
-                    var parameters = ctor.GetParameters();
-                    if (parameters.Length == 2)
-                    {
-                        if ((parameters[0].ParameterType == typeof(SerializationInfo))
-                            &&
-                            (parameters[1].ParameterType == typeof(StreamingContext)))
-                        {
-                            serializationCtor = ctor;
-                            break;
-                        }
-                    }
-                }
-
-                ExceptionAssert.InnerThrow(
-                    () =>
-                    {
-                        serializationCtor.Invoke(
-                            new object[] { null, new StreamingContext() });
-                    },
-                    expectedInnerType: typeof(ArgumentNullException),
-                    expectedInnerMessage: innerMessage);
-            }
-
-            // Some premises are empty
-            {
-                MemoryStream ms = new MemoryStream();
-
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
-                {
-                    { 0, "0" },
-                    { 1, "1" },
-                    { 2, "2" },
-                    { 3, "3" },
-                    { 4, "4" }
-                };
-                f0.SetAsReadOnly();
-
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
-                {
-                    { 0, "0" },
-                    { 1, "1" },
-                    { 2, "2" },
-                    { 3, "3" }
-                };
-                f1.SetAsReadOnly();
-
-                var featureVariables =
-                    new List<CategoricalVariable>(2) {
-                        f0,
-                        f1 };
-
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
-                {
-                    { 0, "0" },
-                    { 1, "1" },
-                    { 2, "2" }
-                };
-                responseVariable.SetAsReadOnly();
-
-                var featurePremises
-                    = new List<SortedSet<double>>(2) {
-                        new SortedSet<double>() { 0.0, 1.0 },
-                        new SortedSet<double>() };
-
-                double responseConclusion = responseVariable.Categories[1].Code;
-                double truthValue = .9;
-
-                var serializedEntailment = new CategoricalEntailment(
-                    featureVariables: featureVariables,
-                    responseVariable: responseVariable,
-                    featurePremises: featurePremises,
-                    responseConclusion: responseConclusion,
-                    truthValue: truthValue);
-
-                BinaryFormatter formatter = new BinaryFormatter();
-
-                formatter.Serialize(ms, serializedEntailment);
-
-                // Reset stream position
-                ms.Position = 0;
-
-                var deserializedEntailment = (CategoricalEntailment)formatter.Deserialize(ms);
-
-                CategoricalEntailmentAssert.IsStateAsExpected(
-                    target: deserializedEntailment,
-                    expectedFeatureVariables: featureVariables,
-                    expectedResponseVariable: responseVariable,
-                    expectedFeaturePremises: featurePremises,
-                    expectedResponseConclusion: responseConclusion,
-                    expectedTruthValue: truthValue);
-            }
-
-            // No premises are empty
-            {
-                MemoryStream ms = new MemoryStream();
-
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
-                {
-                    { 0, "0" },
-                    { 1, "1" },
-                    { 2, "2" },
-                    { 3, "3" },
-                    { 4, "4" }
-                };
-                f0.SetAsReadOnly();
-
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
-                {
-                    { 0, "0" },
-                    { 1, "1" },
-                    { 2, "2" },
-                    { 3, "3" }
-                };
-                f1.SetAsReadOnly();
-
-                var featureVariables =
-                    new List<CategoricalVariable>(2) {
-                        f0,
-                        f1 };
-
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
-                {
-                    { 0, "0" },
-                    { 1, "1" },
-                    { 2, "2" }
-                };
-                responseVariable.SetAsReadOnly();
-
-                var featurePremises
-                    = new List<SortedSet<double>>(2) {
-                        new SortedSet<double>() { 0.0, 1.0 },
-                        new SortedSet<double>() { 2.0 } };
-
-                double responseConclusion = responseVariable.Categories[1].Code;
-                double truthValue = .9;
-
-                var serializedEntailment = new CategoricalEntailment(
-                    featureVariables: featureVariables,
-                    responseVariable: responseVariable,
-                    featurePremises: featurePremises,
-                    responseConclusion: responseConclusion,
-                    truthValue: truthValue);
-
-                BinaryFormatter formatter = new BinaryFormatter();
-
-                formatter.Serialize(ms, serializedEntailment);
-
-                // Reset stream position
-                ms.Position = 0;
-
-                var deserializedEntailment = (CategoricalEntailment)formatter.Deserialize(ms);
-
-                CategoricalEntailmentAssert.IsStateAsExpected(
-                    target: deserializedEntailment,
-                    expectedFeatureVariables: featureVariables,
-                    expectedResponseVariable: responseVariable,
-                    expectedFeaturePremises: featurePremises,
-                    expectedResponseConclusion: responseConclusion,
-                    expectedTruthValue: truthValue);
-            }
-        }
-
         [TestMethod()]
         public void ConstructorTest()
         {
             // From entailment representation as a double matrix
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -278,7 +30,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -292,7 +44,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -328,7 +80,7 @@ namespace Novacta.Analytics.Tests
 
             // From entailment state
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -338,7 +90,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -352,7 +104,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -396,7 +148,7 @@ namespace Novacta.Analytics.Tests
                             "STR_EXCEPT_PAR_NOT_IN_CLOSED_INTERVAL"),
                             "0", "1");
 
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -406,7 +158,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -420,7 +172,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -461,7 +213,7 @@ namespace Novacta.Analytics.Tests
                             "STR_EXCEPT_PAR_NOT_IN_CLOSED_INTERVAL"),
                             "0", "1");
 
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -471,7 +223,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -485,7 +237,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -520,7 +272,7 @@ namespace Novacta.Analytics.Tests
 
             // valid input
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -530,7 +282,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -544,7 +296,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -580,7 +332,7 @@ namespace Novacta.Analytics.Tests
         [TestMethod()]
         public void ToStringTest()
         {
-            CategoricalVariable f0 = new CategoricalVariable("F-0")
+            CategoricalVariable f0 = new("F-0")
             {
                 { 0, "0" },
                 { 1, "1" },
@@ -590,7 +342,7 @@ namespace Novacta.Analytics.Tests
             };
             f0.SetAsReadOnly();
 
-            CategoricalVariable f1 = new CategoricalVariable("F-1")
+            CategoricalVariable f1 = new("F-1")
             {
                 { 0, "0" },
                 { 1, "1" },
@@ -604,7 +356,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-            CategoricalVariable responseVariable = new CategoricalVariable("R")
+            CategoricalVariable responseVariable = new("R")
             {
                 { 0, "0" },
                 { 1, "1" },
@@ -644,7 +396,7 @@ namespace Novacta.Analytics.Tests
         {
             // dataSet is null
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -654,7 +406,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -668,7 +420,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -707,7 +459,7 @@ namespace Novacta.Analytics.Tests
 
             // featureVariableIndexes is null
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -717,7 +469,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -731,7 +483,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -740,7 +492,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, responseVariable };
+                    new() { f0, f1, responseVariable };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -811,7 +563,7 @@ namespace Novacta.Analytics.Tests
                             "STR_EXCEPT_PAR_INDEX_EXCEEDS_OTHER_PAR_DIMS"),
                         "column", "dataSet");
 
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -821,7 +573,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -835,7 +587,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -844,7 +596,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, responseVariable };
+                    new() { f0, f1, responseVariable };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -912,7 +664,7 @@ namespace Novacta.Analytics.Tests
                     = ImplementationServices.GetResourceString(
                             "STR_EXCEPT_CEE_MUST_HAVE_SAME_FEATURES_COUNT");
 
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -922,7 +674,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -936,7 +688,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -945,7 +697,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, responseVariable };
+                    new() { f0, f1, responseVariable };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -1009,7 +761,7 @@ namespace Novacta.Analytics.Tests
 
             // Valid input: from data set - with some empty or not proper premise
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1019,7 +771,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1033,7 +785,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1042,7 +794,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, responseVariable };
+                    new() { f0, f1, responseVariable };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -1103,7 +855,7 @@ namespace Novacta.Analytics.Tests
 
             // Valid input: from data set - with some empty premise
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1113,7 +865,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1127,7 +879,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1136,7 +888,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, responseVariable };
+                    new() { f0, f1, responseVariable };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -1197,7 +949,7 @@ namespace Novacta.Analytics.Tests
 
             // Valid input: from data set - with some not proper premise
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1207,7 +959,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1221,7 +973,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1230,7 +982,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, responseVariable };
+                    new() { f0, f1, responseVariable };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -1291,7 +1043,7 @@ namespace Novacta.Analytics.Tests
 
             // Valid input: from double matrix - with some empty or not proper premise
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1301,7 +1053,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1315,7 +1067,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1324,7 +1076,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, responseVariable };
+                    new() { f0, f1, responseVariable };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -1411,7 +1163,7 @@ namespace Novacta.Analytics.Tests
 
             // Valid input: from double matrix - with some empty premise
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1421,7 +1173,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1435,7 +1187,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1444,7 +1196,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, responseVariable };
+                    new() { f0, f1, responseVariable };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -1531,7 +1283,7 @@ namespace Novacta.Analytics.Tests
 
             // Valid input: from double matrix - with some not proper premise
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1541,7 +1293,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1555,7 +1307,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1564,7 +1316,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, responseVariable };
+                    new() { f0, f1, responseVariable };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {

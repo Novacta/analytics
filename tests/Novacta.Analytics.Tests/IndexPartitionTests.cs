@@ -9,114 +9,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Novacta.Analytics.Infrastructure;
 using Novacta.Analytics.Tests.Data.UCI;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Reflection;
-using System.Runtime.Serialization;
 
 namespace Novacta.Analytics.Tests
 {
     [TestClass]
     public class IndexPartitionTests
     {
-        [TestMethod]
-        public void GetObjectDataTest()
-        {
-            // info is null
-            {
-                // Create a matrix
-                var data = new double[6] {
-                    1,3,
-                    0,2,
-                    2,1 };
-
-                var elements = DoubleMatrix.Dense(3, 2, data, StorageOrder.RowMajor);
-
-                // Partition the matrix linear indexes by the content of 
-                // matrix entries: a part is created for each distinct matrix value
-                var partition = IndexPartition.Create(elements);
-
-                ArgumentExceptionAssert.Throw(
-                    () =>
-                    {
-                        partition.GetObjectData(
-                            info: null,
-                            context: new System.Runtime.Serialization.StreamingContext());
-                    },
-                    expectedType: typeof(ArgumentNullException),
-                    expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
-                    expectedParameterName: "info");
-            }
-        }
-
-        [TestMethod]
-        public void SerializableTest()
-        {
-            // info is null
-            {
-                string parameterName = "info";
-                string innerMessage =
-                    ArgumentExceptionAssert.NullPartialMessage +
-                        Environment.NewLine + "Parameter name: " + parameterName;
-
-                ConstructorInfo serializationCtor = null;
-                TypeInfo t = typeof(IndexPartition<double>).GetTypeInfo();
-                IEnumerable<ConstructorInfo> ctors = t.DeclaredConstructors;
-                foreach (var ctor in ctors)
-                {
-                    var parameters = ctor.GetParameters();
-                    if (parameters.Length == 2)
-                    {
-                        if ((parameters[0].ParameterType == typeof(SerializationInfo))
-                            &&
-                            (parameters[1].ParameterType == typeof(StreamingContext)))
-                        {
-                            serializationCtor = ctor;
-                            break;
-                        }
-                    }
-                }
-
-                ExceptionAssert.InnerThrow(
-                    () =>
-                    {
-                        serializationCtor.Invoke(
-                            new object[] { null, new StreamingContext() });
-                    },
-                    expectedInnerType: typeof(ArgumentNullException),
-                    expectedInnerMessage: innerMessage);
-            }
-
-            {
-                MemoryStream ms = new MemoryStream();
-
-                // Create a matrix
-                var data = new double[6] {
-                    1,3,
-                    0,2,
-                    2,1 };
-
-                var elements = DoubleMatrix.Dense(3, 2, data, StorageOrder.RowMajor);
-
-                // Partition the matrix linear indexes by the content of 
-                // matrix entries: a part is created for each distinct matrix value
-                var serializedPartition = IndexPartition.Create(elements);
-
-                BinaryFormatter formatter = new BinaryFormatter();
-
-                formatter.Serialize(ms, serializedPartition);
-
-                // Reset stream position
-                ms.Position = 0;
-
-                var deserializedPartition = (IndexPartition<double>)formatter.Deserialize(ms);
-
-                IndexPartitionAssert.AreEqual(
-                    expected: serializedPartition,
-                    actual: deserializedPartition);
-            }
-        }
-
         [TestMethod]
         public void CreateFromDoubleMatrixTest()
         {
@@ -161,7 +59,7 @@ namespace Novacta.Analytics.Tests
                 // Part identifier: 1
                 //      indexes: 4, 5
 
-                IndexPartition<double> expected = new IndexPartition<double>
+                IndexPartition<double> expected = new()
                 {
                     partIndetifiers = new List<double>(2)
                     {
@@ -213,7 +111,7 @@ namespace Novacta.Analytics.Tests
                 //      indexes: 2, 5, 7
                 // 
 
-                IndexPartition<double> expected = new IndexPartition<double>
+                IndexPartition<double> expected = new()
                 {
                     partIndetifiers = new List<double>(3)
                     {
@@ -664,7 +562,7 @@ namespace Novacta.Analytics.Tests
                 var actual = IndexPartition.MinimumCentroidLinkage(
                     data, partition);
 
-                List<double> linkages = new List<double>();
+                List<double> linkages = new();
                 foreach (var leftId in partition.Identifiers)
                 {
                     var leftPart = partition[leftId];

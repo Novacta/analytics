@@ -79,16 +79,6 @@ namespace Novacta.Analytics
         /// <latex mode="inline">A_{i,j}=0</latex> whenever <latex mode="inline">j \neq i</latex>.
         /// </para>
         /// </remarks>
-        /// <example>
-        /// <para>
-        /// In the following example, some matrices are tested
-        /// for being diagonal.
-        /// </para>
-        /// <para>
-        /// <code source="..\Novacta.Analytics.CodeExamples\IsDiagonalExample0.cs.txt" 
-        /// language="cs" />
-        /// </para>
-        /// </example>
         /// <seealso cref="IsSquare"/>
         /// <seealso href="https://en.wikipedia.org/wiki/Diagonal_matrix"/>
         bool IsDiagonal
@@ -135,16 +125,6 @@ namespace Novacta.Analytics
         /// <latex mode="inline">A_{i,j}=0</latex> whenever <latex mode="inline">j>i+1</latex>.
         /// </para>
         /// </remarks>
-        /// <example>
-        /// <para>
-        /// In the following example, some matrices are tested
-        /// for being lower Hessenberg.
-        /// </para>
-        /// <para>
-        /// <code source="..\Novacta.Analytics.CodeExamples\IsLowerHessenbergExample0.cs.txt" 
-        /// language="cs" />
-        /// </para>
-        /// </example>
         /// <seealso cref="IsSquare"/>
         /// <seealso href="https://en.wikipedia.org/wiki/Hessenberg_matrix"/>
         bool IsLowerHessenberg
@@ -167,16 +147,6 @@ namespace Novacta.Analytics
         /// <latex mode="inline">A_{i,j}=A_{j,i}</latex>.
         /// </para>
         /// </remarks>
-        /// <example>
-        /// <para>
-        /// In the following example, some matrices are tested
-        /// for being symmetric.
-        /// </para>
-        /// <para>
-        /// <code source="..\Novacta.Analytics.CodeExamples\IsSymmetricExample0.cs.txt" 
-        /// language="cs" />
-        /// </para>
-        /// </example>
         /// <seealso cref="IsSquare"/>
         /// <seealso href="https://en.wikipedia.org/wiki/Symmetric_matrix"/>
         bool IsSymmetric
@@ -199,16 +169,6 @@ namespace Novacta.Analytics
         /// <latex mode="inline">A_{i,j}=-A_{j,i}</latex>.
         /// </para>
         /// </remarks>
-        /// <example>
-        /// <para>
-        /// In the following example, some matrices are tested
-        /// for being skew symmetric.
-        /// </para>
-        /// <para>
-        /// <code source="..\Novacta.Analytics.CodeExamples\IsSkewSymmetricExample0.cs.txt" 
-        /// language="cs" />
-        /// </para>
-        /// </example>
         /// <seealso cref="IsSquare"/>
         /// <seealso href="https://en.wikipedia.org/wiki/Skew-symmetric_matrix"/>
         bool IsSkewSymmetric
@@ -255,16 +215,6 @@ namespace Novacta.Analytics
         /// <latex mode="inline">A{i,j}=0</latex> whenever <latex mode="inline">j>i</latex>.
         /// </para>
         /// </remarks>
-        /// <example>
-        /// <para>
-        /// In the following example, some matrices are tested
-        /// for being lower triangular.
-        /// </para>
-        /// <para>
-        /// <code source="..\Novacta.Analytics.CodeExamples\IsLowerTriangularExample0.cs.txt" 
-        /// language="cs" />
-        /// </para>
-        /// </example>
         /// <seealso cref="IsSquare"/>
         /// <seealso href="https://en.wikipedia.org/wiki/Triangular_matrix"/>
         bool IsLowerTriangular
@@ -292,16 +242,6 @@ namespace Novacta.Analytics
         /// <latex mode="inline">A_{i,j}=0</latex> whenever <latex mode="inline">i>j</latex>.
         /// </para>
         /// </remarks>
-        /// <example>
-        /// <para>
-        /// In the following example, some matrices are tested
-        /// for being upper triangular.
-        /// </para>
-        /// <para>
-        /// <code source="..\Novacta.Analytics.CodeExamples\IsUpperTriangularExample0.cs.txt" 
-        /// language="cs" />
-        /// </para>
-        /// </example>
         /// <seealso cref="IsSquare"/>
         /// <seealso href="https://en.wikipedia.org/wiki/Triangular_matrix"/>
         bool IsUpperTriangular
@@ -335,16 +275,6 @@ namespace Novacta.Analytics
         /// <latex mode="inline">j>i+1</latex>.
         /// </para>
         /// </remarks>
-        /// <example>
-        /// <para>
-        /// In the following example, some matrices are tested
-        /// for being tridiagonal.
-        /// </para>
-        /// <para>
-        /// <code source="..\Novacta.Analytics.CodeExamples\IsTridiagonalExample0.cs.txt" 
-        /// language="cs" />
-        /// </para>
-        /// </example>
         /// <seealso cref="IsSquare"/>
         /// <seealso href="https://en.wikipedia.org/wiki/Tridiagonal_matrix"/>
         bool IsTridiagonal
@@ -376,16 +306,6 @@ namespace Novacta.Analytics
         /// <latex mode="inline">j>i</latex>.
         /// </para>
         /// </remarks>
-        /// <example>
-        /// <para>
-        /// In the following example, some matrices are tested
-        /// for being lower bidiagonal.
-        /// </para>
-        /// <para>
-        /// <code source="..\Novacta.Analytics.CodeExamples\IsLowerBidiagonalExample0.cs.txt" 
-        /// language="cs" />
-        /// </para>
-        /// </example>
         /// <seealso cref="IsSquare"/>
         /// <seealso href="https://en.wikipedia.org/wiki/Bidiagonal_matrix"/>
         bool IsLowerBidiagonal
@@ -417,16 +337,6 @@ namespace Novacta.Analytics
         /// <latex mode="inline">i>j</latex>.
         /// </para>
         /// </remarks>
-        /// <example>
-        /// <para>
-        /// In the following example, some matrices are tested
-        /// for being upper bidiagonal.
-        /// </para>
-        /// <para>
-        /// <code source="..\Novacta.Analytics.CodeExamples\IsUpperBidiagonalExample0.cs.txt" 
-        /// language="cs" />
-        /// </para>
-        /// </example>
         /// <seealso cref="IsSquare"/>
         /// <seealso href="https://en.wikipedia.org/wiki/Bidiagonal_matrix"/>
         bool IsUpperBidiagonal
@@ -474,16 +384,6 @@ namespace Novacta.Analytics
         /// <latex mode="inline">A_{i,j}=0</latex> whenever <latex mode="inline">i>j+1</latex>.
         /// </para>
         /// </remarks>
-        /// <example>
-        /// <para>
-        /// In the following example, some matrices are tested
-        /// for being upper Hessenberg.
-        /// </para>
-        /// <para>
-        /// <code source="..\Novacta.Analytics.CodeExamples\IsUpperHessenbergExample0.cs.txt" 
-        /// language="cs" />
-        /// </para>
-        /// </example>
         /// <seealso cref="IsSquare"/>
         /// <seealso href="https://en.wikipedia.org/wiki/Hessenberg_matrix"/>
         bool IsUpperHessenberg
@@ -501,15 +401,6 @@ namespace Novacta.Analytics
         /// <inheritdoc cref="DoubleMatrix" 
         /// path="para[@id='lower']"/>
         /// </remarks>
-        /// <example>
-        /// <para>
-        /// In the following example, the lower bandwidth is computed for some matrices.
-        /// </para>
-        /// <para>
-        /// <code source="..\Novacta.Analytics.CodeExamples\LowerBandwidthExample0.cs.txt" 
-        /// language="cs" />
-        /// </para>
-        /// </example>
         /// <seealso cref="UpperBandwidth"/>
         /// <seealso href="https://en.wikipedia.org/wiki/Band_matrix"/>
         int LowerBandwidth
@@ -527,15 +418,6 @@ namespace Novacta.Analytics
         /// <inheritdoc cref="DoubleMatrix" 
         /// path="para[@id='upper']"/>
         /// </remarks>
-        /// <example>
-        /// <para>
-        /// In the following example, the upper bandwidth is computed for some matrices.
-        /// </para>
-        /// <para>
-        /// <code source="..\Novacta.Analytics.CodeExamples\UpperBandwidthExample0.cs.txt" 
-        /// language="cs" />
-        /// </para>
-        /// </example>
         /// <seealso cref="LowerBandwidth"/>
         /// <seealso href="https://en.wikipedia.org/wiki/Band_matrix"/>
         int UpperBandwidth

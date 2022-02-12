@@ -96,10 +96,10 @@ namespace Novacta.Analytics.Tests.Tools
                     //|Bin2: [3.35,+INF)
                     Assert.AreEqual("]-Inf, 2.95]", specialCategorizers[1]("2.94", CultureInfo.InvariantCulture));
                     Assert.AreEqual("]-Inf, 2.95]", specialCategorizers[1]("2.95", CultureInfo.InvariantCulture));
-                    Assert.AreEqual("]2.95, 3.35]", specialCategorizers[1]("2.9500000000001", CultureInfo.InvariantCulture));
-                    Assert.AreEqual("]2.95, 3.35]", specialCategorizers[1]("3.35", CultureInfo.InvariantCulture));
-                    Assert.AreEqual("]3.35, Inf[", specialCategorizers[1]("3.35000000001", CultureInfo.InvariantCulture));
-                    Assert.AreEqual("]3.35, Inf[", specialCategorizers[1]("7.21", CultureInfo.InvariantCulture));
+                    Assert.AreEqual("]2.95, 3.3499999999999996]", specialCategorizers[1]("2.9500000000001", CultureInfo.InvariantCulture));
+                    Assert.AreEqual("]2.95, 3.3499999999999996]", specialCategorizers[1]("3.3499999999999995", CultureInfo.InvariantCulture));
+                    Assert.AreEqual("]3.3499999999999996, Inf[", specialCategorizers[1]("3.35000000001", CultureInfo.InvariantCulture));
+                    Assert.AreEqual("]3.3499999999999996, Inf[", specialCategorizers[1]("7.21", CultureInfo.InvariantCulture));
 
                     //|Discretization of Attribute: "petal-length"
                     //|
@@ -235,14 +235,14 @@ namespace Novacta.Analytics.Tests.Tools
                     // ]2.5, Inf[,C,
                     // ]2.5, Inf[,C,
                     // ]2.5, Inf[,C,
-                    CategoricalVariable numerical = new CategoricalVariable("NUMERICAL")
+                    CategoricalVariable numerical = new("NUMERICAL")
                     {
                         { 0, "]-Inf, 2.5]" },
                         { 1, "]2.5, Inf[" }
                     };
                     numerical.SetAsReadOnly();
 
-                    CategoricalVariable number = new CategoricalVariable("TARGET")
+                    CategoricalVariable number = new("TARGET")
                     {
                         { 0, "A" },
                         { 1, "B" },
@@ -251,7 +251,7 @@ namespace Novacta.Analytics.Tests.Tools
                     number.SetAsReadOnly();
 
                     List<CategoricalVariable> expectedVariables =
-                        new List<CategoricalVariable>() { numerical, number };
+                        new() { numerical, number };
 
                     DoubleMatrix expectedData = DoubleMatrix.Dense(numberOfInstances, 2);
 
@@ -285,7 +285,7 @@ namespace Novacta.Analytics.Tests.Tools
                         expectedData[i, 0] = 1.0;
                     }
 
-                    CategoricalDataSet expected = new CategoricalDataSet(
+                    CategoricalDataSet expected = new(
                         expectedVariables, expectedData);
 
                     CategoricalDataSetAssert.AreEqual(expected, actual);
@@ -344,8 +344,8 @@ namespace Novacta.Analytics.Tests.Tools
                         "9,C",
                         "9,C" };
 
-                    MemoryStream stream = new MemoryStream();
-                    StreamWriter writer = new StreamWriter(stream);
+                    MemoryStream stream = new();
+                    StreamWriter writer = new(stream);
                     for (int i = 0; i < data.Length; i++)
                     {
                         writer.WriteLine(data[i].ToCharArray());
@@ -354,7 +354,7 @@ namespace Novacta.Analytics.Tests.Tools
                     stream.Position = 0;
 
                     // Identify the special categorizer for variable NUMERICAL
-                    StreamReader streamReader = new StreamReader(stream);
+                    StreamReader streamReader = new(stream);
                     char columnDelimiter = ',';
                     IndexCollection numericalColumns = IndexCollection.Range(0, 0);
                     bool firstLineContainsColumnHeaders = true;
@@ -409,14 +409,14 @@ namespace Novacta.Analytics.Tests.Tools
                     // ]2.5, Inf[,C,
                     // ]2.5, Inf[,C,
                     // ]2.5, Inf[,C,
-                    CategoricalVariable numerical = new CategoricalVariable("NUMERICAL")
+                    CategoricalVariable numerical = new("NUMERICAL")
                     {
                         { 0, "]-Inf, 2.5]" },
                         { 1, "]2.5, Inf[" }
                     };
                     numerical.SetAsReadOnly();
 
-                    CategoricalVariable number = new CategoricalVariable("TARGET")
+                    CategoricalVariable number = new("TARGET")
                     {
                         { 0, "A" },
                         { 1, "B" },
@@ -425,7 +425,7 @@ namespace Novacta.Analytics.Tests.Tools
                     number.SetAsReadOnly();
 
                     List<CategoricalVariable> expectedVariables =
-                        new List<CategoricalVariable>() { numerical, number };
+                        new() { numerical, number };
 
                     DoubleMatrix expectedData = DoubleMatrix.Dense(numberOfInstances, 2);
 
@@ -459,7 +459,7 @@ namespace Novacta.Analytics.Tests.Tools
                         expectedData[i, 0] = 1.0;
                     }
 
-                    CategoricalDataSet expected = new CategoricalDataSet(
+                    CategoricalDataSet expected = new(
                         expectedVariables, expectedData);
 
                     CategoricalDataSetAssert.AreEqual(expected, actual);
@@ -518,8 +518,8 @@ namespace Novacta.Analytics.Tests.Tools
                         "9,C",
                         "9,C" };
 
-                    MemoryStream stream = new MemoryStream();
-                    StreamWriter writer = new StreamWriter(stream);
+                    MemoryStream stream = new();
+                    StreamWriter writer = new(stream);
                     for (int i = 0; i < data.Length; i++)
                     {
                         writer.WriteLine(data[i].ToCharArray());
@@ -528,7 +528,7 @@ namespace Novacta.Analytics.Tests.Tools
                     stream.Position = 0;
 
                     // Identify the special categorizer for variable NUMERICAL
-                    StreamReader streamReader = new StreamReader(stream);
+                    StreamReader streamReader = new(stream);
                     char columnDelimiter = ',';
                     IndexCollection numericalColumns = IndexCollection.Range(0, 0);
                     bool firstLineContainsColumnHeaders = false;
@@ -583,14 +583,14 @@ namespace Novacta.Analytics.Tests.Tools
                     // ]2.5, Inf[,C,
                     // ]2.5, Inf[,C,
                     // ]2.5, Inf[,C,
-                    CategoricalVariable numerical = new CategoricalVariable("0")
+                    CategoricalVariable numerical = new("0")
                     {
                         { 0, "]-Inf, 2.5]" },
                         { 1, "]2.5, Inf[" }
                     };
                     numerical.SetAsReadOnly();
 
-                    CategoricalVariable number = new CategoricalVariable("1")
+                    CategoricalVariable number = new("1")
                     {
                         { 0, "A" },
                         { 1, "B" },
@@ -599,7 +599,7 @@ namespace Novacta.Analytics.Tests.Tools
                     number.SetAsReadOnly();
 
                     List<CategoricalVariable> expectedVariables =
-                        new List<CategoricalVariable>() { numerical, number };
+                        new() { numerical, number };
 
                     DoubleMatrix expectedData = DoubleMatrix.Dense(numberOfInstances, 2);
 
@@ -633,7 +633,7 @@ namespace Novacta.Analytics.Tests.Tools
                         expectedData[i, 0] = 1.0;
                     }
 
-                    CategoricalDataSet expected = new CategoricalDataSet(
+                    CategoricalDataSet expected = new(
                         expectedVariables, expectedData);
 
                     CategoricalDataSetAssert.AreEqual(expected, actual);
@@ -666,8 +666,8 @@ namespace Novacta.Analytics.Tests.Tools
                         "Black,TRUE,-1.1",
                         "Black,FALSE, 4.4" };
 
-                    MemoryStream stream = new MemoryStream();
-                    StreamWriter writer = new StreamWriter(stream);
+                    MemoryStream stream = new();
+                    StreamWriter writer = new(stream);
                     for (int i = 0; i < data.Length; i++)
                     {
                         writer.WriteLine(data[i].ToCharArray());
@@ -676,7 +676,7 @@ namespace Novacta.Analytics.Tests.Tools
                     stream.Position = 0;
 
                     // Try to get the special categorizer
-                    StreamReader streamReader = new StreamReader(stream);
+                    StreamReader streamReader = new(stream);
                     char columnDelimiter = ',';
                     IndexCollection numericalColumns = IndexCollection.Range(2, 2);
                     bool firstLineContainsColumnHeaders = true;
@@ -704,7 +704,7 @@ namespace Novacta.Analytics.Tests.Tools
                         expectedInnerType: typeof(ArgumentOutOfRangeException),
                         expectedInnerMessage: ImplementationServices.GetResourceString(
                             "STR_EXCEPT_PAR_STRING_IS_EMPTY_OR_WHITESPACE") +
-                            Environment.NewLine + "Parameter name: label");
+                             " (Parameter 'label')");
                 }
 
                 /// Tests that the
@@ -724,8 +724,8 @@ namespace Novacta.Analytics.Tests.Tools
                         "Black,TRUE,-1.1",
                         "Black,FALSE, 4.4" };
 
-                    MemoryStream stream = new MemoryStream();
-                    StreamWriter writer = new StreamWriter(stream);
+                    MemoryStream stream = new();
+                    StreamWriter writer = new(stream);
                     for (int i = 0; i < data.Length; i++)
                     {
                         writer.WriteLine(data[i].ToCharArray());
@@ -736,7 +736,7 @@ namespace Novacta.Analytics.Tests.Tools
                     // A numerical column is missing 
 
                     // Try to get the special categorizer
-                    StreamReader streamReader = new StreamReader(stream);
+                    StreamReader streamReader = new(stream);
                     char columnDelimiter = ',';
                     IndexCollection numericalColumns = IndexCollection.Range(2, 3);
                     bool firstLineContainsColumnHeaders = true;
@@ -805,8 +805,8 @@ namespace Novacta.Analytics.Tests.Tools
                         "Black,TRUE,-1.1",
                         "Black,FALSE, 4.4" };
 
-                    MemoryStream stream = new MemoryStream();
-                    StreamWriter writer = new StreamWriter(stream);
+                    MemoryStream stream = new();
+                    StreamWriter writer = new(stream);
                     for (int i = 0; i < data.Length; i++)
                     {
                         writer.WriteLine(data[i].ToCharArray());
@@ -815,7 +815,7 @@ namespace Novacta.Analytics.Tests.Tools
                     stream.Position = 0;
 
                     // Try to get the special categorizer
-                    StreamReader streamReader = new StreamReader(stream);
+                    StreamReader streamReader = new(stream);
                     char columnDelimiter = ',';
                     IndexCollection numericalColumns = IndexCollection.Range(2, 2);
                     bool firstLineContainsColumnHeaders = true;
@@ -850,8 +850,8 @@ namespace Novacta.Analytics.Tests.Tools
                     string[] data = new string[1] {
                         "COLOR,HAPPINESS,NUMBER" }; // No data rows
 
-                    MemoryStream stream = new MemoryStream();
-                    StreamWriter writer = new StreamWriter(stream);
+                    MemoryStream stream = new();
+                    StreamWriter writer = new(stream);
                     for (int i = 0; i < data.Length; i++)
                     {
                         writer.WriteLine(data[i].ToCharArray());
@@ -859,7 +859,7 @@ namespace Novacta.Analytics.Tests.Tools
                     }
                     stream.Position = 0;
 
-                    StreamReader streamReader = new StreamReader(stream);
+                    StreamReader streamReader = new(stream);
                     char columnDelimiter = ',';
                     IndexCollection numericalColumns = IndexCollection.Range(2, 2);
                     bool firstLineContainsColumnHeaders = true;
@@ -934,15 +934,15 @@ namespace Novacta.Analytics.Tests.Tools
                         "Black,TRUE,-1.1",
                         "Black,FALSE, 4.4" };
 
-                    MemoryStream stream = new MemoryStream();
-                    StreamWriter writer = new StreamWriter(stream);
+                    MemoryStream stream = new();
+                    StreamWriter writer = new(stream);
                     for (int i = 0; i < data.Length; i++)
                     {
                         writer.WriteLine(data[i].ToCharArray());
                         writer.Flush();
                     }
                     stream.Position = 0;
-                    StreamReader streamReader = new StreamReader(stream);
+                    StreamReader streamReader = new(stream);
 
                     char columnDelimiter = ',';
                     IndexCollection numericalColumns = null;
@@ -985,15 +985,15 @@ namespace Novacta.Analytics.Tests.Tools
                         "Black,TRUE,-1.1",
                         "Black,FALSE, 4.4" };
 
-                    MemoryStream stream = new MemoryStream();
-                    StreamWriter writer = new StreamWriter(stream);
+                    MemoryStream stream = new();
+                    StreamWriter writer = new(stream);
                     for (int i = 0; i < data.Length; i++)
                     {
                         writer.WriteLine(data[i].ToCharArray());
                         writer.Flush();
                     }
                     stream.Position = 0;
-                    StreamReader streamReader = new StreamReader(stream);
+                    StreamReader streamReader = new(stream);
 
                     char columnDelimiter = ',';
                     IndexCollection numericalColumns = IndexCollection.Sequence(0, 2, 2);
@@ -1047,8 +1047,8 @@ namespace Novacta.Analytics.Tests.Tools
                     "Black,TRUE,-1.1",
                     "Black,FALSE, 4.4" };
 
-                MemoryStream stream = new MemoryStream();
-                StreamWriter writer = new StreamWriter(stream);
+                MemoryStream stream = new();
+                StreamWriter writer = new(stream);
                 for (int i = 0; i < data.Length; i++)
                 {
                     writer.WriteLine(data[i].ToCharArray());
@@ -1082,7 +1082,7 @@ namespace Novacta.Analytics.Tests.Tools
                 };
 
                 // Encode the categorical data set
-                StreamReader reader = new StreamReader(stream);
+                StreamReader reader = new(stream);
                 char columnDelimiter = ',';
                 IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
                 bool firstLineContainsColumnHeaders = true;
@@ -1162,8 +1162,8 @@ namespace Novacta.Analytics.Tests.Tools
                         "Black,TRUE,-1.1",
                         "Black,FALSE, 4.4" };
 
-                    MemoryStream stream = new MemoryStream();
-                    StreamWriter writer = new StreamWriter(stream);
+                    MemoryStream stream = new();
+                    StreamWriter writer = new(stream);
                     for (int i = 0; i < data.Length; i++)
                     {
                         writer.WriteLine(data[i].ToCharArray());
@@ -1197,7 +1197,7 @@ namespace Novacta.Analytics.Tests.Tools
                     };
 
                     // Encode the categorical data set
-                    StreamReader reader = new StreamReader(stream);
+                    StreamReader reader = new(stream);
                     char columnDelimiter = ',';
                     IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
                     bool firstLineContainsColumnHeaders = true;
@@ -1269,8 +1269,8 @@ namespace Novacta.Analytics.Tests.Tools
                         "Black,TRUE,-1.1",
                         "Black,FALSE, 4.4" };
 
-                    MemoryStream stream = new MemoryStream();
-                    StreamWriter writer = new StreamWriter(stream);
+                    MemoryStream stream = new();
+                    StreamWriter writer = new(stream);
                     for (int i = 0; i < data.Length; i++)
                     {
                         writer.WriteLine(data[i].ToCharArray());
@@ -1304,7 +1304,7 @@ namespace Novacta.Analytics.Tests.Tools
                     };
 
                     // Encode the categorical data set
-                    StreamReader reader = new StreamReader(stream);
+                    StreamReader reader = new(stream);
                     char columnDelimiter = ',';
                     IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
                     bool firstLineContainsColumnHeaders = true;
@@ -1342,8 +1342,8 @@ namespace Novacta.Analytics.Tests.Tools
                         "Black,TRUE,-1.1",
                         "Black,FALSE, 4.4" };
 
-                    MemoryStream stream = new MemoryStream();
-                    StreamWriter writer = new StreamWriter(stream);
+                    MemoryStream stream = new();
+                    StreamWriter writer = new(stream);
                     for (int i = 0; i < data.Length; i++)
                     {
                         writer.WriteLine(data[i].ToCharArray());
@@ -1377,7 +1377,7 @@ namespace Novacta.Analytics.Tests.Tools
                     };
 
                     // Encode the categorical data set
-                    StreamReader reader = new StreamReader(stream);
+                    StreamReader reader = new(stream);
                     char columnDelimiter = ',';
                     IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
                     bool firstLineContainsColumnHeaders = true;
@@ -1420,8 +1420,8 @@ namespace Novacta.Analytics.Tests.Tools
                         "Black,TRUE,-1.1",
                         "Black,FALSE, 4.4" };
 
-                    MemoryStream stream = new MemoryStream();
-                    StreamWriter writer = new StreamWriter(stream);
+                    MemoryStream stream = new();
+                    StreamWriter writer = new(stream);
                     for (int i = 0; i < data.Length; i++)
                     {
                         writer.WriteLine(data[i].ToCharArray());
@@ -1455,7 +1455,7 @@ namespace Novacta.Analytics.Tests.Tools
                     };
 
                     // Encode the categorical data set
-                    StreamReader reader = new StreamReader(stream);
+                    StreamReader reader = new(stream);
                     char columnDelimiter = ',';
                     IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
                     bool firstLineContainsColumnHeaders = true;
@@ -1529,7 +1529,7 @@ namespace Novacta.Analytics.Tests.Tools
                             extractedColumns,
                             firstLineContainsColumnHeaders);
 
-                        CategoricalVariable color = new CategoricalVariable("COLOR")
+                        CategoricalVariable color = new("COLOR")
                         {
                             { 0, "Red" },
                             { 1, "Green" },
@@ -1537,7 +1537,7 @@ namespace Novacta.Analytics.Tests.Tools
                         };
                         color.SetAsReadOnly();
 
-                        CategoricalVariable happiness = new CategoricalVariable("HAPPINESS")
+                        CategoricalVariable happiness = new("HAPPINESS")
                         {
                             { 0, "TRUE" },
                             { 1, "FALSE" }
@@ -1545,7 +1545,7 @@ namespace Novacta.Analytics.Tests.Tools
                         happiness.SetAsReadOnly();
 
                         List<CategoricalVariable> expectedVariables =
-                            new List<CategoricalVariable>() { color, happiness };
+                            new() { color, happiness };
 
                         DoubleMatrix expectedData = DoubleMatrix.Dense(5, 2);
 
@@ -1564,7 +1564,7 @@ namespace Novacta.Analytics.Tests.Tools
                         expectedData[3, 1] = 0;
                         expectedData[4, 1] = 1;
 
-                        CategoricalDataSet expected = new CategoricalDataSet(
+                        CategoricalDataSet expected = new(
                             expectedVariables, expectedData);
 
                         CategoricalDataSetAssert.AreEqual(expected, actual);
@@ -1588,8 +1588,8 @@ namespace Novacta.Analytics.Tests.Tools
                             "Black,TRUE,-1.1",
                             "Black,FALSE, 4.4" };
 
-                        MemoryStream stream = new MemoryStream();
-                        StreamWriter writer = new StreamWriter(stream);
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
                         for (int i = 0; i < data.Length; i++)
                         {
                             writer.WriteLine(data[i].ToCharArray());
@@ -1598,7 +1598,7 @@ namespace Novacta.Analytics.Tests.Tools
                         stream.Position = 0;
 
                         // Encode the categorical data set
-                        StreamReader reader = new StreamReader(stream);
+                        StreamReader reader = new(stream);
                         char columnDelimiter = ',';
                         IndexCollection extractedColumns = IndexCollection.Range(0, 1);
                         bool firstLineContainsColumnHeaders = true;
@@ -1608,7 +1608,7 @@ namespace Novacta.Analytics.Tests.Tools
                             extractedColumns,
                             firstLineContainsColumnHeaders);
 
-                        CategoricalVariable color = new CategoricalVariable("COLOR")
+                        CategoricalVariable color = new("COLOR")
                         {
                             { 0, "Red" },
                             { 1, "Green" },
@@ -1616,7 +1616,7 @@ namespace Novacta.Analytics.Tests.Tools
                         };
                         color.SetAsReadOnly();
 
-                        CategoricalVariable happiness = new CategoricalVariable("HAPPINESS")
+                        CategoricalVariable happiness = new("HAPPINESS")
                         {
                             { 0, "TRUE" },
                             { 1, "FALSE" }
@@ -1624,7 +1624,7 @@ namespace Novacta.Analytics.Tests.Tools
                         happiness.SetAsReadOnly();
 
                         List<CategoricalVariable> expectedVariables =
-                            new List<CategoricalVariable>() { color, happiness };
+                            new() { color, happiness };
 
                         DoubleMatrix expectedData = DoubleMatrix.Dense(5, 2);
 
@@ -1643,7 +1643,7 @@ namespace Novacta.Analytics.Tests.Tools
                         expectedData[3, 1] = 0;
                         expectedData[4, 1] = 1;
 
-                        CategoricalDataSet expected = new CategoricalDataSet(
+                        CategoricalDataSet expected = new(
                             expectedVariables, expectedData);
 
                         CategoricalDataSetAssert.AreEqual(expected, actual);
@@ -1668,8 +1668,8 @@ namespace Novacta.Analytics.Tests.Tools
                             "Black,TRUE,-1.1",
                             "Black,FALSE, 4.4" };
 
-                        MemoryStream stream = new MemoryStream();
-                        StreamWriter writer = new StreamWriter(stream);
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
                         for (int i = 0; i < data.Length; i++)
                         {
                             writer.WriteLine(data[i].ToCharArray());
@@ -1678,7 +1678,7 @@ namespace Novacta.Analytics.Tests.Tools
                         stream.Position = 0;
 
                         // Encode the categorical data set
-                        StreamReader reader = new StreamReader(stream);
+                        StreamReader reader = new(stream);
                         char columnDelimiter = ',';
                         IndexCollection extractedColumns = IndexCollection.Range(0, 1);
                         bool firstLineContainsColumnHeaders = false;
@@ -1688,7 +1688,7 @@ namespace Novacta.Analytics.Tests.Tools
                             extractedColumns,
                             firstLineContainsColumnHeaders);
 
-                        CategoricalVariable color = new CategoricalVariable("0")
+                        CategoricalVariable color = new("0")
                         {
                             { 0, "Red" },
                             { 1, "Green" },
@@ -1696,7 +1696,7 @@ namespace Novacta.Analytics.Tests.Tools
                         };
                         color.SetAsReadOnly();
 
-                        CategoricalVariable happiness = new CategoricalVariable("1")
+                        CategoricalVariable happiness = new("1")
                         {
                             { 0, "TRUE" },
                             { 1, "FALSE" }
@@ -1704,7 +1704,7 @@ namespace Novacta.Analytics.Tests.Tools
                         happiness.SetAsReadOnly();
 
                         List<CategoricalVariable> expectedVariables =
-                            new List<CategoricalVariable>() { color, happiness };
+                            new() { color, happiness };
 
                         DoubleMatrix expectedData = DoubleMatrix.Dense(5, 2);
 
@@ -1723,7 +1723,7 @@ namespace Novacta.Analytics.Tests.Tools
                         expectedData[3, 1] = 0;
                         expectedData[4, 1] = 1;
 
-                        CategoricalDataSet expected = new CategoricalDataSet(
+                        CategoricalDataSet expected = new(
                             expectedVariables, expectedData);
 
                         CategoricalDataSetAssert.AreEqual(expected, actual);
@@ -1756,8 +1756,8 @@ namespace Novacta.Analytics.Tests.Tools
                             "Black,TRUE,-1.1",
                             "Black,FALSE, 4.4" };
 
-                        MemoryStream stream = new MemoryStream();
-                        StreamWriter writer = new StreamWriter(stream);
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
                         for (int i = 0; i < data.Length; i++)
                         {
                             writer.WriteLine(data[i].ToCharArray());
@@ -1766,7 +1766,7 @@ namespace Novacta.Analytics.Tests.Tools
                         stream.Position = 0;
 
                         // Encode the categorical data set
-                        StreamReader reader = new StreamReader(stream);
+                        StreamReader reader = new(stream);
                         char columnDelimiter = ',';
                         IndexCollection extractedColumns = IndexCollection.Range(0, 1);
                         bool firstLineContainsColumnHeaders = true;
@@ -1789,7 +1789,7 @@ namespace Novacta.Analytics.Tests.Tools
                             expectedInnerType: typeof(ArgumentOutOfRangeException),
                             expectedInnerMessage: ImplementationServices.GetResourceString(
                                 "STR_EXCEPT_PAR_STRING_IS_EMPTY_OR_WHITESPACE") + 
-                                Environment.NewLine + "Parameter name: name");
+                                " (Parameter 'name')");
                     }
 
                     /// Tests that the
@@ -1811,8 +1811,8 @@ namespace Novacta.Analytics.Tests.Tools
                             "Black,TRUE,-1.1",
                             "Black,FALSE, 4.4" };
 
-                        MemoryStream stream = new MemoryStream();
-                        StreamWriter writer = new StreamWriter(stream);
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
                         for (int i = 0; i < data.Length; i++)
                         {
                             writer.WriteLine(data[i].ToCharArray());
@@ -1821,7 +1821,7 @@ namespace Novacta.Analytics.Tests.Tools
                         stream.Position = 0;
 
                         // Encode the categorical data set
-                        StreamReader reader = new StreamReader(stream);
+                        StreamReader reader = new(stream);
                         char columnDelimiter = ',';
                         IndexCollection extractedColumns = IndexCollection.Range(0, 1);
                         bool firstLineContainsColumnHeaders = true;
@@ -1844,7 +1844,7 @@ namespace Novacta.Analytics.Tests.Tools
                             expectedInnerType: typeof(ArgumentOutOfRangeException),
                             expectedInnerMessage: ImplementationServices.GetResourceString(
                                 "STR_EXCEPT_PAR_STRING_IS_EMPTY_OR_WHITESPACE") + 
-                                Environment.NewLine + "Parameter name: label");
+                                " (Parameter 'label')");
                     }
 
                     /// Tests that the
@@ -1864,8 +1864,8 @@ namespace Novacta.Analytics.Tests.Tools
                             "Black,TRUE,-1.1",
                             "Black,FALSE, 4.4" };
 
-                        MemoryStream stream = new MemoryStream();
-                        StreamWriter writer = new StreamWriter(stream);
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
                         for (int i = 0; i < data.Length; i++)
                         {
                             writer.WriteLine(data[i].ToCharArray());
@@ -1874,7 +1874,7 @@ namespace Novacta.Analytics.Tests.Tools
                         stream.Position = 0;
 
                         // Encode the categorical data set
-                        StreamReader reader = new StreamReader(stream);
+                        StreamReader reader = new(stream);
                         char columnDelimiter = ',';
 
                         // Column 4 does not exist
@@ -1915,8 +1915,8 @@ namespace Novacta.Analytics.Tests.Tools
                             "Black,TRUE,-1.1",
                             "Black,FALSE, 4.4" };
 
-                        MemoryStream stream = new MemoryStream();
-                        StreamWriter writer = new StreamWriter(stream);
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
                         for (int i = 0; i < data.Length; i++)
                         {
                             writer.WriteLine(data[i].ToCharArray());
@@ -1925,7 +1925,7 @@ namespace Novacta.Analytics.Tests.Tools
                         stream.Position = 0;
 
                         // Encode the categorical data set
-                        StreamReader reader = new StreamReader(stream);
+                        StreamReader reader = new(stream);
                         char columnDelimiter = ',';
 
                         // Column 4 does not exist
@@ -1961,8 +1961,8 @@ namespace Novacta.Analytics.Tests.Tools
                         string[] data = new string[1] {
                         "COLOR,HAPPINESS,NUMBER" }; // No data rows
 
-                        MemoryStream stream = new MemoryStream();
-                        StreamWriter writer = new StreamWriter(stream);
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
                         for (int i = 0; i < data.Length; i++)
                         {
                             writer.WriteLine(data[i].ToCharArray());
@@ -1971,7 +1971,7 @@ namespace Novacta.Analytics.Tests.Tools
                         stream.Position = 0;
 
                         // Encode the categorical data set
-                        StreamReader reader = new StreamReader(stream);
+                        StreamReader reader = new(stream);
                         char columnDelimiter = ',';
 
                         IndexCollection extractedColumns = IndexCollection.Range(0, 1);
@@ -2037,15 +2037,15 @@ namespace Novacta.Analytics.Tests.Tools
                             "Black,TRUE,-1.1",
                             "Black,FALSE, 4.4" };
 
-                        MemoryStream stream = new MemoryStream();
-                        StreamWriter writer = new StreamWriter(stream);
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
                         for (int i = 0; i < data.Length; i++)
                         {
                             writer.WriteLine(data[i].ToCharArray());
                             writer.Flush();
                         }
                         stream.Position = 0;
-                        StreamReader reader = new StreamReader(stream);
+                        StreamReader reader = new(stream);
 
                         char columnDelimiter = ',';
                         IndexCollection extractedColumns = null;
@@ -2130,7 +2130,7 @@ namespace Novacta.Analytics.Tests.Tools
                             specialCategorizers,
                             CultureInfo.InvariantCulture);
 
-                        CategoricalVariable color = new CategoricalVariable("COLOR")
+                        CategoricalVariable color = new("COLOR")
                         {
                             { 0, "Red" },
                             { 1, "Green" },
@@ -2138,7 +2138,7 @@ namespace Novacta.Analytics.Tests.Tools
                         };
                         color.SetAsReadOnly();
 
-                        CategoricalVariable number = new CategoricalVariable("NUMBER")
+                        CategoricalVariable number = new("NUMBER")
                         {
                             { 0, "Negative" },
                             { 1, "Zero" },
@@ -2147,7 +2147,7 @@ namespace Novacta.Analytics.Tests.Tools
                         number.SetAsReadOnly();
 
                         List<CategoricalVariable> expectedVariables =
-                            new List<CategoricalVariable>() { color, number };
+                            new() { color, number };
 
                         DoubleMatrix expectedData = DoubleMatrix.Dense(5, 2);
 
@@ -2166,7 +2166,7 @@ namespace Novacta.Analytics.Tests.Tools
                         expectedData[3, 1] = 0;
                         expectedData[4, 1] = 2;
 
-                        CategoricalDataSet expected = new CategoricalDataSet(
+                        CategoricalDataSet expected = new(
                             expectedVariables, expectedData);
 
                         CategoricalDataSetAssert.AreEqual(expected, actual);
@@ -2191,8 +2191,8 @@ namespace Novacta.Analytics.Tests.Tools
                             "Black,TRUE,-1.1",
                             "Black,FALSE, 4.4" };
 
-                        MemoryStream stream = new MemoryStream();
-                        StreamWriter writer = new StreamWriter(stream);
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
                         for (int i = 0; i < data.Length; i++)
                         {
                             writer.WriteLine(data[i].ToCharArray());
@@ -2226,7 +2226,7 @@ namespace Novacta.Analytics.Tests.Tools
                         };
 
                         // Encode the categorical data set
-                        StreamReader reader = new StreamReader(stream);
+                        StreamReader reader = new(stream);
                         char columnDelimiter = ',';
                         IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
                         bool firstLineContainsColumnHeaders = true;
@@ -2238,7 +2238,7 @@ namespace Novacta.Analytics.Tests.Tools
                             specialCategorizers,
                             CultureInfo.InvariantCulture);
 
-                        CategoricalVariable color = new CategoricalVariable("COLOR")
+                        CategoricalVariable color = new("COLOR")
                         {
                             { 0, "Red" },
                             { 1, "Green" },
@@ -2246,7 +2246,7 @@ namespace Novacta.Analytics.Tests.Tools
                         };
                         color.SetAsReadOnly();
 
-                        CategoricalVariable number = new CategoricalVariable("NUMBER")
+                        CategoricalVariable number = new("NUMBER")
                         {
                             { 0, "Negative" },
                             { 1, "Zero" },
@@ -2255,7 +2255,7 @@ namespace Novacta.Analytics.Tests.Tools
                         number.SetAsReadOnly();
 
                         List<CategoricalVariable> expectedVariables =
-                            new List<CategoricalVariable>() { color, number };
+                            new() { color, number };
 
                         DoubleMatrix expectedData = DoubleMatrix.Dense(5, 2);
 
@@ -2274,7 +2274,7 @@ namespace Novacta.Analytics.Tests.Tools
                         expectedData[3, 1] = 0;
                         expectedData[4, 1] = 2;
 
-                        CategoricalDataSet expected = new CategoricalDataSet(
+                        CategoricalDataSet expected = new(
                             expectedVariables, expectedData);
 
                         CategoricalDataSetAssert.AreEqual(expected, actual);
@@ -2300,8 +2300,8 @@ namespace Novacta.Analytics.Tests.Tools
                             "Black,TRUE,-1.1",
                             "Black,FALSE, 4.4" };
 
-                        MemoryStream stream = new MemoryStream();
-                        StreamWriter writer = new StreamWriter(stream);
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
                         for (int i = 0; i < data.Length; i++)
                         {
                             writer.WriteLine(data[i].ToCharArray());
@@ -2335,7 +2335,7 @@ namespace Novacta.Analytics.Tests.Tools
                         };
 
                         // Encode the categorical data set
-                        StreamReader reader = new StreamReader(stream);
+                        StreamReader reader = new(stream);
                         char columnDelimiter = ',';
                         IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
                         bool firstLineContainsColumnHeaders = false;
@@ -2347,7 +2347,7 @@ namespace Novacta.Analytics.Tests.Tools
                             specialCategorizers,
                             CultureInfo.InvariantCulture);
 
-                        CategoricalVariable color = new CategoricalVariable("0")
+                        CategoricalVariable color = new("0")
                         {
                             { 0, "Red" },
                             { 1, "Green" },
@@ -2355,7 +2355,7 @@ namespace Novacta.Analytics.Tests.Tools
                         };
                         color.SetAsReadOnly();
 
-                        CategoricalVariable number = new CategoricalVariable("1")
+                        CategoricalVariable number = new("1")
                         {
                             { 0, "Negative" },
                             { 1, "Zero" },
@@ -2364,7 +2364,7 @@ namespace Novacta.Analytics.Tests.Tools
                         number.SetAsReadOnly();
 
                         List<CategoricalVariable> expectedVariables =
-                            new List<CategoricalVariable>() { color, number };
+                            new() { color, number };
 
                         DoubleMatrix expectedData = DoubleMatrix.Dense(5, 2);
 
@@ -2383,7 +2383,7 @@ namespace Novacta.Analytics.Tests.Tools
                         expectedData[3, 1] = 0;
                         expectedData[4, 1] = 2;
 
-                        CategoricalDataSet expected = new CategoricalDataSet(
+                        CategoricalDataSet expected = new(
                             expectedVariables, expectedData);
 
                         CategoricalDataSetAssert.AreEqual(expected, actual);
@@ -2418,8 +2418,8 @@ namespace Novacta.Analytics.Tests.Tools
                             "Black,TRUE,-1.1",
                             "Black,FALSE, 4.4" };
 
-                        MemoryStream stream = new MemoryStream();
-                        StreamWriter writer = new StreamWriter(stream);
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
                         for (int i = 0; i < data.Length; i++)
                         {
                             writer.WriteLine(data[i].ToCharArray());
@@ -2453,7 +2453,7 @@ namespace Novacta.Analytics.Tests.Tools
                         };
 
                         // Encode the categorical data set
-                        StreamReader reader = new StreamReader(stream);
+                        StreamReader reader = new(stream);
                         char columnDelimiter = ',';
                         IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
                         bool firstLineContainsColumnHeaders = true;
@@ -2478,7 +2478,7 @@ namespace Novacta.Analytics.Tests.Tools
                             expectedInnerType: typeof(ArgumentOutOfRangeException),
                             expectedInnerMessage: ImplementationServices.GetResourceString(
                                 "STR_EXCEPT_PAR_STRING_IS_EMPTY_OR_WHITESPACE") + 
-                                Environment.NewLine + "Parameter name: name");
+                                " (Parameter 'name')");
                     }
 
                     /// Tests that the
@@ -2501,8 +2501,8 @@ namespace Novacta.Analytics.Tests.Tools
                             "Black,TRUE,-1.1",
                             "Black,FALSE, 4.4" };
 
-                        MemoryStream stream = new MemoryStream();
-                        StreamWriter writer = new StreamWriter(stream);
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
                         for (int i = 0; i < data.Length; i++)
                         {
                             writer.WriteLine(data[i].ToCharArray());
@@ -2536,7 +2536,7 @@ namespace Novacta.Analytics.Tests.Tools
                         };
 
                         // Encode the categorical data set
-                        StreamReader reader = new StreamReader(stream);
+                        StreamReader reader = new(stream);
                         char columnDelimiter = ',';
                         IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
                         bool firstLineContainsColumnHeaders = true;
@@ -2561,7 +2561,7 @@ namespace Novacta.Analytics.Tests.Tools
                             expectedInnerType: typeof(ArgumentOutOfRangeException),
                             expectedInnerMessage: ImplementationServices.GetResourceString(
                                 "STR_EXCEPT_PAR_STRING_IS_EMPTY_OR_WHITESPACE") + 
-                                Environment.NewLine + "Parameter name: label");
+                                " (Parameter 'label')");
                     }
 
                     /// Tests that the
@@ -2582,8 +2582,8 @@ namespace Novacta.Analytics.Tests.Tools
                             "Black,TRUE,-1.1",
                             "Black,FALSE, 4.4" };
 
-                        MemoryStream stream = new MemoryStream();
-                        StreamWriter writer = new StreamWriter(stream);
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
                         for (int i = 0; i < data.Length; i++)
                         {
                             writer.WriteLine(data[i].ToCharArray());
@@ -2617,7 +2617,7 @@ namespace Novacta.Analytics.Tests.Tools
                         };
 
                         // Encode the categorical data set
-                        StreamReader reader = new StreamReader(stream);
+                        StreamReader reader = new(stream);
                         char columnDelimiter = ',';
 
                         // Column 4 does not exist
@@ -2661,8 +2661,8 @@ namespace Novacta.Analytics.Tests.Tools
                             "Black,TRUE,-1.1",
                             "Black,FALSE, 4.4" };
 
-                        MemoryStream stream = new MemoryStream();
-                        StreamWriter writer = new StreamWriter(stream);
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
                         for (int i = 0; i < data.Length; i++)
                         {
                             writer.WriteLine(data[i].ToCharArray());
@@ -2696,7 +2696,7 @@ namespace Novacta.Analytics.Tests.Tools
                         };
 
                         // Encode the categorical data set
-                        StreamReader reader = new StreamReader(stream);
+                        StreamReader reader = new(stream);
                         char columnDelimiter = ',';
 
                         // Column 4 does not exist
@@ -2735,8 +2735,8 @@ namespace Novacta.Analytics.Tests.Tools
                         string[] data = new string[1] {
                         "COLOR,HAPPINESS,NUMBER" }; // No data rows
 
-                        MemoryStream stream = new MemoryStream();
-                        StreamWriter writer = new StreamWriter(stream);
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
                         for (int i = 0; i < data.Length; i++)
                         {
                             writer.WriteLine(data[i].ToCharArray());
@@ -2770,7 +2770,7 @@ namespace Novacta.Analytics.Tests.Tools
                         };
 
                         // Encode the categorical data set
-                        StreamReader reader = new StreamReader(stream);
+                        StreamReader reader = new(stream);
                         char columnDelimiter = ',';
 
                         IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
@@ -2867,15 +2867,15 @@ namespace Novacta.Analytics.Tests.Tools
                             "Black,TRUE,-1.1",
                             "Black,FALSE, 4.4" };
 
-                        MemoryStream stream = new MemoryStream();
-                        StreamWriter writer = new StreamWriter(stream);
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
                         for (int i = 0; i < data.Length; i++)
                         {
                             writer.WriteLine(data[i].ToCharArray());
                             writer.Flush();
                         }
                         stream.Position = 0;
-                        StreamReader reader = new StreamReader(stream);
+                        StreamReader reader = new(stream);
 
                         char columnDelimiter = ',';
                         IndexCollection extractedColumns = null;
@@ -2941,15 +2941,15 @@ namespace Novacta.Analytics.Tests.Tools
                             "Black,TRUE,-1.1",
                             "Black,FALSE, 4.4" };
 
-                        MemoryStream stream = new MemoryStream();
-                        StreamWriter writer = new StreamWriter(stream);
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
                         for (int i = 0; i < data.Length; i++)
                         {
                             writer.WriteLine(data[i].ToCharArray());
                             writer.Flush();
                         }
                         stream.Position = 0;
-                        StreamReader reader = new StreamReader(stream);
+                        StreamReader reader = new(stream);
 
                         char columnDelimiter = ',';
                         IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
@@ -2993,15 +2993,15 @@ namespace Novacta.Analytics.Tests.Tools
                             "Black,TRUE,-1.1",
                             "Black,FALSE, 4.4" };
 
-                        MemoryStream stream = new MemoryStream();
-                        StreamWriter writer = new StreamWriter(stream);
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
                         for (int i = 0; i < data.Length; i++)
                         {
                             writer.WriteLine(data[i].ToCharArray());
                             writer.Flush();
                         }
                         stream.Position = 0;
-                        StreamReader reader = new StreamReader(stream);
+                        StreamReader reader = new(stream);
 
                         char columnDelimiter = ',';
                         IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
@@ -3068,15 +3068,15 @@ namespace Novacta.Analytics.Tests.Tools
                             "Black,TRUE,-1.1",
                             "Black,FALSE, 4.4" };
 
-                        MemoryStream stream = new MemoryStream();
-                        StreamWriter writer = new StreamWriter(stream);
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
                         for (int i = 0; i < data.Length; i++)
                         {
                             writer.WriteLine(data[i].ToCharArray());
                             writer.Flush();
                         }
                         stream.Position = 0;
-                        StreamReader reader = new StreamReader(stream);
+                        StreamReader reader = new(stream);
 
                         char columnDelimiter = ',';
                         IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
@@ -3126,15 +3126,15 @@ namespace Novacta.Analytics.Tests.Tools
                             "Black,TRUE,-1.1",
                             "Black,FALSE, 4.4" };
 
-                        MemoryStream stream = new MemoryStream();
-                        StreamWriter writer = new StreamWriter(stream);
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
                         for (int i = 0; i < data.Length; i++)
                         {
                             writer.WriteLine(data[i].ToCharArray());
                             writer.Flush();
                         }
                         stream.Position = 0;
-                        StreamReader reader = new StreamReader(stream);
+                        StreamReader reader = new(stream);
 
                         char columnDelimiter = ',';
                         IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);

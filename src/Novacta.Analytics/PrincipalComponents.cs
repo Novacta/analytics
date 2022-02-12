@@ -264,10 +264,6 @@ namespace Novacta.Analytics
         /// No principal component has positive variance. 
         /// The principal information cannot be acquired.
         /// </exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Design", 
-            "CA1062:Validate arguments of public methods", 
-            Justification = "Input validation partially delegated to private methods.")]
         public static PrincipalComponents Analyze(DoubleMatrix data,
             DoubleMatrix individualWeights, DoubleMatrix variableCoefficients)
         {

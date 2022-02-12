@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="STR_EXCEPT_ALG_NOT_CONVERGING" xml:space="preserve">
+    <value>The algorithm failed to converge.</value>
+  </data>
   <data name="STR_EXCEPT_CAT_ALREADY_EXISTS_IN_VARIABLE_LIST" xml:space="preserve">
     <value>A category already exists in the variable having the same code or label.</value>
   </data>
@@ -124,16 +127,16 @@
     <value>The dictionary cannot contain null values.</value>
   </data>
   <data name="STR_EXCEPT_CAT_CATEGORIZER_REFERS_TO_IRRELEVANT_KEY" xml:space="preserve">
-    <value>The dictionary cannot contain keys not included in collection parameter {0}.</value>
+    <value>The dictionary cannot contain keys not included in collection parameter '{0}'.</value>
   </data>
   <data name="STR_EXCEPT_CAT_CODE_NOT_IN_VARIABLE_LIST" xml:space="preserve">
-    <value>The paremeter is not a category code in the variable represented by parameter {0}.</value>
+    <value>The paremeter is not a category code in the variable represented by parameter '{0}'.</value>
   </data>
   <data name="STR_EXCEPT_CAT_COLUMNS_NOT_EQUAL_TO_DATASET_VARIABLES" xml:space="preserve">
     <value>The parameter must have a number of columns equal to the number of variables in this instance.</value>
   </data>
   <data name="STR_EXCEPT_CAT_COLUMNS_NOT_EQUAL_TO_VARIABLES_COUNT" xml:space="preserve">
-    <value>The parameter must have a number of columns equal to the number of items in parameter {0}.</value>
+    <value>The parameter must have a number of columns equal to the number of items in parameter '{0}'.</value>
   </data>
   <data name="STR_EXCEPT_CAT_DATASET_NOT_ENOUGH_DATA" xml:space="preserve">
     <value>The stream contains not enough data to define a valid categorical data set.</value>
@@ -170,6 +173,12 @@
   </data>
   <data name="STR_EXCEPT_CEE_VARIABLE_IS_EMPTY" xml:space="preserve">
     <value>The {0} variable must define at least a category.</value>
+  </data>
+  <data name="STR_EXCEPT_CEM_TOO_HIGH_RARITY" xml:space="preserve">
+    <value>Given the current context, the parameter's value is incompatible with that of parameter '{0}'. To achieve compatibility, 'rarity' should be decreased.</value>
+  </data>
+  <data name="STR_EXCEPT_CEM_TOO_LOW_RARITY" xml:space="preserve">
+    <value>Given the current context, the parameter's value is incompatible with that of parameter '{0}'. To achieve compatibility, 'rarity' should be increased.</value>
   </data>
   <data name="STR_EXCEPT_CEP_PARAMETER_IS_CONTEXT_INCOMPATIBLE" xml:space="preserve">
     <value>The parameter has not the dimensions expected by the specified context.</value>
@@ -213,8 +222,8 @@
   <data name="STR_EXCEPT_MAT_ADD_ALL_DIMS_MUST_MATCH" xml:space="preserve">
     <value>In addition operations, the dimensions of the right operand must match those of the left one.</value>
   </data>
-  <data name="STR_EXCEPT_MAT_CONVERTED_TO_DOUBLE_MUST_BE_SCALAR" xml:space="preserve">
-    <value>A matrix can be converted to a double only if it is scalar.</value>
+  <data name="STR_EXCEPT_MAT_CONVERTED_TO_ENTRY_TYPE_MUST_BE_SCALAR" xml:space="preserve">
+    <value>A matrix can be converted to the type of its entries only if it is scalar.</value>
   </data>
   <data name="STR_EXCEPT_MAT_DIVIDE_COLUMNS_MUST_MATCH" xml:space="preserve">
     <value>In division operations, the number of columns of the right operand must match that of the left one.</value>
@@ -286,7 +295,7 @@
     <value>The parameter entries must be in the open interval ]{0}, {1}[.</value>
   </data>
   <data name="STR_EXCEPT_PAR_INDEX_EXCEEDS_OTHER_PAR_DIMS" xml:space="preserve">
-    <value>The parameter has or contains a value which is not a valid {0} index for parameter {1}.</value>
+    <value>The parameter has or contains a value which is not a valid {0} index for parameter '{1}'.</value>
   </data>
   <data name="STR_EXCEPT_PAR_IS_NOT_A_PART_IDENTIFIER" xml:space="preserve">
     <value>The parameter is not a part identifier.</value>
@@ -301,19 +310,22 @@
     <value>The parameter must be a column vector.</value>
   </data>
   <data name="STR_EXCEPT_PAR_MUST_BE_GREATER_THAN_OTHER" xml:space="preserve">
-    <value>Parameter {0} must be greater than parameter {1}.</value>
+    <value>Parameter '{0}' must be greater than parameter '{1}'.</value>
   </data>
   <data name="STR_EXCEPT_PAR_MUST_BE_GREATER_THAN_VALUE" xml:space="preserve">
     <value>The parameter must be greater than {0}.</value>
   </data>
+  <data name="STR_EXCEPT_PAR_MUST_BE_HERMITIAN" xml:space="preserve">
+    <value>The parameter must be a Hermitian matrix.</value>
+  </data>
   <data name="STR_EXCEPT_PAR_MUST_BE_LESS_THAN_OTHER" xml:space="preserve">
-    <value>Parameter {0} must be less than parameter {1}.</value>
+    <value>Parameter '{0}' must be less than parameter '{1}'.</value>
   </data>
   <data name="STR_EXCEPT_PAR_MUST_BE_LESS_THAN_OTHER_COLUMNS" xml:space="preserve">
-    <value>Parameter {0} must be less than the number of columns in parameter {1}.</value>
+    <value>Parameter '{0}' must be less than the number of columns in parameter '{1}'.</value>
   </data>
   <data name="STR_EXCEPT_PAR_MUST_BE_LESS_THAN_OTHER_ROWS" xml:space="preserve">
-    <value>Parameter {0} must be less than the number of rows in parameter {1}.</value>
+    <value>Parameter '{0}' must be less than the number of rows in parameter '{1}'.</value>
   </data>
   <data name="STR_EXCEPT_PAR_MUST_BE_LESS_THAN_VALUE" xml:space="preserve">
     <value>The parameter must be less than {0}.</value>
@@ -331,7 +343,7 @@
     <value>The parameter must be a non singular matrix.</value>
   </data>
   <data name="STR_EXCEPT_PAR_MUST_BE_NOT_GREATER_THAN_OTHER" xml:space="preserve">
-    <value>Parameter {0} must be less than or equal to parameter {1}.</value>
+    <value>Parameter '{0}' must be less than or equal to parameter '{1}'.</value>
   </data>
   <data name="STR_EXCEPT_PAR_MUST_BE_POSITIVE" xml:space="preserve">
     <value>The parameter must be positive.</value>
@@ -342,14 +354,17 @@
   <data name="STR_EXCEPT_PAR_MUST_BE_SQUARE" xml:space="preserve">
     <value>The parameter must be a square matrix.</value>
   </data>
+  <data name="STR_EXCEPT_PAR_MUST_BE_SYMMETRIC" xml:space="preserve">
+    <value>The parameter must be a symmetric matrix.</value>
+  </data>
   <data name="STR_EXCEPT_PAR_MUST_HAVE_SAME_COUNT" xml:space="preserve">
-    <value>The parameter's count must be equal to that of parameter {0}.</value>
+    <value>The parameter's count must be equal to that of parameter '{0}'.</value>
   </data>
   <data name="STR_EXCEPT_PAR_MUST_HAVE_SAME_NUM_OF_COLUMNS" xml:space="preserve">
-    <value>The parameter must have a number of columns equal to that of parameter {0}.</value>
+    <value>The parameter must have a number of columns equal to that of parameter '{0}'.</value>
   </data>
   <data name="STR_EXCEPT_PAR_MUST_HAVE_SAME_NUM_OF_ROWS" xml:space="preserve">
-    <value>The parameter must have a number of rows equal to that of parameter {0}.</value>
+    <value>The parameter must have a number of rows equal to that of parameter '{0}'.</value>
   </data>
   <data name="STR_EXCEPT_PAR_NAME_CANNOT_BE_RESERVED_STRING" xml:space="preserve">
     <value>A row or column name cannot match a string reserved for matrix indexing.</value>
@@ -373,7 +388,10 @@
     <value>Cannot invert the cumulative distribution function of this instance.</value>
   </data>
   <data name="STR_EXCEPT_PDF_SAMPLESIZE_ARRAYLENGTH_MISMATCH" xml:space="preserve">
-    <value>Parameter {0} must be less than or equal to the difference between the length of parameter {1} and {2}.</value>
+    <value>Parameter '{0}' must be less than or equal to the difference between the lengths of parameters '{1}' and '{2}'.</value>
+  </data>
+  <data name="STR_EXCEPT_REP_DESERIALIZE_UNEXPECTED_ENTRY_TYPE" xml:space="preserve">
+    <value>The Csv document declares entry type '{0}' but the serializer expects '{1}'.</value>
   </data>
   <data name="STR_EXCEPT_REP_UNABLE_TO_DESERIALIZE" xml:space="preserve">
     <value>An error occurred during deserialization. Inspect eventual inner exceptions for additional details.</value>

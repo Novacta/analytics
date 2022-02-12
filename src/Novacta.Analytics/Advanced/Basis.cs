@@ -140,26 +140,16 @@ namespace Novacta.Analytics.Advanced
         private static void ThrowIfBasisMatrixIsSingular(
             DoubleMatrix basisMatrix)
         {
-            bool isStorageSchemeFull = 
-                basisMatrix.StorageScheme == StorageScheme.Dense;
             double[] basisArray = basisMatrix.AsColumnMajorDenseArray();
             int k = basisMatrix.NumberOfColumns;
-            double[] tmp;
-            if (isStorageSchemeFull) {
-                tmp = new double[k * k];
-                basisArray.CopyTo(tmp, 0);
-            }
-            else {
-                tmp = basisArray;
-            }
             int[] ipiv = new int[k];
 
             int lapackInfo;
-            lapackInfo = SafeNativeMethods.LAPACK_dgetrf(
+            lapackInfo = SafeNativeMethods.LAPACK.DGETRF(
                 SafeNativeMethods.LAPACK.ORDER.ColMajor,
                 k,
                 k,
-                tmp,
+                basisArray,
                 k,
                 ipiv);
 

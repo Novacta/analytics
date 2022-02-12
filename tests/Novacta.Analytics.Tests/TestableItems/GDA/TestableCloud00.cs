@@ -31,7 +31,7 @@ namespace Novacta.Analytics.Tests.TestableItems.GDA
     /// </summary>
     class TestableCloud00 : TestableCloud
     {
-        static readonly Basis a = new Basis(
+        static readonly Basis a = new(
             DoubleMatrix.Dense(2, 2, new double[4] { 3, 0, 0, 2 }));
 
         static readonly DoubleMatrix x_sa =

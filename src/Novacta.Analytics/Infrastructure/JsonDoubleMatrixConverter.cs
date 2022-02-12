@@ -46,7 +46,7 @@ namespace Novacta.Analytics.Infrastructure
 
             #endregion
 
-            DoubleMatrix matrix = new DoubleMatrix(matrixImplementor);
+            DoubleMatrix matrix = new(matrixImplementor);
 
             #region Name
 
@@ -63,17 +63,12 @@ namespace Novacta.Analytics.Infrastructure
             }
 
             reader.Read();
-            switch (reader.TokenType)
+            matrix.Name = reader.TokenType switch
             {
-                case JsonTokenType.String:
-                    matrix.Name = reader.GetString();
-                    break;
-                case JsonTokenType.Null:
-                    matrix.Name = null;
-                    break;
-                default:
-                    throw new JsonException();
-            }
+                JsonTokenType.String => reader.GetString(),
+                JsonTokenType.Null => null,
+                _ => throw new JsonException(),
+            };
 
             #endregion
 

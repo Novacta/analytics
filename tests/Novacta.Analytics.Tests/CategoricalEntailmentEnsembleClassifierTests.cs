@@ -482,7 +482,7 @@ namespace Novacta.Analytics.Tests
 
             // valid input
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -492,7 +492,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -501,7 +501,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f1.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -516,7 +516,7 @@ namespace Novacta.Analytics.Tests
                     responseVariable: r);
 
                 List<CategoricalEntailment> expected =
-                    new List<CategoricalEntailment>();
+                    new();
 
                 List<SortedSet<double>> featurePremises;
                 double responseConclusion;
@@ -591,7 +591,7 @@ namespace Novacta.Analytics.Tests
         {
             // dataSet is null
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -601,7 +601,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -615,7 +615,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -647,7 +647,7 @@ namespace Novacta.Analytics.Tests
 
             // featureVariableIndexes is null
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -657,7 +657,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -671,7 +671,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -680,7 +680,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, responseVariable };
+                    new() { f0, f1, responseVariable };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -742,7 +742,7 @@ namespace Novacta.Analytics.Tests
                             "STR_EXCEPT_PAR_INDEX_EXCEEDS_OTHER_PAR_DIMS"),
                         "column", "dataSet");
 
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -752,7 +752,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -766,7 +766,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -775,7 +775,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, responseVariable };
+                    new() { f0, f1, responseVariable };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -834,7 +834,7 @@ namespace Novacta.Analytics.Tests
                     = ImplementationServices.GetResourceString(
                             "STR_EXCEPT_CEE_MUST_HAVE_SAME_FEATURES_COUNT");
 
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -844,7 +844,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -858,7 +858,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -867,7 +867,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, responseVariable };
+                    new() { f0, f1, responseVariable };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -929,7 +929,7 @@ namespace Novacta.Analytics.Tests
                             "STR_EXCEPT_PAR_INDEX_EXCEEDS_OTHER_PAR_DIMS"),
                         "column", "dataSet");
 
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -939,7 +939,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -953,7 +953,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -962,7 +962,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, responseVariable };
+                    new() { f0, f1, responseVariable };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -1024,7 +1024,7 @@ namespace Novacta.Analytics.Tests
                             "STR_EXCEPT_PAR_INDEX_EXCEEDS_OTHER_PAR_DIMS"),
                         "column", "dataSet");
 
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1034,7 +1034,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1048,7 +1048,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1057,7 +1057,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, responseVariable };
+                    new() { f0, f1, responseVariable };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -1116,7 +1116,7 @@ namespace Novacta.Analytics.Tests
                     = ImplementationServices.GetResourceString(
                         "STR_EXCEPT_PAR_MUST_BE_POSITIVE");
 
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1126,7 +1126,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1140,7 +1140,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1149,7 +1149,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, responseVariable };
+                    new() { f0, f1, responseVariable };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -1208,7 +1208,7 @@ namespace Novacta.Analytics.Tests
                     = ImplementationServices.GetResourceString(
                         "STR_EXCEPT_PAR_MUST_BE_POSITIVE");
 
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1218,7 +1218,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1232,7 +1232,7 @@ namespace Novacta.Analytics.Tests
                         f0,
                         f1 };
 
-                CategoricalVariable responseVariable = new CategoricalVariable("R")
+                CategoricalVariable responseVariable = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1241,7 +1241,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, responseVariable };
+                    new() { f0, f1, responseVariable };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -1296,7 +1296,7 @@ namespace Novacta.Analytics.Tests
 
             // Valid input - simultaneous training - empty initial ensemble
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1307,7 +1307,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" }
@@ -1315,7 +1315,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, r };
+                    new() { f0, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -1403,7 +1403,7 @@ namespace Novacta.Analytics.Tests
 
             // Valid input - simultaneous training - nonempty initial ensemble
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1414,7 +1414,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" }
@@ -1422,7 +1422,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, r };
+                    new() { f0, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -1516,7 +1516,7 @@ namespace Novacta.Analytics.Tests
 
             // Valid input - sequential training - empty initial ensemble
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1527,7 +1527,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" }
@@ -1535,7 +1535,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, r };
+                    new() { f0, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -1623,7 +1623,7 @@ namespace Novacta.Analytics.Tests
 
             // Valid input - sequential training - nonempty initial ensemble
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1634,7 +1634,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" }
@@ -1642,7 +1642,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, r };
+                    new() { f0, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -1740,7 +1740,7 @@ namespace Novacta.Analytics.Tests
         {
             // dataSet is null
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1751,7 +1751,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" }
@@ -1778,7 +1778,7 @@ namespace Novacta.Analytics.Tests
 
             // featureVariableIndexes is null
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1789,7 +1789,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" }
@@ -1801,7 +1801,7 @@ namespace Novacta.Analytics.Tests
                     responseVariable: r);
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, r };
+                    new() { f0, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -1862,7 +1862,7 @@ namespace Novacta.Analytics.Tests
                             "STR_EXCEPT_PAR_INDEX_EXCEEDS_OTHER_PAR_DIMS"),
                         "column", "dataSet");
 
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1873,7 +1873,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" }
@@ -1885,7 +1885,7 @@ namespace Novacta.Analytics.Tests
                     responseVariable: r);
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, r };
+                    new() { f0, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -1943,7 +1943,7 @@ namespace Novacta.Analytics.Tests
                     = ImplementationServices.GetResourceString(
                             "STR_EXCEPT_CEE_MUST_HAVE_SAME_FEATURES_COUNT");
 
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -1954,7 +1954,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" }
@@ -1966,7 +1966,7 @@ namespace Novacta.Analytics.Tests
                     responseVariable: r);
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, r };
+                    new() { f0, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -2020,7 +2020,7 @@ namespace Novacta.Analytics.Tests
 
             // valid input
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -2031,7 +2031,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" }
@@ -2039,7 +2039,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, r };
+                    new() { f0, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -2142,7 +2142,7 @@ namespace Novacta.Analytics.Tests
 
             // valid input - random ties resolution
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -2153,7 +2153,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -2163,7 +2163,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, r };
+                    new() { f0, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -2298,7 +2298,7 @@ namespace Novacta.Analytics.Tests
         {
             // predictedDataSet is null
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -2309,7 +2309,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" }
@@ -2317,7 +2317,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, r };
+                    new() { f0, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -2371,7 +2371,7 @@ namespace Novacta.Analytics.Tests
 
             // actualDataSet is null
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -2382,7 +2382,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" }
@@ -2390,7 +2390,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, r };
+                    new() { f0, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -2451,7 +2451,7 @@ namespace Novacta.Analytics.Tests
                             "STR_EXCEPT_PAR_INDEX_EXCEEDS_OTHER_PAR_DIMS"),
                         "column", "predictedDataSet");
 
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -2462,7 +2462,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" }
@@ -2470,7 +2470,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, r };
+                    new() { f0, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -2531,7 +2531,7 @@ namespace Novacta.Analytics.Tests
                             "STR_EXCEPT_PAR_INDEX_EXCEEDS_OTHER_PAR_DIMS"),
                         "column", "predictedDataSet");
 
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -2542,7 +2542,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" }
@@ -2550,7 +2550,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, r };
+                    new() { f0, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -2611,7 +2611,7 @@ namespace Novacta.Analytics.Tests
                             "STR_EXCEPT_PAR_INDEX_EXCEEDS_OTHER_PAR_DIMS"),
                         "column", "actualDataSet");
 
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -2622,7 +2622,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" }
@@ -2630,7 +2630,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, r };
+                    new() { f0, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -2691,7 +2691,7 @@ namespace Novacta.Analytics.Tests
                             "STR_EXCEPT_PAR_INDEX_EXCEEDS_OTHER_PAR_DIMS"),
                         "column", "actualDataSet");
 
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -2702,7 +2702,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" }
@@ -2710,7 +2710,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, r };
+                    new() { f0, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -2771,7 +2771,7 @@ namespace Novacta.Analytics.Tests
                             "STR_EXCEPT_PAR_MUST_HAVE_SAME_NUM_OF_ROWS"),
                         "predictedDataSet");
 
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -2782,7 +2782,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" }
@@ -2790,7 +2790,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, r };
+                    new() { f0, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -2844,7 +2844,7 @@ namespace Novacta.Analytics.Tests
 
             // valid input - all actual codes partially predicted
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -2855,7 +2855,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" }
@@ -2863,7 +2863,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, r };
+                    new() { f0, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -2935,7 +2935,7 @@ namespace Novacta.Analytics.Tests
 
             // valid input - some actual codes totally unpredicted
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -2946,7 +2946,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" }
@@ -2954,7 +2954,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, r };
+                    new() { f0, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -3048,7 +3048,7 @@ namespace Novacta.Analytics.Tests
 
             // featureVariableIndexes is null
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -3058,7 +3058,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -3067,7 +3067,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f1.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -3076,7 +3076,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, r };
+                    new() { f0, f1, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -3134,7 +3134,7 @@ namespace Novacta.Analytics.Tests
                             "STR_EXCEPT_PAR_INDEX_EXCEEDS_OTHER_PAR_DIMS"),
                         "column", "dataSet");
 
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -3144,7 +3144,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -3153,7 +3153,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f1.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -3162,7 +3162,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, r };
+                    new() { f0, f1, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -3220,7 +3220,7 @@ namespace Novacta.Analytics.Tests
                             "STR_EXCEPT_PAR_INDEX_EXCEEDS_OTHER_PAR_DIMS"),
                         "column", "dataSet");
 
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -3230,7 +3230,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -3239,7 +3239,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f1.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -3248,7 +3248,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, r };
+                    new() { f0, f1, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -3306,7 +3306,7 @@ namespace Novacta.Analytics.Tests
                             "STR_EXCEPT_PAR_INDEX_EXCEEDS_OTHER_PAR_DIMS"),
                         "column", "dataSet");
 
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -3316,7 +3316,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -3325,7 +3325,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f1.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -3334,7 +3334,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, r };
+                    new() { f0, f1, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -3389,7 +3389,7 @@ namespace Novacta.Analytics.Tests
                         ImplementationServices.GetResourceString(
                             "STR_EXCEPT_PAR_MUST_BE_POSITIVE");
 
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -3399,7 +3399,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -3408,7 +3408,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f1.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -3417,7 +3417,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, r };
+                    new() { f0, f1, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -3472,7 +3472,7 @@ namespace Novacta.Analytics.Tests
                         ImplementationServices.GetResourceString(
                             "STR_EXCEPT_PAR_MUST_BE_POSITIVE");
 
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -3482,7 +3482,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -3491,7 +3491,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f1.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -3500,7 +3500,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, r };
+                    new() { f0, f1, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -3551,7 +3551,7 @@ namespace Novacta.Analytics.Tests
 
             // Valid input - Simultaneous training
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -3562,7 +3562,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" }
@@ -3570,7 +3570,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, r };
+                    new() { f0, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -3655,7 +3655,7 @@ namespace Novacta.Analytics.Tests
 
             // Valid input - Sequential training
             {
-                CategoricalVariable f0 = new CategoricalVariable("F-0")
+                CategoricalVariable f0 = new("F-0")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -3666,7 +3666,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f0.SetAsReadOnly();
 
-                CategoricalVariable f1 = new CategoricalVariable("F-1")
+                CategoricalVariable f1 = new("F-1")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -3675,7 +3675,7 @@ namespace Novacta.Analytics.Tests
                 };
                 f1.SetAsReadOnly();
 
-                CategoricalVariable r = new CategoricalVariable("R")
+                CategoricalVariable r = new("R")
                 {
                     { 0, "0" },
                     { 1, "1" },
@@ -3684,7 +3684,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new List<CategoricalVariable>() { f0, f1, r };
+                    new() { f0, f1, r };
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[24, 3] {

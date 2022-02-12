@@ -6,9 +6,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Runtime.Serialization;
-using System.Security;
-using System.Security.Permissions;
 using System.Text;
 
 using Novacta.Analytics.Infrastructure;
@@ -69,78 +66,13 @@ namespace Novacta.Analytics
     /// <seealso cref="DoubleMatrix">
     /// DoubleMatrix Class</seealso>
     /// <seealso href="http://en.wikipedia.org/wiki/Row-major_order#Column-major_order"/>
-    [Serializable]
     public class IndexCollection :
         IList<int>,
         IReadOnlyList<int>,
         IEquatable<IndexCollection>,
         IComparable<IndexCollection>,
-        IComparable,
-        ISerializable
+        IComparable
     {
-        #region ISerializable
-
-        /// <summary>
-        /// Initializes a new instance of the 
-        /// <see cref="IndexCollection"/> class with serialized data.
-        /// </summary>
-        /// <param name="info">
-        /// The object that holds the serialized object data.
-        /// </param>
-        /// <param name="context">
-        /// The contextual information about the source or destination.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="info"/> is <b>null</b>.
-        /// </exception>
-        [SecurityPermission(
-            SecurityAction.Demand,
-            SerializationFormatter = true),
-         System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Naming",
-            "CA1801:ReviewUnusedParameters",
-            Justification = "Constructor requires parameter context.")]
-        protected IndexCollection(
-            SerializationInfo info,
-            StreamingContext context)
-        {
-            if (null == info)
-                throw new ArgumentNullException(nameof(info));
-
-            this.indexes =
-                (int[])info.GetValue(
-                    "indexes",
-                    typeof(int[]));
-
-            this.maxIndex =
-                (int)info.GetValue(
-                    "maxIndex",
-                    typeof(int));
-        }
-
-        /// <inheritdoc/>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="info"/> is <b>null</b>.
-        /// </exception>
-        [SecurityCritical]
-        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            if (null == info)
-                throw new ArgumentNullException(nameof(info));
-
-            info.AddValue(
-                "indexes",
-                this.indexes,
-                typeof(int[]));
-
-            info.AddValue(
-                "maxIndex",
-                this.maxIndex,
-                typeof(int));
-        }
-
-        #endregion
-
         #region State
 
         internal int[] indexes;
@@ -208,7 +140,7 @@ namespace Novacta.Analytics
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString()
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new();
 
             int numberOfIndexes = this.indexes.Length;
 
@@ -236,8 +168,8 @@ namespace Novacta.Analytics
         /// that contains elements from the specified array, eventually copied.
         /// </summary>
         /// <param name="indexes">The indexes to store.</param>
-        /// <param name="copyIndexes"><b>true</b> if <paramref name="indexes"/> has to be copied;
-        /// otherwise <b>false</b>.</param>
+        /// <param name="copyIndexes"><c>true</c> if <paramref name="indexes"/> has to be copied;
+        /// otherwise <c>false</c>.</param>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="indexes" /> is <b>null</b>.
         /// </exception>
@@ -332,8 +264,8 @@ namespace Novacta.Analytics
         /// of the new <see cref="IndexCollection" /> instance.
         /// </param>
         /// <param name="copyIndexes">
-        /// <b>true</b> if <paramref name="indexes"/> 
-        /// must be copied before instantiation; otherwise <b>false</b>.
+        /// <c>true</c> if <paramref name="indexes"/> 
+        /// must be copied before instantiation; otherwise <c>false</c>.
         /// </param>
         /// <returns>
         /// A collection using the specified array to store its indexes.
@@ -343,7 +275,7 @@ namespace Novacta.Analytics
         /// The <see cref="FromArray(int[],bool)"/> method prevents 
         /// the copy of the elements in <paramref name="indexes"/> before 
         /// instantiation if <paramref name="copyIndexes"/> evaluates 
-        /// to <b>false</b>: the 
+        /// to <c>false</c>: the 
         /// returned <see cref="IndexCollection"/> instance will use a direct 
         /// reference to <paramref name="indexes"/> to manipulate its indexes.
         /// </para>
@@ -351,7 +283,7 @@ namespace Novacta.Analytics
         /// <note type="caution">
         /// This method is intended for advanced users and must always be used 
         /// carefully. 
-        /// If the value of <paramref name="copyIndexes"/> is <b>false</b>, do not 
+        /// If the value of <paramref name="copyIndexes"/> is <c>false</c>, do not 
         /// use this method if you do not have complete control of 
         /// the <paramref name="indexes"/> array.
         /// Once the array is passed to the method as an argument, it must be 
@@ -658,10 +590,6 @@ namespace Novacta.Analytics
         /// <paramref name="positions"/> contains a value which is negative or greater than or equal to
         /// <see cref="Count"/>.
         /// </exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1043:UseIntegralOrStringArgumentForIndexers",
-            Justification = "Index collections can be sub referenced by index collections.")]
         public IndexCollection this[IndexCollection positions]
         {
             get
@@ -862,9 +790,9 @@ namespace Novacta.Analytics
         /// </summary>
         /// <param name="left">The first instance to compare.</param>
         /// <param name="right">The second instance to compare.</param>
-        /// <returns><b>true</b> if <paramref name="left"/> is less 
+        /// <returns><c>true</c> if <paramref name="left"/> is less 
         /// than <paramref name="right"/>;
-        /// otherwise, <b>false</b>.
+        /// otherwise, <c>false</c>.
         /// </returns>
         /// <remarks>
         /// <inheritdoc cref="IndexCollection" 
@@ -887,9 +815,9 @@ namespace Novacta.Analytics
         /// </summary>
         /// <param name="left">The first instance to compare.</param>
         /// <param name="right">The second instance to compare.</param>
-        /// <returns><b>true</b> if <paramref name="left"/> is less than 
+        /// <returns><c>true</c> if <paramref name="left"/> is less than 
         /// or equal to <paramref name="right"/>;
-        /// otherwise, <b>false</b>.
+        /// otherwise, <c>false</c>.
         /// </returns>
         /// <remarks>
         /// <inheritdoc cref="IndexCollection" 
@@ -914,9 +842,9 @@ namespace Novacta.Analytics
         /// </summary>
         /// <param name="left">The first instance to compare.</param>
         /// <param name="right">The second instance to compare.</param>
-        /// <returns><b>true</b> if <paramref name="left"/> is greater 
+        /// <returns><c>true</c> if <paramref name="left"/> is greater 
         /// than <paramref name="right"/>;
-        /// otherwise, <b>false</b>.
+        /// otherwise, <c>false</c>.
         /// </returns>
         /// <remarks>
         /// <inheritdoc cref="IndexCollection" 
@@ -939,9 +867,9 @@ namespace Novacta.Analytics
         /// </summary>
         /// <param name="left">The first instance to compare.</param>
         /// <param name="right">The second instance to compare.</param>
-        /// <returns><b>true</b> if <paramref name="left"/> is greater than 
+        /// <returns><c>true</c> if <paramref name="left"/> is greater than 
         /// or equal to <paramref name="right"/>;
-        /// otherwise, <b>false</b>.
+        /// otherwise, <c>false</c>.
         /// </returns>
         /// <remarks>
         /// <inheritdoc cref="IndexCollection" 
@@ -963,8 +891,8 @@ namespace Novacta.Analytics
         /// Indicates whether the current object is equal to another object of the same type.
         /// </summary>
         /// <param name="other">An object to compare with this object.</param>
-        /// <returns><b>true</b> if the current object is equal to the <paramref name="other" /> 
-        /// parameter; otherwise, <b>false</b>.</returns>
+        /// <returns><c>true</c> if the current object is equal to the <paramref name="other" /> 
+        /// parameter; otherwise, <c>false</c>.</returns>
         /// <remarks>
         /// <inheritdoc cref="IndexCollection" 
         /// path="para[@id='quasi.lexicographic.order']"/>
@@ -982,8 +910,8 @@ namespace Novacta.Analytics
         /// is equal to the current <see cref="object" />.
         /// </summary>
         /// <param name="obj">The object to compare with the current object.</param>
-        /// <returns><b>true</b> if the specified object is equal to the current object; 
-        /// otherwise, <b>false</b>.</returns>
+        /// <returns><c>true</c> if the specified object is equal to the current object; 
+        /// otherwise, <c>false</c>.</returns>
         /// <remarks>
         /// <inheritdoc cref="IndexCollection" 
         /// path="para[@id='quasi.lexicographic.order']"/>
@@ -1009,8 +937,8 @@ namespace Novacta.Analytics
         /// </summary>
         /// <param name="left">The first instance to compare.</param>
         /// <param name="right">The second instance to compare.</param>
-        /// <returns><b>true</b> if <paramref name="left"/> is equal to <paramref name="right"/>;
-        /// otherwise, <b>false</b>.
+        /// <returns><c>true</c> if <paramref name="left"/> is equal to <paramref name="right"/>;
+        /// otherwise, <c>false</c>.
         /// </returns>
         /// <remarks>
         /// <inheritdoc cref="IndexCollection" 
@@ -1035,8 +963,8 @@ namespace Novacta.Analytics
         /// </summary>
         /// <param name="left">The first instance to compare.</param>
         /// <param name="right">The second instance to compare.</param>
-        /// <returns><b>true</b> if <paramref name="left"/> is not equal to <paramref name="right"/>;
-        /// otherwise, <b>false</b>.
+        /// <returns><c>true</c> if <paramref name="left"/> is not equal to <paramref name="right"/>;
+        /// otherwise, <c>false</c>.
         /// </returns>
         /// <remarks>
         /// <inheritdoc cref="IndexCollection" 

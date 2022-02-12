@@ -320,10 +320,6 @@ namespace Novacta.Analytics.Advanced
         /// -or-<br/>
         /// <paramref name="estimationSampleSize"/> is not positive.
         /// </exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Design", 
-            "CA1062:Validate arguments of public methods", 
-            Justification = "Input validation delegated to CrossEntropyProgram.Run.")]
         public RareEventProbabilityEstimationResults Estimate(
             RareEventProbabilityEstimationContext context,
             double rarity,

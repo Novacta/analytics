@@ -9,11 +9,13 @@ namespace Novacta.Analytics.CodeExamples
         public void Main()
         {
             // Create the CSV representation of a dense matrix.
-            string[] data = new string[4] {
-                "Dense,2,3,MatrixName",
-                ",column0,,column2",
-                "row0,1.0,NaN,5.0",
-                "row1,2.0,4.0,6.0"};
+            string[] data = new string[5] {
+                "Dense|Complex,3,2,MatrixName",
+                ",column0,column1",
+                "row0,(1.0 -2.0),(NaN NaN)",
+                "row1,(2.0 -3.0),(4.0 -1.0)",
+                "row2,(0 0),(5.0 7.0)"
+            };
 
             // Show the matrix CSV representation.
             Console.WriteLine("CSV representation of the matrix:");
@@ -23,8 +25,8 @@ namespace Novacta.Analytics.CodeExamples
             Console.WriteLine();
 
             // Create a stream containing the CSV content.
-            MemoryStream stream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(stream);
+            MemoryStream stream = new();
+            StreamWriter writer = new(stream);
             for (int i = 0; i < data.Length; i++) {
                 writer.WriteLine(data[i].ToCharArray());
                 writer.Flush();
@@ -32,10 +34,11 @@ namespace Novacta.Analytics.CodeExamples
             stream.Position = 0;
 
             // Create a reader for the stream.
-            StreamReader reader = new StreamReader(stream);
+            StreamReader reader = new(stream);
 
             // Deserialize the CSV document contained in the stream.
-            DoubleMatrix matrix = CsvMatrixSerializer.Deserialize(reader);
+            ComplexMatrix matrix = 
+                CsvComplexMatrixSerializer.Deserialize(reader);
 
             // Show the matrix.
             Console.WriteLine("Deserialized matrix:");
