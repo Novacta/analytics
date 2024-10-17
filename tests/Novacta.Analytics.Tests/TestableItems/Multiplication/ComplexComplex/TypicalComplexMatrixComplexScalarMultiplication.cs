@@ -28,15 +28,15 @@ namespace Novacta.Analytics.Tests.TestableItems.Multiplication
         TypicalComplexMatrixComplexScalarMultiplication() :
             base(
                 expected: new ComplexMatrixState(
-                    asColumnMajorDenseArray: new Complex[6]
-                    {
+                    asColumnMajorDenseArray:
+                    [
                         0,
-                        new Complex(0, 4),
-                        new Complex(0, 8),
-                        new Complex(0, 12),
-                        new Complex(0, 16),
-                        new Complex(0, 20)
-                    },
+                        new(0, 4),
+                        new(0, 8),
+                        new(0, 12),
+                        new(0, 16),
+                        new(0, 20)
+                    ],
                     numberOfRows: 2,
                     numberOfColumns: 3),
                 left: TestableComplexMatrix16.Get(),

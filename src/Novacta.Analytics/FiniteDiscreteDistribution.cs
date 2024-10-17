@@ -202,10 +202,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static FiniteDiscreteDistribution Uniform(DoubleMatrix values)
         {
-            if (values is null)
-            {
-                throw new ArgumentNullException(nameof(values));
-            }
+            ArgumentNullException.ThrowIfNull(values);
 
             double numberOfValues = values.Count;
 
@@ -235,7 +232,7 @@ namespace Novacta.Analytics
                 {
                     break;
                 }
-                currentIndex = new IndexCollection(s.ToArray(), false);
+                currentIndex = new IndexCollection([.. s], false);
                 currentDifference = difference.Vec(currentIndex);
 
                 IndexValuePair pair = Stat.Min(currentDifference);
@@ -416,10 +413,7 @@ namespace Novacta.Analytics
 
         private static void ValidateValues(DoubleMatrix values)
         {
-            if (values is null)
-            {
-                throw new ArgumentNullException(nameof(values));
-            }
+            ArgumentNullException.ThrowIfNull(values);
 
             int numberOfDistinctValues = values.Distinct().Count();
             if (numberOfDistinctValues != values.Count)
@@ -433,10 +427,7 @@ namespace Novacta.Analytics
         private static void ValidateMasses(
             DoubleMatrix masses, DoubleMatrix values)
         {
-            if (masses is null)
-            {
-                throw new ArgumentNullException(nameof(masses));
-            }
+            ArgumentNullException.ThrowIfNull(masses);
 
             if (values.NumberOfRows != masses.NumberOfRows)
             {

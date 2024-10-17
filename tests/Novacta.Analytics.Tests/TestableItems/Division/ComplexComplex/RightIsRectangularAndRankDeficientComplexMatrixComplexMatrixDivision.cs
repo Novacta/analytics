@@ -5,7 +5,6 @@
 using Novacta.Analytics.Infrastructure;
 using Novacta.Analytics.Tests.TestableItems.Matrices;
 using System;
-using System.Numerics;
 
 namespace Novacta.Analytics.Tests.TestableItems.Division
 {

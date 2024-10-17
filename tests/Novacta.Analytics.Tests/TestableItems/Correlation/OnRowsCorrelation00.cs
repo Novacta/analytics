@@ -18,7 +18,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Correlation
                 base(
                     expected: new DoubleMatrixState(
                         asColumnMajorDenseArray:
-                            new double[25] {
+                            [
                                  1.00000000000000,
                                 -0.69457793721244,
                                 -0.64992883353843,
@@ -43,7 +43,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Correlation
                                 -0.79504639199993,
                                 -0.82530726124983,
                                  0.75847274102396,
-                                 1.00000000000000 },
+                                 1.00000000000000 ],
                         numberOfRows: 5,
                         numberOfColumns: 5
                     ),

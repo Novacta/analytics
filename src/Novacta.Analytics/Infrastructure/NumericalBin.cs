@@ -107,13 +107,9 @@ namespace Novacta.Analytics.Infrastructure
         {
             #region Input validation
 
-            if (numericalData is null) {
-                throw new ArgumentNullException(nameof(numericalData));
-            }
+            ArgumentNullException.ThrowIfNull(numericalData);
 
-            if (targetData is null) {
-                throw new ArgumentNullException(nameof(targetData));
-            }
+            ArgumentNullException.ThrowIfNull(targetData);
 
             if (numericalData.Count != targetData.Count) {
                 throw new ArgumentException(
@@ -144,7 +140,7 @@ namespace Novacta.Analytics.Infrastructure
                 return bins;
             }
 
-            bins = new List<NumericalBin>();
+            bins = [];
 
             // Identify boundary points
             SortIndexResults sortResults = Stat.SortIndex(

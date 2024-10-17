@@ -18,13 +18,13 @@ namespace Novacta.Analytics.Tests.TestableItems.Matrices
         /// Initializes a new instance of the <see cref="TestableComplexMatrix09" /> class.
         /// </summary>
         TestableComplexMatrix09() : base(
-                asColumnMajorDenseArray: new Complex[4] 
-                {
-                    new Complex(1, 1),
+                asColumnMajorDenseArray:
+                [
+                    new(1, 1),
                     0,
                     0,
                     0
-                },
+                ],
                 numberOfRows: 2,
                 numberOfColumns: 2,
                 isUpperHessenberg: true,

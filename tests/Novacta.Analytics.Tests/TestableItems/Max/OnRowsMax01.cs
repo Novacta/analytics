@@ -16,10 +16,10 @@ namespace Novacta.Analytics.Tests.TestableItems.Max
     {
         protected OnRowsMax01() :
                 base(
-                    expected: new IndexValuePair[2] {
-                        new IndexValuePair() { index = 0, value = 1.0 },
-                        new IndexValuePair() { index = 0, value = 0.0 }
-                    },
+                    expected: [
+                        new() { index = 0, value = 1.0 },
+                        new() { index = 0, value = 0.0 }
+                    ],
                     data: TestableDoubleMatrix50.Get(),
                     dataOperation: DataOperation.OnRows
                 )

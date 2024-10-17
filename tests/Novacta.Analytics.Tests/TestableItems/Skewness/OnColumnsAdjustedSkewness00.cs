@@ -18,8 +18,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Skewness
                 base(
                     expected: new DoubleMatrixState(
                         asColumnMajorDenseArray:
-                            new double[5] 
-                                { 1.58882231416295, -0.45617799047082, 0.0, -1.18822340003788, 0.0 },
+                            [1.58882231416295, -0.45617799047082, 0.0, -1.18822340003788, 0.0],
                         numberOfRows: 1,
                         numberOfColumns: 5
                     ),

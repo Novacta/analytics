@@ -1,364 +1,372 @@
-﻿<html><head><meta http-equiv="X-UA-Compatible" content="IE=edge" /><link rel="shortcut icon" href="../icons/favicon.ico" /><link rel="stylesheet" type="text/css" href="../styles/branding.css" /><link rel="stylesheet" type="text/css" href="../styles/branding-en-US.css" /><script type="text/javascript" src="../scripts/branding.js"> </script><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>JsonSerialization Class</title><meta name="Language" content="en-us" /><meta name="System.Keywords" content="JsonSerialization class" /><meta name="System.Keywords" content="Novacta.Analytics.JsonSerialization class" /><meta name="Microsoft.Help.F1" content="Novacta.Analytics.JsonSerialization" /><meta name="Microsoft.Help.Id" content="T:Novacta.Analytics.JsonSerialization" /><meta name="Description" content="Provides methods to support the JSON serialization of types defined in the namespace." /><meta name="Microsoft.Help.ContentType" content="Reference" /><meta name="BrandingAware" content="true" /><meta name="container" content="Novacta.Analytics" /><meta name="file" content="652F931A" /><meta name="guid" content="652F931A" /><link type="text/css" rel="stylesheet" href="../styles/highlight.css" /><script type="text/javascript" src="../scripts/highlight.js"> </script><link rel="stylesheet" type="text/css" href="../styles/branding-Website.css" /><script type="text/javascript" src="../scripts/jquery-3.5.1.min.js"></script><script type="text/javascript" src="../scripts/branding-Website.js"></script><script type="text/javascript" src="../scripts/clipboard.min.js"></script></head><body onload="OnLoad('cs')"><input type="hidden" id="userDataCache" class="userDataStyle" /><div class="pageHeader" id="PageHeader">Novacta.Analytics Documentation<form id="SearchForm" method="get" action="#" onsubmit="javascript:TransferToSearchPage(); return false;"><input id="SearchTextBox" type="text" maxlength="200" /><button id="SearchButton" type="submit"></button></form></div><div class="pageBody"><div class="leftNav" id="leftNav"><div id="tocNav"><div class="toclevel0" data-toclevel="0"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/a4ea75a2-ef53-4ea2-a7f4-b493a50f90b3.htm" title="Novacta.Analytics Documentation" tocid="roottoc">Novacta.Analytics Documentation</a></div><div class="toclevel0" data-toclevel="0"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/D9FC3C8F.htm" title="Novacta.Analytics namespaces" tocid="D9FC3C8F">Novacta.Analytics namespaces</a></div><div class="toclevel0" data-toclevel="0"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/2406EB43.htm" title="Novacta.Analytics" tocid="2406EB43">Novacta.Analytics</a></div><div class="toclevel1 current" data-toclevel="1" data-childrenloaded="true"><a class="tocExpanded" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/652F931A.htm" title="JsonSerialization Class" tocid="652F931A">JsonSerialization Class</a></div><div class="toclevel2" data-toclevel="2"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!" /><a data-tochassubtree="true" href="../html/37DAAA2B.htm" title="JsonSerialization Methods" tocid="37DAAA2B">JsonSerialization Methods</a></div></div><div id="tocResizableEW" onmousedown="OnMouseDown(event);"></div><div id="TocResize" class="tocResize"><img id="ResizeImageIncrease" src="../icons/TocOpen.gif" onclick="OnIncreaseToc()" alt="Click or drag to resize" title="Click or drag to resize" /><img id="ResizeImageReset" src="../icons/TocClose.gif" style="display:none" onclick="OnResetToc()" alt="Click or drag to resize" title="Click or drag to resize" /></div></div><div class="topicContent" id="TopicContent"><table class="titleTable"><tr><td class="logoColumn"><img src="../icons/Help.png" /></td><td class="titleColumn"><h1>JsonSerialization Class</h1></td></tr></table><span class="introStyle"></span> <div class="summary">
+﻿<!DOCTYPE html ><html lang="en-US"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="shortcut icon" href="../icons/favicon.ico" /><link rel="stylesheet" href="../css/bulma.css" /><link rel="stylesheet" href="../css/font-awesome.min.css" /><link rel="stylesheet" href="../css/presentationStyle.css" /><link rel="stylesheet" href="../css/vs.min.css" /><script src="../scripts/jquery-3.5.1.min.js"></script><script src="../scripts/clipboard.min.js"></script><script src="../scripts/highlight.min.js"></script><script src="../scripts/presentationStyle.js"></script><title>JsonSerialization Class</title><meta name="Title" content="JsonSerialization" /><meta name="Help.Id" content="T:Novacta.Analytics.JsonSerialization" /><meta name="Help.ContentType" content="Reference" /><meta name="container" content="Novacta.Analytics" /><meta name="guid" content="652F931A" /><meta name="Description" content="Provides methods to support the JSON serialization of types defined in the namespace." /><meta name="tocFile" content="../toc/IDAE.xml" /></head><body><div class="fixedLayout"><div id="Header" class="fixedHeader"><div class="pageHeader level mb-0 py-2 px-4"><div id="TitleContainer" class="level-left"><div class="level-item"><img src="../icons/Help.png" /></div><div id="DocumentationTitle" class="level-item">Novacta.Analytics Documentation</div></div><div id="LangFilterSearchContainer" class="level-right"><div class="level-item"><div class="dropdown is-hoverable"><div class="dropdown-trigger"><button class="button" aria-haspopup="true" aria-controls="dropdown-menu"><span id="CurrentLanguage"></span><span class="icon is-small"><i class="fa fa-angle-down" aria-hidden="true"></i></span></button></div><div class="dropdown-menu" role="menu"><div id="LanguageSelections" class="dropdown-content"><a class="dropdown-item languageFilterItem" data-languageId="cs">C#</a><a class="dropdown-item languageFilterItem" data-languageId="vb">VB</a><a class="dropdown-item languageFilterItem" data-languageId="cpp">C++</a><a class="dropdown-item languageFilterItem" data-languageId="fs">F#</a></div></div></div></div><div class="level-item"><form id="SearchForm" action="#" onsubmit="TransferToSearchPage(); return false;"><div class="field"><div class="control has-icons-left"><input id="SearchTerms" class="input" type="text" maxlength="200" placeholder="Search" /><span class="icon is-small is-left"><i class="fa fa-search"></i></span><button id="SearchButton" type="submit" class="is-hidden"></button></div></div></form></div></div></div></div><div class="fixedContent"><nav class="breadcrumb my-1 px-2 border-bottom" role="navigation"><ul id="TopicBreadcrumbs" /></nav><div id="ContentContainer" class="columns pl-5 pr-5 fixedContent"><div id="ShowHideTOCColumn" class="column is-hidden-tablet"><a id="ShowHideTOC">Show/Hide TOC</a></div><div id="TOCColumn" class="column is-hidden-mobile"><nav class="toc"><ul id="TableOfContents" class="toc-menu" /></nav></div><div id="Resizer" class="is-hidden"></div><div id="TopicContent" class="column content is-7"><h1>Json<wbr />Serialization Class</h1><div class="summary">
             Provides methods to support the JSON serialization of types
             defined in the <a href="2406EB43.htm">Novacta.Analytics</a> namespace.
-            </div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID0RB')" onkeypress="SectionExpandCollapse_CheckKey('ID0RB', event)" tabindex="0"><img id="ID0RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Inheritance Hierarchy</span></div><div id="ID0RBSection" class="collapsibleSection"><a href="https://docs.microsoft.com/dotnet/api/system.object" target="_blank" rel="noopener noreferrer">System<span id="LST652F931A_0"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST652F931A_0?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>Object</a><br />  <span class="selflink">Novacta.Analytics<span id="LST652F931A_1"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST652F931A_1?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>JsonSerialization</span><br /></div><p> </p>
-    <strong>Namespace:</strong> 
-   <a href="2406EB43.htm">Novacta.Analytics</a><br />
-    <strong>Assembly:</strong>
-   Novacta.Analytics (in Novacta.Analytics.dll) Version: 2.0.0<div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID2RB')" onkeypress="SectionExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Syntax</span></div><div id="ID2RBSection" class="collapsibleSection"><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID1EDCA_tab1" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID1EDCA','cs','1','4');return false;">C#</a></div><div id="ID1EDCA_tab2" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID1EDCA','vb','2','4');return false;">VB</a></div><div id="ID1EDCA_tab3" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID1EDCA','cpp','3','4');return false;">C++</a></div><div id="ID1EDCA_tab4" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID1EDCA','fs','4','4');return false;">F#</a></div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EDCA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EDCA');return false;" title="Copy">Copy</a></div></div><div id="ID1EDCA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="identifier">JsonSerialization</span></pre></div><div id="ID1EDCA_code_Div2" class="codeSnippetContainerCode" style="display: none"><pre xml:space="preserve"><span class="keyword">Public</span> <span class="keyword">NotInheritable</span> <span class="keyword">Class</span> <span class="identifier">JsonSerialization</span></pre></div><div id="ID1EDCA_code_Div3" class="codeSnippetContainerCode" style="display: none"><pre xml:space="preserve"><span class="keyword">public</span> <span class="keyword">ref class</span> <span class="identifier">JsonSerialization</span> <span class="keyword">abstract</span> <span class="keyword">sealed</span></pre></div><div id="ID1EDCA_code_Div4" class="codeSnippetContainerCode" style="display: none"><pre xml:space="preserve">[&lt;<span class="identifier">AbstractClassAttribute</span>&gt;]
+            </div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Definition</h2><div id="IDBSection"><strong>Namespace:</strong> <a href="2406EB43.htm">Novacta.Analytics</a><br /><strong>Assembly:</strong> Novacta.Analytics (in Novacta.Analytics.dll) Version: 2.1.0+428f3840cfab98dda567bb0ed350b302533e273a<div class="codeSnippet" data-codeSnippetLanguage="cs"><div class="codeHeader"><span class="codeHeaderTitle">C#</span><span class="buttons"><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></span></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cs"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="identifier">JsonSerialization</span></code></pre></div></div><div class="codeSnippet is-hidden" data-codeSnippetLanguage="vb"><div class="codeHeader"><span class="codeHeaderTitle">VB</span><span class="buttons"><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></span></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-vb"><span class="keyword">Public</span> <span class="keyword">NotInheritable</span> <span class="keyword">Class</span> <span class="identifier">JsonSerialization</span></code></pre></div></div><div class="codeSnippet is-hidden" data-codeSnippetLanguage="cpp"><div class="codeHeader"><span class="codeHeaderTitle">C++</span><span class="buttons"><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></span></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cpp"><span class="keyword">public</span> <span class="keyword">ref class</span> <span class="identifier">JsonSerialization</span> <span class="keyword">abstract</span> <span class="keyword">sealed</span></code></pre></div></div><div class="codeSnippet is-hidden" data-codeSnippetLanguage="fs"><div class="codeHeader"><span class="codeHeaderTitle">F#</span><span class="buttons"><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></span></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-fs">[&lt;<span class="identifier">AbstractClassAttribute</span>&gt;]
 [&lt;<span class="identifier">SealedAttribute</span>&gt;]
-<span class="keyword">type</span> <span class="identifier">JsonSerialization</span> =  <span class="keyword">class</span> <span class="keyword">end</span></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EDCA");</script></div><p>The <span class="selflink">JsonSerialization</span> type exposes the following members.</p><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID3RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
-								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;static;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /><img src="../icons/static.gif" alt="Static member" title="Static member" /></td><td><a href="4273C89F.htm">AddDataConverters</a></td><td><div class="summary">
-            Adds support to the JSON conversion of data types in the
-            <a href="2406EB43.htm">Novacta.Analytics</a> namespace.
-            </div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID4RBSection" class="collapsibleSection"><p>
+<span class="keyword">type</span> <span class="identifier">JsonSerialization</span> = <span class="keyword">class</span> <span class="keyword">end</span></code></pre></div></div><dl class="inheritanceHierarchy"><dt>Inheritance</dt><dd><a href="https://learn.microsoft.com/dotnet/api/system.object" target="_blank" rel="noopener noreferrer">Object</a>  <span class="icon is-small"><i class="fa fa-arrow-right"></i></span>  <span class="selflink">JsonSerialization</span></dd></dl></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Remarks</h2><div id="IDBCSection"><p>
             This class provides custom converters for the JSON serialization classes that 
-            are defined in the <a href="https://docs.microsoft.com/dotnet/api/system.text.json" target="_blank" rel="noopener noreferrer">System.Text.Json</a> namespace. 
+            are defined in the <a href="https://learn.microsoft.com/dotnet/api/system.text.json" target="_blank" rel="noopener noreferrer">System.Text.Json</a> namespace. 
             </p><p>
             In particular, method <a href="4273C89F.htm">AddDataConverters(JsonSerializerOptions)</a> 
-            adds to a given <a href="https://docs.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions" target="_blank" rel="noopener noreferrer">JsonSerializerOptions</a> instance
+            adds to a given <a href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions" target="_blank" rel="noopener noreferrer">JsonSerializerOptions</a> instance
             the converters required for the JSON serialization of the following types: 
             <a href="1DED9EB1.htm">DoubleMatrix</a>, <a href="9FFC4131.htm">ReadOnlyDoubleMatrix</a>, 
             <a href="AFDA21E4.htm">ComplexMatrix</a>, <a href="E2E3D527.htm">ReadOnlyComplexMatrix</a>, 
             <a href="E499D77C.htm">Category</a>,
             <a href="BFCDF326.htm">CategoricalVariable</a>, <a href="39D67B46.htm">CategoricalEntailment</a>, 
             and <a href="B39F799B.htm">CategoricalDataSet</a>.
-            </p></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Examples</span></div><div id="ID5RBSection" class="collapsibleSection"><p>
+            </p></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Example</h2><div id="IDCCSection"><p>
             In the following example, a matrix instance is serialized by writing to
             a JSON value. Hence the matrix is deserialized by reading from
             such value.
-            </p><p><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID1EAACABA_tab1" class="codeSnippetContainerTabSingle">Conversion of a matrix to and from a JSON value.</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACABA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACABA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACABA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-keyword">using</span> System;
-<span class="highlight-keyword">using</span> System.Text.Json;
+            </p><p><div class="codeSnippet"><div class="codeHeader"><span class="codeHeaderTitle">Conversion of a matrix to and from a JSON value.</span><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cs">using System;
+using System.Text.Json;
 
-<span class="highlight-keyword">namespace</span> Novacta.Analytics.CodeExamples
+namespace Novacta.Analytics.CodeExamples
 {
-    <span class="highlight-keyword">public</span> <span class="highlight-keyword">class</span> JsonSerializationExample0  
+    public class JsonSerializationExample0  
     {
-        <span class="highlight-keyword">public</span> <span class="highlight-keyword">void</span> Main()
+        public void Main()
         {
-            <span class="highlight-comment">// Set matrix dimensions.</span>
-            <span class="highlight-keyword">const</span> <span class="highlight-keyword">int</span> numberOfRows = <span class="highlight-number">3</span>;
-            <span class="highlight-keyword">const</span> <span class="highlight-keyword">int</span> numberOfColumns = <span class="highlight-number">2</span>;
+            // Set matrix dimensions.
+            const int numberOfRows = 3;
+            const int numberOfColumns = 2;
 
-            <span class="highlight-comment">// Create the data as an array having lower bounds equal to zero.</span>
-            <span class="highlight-keyword">var</span> data = <span class="highlight-keyword">new</span> <span class="highlight-keyword">double</span>[numberOfRows, numberOfColumns]
-                { { <span class="highlight-number">1</span>, <span class="highlight-number">2</span> },
-                  { <span class="highlight-number">3</span>, <span class="highlight-number">4</span> },
-                  { <span class="highlight-number">5</span>, <span class="highlight-number">6</span> } };
+            // Create the data as an array having lower bounds equal to zero.
+            var data = new double[numberOfRows, numberOfColumns]
+                { { 1, 2 },
+                  { 3, 4 },
+                  { 5, 6 } };
 
-            <span class="highlight-comment">// Create the matrix. </span>
-            <span class="highlight-keyword">var</span> serializedMatrix = DoubleMatrix.Dense(data);
+            // Create the matrix. 
+            var serializedMatrix = DoubleMatrix.Dense(data);
 
-            <span class="highlight-comment">// Set the matrix name.</span>
-            serializedMatrix.Name = <span class="highlight-literal">"MyData"</span>;
+            // Set the matrix name.
+            serializedMatrix.Name = "MyData";
 
-            <span class="highlight-comment">// Set names for some rows and columns.</span>
-            serializedMatrix.SetRowName(<span class="highlight-number">0</span>, <span class="highlight-literal">"Row-0"</span>);
-            serializedMatrix.SetRowName(<span class="highlight-number">2</span>, <span class="highlight-literal">"Row-2"</span>);
-            serializedMatrix.SetColumnName(<span class="highlight-number">1</span>, <span class="highlight-literal">"Col-0"</span>);
+            // Set names for some rows and columns.
+            serializedMatrix.SetRowName(0, "Row-0");
+            serializedMatrix.SetRowName(2, "Row-2");
+            serializedMatrix.SetColumnName(1, "Col-1");
 
-            <span class="highlight-comment">// Show the matrix.</span>
-            Console.WriteLine(<span class="highlight-literal">"Serialized matrix:"</span>);
+            // Show the matrix.
+            Console.WriteLine("Serialized matrix:");
             Console.WriteLine(serializedMatrix);
             Console.WriteLine();
 
-            <span class="highlight-comment">// Add converters to a JsonSerializerOptions instance</span>
-            <span class="highlight-comment">// to support the JSON serialization of data types</span>
-            <span class="highlight-comment">// defined in the Novacta.Analytics namespace.</span>
-            <span class="highlight-keyword">var</span> options = <span class="highlight-keyword">new</span> JsonSerializerOptions
+            // Add converters to a JsonSerializerOptions instance
+            // to support the JSON serialization of data types
+            // defined in the Novacta.Analytics namespace.
+            var options = new JsonSerializerOptions
             {
-                WriteIndented = <span class="highlight-keyword">true</span>
+                WriteIndented = true
             };
             JsonSerialization.AddDataConverters(options);
 
-            <span class="highlight-comment">// Create a JSON representation of the matrix.</span>
-            <span class="highlight-comment">// The options previously defined must be passed as a parameter </span>
-            <span class="highlight-comment">// to method Serialize of class System.Text.Json.JsonSerializer.</span>
-            <span class="highlight-keyword">string</span> json = JsonSerializer.Serialize(
+            // Create a JSON representation of the matrix.
+            // The options previously defined must be passed as a parameter 
+            // to method Serialize of class System.Text.Json.JsonSerializer.
+            string json = JsonSerializer.Serialize(
                 serializedMatrix,
-                <span class="highlight-keyword">typeof</span>(DoubleMatrix),
+                typeof(DoubleMatrix),
                 options);
 
-            <span class="highlight-comment">// Show the JSON value representing the matrix.</span>
-            Console.WriteLine(<span class="highlight-literal">"JSON matrix representation:"</span>);
+            // Show the JSON value representing the matrix.
+            Console.WriteLine("JSON matrix representation:");
             Console.WriteLine(json);
             Console.WriteLine();
 
-            <span class="highlight-comment">// Create a matrix from the JSON representation.</span>
-            <span class="highlight-comment">// The options previously defined must be passed as a parameter </span>
-            <span class="highlight-comment">// to method Deserialize of class System.Text.Json.JsonSerializer.</span>
-            <span class="highlight-keyword">var</span> deserializedMatrix = JsonSerializer.Deserialize&lt;DoubleMatrix&gt;(
+            // Create a matrix from the JSON representation.
+            // The options previously defined must be passed as a parameter 
+            // to method Deserialize of class System.Text.Json.JsonSerializer.
+            var deserializedMatrix = JsonSerializer.Deserialize&lt;DoubleMatrix&gt;(
                 json,
                 options);
 
-            <span class="highlight-comment">// Show the deserialized matrix.</span>
-            Console.WriteLine(<span class="highlight-literal">"Deserialized matrix:"</span>);
+            // Show the deserialized matrix.
+            Console.WriteLine("Deserialized matrix:");
             Console.WriteLine(deserializedMatrix);
         }
     }
 }
 
-<span class="highlight-comment">// Executing method Main() produces the following output:</span>
-<span class="highlight-comment">// </span>
-<span class="highlight-comment">// Serialized matrix:</span>
-<span class="highlight-comment">//                                   [Col-0]          </span>
-<span class="highlight-comment">// [Row-0]          1                2                </span>
-<span class="highlight-comment">//                  3                4                </span>
-<span class="highlight-comment">// [Row-2]          5                6                </span>
-<span class="highlight-comment">// </span>
-<span class="highlight-comment">// </span>
-<span class="highlight-comment">// </span>
-<span class="highlight-comment">// JSON matrix representation:</span>
-<span class="highlight-comment">// {</span>
-<span class="highlight-comment">//   "Implementor": {</span>
-<span class="highlight-comment">//     "StorageScheme": 0,</span>
-<span class="highlight-comment">//     "NumberOfRows": 3,</span>
-<span class="highlight-comment">//     "NumberOfColumns": 2,</span>
-<span class="highlight-comment">//     "Storage": [</span>
-<span class="highlight-comment">//       1,</span>
-<span class="highlight-comment">//       3,</span>
-<span class="highlight-comment">//       5,</span>
-<span class="highlight-comment">//       2,</span>
-<span class="highlight-comment">//       4,</span>
-<span class="highlight-comment">//       6</span>
-<span class="highlight-comment">//     ]</span>
-<span class="highlight-comment">//   },</span>
-<span class="highlight-comment">//   "Name": "MyData",</span>
-<span class="highlight-comment">//   "RowNames": {</span>
-<span class="highlight-comment">//     "0": "Row-0",</span>
-<span class="highlight-comment">//     "2": "Row-2"</span>
-<span class="highlight-comment">//   },</span>
-<span class="highlight-comment">//   "ColumnNames": {</span>
-<span class="highlight-comment">//     "1": "Col-0"</span>
-<span class="highlight-comment">//   }</span>
-<span class="highlight-comment">// }</span>
-<span class="highlight-comment">// </span>
-<span class="highlight-comment">// Deserialized matrix:</span>
-<span class="highlight-comment">//                                   [Col-0]          </span>
-<span class="highlight-comment">// [Row-0]          1                2                </span>
-<span class="highlight-comment">//                  3                4                </span>
-<span class="highlight-comment">// [Row-2]          5                6                </span>
-<span class="highlight-comment">// </span>
-</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EAACABA");</script></p><p>
+// Executing method Main() produces the following output:
+// 
+// Serialized matrix:
+//                                   [Col-1]          
+// [Row-0]          1                2                
+//                  3                4                
+// [Row-2]          5                6                
+// 
+// 
+// 
+// JSON matrix representation:
+// {
+//   "Implementor": {
+//     "StorageScheme": 0,
+//     "NumberOfRows": 3,
+//     "NumberOfColumns": 2,
+//     "Storage": [
+//       1,
+//       3,
+//       5,
+//       2,
+//       4,
+//       6
+//     ]
+//   },
+//   "Name": "MyData",
+//   "RowNames": {
+//     "0": "Row-0",
+//     "2": "Row-2"
+//   },
+//   "ColumnNames": {
+//     "1": "Col-1"
+//   }
+// }
+// 
+// Deserialized matrix:
+//                                   [Col-1]          
+// [Row-0]          1                2                
+//                  3                4                
+// [Row-2]          5                6                
+// 
+//</code></pre></div></div></p><p>
             In the following example, a categorical data set is converted to
             a JSON value. Hence the data set is instantiated by reading from
             such value.
-            </p><p><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID1EAAAABA_tab1" class="codeSnippetContainerTabSingle">Conversion of categorical data to and from a JSON value.</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAAABA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAAABA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAAABA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-keyword">using</span> System;
-<span class="highlight-keyword">using</span> System.Collections.Generic;
-<span class="highlight-keyword">using</span> System.Text.Json;
+            </p><p><div class="codeSnippet"><div class="codeHeader"><span class="codeHeaderTitle">Conversion of categorical data to and from a JSON value.</span><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cs">using System;
+using System.Collections.Generic;
+using System.Text.Json;
 
-<span class="highlight-keyword">namespace</span> Novacta.Analytics.CodeExamples
+namespace Novacta.Analytics.CodeExamples
 {
-    <span class="highlight-keyword">public</span> <span class="highlight-keyword">class</span> JsonSerializationExample1  
+    public class JsonSerializationExample1  
     {
-        <span class="highlight-keyword">public</span> <span class="highlight-keyword">void</span> Main()
+        public void Main()
         {
-            <span class="highlight-comment">// Create the feature variables.</span>
-            CategoricalVariable f0 = <span class="highlight-keyword">new</span>(<span class="highlight-literal">"F-0"</span>)
+            // Create the feature variables.
+            CategoricalVariable f0 = new("F-0")
                 {
-                    { <span class="highlight-number">0</span>, <span class="highlight-literal">"A"</span> },
-                    { <span class="highlight-number">1</span>, <span class="highlight-literal">"B"</span> },
-                    { <span class="highlight-number">2</span>, <span class="highlight-literal">"C"</span> },
-                    { <span class="highlight-number">3</span>, <span class="highlight-literal">"D"</span> },
-                    { <span class="highlight-number">4</span>, <span class="highlight-literal">"E"</span> }
+                    { 0, "A" },
+                    { 1, "B" },
+                    { 2, "C" },
+                    { 3, "D" },
+                    { 4, "E" }
                 };
             f0.SetAsReadOnly();
 
-            CategoricalVariable f1 = <span class="highlight-keyword">new</span>(<span class="highlight-literal">"F-1"</span>)
+            CategoricalVariable f1 = new("F-1")
                 {
-                    { <span class="highlight-number">0</span>, <span class="highlight-literal">"I"</span> },
-                    { <span class="highlight-number">1</span>, <span class="highlight-literal">"II"</span> },
-                    { <span class="highlight-number">2</span>, <span class="highlight-literal">"III"</span> },
-                    { <span class="highlight-number">3</span>, <span class="highlight-literal">"IV"</span> }
+                    { 0, "I" },
+                    { 1, "II" },
+                    { 2, "III" },
+                    { 3, "IV" }
                 };
             f1.SetAsReadOnly();
 
-            <span class="highlight-comment">// Create the response variable.</span>
-            CategoricalVariable r = <span class="highlight-keyword">new</span>(<span class="highlight-literal">"R"</span>)
+            // Create the response variable.
+            CategoricalVariable r = new("R")
                 {
-                    <span class="highlight-number">0</span>,
-                    <span class="highlight-number">1</span>,
-                    <span class="highlight-number">2</span>
+                    0,
+                    1,
+                    2
                 };
             r.SetAsReadOnly();
 
-            <span class="highlight-comment">// Create a categorical data set containing</span>
-            <span class="highlight-comment">// observations about such variables.</span>
+            // Create a categorical data set containing
+            // observations about such variables.
             List&lt;CategoricalVariable&gt; variables =
-                <span class="highlight-keyword">new</span>() { f0, f1, r };
+                [f0, f1, r];
 
             DoubleMatrix data = DoubleMatrix.Dense(
-                <span class="highlight-keyword">new</span> <span class="highlight-keyword">double</span>[<span class="highlight-number">8</span>, <span class="highlight-number">3</span>] {
-                    { <span class="highlight-number">0</span>, <span class="highlight-number">0</span>, <span class="highlight-number">0</span> },
-                    { <span class="highlight-number">0</span>, <span class="highlight-number">1</span>, <span class="highlight-number">0</span> },
-                    { <span class="highlight-number">1</span>, <span class="highlight-number">2</span>, <span class="highlight-number">2</span> },
-                    { <span class="highlight-number">1</span>, <span class="highlight-number">3</span>, <span class="highlight-number">2</span> },
+                new double[8, 3] {
+                    { 0, 0, 0 },
+                    { 0, 1, 0 },
+                    { 1, 2, 2 },
+                    { 1, 3, 2 },
 
-                    { <span class="highlight-number">2</span>, <span class="highlight-number">0</span>, <span class="highlight-number">1</span> },
-                    { <span class="highlight-number">3</span>, <span class="highlight-number">1</span>, <span class="highlight-number">1</span> },
-                    { <span class="highlight-number">4</span>, <span class="highlight-number">2</span>, <span class="highlight-number">1</span> },
-                    { <span class="highlight-number">4</span>, <span class="highlight-number">3</span>, <span class="highlight-number">1</span> } });
+                    { 2, 0, 1 },
+                    { 3, 1, 1 },
+                    { 4, 2, 1 },
+                    { 4, 3, 1 } });
 
             CategoricalDataSet serializedDataSet = CategoricalDataSet.FromEncodedData(
                 variables,
                 data);
 
-            <span class="highlight-comment">// Set the data set name.</span>
-            serializedDataSet.Name = <span class="highlight-literal">"MyData"</span>;
+            // Set the data set name.
+            serializedDataSet.Name = "MyData";
 
-            <span class="highlight-comment">// Add converters to a JsonSerializerOptions instance</span>
-            <span class="highlight-comment">// to support the JSON serialization of data types</span>
-            <span class="highlight-comment">// defined in the Novacta.Analytics namespace.</span>
-            <span class="highlight-keyword">var</span> options = <span class="highlight-keyword">new</span> JsonSerializerOptions
+            // Add converters to a JsonSerializerOptions instance
+            // to support the JSON serialization of data types
+            // defined in the Novacta.Analytics namespace.
+            var options = new JsonSerializerOptions
             {
-                WriteIndented = <span class="highlight-keyword">true</span>
+                WriteIndented = true
             };
             JsonSerialization.AddDataConverters(options);
 
-            <span class="highlight-comment">// Create a JSON representation of the data set.</span>
-            <span class="highlight-comment">// The options previously defined must be passed as a parameter </span>
-            <span class="highlight-comment">// to method Serialize of class System.Text.Json.JsonSerializer.</span>
-            <span class="highlight-keyword">string</span> json = JsonSerializer.Serialize(
+            // Create a JSON representation of the data set.
+            // The options previously defined must be passed as a parameter 
+            // to method Serialize of class System.Text.Json.JsonSerializer.
+            string json = JsonSerializer.Serialize(
                 serializedDataSet,
-                <span class="highlight-keyword">typeof</span>(CategoricalDataSet),
+                typeof(CategoricalDataSet),
                 options);
 
-            <span class="highlight-comment">// Show the JSON value representing the data set.</span>
-            Console.WriteLine(<span class="highlight-literal">"JSON data set representation:"</span>);
+            // Show the JSON value representing the data set.
+            Console.WriteLine("JSON data set representation:");
             Console.WriteLine(json);
             Console.WriteLine();
 
-            <span class="highlight-comment">// Create a data set from the JSON representation.</span>
-            <span class="highlight-comment">// The options previously defined must be passed as a parameter </span>
-            <span class="highlight-comment">// to method Deserialize of class System.Text.Json.JsonSerializer.</span>
-            <span class="highlight-keyword">var</span> deserializedDataSet = JsonSerializer.Deserialize&lt;CategoricalDataSet&gt;(
+            // Create a data set from the JSON representation.
+            // The options previously defined must be passed as a parameter 
+            // to method Deserialize of class System.Text.Json.JsonSerializer.
+            var deserializedDataSet = JsonSerializer.Deserialize&lt;CategoricalDataSet&gt;(
                 json,
                 options);
 
-            <span class="highlight-comment">// Show the deserialized data set name.</span>
-            Console.WriteLine(<span class="highlight-literal">"Deserialized data set name:"</span>);
+            // Show the deserialized data set name.
+            Console.WriteLine("Deserialized data set name:");
             Console.WriteLine(deserializedDataSet.Name);
         }
     }
 }
 
-<span class="highlight-comment">// Executing method Main() produces the following output:</span>
-<span class="highlight-comment">// </span>
-<span class="highlight-comment">// JSON data set representation:</span>
-<span class="highlight-comment">// {</span>
-<span class="highlight-comment">//   "Variables": [</span>
-<span class="highlight-comment">//     {</span>
-<span class="highlight-comment">//       "Name": "F-0",</span>
-<span class="highlight-comment">//       "Categories": [</span>
-<span class="highlight-comment">//         {</span>
-<span class="highlight-comment">//           "Code": 0,</span>
-<span class="highlight-comment">//           "Label": "A"</span>
-<span class="highlight-comment">//         },</span>
-<span class="highlight-comment">//         {</span>
-<span class="highlight-comment">//           "Code": 1,</span>
-<span class="highlight-comment">//           "Label": "B"</span>
-<span class="highlight-comment">//         },</span>
-<span class="highlight-comment">//         {</span>
-<span class="highlight-comment">//           "Code": 2,</span>
-<span class="highlight-comment">//           "Label": "C"</span>
-<span class="highlight-comment">//         },</span>
-<span class="highlight-comment">//         {</span>
-<span class="highlight-comment">//           "Code": 3,</span>
-<span class="highlight-comment">//           "Label": "D"</span>
-<span class="highlight-comment">//         },</span>
-<span class="highlight-comment">//         {</span>
-<span class="highlight-comment">//           "Code": 4,</span>
-<span class="highlight-comment">//           "Label": "E"</span>
-<span class="highlight-comment">//         }</span>
-<span class="highlight-comment">//       ],</span>
-<span class="highlight-comment">//       "IsReadOnly": true</span>
-<span class="highlight-comment">//     },</span>
-<span class="highlight-comment">//     {</span>
-<span class="highlight-comment">//       "Name": "F-1",</span>
-<span class="highlight-comment">//       "Categories": [</span>
-<span class="highlight-comment">//         {</span>
-<span class="highlight-comment">//           "Code": 0,</span>
-<span class="highlight-comment">//           "Label": "I"</span>
-<span class="highlight-comment">//         },</span>
-<span class="highlight-comment">//         {</span>
-<span class="highlight-comment">//           "Code": 1,</span>
-<span class="highlight-comment">//           "Label": "II"</span>
-<span class="highlight-comment">//         },</span>
-<span class="highlight-comment">//         {</span>
-<span class="highlight-comment">//           "Code": 2,</span>
-<span class="highlight-comment">//           "Label": "III"</span>
-<span class="highlight-comment">//         },</span>
-<span class="highlight-comment">//         {</span>
-<span class="highlight-comment">//           "Code": 3,</span>
-<span class="highlight-comment">//           "Label": "IV"</span>
-<span class="highlight-comment">//         }</span>
-<span class="highlight-comment">//       ],</span>
-<span class="highlight-comment">//       "IsReadOnly": true</span>
-<span class="highlight-comment">//     },</span>
-<span class="highlight-comment">//     {</span>
-<span class="highlight-comment">//       "Name": "R",</span>
-<span class="highlight-comment">//       "Categories": [</span>
-<span class="highlight-comment">//         {</span>
-<span class="highlight-comment">//           "Code": 0,</span>
-<span class="highlight-comment">//           "Label": "0"</span>
-<span class="highlight-comment">//         },</span>
-<span class="highlight-comment">//         {</span>
-<span class="highlight-comment">//           "Code": 1,</span>
-<span class="highlight-comment">//           "Label": "1"</span>
-<span class="highlight-comment">//         },</span>
-<span class="highlight-comment">//         {</span>
-<span class="highlight-comment">//           "Code": 2,</span>
-<span class="highlight-comment">//           "Label": "2"</span>
-<span class="highlight-comment">//         }</span>
-<span class="highlight-comment">//       ],</span>
-<span class="highlight-comment">//       "IsReadOnly": true</span>
-<span class="highlight-comment">//     }</span>
-<span class="highlight-comment">//   ],</span>
-<span class="highlight-comment">//   "Data": {</span>
-<span class="highlight-comment">//     "Matrix": {</span>
-<span class="highlight-comment">//       "Implementor": {</span>
-<span class="highlight-comment">//         "StorageScheme": 0,</span>
-<span class="highlight-comment">//         "NumberOfRows": 8,</span>
-<span class="highlight-comment">//         "NumberOfColumns": 3,</span>
-<span class="highlight-comment">//         "Storage": [</span>
-<span class="highlight-comment">//           0,</span>
-<span class="highlight-comment">//           0,</span>
-<span class="highlight-comment">//           1,</span>
-<span class="highlight-comment">//           1,</span>
-<span class="highlight-comment">//           2,</span>
-<span class="highlight-comment">//           3,</span>
-<span class="highlight-comment">//           4,</span>
-<span class="highlight-comment">//           4,</span>
-<span class="highlight-comment">//           0,</span>
-<span class="highlight-comment">//           1,</span>
-<span class="highlight-comment">//           2,</span>
-<span class="highlight-comment">//           3,</span>
-<span class="highlight-comment">//           0,</span>
-<span class="highlight-comment">//           1,</span>
-<span class="highlight-comment">//           2,</span>
-<span class="highlight-comment">//           3,</span>
-<span class="highlight-comment">//           0,</span>
-<span class="highlight-comment">//           0,</span>
-<span class="highlight-comment">//           2,</span>
-<span class="highlight-comment">//           2,</span>
-<span class="highlight-comment">//           1,</span>
-<span class="highlight-comment">//           1,</span>
-<span class="highlight-comment">//           1,</span>
-<span class="highlight-comment">//           1</span>
-<span class="highlight-comment">//         ]</span>
-<span class="highlight-comment">//       },</span>
-<span class="highlight-comment">//       "Name": "MyData",</span>
-<span class="highlight-comment">//       "RowNames": null,</span>
-<span class="highlight-comment">//       "ColumnNames": {</span>
-<span class="highlight-comment">//         "0": "F-0",</span>
-<span class="highlight-comment">//         "1": "F-1",</span>
-<span class="highlight-comment">//         "2": "R"</span>
-<span class="highlight-comment">//       }</span>
-<span class="highlight-comment">//     }</span>
-<span class="highlight-comment">//   },</span>
-<span class="highlight-comment">//   "Name": "MyData"</span>
-<span class="highlight-comment">// }</span>
-<span class="highlight-comment">// </span>
-<span class="highlight-comment">// Deserialized data set name:</span>
-<span class="highlight-comment">// MyData</span></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EAAAABA");</script></p></div><div class="collapsibleAreaRegion" id="seeAlsoSection"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID6RB')" onkeypress="SectionExpandCollapse_CheckKey('ID6RB', event)" tabindex="0"><img id="ID6RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />See Also</span></div><div id="ID6RBSection" class="collapsibleSection"><h4 class="subHeading">Reference</h4><div class="seeAlsoStyle"><a href="2406EB43.htm">Novacta.Analytics Namespace</a></div></div></div></div><div id="pageFooter" class="pageFooter"><p>Copyright (c) Giovanni Lafratta.</p> </div></body></html>
+// Executing method Main() produces the following output:
+// 
+// JSON data set representation:
+// {
+//   "Variables": [
+//     {
+//       "Name": "F-0",
+//       "Categories": [
+//         {
+//           "Code": 0,
+//           "Label": "A"
+//         },
+//         {
+//           "Code": 1,
+//           "Label": "B"
+//         },
+//         {
+//           "Code": 2,
+//           "Label": "C"
+//         },
+//         {
+//           "Code": 3,
+//           "Label": "D"
+//         },
+//         {
+//           "Code": 4,
+//           "Label": "E"
+//         }
+//       ],
+//       "IsReadOnly": true
+//     },
+//     {
+//       "Name": "F-1",
+//       "Categories": [
+//         {
+//           "Code": 0,
+//           "Label": "I"
+//         },
+//         {
+//           "Code": 1,
+//           "Label": "II"
+//         },
+//         {
+//           "Code": 2,
+//           "Label": "III"
+//         },
+//         {
+//           "Code": 3,
+//           "Label": "IV"
+//         }
+//       ],
+//       "IsReadOnly": true
+//     },
+//     {
+//       "Name": "R",
+//       "Categories": [
+//         {
+//           "Code": 0,
+//           "Label": "0"
+//         },
+//         {
+//           "Code": 1,
+//           "Label": "1"
+//         },
+//         {
+//           "Code": 2,
+//           "Label": "2"
+//         }
+//       ],
+//       "IsReadOnly": true
+//     }
+//   ],
+//   "Data": {
+//     "Matrix": {
+//       "Implementor": {
+//         "StorageScheme": 0,
+//         "NumberOfRows": 8,
+//         "NumberOfColumns": 3,
+//         "Storage": [
+//           0,
+//           0,
+//           1,
+//           1,
+//           2,
+//           3,
+//           4,
+//           4,
+//           0,
+//           1,
+//           2,
+//           3,
+//           0,
+//           1,
+//           2,
+//           3,
+//           0,
+//           0,
+//           2,
+//           2,
+//           1,
+//           1,
+//           1,
+//           1
+//         ]
+//       },
+//       "Name": "MyData",
+//       "RowNames": null,
+//       "ColumnNames": {
+//         "0": "F-0",
+//         "1": "F-1",
+//         "2": "R"
+//       }
+//     }
+//   },
+//   "Name": "MyData"
+// }
+// 
+// Deserialized data set name:
+// MyData</code></pre></div></div></p></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Methods</h2><div id="IDAEASection"><table id="MethodList" class="table is-hoverable"><tr><td><a href="4273C89F.htm">AddDataConverters</a></td><td>
+            Adds support to the JSON conversion of data types in the
+            <a href="2406EB43.htm">Novacta.Analytics</a> namespace.
+            </td></tr></table></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>See Also</h2><div id="seeAlsoSection"><h4>Reference</h4><div><a href="2406EB43.htm">Novacta.Analytics Namespace</a></div></div></div><div id="InThisArticleColumn" class="column is-hidden-mobile"><nav class="menu sticky is-hidden"><p class="menu-label"><strong>In This Article</strong></p><ul id="InThisArticleMenu" class="menu-list"><li><a class="quickLink">Definition</a></li><li><a class="quickLink">Remarks</a></li><li><a class="quickLink">Example</a></li><li><a class="quickLink">Methods</a></li><li><a class="quickLink">See Also</a></li></ul></nav></div></div></div><footer id="PageFooter" class="footer border-top py-3 fixedFooter"><div class="columns"><div id="FooterContent" class="column"><p>Copyright (c) Giovanni Lafratta.</p> 
+				</div></div></footer></div><script>$(function(){
+SetDefaultLanguage("cs");
+LoadTocFile(null, null);
+InitializeQuickLinks();
+
+$(".toggleSection" ).click(function () {
+    SectionExpandCollapse(this);
+});
+
+$(".toggleSection").keypress(function () {
+    SectionExpandCollapseCheckKey(this, event)
+});
+hljs.highlightAll();
+});</script></body></html>

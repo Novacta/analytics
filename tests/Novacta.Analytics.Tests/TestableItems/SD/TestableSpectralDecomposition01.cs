@@ -16,7 +16,7 @@ namespace Novacta.Analytics.Tests.TestableItems.SD
 
         static TestableSpectralDecomposition01()
         {
-            double[] realArray = new double[9] {
+            double[] realArray = [
                 2,
                 2,
                 0,
@@ -26,8 +26,8 @@ namespace Novacta.Analytics.Tests.TestableItems.SD
                 0,
                 0,
                 5
-            };
-            double[] imaginaryArray = new double[9] {
+            ];
+            double[] imaginaryArray = [
                 0,
                 1,
                 0,
@@ -37,7 +37,7 @@ namespace Novacta.Analytics.Tests.TestableItems.SD
                 0,
                 0,
                 0
-            };
+            ];
 
             var complexArray = new Complex[9];
             for (int i = 0; i < 9; i++)
@@ -65,29 +65,29 @@ namespace Novacta.Analytics.Tests.TestableItems.SD
             values[1, 1] = 3.449489742783178;
             values[2, 2] = 5;
 
-            vectorsIfLower = ComplexMatrix.Dense(3, 3, new Complex[9] {
+            vectorsIfLower = ComplexMatrix.Dense(3, 3, [
                 -0.543944717,
-                new Complex(0.750532688, 0.375266344),
+                new(0.750532688, 0.375266344),
                 0,
                 -0.839121055171381,
-                new Complex(-0.486518945, -0.243259472),
+                new(-0.486518945, -0.243259472),
                 0,
                 0,
                 0,
                 1
-            });
+            ]);
 
-            vectorsIfUpper = ComplexMatrix.Dense(3, 3, new Complex[9] {
-                new Complex(0.486518945, -0.243259472),
+            vectorsIfUpper = ComplexMatrix.Dense(3, 3, [
+                new(0.486518945, -0.243259472),
                 -0.839121055171381,
                 0,
-                new Complex(0.750532688, -0.375266344),
+                new(0.750532688, -0.375266344),
                 0.543944717,
                 0,
                 0,
                 0,
                 1
-            });
+            ]);
         }
 
         TestableSpectralDecomposition01()

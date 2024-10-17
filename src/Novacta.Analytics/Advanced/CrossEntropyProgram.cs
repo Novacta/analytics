@@ -200,10 +200,7 @@ namespace Novacta.Analytics.Advanced
             }
             set
             {
-                if (value is null)
-                {
-                    throw new ArgumentNullException(nameof(value));
-                }
+                ArgumentNullException.ThrowIfNull(value);
                 this.performanceEvaluationParallelOptions = value;
             }
         }
@@ -225,10 +222,7 @@ namespace Novacta.Analytics.Advanced
             }
             set
             {
-                if (value is null)
-                {
-                    throw new ArgumentNullException(nameof(value));
-                }
+                ArgumentNullException.ThrowIfNull(value);
                 this.sampleGenerationParallelOptions = value;
             }
         }
@@ -309,10 +303,7 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (context is null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(context);
 
             if (sampleSize < 1)
             {
@@ -514,15 +505,9 @@ namespace Novacta.Analytics.Advanced
             CrossEntropyContext context,
             DoubleMatrix sample)
         {
-            if (context is null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(context);
 
-            if (sample is null)
-            {
-                throw new ArgumentNullException(nameof(sample));
-            }
+            ArgumentNullException.ThrowIfNull(sample);
 
             if (sample.NumberOfColumns != context.StateDimension)
             {
@@ -621,10 +606,7 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (context is null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(context);
 
             if (sampleSize < 1)
             {
@@ -634,10 +616,7 @@ namespace Novacta.Analytics.Advanced
                         "STR_EXCEPT_PAR_MUST_BE_POSITIVE"));
             }
 
-            if (parameter is null)
-            {
-                throw new ArgumentNullException(nameof(parameter));
-            }
+            ArgumentNullException.ThrowIfNull(parameter);
 
             if (parameter.NumberOfRows != context.InitialParameter.NumberOfRows
                 ||

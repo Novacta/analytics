@@ -55,7 +55,7 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
             traceExecution: false,
             optimizationGoal: OptimizationGoal.Minimization,
             initialParameter: DoubleMatrix.Dense(2, 1,
-                new double[] { -6.0, 100.0 }),
+                [-6.0, 100.0]),
             minimumNumberOfIterations: 3,
             maximumNumberOfIterations: 1000,
             optimalState: DoubleMatrix.Dense(1, 1, -.031878),

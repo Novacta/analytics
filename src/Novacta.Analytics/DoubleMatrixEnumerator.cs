@@ -9,15 +9,10 @@ using System.Collections.Generic;
 
 namespace Novacta.Analytics
 {
-    class DoubleMatrixEnumerator : IEnumerator<Double>
+    class DoubleMatrixEnumerator(DoubleMatrix matrix) : IEnumerator<double>
     {
-        private readonly DoubleMatrix matrix;
+        private readonly DoubleMatrix matrix = matrix;
         private int position = -1;
-
-        public DoubleMatrixEnumerator(DoubleMatrix matrix)
-        {
-            this.matrix = matrix;
-        }
 
         ~DoubleMatrixEnumerator()
         {
@@ -67,7 +62,7 @@ namespace Novacta.Analytics
             }
         }
 
-        public Double Current
+        public double Current
         {
             get
             {
@@ -80,6 +75,5 @@ namespace Novacta.Analytics
                 return this.matrix[this.position]; ;
             }
         }
-
     }
 }

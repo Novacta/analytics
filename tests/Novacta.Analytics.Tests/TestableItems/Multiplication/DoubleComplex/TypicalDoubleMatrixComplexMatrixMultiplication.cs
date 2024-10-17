@@ -4,7 +4,6 @@
 
 using Novacta.Analytics.Tests.TestableItems.Matrices;
 using Novacta.Analytics.Tests.Tools;
-using System.Numerics;
 
 namespace Novacta.Analytics.Tests.TestableItems.Multiplication
 {
@@ -31,11 +30,11 @@ namespace Novacta.Analytics.Tests.TestableItems.Multiplication
         TypicalDoubleMatrixComplexMatrixMultiplication() :
             base(
                 expected: new ComplexMatrixState(
-                    asColumnMajorDenseArray: new Complex[2] 
-                    {
-                        new Complex(-20, -20), 
-                        new Complex(-32, -32) 
-                    },
+                    asColumnMajorDenseArray:
+                    [
+                        new(-20, -20), 
+                        new(-32, -32) 
+                    ],
                     numberOfRows: 2,
                     numberOfColumns: 1),
                 left: TestableDoubleMatrix16.Get(),

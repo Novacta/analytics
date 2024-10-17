@@ -168,7 +168,7 @@ namespace Novacta.Analytics.Tests
             // degrees of freedom is 139.1495
             // (as from R function qchisq(.9,119))
 
-            int[] indexesArray = new int[] { 2, 4, 10, 8, 3 };
+            int[] indexesArray = [2, 4, 10, 8, 3];
             var indexes = IndexCollection.FromArray(indexesArray);
 
             int numberOfRandomPermutations = 12000;

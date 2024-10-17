@@ -76,7 +76,7 @@ namespace Novacta.Analytics.Advanced.Tests
             // basisMatrix is singular
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 2, 2, 4 });
+                    [1, 2, 2, 4]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -93,7 +93,7 @@ namespace Novacta.Analytics.Advanced.Tests
             // basisMatrix is valid (dense)
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 1, -1, 2 });
+                    [1, 1, -1, 2]);
 
                 var basis = new Basis(basisMatrix);
 
@@ -132,7 +132,7 @@ namespace Novacta.Analytics.Advanced.Tests
             // vectors is null
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 1, -1, 2 });
+                    [1, 1, -1, 2]);
                 var basis = new Basis(basisMatrix);
 
                 ArgumentExceptionAssert.Throw(
@@ -149,7 +149,7 @@ namespace Novacta.Analytics.Advanced.Tests
             // vectors is not a basis compliant matrix
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 1, -1, 2 });
+                    [1, 1, -1, 2]);
                 var basis = new Basis(basisMatrix);
 
                 var vectors = DoubleMatrix.Dense(2, 3);
@@ -169,15 +169,15 @@ namespace Novacta.Analytics.Advanced.Tests
             // vectors is valid
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 1, -1, 2 });
+                    [1, 1, -1, 2]);
                 var basis = new Basis(basisMatrix);
 
-                var vectors = DoubleMatrix.Dense(1, 2, new double[2] { 1, 0 });
+                var vectors = DoubleMatrix.Dense(1, 2, [1, 0]);
 
                 var coordinates = basis.GetCoordinates(vectors);
 
                 var expected = DoubleMatrix.Dense(1, 2,
-                    new double[2] { 2.0 / 3.0, -1.0 / 3.0 });
+                    [2.0 / 3.0, -1.0 / 3.0]);
                 var actual = coordinates;
 
                 DoubleMatrixAssert.AreEqual(
@@ -194,9 +194,9 @@ namespace Novacta.Analytics.Advanced.Tests
             {
                 Basis newBasis = null;
                 var currentCoordinates = DoubleMatrix.Dense(1, 2,
-                    new double[2] { 2.0 / 3.0, -1.0 / 3.0 });
+                    [2.0 / 3.0, -1.0 / 3.0]);
                 var currentBasisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 1, -1, 2 });
+                    [1, 1, -1, 2]);
                 Basis currentBasis = new(currentBasisMatrix);
 
                 ArgumentExceptionAssert.Throw(
@@ -218,7 +218,7 @@ namespace Novacta.Analytics.Advanced.Tests
                 Basis newBasis = Basis.Standard(2);
                 DoubleMatrix currentCoordinates = null;
                 var currentBasisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 1, -1, 2 });
+                    [1, 1, -1, 2]);
                 Basis currentBasis = new(currentBasisMatrix);
 
                 ArgumentExceptionAssert.Throw(
@@ -239,7 +239,7 @@ namespace Novacta.Analytics.Advanced.Tests
             {
                 Basis newBasis = Basis.Standard(2);
                 var currentCoordinates = DoubleMatrix.Dense(1, 2,
-                    new double[2] { 2.0 / 3.0, -1.0 / 3.0 });
+                    [2.0 / 3.0, -1.0 / 3.0]);
                 Basis currentBasis = null;
 
                 ArgumentExceptionAssert.Throw(
@@ -260,9 +260,9 @@ namespace Novacta.Analytics.Advanced.Tests
             {
                 Basis newBasis = Basis.Standard(1);
                 var currentCoordinates = DoubleMatrix.Dense(1, 2,
-                    new double[2] { 2.0 / 3.0, -1.0 / 3.0 });
+                    [2.0 / 3.0, -1.0 / 3.0]);
                 var currentBasisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 1, -1, 2 });
+                    [1, 1, -1, 2]);
                 Basis currentBasis = new(currentBasisMatrix);
 
                 ArgumentExceptionAssert.Throw(
@@ -285,7 +285,7 @@ namespace Novacta.Analytics.Advanced.Tests
                 Basis newBasis = Basis.Standard(2);
                 var currentCoordinates = DoubleMatrix.Dense(1, 3);
                 var currentBasisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 1, -1, 2 });
+                    [1, 1, -1, 2]);
                 Basis currentBasis = new(currentBasisMatrix);
 
                 ArgumentExceptionAssert.Throw(
@@ -310,10 +310,10 @@ namespace Novacta.Analytics.Advanced.Tests
                 var newBasis = Basis.Standard(2);
 
                 var currentCoordinates = DoubleMatrix.Dense(1, 2,
-                    new double[2] { 2.0 / 3.0, -1.0 / 3.0 });
+                    [2.0 / 3.0, -1.0 / 3.0]);
 
                 var currentBasisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 1, -1, 2 });
+                    [1, 1, -1, 2]);
                 var currentBasis = new Basis(currentBasisMatrix);
 
                 var newCoordinates = Basis.ChangeCoordinates(
@@ -321,7 +321,7 @@ namespace Novacta.Analytics.Advanced.Tests
                     currentCoordinates,
                     currentBasis);
 
-                var expected = DoubleMatrix.Dense(1, 2, new double[2] { 1, 0 });
+                var expected = DoubleMatrix.Dense(1, 2, [1, 0]);
                 var actual = newCoordinates;
 
                 DoubleMatrixAssert.AreEqual(
@@ -337,7 +337,7 @@ namespace Novacta.Analytics.Advanced.Tests
             // coordinates is null
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 1, -1, 2 });
+                    [1, 1, -1, 2]);
                 var basis = new Basis(basisMatrix);
 
                 ArgumentExceptionAssert.Throw(
@@ -354,7 +354,7 @@ namespace Novacta.Analytics.Advanced.Tests
             // coordinates is not a basis compliant matrix
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 1, -1, 2 });
+                    [1, 1, -1, 2]);
                 var basis = new Basis(basisMatrix);
 
                 var coordinates = DoubleMatrix.Dense(2, 3);
@@ -374,16 +374,16 @@ namespace Novacta.Analytics.Advanced.Tests
             // coordinates is valid
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 1, -1, 2 });
+                    [1, 1, -1, 2]);
                 var basis = new Basis(basisMatrix);
 
                 var coordinates = DoubleMatrix.Dense(1, 2,
-                     new double[2] { 2.0 / 3.0, -1.0 / 3.0 });
+                     [2.0 / 3.0, -1.0 / 3.0]);
 
                 var vectors = basis.GetVectors(coordinates);
 
                 var expected = DoubleMatrix.Dense(1, 2,
-                    new double[2] { 1, 0 });
+                    [1, 0]);
                 var actual = vectors;
 
                 DoubleMatrixAssert.AreEqual(
@@ -399,7 +399,7 @@ namespace Novacta.Analytics.Advanced.Tests
             // coordinates is null
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 0, 0, 2 });
+                    [1, 0, 0, 2]);
                 var basis = new Basis(basisMatrix);
 
                 ArgumentExceptionAssert.Throw(
@@ -416,7 +416,7 @@ namespace Novacta.Analytics.Advanced.Tests
             // coordinates is not a row vector
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 0, 0, 2 });
+                    [1, 0, 0, 2]);
                 var basis = new Basis(basisMatrix);
 
                 var coordinates = DoubleMatrix.Dense(4, 2);
@@ -436,7 +436,7 @@ namespace Novacta.Analytics.Advanced.Tests
             // coordinates is not a basis compliant vector
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 0, 0, 2 });
+                    [1, 0, 0, 2]);
                 var basis = new Basis(basisMatrix);
 
                 var coordinates = DoubleMatrix.Dense(1, 3);
@@ -456,11 +456,11 @@ namespace Novacta.Analytics.Advanced.Tests
             // coordinates is valid
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 0, 0, 2 });
+                    [1, 0, 0, 2]);
                 var basis = new Basis(basisMatrix);
 
                 var coordinates = DoubleMatrix.Dense(1, 2, 
-                    new double[2] { 2.0, -1.0 });
+                    [2.0, -1.0]);
 
                 // [ 2 -1 ] * [ 1  0   *  [ 2    = [ 2 -1 ] * [ 2   = 8
                 //              0  4 ]     -1 ]                -4 ]
@@ -482,12 +482,12 @@ namespace Novacta.Analytics.Advanced.Tests
             // left is null
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 0, 0, 2 });
+                    [1, 0, 0, 2]);
                 var basis = new Basis(basisMatrix);
 
                 DoubleMatrix left = null;
                 var right = DoubleMatrix.Dense(1, 2, 
-                    new double[2] { 3, 2 });
+                    [3, 2]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -503,12 +503,12 @@ namespace Novacta.Analytics.Advanced.Tests
             // left is not a row vector
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 0, 0, 2 });
+                    [1, 0, 0, 2]);
                 var basis = new Basis(basisMatrix);
 
                 var left = DoubleMatrix.Dense(4, 2);
                 var right = DoubleMatrix.Dense(1, 2,
-                    new double[2] { 3, 2 });
+                    [3, 2]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -525,12 +525,12 @@ namespace Novacta.Analytics.Advanced.Tests
             // left is not a basis compliant vector
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 0, 0, 2 });
+                    [1, 0, 0, 2]);
                 var basis = new Basis(basisMatrix);
 
                 var left = DoubleMatrix.Dense(1, 3);
                 var right = DoubleMatrix.Dense(1, 2,
-                    new double[2] { 3, 2 });
+                    [3, 2]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -547,11 +547,11 @@ namespace Novacta.Analytics.Advanced.Tests
             // right is null
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 0, 0, 2 });
+                    [1, 0, 0, 2]);
                 var basis = new Basis(basisMatrix);
 
                 var left = DoubleMatrix.Dense(1, 2,
-                    new double[2] { 3, 2 });
+                    [3, 2]);
                 DoubleMatrix right = null;
 
                 ArgumentExceptionAssert.Throw(
@@ -568,11 +568,11 @@ namespace Novacta.Analytics.Advanced.Tests
             // right is not a row vector
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 0, 0, 2 });
+                    [1, 0, 0, 2]);
                 var basis = new Basis(basisMatrix);
 
                 var left = DoubleMatrix.Dense(1, 2,
-                    new double[2] { 3, 2 });
+                    [3, 2]);
                 var right = DoubleMatrix.Dense(4, 2);
 
                 ArgumentExceptionAssert.Throw(
@@ -590,11 +590,11 @@ namespace Novacta.Analytics.Advanced.Tests
             // right is not a basis compliant vector
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 0, 0, 2 });
+                    [1, 0, 0, 2]);
                 var basis = new Basis(basisMatrix);
 
                 var left = DoubleMatrix.Dense(1, 2,
-                    new double[2] { 3, 2 });
+                    [3, 2]);
                 var right = DoubleMatrix.Dense(1, 3);
 
                 ArgumentExceptionAssert.Throw(
@@ -612,11 +612,11 @@ namespace Novacta.Analytics.Advanced.Tests
             // valid input
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 0, 0, 2 });
+                    [1, 0, 0, 2]);
                 var basis = new Basis(basisMatrix);
 
-                var left = DoubleMatrix.Dense(1, 2, new double[2] { 2.0, -1.0 });
-                var right = DoubleMatrix.Dense(1, 2, new double[2] { 3, -2 });
+                var left = DoubleMatrix.Dense(1, 2, [2.0, -1.0]);
+                var right = DoubleMatrix.Dense(1, 2, [3, -2]);
 
                 // [ 2 -1 ] * [ 1  0   *  [ 3    = [ 2 -1 ] * [ 3   = 14
                 //              0  4 ]     -2 ]                -8 ]
@@ -638,12 +638,12 @@ namespace Novacta.Analytics.Advanced.Tests
             // left is null
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 0, 0, 2 });
+                    [1, 0, 0, 2]);
                 var basis = new Basis(basisMatrix);
 
                 DoubleMatrix left = null;
                 var right = DoubleMatrix.Dense(1, 2,
-                    new double[2] { 3, 2 });
+                    [3, 2]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -659,12 +659,12 @@ namespace Novacta.Analytics.Advanced.Tests
             // left is not a row vector
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 0, 0, 2 });
+                    [1, 0, 0, 2]);
                 var basis = new Basis(basisMatrix);
 
                 var left = DoubleMatrix.Dense(4, 2);
                 var right = DoubleMatrix.Dense(1, 2,
-                    new double[2] { 3, 2 });
+                    [3, 2]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -681,12 +681,12 @@ namespace Novacta.Analytics.Advanced.Tests
             // left is not a basis compliant vector
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 0, 0, 2 });
+                    [1, 0, 0, 2]);
                 var basis = new Basis(basisMatrix);
 
                 var left = DoubleMatrix.Dense(1, 3);
                 var right = DoubleMatrix.Dense(1, 2,
-                    new double[2] { 3, 2 });
+                    [3, 2]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -703,11 +703,11 @@ namespace Novacta.Analytics.Advanced.Tests
             // right is null
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 0, 0, 2 });
+                    [1, 0, 0, 2]);
                 var basis = new Basis(basisMatrix);
 
                 var left = DoubleMatrix.Dense(1, 2,
-                    new double[2] { 3, 2 });
+                    [3, 2]);
                 DoubleMatrix right = null;
 
                 ArgumentExceptionAssert.Throw(
@@ -724,11 +724,11 @@ namespace Novacta.Analytics.Advanced.Tests
             // right is not a row vector
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 0, 0, 2 });
+                    [1, 0, 0, 2]);
                 var basis = new Basis(basisMatrix);
 
                 var left = DoubleMatrix.Dense(1, 2,
-                    new double[2] { 3, 2 });
+                    [3, 2]);
                 var right = DoubleMatrix.Dense(4, 2);
 
                 ArgumentExceptionAssert.Throw(
@@ -746,11 +746,11 @@ namespace Novacta.Analytics.Advanced.Tests
             // right is not a basis compliant vector
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 0, 0, 2 });
+                    [1, 0, 0, 2]);
                 var basis = new Basis(basisMatrix);
 
                 var left = DoubleMatrix.Dense(1, 2,
-                    new double[2] { 3, 2 });
+                    [3, 2]);
                 var right = DoubleMatrix.Dense(1, 3);
 
                 ArgumentExceptionAssert.Throw(
@@ -768,11 +768,11 @@ namespace Novacta.Analytics.Advanced.Tests
             // valid input
             {
                 var basisMatrix = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 1, 0, 0, 2 });
+                    [1, 0, 0, 2]);
                 var basis = new Basis(basisMatrix);
 
-                var left = DoubleMatrix.Dense(1, 2, new double[2] { 2.0, -1.0 });
-                var right = DoubleMatrix.Dense(1, 2, new double[2] { 3, -2 });
+                var left = DoubleMatrix.Dense(1, 2, [2.0, -1.0]);
+                var right = DoubleMatrix.Dense(1, 2, [3, -2]);
 
                 // ([ 2 -1 ] - [ 3 -2 ]) * [ 1  0   * ( [ 2   - [ 3   ) =
                 //                           0  4 ]      -1 ]    -2 ]    

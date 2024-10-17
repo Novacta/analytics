@@ -2,8 +2,6 @@
 // Licensed under the MIT license. 
 // See the LICENSE file in the project root for more information.
 
-using System;
-
 namespace Novacta.Analytics.Tests.TestableItems.Max
 {
     /// <summary>
@@ -26,9 +24,9 @@ namespace Novacta.Analytics.Tests.TestableItems.Max
                 expected: expected,
                 data: data,
                 dataWritableOps:
-                    new Func<DoubleMatrix, IndexValuePair>[1] { Stat.Max },
+                    [Stat.Max],
                 dataReadOnlyOps:
-                   new Func<ReadOnlyDoubleMatrix, IndexValuePair>[1] { Stat.Max })
+                   [Stat.Max])
         {
         }
     }

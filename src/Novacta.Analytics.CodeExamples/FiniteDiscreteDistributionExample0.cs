@@ -9,11 +9,11 @@ namespace Novacta.Analytics.CodeExamples
         {
             // Create the values.
             var values = DoubleMatrix.Dense(
-                3, 2, new double[6] { 2, -1, 0, 1, 3, -4 });
+                3, 2, [2, -1, 0, 1, 3, -4]);
 
             // Create the corresponding probabilities.
             var probabilities = DoubleMatrix.Dense(
-                3, 2, new double[6] { 1.0 / 8, 0.0, 2.0 / 8, 1.0 / 8, 3.0 / 8, 1.0 / 8 });
+                3, 2, [1.0 / 8, 0.0, 2.0 / 8, 1.0 / 8, 3.0 / 8, 1.0 / 8]);
 
             // Create the finite discrete distribution.
             var distribution = new FiniteDiscreteDistribution(values, probabilities);

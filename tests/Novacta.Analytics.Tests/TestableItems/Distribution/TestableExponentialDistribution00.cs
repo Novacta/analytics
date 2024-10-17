@@ -28,7 +28,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Distribution
             {
                 {
                     new TestableDoubleMatrix(
-                        asColumnMajorDenseArray: new double[17]{
+                        asColumnMajorDenseArray: [
                             -1.0,
                              0.1,
                              1.2,
@@ -45,7 +45,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Distribution
                              13.3,
                              14.4,
                              15.5,
-                             16.6},
+                             16.6],
                         numberOfRows: 17,
                         numberOfColumns: 1,
                         isUpperHessenberg: false,
@@ -56,7 +56,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Distribution
                         isSkewSymmetric: false,
                         upperBandwidth: 0,
                         lowerBandwidth: 16),
-                    DoubleMatrix.Dense(17, 1, new Double[17]{
+                    DoubleMatrix.Dense(17, 1, [
                         0.0,
                         3.589427799784654e+000,
                         4.350924540285889e-006,
@@ -73,14 +73,14 @@ namespace Novacta.Analytics.Tests.TestableItems.Distribution
                         3.611612704461358e-071,
                         4.377815970220162e-077,
                         5.306569180421715e-083,
-                        6.432357289149691e-089})
+                        6.432357289149691e-089])
                 }
             },
             cdfPartialGraph: new Dictionary<TestableDoubleMatrix, DoubleMatrix>()
             {
                 {
                     new TestableDoubleMatrix(
-                        asColumnMajorDenseArray: new double[17]{
+                        asColumnMajorDenseArray: [
                             -1.0,
                              0.1,
                              1.2,
@@ -97,7 +97,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Distribution
                              13.3,
                              14.4,
                              15.5,
-                             16.6},
+                             16.6],
                         numberOfRows: 17,
                         numberOfColumns: 1,
                         isUpperHessenberg: false,
@@ -108,7 +108,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Distribution
                         isSkewSymmetric: false,
                         upperBandwidth: 0,
                         lowerBandwidth: 16),
-                    DoubleMatrix.Dense(17, 1, new Double[17]{
+                    DoubleMatrix.Dense(17, 1, [
                         0.0,
                         7.101712361847405e-001,
                         9.999996486840936e-001,
@@ -125,7 +125,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Distribution
                         1.000000000000000e+000,
                         1.000000000000000e+000,
                         1.000000000000000e+000,
-                        1.000000000000000e+000})
+                        1.000000000000000e+000])
                 }
             },
             canInvertCdf: true,
@@ -133,7 +133,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Distribution
             {
                 {
                     new TestableDoubleMatrix(
-                        asColumnMajorDenseArray: new double[8]{
+                        asColumnMajorDenseArray: [
                             -0.01,
                              0.0,
                              0.000001,
@@ -141,7 +141,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Distribution
                              .75,
                              .9999999,
                              1.0,
-                             1.01},
+                             1.01],
                         numberOfRows: 8,
                         numberOfColumns: 1,
                         isUpperHessenberg: false,
@@ -152,7 +152,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Distribution
                         isSkewSymmetric: false,
                         upperBandwidth: 0,
                         lowerBandwidth: 7),
-                    DoubleMatrix.Dense(8, 1, new Double[8]{
+                    DoubleMatrix.Dense(8, 1, [
                          Double.NaN,
                          0.0,
                          8.07451563023851E-08,
@@ -160,7 +160,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Distribution
                          0.111936498901454,
                          1.30145750194674,
                          Double.PositiveInfinity,
-                         Double.NaN})
+                         Double.NaN])
                 }
             })
         {

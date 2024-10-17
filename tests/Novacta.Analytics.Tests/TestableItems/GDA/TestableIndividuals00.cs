@@ -24,7 +24,7 @@ namespace Novacta.Analytics.Tests.TestableItems.GDA
     {
         static readonly DoubleMatrix f_c =
             DoubleMatrix.Dense(1, 6,
-                new double[6] { 0.2, 0.1, 0.2, 0.3, 0.1, 0.1 });
+                [0.2, 0.1, 0.2, 0.3, 0.1, 0.1]);
         static readonly DoubleMatrix inv_sqrt_f_c = f_c.Apply(
             x => 1.0 / Math.Sqrt(x));
         static readonly Basis a = new(
@@ -32,13 +32,13 @@ namespace Novacta.Analytics.Tests.TestableItems.GDA
 
         static readonly DoubleMatrix x_sa =
             DoubleMatrix.Dense(5, 6,
-                new double[30] {
+                [
                     0.5, 0.0, 0.0, 0.5, 0.0, 0.0,
                     0.0, 0.5, 0.0, 0.0, 0.5, 0.0,
                     0.5, 0.0, 0.0, 0.5, 0.0, 0.0,
                     0.0, 0.0, 0.5, 0.5, 0.0, 0.0,
                     0.0, 0.0, 0.5, 0.0, 0.0, 0.5
-                }, StorageOrder.RowMajor);
+                ], StorageOrder.RowMajor);
 
         static readonly DoubleMatrix f_r =
             DoubleMatrix.Dense(5, 1, .2);
@@ -61,10 +61,6 @@ namespace Novacta.Analytics.Tests.TestableItems.GDA
 
         static readonly DoubleMatrix variances;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Performance", 
-            "CA1810:Initialize reference type static fields inline", 
-            Justification = "Performance is not a concern.")]
         static TestableIndividuals00()
         {
             for (int j = 0; j < x_sa.NumberOfColumns; j++)
@@ -72,10 +68,10 @@ namespace Novacta.Analytics.Tests.TestableItems.GDA
                 x_sa.SetColumnName(j, String.Format("i{0}", j + 1));
             }
 
-            string[] rowNames = new string[]
-                {
+            string[] rowNames =
+                [
                     "Red", "Green", "Blue", "Negative", "Zero", "Positive"
-                };
+                ];
 
             for (int i = 0; i < x_sa.NumberOfRows; i++)
             {

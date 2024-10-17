@@ -544,10 +544,7 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (objectiveFunction is null)
-            {
-                throw new ArgumentNullException(nameof(objectiveFunction));
-            }
+            ArgumentNullException.ThrowIfNull(objectiveFunction);
 
             if (terminationTolerance <= 0)
             {
@@ -613,10 +610,7 @@ namespace Novacta.Analytics.Advanced
 
         private static int GetStateDimension(DoubleMatrix initialArgument)
         {
-            if (initialArgument is null)
-            {
-                throw new ArgumentNullException(nameof(initialArgument));
-            }
+            ArgumentNullException.ThrowIfNull(initialArgument);
 
             if (!initialArgument.IsRowVector)
             {

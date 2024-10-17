@@ -975,8 +975,8 @@ namespace Novacta.Analytics.Tests
 
                 var featurePremises
                     = new List<SortedSet<double>>(2) {
-                        new SortedSet<double>() { 0.0, 1.0 },
-                        new SortedSet<double>() };
+                        new() { 0.0, 1.0 },
+                        new() };
 
                 double responseConclusion = responseVariable.Categories[1].Code;
                 double truthValue = .9;
@@ -1048,8 +1048,8 @@ namespace Novacta.Analytics.Tests
 
                 var featurePremises
                     = new List<SortedSet<double>>(2) {
-                        new SortedSet<double>() { 0.0, 1.0 },
-                        new SortedSet<double>() { 2.0 } };
+                        new() { 0.0, 1.0 },
+                        new() { 2.0 } };
 
                 double responseConclusion = responseVariable.Categories[1].Code;
                 double truthValue = .9;
@@ -1959,7 +1959,7 @@ namespace Novacta.Analytics.Tests
                 // Create a categorical data set containing
                 // observations about such variables
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, r };
+                    [f0, f1, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -2048,7 +2048,7 @@ namespace Novacta.Analytics.Tests
                 // Create a categorical data set containing
                 // observations about such variables
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, r };
+                    [f0, f1, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -2131,13 +2131,13 @@ namespace Novacta.Analytics.Tests
             // Name is not null
             {
                 // Create a data stream 
-                string[] data = new string[6] {
+                string[] data = [
                             "COLOR,HAPPINESS,NUMBER",
                             "Red,TRUE,  -2.2",
                             "Green,TRUE, 0.0",
                             "Red,FALSE,  -3.3",
                             "Black,TRUE,-1.1",
-                            "Black,FALSE, 4.4" };
+                            "Black,FALSE, 4.4" ];
 
                 MemoryStream stream = new();
                 StreamWriter writer = new(stream);
@@ -2211,13 +2211,13 @@ namespace Novacta.Analytics.Tests
             // Name is null
             {
                 // Create a data stream 
-                string[] data = new string[6] {
+                string[] data = [
                             "COLOR,HAPPINESS,NUMBER",
                             "Red,TRUE,  -2.2",
                             "Green,TRUE, 0.0",
                             "Red,FALSE,  -3.3",
                             "Black,TRUE,-1.1",
-                            "Black,FALSE, 4.4" };
+                            "Black,FALSE, 4.4" ];
 
                 MemoryStream stream = new();
                 StreamWriter writer = new(stream);

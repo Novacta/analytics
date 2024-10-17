@@ -2,8 +2,6 @@
 // Licensed under the MIT license. 
 // See the LICENSE file in the project root for more information.
 
-using System;
-
 namespace Novacta.Analytics.Tests.TestableItems.SumOfSquaredDeviations
 {
     /// <summary>
@@ -28,9 +26,9 @@ namespace Novacta.Analytics.Tests.TestableItems.SumOfSquaredDeviations
                 data: data,
                 dataOperation: dataOperation,
                 dataWritableOps:
-                    new Func<DoubleMatrix, DataOperation, DoubleMatrix>[1] { Stat.SumOfSquaredDeviations },
+                    [Stat.SumOfSquaredDeviations],
                 dataReadOnlyOps:
-                    new Func<ReadOnlyDoubleMatrix, DataOperation, DoubleMatrix>[1] { Stat.SumOfSquaredDeviations })
+                    [Stat.SumOfSquaredDeviations])
         {
         }
     }

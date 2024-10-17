@@ -29,15 +29,15 @@ namespace Novacta.Analytics.Tests.TestableItems.Multiplication
         LeftIsNeutralComplexScalarDoubleMatrixMultiplication() :
             base(
                 expected: new ComplexMatrixState(
-                    asColumnMajorDenseArray: new Complex[6] 
-                    {
+                    asColumnMajorDenseArray:
+                    [
                         0,
-                        new Complex(1, 1),
-                        new Complex(2, 2),
-                        new Complex(3, 3),
-                        new Complex(4, 4),
-                        new Complex(5, 5)
-                    },
+                        new(1, 1),
+                        new(2, 2),
+                        new(3, 3),
+                        new(4, 4),
+                        new(5, 5)
+                    ],
                     numberOfRows: 2,
                     numberOfColumns: 3),
                 left: new Complex(1, 1),

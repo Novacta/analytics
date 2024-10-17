@@ -1,4 +1,3 @@
-using System;
 using System.Numerics;
 
 namespace Novacta.Analytics.Tests.TestableItems.Division
@@ -19,15 +18,15 @@ namespace Novacta.Analytics.Tests.TestableItems.Division
                 left,
                 right,
                 leftWritableRightScalarOps:
-                    new Func<ComplexMatrix, Complex, ComplexMatrix>[2] {
+                    [
                         (l, r) => l / r,
                         (l, r) => ComplexMatrix.Divide(l, r)
-                    },
+                    ],
                 leftReadOnlyRightScalarOps:
-                    new Func<ReadOnlyComplexMatrix, Complex, ComplexMatrix>[2] {
+                    [
                         (l, r) => l / r,
                         (l, r) => ReadOnlyComplexMatrix.Divide(l, r)
-                    }
+                    ]
                 )
         {
         }

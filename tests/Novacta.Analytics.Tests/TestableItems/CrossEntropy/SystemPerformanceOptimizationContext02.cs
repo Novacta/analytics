@@ -69,7 +69,7 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
                 // is sampled while searching 
                 // for the optimizer.
                 initialParameter: DoubleMatrix.Dense(2, 1,
-                    new double[] { -6.0, 100.0 }),
+                    [-6.0, 100.0]),
                 minimumNumberOfIterations: 3,
                 maximumNumberOfIterations: 10000)
         {

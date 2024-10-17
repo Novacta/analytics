@@ -29,7 +29,7 @@ namespace Novacta.Analytics.Tests
             // value is not null
             {
                 DoubleMatrix matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 var expected = matrix;
@@ -46,7 +46,7 @@ namespace Novacta.Analytics.Tests
         public void AsDoubleMatrixTest()
         {
             DoubleMatrix expected = DoubleMatrix.Dense(2, 3,
-                new double[6] { 1, 2, 3, 4, 5, 6 });
+                [1, 2, 3, 4, 5, 6]);
 
             var doubleMatrixRowCollection = expected.AsRowCollection();
 
@@ -54,7 +54,7 @@ namespace Novacta.Analytics.Tests
 
             DoubleMatrixAssert.IsStateAsExpected(
                 expectedState: new DoubleMatrixState(
-                    asColumnMajorDenseArray: new double[6] { 1, 2, 3, 4, 5, 6 },
+                    asColumnMajorDenseArray: [1, 2, 3, 4, 5, 6],
                     numberOfRows: 2,
                     numberOfColumns: 3),
                 actualMatrix: actual,
@@ -67,7 +67,7 @@ namespace Novacta.Analytics.Tests
             // value is less than 0
             {
                 var matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 ArgumentExceptionAssert.Throw(
@@ -84,7 +84,7 @@ namespace Novacta.Analytics.Tests
             // value is greater than NumberOfColumns - 1
             {
                 var matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 ArgumentExceptionAssert.Throw(
@@ -101,7 +101,7 @@ namespace Novacta.Analytics.Tests
             // value is inside the bounds
             {
                 var matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 int dataColumn = 1;
@@ -116,8 +116,8 @@ namespace Novacta.Analytics.Tests
                 double expected = matrix[row.Index, dataColumn];
                 row[dataColumn] = expected;
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: [""],
+                    actual: [.. subscriber.PropertyNames]);
                 var actual = row[dataColumn];
                 Assert.AreEqual(
                     expected,
@@ -131,8 +131,8 @@ namespace Novacta.Analytics.Tests
                     row[dataColumn],
                     DoubleMatrixTest.Accuracy);
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "", "[1]", "XData" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: ["", "[1]", "XData"],
+                    actual: [.. subscriber.PropertyNames]);
             }
         }
 
@@ -142,7 +142,7 @@ namespace Novacta.Analytics.Tests
             // value is less than 0
             {
                 var matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 ArgumentExceptionAssert.Throw(
@@ -159,7 +159,7 @@ namespace Novacta.Analytics.Tests
             // value is greater than NumberOfColumns - 1
             {
                 var matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 ArgumentExceptionAssert.Throw(
@@ -176,7 +176,7 @@ namespace Novacta.Analytics.Tests
             // value is inside the bounds
             {
                 var matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 int dataColumn = 1;
@@ -192,8 +192,8 @@ namespace Novacta.Analytics.Tests
                 double expected = matrix[row.Index, dataColumn];
                 row[dataColumn] = expected;
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: [""],
+                    actual: [.. subscriber.PropertyNames]);
                 var actual = row[dataColumn];
                 Assert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
 
@@ -204,8 +204,8 @@ namespace Novacta.Analytics.Tests
                     row[dataColumn],
                     DoubleMatrixTest.Accuracy);
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "", "[1]", "YData" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: ["", "[1]", "YData"],
+                    actual: [.. subscriber.PropertyNames]);
             }
         }
 
@@ -215,7 +215,7 @@ namespace Novacta.Analytics.Tests
             // value is less than 0
             {
                 var matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 ArgumentExceptionAssert.Throw(
@@ -232,7 +232,7 @@ namespace Novacta.Analytics.Tests
             // value is greater than NumberOfColumns - 1
             {
                 var matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 ArgumentExceptionAssert.Throw(
@@ -249,7 +249,7 @@ namespace Novacta.Analytics.Tests
             // value is inside the bounds
             {
                 var matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 int dataColumn = 1;
@@ -265,8 +265,8 @@ namespace Novacta.Analytics.Tests
                 double expected = matrix[row.Index, dataColumn];
                 row[dataColumn] = expected;
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: [""],
+                    actual: [.. subscriber.PropertyNames]);
                 var actual = row[dataColumn];
                 Assert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
 
@@ -277,8 +277,8 @@ namespace Novacta.Analytics.Tests
                     row[dataColumn],
                     DoubleMatrixTest.Accuracy);
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "", "[1]", "ZData" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: ["", "[1]", "ZData"],
+                    actual: [.. subscriber.PropertyNames]);
             }
         }
     }

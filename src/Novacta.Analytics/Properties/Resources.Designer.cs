@@ -322,6 +322,15 @@ namespace Novacta.Analytics.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid TValue type: {0}. Expected: {1}..
+        /// </summary>
+        internal static string STR_EXCEPT_IDV_INVALID_COLUMN_TYPE {
+            get {
+                return ResourceManager.GetString("STR_EXCEPT_IDV_INVALID_COLUMN_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The last index must be greater than or equal to first one..
         /// </summary>
         internal static string STR_EXCEPT_IND_LAST_LESS_THAN_FIRST {
@@ -372,6 +381,24 @@ namespace Novacta.Analytics.Properties {
         internal static string STR_EXCEPT_MAT_ADD_ALL_DIMS_MUST_MATCH {
             get {
                 return ResourceManager.GetString("STR_EXCEPT_MAT_ADD_ALL_DIMS_MUST_MATCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The dictionary cannot contain null values..
+        /// </summary>
+        internal static string STR_EXCEPT_MAT_CODIFIER_IS_NULL {
+            get {
+                return ResourceManager.GetString("STR_EXCEPT_MAT_CODIFIER_IS_NULL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The dictionary cannot contain keys not included in collection parameter &apos;{0}&apos;..
+        /// </summary>
+        internal static string STR_EXCEPT_MAT_CODIFIER_REFERS_TO_IRRELEVANT_KEY {
+            get {
+                return ResourceManager.GetString("STR_EXCEPT_MAT_CODIFIER_REFERS_TO_IRRELEVANT_KEY", resourceCulture);
             }
         }
         
@@ -741,6 +768,24 @@ namespace Novacta.Analytics.Properties {
         internal static string STR_EXCEPT_PAR_MUST_BE_NOT_GREATER_THAN_OTHER {
             get {
                 return ResourceManager.GetString("STR_EXCEPT_PAR_MUST_BE_NOT_GREATER_THAN_OTHER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; must be less than or equal to the number of rows in parameter &apos;{1}&apos;..
+        /// </summary>
+        internal static string STR_EXCEPT_PAR_MUST_BE_NOT_GREATER_THAN_OTHER_ROWS {
+            get {
+                return ResourceManager.GetString("STR_EXCEPT_PAR_MUST_BE_NOT_GREATER_THAN_OTHER_ROWS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The parameter must be greater than or equal to {0}..
+        /// </summary>
+        internal static string STR_EXCEPT_PAR_MUST_BE_NOT_LESS_THAN_VALUE {
+            get {
+                return ResourceManager.GetString("STR_EXCEPT_PAR_MUST_BE_NOT_LESS_THAN_VALUE", resourceCulture);
             }
         }
         

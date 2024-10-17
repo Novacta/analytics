@@ -7,7 +7,8 @@ using Novacta.Analytics.Infrastructure;
 using Novacta.Analytics.Tests.TestableItems;
 using System;
 using System.Collections.Generic;
-using System.Numerics;
+using System.Globalization;
+using System.IO;
 
 namespace Novacta.Analytics.Tests.Tools
 {
@@ -3471,6 +3472,1462 @@ namespace Novacta.Analytics.Tests.Tools
 
                     actual = testableMatrix.AsSparse.AsReadOnly().Vec(linearIndexes);
                     DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
+                }
+            }
+        }
+
+        #endregion
+
+        #region Encode
+
+        /// <summary>
+        /// Provides methods to test that the
+        /// encoding methods in <see cref="DoubleMatrix"/> 
+        /// have been properly implemented.
+        /// </summary>
+        public static class Encode
+        {
+            /// <summary>
+            /// Provides methods to test that the
+            /// basic encoding methods in <see cref="DoubleMatrix"/> 
+            /// (i.e., those with no special codifiers or format providers)
+            /// have been properly implemented.
+            /// </summary>
+            public static class Basic
+            {
+                /// <summary>
+                /// Provides methods to test that the
+                /// basic encoding methods in <see cref="DoubleMatrix"/> 
+                /// terminate successfully when expected.
+                public static class Succeed
+                {
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// string, char, IndexCollection, bool)"/>
+                    /// method terminates successfully as expected when
+                    /// its parameters are valid and the data set contains
+                    /// variable names.
+                    /// </summary>
+                    public static void FromPathWithVariableNames()
+                    {
+                        var path = "Data" + Path.DirectorySeparatorChar + "numerical-encode-path-basic.csv";
+
+                        char columnDelimiter = ',';
+                        IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
+                        bool firstLineContainsColumnHeaders = true;
+                        DoubleMatrix actual = DoubleMatrix.Encode(
+                            path,
+                            columnDelimiter,
+                            extractedColumns,
+                            firstLineContainsColumnHeaders);
+
+                        DoubleMatrix expected = DoubleMatrix.Dense(5, 2);
+
+                        expected.SetColumnName(0, "V0");
+                        expected.SetColumnName(1, "V2");
+
+                        expected[0, 0] = 1;
+                        expected[1, 0] = 2;
+                        expected[2, 0] = 3;
+                        expected[3, 0] = 4;
+                        expected[4, 0] = 5;
+
+                        expected[0, 1] = -2.2;
+                        expected[1, 1] = 0;
+                        expected[2, 1] = -3.3;
+                        expected[3, 1] = -1.1;
+                        expected[4, 1] = 4.4;
+
+                        DoubleMatrixAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
+                    }
+
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// TextReader, char, IndexCollection, bool)"/>
+                    /// method terminates successfully as expected when
+                    /// its parameters are valid and the data set contains
+                    /// variable names.
+                    /// </summary>
+                    public static void FromTextReaderWithVariableNames()
+                    {
+                        // Create a data stream 
+                        string[] data = [
+                            "V0,V1,V2",
+                            "1, 10, -2.2",
+                            "2, 20,  0.0",
+                            "3, 30, -3.3",
+                            "4, 40, -1.1",
+                            "5, 50,  4.4" ];
+
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
+                        for (int i = 0; i < data.Length; i++)
+                        {
+                            writer.WriteLine(data[i].ToCharArray());
+                            writer.Flush();
+                        }
+                        stream.Position = 0;
+
+                        StreamReader reader = new(stream);
+                        char columnDelimiter = ',';
+                        IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
+                        bool firstLineContainsColumnHeaders = true;
+                        DoubleMatrix actual = DoubleMatrix.Encode(
+                            reader,
+                            columnDelimiter,
+                            extractedColumns,
+                            firstLineContainsColumnHeaders);
+
+
+                        DoubleMatrix expected = DoubleMatrix.Dense(5, 2);
+
+                        expected.SetColumnName(0, "V0");
+                        expected.SetColumnName(1, "V2");
+
+                        expected[0, 0] = 1;
+                        expected[1, 0] = 2;
+                        expected[2, 0] = 3;
+                        expected[3, 0] = 4;
+                        expected[4, 0] = 5;
+
+                        expected[0, 1] = -2.2;
+                        expected[1, 1] = 0;
+                        expected[2, 1] = -3.3;
+                        expected[3, 1] = -1.1;
+                        expected[4, 1] = 4.4;
+
+                        DoubleMatrixAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
+                    }
+
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// TextReader, char, IndexCollection, bool)"/>
+                    /// method terminates successfully as expected when
+                    /// its parameters are valid and the data set contains
+                    /// no variable names.
+                    /// </summary>
+                    public static void FromTextReaderWithoutVariableNames()
+                    {
+                        // Mainstream use case - without variable names
+
+                        // Create a data stream 
+                        string[] data = [
+                            "1, 10, -2.2",
+                            "2, 20,  0.0",
+                            "3, 30, -3.3",
+                            "4, 40, -1.1",
+                            "5, 50,  4.4" ];
+
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
+                        for (int i = 0; i < data.Length; i++)
+                        {
+                            writer.WriteLine(data[i].ToCharArray());
+                            writer.Flush();
+                        }
+                        stream.Position = 0;
+
+                        StreamReader reader = new(stream);
+                        char columnDelimiter = ',';
+                        IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
+                        bool firstLineContainsColumnHeaders = false;
+                        DoubleMatrix actual = DoubleMatrix.Encode(
+                            reader,
+                            columnDelimiter,
+                            extractedColumns,
+                            firstLineContainsColumnHeaders);
+
+
+                        DoubleMatrix expected = DoubleMatrix.Dense(5, 2);
+
+                        expected[0, 0] = 1;
+                        expected[1, 0] = 2;
+                        expected[2, 0] = 3;
+                        expected[3, 0] = 4;
+                        expected[4, 0] = 5;
+
+                        expected[0, 1] = -2.2;
+                        expected[1, 1] = 0;
+                        expected[2, 1] = -3.3;
+                        expected[3, 1] = -1.1;
+                        expected[4, 1] = 4.4;
+
+                        DoubleMatrixAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
+                    }
+                }
+
+                /// <summary>
+                /// Provides methods to test that the
+                /// <see cref="DoubleMatrix.Encode(
+                /// TextReader, char, IndexCollection, bool)"/>
+                /// method fails when expected.
+                public static class Fail
+                {
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// TextReader, char, IndexCollection, bool)"/>
+                    /// method fails as expected when
+                    /// a variable name is missing in the data set.
+                    /// </summary>
+                    public static void VariableNameIsMissing()
+                    {
+                        // Variable name is missing
+
+                        // Create an invalid data stream 
+                        string[] data = [
+                            "V0,V1,  ",// Names cannot be empty or consisting of white spaces
+                            "1, 10, -2.2",
+                            "2, 20,  0.0",
+                            "3, 30, -3.3",
+                            "4, 40, -1.1",
+                            "5, 50,  4.4" ];
+
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
+                        for (int i = 0; i < data.Length; i++)
+                        {
+                            writer.WriteLine(data[i].ToCharArray());
+                            writer.Flush();
+                        }
+                        stream.Position = 0;
+
+                        StreamReader reader = new(stream);
+                        char columnDelimiter = ',';
+                        IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
+                        bool firstLineContainsColumnHeaders = true;
+                        int lineNumber = 0;
+                        int column = 2;
+                        ExceptionAssert.Throw(
+                            () =>
+                            {
+                                DoubleMatrix.Encode(
+                                    reader,
+                                    columnDelimiter,
+                                    extractedColumns,
+                                    firstLineContainsColumnHeaders);
+                            },
+                            expectedType: typeof(InvalidDataException),
+                            expectedMessage: string.Format(
+                                                    ImplementationServices.GetResourceString(
+                                                        "STR_EXCEPT_CAT_DATASET_NOT_ENOUGH_ROW_DATA"),
+                                                    lineNumber, column));
+                    }
+
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// TextReader, char, IndexCollection, bool)"/>
+                    /// method fails as expected when
+                    /// a category label is missing in the data set.
+                    /// </summary>
+                    public static void NumericalValueIsMissing()
+                    {
+                        // Category label is missing
+
+                        // Create an invalid data stream 
+                        string[] data = [
+                            "V0,V1,V2",
+                            "1, 10, -2.2",
+                            ", 20,  0",// Labels cannot be empty or consisting of white spaces
+                            "3, 30, -3.3",
+                            "4, 40, -1.1",
+                            "5, 50,  4.4" ];
+
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
+                        for (int i = 0; i < data.Length; i++)
+                        {
+                            writer.WriteLine(data[i].ToCharArray());
+                            writer.Flush();
+                        }
+                        stream.Position = 0;
+
+                        StreamReader reader = new(stream);
+                        char columnDelimiter = ',';
+                        IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
+                        bool firstLineContainsColumnHeaders = true;
+                        int lineNumber = 2;
+                        int column = 0;
+                        ExceptionAssert.Throw(
+                            () =>
+                            {
+                                DoubleMatrix.Encode(
+                                    reader,
+                                    columnDelimiter,
+                                    extractedColumns,
+                                    firstLineContainsColumnHeaders);
+                            },
+                            expectedType: typeof(InvalidDataException),
+                            expectedMessage: string.Format(
+                                                    ImplementationServices.GetResourceString(
+                                                        "STR_EXCEPT_CAT_DATASET_NOT_ENOUGH_ROW_DATA"),
+                                                    lineNumber, column));
+                    }
+
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// TextReader, char, IndexCollection, bool)"/>
+                    /// method fails as expected when
+                    /// any extracted column is missing in the header row of the data set.
+                    /// </summary>
+                    public static void ExtractedColumnIsMissingInHeaderRow()
+                    {
+                        // Create a data stream 
+                        string[] data = [
+                            "V0,V1,V2",
+                            "1, 10, -2.2",
+                            "2, 20,  0.0",
+                            "3, 30, -3.3",
+                            "4, 40, -1.1",
+                            "5, 50,  4.4" ];
+
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
+                        for (int i = 0; i < data.Length; i++)
+                        {
+                            writer.WriteLine(data[i].ToCharArray());
+                            writer.Flush();
+                        }
+                        stream.Position = 0;
+
+                        StreamReader reader = new(stream);
+                        char columnDelimiter = ',';
+
+                        // Column 4 does not exist
+                        IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 4);
+                        bool firstLineContainsColumnHeaders = true;
+                        int lineNumber = 0;
+                        int column = 4;
+                        ExceptionAssert.Throw(
+                            () =>
+                            {
+                                DoubleMatrix.Encode(
+                                    reader,
+                                    columnDelimiter,
+                                    extractedColumns,
+                                    firstLineContainsColumnHeaders);
+                            },
+                            expectedType: typeof(InvalidDataException),
+                            expectedMessage: string.Format(
+                                ImplementationServices.GetResourceString(
+                                    "STR_EXCEPT_CAT_DATASET_NOT_ENOUGH_ROW_DATA"),
+                                lineNumber, column));
+                    }
+
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// TextReader, char, IndexCollection, bool)"/>
+                    /// method fails as expected when
+                    /// any extracted column is missing in a data row.
+                    /// </summary>
+                    public static void ExtractedColumnIsMissingInDataRow()
+                    {
+                        // Create a data stream 
+                        string[] data = [
+                            "V0,V1,V2,HOMER,D'OH!",
+                            "1, 10, -2.2",
+                            "2, 20,  0.0",
+                            "3, 30, -3.3",
+                            "4, 40, -1.1",
+                            "5, 50,  4.4" ];
+
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
+                        for (int i = 0; i < data.Length; i++)
+                        {
+                            writer.WriteLine(data[i].ToCharArray());
+                            writer.Flush();
+                        }
+                        stream.Position = 0;
+
+                        StreamReader reader = new(stream);
+                        char columnDelimiter = ',';
+
+                        // Column 4 does not exist
+                        IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 4);
+                        bool firstLineContainsColumnHeaders = true;
+                        int lineNumber = 1;
+                        int column = 4;
+                        ExceptionAssert.Throw(
+                            () =>
+                            {
+                                DoubleMatrix.Encode(
+                                    reader,
+                                    columnDelimiter,
+                                    extractedColumns,
+                                    firstLineContainsColumnHeaders);
+                            },
+                            expectedType: typeof(InvalidDataException),
+                            expectedMessage: string.Format(
+                                ImplementationServices.GetResourceString(
+                                    "STR_EXCEPT_CAT_DATASET_NOT_ENOUGH_ROW_DATA"),
+                                lineNumber, column));
+                    }
+
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// TextReader, char, IndexCollection, bool)"/>
+                    /// method fails as expected when
+                    /// the data set contains no rows.
+                    /// </summary>
+                    public static void NoDataRows()
+                    {
+                        // Create a data stream 
+                        string[] data = [
+                        "V0,V1,V2" ]; // No data rows
+
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
+                        for (int i = 0; i < data.Length; i++)
+                        {
+                            writer.WriteLine(data[i].ToCharArray());
+                            writer.Flush();
+                        }
+                        stream.Position = 0;
+
+                        StreamReader reader = new(stream);
+                        char columnDelimiter = ',';
+
+                        IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
+                        bool firstLineContainsColumnHeaders = true;
+                        ExceptionAssert.Throw(
+                            () =>
+                            {
+                                DoubleMatrix.Encode(
+                                    reader,
+                                    columnDelimiter,
+                                    extractedColumns,
+                                    firstLineContainsColumnHeaders);
+                            },
+                            expectedType: typeof(InvalidDataException),
+                            expectedMessage: ImplementationServices.GetResourceString(
+                                "STR_EXCEPT_CAT_DATASET_NOT_ENOUGH_DATA"));
+                    }
+
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// TextReader, char, IndexCollection, bool)"/>
+                    /// method fails as expected when
+                    /// the text reader is <b>null</b>.
+                    /// </summary>
+                    public static void ReaderIsNull()
+                    {
+                        // reader is null
+
+                        StreamReader reader = null;
+                        char columnDelimiter = ',';
+                        IndexCollection extractedColumns = IndexCollection.Range(0, 1);
+                        bool firstLineContainsColumnHeaders = true;
+
+                        ArgumentExceptionAssert.Throw(
+                            () =>
+                            {
+                                DoubleMatrix.Encode(
+                                    reader,
+                                    columnDelimiter,
+                                    extractedColumns,
+                                    firstLineContainsColumnHeaders);
+                            },
+                            expectedType: typeof(ArgumentNullException),
+                            expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
+                            expectedParameterName: "reader");
+                    }
+
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// TextReader, char, IndexCollection, bool)"/>
+                    /// method fails as expected when
+                    /// the <see cref="IndexCollection"/> representing the 
+                    /// columns to extract is <b>null</b>.
+                    /// </summary>
+                    public static void ExtractedColumnsIsNull()
+                    {
+                        // Create a data stream 
+                        string[] data = [
+                            "V0,V1,V2",
+                            "1, 10, -2.2",
+                            "2, 20,  0.0",
+                            "3, 30, -3.3",
+                            "4, 40, -1.1",
+                            "5, 50,  4.4" ];
+
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
+                        for (int i = 0; i < data.Length; i++)
+                        {
+                            writer.WriteLine(data[i].ToCharArray());
+                            writer.Flush();
+                        }
+                        stream.Position = 0;
+                        StreamReader reader = new(stream);
+
+                        char columnDelimiter = ',';
+                        IndexCollection extractedColumns = null;
+                        bool firstLineContainsColumnHeaders = true;
+
+                        ArgumentExceptionAssert.Throw(
+                            () =>
+                            {
+                                DoubleMatrix.Encode(
+                                    reader,
+                                    columnDelimiter,
+                                    extractedColumns,
+                                    firstLineContainsColumnHeaders);
+                            },
+                            expectedType: typeof(ArgumentNullException),
+                            expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
+                            expectedParameterName: "extractedColumns");
+                    }
+                }
+            }
+
+            /// <summary>
+            /// Provides methods to test that the
+            /// advanced encoding methods in <see cref="DoubleMatrix"/> 
+            /// (i.e., those with special codifiers and format providers)
+            /// have been properly implemented.
+            /// </summary>
+            public static class Advanced
+            {
+                /// <summary>
+                /// Provides methods to test that the
+                /// advanced encoding methods in <see cref="DoubleMatrix"/> 
+                /// terminate successfully when expected.
+                public static class Succeed
+                {
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// string, char, IndexCollection, bool, 
+                    /// Dictionary{int, Codifier}, IFormatProvider)"/>
+                    /// method terminates successfully as expected when
+                    /// its parameters are valid and the data set contains
+                    /// variable names.
+                    /// </summary>
+                    public static void FromPathWithVariableNames()
+                    {
+                        var path = "Data" + Path.DirectorySeparatorChar + "numerical-encode-path-advanced.csv";
+
+                        // Define a special codifier for variable TIME
+                        // using a local function.
+                        static double timeCodifier(string token, IFormatProvider provider)
+                        {
+                            double datum = DateTimeOffset.ParseExact(
+                                input: token,
+                                format: "yyyyMMdd HH:mm:ss.fff zzz",
+                                formatProvider: provider).ToUnixTimeMilliseconds();
+
+                            return datum;
+                        }
+
+                        // Attach the special codifier to variable TIME
+                        int numberColumnIndex = 0;
+                        var specialCodifiers = new Dictionary<int, Codifier>
+                        {
+                            { numberColumnIndex, timeCodifier }
+                        };
+
+                        char columnDelimiter = ',';
+                        IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
+                        bool firstLineContainsColumnHeaders = true;
+                        DoubleMatrix actual = DoubleMatrix.Encode(
+                            path,
+                            columnDelimiter,
+                            extractedColumns,
+                            firstLineContainsColumnHeaders,
+                            specialCodifiers,
+                            CultureInfo.InvariantCulture);
+
+                        DoubleMatrix expected = DoubleMatrix.Dense(5, 2);
+
+                        expected.SetColumnName(0, "TIME");
+                        expected.SetColumnName(1, "NUMBER");
+
+                        expected[0, 0] = timeCodifier("20200410 09:42:00.000 +00:00", CultureInfo.InvariantCulture);
+                        expected[1, 0] = timeCodifier("20210511 11:51:00.010 +00:00", CultureInfo.InvariantCulture);
+                        expected[2, 0] = timeCodifier("20220612 15:11:31.200 +00:00", CultureInfo.InvariantCulture);
+                        expected[3, 0] = timeCodifier("20230713 17:32:10.749 +00:00", CultureInfo.InvariantCulture);
+                        expected[4, 0] = timeCodifier("20240814 09:42:00.150 +00:00", CultureInfo.InvariantCulture);
+
+                        expected[0, 1] = -2.2;
+                        expected[1, 1] = 0;
+                        expected[2, 1] = -3.3;
+                        expected[3, 1] = -1.1;
+                        expected[4, 1] = 4.4;
+
+                        DoubleMatrixAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
+                    }
+
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// string, char, IndexCollection, bool, 
+                    /// Dictionary{int, Codifier}, IFormatProvider)"/>
+                    /// method terminates successfully as expected when
+                    /// its parameters are valid and the data set contains
+                    /// variable names.
+                    /// </summary>
+                    public static void FromTextReaderWithVariableNames()
+                    {
+                        // Create a data stream 
+                        string[] data = [
+                            "TIME,NAME,NUMBER",
+                            "20200410 09:42:00.000 +00:00,JOE,-2.2",
+                            "20210511 11:51:00.010 +00:00,BILL,0.0",
+                            "20220612 15:11:31.200 +00:00,ANN,-3.3",
+                            "20230713 17:32:10.749 +00:00,LUCCA,-1.1",
+                            "20240814 09:42:00.150 +00:00,BOB,4.4"];
+
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
+                        for (int i = 0; i < data.Length; i++)
+                        {
+                            writer.WriteLine(data[i].ToCharArray());
+                            writer.Flush();
+                        }
+                        stream.Position = 0;
+
+                        // Define a special codifier for variable TIME
+                        // using a local function.
+                        static double timeCodifier(string token, IFormatProvider provider)
+                        {
+                            double datum = DateTimeOffset.ParseExact(
+                                input: token,
+                                format: "yyyyMMdd HH:mm:ss.fff zzz",
+                                formatProvider: provider).ToUnixTimeMilliseconds();
+
+                            return datum;
+                        }
+
+                        // Attach the special codifier to variable TIME
+                        int numberColumnIndex = 0;
+                        var specialCodifiers = new Dictionary<int, Codifier>
+                        {
+                            { numberColumnIndex, timeCodifier }
+                        };
+
+                        StreamReader reader = new(stream);
+                        char columnDelimiter = ',';
+                        IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
+                        bool firstLineContainsColumnHeaders = true;
+                        DoubleMatrix actual = DoubleMatrix.Encode(
+                            reader,
+                            columnDelimiter,
+                            extractedColumns,
+                            firstLineContainsColumnHeaders,
+                            specialCodifiers,
+                            CultureInfo.InvariantCulture);
+
+                        DoubleMatrix expected = DoubleMatrix.Dense(5, 2);
+
+                        expected.SetColumnName(0, "TIME");
+                        expected.SetColumnName(1, "NUMBER");
+
+                        expected[0, 0] = timeCodifier("20200410 09:42:00.000 +00:00", CultureInfo.InvariantCulture);
+                        expected[1, 0] = timeCodifier("20210511 11:51:00.010 +00:00", CultureInfo.InvariantCulture);
+                        expected[2, 0] = timeCodifier("20220612 15:11:31.200 +00:00", CultureInfo.InvariantCulture);
+                        expected[3, 0] = timeCodifier("20230713 17:32:10.749 +00:00", CultureInfo.InvariantCulture);
+                        expected[4, 0] = timeCodifier("20240814 09:42:00.150 +00:00", CultureInfo.InvariantCulture);
+
+                        expected[0, 1] = -2.2;
+                        expected[1, 1] = 0;
+                        expected[2, 1] = -3.3;
+                        expected[3, 1] = -1.1;
+                        expected[4, 1] = 4.4;
+
+                        DoubleMatrixAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
+                    }
+
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// string, char, IndexCollection, bool, 
+                    /// Dictionary{int, Codifier}, IFormatProvider)"/>
+                    /// method terminates successfully as expected when
+                    /// its parameters are valid and the data set contains
+                    /// no variable names.
+                    /// </summary>
+                    public static void FromTextReaderWithoutVariableNames()
+                    {
+                        // Mainstream use case - without variable names
+
+                        // Create a data stream 
+                        string[] data = [
+                            "20200410 09:42:00.000 +00:00,JOE,-2.2",
+                            "20210511 11:51:00.010 +00:00,BILL,0.0",
+                            "20220612 15:11:31.200 +00:00,ANN,-3.3",
+                            "20230713 17:32:10.749 +00:00,LUCCA,-1.1",
+                            "20240814 09:42:00.150 +00:00,BOB,4.4"];
+
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
+                        for (int i = 0; i < data.Length; i++)
+                        {
+                            writer.WriteLine(data[i].ToCharArray());
+                            writer.Flush();
+                        }
+                        stream.Position = 0;
+
+                        // Define a special codifier for variable TIME
+                        // using a local function.
+                        static double timeCodifier(string token, IFormatProvider provider)
+                        {
+                            double datum = DateTimeOffset.ParseExact(
+                                input: token,
+                                format: "yyyyMMdd HH:mm:ss.fff zzz",
+                                formatProvider: provider).ToUnixTimeMilliseconds();
+
+                            return datum;
+                        }
+
+                        // Attach the special codifier to variable TIME
+                        int numberColumnIndex = 0;
+                        var specialCodifiers = new Dictionary<int, Codifier>
+                        {
+                            { numberColumnIndex, timeCodifier }
+                        };
+
+                        StreamReader reader = new(stream);
+                        char columnDelimiter = ',';
+                        IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
+                        bool firstLineContainsColumnHeaders = false;
+                        DoubleMatrix actual = DoubleMatrix.Encode(
+                            reader,
+                            columnDelimiter,
+                            extractedColumns,
+                            firstLineContainsColumnHeaders,
+                            specialCodifiers,
+                            CultureInfo.InvariantCulture);
+
+                        DoubleMatrix expected = DoubleMatrix.Dense(5, 2);
+
+                        expected[0, 0] = timeCodifier("20200410 09:42:00.000 +00:00", CultureInfo.InvariantCulture);
+                        expected[1, 0] = timeCodifier("20210511 11:51:00.010 +00:00", CultureInfo.InvariantCulture);
+                        expected[2, 0] = timeCodifier("20220612 15:11:31.200 +00:00", CultureInfo.InvariantCulture);
+                        expected[3, 0] = timeCodifier("20230713 17:32:10.749 +00:00", CultureInfo.InvariantCulture);
+                        expected[4, 0] = timeCodifier("20240814 09:42:00.150 +00:00", CultureInfo.InvariantCulture);
+
+                        expected[0, 1] = -2.2;
+                        expected[1, 1] = 0;
+                        expected[2, 1] = -3.3;
+                        expected[3, 1] = -1.1;
+                        expected[4, 1] = 4.4;
+
+                        DoubleMatrixAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
+                    }
+                }
+
+                /// <summary>
+                /// Provides methods to test that the
+                /// <see cref="DoubleMatrix.Encode(
+                /// TextReader, char, IndexCollection, bool, 
+                /// Dictionary{int, Codifier}, IFormatProvider)"/>
+                /// method fails when expected.
+                public static class Fail
+                {
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// TextReader, char, IndexCollection, bool, 
+                    /// Dictionary{int, Codifier}, IFormatProvider)"/>
+                    /// method fails as expected when
+                    /// a variable name is missing in the data set.
+                    /// </summary>
+                    public static void VariableNameIsMissing()
+                    {
+                        // Variable name is missing
+
+                        // Create an invalid data stream 
+                        string[] data = [
+                            "TIME,NAME,  ", // Names cannot be empty or consisting of white spaces
+                            "20200410 09:42:00.000 +00:00,JOE,-2.2",
+                            "20210511 11:51:00.010 +00:00,BILL,0.0",
+                            "20220612 15:11:31.200 +00:00,ANN,-3.3",
+                            "20230713 17:32:10.749 +00:00,LUCCA,-1.1",
+                            "20240814 09:42:00.150 +00:00,BOB,4.4"];
+
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
+                        for (int i = 0; i < data.Length; i++)
+                        {
+                            writer.WriteLine(data[i].ToCharArray());
+                            writer.Flush();
+                        }
+                        stream.Position = 0;
+
+                        // Define a special codifier for variable TIME
+                        // using a local function.
+                        static double timeCodifier(string token, IFormatProvider provider)
+                        {
+                            double datum = DateTimeOffset.ParseExact(
+                                input: token,
+                                format: "yyyyMMdd HH:mm:ss.fff zzz",
+                                formatProvider: provider).ToUnixTimeMilliseconds();
+
+                            return datum;
+                        }
+
+                        // Attach the special codifier to variable TIME
+                        int numberColumnIndex = 0;
+                        var specialCodifiers = new Dictionary<int, Codifier>
+                        {
+                            { numberColumnIndex, timeCodifier }
+                        };
+
+                        // Encode the categorical data set
+                        StreamReader reader = new(stream);
+                        char columnDelimiter = ',';
+                        IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
+                        bool firstLineContainsColumnHeaders = true;
+                        int lineNumber = 0;
+                        int column = 2;
+                        ExceptionAssert.Throw(
+                            () =>
+                            {
+                                DoubleMatrix.Encode(
+                                    reader,
+                                    columnDelimiter,
+                                    extractedColumns,
+                                    firstLineContainsColumnHeaders,
+                                    specialCodifiers,
+                                    CultureInfo.InvariantCulture);
+                            },
+                            expectedType: typeof(InvalidDataException),
+                            expectedMessage: string.Format(
+                                ImplementationServices.GetResourceString(
+                                    "STR_EXCEPT_CAT_DATASET_NOT_ENOUGH_ROW_DATA"),
+                                lineNumber, column));
+                    }
+
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// TextReader, char, IndexCollection, bool, 
+                    /// Dictionary{int, Codifier}, IFormatProvider)"/>
+                    /// method fails as expected when
+                    /// a category label is missing in the data set.
+                    /// </summary>
+                    public static void NumericalValueIsMissing()
+                    {
+                        // Category label is missing
+
+                        // Create an invalid data stream 
+                        string[] data = [
+                            "TIME,NAME,NUMBER",
+                            "20200410 09:42:00.000 +00:00,JOE,-2.2",
+                            ",BILL,0.0",
+                            "20220612 15:11:31.200 +00:00,ANN,-3.3",
+                            "20230713 17:32:10.749 +00:00,LUCCA,-1.1",
+                            "20240814 09:42:00.150 +00:00,BOB,4.4"];
+
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
+                        for (int i = 0; i < data.Length; i++)
+                        {
+                            writer.WriteLine(data[i].ToCharArray());
+                            writer.Flush();
+                        }
+                        stream.Position = 0;
+
+                        // Define a special codifier for variable TIME
+                        // using a local function.
+                        static double timeCodifier(string token, IFormatProvider provider)
+                        {
+                            double datum = DateTimeOffset.ParseExact(
+                                input: token,
+                                format: "yyyyMMdd HH:mm:ss.fff zzz",
+                                formatProvider: provider).ToUnixTimeMilliseconds();
+
+                            return datum;
+                        }
+
+                        // Attach the special codifier to variable TIME
+                        int numberColumnIndex = 0;
+                        var specialCodifiers = new Dictionary<int, Codifier>
+                        {
+                            { numberColumnIndex, timeCodifier }
+                        };
+
+                        // Encode the categorical data set
+                        StreamReader reader = new(stream);
+                        char columnDelimiter = ',';
+                        IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
+                        bool firstLineContainsColumnHeaders = true;
+                        int lineNumber = 2;
+                        int column = 0;
+                        ExceptionAssert.Throw(
+                            () =>
+                            {
+                                DoubleMatrix.Encode(
+                                    reader,
+                                    columnDelimiter,
+                                    extractedColumns,
+                                    firstLineContainsColumnHeaders,
+                                    specialCodifiers,
+                                    CultureInfo.InvariantCulture);
+                            },
+                            expectedType: typeof(InvalidDataException),
+                            expectedMessage: string.Format(
+                                ImplementationServices.GetResourceString(
+                                    "STR_EXCEPT_CAT_DATASET_NOT_ENOUGH_ROW_DATA"),
+                                lineNumber, column));
+                    }
+
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// TextReader, char, IndexCollection, bool, 
+                    /// Dictionary{int, Codifier}, IFormatProvider)"/>
+                    /// method fails as expected when
+                    /// any extracted column is missing in the header row of the data set.
+                    /// </summary>
+                    public static void ExtractedColumnIsMissingInHeaderRow()
+                    {
+                        // Create a data stream 
+                        string[] data = [
+                            "TIME,NAME,NUMBER",
+                            "20200410 09:42:00.000 +00:00,JOE,-2.2",
+                            "20210511 11:51:00.010 +00:00,BILL,0.0",
+                            "20220612 15:11:31.200 +00:00,ANN,-3.3",
+                            "20230713 17:32:10.749 +00:00,LUCCA,-1.1",
+                            "20240814 09:42:00.150 +00:00,BOB,4.4"];
+
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
+                        for (int i = 0; i < data.Length; i++)
+                        {
+                            writer.WriteLine(data[i].ToCharArray());
+                            writer.Flush();
+                        }
+                        stream.Position = 0;
+
+                        // Define a special codifier for variable TIME
+                        // using a local function.
+                        static double timeCodifier(string token, IFormatProvider provider)
+                        {
+                            double datum = DateTimeOffset.ParseExact(
+                                input: token,
+                                format: "yyyyMMdd HH:mm:ss.fff zzz",
+                                formatProvider: provider).ToUnixTimeMilliseconds();
+
+                            return datum;
+                        }
+
+                        // Attach the special codifier to variable TIME
+                        int numberColumnIndex = 0;
+                        var specialCodifiers = new Dictionary<int, Codifier>
+                        {
+                            { numberColumnIndex, timeCodifier }
+                        };
+
+                        // Encode the categorical data set
+                        StreamReader reader = new(stream);
+                        char columnDelimiter = ',';
+
+                        // Column 4 does not exist
+                        IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 4);
+                        bool firstLineContainsColumnHeaders = true;
+                        int lineNumber = 0;
+                        int column = 4;
+                        ExceptionAssert.Throw(
+                            () =>
+                            {
+                                DoubleMatrix.Encode(
+                                    reader,
+                                    columnDelimiter,
+                                    extractedColumns,
+                                    firstLineContainsColumnHeaders,
+                                    specialCodifiers,
+                                    CultureInfo.InvariantCulture);
+                            },
+                            expectedType: typeof(InvalidDataException),
+                            expectedMessage: string.Format(
+                                ImplementationServices.GetResourceString(
+                                    "STR_EXCEPT_CAT_DATASET_NOT_ENOUGH_ROW_DATA"),
+                                lineNumber, column));
+                    }
+
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// TextReader, char, IndexCollection, bool, 
+                    /// Dictionary{int, Codifier}, IFormatProvider)"/>
+                    /// method fails as expected when
+                    /// any extracted column is missing in a data row.
+                    /// </summary>
+                    public static void ExtractedColumnIsMissingInDataRow()
+                    {
+                        // Create a data stream 
+                        string[] data = [
+                            "TIME,NAME,NUMBER,HOMER,D'OH!",
+                            "20200410 09:42:00.000 +00:00,JOE,-2.2",
+                            "20210511 11:51:00.010 +00:00,BILL,0.0",
+                            "20220612 15:11:31.200 +00:00,ANN,-3.3",
+                            "20230713 17:32:10.749 +00:00,LUCCA,-1.1",
+                            "20240814 09:42:00.150 +00:00,BOB,4.4"];
+
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
+                        for (int i = 0; i < data.Length; i++)
+                        {
+                            writer.WriteLine(data[i].ToCharArray());
+                            writer.Flush();
+                        }
+                        stream.Position = 0;
+
+                        // Define a special codifier for variable TIME
+                        // using a local function.
+                        static double timeCodifier(string token, IFormatProvider provider)
+                        {
+                            double datum = DateTimeOffset.ParseExact(
+                                input: token,
+                                format: "yyyyMMdd HH:mm:ss.fff zzz",
+                                formatProvider: provider).ToUnixTimeMilliseconds();
+
+                            return datum;
+                        }
+
+                        // Attach the special codifier to variable TIME
+                        int numberColumnIndex = 0;
+                        var specialCodifiers = new Dictionary<int, Codifier>
+                        {
+                            { numberColumnIndex, timeCodifier }
+                        };
+
+                        // Encode the categorical data set
+                        StreamReader reader = new(stream);
+                        char columnDelimiter = ',';
+
+                        // Column 4 does not exist
+                        IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 4);
+                        bool firstLineContainsColumnHeaders = true;
+                        int lineNumber = 1;
+                        int column = 4;
+                        ExceptionAssert.Throw(
+                            () =>
+                            {
+                                DoubleMatrix.Encode(
+                                    reader,
+                                    columnDelimiter,
+                                    extractedColumns,
+                                    firstLineContainsColumnHeaders,
+                                    specialCodifiers,
+                                    CultureInfo.InvariantCulture);
+                            },
+                            expectedType: typeof(InvalidDataException),
+                            expectedMessage: string.Format(
+                                ImplementationServices.GetResourceString(
+                                    "STR_EXCEPT_CAT_DATASET_NOT_ENOUGH_ROW_DATA"),
+                                lineNumber, column));
+                    }
+
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// TextReader, char, IndexCollection, bool, 
+                    /// Dictionary{int, Codifier}, IFormatProvider)"/>
+                    /// method fails as expected when
+                    /// the data set contains no rows.
+                    /// </summary>
+                    public static void NoDataRows()
+                    {
+                        // Create a data stream 
+                        string[] data = [
+                            "TIME,NAME,NUMBER"]; // No data rows
+
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
+                        for (int i = 0; i < data.Length; i++)
+                        {
+                            writer.WriteLine(data[i].ToCharArray());
+                            writer.Flush();
+                        }
+                        stream.Position = 0;
+
+                        // Define a special codifier for variable TIME
+                        // using a local function.
+                        static double timeCodifier(string token, IFormatProvider provider)
+                        {
+                            double datum = DateTimeOffset.ParseExact(
+                                input: token,
+                                format: "yyyyMMdd HH:mm:ss.fff zzz",
+                                formatProvider: provider).ToUnixTimeMilliseconds();
+
+                            return datum;
+                        }
+
+                        // Attach the special codifier to variable TIME
+                        int numberColumnIndex = 0;
+                        var specialCodifiers = new Dictionary<int, Codifier>
+                        {
+                            { numberColumnIndex, timeCodifier }
+                        };
+
+                        // Encode the categorical data set
+                        StreamReader reader = new(stream);
+                        char columnDelimiter = ',';
+
+                        IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
+                        bool firstLineContainsColumnHeaders = true;
+                        ExceptionAssert.Throw(
+                            () =>
+                            {
+                                DoubleMatrix.Encode(
+                                    reader,
+                                    columnDelimiter,
+                                    extractedColumns,
+                                    firstLineContainsColumnHeaders,
+                                    specialCodifiers,
+                                    CultureInfo.InvariantCulture);
+                            },
+                            expectedType: typeof(InvalidDataException),
+                            expectedMessage: ImplementationServices.GetResourceString(
+                                "STR_EXCEPT_CAT_DATASET_NOT_ENOUGH_DATA"));
+                    }
+
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// TextReader, char, IndexCollection, bool, 
+                    /// Dictionary{int, Codifier}, IFormatProvider)"/>
+                    /// method fails as expected when
+                    /// the text reader is <b>null</b>.
+                    /// </summary>
+                    public static void ReaderIsNull()
+                    {
+                        // reader is null
+
+                        StreamReader reader = null;
+                        char columnDelimiter = ',';
+                        IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
+                        bool firstLineContainsColumnHeaders = true;
+
+                        // Define a special codifier for variable TIME
+                        // using a local function.
+                        static double timeCodifier(string token, IFormatProvider provider)
+                        {
+                            double datum = DateTimeOffset.ParseExact(
+                                input: token,
+                                format: "yyyyMMdd HH:mm:ss.fff zzz",
+                                formatProvider: provider).ToUnixTimeMilliseconds();
+
+                            return datum;
+                        }
+
+                        // Attach the special codifier to variable TIME
+                        int numberColumnIndex = 0;
+                        var specialCodifiers = new Dictionary<int, Codifier>
+                        {
+                            { numberColumnIndex, timeCodifier }
+                        };
+
+                        ArgumentExceptionAssert.Throw(
+                            () =>
+                            {
+                                DoubleMatrix.Encode(
+                                    reader,
+                                    columnDelimiter,
+                                    extractedColumns,
+                                    firstLineContainsColumnHeaders,
+                                    specialCodifiers,
+                                    CultureInfo.InvariantCulture);
+                            },
+                            expectedType: typeof(ArgumentNullException),
+                            expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
+                            expectedParameterName: "reader");
+                    }
+
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// TextReader, char, IndexCollection, bool, 
+                    /// Dictionary{int, Codifier}, IFormatProvider)"/>
+                    /// method fails as expected when
+                    /// the <see cref="IndexCollection"/> representing the 
+                    /// columns to extract is <b>null</b>.
+                    /// </summary>
+                    public static void ExtractedColumnsIsNull()
+                    {
+                        // Create a data stream 
+                        string[] data = [
+                            "TIME,NAME,NUMBER",
+                            "20200410 09:42:00.000 +00:00,JOE,-2.2",
+                            "20210511 11:51:00.010 +00:00,BILL,0.0",
+                            "20220612 15:11:31.200 +00:00,ANN,-3.3",
+                            "20230713 17:32:10.749 +00:00,LUCCA,-1.1",
+                            "20240814 09:42:00.150 +00:00,BOB,4.4"];
+
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
+                        for (int i = 0; i < data.Length; i++)
+                        {
+                            writer.WriteLine(data[i].ToCharArray());
+                            writer.Flush();
+                        }
+                        stream.Position = 0;
+                        StreamReader reader = new(stream);
+
+                        char columnDelimiter = ',';
+                        IndexCollection extractedColumns = null;
+                        bool firstLineContainsColumnHeaders = true;
+
+                        // Define a special codifier for variable TIME
+                        // using a local function.
+                        static double timeCodifier(string token, IFormatProvider provider)
+                        {
+                            double datum = DateTimeOffset.ParseExact(
+                                input: token,
+                                format: "yyyyMMdd HH:mm:ss.fff zzz",
+                                formatProvider: provider).ToUnixTimeMilliseconds();
+
+                            return datum;
+                        }
+
+                        // Attach the special codifier to variable TIME
+                        int numberColumnIndex = 0;
+                        var specialCodifiers = new Dictionary<int, Codifier>
+                        {
+                            { numberColumnIndex, timeCodifier }
+                        };
+
+                        ArgumentExceptionAssert.Throw(
+                            () =>
+                            {
+                                DoubleMatrix.Encode(
+                                    reader,
+                                    columnDelimiter,
+                                    extractedColumns,
+                                    firstLineContainsColumnHeaders,
+                                    specialCodifiers,
+                                    CultureInfo.InvariantCulture);
+                            },
+                            expectedType: typeof(ArgumentNullException),
+                            expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
+                            expectedParameterName: "extractedColumns");
+                    }
+
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// TextReader, char, IndexCollection, bool, 
+                    /// Dictionary{int, Codifier}, IFormatProvider)"/>
+                    /// method fails as expected when
+                    /// the <see cref="Dictionary{System.Int32, Categorizer}"/> representing the 
+                    /// special categorizers to apply is <b>null</b>.
+                    /// </summary>
+                    public static void SpecialCodifiersIsNull()
+                    {
+                        // Create a data stream 
+                        string[] data = [
+                            "TIME,NAME,NUMBER",
+                            "20200410 09:42:00.000 +00:00,JOE,-2.2",
+                            "20210511 11:51:00.010 +00:00,BILL,0.0",
+                            "20220612 15:11:31.200 +00:00,ANN,-3.3",
+                            "20230713 17:32:10.749 +00:00,LUCCA,-1.1",
+                            "20240814 09:42:00.150 +00:00,BOB,4.4"];
+
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
+                        for (int i = 0; i < data.Length; i++)
+                        {
+                            writer.WriteLine(data[i].ToCharArray());
+                            writer.Flush();
+                        }
+                        stream.Position = 0;
+                        StreamReader reader = new(stream);
+
+                        char columnDelimiter = ',';
+                        IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
+                        bool firstLineContainsColumnHeaders = true;
+
+                        // Attach the special categorizer to variable NUMBER
+                        Dictionary<int, Codifier> specialCodifiers = null;
+
+                        ArgumentExceptionAssert.Throw(
+                            () =>
+                            {
+                                DoubleMatrix.Encode(
+                                    reader,
+                                    columnDelimiter,
+                                    extractedColumns,
+                                    firstLineContainsColumnHeaders,
+                                    specialCodifiers,
+                                    CultureInfo.InvariantCulture);
+                            },
+                            expectedType: typeof(ArgumentNullException),
+                            expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
+                            expectedParameterName: "specialCodifiers");
+                    }
+
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// TextReader, char, IndexCollection, bool, 
+                    /// Dictionary{int, Codifier}, IFormatProvider)"/>
+                    /// method fails as expected when
+                    /// the <see cref="IFormatProvider"/> representing the 
+                    /// format provider is <b>null</b>.
+                    /// </summary>
+                    public static void ProviderIsNull()
+                    {
+                        // Create a data stream 
+                        string[] data = [
+                            "TIME,NAME,NUMBER",
+                            "20200410 09:42:00.000 +00:00,JOE,-2.2",
+                            "20210511 11:51:00.010 +00:00,BILL,0.0",
+                            "20220612 15:11:31.200 +00:00,ANN,-3.3",
+                            "20230713 17:32:10.749 +00:00,LUCCA,-1.1",
+                            "20240814 09:42:00.150 +00:00,BOB,4.4"];
+
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
+                        for (int i = 0; i < data.Length; i++)
+                        {
+                            writer.WriteLine(data[i].ToCharArray());
+                            writer.Flush();
+                        }
+                        stream.Position = 0;
+                        StreamReader reader = new(stream);
+
+                        char columnDelimiter = ',';
+                        IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
+                        bool firstLineContainsColumnHeaders = true;
+
+                        // Define a special codifier for variable TIME
+                        // using a local function.
+                        static double timeCodifier(string token, IFormatProvider provider)
+                        {
+                            double datum = DateTimeOffset.ParseExact(
+                                input: token,
+                                format: "yyyyMMdd HH:mm:ss.fff zzz",
+                                formatProvider: provider).ToUnixTimeMilliseconds();
+
+                            return datum;
+                        }
+
+                        // Attach the special codifier to variable TIME
+                        int numberColumnIndex = 0;
+                        var specialCodifiers = new Dictionary<int, Codifier>
+                        {
+                            { numberColumnIndex, timeCodifier }
+                        };
+
+                        ArgumentExceptionAssert.Throw(
+                            () =>
+                            {
+                                DoubleMatrix.Encode(
+                                    reader,
+                                    columnDelimiter,
+                                    extractedColumns,
+                                    firstLineContainsColumnHeaders,
+                                    specialCodifiers,
+                                    null);
+                            },
+                            expectedType: typeof(ArgumentNullException),
+                            expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
+                            expectedParameterName: "provider");
+                    }
+
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// TextReader, char, IndexCollection, bool, 
+                    /// Dictionary{int, Codifier}, IFormatProvider)"/>
+                    /// method fails as expected when
+                    /// the <see cref="Dictionary{System.Int32, Codifier}"/> representing the 
+                    /// special categorizers to apply contains
+                    /// a wrong key.
+                    /// </summary>
+                    public static void SpecialCodifiersContainsIrrelevantKey()
+                    {
+                        // Create a data stream 
+                        string[] data = [
+                            "TIME,NAME,NUMBER",
+                            "20200410 09:42:00.000 +00:00,JOE,-2.2",
+                            "20210511 11:51:00.010 +00:00,BILL,0.0",
+                            "20220612 15:11:31.200 +00:00,ANN,-3.3",
+                            "20230713 17:32:10.749 +00:00,LUCCA,-1.1",
+                            "20240814 09:42:00.150 +00:00,BOB,4.4"];
+
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
+                        for (int i = 0; i < data.Length; i++)
+                        {
+                            writer.WriteLine(data[i].ToCharArray());
+                            writer.Flush();
+                        }
+                        stream.Position = 0;
+                        StreamReader reader = new(stream);
+
+                        char columnDelimiter = ',';
+                        IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
+                        bool firstLineContainsColumnHeaders = true;
+
+                        var specialCodifiers = new Dictionary<int, Codifier>
+                        {
+                            { -1, (token, provider) => { return Convert.ToDouble(token); } }
+                        };
+
+                        ArgumentExceptionAssert.Throw(
+                            () =>
+                            {
+                                DoubleMatrix.Encode(
+                                    reader,
+                                    columnDelimiter,
+                                    extractedColumns,
+                                    firstLineContainsColumnHeaders,
+                                    specialCodifiers,
+                                    CultureInfo.InvariantCulture);
+                            },
+                            expectedType: typeof(ArgumentException),
+                            expectedPartialMessage: string.Format(
+                                    ImplementationServices.GetResourceString(
+                                    "STR_EXCEPT_MAT_CODIFIER_REFERS_TO_IRRELEVANT_KEY"),
+                                    "columns"),
+                            expectedParameterName: "specialCodifiers");
+                    }
+
+                    /// Tests that the
+                    /// <see cref="DoubleMatrix.Encode(
+                    /// TextReader, char, IndexCollection, bool, 
+                    /// Dictionary{int, Codifier}, IFormatProvider)"/>
+                    /// method fails as expected when
+                    /// the <see cref="Dictionary{System.Int32, Codifier}"/> representing the 
+                    /// special categorizers to apply contains
+                    /// a <b>null</b> value.
+                    /// </summary>
+                    public static void SpecialCodifiersContainsNullValue()
+                    {
+                        // Create a data stream 
+                        string[] data = [
+                            "TIME,NAME,NUMBER",
+                            "20200410 09:42:00.000 +00:00,JOE,-2.2",
+                            "20210511 11:51:00.010 +00:00,BILL,0.0",
+                            "20220612 15:11:31.200 +00:00,ANN,-3.3",
+                            "20230713 17:32:10.749 +00:00,LUCCA,-1.1",
+                            "20240814 09:42:00.150 +00:00,BOB,4.4"];
+
+                        MemoryStream stream = new();
+                        StreamWriter writer = new(stream);
+                        for (int i = 0; i < data.Length; i++)
+                        {
+                            writer.WriteLine(data[i].ToCharArray());
+                            writer.Flush();
+                        }
+                        stream.Position = 0;
+                        StreamReader reader = new(stream);
+
+                        char columnDelimiter = ',';
+                        IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
+                        bool firstLineContainsColumnHeaders = true;
+
+                        var specialCodifiers = new Dictionary<int, Codifier>
+                        {
+                            { 0, null }
+                        };
+
+                        ArgumentExceptionAssert.Throw(
+                            () =>
+                            {
+                                DoubleMatrix.Encode(
+                                    reader,
+                                    columnDelimiter,
+                                    extractedColumns,
+                                    firstLineContainsColumnHeaders,
+                                    specialCodifiers,
+                                    CultureInfo.InvariantCulture);
+                            },
+                            expectedType: typeof(ArgumentException),
+                            expectedPartialMessage: ImplementationServices.GetResourceString(
+                                    "STR_EXCEPT_MAT_CODIFIER_IS_NULL"),
+                            expectedParameterName: "specialCodifiers");
+                    }
                 }
             }
         }

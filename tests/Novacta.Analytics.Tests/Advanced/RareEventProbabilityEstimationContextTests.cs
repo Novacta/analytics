@@ -130,7 +130,7 @@ namespace Novacta.Analytics.Advanced.Tests
                             rareEventPerformanceBoundedness:
                                 RareEventPerformanceBoundedness.Lower,
                             initialParameter: DoubleMatrix.Dense(1, 5,
-                                new double[] { 0.25, 0.4, 0.1, 0.3, 0.2 }));
+                                [0.25, 0.4, 0.1, 0.3, 0.2]));
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
                     expectedPartialMessage:
@@ -155,7 +155,7 @@ namespace Novacta.Analytics.Advanced.Tests
                             rareEventPerformanceBoundedness:
                                 (RareEventPerformanceBoundedness)(-1),
                             initialParameter: DoubleMatrix.Dense(1, 5,
-                                new double[] { 0.25, 0.4, 0.1, 0.3, 0.2 }));
+                                [0.25, 0.4, 0.1, 0.3, 0.2]));
                     },
                     expectedType: typeof(ArgumentException),
                     expectedPartialMessage:
@@ -248,7 +248,7 @@ namespace Novacta.Analytics.Advanced.Tests
             var rareEventPerformanceBoundedness =
                 RareEventPerformanceBoundedness.Upper;
             var nominalParameter = DoubleMatrix.Dense(2, 1,
-                new double[] { 0, 1 });
+                [0, 1]);
 
             var context = new RareEventProbabilityEstimationContext01(
                         stateDimension: stateDimension,

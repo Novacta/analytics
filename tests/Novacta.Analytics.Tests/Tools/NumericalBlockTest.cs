@@ -41,9 +41,9 @@ namespace Novacta.Analytics.Tests.Tools
                 public static void DataLengthIsGreaterThanOne()
                 {
                     var numericalData = DoubleMatrix.Dense(7, 1, 
-                        new double[7] { 1, 1, 1, 2, 2, 3, 4 });
+                        [1, 1, 1, 2, 2, 3, 4]);
                     var targetData = DoubleMatrix.Dense(7, 1, 
-                        new double[7] { 10, 10, 10, 10, 10, 10, 5 });
+                        [10, 10, 10, 10, 10, 10, 5]);
                     var blocks = NumericalBlock.GetNumericalBlocks(
                         numericalData, 
                         targetData);
@@ -100,9 +100,9 @@ namespace Novacta.Analytics.Tests.Tools
                 public static void FinalCutPointExists()
                 {
                     var numericalData = DoubleMatrix.Dense(5, 1, 
-                        new double[5] { -1, -1, 1, 1, 2 });
+                        [-1, -1, 1, 1, 2]);
                     var targetData = DoubleMatrix.Dense(5, 1, 
-                        new double[5] { 10, 20, 10, 10, 10 });
+                        [10, 20, 10, 10, 10]);
                     var blocks = NumericalBlock.GetNumericalBlocks(
                         numericalData, 
                         targetData);
@@ -143,9 +143,9 @@ namespace Novacta.Analytics.Tests.Tools
                 public static void NumericalAndTargetDataHaveDifferentLengths()
                 {
                     var numericalData = DoubleMatrix.Dense(5, 1, 
-                        new double[5] { -1, -1, -1, 1, 1 });
+                        [-1, -1, -1, 1, 1]);
                     var targetData = DoubleMatrix.Dense(4, 1, 
-                        new double[4] { 20, 10, 10, 10 });
+                        [20, 10, 10, 10]);
 
                     ArgumentExceptionAssert.Throw(
                         () =>
@@ -170,7 +170,7 @@ namespace Novacta.Analytics.Tests.Tools
                 public static void TargetDataIsNull()
                 {
                     var numericalData = DoubleMatrix.Dense(5, 1, 
-                        new double[5] { -1, -1, -1, 1, 1 });
+                        [-1, -1, -1, 1, 1]);
                     DoubleMatrix targetData = null;
 
                     ArgumentExceptionAssert.Throw(
@@ -194,7 +194,7 @@ namespace Novacta.Analytics.Tests.Tools
                 {
                     DoubleMatrix numericalData = null;
                     var targetData = DoubleMatrix.Dense(5, 1, 
-                        new double[5] { 10, 20, 10, 10, 10 });
+                        [10, 20, 10, 10, 10]);
 
                     ArgumentExceptionAssert.Throw(
                         () =>

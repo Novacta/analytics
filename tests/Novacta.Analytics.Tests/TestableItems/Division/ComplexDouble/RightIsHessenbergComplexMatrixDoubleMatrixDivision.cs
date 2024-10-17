@@ -4,7 +4,6 @@
 
 using Novacta.Analytics.Tests.TestableItems.Matrices;
 using Novacta.Analytics.Tests.Tools;
-using System.Numerics;
 
 namespace Novacta.Analytics.Tests.TestableItems.Division
 {
@@ -33,19 +32,19 @@ namespace Novacta.Analytics.Tests.TestableItems.Division
         RightIsHessenbergComplexMatrixDoubleMatrixDivision() :
             base(
                 expected: new ComplexMatrixState(
-                    asColumnMajorDenseArray: new Complex[10]
-                    { 
-                        new Complex(-1, -1),
+                    asColumnMajorDenseArray:
+                    [
+                        new(-1, -1),
                         0,
-                        new Complex(2, 2),
-                        new Complex(2, 2),
+                        new(2, 2),
+                        new(2, 2),
                         0,
                         0,
                         0,
                         0,
                         0,
                         0
-                    },
+                    ],
                     numberOfRows: 2,
                     numberOfColumns: 5),
                 left: TestableComplexMatrix23.Get(),

@@ -45,25 +45,25 @@ namespace Novacta.Analytics.Advanced
     /// Given a basis <latex>\A</latex> of <latex>\R^K</latex>, a 
     /// structure 
     /// <latex>S</latex> can be represented by a 
-    /// <i>cloud</i>, say <latex>\bc{A}{\C_S}</latex>, which 
+    /// <i>cloud</i>, say <latex>\C__{S,\A}</latex>, which 
     /// can be formally defined as the
-    /// triplet <latex>(\A,\bc{A}{X_S},w_S)</latex>, where
+    /// triplet <latex>(\A,X_{S,\A},w_S)</latex>, where
     /// <latex mode="display">
-    /// \bc{A}{X_S} =\mx{
-    ///     \T{\bc{A}{x_1}} \\ \vdots \\ \T{\bc{A}{x_n}}
+    /// X_{S,\A} =\mx{
+    ///     \T{x_{1,\A}} \\ \vdots \\ \T{x_{n,\A}}
     ///     }
     /// </latex>
     /// is the coordinates matrix w.r.t. <latex>\A</latex> of the points
     /// in <latex>S</latex>, i.e., its <latex>i</latex>-th row, 
-    /// <latex>\T{\bc{A}{x_i}}</latex>, represents the coordinates 
+    /// <latex>\T{x_{i,\A}}</latex>, represents the coordinates 
     /// of point <latex>x_i</latex>.
     /// </para>
     /// <para>
     /// Given a <see cref="Cloud"/> instance representing 
-    /// <latex>\bc{A}{\C_S}=(\A,\bc{A}{X_S},w_S)</latex>, you can inspect 
+    /// <latex>{\C_{S,\A}=(\A,{X_{S,\A},w_S)</latex>, you can inspect 
     /// its <see cref="Basis"/>, <latex>\A</latex>, 
     /// the <see cref="Coordinates"/>
-    /// of the points <latex>\bc{A}{X_S}</latex>, and 
+    /// of the points <latex>X_{S,\A}</latex>, and 
     /// their <see cref="Weights"/>, <latex>w_S</latex>.
     /// </para>
     /// <para>
@@ -71,7 +71,7 @@ namespace Novacta.Analytics.Advanced
     /// is the vector <latex>m_S</latex> 
     /// whose <latex>\A</latex> coordinates are given by:
     /// <latex mode="display">
-    /// \bc{A}{m_S} = \T{\bc{A}{X_S}}\,w_S.
+    /// m_{S,\A} = \T{X_{S,\A}}\,w_S.
     /// </latex>
     /// Such coordinates are returned by method <see cref="Mean"/>.
     /// The <i>variance</i> of <latex>S</latex>, 
@@ -90,14 +90,14 @@ namespace Novacta.Analytics.Advanced
     /// induced by basis <latex>\A</latex>.
     /// </para>
     /// <para>
-    /// The columns of <latex>\bc{A}{X_S}</latex> represent 
+    /// The columns of <latex>X_{S,\A}</latex> represent 
     /// the <i>active</i> variables 
     /// observed at the <latex>S</latex> points w.r.t. basis 
     /// <latex>\A</latex>. The covariance matrix of such variables 
     /// can be defined 
     /// as follows
     /// <latex mode="display">
-    /// \Cov_{S,\A} = \T{\bc{A}{X_S}}\,W_S\,\bc{A}{X_S},
+    /// \Cov_{S,\A} = \T{X_{S,\A}}\,W_S\,{X_{S,\A},
     /// </latex>
     /// where 
     /// <latex mode="display">
@@ -286,20 +286,11 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (coordinates is null)
-            {
-                throw new ArgumentNullException(nameof(coordinates));
-            }
+            ArgumentNullException.ThrowIfNull(coordinates);
 
-            if (weights is null)
-            {
-                throw new ArgumentNullException(nameof(weights));
-            }
+            ArgumentNullException.ThrowIfNull(weights);
 
-            if (basis is null)
-            {
-                throw new ArgumentNullException(nameof(basis));
-            }
+            ArgumentNullException.ThrowIfNull(basis);
 
             if (!weights.IsColumnVector)
             {
@@ -557,10 +548,10 @@ namespace Novacta.Analytics.Advanced
         /// </para>
         /// <para>
         /// Let this <see cref="Cloud"/> instance represent the cloud 
-        /// <latex>(\A,\bc{A}{X_S},w_S)</latex>, where
+        /// <latex>(\A,X_{S,\A},w_S)</latex>, where
         /// <latex>\A</latex> is its <see cref="Basis"/>, 
         /// the <see cref="Coordinates"/>
-        /// of the points are given by <latex>\bc{A}{X_S}</latex>, and 
+        /// of the points are given by <latex>X_{S,\A}</latex>, and 
         /// <latex>w_S</latex> contains the <see cref="Weights"/>.
         /// </para>
         /// <para>
@@ -568,7 +559,7 @@ namespace Novacta.Analytics.Advanced
         /// w.r.t. basis <latex>\A</latex> of 
         /// the <i>mean point</i>:
         /// <latex mode="display">
-        /// \bc{A}{m_S} = \T{\bc{A}{X_S}}\,w_S.
+        /// m_{S,\A} = \T{X_{S,\A}}\,w_S.
         /// </latex>
         /// </para>
         /// </remarks>
@@ -584,10 +575,10 @@ namespace Novacta.Analytics.Advanced
         /// <remarks>
         /// <para>
         /// Let this <see cref="Cloud"/> instance represent the cloud 
-        /// <latex>(\A,\bc{A}{X_S},w_S)</latex>, where
+        /// <latex>(\A,X_{S,\A},w_S)</latex>, where
         /// <latex>\A</latex> is its <see cref="Basis"/>, 
         /// the <see cref="Coordinates"/>
-        /// of the points are given by <latex>\bc{A}{X_S}</latex>, and 
+        /// of the points are given by <latex>X_{S,\A}</latex>, and 
         /// <latex>w_S</latex> contains the <see cref="Weights"/>.
         /// </para>
         /// <para>
@@ -615,21 +606,21 @@ namespace Novacta.Analytics.Advanced
         /// <remarks>
         /// <para>
         /// Let this <see cref="Cloud"/> instance represent the cloud 
-        /// <latex>(\A,\bc{A}{X_S},w_S)</latex>, where
+        /// <latex>(\A,X_{S,\A},w_S)</latex>, where
         /// <latex>\A</latex> is its <see cref="Basis"/>, 
         /// the <see cref="Coordinates"/>
-        /// of the points are given by <latex>\bc{A}{X_S}</latex>, and 
+        /// of the points are given by <latex>X_{S,\A}</latex>, and 
         /// <latex>w_S</latex> contains the <see cref="Weights"/>.
         /// </para>
         /// <para>
-        /// The columns of <latex>\bc{A}{X_S}</latex> represent 
+        /// The columns of <latex>X_{S,\A}</latex> represent 
         /// the <i>active</i> variables 
         /// observed at the <latex>S</latex> points w.r.t. basis 
         /// <latex>\A</latex>. The covariance matrix of such variables 
         /// is returned by method <see cref="Covariance"/> 
         /// as follows
         /// <latex mode="display">
-        /// \Cov_{S,\A} = \T{\bc{A}{X_S}}\,W_S\,\bc{A}{X_S},
+        /// \Cov_{S,\A} = \T{X_{S,\A}}\,W_S\,X_{S,\A},
         /// </latex>
         /// where 
         /// <latex mode="display">
@@ -677,8 +668,7 @@ namespace Novacta.Analytics.Advanced
         /// </exception>
         public DoubleMatrix GetVariances(DoubleMatrix supplementaryVariables)
         {
-            if (supplementaryVariables is null)
-                throw new ArgumentNullException(nameof(supplementaryVariables));
+            ArgumentNullException.ThrowIfNull(supplementaryVariables);
 
             int numberOfVariables = supplementaryVariables.NumberOfRows;
 
@@ -707,8 +697,7 @@ namespace Novacta.Analytics.Advanced
         /// <inheritdoc cref="GetVariances(DoubleMatrix)"/>
         public DoubleMatrix GetVariances(ReadOnlyDoubleMatrix supplementaryVariables)
         {
-            if (supplementaryVariables is null)
-                throw new ArgumentNullException(nameof(supplementaryVariables));
+            ArgumentNullException.ThrowIfNull(supplementaryVariables);
 
             return this.GetVariances(supplementaryVariables.matrix);
         }
@@ -762,10 +751,7 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (newBasis is null)
-            {
-                throw new ArgumentNullException(nameof(newBasis));
-            }
+            ArgumentNullException.ThrowIfNull(newBasis);
 
             int k = this.Basis.Dimension;
 

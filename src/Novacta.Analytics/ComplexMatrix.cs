@@ -133,7 +133,7 @@ namespace Novacta.Analytics
     /// </para>
     /// <para id='super'>
     /// If <latex mode="inline">n>1</latex>, then the matrix has 
-    /// <latex depth="0" mode="inline">n-1</latex> <b> super-diagonals</b>: for 
+    /// <latex mode="inline">n-1</latex> <b> super-diagonals</b>: for 
     /// <latex mode="inline">k=1,\dots,n-1</latex>, the 
     /// <latex mode="inline">k</latex>-th super-diagonal is the collection of entries
     /// corresponding to the positions
@@ -143,7 +143,7 @@ namespace Novacta.Analytics
     /// </para>
     /// <para id='sub'>
     /// If <latex mode="inline">m>1</latex>, the matrix has 
-    /// <latex depth="0" mode="inline">m-1</latex> <b> sub-diagonals</b>: for 
+    /// <latex mode="inline">m-1</latex> <b> sub-diagonals</b>: for 
     /// <latex mode="inline">k=1,\dots,m-1</latex>, the 
     /// <latex mode="inline">k</latex>-th sub-diagonal is the collection of entries
     /// corresponding to the positions
@@ -318,7 +318,7 @@ namespace Novacta.Analytics
         public ComplexMatrix(Complex value)
         {
             this.implementor = new DenseComplexMatrixImplementor(
-                1, 1, new Complex[] { value }, StorageOrder.ColumnMajor);
+                1, 1, [value], StorageOrder.ColumnMajor);
         }
 
         internal ComplexMatrix(MatrixImplementor<Complex> implementor)
@@ -354,8 +354,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static explicit operator ComplexMatrix(ReadOnlyComplexMatrix value)
         {
-            if (value is null)
-                throw new ArgumentNullException(nameof(value));
+            ArgumentNullException.ThrowIfNull(value);
 
             return value.matrix.Clone();
         }
@@ -371,8 +370,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix FromReadOnlyComplexMatrix(ReadOnlyComplexMatrix value)
         {
-            if (value is null)
-                throw new ArgumentNullException(nameof(value));
+            ArgumentNullException.ThrowIfNull(value);
 
             return value.matrix.Clone();
         }
@@ -418,8 +416,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static explicit operator Complex(ComplexMatrix value)
         {
-            if (value is null)
-                throw new ArgumentNullException(nameof(value));
+            ArgumentNullException.ThrowIfNull(value);
 
             if (!value.IsScalar)
             {
@@ -542,7 +539,7 @@ namespace Novacta.Analytics
             {
                 if (null == this.rowNames)
                 {
-                    this.rowNames = new Dictionary<int, string>();
+                    this.rowNames = [];
                 }
 
                 return new ReadOnlyDictionary<int, string>(this.rowNames);
@@ -585,7 +582,7 @@ namespace Novacta.Analytics
             }
 
             if (null == this.rowNames)
-                this.rowNames = new Dictionary<int, string>();
+                this.rowNames = [];
 
             this.rowNames[rowIndex] = rowName;
         }
@@ -636,7 +633,7 @@ namespace Novacta.Analytics
 
             if (this.rowNames is not null)
             {
-                clonedRowNames = new Dictionary<int, string>();
+                clonedRowNames = [];
                 foreach (var i in this.rowNames.Keys)
                 {
                     clonedRowNames[i] = this.rowNames[i];
@@ -720,7 +717,7 @@ namespace Novacta.Analytics
             {
                 if (null == this.columnNames)
                 {
-                    this.columnNames = new Dictionary<int, string>();
+                    this.columnNames = [];
                 }
                 return new ReadOnlyDictionary<int, string>(this.columnNames);
             }
@@ -762,7 +759,7 @@ namespace Novacta.Analytics
             }
 
             if (null == this.columnNames)
-                this.columnNames = new Dictionary<int, string>();
+                this.columnNames = [];
 
             this.columnNames[columnIndex] = columnName;
         }
@@ -812,7 +809,7 @@ namespace Novacta.Analytics
 
             if (this.columnNames is not null)
             {
-                clonedColumnNames = new Dictionary<int, string>();
+                clonedColumnNames = [];
                 foreach (var i in this.columnNames.Keys)
                 {
                     clonedColumnNames[i] = this.columnNames[i];
@@ -911,10 +908,7 @@ namespace Novacta.Analytics
         /// </exception>
         public ComplexMatrixRowCollection AsRowCollection(IndexCollection rowIndexes)
         {
-            if (rowIndexes is null)
-            {
-                throw new ArgumentNullException(nameof(rowIndexes));
-            }
+            ArgumentNullException.ThrowIfNull(rowIndexes);
             if (rowIndexes.maxIndex >= this.NumberOfRows)
             {
                 throw new ArgumentOutOfRangeException(nameof(rowIndexes),
@@ -1029,10 +1023,7 @@ namespace Novacta.Analytics
         public static ComplexMatrix Diagonal(
             ComplexMatrix mainDiagonal)
         {
-            if (mainDiagonal is null)
-            {
-                throw new ArgumentNullException(nameof(mainDiagonal));
-            }
+            ArgumentNullException.ThrowIfNull(mainDiagonal);
 
             int dimension = mainDiagonal.Count;
             var diagonalImplementor = new SparseCsr3ComplexMatrixImplementor(dimension, dimension, dimension);
@@ -1051,10 +1042,7 @@ namespace Novacta.Analytics
         public static ComplexMatrix Diagonal(
             ReadOnlyComplexMatrix mainDiagonal)
         {
-            if (mainDiagonal is null)
-            {
-                throw new ArgumentNullException(nameof(mainDiagonal));
-            }
+            ArgumentNullException.ThrowIfNull(mainDiagonal);
 
             return Diagonal(mainDiagonal.matrix);
         }
@@ -1170,10 +1158,7 @@ namespace Novacta.Analytics
         {
             #region Input validation
 
-            if (null == data)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             int numberOfRows = data.GetLength(0);
             int numberOfColumns = data.GetLength(1);
@@ -1445,10 +1430,7 @@ namespace Novacta.Analytics
                         "STR_EXCEPT_PAR_MUST_BE_POSITIVE"));
             }
 
-            if (null == data)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             if ((StorageOrder.ColumnMajor != storageOrder)
                 && (StorageOrder.RowMajor != storageOrder))
@@ -1540,10 +1522,7 @@ namespace Novacta.Analytics
                         "STR_EXCEPT_PAR_MUST_BE_POSITIVE"));
             }
 
-            if (null == data)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             int matrixCount = numberOfRows * numberOfColumns;
             if (data.Length != matrixCount)
@@ -1673,10 +1652,7 @@ namespace Novacta.Analytics
                         "STR_EXCEPT_PAR_MUST_BE_POSITIVE"));
             }
 
-            if (null == data)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             if ((StorageOrder.ColumnMajor != storageOrder)
                 && (StorageOrder.RowMajor != storageOrder))
@@ -1955,14 +1931,8 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator +(ComplexMatrix left, ComplexMatrix right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(left);
+            ArgumentNullException.ThrowIfNull(right);
             return new ComplexMatrix(complexComplexSumOperators[(int)left.implementor.StorageScheme,
                (int)right.implementor.StorageScheme](left.implementor, right.implementor));
         }
@@ -2056,14 +2026,8 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator +(DoubleMatrix left, ComplexMatrix right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(left);
+            ArgumentNullException.ThrowIfNull(right);
             return new ComplexMatrix(doubleComplexSumOperators[(int)left.implementor.StorageScheme,
                (int)right.implementor.StorageScheme](left.implementor, right.implementor));
         }
@@ -2077,8 +2041,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "op_Addition(DoubleMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator +(ReadOnlyDoubleMatrix left, ComplexMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
             return left.matrix + right;
         }
@@ -2172,14 +2135,8 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator +(ComplexMatrix left, DoubleMatrix right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(left);
+            ArgumentNullException.ThrowIfNull(right);
             return new ComplexMatrix(complexDoubleSumOperators[(int)left.implementor.StorageScheme,
                (int)right.implementor.StorageScheme](left.implementor, right.implementor));
         }
@@ -2193,8 +2150,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "op_Addition(ComplexMatrix,DoubleMatrix)"/>
         public static ComplexMatrix operator +(ComplexMatrix left, ReadOnlyDoubleMatrix right)
         {
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left + right.matrix;
         }
@@ -2264,10 +2220,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator +(ComplexMatrix left, Complex right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
+            ArgumentNullException.ThrowIfNull(left);
             return new ComplexMatrix(scalarSumOperators[(int)left.implementor.StorageScheme]
                 (left.implementor, right));
         }
@@ -2316,10 +2269,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator +(Complex left, ComplexMatrix right)
         {
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(right);
             return new ComplexMatrix(scalarSumOperators[(int)right.implementor.StorageScheme]
                 (right.implementor, left));
         }
@@ -2386,10 +2336,7 @@ namespace Novacta.Analytics
         /// <seealso cref="Apply"/>
         public void InPlaceApply(Func<Complex, Complex> func)
         {
-            if (func is null)
-            {
-                throw new ArgumentNullException(nameof(func));
-            }
+            ArgumentNullException.ThrowIfNull(func);
             inPlaceApplyOperators[(int)this.implementor.StorageScheme](this.implementor, func);
         }
 
@@ -2447,10 +2394,7 @@ namespace Novacta.Analytics
         /// <seealso cref="InPlaceApply"/>
         public ComplexMatrix Apply(Func<Complex, Complex> func)
         {
-            if (func is null)
-            {
-                throw new ArgumentNullException(nameof(func));
-            }
+            ArgumentNullException.ThrowIfNull(func);
 
             return new ComplexMatrix(outPlaceApplyOperators[
                 (int)this.implementor.StorageScheme]
@@ -2523,14 +2467,8 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix ElementWiseMultiply(ComplexMatrix left, ComplexMatrix right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(left);
+            ArgumentNullException.ThrowIfNull(right);
             return new ComplexMatrix(multiplyByElementOperators[(int)left.implementor.StorageScheme,
                (int)right.implementor.StorageScheme](left.implementor, right.implementor));
         }
@@ -2588,14 +2526,8 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix ElementWiseMultiply(DoubleMatrix left, ComplexMatrix right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(left);
+            ArgumentNullException.ThrowIfNull(right);
             return new ComplexMatrix(doubleComplexMultiplyByElementOperators[(int)left.implementor.StorageScheme,
                (int)right.implementor.StorageScheme](left.implementor, right.implementor));
         }
@@ -2603,10 +2535,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ElementWiseMultiply(DoubleMatrix,ComplexMatrix)"/>
         public static ComplexMatrix ElementWiseMultiply(ReadOnlyDoubleMatrix left, ComplexMatrix right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
+            ArgumentNullException.ThrowIfNull(left);
             return ElementWiseMultiply(left.matrix, right);
         }
 
@@ -2635,14 +2564,8 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ElementWiseMultiply(DoubleMatrix,ComplexMatrix)"/>
         public static ComplexMatrix ElementWiseMultiply(ComplexMatrix left, DoubleMatrix right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(left);
+            ArgumentNullException.ThrowIfNull(right);
             return new ComplexMatrix(complexDoubleMultiplyByElementOperators[(int)left.implementor.StorageScheme,
                (int)right.implementor.StorageScheme](left.implementor, right.implementor));
         }
@@ -2650,10 +2573,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ElementWiseMultiply(DoubleMatrix,ComplexMatrix)"/>
         public static ComplexMatrix ElementWiseMultiply(ComplexMatrix left, ReadOnlyDoubleMatrix right)
         {
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(right);
 
             return ElementWiseMultiply(left, right.matrix);
         }
@@ -2810,10 +2730,7 @@ namespace Novacta.Analytics
         /// </exception>
         public IndexCollection FindWhile(Predicate<Complex> match)
         {
-            if (match is null)
-            {
-                throw new ArgumentNullException(nameof(match));
-            }
+            ArgumentNullException.ThrowIfNull(match);
 
             var implementor = this.implementor;
             return findWhileComplexOperators[(int)implementor.StorageScheme](implementor, match);
@@ -2878,9 +2795,7 @@ namespace Novacta.Analytics
             {
                 if (this.HasColumnNames)
                 {
-                    var rowNames = this.rowNames;
-                    this.rowNames = this.columnNames;
-                    this.columnNames = rowNames;
+                    (this.columnNames, this.rowNames) = (this.rowNames, this.columnNames);
                 }
                 else
                 {
@@ -3032,9 +2947,7 @@ namespace Novacta.Analytics
             {
                 if (this.HasColumnNames)
                 {
-                    var rowNames = this.rowNames;
-                    this.rowNames = this.columnNames;
-                    this.columnNames = rowNames;
+                    (this.columnNames, this.rowNames) = (this.rowNames, this.columnNames);
                 }
                 else
                 {
@@ -3372,14 +3285,8 @@ namespace Novacta.Analytics
         /// <seealso href="https://en.wikipedia.org/wiki/QR_decomposition"/>
         public static ComplexMatrix operator /(ComplexMatrix left, ComplexMatrix right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(left);
+            ArgumentNullException.ThrowIfNull(right);
             return new ComplexMatrix(divideOperators[(int)left.implementor.StorageScheme,
                (int)right.implementor.StorageScheme](left.implementor, right.implementor));
         }
@@ -3485,14 +3392,8 @@ namespace Novacta.Analytics
         /// <seealso href="https://en.wikipedia.org/wiki/QR_decomposition"/>
         public static ComplexMatrix operator /(DoubleMatrix left, ComplexMatrix right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(left);
+            ArgumentNullException.ThrowIfNull(right);
             return new ComplexMatrix(doubleComplexDivideOperators[(int)left.implementor.StorageScheme,
                (int)right.implementor.StorageScheme](left.implementor, right.implementor));
         }
@@ -3506,8 +3407,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "op_Division(DoubleMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator /(ReadOnlyDoubleMatrix left, ComplexMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
             return left.matrix / right;
         }
@@ -3613,14 +3513,8 @@ namespace Novacta.Analytics
         /// <seealso href="https://en.wikipedia.org/wiki/QR_decomposition"/>
         public static ComplexMatrix operator /(ComplexMatrix left, DoubleMatrix right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(left);
+            ArgumentNullException.ThrowIfNull(right);
             return new ComplexMatrix(complexDoubleDivideOperators[(int)left.implementor.StorageScheme,
                (int)right.implementor.StorageScheme](left.implementor, right.implementor));
         }
@@ -3634,8 +3528,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "op_Division(ComplexMatrix,DoubleMatrix)"/>
         public static ComplexMatrix operator /(ComplexMatrix left, ReadOnlyDoubleMatrix right)
         {
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left / right.matrix;
         }
@@ -3697,10 +3590,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator /(ComplexMatrix left, Complex right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
+            ArgumentNullException.ThrowIfNull(left);
             return new ComplexMatrix(scalarRightDivideOperators[(int)left.implementor.StorageScheme]
                 (left.implementor, right));
         }
@@ -3761,10 +3651,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator /(Complex left, ComplexMatrix right)
         {
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(right);
             return new ComplexMatrix(scalarLeftDivideOperators[(int)right.implementor.StorageScheme]
                 (right.implementor, left));
         }
@@ -3863,14 +3750,8 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator *(ComplexMatrix left, ComplexMatrix right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(left);
+            ArgumentNullException.ThrowIfNull(right);
             return new ComplexMatrix(multiplyOperators[(int)left.implementor.StorageScheme,
                (int)right.implementor.StorageScheme](left.implementor, right.implementor));
         }
@@ -3953,14 +3834,8 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator *(DoubleMatrix left, ComplexMatrix right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(left);
+            ArgumentNullException.ThrowIfNull(right);
             return new ComplexMatrix(doubleComplexMultiplyOperators[(int)left.implementor.StorageScheme,
                (int)right.implementor.StorageScheme](left.implementor, right.implementor));
         }
@@ -3974,8 +3849,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "op_Multiply(DoubleMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator *(ReadOnlyDoubleMatrix left, ComplexMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
             return left.matrix * right;
         }
@@ -4058,14 +3932,8 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator *(ComplexMatrix left, DoubleMatrix right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(left);
+            ArgumentNullException.ThrowIfNull(right);
             return new ComplexMatrix(complexDoubleMultiplyOperators[(int)left.implementor.StorageScheme,
                (int)right.implementor.StorageScheme](left.implementor, right.implementor));
         }
@@ -4079,8 +3947,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "op_Multiply(ComplexMatrix,DoubleMatrix)"/>
         public static ComplexMatrix operator *(ComplexMatrix left, ReadOnlyDoubleMatrix right)
         {
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left * right.matrix;
         }
@@ -4143,10 +4010,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator *(ComplexMatrix left, Complex right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
+            ArgumentNullException.ThrowIfNull(left);
             return new ComplexMatrix(scalarMultiplyOperators[(int)left.implementor.StorageScheme]
                 (left.implementor, right));
         }
@@ -4188,10 +4052,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator *(Complex left, ComplexMatrix right)
         {
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(right);
             return new ComplexMatrix(scalarMultiplyOperators[(int)right.implementor.StorageScheme]
                 (right.implementor, left));
         }
@@ -4289,14 +4150,8 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator -(ComplexMatrix left, ComplexMatrix right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(left);
+            ArgumentNullException.ThrowIfNull(right);
             return new ComplexMatrix(subtractOperators[(int)left.implementor.StorageScheme,
                (int)right.implementor.StorageScheme](left.implementor, right.implementor));
         }
@@ -4378,14 +4233,8 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator -(DoubleMatrix left, ComplexMatrix right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(left);
+            ArgumentNullException.ThrowIfNull(right);
             return new ComplexMatrix(doubleComplexSubtractOperators[(int)left.implementor.StorageScheme,
                (int)right.implementor.StorageScheme](left.implementor, right.implementor));
         }
@@ -4399,8 +4248,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "op_Subtraction(DoubleMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator -(ReadOnlyDoubleMatrix left, ComplexMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
             return left.matrix - right;
         }
@@ -4482,14 +4330,8 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator -(ComplexMatrix left, DoubleMatrix right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(left);
+            ArgumentNullException.ThrowIfNull(right);
             return new ComplexMatrix(complexDoubleSubtractOperators[(int)left.implementor.StorageScheme,
                (int)right.implementor.StorageScheme](left.implementor, right.implementor));
         }
@@ -4503,8 +4345,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "op_Subtraction(ComplexMatrix,DoubleMatrix)"/>
         public static ComplexMatrix operator -(ComplexMatrix left, ReadOnlyDoubleMatrix right)
         {
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left - right.matrix;
         }
@@ -4566,10 +4407,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator -(ComplexMatrix left, Complex right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
+            ArgumentNullException.ThrowIfNull(left);
             return new ComplexMatrix(scalarRightSubtractOperators[(int)left.implementor.StorageScheme]
                 (left.implementor, right));
         }
@@ -4628,10 +4466,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator -(Complex left, ComplexMatrix right)
         {
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(right);
             return new ComplexMatrix(scalarLeftSubtractOperators[(int)right.implementor.StorageScheme]
                 (right.implementor, left));
         }
@@ -4696,10 +4531,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator -(ComplexMatrix matrix)
         {
-            if (matrix is null)
-            {
-                throw new ArgumentNullException(nameof(matrix));
-            }
+            ArgumentNullException.ThrowIfNull(matrix);
             return new ComplexMatrix(negationOperators[(int)matrix.implementor.StorageScheme]
                 (matrix.implementor));
         }
@@ -5089,8 +4921,7 @@ namespace Novacta.Analytics
         {
             get
             {
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
                 var subMatrix = new ComplexMatrix(this.implementor[rowIndex, columnIndexes]);
 
@@ -5110,11 +4941,9 @@ namespace Novacta.Analytics
             }
             set
             {
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
-                if (value is null)
-                    throw new ArgumentNullException(nameof(value));
+                ArgumentNullException.ThrowIfNull(value);
 
                 this.implementor[rowIndex, columnIndexes] = value.implementor;
             }
@@ -5134,8 +4963,7 @@ namespace Novacta.Analytics
         {
             get
             {
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
                 // Check if columnIndexes is a string reserved for sub-reference
                 if (0 != string.Compare(columnIndexes, ":", StringComparison.Ordinal))
@@ -5164,11 +4992,9 @@ namespace Novacta.Analytics
 
             set
             {
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
-                if (value is null)
-                    throw new ArgumentNullException(nameof(value));
+                ArgumentNullException.ThrowIfNull(value);
 
                 // Check if columnIndexes is a string reserved for sub-reference
                 if (0 != string.Compare(columnIndexes, ":", StringComparison.Ordinal))
@@ -5201,8 +5027,7 @@ namespace Novacta.Analytics
         {
             get
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
                 var subMatrix = new ComplexMatrix(this.implementor[rowIndexes, columnIndex]);
 
@@ -5222,11 +5047,9 @@ namespace Novacta.Analytics
             }
             set
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
-                if (value is null)
-                    throw new ArgumentNullException(nameof(value));
+                ArgumentNullException.ThrowIfNull(value);
 
                 this.implementor[rowIndexes, columnIndex] = value.implementor;
             }
@@ -5246,11 +5069,9 @@ namespace Novacta.Analytics
         {
             get
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
                 ComplexMatrix subMatrix = new(this.implementor[rowIndexes, columnIndexes]);
 
@@ -5270,14 +5091,11 @@ namespace Novacta.Analytics
             }
             set
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
-                if (value is null)
-                    throw new ArgumentNullException(nameof(value));
+                ArgumentNullException.ThrowIfNull(value);
 
                 this.implementor[rowIndexes, columnIndexes] = value.implementor;
             }
@@ -5297,11 +5115,9 @@ namespace Novacta.Analytics
         {
             get
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
                 // Check if columnIndexes is a string reserved for sub-reference
                 if (0 != string.Compare(columnIndexes, ":", StringComparison.Ordinal))
@@ -5329,14 +5145,11 @@ namespace Novacta.Analytics
             }
             set
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
-                if (value is null)
-                    throw new ArgumentNullException(nameof(value));
+                ArgumentNullException.ThrowIfNull(value);
 
                 // Check if columnIndexes is a string reserved for sub-reference
                 if (0 != string.Compare(columnIndexes, ":", StringComparison.Ordinal))
@@ -5369,8 +5182,7 @@ namespace Novacta.Analytics
         {
             get
             {
-                if (rowIndexes is null)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
                 // Check if rowIndexes is a string reserved for sub-reference
                 if (0 != string.Compare(rowIndexes, ":", StringComparison.Ordinal))
@@ -5398,8 +5210,7 @@ namespace Novacta.Analytics
             }
             set
             {
-                if (rowIndexes is null)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
                 // Check if rowIndexes is a string reserved for sub-reference
                 if (0 != string.Compare(rowIndexes, ":", StringComparison.Ordinal))
@@ -5410,8 +5221,7 @@ namespace Novacta.Analytics
                            "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX"));
                 }
 
-                if (value is null)
-                    throw new ArgumentNullException(nameof(value));
+                ArgumentNullException.ThrowIfNull(value);
 
                 this.implementor[rowIndexes, columnIndex] = value.implementor;
             }
@@ -5431,11 +5241,9 @@ namespace Novacta.Analytics
         {
             get
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
                 // Check if rowIndexes is a string reserved for sub reference
                 if (0 != string.Compare(rowIndexes, ":", StringComparison.Ordinal))
@@ -5463,11 +5271,9 @@ namespace Novacta.Analytics
             }
             set
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
                 // Check if rowIndexes is a string reserved for sub-reference
                 if (0 != string.Compare(rowIndexes, ":", StringComparison.Ordinal))
@@ -5478,8 +5284,7 @@ namespace Novacta.Analytics
                            "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX"));
                 }
 
-                if (value is null)
-                    throw new ArgumentNullException(nameof(value));
+                ArgumentNullException.ThrowIfNull(value);
 
                 this.implementor[rowIndexes, columnIndexes] = value.implementor;
             }
@@ -5499,11 +5304,9 @@ namespace Novacta.Analytics
         {
             get
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
                 if (0 != string.Compare(rowIndexes, ":", StringComparison.Ordinal))
                 {
@@ -5537,15 +5340,12 @@ namespace Novacta.Analytics
             }
             set
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
 
-                if (value is null)
-                    throw new ArgumentNullException(nameof(value));
+                ArgumentNullException.ThrowIfNull(value);
 
                 if (0 != string.Compare(rowIndexes, ":", StringComparison.Ordinal))
                 {
@@ -5652,8 +5452,7 @@ namespace Novacta.Analytics
         /// </exception>
         public ComplexMatrix Vec(IndexCollection linearIndexes)
         {
-            if (linearIndexes is null)
-                throw new ArgumentNullException(nameof(linearIndexes));
+            ArgumentNullException.ThrowIfNull(linearIndexes);
 
             return new ComplexMatrix(this.implementor[linearIndexes]);
         }
@@ -5813,10 +5612,7 @@ namespace Novacta.Analytics
         /// <inheritdoc/>
         public void CopyTo(Complex[] array, int arrayIndex)
         {
-            if (array is null)
-            {
-                throw new ArgumentNullException(nameof(array));
-            }
+            ArgumentNullException.ThrowIfNull(array);
 
             if (arrayIndex < 0)
             {

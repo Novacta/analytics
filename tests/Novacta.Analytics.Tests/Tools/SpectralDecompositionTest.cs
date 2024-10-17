@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using Novacta.Analytics.Advanced;
+using Novacta.Analytics.Infrastructure;
 using Novacta.Analytics.Tests.TestableItems;
 using System;
 
@@ -564,6 +565,69 @@ namespace Novacta.Analytics.Tests.Tools
                     expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
                     expectedParameterName: "matrix");
             }
+
+            /// <summary>
+            /// Tests the operation
+            /// when its operand is set through a value represented by an instance
+            /// that is not a square matrix.
+            /// </summary>
+            public static void MatrixIsNotSquare()
+            {
+                var STR_EXCEPT_PAR_MUST_BE_SQUARE =
+                    ImplementationServices.GetResourceString(
+                        "STR_EXCEPT_PAR_MUST_BE_SQUARE");
+
+                string parameterName = "matrix";
+
+                ArgumentExceptionAssert.Throw(
+                    () =>
+                    {
+                        SpectralDecomposition.Decompose(
+                            matrix: DoubleMatrix.Dense(2, 3),
+                            lowerTriangularPart: true,
+                            out DoubleMatrix eigenvectors);
+                    },
+                    expectedType: typeof(ArgumentException),
+                    expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_SQUARE,
+                    expectedParameterName: parameterName);
+
+                ArgumentExceptionAssert.Throw(
+                    () =>
+                    {
+                        SpectralDecomposition.Decompose(
+                            matrix: DoubleMatrix.Dense(2, 3).AsReadOnly(),
+                            lowerTriangularPart: true,
+                            out DoubleMatrix eigenvectors);
+                    },
+                    expectedType: typeof(ArgumentException),
+                    expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_SQUARE,
+                    expectedParameterName: parameterName);
+
+                ArgumentExceptionAssert.Throw(
+                    () =>
+                    {
+                        SpectralDecomposition.Decompose(
+                            matrix: ComplexMatrix.Dense(2, 3),
+                            lowerTriangularPart: true,
+                            out ComplexMatrix eigenvectors);
+                    },
+                    expectedType: typeof(ArgumentException),
+                    expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_SQUARE,
+                    expectedParameterName: parameterName);
+
+                ArgumentExceptionAssert.Throw(
+                    () =>
+                    {
+                        SpectralDecomposition.Decompose(
+                            matrix: ComplexMatrix.Dense(2, 3).AsReadOnly(),
+                            lowerTriangularPart: true,
+                            out ComplexMatrix eigenvectors);
+                    },
+                    expectedType: typeof(ArgumentException),
+                    expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_SQUARE,
+                    expectedParameterName: parameterName);
+            }
+
         }
 
         /// <summary>
@@ -866,6 +930,65 @@ namespace Novacta.Analytics.Tests.Tools
                     expectedPartialMessage: ArgumentExceptionAssert.NullPartialMessage,
                     expectedParameterName: "matrix");
             }
+
+            /// <summary>
+            /// Tests the operation
+            /// when its operand is set through a value represented by an instance
+            /// that is not a square matrix.
+            /// </summary>
+            public static void MatrixIsNotSquare()
+            {
+                var STR_EXCEPT_PAR_MUST_BE_SQUARE =
+                    ImplementationServices.GetResourceString(
+                        "STR_EXCEPT_PAR_MUST_BE_SQUARE");
+
+                string parameterName = "matrix";
+
+                ArgumentExceptionAssert.Throw(
+                    () =>
+                    {
+                        SpectralDecomposition.GetEigenvalues(
+                            matrix: DoubleMatrix.Dense(2, 3),
+                            lowerTriangularPart: true);
+                    },
+                    expectedType: typeof(ArgumentException),
+                    expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_SQUARE,
+                    expectedParameterName: parameterName);
+
+                ArgumentExceptionAssert.Throw(
+                    () =>
+                    {
+                        SpectralDecomposition.GetEigenvalues(
+                            matrix: DoubleMatrix.Dense(2, 3).AsReadOnly(),
+                            lowerTriangularPart: true);
+                    },
+                    expectedType: typeof(ArgumentException),
+                    expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_SQUARE,
+                    expectedParameterName: parameterName);
+
+                ArgumentExceptionAssert.Throw(
+                    () =>
+                    {
+                        SpectralDecomposition.GetEigenvalues(
+                            matrix: ComplexMatrix.Dense(2, 3),
+                            lowerTriangularPart: true);
+                    },
+                    expectedType: typeof(ArgumentException),
+                    expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_SQUARE,
+                    expectedParameterName: parameterName);
+
+                ArgumentExceptionAssert.Throw(
+                    () =>
+                    {
+                        SpectralDecomposition.GetEigenvalues(
+                            matrix: ComplexMatrix.Dense(2, 3).AsReadOnly(),
+                            lowerTriangularPart: true);
+                    },
+                    expectedType: typeof(ArgumentException),
+                    expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_SQUARE,
+                    expectedParameterName: parameterName);
+            }
+
         }
     }
 }

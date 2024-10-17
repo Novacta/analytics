@@ -32,6 +32,24 @@ namespace Novacta.Analytics
         /// <summary>
         /// Initializes a new instance of 
         /// the <see cref="RandomIndexPermutation"/> class
+        /// able to permute the specified <see cref="IndexCollection"/>, eventually copied.
+        /// </summary>
+        /// <param name="indexes">The collection of indexes to permute.</param>
+        /// <param name="copyIndexes"><c>true</c> if <paramref name="indexes"/> has to be copied;
+        /// otherwise <c>false</c>.</param>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="indexes"/> is <b>null</b>.
+        /// </exception>
+        public RandomIndexPermutation(IndexCollection indexes, bool copyIndexes)
+        {
+            ArgumentNullException.ThrowIfNull(indexes);
+
+            this.indexes = copyIndexes ? indexes.Clone() : indexes;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of 
+        /// the <see cref="RandomIndexPermutation"/> class
         /// able to permute the specified <see cref="IndexCollection"/>.
         /// </summary>
         /// <param name="indexes">The collection of indexes to permute.</param>
@@ -39,12 +57,8 @@ namespace Novacta.Analytics
         /// <paramref name="indexes"/> is <b>null</b>.
         /// </exception>
         public RandomIndexPermutation(IndexCollection indexes)
+            : this(indexes, copyIndexes: true)
         {
-            if (indexes is null) {
-                throw new ArgumentNullException(nameof(indexes));
-            }
-
-            this.indexes = indexes.Clone();
         }
 
         /// <summary>
@@ -64,9 +78,7 @@ namespace Novacta.Analytics
                 int j = this.RandomNumberGenerator.DiscreteUniform(0, i + 1);
 
                 // Swap contents at positions j and i 
-                int randomIndex = randomIndexes[j];
-                randomIndexes[j] = randomIndexes[i];
-                randomIndexes[i] = randomIndex;
+                (randomIndexes[i], randomIndexes[j]) = (randomIndexes[j], randomIndexes[i]);
             }
 
             return randomPermutation;

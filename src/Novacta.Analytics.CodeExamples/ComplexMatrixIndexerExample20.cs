@@ -10,10 +10,10 @@ namespace Novacta.Analytics.CodeExamples
         {
             // Create a matrix.
             var data = new Complex[8] {
-                new Complex(1, -1), new Complex(5, -5),
-                new Complex(2, -2), new Complex(6, -6),
-                new Complex(3, -3), new Complex(7, -7),
-                new Complex(4, -4), new Complex(8, -8)
+                new(1, -1), new(5, -5),
+                new(2, -2), new(6, -6),
+                new(3, -3), new(7, -7),
+                new(4, -4), new(8, -8)
             };
             var matrix = ComplexMatrix.Dense(4, 2, data, StorageOrder.RowMajor);
             Console.WriteLine("Initial data matrix:");
@@ -31,10 +31,10 @@ namespace Novacta.Analytics.CodeExamples
 
             // Specify the value matrix.
             var valueData = new Complex[4] {
-                new Complex(10, -10),
-                new Complex(20, -20),
-                new Complex(30, -30),
-                new Complex(40, -40)
+                new(10, -10),
+                new(20, -20),
+                new(30, -30),
+                new(40, -40)
             };
             var value = ComplexMatrix.Dense(4, 1, valueData, StorageOrder.RowMajor);
             Console.WriteLine();

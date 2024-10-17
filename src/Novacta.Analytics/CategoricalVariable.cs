@@ -73,7 +73,7 @@ namespace Novacta.Analytics
         #region Status
 
         private string name;
-        private readonly List<Category> categories = new();
+        private readonly List<Category> categories = [];
 
         /// <summary>
         /// Gets a value indicating whether this instance is read only.
@@ -207,7 +207,7 @@ namespace Novacta.Analytics
 
             int numberOfCategories = this.categories.Count;
 
-            builder.Append("[");
+            builder.Append('[');
 
             for (int i = 0; i < numberOfCategories; i++)
             {
@@ -219,7 +219,7 @@ namespace Novacta.Analytics
                 }
             }
 
-            builder.Append("]");
+            builder.Append(']');
 
             return builder.ToString();
         }
@@ -428,10 +428,7 @@ namespace Novacta.Analytics
         {
             this.ThrowIfVariableIsReadOnly();
 
-            if (label is null)
-            {
-                throw new ArgumentNullException(nameof(label));
-            }
+            ArgumentNullException.ThrowIfNull(label);
 
             bool isNameContained = false;
             foreach (var category in this.categories)
@@ -472,10 +469,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static explicit operator DoubleMatrix(CategoricalVariable value)
         {
-            if (value is null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            ArgumentNullException.ThrowIfNull(value);
 
             int numberOfRows = value.NumberOfCategories;
             var doubleMatrix = DoubleMatrix.Dense(numberOfRows, 1);
@@ -549,10 +543,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static explicit operator CategoricalVariable(DoubleMatrix value)
         {
-            if (value is null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            ArgumentNullException.ThrowIfNull(value);
 
             if (!value.IsColumnVector)
             {

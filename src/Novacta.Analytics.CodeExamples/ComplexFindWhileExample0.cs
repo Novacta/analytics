@@ -10,9 +10,9 @@ namespace Novacta.Analytics.CodeExamples
         {
             // Create a matrix.
             var data = new Complex[6] {
-                new Complex(0,  0), new Complex(5, -5),
-                new Complex(2, -2), new Complex(0,  0),
-                new Complex(0,  0), new Complex(2, -2)
+                new(0,  0), new(5, -5),
+                new(2, -2), new(0,  0),
+                new(0,  0), new(2, -2)
             };
             var matrix = ComplexMatrix.Dense(3, 2, data, StorageOrder.RowMajor);
             Console.WriteLine("The data matrix:");

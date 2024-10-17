@@ -37,7 +37,7 @@ namespace Novacta.Analytics.Tests.Data
         /// and related corrosion levels (second column).
         /// </summary>
         internal static DoubleMatrix Data = DoubleMatrix.Dense(32, 2, 
-            new double[64]{
+            [
                 // Failure times
                 5.23123756299729160000,
                 0.88374116211433573000,
@@ -104,7 +104,7 @@ namespace Novacta.Analytics.Tests.Data
                 3.86109929298981980000,
                 4.16830997914075760000,
                 4.17895696591585790000
-                });
+                ]);
 
         /// <summary>
         /// Gets the estimated model parameters.
@@ -117,12 +117,12 @@ namespace Novacta.Analytics.Tests.Data
         /// </remarks>
         internal static DoubleMatrix EstimatedParameters
             = DoubleMatrix.Dense(1, 2,
-                new double[2] {
+                [
                     // a
                     1.133,
                     // b
                     .479
-                });
+                ]);
 
         #endregion
 

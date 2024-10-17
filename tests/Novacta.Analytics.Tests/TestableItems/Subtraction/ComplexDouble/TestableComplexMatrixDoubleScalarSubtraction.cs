@@ -1,6 +1,3 @@
-using System;
-using System.Numerics;
-
 namespace Novacta.Analytics.Tests.TestableItems.Subtraction
 {
     /// <summary>
@@ -19,15 +16,15 @@ namespace Novacta.Analytics.Tests.TestableItems.Subtraction
                 left,
                 right,
                 leftWritableRightScalarOps:
-                    new Func<ComplexMatrix, double, ComplexMatrix>[2] {
+                    [
                         (l, r) => l - r,
                         (l, r) => ComplexMatrix.Subtract(l, r)
-                    },
+                    ],
                 leftReadOnlyRightScalarOps:
-                    new Func<ReadOnlyComplexMatrix, double, ComplexMatrix>[2] {
+                    [
                         (l, r) => l - r,
                         (l, r) => ReadOnlyComplexMatrix.Subtract(l, r)
-                    }
+                    ]
                 )
         {
         }

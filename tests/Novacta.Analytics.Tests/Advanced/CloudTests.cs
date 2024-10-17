@@ -411,8 +411,7 @@ namespace Novacta.Analytics.Advanced.Tests
                 string parameterName = "weights";
 
                 DoubleMatrix coordinates = DoubleMatrix.Dense(4, 2);
-                DoubleMatrix weights = DoubleMatrix.Dense(4, 1,
-                    new double[4] { .3, .6, .2, .1 });
+                DoubleMatrix weights = DoubleMatrix.Dense(4, 1, [.3, .6, .2, .1]);
                 Basis basis = Basis.Standard(2);
 
                 ArgumentExceptionAssert.Throw(
@@ -734,7 +733,7 @@ namespace Novacta.Analytics.Advanced.Tests
 
                 var cloud = TestableCloud00.Get().Cloud;
 
-                var supplementaryVariables = 
+                var supplementaryVariables =
                     DoubleMatrix.Dense(
                         cloud.Coordinates.NumberOfRows + 1,
                         10);

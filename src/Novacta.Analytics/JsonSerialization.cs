@@ -73,10 +73,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static void AddDataConverters(JsonSerializerOptions options)
         {
-            if (options is null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
+            ArgumentNullException.ThrowIfNull(options);
 
             options.Converters.Add(new JsonDictionaryInt32StringConverter());
 

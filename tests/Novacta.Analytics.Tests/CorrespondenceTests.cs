@@ -101,7 +101,7 @@ namespace Novacta.Analytics.Tests
                         "STR_EXCEPT_SVD_ERRORS");
 
                 DoubleMatrix data = DoubleMatrix.Dense(2, 2,
-                    new double[4] { Double.NaN, 1, 1, 1 });
+                    [Double.NaN, 1, 1, 1]);
 
                 ExceptionAssert.Throw(
                     () =>

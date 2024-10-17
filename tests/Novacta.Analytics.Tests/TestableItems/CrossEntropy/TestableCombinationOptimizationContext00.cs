@@ -20,17 +20,12 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
         private static readonly DoubleMatrix data;
         private static readonly IndexPartition<double> partition;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Performance",
-            "CA1810:Initialize reference type static fields inline",
-            Justification = "Performance is not a concern.")]
         static TestableCombinationOptimizationContext00()
         {
             const int numberOfItems = 12;
 
             var target = DoubleMatrix.Dense(numberOfItems, 1,
-                new double[numberOfItems]
-                    { 0 ,0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2 });
+                [0 ,0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2]);
 
             partition = IndexPartition.Create(target);
             data = DoubleMatrix.Dense(numberOfItems, 7);
@@ -98,9 +93,9 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
             minimumNumberOfIterations: 3,
             maximumNumberOfIterations: 1000,
             optimalState: DoubleMatrix.Dense(1, 7,
-                new double[7] { 0, 0, 0, 0, 0, 1, 1 }),
+                [0, 0, 0, 0, 0, 1, 1]),
             optimalPerformance: Performance(DoubleMatrix.Dense(1, 7,
-                new double[7] { 0, 0, 0, 0, 0, 1, 1 })),
+                [0, 0, 0, 0, 0, 1, 1])),
             combinationDimension: 2,
             probabilitySmoothingCoefficient: .8)
         {

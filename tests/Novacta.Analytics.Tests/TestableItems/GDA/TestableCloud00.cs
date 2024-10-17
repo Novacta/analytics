@@ -32,11 +32,11 @@ namespace Novacta.Analytics.Tests.TestableItems.GDA
     class TestableCloud00 : TestableCloud
     {
         static readonly Basis a = new(
-            DoubleMatrix.Dense(2, 2, new double[4] { 3, 0, 0, 2 }));
+            DoubleMatrix.Dense(2, 2, [3, 0, 0, 2]));
 
         static readonly DoubleMatrix x_sa =
             DoubleMatrix.Dense(10, 2,
-                new double[20] {
+                [
                     16,
                     13,
                     13,
@@ -56,22 +56,22 @@ namespace Novacta.Analytics.Tests.TestableItems.GDA
                      9,
                      7,
                     15,
-                     4});
+                     4]);
 
         static readonly DoubleMatrix w_s =
             DoubleMatrix.Dense(10, 1, 1.0 / 10.0);
 
         static readonly DoubleMatrix m_sa =
-            DoubleMatrix.Dense(1, 2, new double[2] { 13, 10 });
+            DoubleMatrix.Dense(1, 2, [13, 10]);
 
         static readonly double var_s;
 
         static readonly DoubleMatrix cov_sa =
-            DoubleMatrix.Dense(2, 2, new double[4] { 10, 2, 2, 13 });
+            DoubleMatrix.Dense(2, 2, [10, 2, 2, 13]);
 
         static readonly DoubleMatrix centred_x_sa =
             DoubleMatrix.Dense(10, 2,
-                new double[20] {
+                [
                             16-13,
                             13-13,
                             13-13,
@@ -91,20 +91,16 @@ namespace Novacta.Analytics.Tests.TestableItems.GDA
                              9-10,
                              7-10,
                             15-10,
-                             4-10});
+                             4-10]);
 
         static readonly DoubleMatrix standardized_x_sa =
             centred_x_sa *
-                DoubleMatrix.Dense(2, 2, new double[4] {
-                    1.0 / Math.Sqrt(cov_sa[0,0]), 0, 0, 1.0 / Math.Sqrt(cov_sa[1,1]) }
+                DoubleMatrix.Dense(2, 2, [
+                    1.0 / Math.Sqrt(cov_sa[0,0]), 0, 0, 1.0 / Math.Sqrt(cov_sa[1,1]) ]
                 );
 
         static readonly Dictionary<Basis, DoubleMatrix> rebased;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Performance",
-            "CA1810:Initialize reference type static fields inline",
-            Justification = "Performance is not a concern.")]
         static TestableCloud00()
         {
             var q_a = a.basisScalarProducts;

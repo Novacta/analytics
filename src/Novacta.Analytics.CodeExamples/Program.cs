@@ -1,4 +1,5 @@
-﻿using Novacta.Documentation.CodeExamples;
+﻿using Novacta.Analytics.Runtime;
+using Novacta.Documentation.CodeExamples;
 using System;
 
 namespace Novacta.Analytics.CodeExamples
@@ -7,6 +8,7 @@ namespace Novacta.Analytics.CodeExamples
     {
         static void Main(string[] _)
         {
+            AnalyticsRuntime.Deploy();
             string codeBase = @"..\..\..\..\Novacta.Analytics.CodeExamples";
             string defaultNamespace = "Novacta.Analytics.CodeExamples";
             var analyzer = new CodeExamplesAnalyzer(

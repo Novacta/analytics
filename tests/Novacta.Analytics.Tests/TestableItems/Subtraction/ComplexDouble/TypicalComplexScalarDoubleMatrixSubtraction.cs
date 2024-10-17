@@ -29,15 +29,15 @@ namespace Novacta.Analytics.Tests.TestableItems.Subtraction
         TypicalComplexScalarDoubleMatrixSubtraction() :
             base(
                 expected: new ComplexMatrixState(
-                    asColumnMajorDenseArray: new Complex[6] 
-                    {
-                        new Complex(-1, -1), 
-                        new Complex(-2, -1), 
-                        new Complex(-3, -1), 
-                        new Complex(-4, -1), 
-                        new Complex(-5, -1),
-                        new Complex(-6, -1)
-                    },
+                    asColumnMajorDenseArray:
+                    [
+                        new(-1, -1), 
+                        new(-2, -1), 
+                        new(-3, -1), 
+                        new(-4, -1), 
+                        new(-5, -1),
+                        new(-6, -1)
+                    ],
                     numberOfRows: 2,
                     numberOfColumns: 3),
                 left: new Complex(-1, -1),

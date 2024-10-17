@@ -86,7 +86,7 @@ namespace Novacta.Analytics.Tests
             // data is null
             {
                 List<CategoricalVariable> variables =
-                    new();
+                    [];
                 DoubleMatrix data = null;
 
                 ArgumentExceptionAssert.Throw(
@@ -104,11 +104,10 @@ namespace Novacta.Analytics.Tests
             // variables count unequal to data number of columns
             {
                 List<CategoricalVariable> variables =
-                    new()
-                    {
+                    [
                         new CategoricalVariable("var0"),
                         new CategoricalVariable("var1")
-                    };
+                    ];
 
                 DoubleMatrix data = DoubleMatrix.Dense(6, 3);
 
@@ -130,11 +129,10 @@ namespace Novacta.Analytics.Tests
             // category not included in variable
             {
                 List<CategoricalVariable> variables =
-                    new()
-                    {
+                    [
                         new CategoricalVariable("var0"),
                         new CategoricalVariable("var1")
-                    };
+                    ];
 
                 variables[0].Add(0.0);
                 variables[1].Add(1.0);
@@ -158,13 +156,13 @@ namespace Novacta.Analytics.Tests
             // Valid input
             {
                 // Create a data stream 
-                string[] data = new string[6] {
+                string[] data = [
                     "COLOR,NUMBER",
                     "Red,  -2.2",
                     "Green, 0.0",
                     "Red,  -3.3",
                     "Black,-1.1",
-                    "Black, 4.4" };
+                    "Black, 4.4" ];
 
                 MemoryStream stream = new();
                 StreamWriter writer = new(stream);
@@ -230,7 +228,7 @@ namespace Novacta.Analytics.Tests
                 number.SetAsReadOnly();
 
                 List<CategoricalVariable> expectedVariables =
-                    new() { color, number };
+                    [color, number];
 
                 DoubleMatrix expectedData = DoubleMatrix.Dense(5, 2);
                 expectedData[0, 0] = 0;
@@ -265,14 +263,14 @@ namespace Novacta.Analytics.Tests
                 string parameterName = "rowVariableIndex";
 
                 // Create a data stream.
-                string[] data = new string[7] {
+                string[] data = [
                         "COLOR,NUMBER",
                         "Red,Negative",
                         "Green,Zero",
                         "White,Positive",
                         "Red,Negative",
                         "Blue,Negative",
-                        "Blue,Positive" };
+                        "Blue,Positive" ];
 
                 MemoryStream stream = new();
                 StreamWriter writer = new(stream);
@@ -328,14 +326,14 @@ namespace Novacta.Analytics.Tests
                 string parameterName = "columnVariableIndex";
 
                 // Create a data stream.
-                string[] data = new string[7] {
+                string[] data = [
                         "COLOR,NUMBER",
                         "Red,Negative",
                         "Green,Zero",
                         "White,Positive",
                         "Red,Negative",
                         "Blue,Negative",
-                        "Blue,Positive" };
+                        "Blue,Positive" ];
 
                 MemoryStream stream = new();
                 StreamWriter writer = new(stream);
@@ -385,14 +383,14 @@ namespace Novacta.Analytics.Tests
             // Valid input
             {
                 // Create a data stream.
-                string[] data = new string[7] {
+                string[] data = [
                         "COLOR,NUMBER",
                         "Red,Negative",
                         "Green,Zero",
                         "White,Positive",
                         "Red,Negative",
                         "Blue,Negative",
-                        "Blue,Positive" };
+                        "Blue,Positive" ];
 
                 MemoryStream stream = new();
                 StreamWriter writer = new(stream);
@@ -452,13 +450,13 @@ namespace Novacta.Analytics.Tests
         public void DecodeTest()
         {
             // Create a data stream 
-            string[] data = new string[6] {
+            string[] data = [
                 "COLOR,HAPPINESS,NUMBER",
                 "Red,TRUE,  -2.2",
                 "Green,TRUE, 0.0",
                 "Red,FALSE,  -3.3",
                 "Black,TRUE,-1.1",
-                "Black,FALSE, 4.4" };
+                "Black,FALSE, 4.4" ];
 
             MemoryStream stream = new();
             StreamWriter writer = new(stream);
@@ -507,14 +505,14 @@ namespace Novacta.Analytics.Tests
                 specialCategorizers,
                 CultureInfo.InvariantCulture);
 
-            string[][] expectedLabels = new string[5][]
-            {
-                new string[2]{ "Red", "Negative" },
-                new string[2]{ "Green", "Zero"},
-                new string[2]{ "Red", "Negative"},
-                new string[2]{ "Black", "Negative"},
-                new string[2]{ "Black", "Positive"}
-            };
+            string[][] expectedLabels =
+            [
+                ["Red", "Negative"],
+                ["Green", "Zero"],
+                ["Red", "Negative"],
+                ["Black", "Negative"],
+                ["Black", "Positive"]
+            ];
 
             var actualLabels = actual.Decode();
 
@@ -564,7 +562,7 @@ namespace Novacta.Analytics.Tests
             number.SetAsReadOnly();
 
             List<CategoricalVariable> sourceVariables =
-                new() { color, number };
+                [color, number];
 
             DoubleMatrix sourceData = DoubleMatrix.Dense(5, 2);
             sourceData[0, 0] = 0;
@@ -608,7 +606,7 @@ namespace Novacta.Analytics.Tests
             number.SetAsReadOnly();
 
             List<CategoricalVariable> sourceVariables =
-                new() { color, number };
+                [color, number];
 
             DoubleMatrix sourceData = DoubleMatrix.Dense(5, 2);
             sourceData[0, 0] = 0;
@@ -652,7 +650,7 @@ namespace Novacta.Analytics.Tests
             number.SetAsReadOnly();
 
             List<CategoricalVariable> sourceVariables =
-                new() { color, number };
+                [color, number];
 
             DoubleMatrix sourceData = DoubleMatrix.Dense(5, 2);
             sourceData[0, 0] = 0;
@@ -690,7 +688,7 @@ namespace Novacta.Analytics.Tests
             {
                 var rowIndex = 3;
                 var columnIndexes = IndexCollection.FromArray(
-                    new int[] { 0, 1, 0, 0, 1 });
+                    [0, 1, 0, 0, 1]);
 
                 var expectedVariables =
                     new List<CategoricalVariable>() {
@@ -842,7 +840,7 @@ namespace Novacta.Analytics.Tests
             {
                 var rowIndexes = ":";
                 var columnIndexes = IndexCollection.FromArray(
-                    new int[] { 1, 0, 1 });
+                    [1, 0, 1]);
 
                 var expectedVariables =
                    new List<CategoricalVariable>() {

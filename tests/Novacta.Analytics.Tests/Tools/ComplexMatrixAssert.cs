@@ -244,7 +244,7 @@ namespace Novacta.Analytics.Tests.Tools
                 ComplexAssert.AreEqual(
                     expectedColumnMajorOrderedEntries[l],
                     actualColumnMajorOrderedEntries[l],
-                    ComplexMatrixTest.Accuracy);
+                    delta);
             }
 
             int expectedNumberOfRows = (int)Reflector.GetProperty(

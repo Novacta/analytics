@@ -33,10 +33,6 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
 
         public static List<CategoricalEntailment> InitialEntailments { get; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Performance",
-            "CA1810:Initialize reference type static fields inline",
-            Justification = "Performance is not a concern.")]
         static TestableCategoricalEntailmentEnsembleOptimizationContext01()
         {
             CategoricalVariable f0 = new("F-0")
@@ -51,8 +47,8 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
             f0.SetAsReadOnly();
 
             List<int> featureCategoryCounts =
-                new(1) {
-                    f0.NumberOfCategories };
+                [
+                    f0.NumberOfCategories ];
 
             CategoricalVariable r = new("R")
             {
@@ -62,7 +58,7 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
             r.SetAsReadOnly();
 
             List<CategoricalVariable> variables =
-                new() { f0, r };
+                [f0, r];
 
             DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -112,7 +108,7 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
                 numberOfResponseCategories;
             entailmentRepresentationLength = overallNumberOfCategories + 1;
 
-            responseCodeIndexPairs = new SortedList<double, int>();
+            responseCodeIndexPairs = [];
             int i = 0;
             foreach (var code in response.Variables[0].CategoryCodes)
             {
@@ -123,16 +119,15 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
             randomNumberGeneratorPool =
                 new ConcurrentDictionary<int, RandomNumberGenerator>();
 
-            InitialEntailments = new List<CategoricalEntailment>
-            {
+            InitialEntailments =
+            [
                 new CategoricalEntailment(
-                    featureVariables: new List<CategoricalVariable>(1) { f0 },
+                    featureVariables: [f0],
                     responseVariable: r,
-                    featurePremises: new List<SortedSet<double>>(1) {
-                        new SortedSet<double>(){ 0.0, 1.0, 2.0 } },
+                    featurePremises: [new(){ 0.0, 1.0, 2.0 }],
                     responseConclusion: 0.0,
                     truthValue: 1.0)
-            };
+            ];
         }
 
         // Define the performance function of the 
@@ -258,7 +253,7 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
         TestableCategoricalEntailmentEnsembleOptimizationContext01() : base(
             context: new CategoricalEntailmentEnsembleOptimizationContext(
                 objectiveFunction: Performance,
-                featureCategoryCounts: new List<int>(1) { 6 },
+                featureCategoryCounts: [6],
                 numberOfResponseCategories: 2,
                 numberOfCategoricalEntailments: 1,
                 allowEntailmentPartialTruthValues: true,
@@ -271,16 +266,16 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
             eliteSampleDefinition: EliteSampleDefinition.HigherThanLevel,
             traceExecution: false,
             optimizationGoal: OptimizationGoal.Maximization,
-            initialParameter: DoubleMatrix.Dense(1, 8, new double[8] {
-                .5, .5, .5, .5, .5, .5, 1.0 / 2.0, 1.0 / 2.0 }),
+            initialParameter: DoubleMatrix.Dense(1, 8, [
+                .5, .5, .5, .5, .5, .5, 1.0 / 2.0, 1.0 / 2.0 ]),
             minimumNumberOfIterations: 5,
             maximumNumberOfIterations: 1000,
             optimalState: DoubleMatrix.Dense(1, 9,
-                new double[9] {
-                    0, 0, 0, 1, 1, 1,    1, 0,    1.0 }),
+                [
+                    0, 0, 0, 1, 1, 1,    1, 0,    1.0 ]),
             optimalPerformance: Performance(DoubleMatrix.Dense(1, 9,
-                new double[9] {
-                    0, 0, 0, 1, 1, 1,    0, 1,    1.0 })),
+                [
+                    0, 0, 0, 1, 1, 1,    0, 1,    1.0 ])),
             featureVariables: new List<CategoricalVariable>(features.Variables),
             responseVariable: response.Variables[0],
             numberOfResponseCategories: 2,

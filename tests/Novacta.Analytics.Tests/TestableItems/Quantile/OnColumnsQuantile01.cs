@@ -30,28 +30,28 @@ namespace Novacta.Analytics.Tests.TestableItems.Quantile
 
         protected OnColumnsQuantile01() :
                 base(
-                    expected: new DoubleMatrixState[4] {
-                        new DoubleMatrixState(
+                    expected: [
+                        new(
                             asColumnMajorDenseArray:
                                 TestableDoubleMatrix52.Get().AsDense[":", 0].AsColumnMajorDenseArray(),
                             numberOfRows: TestableDoubleMatrix52.Get().AsDense.NumberOfRows,
                             numberOfColumns: 1),
-                        new DoubleMatrixState(
+                        new(
                             asColumnMajorDenseArray:
                                 TestableDoubleMatrix52.Get().AsDense[":", 1].AsColumnMajorDenseArray(),
                             numberOfRows: TestableDoubleMatrix52.Get().AsDense.NumberOfRows,
                             numberOfColumns: 1),
-                        new DoubleMatrixState(
+                        new(
                             asColumnMajorDenseArray:
                                 TestableDoubleMatrix52.Get().AsDense[":", 2].AsColumnMajorDenseArray(),
                             numberOfRows: TestableDoubleMatrix52.Get().AsDense.NumberOfRows,
                             numberOfColumns: 1),
-                        new DoubleMatrixState(
+                        new(
                             asColumnMajorDenseArray:
                                 TestableDoubleMatrix52.Get().AsDense[":", 3].AsColumnMajorDenseArray(),
                             numberOfRows: TestableDoubleMatrix52.Get().AsDense.NumberOfRows,
                             numberOfColumns: 1)
-                    },
+                    ],
                     data: TestableDoubleMatrix52.Get(),
                     probabilities: GetKnownProbabilities(
                         TestableDoubleMatrix52.Get().AsDense.NumberOfRows),

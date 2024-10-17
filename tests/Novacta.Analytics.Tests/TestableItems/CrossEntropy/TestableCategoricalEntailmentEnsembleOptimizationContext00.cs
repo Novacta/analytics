@@ -31,10 +31,6 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
         private static readonly int numberOfResponseCategories;
         private static readonly int overallNumberOfCategories;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Performance",
-            "CA1810:Initialize reference type static fields inline",
-            Justification = "Performance is not a concern.")]
         static TestableCategoricalEntailmentEnsembleOptimizationContext00()
         {
             CategoricalVariable f0 = new("F-0")
@@ -48,8 +44,8 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
             f0.SetAsReadOnly();
 
             List<int> featureCategoryCounts =
-                new(1) {
-                    f0.NumberOfCategories };
+                [
+                    f0.NumberOfCategories ];
 
             CategoricalVariable r = new("R")
             {
@@ -59,7 +55,7 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
             r.SetAsReadOnly();
 
             List<CategoricalVariable> variables =
-                new() { f0, r };
+                [f0, r];
 
             DoubleMatrix data = DoubleMatrix.Dense(
                 new double[20, 2] {
@@ -104,7 +100,7 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
                 numberOfResponseCategories;
             entailmentRepresentationLength = overallNumberOfCategories + 1;
 
-            responseCodeIndexPairs = new SortedList<double, int>();
+            responseCodeIndexPairs = [];
             int i = 0;
             foreach (var code in response.Variables[0].CategoryCodes)
             {
@@ -239,7 +235,7 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
         TestableCategoricalEntailmentEnsembleOptimizationContext00() : base(
             context: new CategoricalEntailmentEnsembleOptimizationContext(
                 objectiveFunction: Performance,
-                featureCategoryCounts: new List<int>(1) { 5 },
+                featureCategoryCounts: [5],
                 numberOfResponseCategories: 2,
                 numberOfCategoricalEntailments: 2,
                 allowEntailmentPartialTruthValues: false,
@@ -252,19 +248,19 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
             eliteSampleDefinition: EliteSampleDefinition.HigherThanLevel,
             traceExecution: false,
             optimizationGoal: OptimizationGoal.Maximization,
-            initialParameter: DoubleMatrix.Dense(1, 14, new double[14] {
+            initialParameter: DoubleMatrix.Dense(1, 14, [
                     .5, .5, .5, .5, .5, 1.0 / 2.0, 1.0 / 2.0,
-                    .5, .5, .5, .5, .5, 1.0 / 2.0, 1.0 / 2.0 }),
+                    .5, .5, .5, .5, .5, 1.0 / 2.0, 1.0 / 2.0 ]),
             minimumNumberOfIterations: 5,
             maximumNumberOfIterations: 1000,
             optimalState: DoubleMatrix.Dense(1, 16,
-                new double[16] { 
+                [ 
                     1, 1, 1, 0, 0,    1, 0,    1.0,
-                    0, 0, 0, 1, 1,    0, 1,    1.0 }),
+                    0, 0, 0, 1, 1,    0, 1,    1.0 ]),
             optimalPerformance: Performance(DoubleMatrix.Dense(1, 16,
-                new double[16] {
+                [
                     1, 1, 1, 0, 0,    1, 0,    1.0,
-                    0, 0, 0, 1, 1,    0, 1,    1.0 })),
+                    0, 0, 0, 1, 1,    0, 1,    1.0 ])),
             featureVariables: new List<CategoricalVariable>(features.Variables),
             responseVariable: response.Variables[0],
             numberOfResponseCategories: 2,

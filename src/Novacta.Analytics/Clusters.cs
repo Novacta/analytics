@@ -132,10 +132,7 @@ namespace Novacta.Analytics
         {
             #region Input validation
 
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             if (numberOfExplanatoryFeatures < 1)
             {
@@ -160,10 +157,7 @@ namespace Novacta.Analytics
                     );
             }
 
-            if (partition is null)
-            {
-                throw new ArgumentNullException(nameof(partition));
-            }
+            ArgumentNullException.ThrowIfNull(partition);
 
             #endregion
 
@@ -279,10 +273,7 @@ namespace Novacta.Analytics
         {
             #region Input validation
 
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             if (maximumNumberOfParts < 2)
             {

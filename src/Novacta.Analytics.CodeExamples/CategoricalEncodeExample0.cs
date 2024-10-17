@@ -11,13 +11,13 @@ namespace Novacta.Analytics.CodeExamples
         public void Main()
         {
             // Create a data stream.
-            string[] data = new string[6] {
+            string[] data = [
             "COLOR,NUMBER",
             "Red,  -2.2",
             "Green, 0.0",
             "Red,  -3.3",
             "Black,-1.1",
-            "Black, 4.4" };
+            "Black, 4.4" ];
 
             MemoryStream stream = new();
             StreamWriter writer = new(stream);

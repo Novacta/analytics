@@ -2,8 +2,6 @@
 // Licensed under the MIT license. 
 // See the LICENSE file in the project root for more information.
 
-using System;
-
 namespace Novacta.Analytics.Tests.TestableItems.StandardDeviation
 {
     /// <summary>
@@ -30,9 +28,9 @@ namespace Novacta.Analytics.Tests.TestableItems.StandardDeviation
                 data: data,
                 adjustForBias: adjustForBias,
                 dataWritableOps:
-                    new Func<DoubleMatrix, bool, double>[1] { Stat.StandardDeviation },
+                    [Stat.StandardDeviation],
                 dataReadOnlyOps:
-                   new Func<ReadOnlyDoubleMatrix, bool, double>[1] { Stat.StandardDeviation })
+                   [Stat.StandardDeviation])
         {
         }
     }

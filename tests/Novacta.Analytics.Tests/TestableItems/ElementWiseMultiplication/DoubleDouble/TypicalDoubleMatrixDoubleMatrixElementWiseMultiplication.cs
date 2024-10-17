@@ -29,7 +29,7 @@ namespace Novacta.Analytics.Tests.TestableItems.ElementWiseMultiplication
         TypicalDoubleMatrixDoubleMatrixElementWiseMultiplication() :
             base(
                 expected: new DoubleMatrixState(
-                    asColumnMajorDenseArray: new double[6] { 0, -4, -6, -6, -4, 0 },
+                    asColumnMajorDenseArray: [0, -4, -6, -6, -4, 0],
                     numberOfRows: 2,
                     numberOfColumns: 3),
                 left: TestableDoubleMatrix16.Get(),

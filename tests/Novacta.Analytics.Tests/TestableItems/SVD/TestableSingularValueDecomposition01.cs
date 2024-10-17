@@ -17,14 +17,14 @@ namespace Novacta.Analytics.Tests.TestableItems.SVD
         static TestableSingularValueDecomposition01()
         {
             testableMatrix = new TestableComplexMatrix(
-                asColumnMajorDenseArray: new Complex[6] {
-                    new Complex( 1, -2),
+                asColumnMajorDenseArray: [
+                    new( 1, -2),
                     0,
-                    new Complex(-4, -1),
+                    new(-4, -1),
                     0,
-                    new Complex(-2,  3),
-                    new Complex( 5,  4),
-                },
+                    new(-2,  3),
+                    new( 5,  4),
+                ],
                 numberOfRows: 3,
                 numberOfColumns: 2,
                 isUpperHessenberg: false,

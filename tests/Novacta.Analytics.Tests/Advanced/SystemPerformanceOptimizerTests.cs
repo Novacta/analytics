@@ -33,7 +33,7 @@ namespace Novacta.Analytics.Advanced.Tests
                         Reflector.ExecuteBaseMember(
                             obj: optimizer,
                             methodName: "Run",
-                            methodArgs: new object[] { null, 1, .01 });
+                            methodArgs: [null, 1, .01]);
                     },
                     expectedInnerType: typeof(ArgumentNullException),
                     expectedInnerMessage: innerMessage);
@@ -60,7 +60,7 @@ namespace Novacta.Analytics.Advanced.Tests
                         Reflector.ExecuteBaseMember(
                             obj: optimizer,
                             methodName: "EvaluatePerformances",
-                            methodArgs: new object[] { null, sample });
+                            methodArgs: [null, sample]);
                     },
                     expectedInnerType: typeof(ArgumentNullException),
                     expectedInnerMessage: innerMessage);
@@ -83,7 +83,7 @@ namespace Novacta.Analytics.Advanced.Tests
                         Reflector.ExecuteBaseMember(
                             obj: optimizer,
                             methodName: "EvaluatePerformances",
-                            methodArgs: new object[] { context, null });
+                            methodArgs: [context, null]);
                     },
                     expectedInnerType: typeof(ArgumentNullException),
                     expectedInnerMessage: innerMessage);
@@ -108,10 +108,10 @@ namespace Novacta.Analytics.Advanced.Tests
                         Reflector.ExecuteBaseMember(
                             obj: optimizer,
                             methodName: "EvaluatePerformances",
-                            methodArgs: new object[] {
+                            methodArgs: [
                                 context,
                                 DoubleMatrix.Dense(1, context.StateDimension + 1)
-                            });
+                            ]);
                     },
                     expectedInnerType: typeof(ArgumentException),
                     expectedInnerMessage: innerMessage);
@@ -432,7 +432,7 @@ namespace Novacta.Analytics.Advanced.Tests
                         Reflector.ExecuteBaseMember(
                             obj: optimizer,
                             methodName: "Sample",
-                            methodArgs: new object[] { null, 1, parameter });
+                            methodArgs: [null, 1, parameter]);
                     },
                     expectedInnerType: typeof(ArgumentNullException),
                     expectedInnerMessage: innerMessage);
@@ -455,7 +455,7 @@ namespace Novacta.Analytics.Advanced.Tests
                         Reflector.ExecuteBaseMember(
                             obj: optimizer,
                             methodName: "Sample",
-                            methodArgs: new object[] { context, 1, null });
+                            methodArgs: [context, 1, null]);
                     },
                     expectedInnerType: typeof(ArgumentNullException),
                     expectedInnerMessage: innerMessage);
@@ -479,10 +479,10 @@ namespace Novacta.Analytics.Advanced.Tests
                         Reflector.ExecuteBaseMember(
                             obj: optimizer,
                             methodName: "Sample",
-                            methodArgs: new object[] {
+                            methodArgs: [
                                 context,
                                 0,
-                                context.InitialParameter });
+                                context.InitialParameter ]);
                     },
                     expectedInnerType: typeof(ArgumentOutOfRangeException),
                     expectedInnerMessage: innerMessage);
@@ -506,10 +506,10 @@ namespace Novacta.Analytics.Advanced.Tests
                         Reflector.ExecuteBaseMember(
                             obj: optimizer,
                             methodName: "Sample",
-                            methodArgs: new object[] {
+                            methodArgs: [
                                 context,
                                 -1,
-                                context.InitialParameter });
+                                context.InitialParameter ]);
                     },
                     expectedInnerType: typeof(ArgumentOutOfRangeException),
                     expectedInnerMessage: innerMessage);
@@ -533,12 +533,12 @@ namespace Novacta.Analytics.Advanced.Tests
                         Reflector.ExecuteBaseMember(
                             obj: optimizer,
                             methodName: "Sample",
-                            methodArgs: new object[] {
+                            methodArgs: [
                                 context,
                                 1,
                                 DoubleMatrix.Dense(
                                     context.InitialParameter.NumberOfRows + 1,
-                                    context.InitialParameter.NumberOfColumns) });
+                                    context.InitialParameter.NumberOfColumns) ]);
                     },
                     expectedInnerType: typeof(ArgumentException),
                     expectedInnerMessage: innerMessage);
@@ -562,12 +562,12 @@ namespace Novacta.Analytics.Advanced.Tests
                         Reflector.ExecuteBaseMember(
                             obj: optimizer,
                             methodName: "Sample",
-                            methodArgs: new object[] { 
+                            methodArgs: [ 
                                 context, 
                                 1, 
                                 DoubleMatrix.Dense(
                                     context.InitialParameter.NumberOfRows,
-                                    context.InitialParameter.NumberOfColumns + 1) });
+                                    context.InitialParameter.NumberOfColumns + 1) ]);
                     },
                     expectedInnerType: typeof(ArgumentException),
                     expectedInnerMessage: innerMessage);

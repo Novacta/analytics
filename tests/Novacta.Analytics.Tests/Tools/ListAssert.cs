@@ -28,10 +28,6 @@ namespace Novacta.Analytics.Tests.Tools
         /// <param name="areEqual">A method that asserts that two items
         /// are equal, and throws an <see cref="AssertFailedException"/> if
         /// they are not equal.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Design",
-            "CA1031:Do not catch general exception types",
-            Justification = "By design: needed for testing purposes.")]
         public static void ContainSameItems(
             IList<T> expected,
             IList<T> actual,

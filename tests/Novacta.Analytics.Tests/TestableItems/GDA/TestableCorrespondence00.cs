@@ -22,10 +22,6 @@ namespace Novacta.Analytics.Tests.TestableItems.GDA
     {
         static readonly DoubleMatrix data;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Performance",
-            "CA1810:Initialize reference type static fields inline",
-            Justification = "Performance is not a concern.")]
         static TestableCorrespondence00()
         {
             data = DoubleMatrix.Dense(

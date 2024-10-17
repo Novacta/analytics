@@ -101,7 +101,7 @@ namespace Novacta.Analytics
         #region Distribution
 
         private static readonly double[] cdfConstants
-            = new double[9] {
+            = [
                 1.25331413731550025,
                 0.421369229288054473,
                 0.236652382913560671,
@@ -110,7 +110,7 @@ namespace Novacta.Analytics
                 0.0990285964717319214,
                 0.0827662865013691773,
                 0.0710695805388521071,
-                0.0622586659950261958 };
+                0.0622586659950261958 ];
 
     private static double Phi(double x)
         {
@@ -155,9 +155,7 @@ namespace Novacta.Analytics
         /// <inheritdoc/>
         public override DoubleMatrix InverseCdf(DoubleMatrix arguments)
         {
-            if (arguments is null) {
-                throw new ArgumentNullException(nameof(arguments));
-            }
+            ArgumentNullException.ThrowIfNull(arguments);
 
             double[] a = arguments.StorageScheme == StorageScheme.Dense ?
                 arguments.GetStorage() : arguments.AsColumnMajorDenseArray();
@@ -221,9 +219,7 @@ namespace Novacta.Analytics
         /// <inheritdoc/>
         public override DoubleMatrix Pdf(DoubleMatrix arguments)
         {
-            if (arguments is null) {
-                throw new ArgumentNullException(nameof(arguments));
-            }
+            ArgumentNullException.ThrowIfNull(arguments);
 
             double mu = this.Mu;
             double sigma = this.sigma;

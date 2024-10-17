@@ -17,31 +17,31 @@ namespace Novacta.Analytics.Tests.TestableItems.Quantile
     {
         protected OnColumnsQuantile00() :
                 base(
-                    expected: new DoubleMatrixState[4] {
-                        new DoubleMatrixState(
+                    expected: [
+                        new(
                             asColumnMajorDenseArray:
-                                new double[6] { 1, 13, 19.33333333, 25, 1, 25 },
+                                [1, 13, 19.33333333, 25, 1, 25],
                             numberOfRows: 2,
                             numberOfColumns: 3),
-                        new DoubleMatrixState(
+                        new(
                             asColumnMajorDenseArray:
-                                new double[6] { 26, 38, 44.33333333, 50, 26, 50 },
+                                [26, 38, 44.33333333, 50, 26, 50],
                             numberOfRows: 2,
                             numberOfColumns: 3),
-                        new DoubleMatrixState(
+                        new(
                             asColumnMajorDenseArray:
-                                new double[6] { 51, 63, 69.33333333, 75, 51, 75 },
+                                [51, 63, 69.33333333, 75, 51, 75],
                             numberOfRows: 2,
                             numberOfColumns: 3),
-                        new DoubleMatrixState(
+                        new(
                             asColumnMajorDenseArray:
-                                new double[6] { 76, 88, 94.33333333, 100, 76, 100 },
+                                [76, 88, 94.33333333, 100, 76, 100],
                             numberOfRows: 2,
                             numberOfColumns: 3)
-                    },
+                    ],
                     data: TestableDoubleMatrix52.Get(),
                     probabilities: DoubleMatrix.Dense(2, 3,
-                         new double[6] { .005, .5, .75, .999, 0, 1 }),
+                         [.005, .5, .75, .999, 0, 1]),
                     dataOperation: DataOperation.OnColumns
                 )
         {

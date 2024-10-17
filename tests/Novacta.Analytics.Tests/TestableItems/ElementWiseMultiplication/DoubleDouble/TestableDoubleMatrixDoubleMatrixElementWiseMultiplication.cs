@@ -2,8 +2,6 @@
 // Licensed under the MIT license. 
 // See the LICENSE file in the project root for more information.
 
-using System;
-
 namespace Novacta.Analytics.Tests.TestableItems.ElementWiseMultiplication
 {
     /// <summary>
@@ -28,21 +26,21 @@ namespace Novacta.Analytics.Tests.TestableItems.ElementWiseMultiplication
                 left,
                 right,
                 leftWritableRightWritableOps:
-                    new Func<DoubleMatrix, DoubleMatrix, DoubleMatrix>[1] {
+                    [
                         (l, r) => DoubleMatrix.ElementWiseMultiply(l, r)
-                    },
+                    ],
                 leftReadOnlyRightWritableOps:
-                    new Func<ReadOnlyDoubleMatrix, DoubleMatrix, DoubleMatrix>[1] {
+                    [
                         (l, r) => ReadOnlyDoubleMatrix.ElementWiseMultiply(l, r)
-                    },
+                    ],
                 leftWritableRightReadOnlyOps:
-                    new Func<DoubleMatrix, ReadOnlyDoubleMatrix, DoubleMatrix>[1] {
+                    [
                         (l, r) => ReadOnlyDoubleMatrix.ElementWiseMultiply(l, r)
-                    },
+                    ],
                 leftReadOnlyRightReadOnlyOps:
-                    new Func<ReadOnlyDoubleMatrix, ReadOnlyDoubleMatrix, DoubleMatrix>[1] {
+                    [
                         (l, r) => ReadOnlyDoubleMatrix.ElementWiseMultiply(l, r)
-                    }
+                    ]
                 )
         {
         }

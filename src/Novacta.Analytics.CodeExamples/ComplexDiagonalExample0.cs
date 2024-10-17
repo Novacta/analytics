@@ -10,8 +10,8 @@ namespace Novacta.Analytics.CodeExamples
         {
             // Create the main diagonal data.
             var data = new Complex[2] {
-                new Complex(1, -1),
-                new Complex(2, -2)
+                new(1, -1),
+                new(2, -2)
             };
 
             // Create a matrix storing the main diagonal data.

@@ -27,8 +27,8 @@ namespace Novacta.Analytics.CodeExamples
             Console.WriteLine();
 
             // Create the data as an array having non-zero lower bounds.
-            int[] lowerBounds = { 2005, 1 };
-            int[] lengths = { numberOfRows, numberOfColumns };
+            int[] lowerBounds = [2005, 1];
+            int[] lengths = [numberOfRows, numberOfColumns];
             data = (Complex[,])Array.CreateInstance(typeof(Complex),
                     lengths, lowerBounds);
 

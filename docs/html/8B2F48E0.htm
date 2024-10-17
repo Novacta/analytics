@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html ><html lang="en-US"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="shortcut icon" href="../icons/favicon.ico" /><link rel="stylesheet" href="../css/bulma.css" /><link rel="stylesheet" href="../css/font-awesome.min.css" /><link rel="stylesheet" href="../css/presentationStyle.css" /><link rel="stylesheet" href="../css/vs.min.css" /><script src="../scripts/jquery-3.5.1.min.js"></script><script src="../scripts/clipboard.min.js"></script><script src="../scripts/highlight.min.js"></script><script src="../scripts/presentationStyle.js"></script><title>DoubleMatrix.Encode(String, Char, IndexCollection, Boolean) Method</title><meta name="Title" content="Encode(String, Char, IndexCollection, Boolean)" /><meta name="Help.Id" content="M:Novacta.Analytics.DoubleMatrix.Encode(System.String,System.Char,Novacta.Analytics.IndexCollection,System.Boolean)" /><meta name="Help.ContentType" content="Reference" /><meta name="container" content="Novacta.Analytics" /><meta name="guid" content="8B2F48E0" /><meta name="Description" content="Encodes numerical data from the specified file." /><meta name="tocFile" content="../toc/IDMCUAE.xml" /></head><body><div class="fixedLayout"><div id="Header" class="fixedHeader"><div class="pageHeader level mb-0 py-2 px-4"><div id="TitleContainer" class="level-left"><div class="level-item"><img src="../icons/Help.png" /></div><div id="DocumentationTitle" class="level-item">Novacta.Analytics Documentation</div></div><div id="LangFilterSearchContainer" class="level-right"><div class="level-item"><div class="dropdown is-hoverable"><div class="dropdown-trigger"><button class="button" aria-haspopup="true" aria-controls="dropdown-menu"><span id="CurrentLanguage"></span><span class="icon is-small"><i class="fa fa-angle-down" aria-hidden="true"></i></span></button></div><div class="dropdown-menu" role="menu"><div id="LanguageSelections" class="dropdown-content"><a class="dropdown-item languageFilterItem" data-languageId="cs">C#</a><a class="dropdown-item languageFilterItem" data-languageId="vb">VB</a><a class="dropdown-item languageFilterItem" data-languageId="cpp">C++</a><a class="dropdown-item languageFilterItem" data-languageId="fs">F#</a></div></div></div></div><div class="level-item"><form id="SearchForm" action="#" onsubmit="TransferToSearchPage(); return false;"><div class="field"><div class="control has-icons-left"><input id="SearchTerms" class="input" type="text" maxlength="200" placeholder="Search" /><span class="icon is-small is-left"><i class="fa fa-search"></i></span><button id="SearchButton" type="submit" class="is-hidden"></button></div></div></form></div></div></div></div><div class="fixedContent"><nav class="breadcrumb my-1 px-2 border-bottom" role="navigation"><ul id="TopicBreadcrumbs" /></nav><div id="ContentContainer" class="columns pl-5 pr-5 fixedContent"><div id="ShowHideTOCColumn" class="column is-hidden-tablet"><a id="ShowHideTOC">Show/Hide TOC</a></div><div id="TOCColumn" class="column is-hidden-mobile"><nav class="toc"><ul id="TableOfContents" class="toc-menu" /></nav></div><div id="Resizer" class="is-hidden"></div><div id="TopicContent" class="column content is-7"><h1>Double<wbr />Matrix<span id="LSTDDB1ABFC_0" data-languageSpecificText="cpp=::|nu=."></span>Encode(String, Char, Index<wbr />Collection, Boolean) Method</h1><div class="summary">
+            Encodes numerical data from the specified file.
+            </div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Definition</h2><div id="IDBSection"><strong>Namespace:</strong> <a href="2406EB43.htm">Novacta.Analytics</a><br /><strong>Assembly:</strong> Novacta.Analytics (in Novacta.Analytics.dll) Version: 2.1.0+428f3840cfab98dda567bb0ed350b302533e273a<div class="codeSnippet" data-codeSnippetLanguage="cs"><div class="codeHeader"><span class="codeHeaderTitle">C#</span><span class="buttons"><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></span></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cs"><span class="keyword">public</span> <span class="keyword">static</span> <span class="identifier">DoubleMatrix</span> <span class="identifier">Encode</span>(
+	<span class="identifier">string</span> <span class="parameter">path</span>,
+	<span class="identifier">char</span> <span class="parameter">columnDelimiter</span>,
+	<span class="identifier">IndexCollection</span> <span class="parameter">extractedColumns</span>,
+	<span class="identifier">bool</span> <span class="parameter">firstLineContainsVariableNames</span>
+)</code></pre></div></div><div class="codeSnippet is-hidden" data-codeSnippetLanguage="vb"><div class="codeHeader"><span class="codeHeaderTitle">VB</span><span class="buttons"><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></span></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-vb"><span class="keyword">Public</span> <span class="keyword">Shared</span> <span class="keyword">Function</span> <span class="identifier">Encode</span> ( 
+	<span class="parameter">path</span> <span class="keyword">As</span> <span class="identifier">String</span>,
+	<span class="parameter">columnDelimiter</span> <span class="keyword">As</span> <span class="identifier">Char</span>,
+	<span class="parameter">extractedColumns</span> <span class="keyword">As</span> <span class="identifier">IndexCollection</span>,
+	<span class="parameter">firstLineContainsVariableNames</span> <span class="keyword">As</span> <span class="identifier">Boolean</span>
+) <span class="keyword">As</span> <span class="identifier">DoubleMatrix</span></code></pre></div></div><div class="codeSnippet is-hidden" data-codeSnippetLanguage="cpp"><div class="codeHeader"><span class="codeHeaderTitle">C++</span><span class="buttons"><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></span></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cpp"><span class="keyword">public</span>:
+<span class="keyword">static</span> <span class="identifier">DoubleMatrix</span>^ <span class="identifier">Encode</span>(
+	<span class="identifier">String</span>^ <span class="parameter">path</span>, 
+	<span class="identifier">wchar_t</span> <span class="parameter">columnDelimiter</span>, 
+	<span class="identifier">IndexCollection</span>^ <span class="parameter">extractedColumns</span>, 
+	<span class="identifier">bool</span> <span class="parameter">firstLineContainsVariableNames</span>
+)</code></pre></div></div><div class="codeSnippet is-hidden" data-codeSnippetLanguage="fs"><div class="codeHeader"><span class="codeHeaderTitle">F#</span><span class="buttons"><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></span></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-fs"><span class="keyword">static</span> <span class="keyword">member</span> <span class="identifier">Encode</span> : 
+        <span class="parameter">path</span> : <span class="identifier">string</span> * 
+        <span class="parameter">columnDelimiter</span> : <span class="identifier">char</span> * 
+        <span class="parameter">extractedColumns</span> : <span class="identifier">IndexCollection</span> * 
+        <span class="parameter">firstLineContainsVariableNames</span> : <span class="identifier">bool</span> <span class="keyword">-&gt;</span> <span class="identifier">DoubleMatrix</span> </code></pre></div></div><h4 class="quickLinkHeader">Parameters</h4><dl><dt class="has-text-weight-normal"><span class="parameter">path</span>  <a href="https://learn.microsoft.com/dotnet/api/system.string" target="_blank" rel="noopener noreferrer">String</a></dt><dd>
+            The data file to be opened for reading.</dd><dt class="has-text-weight-normal"><span class="parameter">columnDelimiter</span>  <a href="https://learn.microsoft.com/dotnet/api/system.char" target="_blank" rel="noopener noreferrer">Char</a></dt><dd>
+            The delimiter used to separate columns in data lines.</dd><dt class="has-text-weight-normal"><span class="parameter">extractedColumns</span>  <a href="9B3BDFD7.htm">IndexCollection</a></dt><dd>
+            The zero-based indexes of the columns from which 
+            data are to be extracted.</dd><dt class="has-text-weight-normal"><span class="parameter">firstLineContainsVariableNames</span>  <a href="https://learn.microsoft.com/dotnet/api/system.boolean" target="_blank" rel="noopener noreferrer">Boolean</a></dt><dd>
+            If set to <span class="code">true</span> signals that the first
+            line contains variable names.</dd></dl><h4 class="quickLinkHeader">Return Value</h4><a href="1DED9EB1.htm">DoubleMatrix</a><br />
+            The matrix containing information about the streamed data.</div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Remarks</h2><div id="IDGCSection"><p>
+             Each line from the stream is interpreted as the information about 
+             variables
+             observed at a given instance. A line is split in tokens, 
+             each corresponding
+             to a (zero-based) column, which in turn stores the data
+             of a given variable. Columns are assumed to be
+             separated each other by the character passed as 
+             <span class="parameter">columnDelimiter</span>.
+             Data from a variable are extracted only if the corresponding 
+             column index is in the 
+             collection <span class="parameter">extractedColumns</span>. 
+             </p><p>
+            Data are encoded as culture independent numerical values, 
+            by applying the <a href="https://learn.microsoft.com/dotnet/api/system.globalization.cultureinfo.invariantculture" target="_blank" rel="noopener noreferrer">InvariantCulture</a>.
+            </p></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Example</h2><div id="IDHCSection"><p>
+             In the following example, a stream is read to encode numerical data into a 
+             matrix.
+            </p><p><div class="codeSnippet"><div class="codeHeader"><span class="codeHeaderTitle">Encoding data into a matrix from a stream containing numerical variables</span><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cs">using System;
+using System.IO;
+
+namespace Novacta.Analytics.CodeExamples
+{
+    public class MatrixEncodeExample1  
+    {
+        public void Main()
+        {
+            // Create a data stream.
+            string[] data = [
+            "V0,V1,V2",
+            "1, 10, -2.2",
+            "2, 20,  0.0",
+            "3, 30, -3.3",
+            "4, 40, -1.1",
+            "5, 50,  4.4" ];
+
+            MemoryStream stream = new();
+            StreamWriter writer = new(stream);
+            for (int i = 0; i &lt; data.Length; i++)
+            {
+                writer.WriteLine(data[i].ToCharArray());
+                writer.Flush();
+            }
+            stream.Position = 0;
+
+            // Encode a matrix containing columns V0 and V2.
+            StreamReader streamReader = new(stream);
+            char columnDelimiter = ',';
+            IndexCollection extractedColumns = IndexCollection.Sequence(0, 2, 2);
+            bool firstLineContainsColumnHeaders = true;
+            DoubleMatrix matrix = DoubleMatrix.Encode(
+                streamReader,
+                columnDelimiter,
+                extractedColumns,
+                firstLineContainsColumnHeaders);
+
+            // Show the matrix.
+            Console.WriteLine("Encoded matrix:");
+            Console.WriteLine();
+            Console.Write(matrix);
+            Console.WriteLine();
+        }
+    }
+}
+
+// Executing method Main() produces the following output:
+// 
+// Encoded matrix:
+// 
+// [V0]             [V2]             
+// 1                -2.2             
+// 2                0                
+// 3                -3.3             
+// 4                -1.1             
+// 5                4.4              
+// 
+//</code></pre></div></div></p></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Exceptions</h2><div id="IDICSection"><table class="table is-hoverable"><tr><td><a href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception" target="_blank" rel="noopener noreferrer">ArgumentNullException</a></td><td><span class="parameter">path</span> is <b>null</b>. <br />
+            -or-<br /><span class="parameter">extractedColumns</span> is <b>null</b>.
+            </td></tr><tr><td><a href="https://learn.microsoft.com/dotnet/api/system.argumentexception" target="_blank" rel="noopener noreferrer">ArgumentException</a></td><td><span class="parameter">path</span> is an empty string ("").
+            </td></tr><tr><td><a href="https://learn.microsoft.com/dotnet/api/system.io.filenotfoundexception" target="_blank" rel="noopener noreferrer">FileNotFoundException</a></td><td>
+            The file cannot be found.
+            </td></tr><tr><td><a href="https://learn.microsoft.com/dotnet/api/system.io.directorynotfoundexception" target="_blank" rel="noopener noreferrer">DirectoryNotFoundException</a></td><td>
+            The specified path is invalid, such as being on an unmapped drive.
+            </td></tr><tr><td><a href="https://learn.microsoft.com/dotnet/api/system.io.ioexception" target="_blank" rel="noopener noreferrer">IOException</a></td><td><span class="parameter">path</span> includes an incorrect or invalid syntax 
+            for file name, directory name, or volume label.
+            </td></tr><tr><td><a href="https://learn.microsoft.com/dotnet/api/system.io.invaliddataexception" target="_blank" rel="noopener noreferrer">InvalidDataException</a></td><td>
+            The stream to file having the specified 
+            <span class="parameter">path</span> contains no data rows.<br />
+            -or-<br />
+            There is at least a row
+            which contains not enough data for any column specified by 
+            <span class="parameter">extractedColumns</span>. This can happen if 
+            there are missing columns, 
+            or if tokens extracted 
+            from the stream
+            are <b>null</b> 
+            or consist only of white-space characters. 
+            </td></tr></table></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>See Also</h2><div id="seeAlsoSection"><h4>Reference</h4><div><a href="1DED9EB1.htm">DoubleMatrix Class</a></div><div><a href="B1082BD8.htm">Encode Overload</a></div><div><a href="2406EB43.htm">Novacta.Analytics Namespace</a></div><div><a href="https://learn.microsoft.com/dotnet/api/system.io.streamreader" target="_blank" rel="noopener noreferrer">StreamReader</a></div></div></div><div id="InThisArticleColumn" class="column is-hidden-mobile"><nav class="menu sticky is-hidden"><p class="menu-label"><strong>In This Article</strong></p><ul id="InThisArticleMenu" class="menu-list"><li><a class="quickLink">Definition</a><ul class="menu"><li><a class="quickLink">Parameters</a></li><li><a class="quickLink">Return Value</a></li></ul></li><li><a class="quickLink">Remarks</a></li><li><a class="quickLink">Example</a></li><li><a class="quickLink">Exceptions</a></li><li><a class="quickLink">See Also</a></li></ul></nav></div></div></div><footer id="PageFooter" class="footer border-top py-3 fixedFooter"><div class="columns"><div id="FooterContent" class="column"><p>Copyright (c) Giovanni Lafratta.</p> 
+				</div></div></footer></div><script>$(function(){
+SetDefaultLanguage("cs");
+LoadTocFile(null, null);
+InitializeQuickLinks();
+
+$(".toggleSection" ).click(function () {
+    SectionExpandCollapse(this);
+});
+
+$(".toggleSection").keypress(function () {
+    SectionExpandCollapseCheckKey(this, event)
+});
+hljs.highlightAll();
+});</script></body></html>

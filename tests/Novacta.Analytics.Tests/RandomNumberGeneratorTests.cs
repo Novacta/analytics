@@ -23,11 +23,11 @@ namespace Novacta.Analytics.Tests
         /// to test.</returns>
         private static List<RandomNumberGenerator> GetRandomNumberGenerators()
         {
-            return new List<RandomNumberGenerator>{
+            return [
                 RandomNumberGenerator.CreateMT19937(777777),
                 RandomNumberGenerator.CreateSFMT19937(777777),
                 RandomNumberGenerator.CreateNextMT2203(777777),
-                RandomNumberGenerator.CreateNextMT2203(777777)};
+                RandomNumberGenerator.CreateNextMT2203(777777)];
         }
 
         #endregion
@@ -68,7 +68,7 @@ namespace Novacta.Analytics.Tests
             {
                 double mu = -1.1;
                 double sigma = 2.2;
-                double[] distributionParameters = new double[2] { mu, sigma };
+                double[] distributionParameters = [mu, sigma];
                 double distributionMean = mu;
                 double distributionVariance = Math.Pow(sigma, 2.0);
 
@@ -131,7 +131,7 @@ namespace Novacta.Analytics.Tests
 
             double mu = -1.1;
             double sigma = 2.2;
-            double[] distributionParameters = new double[2] { mu, sigma };
+            double[] distributionParameters = [mu, sigma];
 
             // Valid input
             {
@@ -269,7 +269,7 @@ namespace Novacta.Analytics.Tests
                 var lowerBound = -1.1;
                 var upperBound = 2.2;
                 double[] distributionParameters =
-                    new double[2] { lowerBound, upperBound };
+                    [lowerBound, upperBound];
                 double distributionMean = (lowerBound + upperBound) / 2.0;
                 double distributionVariance =
                     Math.Pow(upperBound - lowerBound, 2.0) / 12.0;
@@ -362,7 +362,7 @@ namespace Novacta.Analytics.Tests
             var lowerBound = -1.1;
             var upperBound = 2.2;
             double[] distributionParameters =
-                new double[2] { lowerBound, upperBound };
+                [lowerBound, upperBound];
 
             // Valid input
             {
@@ -453,7 +453,7 @@ namespace Novacta.Analytics.Tests
                 var lowerBound = 0.0;
                 var upperBound = 1.0;
                 double[] distributionParameters =
-                    Array.Empty<double>();
+                    [];
                 double distributionMean = (lowerBound + upperBound) / 2.0;
                 double distributionVariance =
                     Math.Pow(upperBound - lowerBound, 2.0) / 12.0;
@@ -489,7 +489,7 @@ namespace Novacta.Analytics.Tests
             var lowerBound = 0.0;
             var upperBound = 1.0;
             double[] distributionParameters =
-                Array.Empty<double>();
+                [];
 
             // Valid input
             {
@@ -624,7 +624,7 @@ namespace Novacta.Analytics.Tests
                 var lowerBound = -10;
                 var upperBound = 10;
                 int[] distributionParameters =
-                    new int[2] { lowerBound, upperBound };
+                    [lowerBound, upperBound];
                 // In what follows, formulas must take into
                 // account that parameter upperBound is exclusive.
                 double distributionMean =
@@ -721,7 +721,7 @@ namespace Novacta.Analytics.Tests
             int lowerBound = -10;
             int upperBound = 10;
             int[] distributionParameters =
-                new int[2] { lowerBound, upperBound };
+                [lowerBound, upperBound];
 
             // Valid input
             {

@@ -27,7 +27,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Division
         TypicalDoubleMatrixDoubleScalarDivision() :
             base(
                 expected: new DoubleMatrixState(
-                    asColumnMajorDenseArray: new double[6] { 0, .5, 1, 1.5, 2, 2.5 },
+                    asColumnMajorDenseArray: [0, .5, 1, 1.5, 2, 2.5],
                     numberOfRows: 2,
                     numberOfColumns: 3),
                 left: TestableDoubleMatrix16.Get(),

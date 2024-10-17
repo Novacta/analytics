@@ -32,8 +32,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Division
         RightIsUpperTriangularDoubleMatrixDoubleMatrixDivision() :
             base(
                 expected: new DoubleMatrixState(
-                    asColumnMajorDenseArray: new double[10]
-                    { 1, 2, 1, 1, 0.1667, 0.1667, 0.0167, 0.0167, -0.0012, -0.0012 },
+                    asColumnMajorDenseArray: [1, 2, 1, 1, 0.1667, 0.1667, 0.0167, 0.0167, -0.0012, -0.0012],
                     numberOfRows: 2,
                     numberOfColumns: 5),
                 left: TestableDoubleMatrix23.Get(),

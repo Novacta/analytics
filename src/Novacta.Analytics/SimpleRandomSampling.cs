@@ -182,7 +182,7 @@ namespace Novacta.Analytics
                 }
             }
 
-            return new IndexCollection(sampleList.ToArray(), false);
+            return new IndexCollection([.. sampleList], false);
         }
     }
 }

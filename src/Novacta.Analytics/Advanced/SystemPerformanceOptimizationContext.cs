@@ -583,15 +583,9 @@ namespace Novacta.Analytics.Advanced
             LinkedList<double> levels,
             LinkedList<DoubleMatrix> parameters)
         {
-            if (levels is null)
-            {
-                throw new ArgumentNullException(nameof(levels));
-            }
+            ArgumentNullException.ThrowIfNull(levels);
 
-            if (parameters is null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            ArgumentNullException.ThrowIfNull(parameters);
 
             bool stopExecution;
 
@@ -630,15 +624,9 @@ namespace Novacta.Analytics.Advanced
             double rarity,
             out DoubleMatrix eliteSample)
         {
-            if (performances is null)
-            {
-                throw new ArgumentNullException(nameof(performances));
-            }
+            ArgumentNullException.ThrowIfNull(performances);
 
-            if (sample is null)
-            {
-                throw new ArgumentNullException(nameof(sample));
-            }
+            ArgumentNullException.ThrowIfNull(sample);
 
             var performanceArray = performances.GetStorage();
             SortHelper.Sort(
@@ -756,15 +744,9 @@ namespace Novacta.Analytics.Advanced
             LinkedList<double> levels,
             LinkedList<DoubleMatrix> parameters)
         {
-            if (levels is null)
-            {
-                throw new ArgumentNullException(nameof(levels));
-            }
+            ArgumentNullException.ThrowIfNull(levels);
 
-            if (parameters is null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            ArgumentNullException.ThrowIfNull(parameters);
 
             bool stopExecution = true;
 
@@ -847,10 +829,7 @@ namespace Novacta.Analytics.Advanced
         protected internal virtual void SmoothParameter(
             LinkedList<DoubleMatrix> parameters)
         {
-            if (parameters is null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            ArgumentNullException.ThrowIfNull(parameters);
 
             double alpha = .7;
 

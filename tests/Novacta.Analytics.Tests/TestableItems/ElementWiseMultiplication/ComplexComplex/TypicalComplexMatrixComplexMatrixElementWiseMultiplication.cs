@@ -4,7 +4,6 @@
 
 using Novacta.Analytics.Tests.TestableItems.Matrices;
 using Novacta.Analytics.Tests.Tools;
-using System.Numerics;
 
 namespace Novacta.Analytics.Tests.TestableItems.ElementWiseMultiplication
 {
@@ -30,15 +29,15 @@ namespace Novacta.Analytics.Tests.TestableItems.ElementWiseMultiplication
         TypicalComplexMatrixComplexMatrixElementWiseMultiplication() :
             base(
                 expected: new ComplexMatrixState(
-                    asColumnMajorDenseArray: new Complex[6] 
-                    { 
+                    asColumnMajorDenseArray:
+                    [
                         0, 
-                        new Complex(0, -8), 
-                        new Complex(0, -12), 
-                        new Complex(0, -12),
-                        new Complex(0, -8), 
+                        new(0, -8), 
+                        new(0, -12), 
+                        new(0, -12),
+                        new(0, -8), 
                         0 
-                    },
+                    ],
                     numberOfRows: 2,
                     numberOfColumns: 3),
                 left: TestableComplexMatrix16.Get(),

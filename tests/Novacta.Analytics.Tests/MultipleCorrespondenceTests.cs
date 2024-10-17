@@ -59,7 +59,7 @@ namespace Novacta.Analytics.Tests
                 number.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { color, number };
+                    [color, number];
 
                 DoubleMatrix data = DoubleMatrix.Dense(5, 2);
                 data[0, 0] = 0;
@@ -97,13 +97,13 @@ namespace Novacta.Analytics.Tests
                         "STR_EXCEPT_GDA_NON_POSITIVE_PRINCIPAL_VARIANCES");
 
                 // Create a data stream.
-                string[] data = new string[6] {
+                string[] data = [
                         "COLOR,NUMBER",
                         "Red,Negative",
                         "Red,Negative",
                         "Red,Negative",
                         "Red,Negative",
-                        "Red,Negative" };
+                        "Red,Negative" ];
 
                 MemoryStream stream = new();
                 StreamWriter writer = new(stream);
@@ -140,13 +140,13 @@ namespace Novacta.Analytics.Tests
             {
                 {
                     // Create a data stream.
-                    string[] data = new string[6] {
+                    string[] data = [
                         "COLOR,NUMBER",
                         "Red,Negative",
                         "Green,Zero",
                         "Red,Negative",
                         "Blue,Negative",
-                        "Blue,Positive" };
+                        "Blue,Positive" ];
 
                     MemoryStream stream = new();
                     StreamWriter writer = new(stream);

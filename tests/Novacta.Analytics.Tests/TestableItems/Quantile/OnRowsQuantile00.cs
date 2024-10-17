@@ -17,26 +17,26 @@ namespace Novacta.Analytics.Tests.TestableItems.Quantile
     {
         protected OnRowsQuantile00() :
                 base(
-                    expected: new DoubleMatrixState[3] {
-                        new DoubleMatrixState(
+                    expected: [
+                        new(
                             asColumnMajorDenseArray: 
-                                new double[4] { 4.28, 9.56, 1, 13 },
+                                [4.28, 9.56, 1, 13],
                             numberOfRows: 2,
                             numberOfColumns: 2),
-                        new DoubleMatrixState(
+                        new(
                             asColumnMajorDenseArray: 
-                                new double[4] { 5.28, 10.56, 2, 14 },
+                                [5.28, 10.56, 2, 14],
                             numberOfRows: 2,
                             numberOfColumns: 2),
-                        new DoubleMatrixState(
+                        new(
                             asColumnMajorDenseArray: 
-                                new double[4] { 6.28, 11.56, 3, 15 },
+                                [6.28, 11.56, 3, 15],
                             numberOfRows: 2,
                             numberOfColumns: 2)
-                    },
+                    ],
                     data: TestableDoubleMatrix53.Get(),
                     probabilities: DoubleMatrix.Dense(2, 2, 
-                         new double[4] { .33, .66, 0, 1 }),
+                         [.33, .66, 0, 1]),
                     dataOperation: DataOperation.OnRows)
         {
         }

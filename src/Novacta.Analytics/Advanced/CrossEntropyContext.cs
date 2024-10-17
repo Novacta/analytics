@@ -249,10 +249,7 @@ namespace Novacta.Analytics.Advanced
                         "STR_EXCEPT_PAR_MUST_BE_POSITIVE"));
             }
 
-            if (initialParameter is null)
-            {
-                throw new ArgumentNullException(nameof(initialParameter));
-            }
+            ArgumentNullException.ThrowIfNull(initialParameter);
 
             this.StateDimension = stateDimension;
             this.InitialParameter = initialParameter;

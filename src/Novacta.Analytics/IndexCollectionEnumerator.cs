@@ -58,7 +58,8 @@ namespace Novacta.Analytics
         {
             get
             {
-                if ((this.position < 0) || 
+                if ((this.position < 0) 
+                    || 
                     (this.position >= this.indexCollection.Count)) {
                     throw new InvalidOperationException(
                     ImplementationServices.GetResourceString(
@@ -73,7 +74,8 @@ namespace Novacta.Analytics
         {
             get
             {
-                if ((this.position < 0) || 
+                if ((this.position < 0) 
+                    || 
                     (this.position >= this.indexCollection.Count)) {
                     throw new InvalidOperationException(
                     ImplementationServices.GetResourceString(

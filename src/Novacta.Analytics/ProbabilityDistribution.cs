@@ -35,10 +35,7 @@ namespace Novacta.Analytics
         /// </exception>
         public virtual DoubleMatrix Cdf(DoubleMatrix arguments)
         {
-            if (arguments is null)
-            {
-                throw new ArgumentNullException(nameof(arguments));
-            }
+            ArgumentNullException.ThrowIfNull(arguments);
 
             DoubleMatrix results = DoubleMatrix.Dense(
                 arguments.NumberOfRows, arguments.NumberOfColumns);
@@ -53,10 +50,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref="Cdf(DoubleMatrix)"/>
         public virtual DoubleMatrix Cdf(ReadOnlyDoubleMatrix arguments)
         {
-            if (arguments is null)
-            {
-                throw new ArgumentNullException(nameof(arguments));
-            }
+            ArgumentNullException.ThrowIfNull(arguments);
 
             DoubleMatrix results = DoubleMatrix.Dense(
                 arguments.NumberOfRows, arguments.NumberOfColumns);
@@ -101,10 +95,7 @@ namespace Novacta.Analytics
         /// </exception>
         public virtual DoubleMatrix InverseCdf(DoubleMatrix arguments)
         {
-            if (arguments is null)
-            {
-                throw new ArgumentNullException(nameof(arguments));
-            }
+            ArgumentNullException.ThrowIfNull(arguments);
 
             DoubleMatrix results = DoubleMatrix.Dense(
                 arguments.NumberOfRows, arguments.NumberOfColumns);
@@ -122,10 +113,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref="ProbabilityDistribution.InverseCdf(DoubleMatrix)"/>
         public virtual DoubleMatrix InverseCdf(ReadOnlyDoubleMatrix arguments)
         {
-            if (arguments is null)
-            {
-                throw new ArgumentNullException(nameof(arguments));
-            }
+            ArgumentNullException.ThrowIfNull(arguments);
 
             DoubleMatrix results = DoubleMatrix.Dense(
                 arguments.NumberOfRows, arguments.NumberOfColumns);
@@ -184,10 +172,7 @@ namespace Novacta.Analytics
         /// </exception>
         public virtual DoubleMatrix Pdf(DoubleMatrix arguments)
         {
-            if (arguments is null)
-            {
-                throw new ArgumentNullException(nameof(arguments));
-            }
+            ArgumentNullException.ThrowIfNull(arguments);
 
             DoubleMatrix results = DoubleMatrix.Dense(
                 arguments.NumberOfRows, arguments.NumberOfColumns);
@@ -202,10 +187,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref="ProbabilityDistribution.Pdf(DoubleMatrix)"/>
         public virtual DoubleMatrix Pdf(ReadOnlyDoubleMatrix arguments)
         {
-            if (arguments is null)
-            {
-                throw new ArgumentNullException(nameof(arguments));
-            }
+            ArgumentNullException.ThrowIfNull(arguments);
 
             DoubleMatrix results = DoubleMatrix.Dense(
                 arguments.NumberOfRows, arguments.NumberOfColumns);
@@ -394,8 +376,7 @@ namespace Novacta.Analytics
         {
             ProbabilityDistribution.ValidateSampleInput(sampleSize);
 
-            if (destinationArray is null)
-                throw new ArgumentNullException(nameof(destinationArray));
+            ArgumentNullException.ThrowIfNull(destinationArray);
 
             if (destinationIndex < 0)
             {
@@ -426,8 +407,7 @@ namespace Novacta.Analytics
         {
             ProbabilityDistribution.ValidateSampleInput(sampleSize);
 
-            if (destinationArray is null)
-                throw new ArgumentNullException(nameof(destinationArray));
+            ArgumentNullException.ThrowIfNull(destinationArray);
 
             if (destinationIndex < 0)
             {

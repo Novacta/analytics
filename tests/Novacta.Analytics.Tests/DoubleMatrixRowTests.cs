@@ -28,7 +28,7 @@ namespace Novacta.Analytics.Tests
             // IEnumerable.GetEnumerator
             {
                 var matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -62,7 +62,7 @@ namespace Novacta.Analytics.Tests
             // IEnumerable<double>.GetEnumerator
             {
                 var matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -102,7 +102,7 @@ namespace Novacta.Analytics.Tests
                         new string[] { "STR_EXCEPT_ENU_OUT_OF_BOUNDS" });
 
                 var matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -132,7 +132,7 @@ namespace Novacta.Analytics.Tests
                         new string[] { "STR_EXCEPT_ENU_OUT_OF_BOUNDS" });
 
                 var matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -158,7 +158,7 @@ namespace Novacta.Analytics.Tests
         public void ConstructorTest()
         {
             var matrix = DoubleMatrix.Dense(2, 3,
-                new double[6] { 1, 2, 3, 4, 5, 6 });
+                [1, 2, 3, 4, 5, 6]);
             var rows = matrix.AsRowCollection();
 
             for (int i = 0; i < matrix.NumberOfRows; i++)
@@ -183,7 +183,7 @@ namespace Novacta.Analytics.Tests
             // matrix has no row or column names
             {
                 var matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { .1, 10.2, -2.3, 1000.2, .2, 239.32 });
+                    [.1, 10.2, -2.3, 1000.2, .2, 239.32]);
                 var rows = matrix.AsRowCollection();
 
                 var actual = rows[0].ToString();
@@ -196,7 +196,7 @@ namespace Novacta.Analytics.Tests
             // matrix has some row or column names
             {
                 var matrix = DoubleMatrix.Dense(3, 3,
-                    new double[9] { .1, 10.2, 0, -2.3, 1000.2, 0, .2, 239.32, 0 });
+                    [.1, 10.2, 0, -2.3, 1000.2, 0, .2, 239.32, 0]);
                 var rows = matrix.AsRowCollection();
 
                 // ROW NAMES 
@@ -256,7 +256,7 @@ namespace Novacta.Analytics.Tests
             // matrix has some row names but no col ones
             {
                 var matrix = DoubleMatrix.Dense(3, 3,
-                    new double[9] { .1, 10.2, 0, -2.3, 1000.2, 0, .2, 239.32, 0 });
+                    [.1, 10.2, 0, -2.3, 1000.2, 0, .2, 239.32, 0]);
                 var rows = matrix.AsRowCollection();
 
                 // ROW NAMES 
@@ -300,7 +300,7 @@ namespace Novacta.Analytics.Tests
             // matrix has no row names and some column ones
             {
                 var matrix = DoubleMatrix.Dense(3, 3,
-                    new double[9] { .1, 10.2, 0, -2.3, 1000.2, 0, .2, 239.32, 0 });
+                    [.1, 10.2, 0, -2.3, 1000.2, 0, .2, 239.32, 0]);
                 var rows = matrix.AsRowCollection();
 
                 // COL NAMES
@@ -352,7 +352,7 @@ namespace Novacta.Analytics.Tests
         public void GetHashCodeTest()
         {
             var matrix = DoubleMatrix.Dense(3, 3,
-                new double[9] { 1, 2, 3, 4, 5, 6, 1, 2, 3 },
+                [1, 2, 3, 4, 5, 6, 1, 2, 3],
                 StorageOrder.RowMajor);
             var rows = matrix.AsRowCollection();
 
@@ -375,7 +375,7 @@ namespace Novacta.Analytics.Tests
             DoubleMatrixRow row;
 
             var matrix = DoubleMatrix.Dense(3, 3,
-                 new double[9] { 1, 2, 3, 4, 5, 6, 1, 2, 3 },
+                 [1, 2, 3, 4, 5, 6, 1, 2, 3],
                  StorageOrder.RowMajor);
 
             var rows = matrix.AsRowCollection();
@@ -398,20 +398,20 @@ namespace Novacta.Analytics.Tests
             expected = matrix[rowIndex, rows.XDataColumn];
             row.XData = expected;
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "" },
-                actual: subscriber.PropertyNames.ToArray());
+                expected: [""],
+                actual: [.. subscriber.PropertyNames]);
 
             expected = matrix[rowIndex, rows.YDataColumn];
             row.YData = expected;
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "" },
-                actual: subscriber.PropertyNames.ToArray());
+                expected: [""],
+                actual: [.. subscriber.PropertyNames]);
 
             expected = matrix[rowIndex, rows.ZDataColumn];
             row.ZData = expected;
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "" },
-                actual: subscriber.PropertyNames.ToArray());
+                expected: [""],
+                actual: [.. subscriber.PropertyNames]);
 
             Assert.AreEqual(
                 matrix[rowIndex, rows.XDataColumn], 
@@ -431,20 +431,20 @@ namespace Novacta.Analytics.Tests
             expected = -5.0;
             row.XData = expected;
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "", "XData", "[2]" },
-                actual: subscriber.PropertyNames.ToArray());
+                expected: ["", "XData", "[2]"],
+                actual: [.. subscriber.PropertyNames]);
 
             expected = -10.0;
             row.YData = expected;
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "", "XData", "[2]", "YData", "[1]" },
-                actual: subscriber.PropertyNames.ToArray());
+                expected: ["", "XData", "[2]", "YData", "[1]"],
+                actual: [.. subscriber.PropertyNames]);
 
             expected = -15.0;
             row.ZData = expected;
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "", "XData", "[2]", "YData", "[1]", "ZData", "[0]" },
-                actual: subscriber.PropertyNames.ToArray());
+                expected: ["", "XData", "[2]", "YData", "[1]", "ZData", "[0]"],
+                actual: [.. subscriber.PropertyNames]);
 
             Assert.AreEqual(
                 matrix[rowIndex, rows.XDataColumn],
@@ -468,7 +468,7 @@ namespace Novacta.Analytics.Tests
             DoubleMatrixRow thisRow, otherRow;
 
             matrix = DoubleMatrix.Dense(3, 3,
-                new double[9] { 1, 2, 3, 4, 5, 6, 1, 2, 3 },
+                [1, 2, 3, 4, 5, 6, 1, 2, 3],
                 StorageOrder.RowMajor);
 
             var rows = matrix.AsRowCollection();
@@ -649,7 +649,7 @@ namespace Novacta.Analytics.Tests
         public void MatrixTest()
         {
             DoubleMatrix matrix = DoubleMatrix.Dense(2, 3,
-                new double[6] { 1, 2, 3, 4, 5, 6 });
+                [1, 2, 3, 4, 5, 6]);
             var rows = matrix.AsRowCollection();
 
             var actual = rows.Matrix;
@@ -662,7 +662,7 @@ namespace Novacta.Analytics.Tests
         public void NotifyPropertyChangedTest()
         {
             DoubleMatrix matrix = DoubleMatrix.Dense(2, 3,
-                new double[6] { 1, 2, 3, 4, 5, 6 });
+                [1, 2, 3, 4, 5, 6]);
 
             var rows = matrix.AsRowCollection();
 
@@ -692,7 +692,7 @@ namespace Novacta.Analytics.Tests
             // value is not null
             {
                 DoubleMatrix matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 for (int i = 0; i < matrix.NumberOfRows; i++)
@@ -713,7 +713,7 @@ namespace Novacta.Analytics.Tests
             // columnIndex is less than 0
             {
                 DoubleMatrix matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -733,7 +733,7 @@ namespace Novacta.Analytics.Tests
             // columnIndex is greater than NumberOfColumns - 1
             {
                 DoubleMatrix matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -755,7 +755,7 @@ namespace Novacta.Analytics.Tests
                 var subscriber = new PropertyChangedSubscriber();
 
                 var matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 int dataColumn = 2;
@@ -769,8 +769,8 @@ namespace Novacta.Analytics.Tests
                 row[dataColumn] = -1;
                 Assert.AreEqual(matrix[rowIndex, dataColumn], row[dataColumn]);
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "", "[2]", "XData", "YData" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: ["", "[2]", "XData", "YData"],
+                    actual: [.. subscriber.PropertyNames]);
             }
         }
 
@@ -780,7 +780,7 @@ namespace Novacta.Analytics.Tests
             // columnIndex not representing an integer
             {
                 DoubleMatrix matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -800,7 +800,7 @@ namespace Novacta.Analytics.Tests
             // columnIndex is less than 0
             {
                 DoubleMatrix matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -820,7 +820,7 @@ namespace Novacta.Analytics.Tests
             // columnIndex is greater than NumberOfColumns - 1
             {
                 DoubleMatrix matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -842,7 +842,7 @@ namespace Novacta.Analytics.Tests
                 var subscriber = new PropertyChangedSubscriber();
 
                 var matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 int dataColumn = 2;
@@ -856,8 +856,8 @@ namespace Novacta.Analytics.Tests
                 row[dataColumn] = -1;
                 Assert.AreEqual(matrix[rowIndex, dataColumn], row["2"]);
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "", "[2]", "XData", "YData" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: ["", "[2]", "XData", "YData"],
+                    actual: [.. subscriber.PropertyNames]);
             }
         }
 
@@ -867,7 +867,7 @@ namespace Novacta.Analytics.Tests
             // columnIndex is less than 0
             {
                 DoubleMatrix matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -887,7 +887,7 @@ namespace Novacta.Analytics.Tests
             // columnIndex is greater than NumberOfColumns - 1
             {
                 DoubleMatrix matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -909,7 +909,7 @@ namespace Novacta.Analytics.Tests
                 var subscriber = new PropertyChangedSubscriber();
 
                 var matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 int dataColumn = 2;
@@ -927,8 +927,8 @@ namespace Novacta.Analytics.Tests
                     row[dataColumn], 
                     DoubleMatrixTest.Accuracy);
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "", "[2]", "XData", "YData", "ZData" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: ["", "[2]", "XData", "YData", "ZData"],
+                    actual: [.. subscriber.PropertyNames]);
 
                 row[0] = -1;
                 Assert.AreEqual(
@@ -936,8 +936,8 @@ namespace Novacta.Analytics.Tests
                     row[dataColumn],
                 DoubleMatrixTest.Accuracy);
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "", "[2]", "XData", "YData", "ZData", "[0]" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: ["", "[2]", "XData", "YData", "ZData", "[0]"],
+                    actual: [.. subscriber.PropertyNames]);
             }
         }
 
@@ -947,7 +947,7 @@ namespace Novacta.Analytics.Tests
             // columnIndex not representing an integer
             {
                 DoubleMatrix matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -967,7 +967,7 @@ namespace Novacta.Analytics.Tests
             // columnIndex is less than 0
             {
                 DoubleMatrix matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -987,7 +987,7 @@ namespace Novacta.Analytics.Tests
             // columnIndex is greater than NumberOfColumns - 1
             {
                 DoubleMatrix matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -1009,7 +1009,7 @@ namespace Novacta.Analytics.Tests
                 var subscriber = new PropertyChangedSubscriber();
 
                 var matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 int dataColumn = 2;
@@ -1027,8 +1027,8 @@ namespace Novacta.Analytics.Tests
                     row["2"],
                     DoubleMatrixTest.Accuracy);
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "", "[2]", "XData", "YData", "ZData" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: ["", "[2]", "XData", "YData", "ZData"],
+                    actual: [.. subscriber.PropertyNames]);
 
                 row[0] = -1;
                 Assert.AreEqual(
@@ -1036,8 +1036,8 @@ namespace Novacta.Analytics.Tests
                     row["2"],
                 DoubleMatrixTest.Accuracy);
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "", "[2]", "XData", "YData", "ZData", "[0]" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: ["", "[2]", "XData", "YData", "ZData", "[0]"],
+                    actual: [.. subscriber.PropertyNames]);
             }
         }
 
@@ -1045,7 +1045,7 @@ namespace Novacta.Analytics.Tests
         public void IndexGetTest()
         {
             var matrix = DoubleMatrix.Dense(2, 3,
-                new double[6] { 1, 2, 3, 4, 5, 6 });
+                [1, 2, 3, 4, 5, 6]);
 
             var rows = matrix.AsRowCollection();
 
@@ -1065,7 +1065,7 @@ namespace Novacta.Analytics.Tests
             // value is less than 0
             {
                 DoubleMatrix matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -1085,7 +1085,7 @@ namespace Novacta.Analytics.Tests
             // value is greater than NumberOfColumns - 1
             {
                 DoubleMatrix matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -1107,7 +1107,7 @@ namespace Novacta.Analytics.Tests
                 var subscriber = new PropertyChangedSubscriber();
 
                 DoubleMatrix matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -1128,7 +1128,7 @@ namespace Novacta.Analytics.Tests
                 var subscriber = new PropertyChangedSubscriber();
 
                 DoubleMatrix matrix = DoubleMatrix.Dense(2, 3,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -1150,7 +1150,7 @@ namespace Novacta.Analytics.Tests
         public void LengthTest()
         {
             DoubleMatrix matrix = DoubleMatrix.Dense(2, 3,
-                new double[6] { 1, 2, 3, 4, 5, 6 });
+                [1, 2, 3, 4, 5, 6]);
             var rows = matrix.AsRowCollection();
 
             DoubleMatrixRow target = rows[0];
@@ -1165,7 +1165,7 @@ namespace Novacta.Analytics.Tests
         public void XDataTest()
         {
             var matrix = DoubleMatrix.Dense(2, 3,
-                new double[6] { 1, 2, 3, 4, 5, 6 });
+                [1, 2, 3, 4, 5, 6]);
             var rows = matrix.AsRowCollection();
 
             int dataColumn = 1;
@@ -1181,8 +1181,8 @@ namespace Novacta.Analytics.Tests
             double expected = matrix[row.Index, dataColumn];
             row.XData = expected;
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "" },
-                actual: subscriber.PropertyNames.ToArray());
+                expected: [""],
+                actual: [.. subscriber.PropertyNames]);
             var actual = row.XData;
             Assert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
 
@@ -1196,15 +1196,15 @@ namespace Novacta.Analytics.Tests
                 row.XData,
                 DoubleMatrixTest.Accuracy);
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "", "XData", "[1]" },
-                actual: subscriber.PropertyNames.ToArray());            
+                expected: ["", "XData", "[1]"],
+                actual: [.. subscriber.PropertyNames]);            
         }
 
         [TestMethod()]
         public void YDataTest()
         {
             var matrix = DoubleMatrix.Dense(2, 3,
-                new double[6] { 1, 2, 3, 4, 5, 6 });
+                [1, 2, 3, 4, 5, 6]);
             var rows = matrix.AsRowCollection();
 
             int dataColumn = 1;
@@ -1220,8 +1220,8 @@ namespace Novacta.Analytics.Tests
             double expected = matrix[row.Index, dataColumn];
             row.YData = expected;
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "" },
-                actual: subscriber.PropertyNames.ToArray());
+                expected: [""],
+                actual: [.. subscriber.PropertyNames]);
             var actual = row.YData;
             Assert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
 
@@ -1235,15 +1235,15 @@ namespace Novacta.Analytics.Tests
                 row.YData,
                 DoubleMatrixTest.Accuracy);
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "", "YData", "[1]" },
-                actual: subscriber.PropertyNames.ToArray());
+                expected: ["", "YData", "[1]"],
+                actual: [.. subscriber.PropertyNames]);
         }
 
         [TestMethod()]
         public void ZDataTest()
         {
             var matrix = DoubleMatrix.Dense(2, 3,
-                new double[6] { 1, 2, 3, 4, 5, 6 });
+                [1, 2, 3, 4, 5, 6]);
             var rows = matrix.AsRowCollection();
 
             int dataColumn = 1;
@@ -1259,8 +1259,8 @@ namespace Novacta.Analytics.Tests
             double expected = matrix[row.Index, dataColumn];
             row.ZData = expected;
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "" },
-                actual: subscriber.PropertyNames.ToArray());
+                expected: [""],
+                actual: [.. subscriber.PropertyNames]);
             var actual = row.ZData;
             Assert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
 
@@ -1274,8 +1274,8 @@ namespace Novacta.Analytics.Tests
                 row.ZData,
                 DoubleMatrixTest.Accuracy);
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "", "ZData", "[1]" },
-                actual: subscriber.PropertyNames.ToArray());
+                expected: ["", "ZData", "[1]"],
+                actual: [.. subscriber.PropertyNames]);
         }
     }
 }

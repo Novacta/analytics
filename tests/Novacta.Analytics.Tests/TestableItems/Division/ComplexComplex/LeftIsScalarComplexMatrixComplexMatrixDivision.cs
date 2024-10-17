@@ -28,15 +28,15 @@ namespace Novacta.Analytics.Tests.TestableItems.Division
         LeftIsScalarComplexMatrixComplexMatrixDivision() :
             base(
                 expected: new ComplexMatrixState(
-                    asColumnMajorDenseArray: new Complex[6]
-                    { 
+                    asColumnMajorDenseArray:
+                    [
                         Complex.NaN, 
                         10, 
                         5, 
                         3.3333333, 
                         2.5,
                         2 
-                    },
+                    ],
                     numberOfRows: 2,
                     numberOfColumns: 3),
                 left: TestableComplexMatrix22.Get(),

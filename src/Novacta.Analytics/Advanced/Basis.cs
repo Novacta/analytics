@@ -195,10 +195,7 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (basisMatrix is null) {
-                throw new ArgumentNullException(
-                    nameof(basisMatrix));
-            }
+            ArgumentNullException.ThrowIfNull(basisMatrix);
 
             if (!basisMatrix.IsSquare) {
                 throw new ArgumentOutOfRangeException(
@@ -265,16 +262,16 @@ namespace Novacta.Analytics.Advanced
         /// Coordinates must be passed as row vectors. 
         /// Let <latex>A</latex> be the 
         /// <see cref="GetBasisMatrix">matrix representation</see>
-        /// of this instance, and let <latex>\bc{A}{l}</latex> and
-        /// <latex>\bc{A}{r}</latex> be 
+        /// of this instance, and let <latex>l_{\basis{A}}</latex> and
+        /// <latex>r_{\basis{A}}</latex> be 
         /// <paramref name="left"/> and <paramref name="right"/>,
         /// respectively. Then 
         /// method <see cref="ScalarProduct(DoubleMatrix, DoubleMatrix)"/>
         /// returns
         /// <latex mode="display">
-        /// \bsprod{A}{l|r} = \T{\bc{A}{l}}\,\Q{A}\,\bc{A}{r},
+        /// \bsprod{A}{l|r} = \T{l_{\basis{A}}}\,\Q{A}\,r_{\basis{A}},
         /// </latex>
-        /// where <latex>\bc{A}{l},\bc{A}{r} \in \R^K</latex> are 
+        /// where <latex>l_{\basis{A}},r_{\basis{A}} \in \R^K</latex> are 
         /// coordinates w.r.t. basis
         /// <latex>\A</latex>, and 
         /// <latex mode="display">
@@ -304,9 +301,7 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (left is null) {
-                throw new ArgumentNullException(nameof(left));
-            }
+            ArgumentNullException.ThrowIfNull(left);
 
             if (!left.IsRowVector) {
                 throw new ArgumentOutOfRangeException(
@@ -324,9 +319,7 @@ namespace Novacta.Analytics.Advanced
                         "STR_EXCEPT_PAR_MUST_BE_BASIS_COMPLIANT_VECTOR"));
             }
 
-            if (right is null) {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(right);
 
             if (!right.IsRowVector) {
                 throw new ArgumentOutOfRangeException(
@@ -361,7 +354,7 @@ namespace Novacta.Analytics.Advanced
         /// a row vector.
         /// Let <latex>A</latex> be the 
         /// <see cref="GetBasisMatrix">matrix representation</see>
-        /// of this instance, and let <latex>\bc{A}{x}</latex> be 
+        /// of this instance, and let <latex>x_{\basis{A}}</latex> be 
         /// equal to <paramref name="coordinates"/>. Then 
         /// method <see cref="Norm(DoubleMatrix)"/>
         /// returns
@@ -388,9 +381,7 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (coordinates is null) {
-                throw new ArgumentNullException(nameof(coordinates));
-            }
+            ArgumentNullException.ThrowIfNull(coordinates);
 
             if (!coordinates.IsRowVector) {
                 throw new ArgumentOutOfRangeException(
@@ -425,8 +416,8 @@ namespace Novacta.Analytics.Advanced
         /// Coordinates must be passed as row vectors.
         /// Let <latex>A</latex> be the 
         /// <see cref="GetBasisMatrix">matrix representation</see>
-        /// of this instance, and let <latex>\bc{A}{l}</latex> and
-        /// <latex>\bc{A}{r}</latex> be 
+        /// of this instance, and let <latex>l_{\basis{A}}</latex> and
+        /// <latex>r_{\basis{A}}</latex> be 
         /// <paramref name="left"/> and <paramref name="right"/>,
         /// respectively. Then 
         /// method <see cref="Distance(DoubleMatrix, DoubleMatrix)"/>
@@ -467,9 +458,7 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (left is null) {
-                throw new ArgumentNullException(nameof(left));
-            }
+            ArgumentNullException.ThrowIfNull(left);
 
             if (!left.IsRowVector) {
                 throw new ArgumentOutOfRangeException(
@@ -487,9 +476,7 @@ namespace Novacta.Analytics.Advanced
                         "STR_EXCEPT_PAR_MUST_BE_BASIS_COMPLIANT_VECTOR"));
             }
 
-            if (right is null) {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(right);
 
             if (!right.IsRowVector) {
                 throw new ArgumentOutOfRangeException(
@@ -545,21 +532,21 @@ namespace Novacta.Analytics.Advanced
         /// Let <latex>C</latex> and <latex>N</latex> be the 
         /// <see cref="GetBasisMatrix">matrix representations</see>
         /// of <paramref name="currentBasis"/>, and <paramref name="newBasis"/>,
-        /// respectively, and let <latex>\bc{C}{X}</latex> be 
+        /// respectively, and let <latex>X_{\basis{C}}</latex> be 
         /// <paramref name="currentCoordinates"/>, i.e. the 
         /// coordinates matrix w.r.t. basis <latex>\basis{C}</latex> of the points
         /// <latex>x_1,\dots,x_n</latex> under study:
         /// <latex mode="display">
-        /// \bc{C}{X}=\mx{
-        ///    \T{\bc{C}{x_1}} \\
+        /// X_{\basis{C}}=\mx{
+        ///    \T{x_{1,\basis{C}}} \\
         ///    \vdots  \\
-        ///    \T{\bc{C}{x_n}} }.
+        ///    \T{x_{n,\basis{C}}} }.
         /// </latex>
         /// Then 
         /// method <see cref="ChangeCoordinates(Basis, DoubleMatrix, Basis)"/>
         /// returns the matrix
         /// <latex mode="display">
-        /// \bc{N}{X} = \bc{C}{X}\, \T{C}\, \InvT{N}.
+        /// X_{\basis{N}} = X_{\basis{C}}\, \T{C}\, \InvT{N}.
         /// </latex>
         /// </para>
         /// </remarks>
@@ -587,17 +574,11 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (newBasis is null) {
-                throw new ArgumentNullException(nameof(newBasis));
-            }
+            ArgumentNullException.ThrowIfNull(newBasis);
 
-            if (currentCoordinates is null) {
-                throw new ArgumentNullException(nameof(currentCoordinates));
-            }
+            ArgumentNullException.ThrowIfNull(currentCoordinates);
 
-            if (currentBasis is null) {
-                throw new ArgumentNullException(nameof(currentBasis));
-            }
+            ArgumentNullException.ThrowIfNull(currentBasis);
 
             int k = newBasis.Dimension;
 
@@ -643,21 +624,21 @@ namespace Novacta.Analytics.Advanced
         /// Let <latex>A</latex> be the 
         /// <see cref="GetBasisMatrix">matrix representation</see>
         /// of this instance, 
-        /// and let <latex>\bc{A}{X}</latex> be 
+        /// and let <latex>X_{\basis{A}}</latex> be 
         /// <paramref name="coordinates"/>, the 
         /// coordinates matrix w.r.t. basis <latex>\A</latex> of the points
         /// <latex>x_1,\dots,x_n</latex> under study:
         /// <latex mode="display">
         /// X_{\A}=\mx{
-        ///    \T{\bc{A}{x_1}} \\
+        ///    \T{x_{1,\A}} \\
         ///    \vdots  \\
-        ///    \T{\bc{A}{x_n}} }.
+        ///    \T{x_{n,\A}} }.
         /// </latex>
         /// Then 
         /// method <see cref="GetVectors(DoubleMatrix)"/>
         /// returns the matrix
         /// <latex mode="display">
-        /// \bc{I}{X} = \bc{A}{X}\,\T{A}.
+        /// X_{\basis{I}} = X_{\basis{A}}\,\T{A}.
         /// </latex>
         /// </para>
         /// </remarks>
@@ -677,9 +658,7 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (coordinates is null) {
-                throw new ArgumentNullException(nameof(coordinates));
-            }
+            ArgumentNullException.ThrowIfNull(coordinates);
 
             int k = this.Dimension;
 
@@ -721,7 +700,7 @@ namespace Novacta.Analytics.Advanced
         /// Let <latex>A</latex> be the 
         /// <see cref="GetBasisMatrix">matrix representation</see>
         /// of this instance, 
-        /// and let <latex>\bc{I}{X}</latex> be 
+        /// and let <latex>X_{\basis{I}}</latex> be 
         /// <paramref name="vectors"/>, a matrix whose rows 
         /// are transposed versions of the points
         /// <latex>x_1,\dots,x_n</latex> under study:
@@ -736,7 +715,7 @@ namespace Novacta.Analytics.Advanced
         /// returns the coordinates matrix w.r.t. basis <latex>\A</latex>
         /// of such points:
         /// <latex mode="display">
-        /// \bc{A}{X} = \bc{I}{X}\,\InvT{A}.
+        /// X_{\basis{A}} = X_{\basis{I}}\,\InvT{A}.
         /// </latex>
         /// </para>
         /// </remarks>
@@ -752,9 +731,7 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (vectors is null) {
-                throw new ArgumentNullException(nameof(vectors));
-            }
+            ArgumentNullException.ThrowIfNull(vectors);
 
             int k = this.Dimension;
 

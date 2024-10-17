@@ -17,11 +17,11 @@ namespace Novacta.Analytics.Tests.TestableItems.Quantile
         protected OnAllQuantile00() :
                 base(
                     expected: new DoubleMatrixState(
-                        asColumnMajorDenseArray: new double[4] { 1.0, 50.5, 75.583333, 100.0 },
+                        asColumnMajorDenseArray: [1.0, 50.5, 75.583333, 100.0],
                         numberOfRows: 2,
                         numberOfColumns: 2),
                     data: TestableDoubleMatrix52.Get(),
-                    probabilities: DoubleMatrix.Dense(2, 2, new double[4] { .005, .5, .75, .999 }))
+                    probabilities: DoubleMatrix.Dense(2, 2, [.005, .5, .75, .999]))
         {
         }
 

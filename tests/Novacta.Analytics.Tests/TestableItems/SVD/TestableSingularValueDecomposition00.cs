@@ -17,7 +17,7 @@ namespace Novacta.Analytics.Tests.TestableItems.SVD
         static TestableSingularValueDecomposition00()
         {
             testableMatrix = new TestableDoubleMatrix(
-                asColumnMajorDenseArray: new double[20] {
+                asColumnMajorDenseArray: [
                     1,
                     0,
                     0,
@@ -38,7 +38,7 @@ namespace Novacta.Analytics.Tests.TestableItems.SVD
                     0,
                     0,
                     0
-                },
+                ],
                 numberOfRows: 4,
                 numberOfColumns: 5,
                 isUpperHessenberg: false,

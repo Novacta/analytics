@@ -283,11 +283,9 @@ namespace Novacta.Analytics
             TextWriter writer,
             ComplexMatrix matrix)
         {
-            if (writer is null)
-                throw new ArgumentNullException(nameof(writer));
+            ArgumentNullException.ThrowIfNull(writer);
 
-            if (matrix is null)
-                throw new ArgumentNullException(nameof(matrix));
+            ArgumentNullException.ThrowIfNull(matrix);
 
             switch (matrix.StorageScheme)
             {
@@ -324,11 +322,9 @@ namespace Novacta.Analytics
         ///</exception>
         public static void Serialize(string path, ComplexMatrix matrix)
         {
-            if (path is null)
-                throw new ArgumentNullException(nameof(path));
+            ArgumentNullException.ThrowIfNull(path);
 
-            if (matrix is null)
-                throw new ArgumentNullException(nameof(matrix));
+            ArgumentNullException.ThrowIfNull(matrix);
 
             try
             {
@@ -357,10 +353,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref="Serialize(string, ComplexMatrix)"/>
         public static void Serialize(string path, ReadOnlyComplexMatrix matrix)
         {
-            if (matrix is null)
-            {
-                throw new ArgumentNullException(nameof(matrix));
-            }
+            ArgumentNullException.ThrowIfNull(matrix);
 
             Serialize(path, matrix.matrix);
         }
@@ -375,10 +368,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref="Serialize(TextWriter, ComplexMatrix)"/>
         public static void Serialize(TextWriter writer, ReadOnlyComplexMatrix matrix)
         {
-            if (matrix is null)
-            {
-                throw new ArgumentNullException(nameof(matrix));
-            }
+            ArgumentNullException.ThrowIfNull(matrix);
 
             Serialize(writer, matrix.matrix);
         }
@@ -622,10 +612,7 @@ namespace Novacta.Analytics
         ///</exception>
         public static ComplexMatrix Deserialize(TextReader reader)
         {
-            if (reader is null)
-            {
-                throw new ArgumentNullException(nameof(reader));
-            }
+            ArgumentNullException.ThrowIfNull(reader);
 
             ComplexMatrix matrix;
             try
@@ -666,10 +653,7 @@ namespace Novacta.Analytics
         ///</exception>
         public static ComplexMatrix Deserialize(string path)
         {
-            if (path is null)
-            {
-                throw new ArgumentNullException(nameof(path));
-            }
+            ArgumentNullException.ThrowIfNull(path);
             try
             {
                 using StreamReader reader = new(path);

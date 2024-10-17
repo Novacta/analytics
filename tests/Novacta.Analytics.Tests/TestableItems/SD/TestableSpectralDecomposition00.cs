@@ -2,8 +2,6 @@
 // Licensed under the MIT license. 
 // See the LICENSE file in the project root for more information.
 
-using System;
-
 namespace Novacta.Analytics.Tests.TestableItems.SD
 {
     class TestableSpectralDecomposition00
@@ -16,7 +14,7 @@ namespace Novacta.Analytics.Tests.TestableItems.SD
         static TestableSpectralDecomposition00()
         {
             testableMatrix = new TestableDoubleMatrix(
-                asColumnMajorDenseArray: new double[9] {
+                asColumnMajorDenseArray: [
                     2,
                     2,
                     0,
@@ -26,7 +24,7 @@ namespace Novacta.Analytics.Tests.TestableItems.SD
                     0,
                     0,
                     5
-                },
+                ],
                 numberOfRows: 3,
                 numberOfColumns: 3,
                 isUpperHessenberg: true,
@@ -43,7 +41,7 @@ namespace Novacta.Analytics.Tests.TestableItems.SD
             values[1, 1] = 3.23606797749979;
             values[2, 2] = 5;
 
-            vectors = DoubleMatrix.Dense(3, 3, new double[9] {
+            vectors = DoubleMatrix.Dense(3, 3, [
                  0.5257311121191335,
                 -0.8506508083520399,
                  0,
@@ -53,7 +51,7 @@ namespace Novacta.Analytics.Tests.TestableItems.SD
                  0,
                  0,
                  1
-            });
+            ]);
         }
 
         TestableSpectralDecomposition00()

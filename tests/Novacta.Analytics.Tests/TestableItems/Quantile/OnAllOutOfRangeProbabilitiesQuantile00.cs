@@ -25,7 +25,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Quantile
                             new string[] { "STR_EXCEPT_PAR_ENTRIES_NOT_IN_CLOSED_INTERVAL" }), 0, 1),
                     paramName: "probabilities"),
                 data: TestableDoubleMatrix00.Get(),
-                probabilities: DoubleMatrix.Dense(2, 1, new double[2] { 1, -1 }))
+                probabilities: DoubleMatrix.Dense(2, 1, [1, -1]))
         {
         }
 

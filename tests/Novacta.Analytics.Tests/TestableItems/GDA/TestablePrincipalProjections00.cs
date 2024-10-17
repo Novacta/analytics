@@ -31,17 +31,17 @@ namespace Novacta.Analytics.Tests.TestableItems.GDA
     class TestablePrincipalProjections00 : TestablePrincipalProjections
     {
         static readonly double[] variableCoefficients = 
-            new double[2] { 9, 4 };
+            [9, 4];
         static readonly Basis a = new(
-            DoubleMatrix.Dense(2, 2, new double[4] 
-                { Math.Sqrt(variableCoefficients[0]),
+            DoubleMatrix.Dense(2, 2,
+                [ Math.Sqrt(variableCoefficients[0]),
                   0,
                   0,
-                  Math.Sqrt(variableCoefficients[1]) }));
+                  Math.Sqrt(variableCoefficients[1]) ]));
 
         static readonly DoubleMatrix x_sa =
             DoubleMatrix.Dense(10, 2,
-                new double[20] {
+                [
                     16-13,
                     13-13,
                     13-13,
@@ -61,7 +61,7 @@ namespace Novacta.Analytics.Tests.TestableItems.GDA
                      9-10,
                      7-10,
                     15-10,
-                     4-10});
+                     4-10]);
 
         static readonly DoubleMatrix w_s =
             DoubleMatrix.Dense(10, 1, 1.0 / 10.0);
@@ -70,7 +70,7 @@ namespace Novacta.Analytics.Tests.TestableItems.GDA
 
         static readonly DoubleMatrix coordinates =
             DoubleMatrix.Dense(10, 2,
-                new double[20] {
+                [
                     -11.4,
                     2.8,
                     -1.1,
@@ -90,38 +90,38 @@ namespace Novacta.Analytics.Tests.TestableItems.GDA
                     -1.9,
                     -9.1,
                     7.9,
-                    -9.0});
+                    -9.0]);
 
         static readonly DoubleMatrix contributions =
             DoubleMatrix.Dense(10, 2);
 
         static readonly DoubleMatrix correlations =
             DoubleMatrix.Dense(2, 2,
-                new double[4] {
+                [
                     -.979,
                     -.373,
                     -.204,
-                    .923});
+                    .923]);
 
         static readonly DoubleMatrix directions =
             DoubleMatrix.Dense(2, 2,
-                new double[4] {
+                [
                    -.3202,
                    -.1390,
                    -.0927,
-                    .4803});
+                    .4803]);
 
         static readonly DoubleMatrix regressionCoefficients =
             DoubleMatrix.Dense(2, 2,
-                new double[4] {
+                [
                    -3.0957,
                    -1.3437,
                     -.6454,
-                    3.3459});
+                    3.3459]);
 
         static readonly DoubleMatrix representationQualities =
             DoubleMatrix.Dense(10, 2,
-                new double[20] {
+                [
                     .72,
                     .08,
                     .08,
@@ -141,17 +141,12 @@ namespace Novacta.Analytics.Tests.TestableItems.GDA
                     .92,
                     .46,
                     .46,
-                    .36});
+                    .36]);
 
         static readonly DoubleMatrix variances =
             DoubleMatrix.Dense(2, 1,
-                new double[2] { 93.4722, 48.5278 });
+                [93.4722, 48.5278]);
 
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Performance",
-            "CA1810:Initialize reference type static fields inline",
-            Justification = "Performance is not a concern.")]
         static TestablePrincipalProjections00()
         {
             var m_sp = w_s.Transpose() * coordinates;
@@ -214,10 +209,10 @@ namespace Novacta.Analytics.Tests.TestableItems.GDA
                           data: x_sa,
                           individualWeights: w_s,
                           variableCoefficients:
-                             DoubleMatrix.Dense(1, 2, new double[2]
-                                {
+                             DoubleMatrix.Dense(1, 2,
+                                [
                                     variableCoefficients[0],
-                                    variableCoefficients[1] })
+                                    variableCoefficients[1] ])
                       )
                     : new PrincipalProjections(activeCloud),
             activeCloud,

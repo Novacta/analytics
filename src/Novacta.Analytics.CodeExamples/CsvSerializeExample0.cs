@@ -9,13 +9,13 @@ namespace Novacta.Analytics.CodeExamples
         public void Main()
         {
             // Create the CSV representation of a dense matrix.
-            string[] data = new string[5] {
+            string[] data = [
                 "Dense|Complex,3,2,MatrixName",
                 ",column0,column1",
                 "row0,(1.0 -2.0),(NaN NaN)",
                 "row1,(2.0 -3.0),(4.0 -1.0)",
                 "row2,(0 0),(5.0 7.0)"
-            };
+            ];
 
             // Show the matrix CSV representation.
             Console.WriteLine("CSV representation of the matrix:");

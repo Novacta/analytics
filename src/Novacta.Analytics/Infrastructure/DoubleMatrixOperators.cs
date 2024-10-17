@@ -78,7 +78,7 @@ namespace Novacta.Analytics.Infrastructure
                 return null;
             }
 
-            result = new IndexCollection(indexList.ToArray(), false);
+            result = new IndexCollection([.. indexList], false);
 
             return result;
         }
@@ -145,7 +145,7 @@ namespace Novacta.Analytics.Infrastructure
                 return null;
             }
 
-            result = new IndexCollection(indexList.ToArray(), false);
+            result = new IndexCollection([.. indexList], false);
 
             return result;
         }
@@ -253,7 +253,7 @@ namespace Novacta.Analytics.Infrastructure
                 return null;
             }
 
-            result = new IndexCollection(indexList.ToArray(), false);
+            result = new IndexCollection([.. indexList], false);
 
             return result;
         }
@@ -581,8 +581,8 @@ namespace Novacta.Analytics.Infrastructure
             List<int>[] columnPositions = new List<int>[numberOfColumns];
             for (j = 0; j < columnRows.Length; j++)
             {
-                columnRows[j] = new List<int>();
-                columnPositions[j] = new List<int>();
+                columnRows[j] = [];
+                columnPositions[j] = [];
             }
 
             for (int i = 0; i < numberOfRows; i++)
@@ -598,7 +598,7 @@ namespace Novacta.Analytics.Infrastructure
             double[] transposeValues = new double[capacity];
             int[] transposeColumns = new int[capacity];
             int[] transposeRowIndex = new int[numberOfColumns + 1];
-            int[] transposePositions, defaultTransposePositions = new int[1] { 0 };
+            int[] transposePositions, defaultTransposePositions = [0];
             List<int> currentColumnRows, currentColumnPositions;
             int cumulativeSum = 0;
             int currentColumnRowsCount;
@@ -1472,7 +1472,7 @@ namespace Novacta.Analytics.Infrastructure
             var result = new SparseCsr3DoubleMatrixImplementor(
                 numberOfRows, numberOfColumns, resultCapacity);
 
-            HashSet<int> inspectedSet = new();
+            HashSet<int> inspectedSet = [];
 
             double leftValue, rightValue;
             int j, index;
@@ -1852,7 +1852,7 @@ namespace Novacta.Analytics.Infrastructure
             int resultCapacity = leftNumberOfStoredPositions + rightNumberOfStoredPositions;
             var result = new SparseCsr3DoubleMatrixImplementor(numberOfRows, numberOfColumns, resultCapacity);
 
-            HashSet<int> inspectedSet = new();
+            HashSet<int> inspectedSet = [];
 
             double leftValue, rightValue, value;
             int j, index;
@@ -2040,7 +2040,7 @@ namespace Novacta.Analytics.Infrastructure
             var result = new SparseCsr3DoubleMatrixImplementor(
                 numberOfRows, numberOfColumns, resultCapacity);
 
-            HashSet<int> inspectedSet = new();
+            HashSet<int> inspectedSet = [];
 
             double leftValue, rightValue, value;
             int j, index;

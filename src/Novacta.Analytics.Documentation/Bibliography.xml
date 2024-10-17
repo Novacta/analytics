@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<bibliography>
+  <reference name="gamma-etal-1995">
+    <title>Design Patterns, Elements of Reusable Object-Oriented Software</title>
+    <author>Gamma, E., Helm, R., Johnson, R. and Vlissides, J.</author>
+    <publisher>Addison-Wesley, Reading, MA. (1995)</publisher>
+  </reference>
+  <reference name="chen-etal-1994">
+    <title>Weighted Finite Population Sampling to Maximize Entropy</title>
+    <author>Chen, X.H., Dempster, A.P. and Liu, J.S.</author>
+    <publisher>in: Biometrika, 81, 3, pp. 457-469. (1994)</publisher>
+    <link>http://biomet.oxfordjournals.org/content/81/3/457</link>
+  </reference>
+  <reference name="coles-2001">
+    <title>An Introduction to Statistical Modeling of Extreme Values</title>
+    <author>Coles, S.</author>
+    <publisher>Springer-Verlag, London. (2001)</publisher>
+  </reference>
+  <reference name="kruskal-b-1964">
+    <title>Nonmetric multidimensional scaling: A numerical method</title>
+    <author>Kruskal, J.B.</author>
+    <publisher>in: Psychometrika, 29, pp. 115-129. (1964)</publisher>
+    <link>https://doi.org/10.1007/BF02289694</link>
+  </reference>
+    <reference name="knuth-2-1997">
+    <title>The Art of Computer Programming, Volume 2: Seminumerical Algorithms</title>
+    <author>Knuth, D.E.</author>
+    <publisher>Addison-Wesley, Reading, MA, third edition. (1997)</publisher>
+  </reference>
+  <reference name="leroux-rouanet-2004">
+    <title>Geometric Data Analysis, From Correspondence Analysis to Structured Data Analysis</title>
+    <author>Le Roux, B. and Rouanet, H.</author>
+    <publisher>Kluwer, Dordrecht. (2004)</publisher>
+  </reference>
+  <reference name="fayyad-irani-1993">
+    <title>Multi-Interval Discretization of Continuous-Valued Attributes for Classification Learning</title>
+    <author>Fayyad, U.M. and Irani, K.B.</author>
+    <publisher>in: Proceedings of the Thirteenth International Joint Conference on Artificial Intelligence, pp. 1022-1027.
+      San Francisco, CA: Morgan Kaufmann. (1993)</publisher>
+    <link>http://ijcai.org/Proceedings/93-2/Papers/022.pdf</link>
+  </reference>
+  <reference name="elomaa-rousu-1999">
+    <title>General and Efficient Multisplitting of Numerical Attributes</title>
+    <author>Elomaa, T. and Rousu, J.</author>
+    <publisher>in: Machine Learning, 36, pp. 201-244. (1999)</publisher>
+    <link>http://link.springer.com/article/10.1023/A%3A1007674919412</link>
+  </reference>
+    <reference name="hyndman-fan-1996">
+        <title>Sample Quantiles in Statistical Packages</title>
+        <author>Hyndman, R.J. and Fan, Y.</author>
+        <publisher>Taylor and Francis, Ltd. on behalf of the American Statistical Association, 
+        in: The American Statistician, 50, 4, pp. 361-365. (1996)</publisher>
+        <link>http://www.jstor.org/stable/2684934</link>
+    </reference>
+  <reference name="rubinstein-kroese-2004">
+    <title>The Cross-Entropy Method, A unified Approach to Combinatorial Optimization, Monte-Carlo Simulation, and Machine Learning</title>
+    <author>Rubinstein, R.Y. and Kroese, D.P.</author>
+    <publisher>Springer, New York. (2004)</publisher>
+  </reference>
+  <reference name="seemann-2012">
+    <title>Dependency Injection in .NET</title>
+    <author>Seemann, M.</author>
+    <publisher>Manning, Shelter Island. (2012)</publisher>
+  </reference>
+  <reference name="dua-graff-2019">
+    <title>UCI Machine Learning Repository</title>
+    <author>Dua, D. and Graff, C.</author>
+    <publisher>Irvine, CA: University of California, School of Information and Computer Science. (2019)</publisher>
+    <link>http://archive.ics.uci.edu/ml</link>
+  </reference>
+</bibliography>

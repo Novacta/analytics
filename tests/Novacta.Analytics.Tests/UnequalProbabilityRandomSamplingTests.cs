@@ -22,8 +22,8 @@ namespace Novacta.Analytics.Tests
             {
                 const int populationSize = 9;
                 var bernoulliProbabilities = DoubleMatrix.Dense(populationSize, 1,
-                    new double[populationSize] {
-                        .1, .2, .3, .4, .5, .6, .7, .8, .9 });
+                    [
+                        .1, .2, .3, .4, .5, .6, .7, .8, .9 ]);
 
                 int sampleSize = 4;
 
@@ -69,8 +69,8 @@ namespace Novacta.Analytics.Tests
 
                 const int populationSize = 1;
                 var bernoulliProbabilities = DoubleMatrix.Dense(populationSize, 1,
-                    new double[populationSize] {
-                        .1 });
+                    [
+                        .1 ]);
 
                 int sampleSize = 4;
 
@@ -97,8 +97,8 @@ namespace Novacta.Analytics.Tests
 
                 const int populationSize = 9;
                 var bernoulliProbabilities = DoubleMatrix.Dense(populationSize, 1,
-                    new double[populationSize] {
-                        .1, .2, .3, .4, .5, .6, .7, .0, .9 });
+                    [
+                        .1, .2, .3, .4, .5, .6, .7, .0, .9 ]);
 
                 int sampleSize = 4;
 
@@ -125,8 +125,8 @@ namespace Novacta.Analytics.Tests
 
                 const int populationSize = 9;
                 var bernoulliProbabilities = DoubleMatrix.Dense(populationSize, 1,
-                    new double[populationSize] {
-                        .1, .2, .3, .4, .5, .6, .7, 1.0, .9 });
+                    [
+                        .1, .2, .3, .4, .5, .6, .7, 1.0, .9 ]);
 
                 int sampleSize = 4;
 
@@ -151,8 +151,8 @@ namespace Novacta.Analytics.Tests
 
                 const int populationSize = 9;
                 var bernoulliProbabilities = DoubleMatrix.Dense(populationSize, 1,
-                    new double[populationSize] {
-                        .1, .2, .3, .4, .5, .6, .7, .8, .9 });
+                    [
+                        .1, .2, .3, .4, .5, .6, .7, .8, .9 ]);
 
                 int sampleSize = 0;
 
@@ -179,8 +179,8 @@ namespace Novacta.Analytics.Tests
 
                 const int populationSize = 9;
                 var bernoulliProbabilities = DoubleMatrix.Dense(populationSize, 1,
-                    new double[populationSize] {
-                        .1, .2, .3, .4, .5, .6, .7, .8, .9 });
+                    [
+                        .1, .2, .3, .4, .5, .6, .7, .8, .9 ]);
 
                 int sampleSize = populationSize;
 
@@ -205,7 +205,7 @@ namespace Novacta.Analytics.Tests
             {
                 const int populationSize = 9;
                 var inclusionProbabilities = DoubleMatrix.Dense(populationSize, 1,
-                    new double[populationSize] {
+                    [
                         0.0602933142691422,
                         0.130083877944215,
                         0.211283730466511,
@@ -214,7 +214,7 @@ namespace Novacta.Analytics.Tests
                         0.537249360967418,
                         0.661978741628504,
                         0.782520969486053,
-                        0.895588146029904 });
+                        0.895588146029904 ]);
 
                 int sampleSize = Convert.ToInt32(
                     Stat.Sum(inclusionProbabilities));
@@ -257,8 +257,8 @@ namespace Novacta.Analytics.Tests
 
                 const int populationSize = 1;
                 var inclusionProbabilities = DoubleMatrix.Dense(populationSize, 1,
-                    new double[populationSize] {
-                        0.895588146029904 });
+                    [
+                        0.895588146029904 ]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -282,7 +282,7 @@ namespace Novacta.Analytics.Tests
 
                 const int populationSize = 9;
                 var inclusionProbabilities = DoubleMatrix.Dense(populationSize, 1,
-                    new double[populationSize] {
+                    [
                         0.0602933142691422,
                         0.130083877944215,
                         0.211283730466511,
@@ -291,7 +291,7 @@ namespace Novacta.Analytics.Tests
                         0.537249360967418,
                         0.661978741628504,
                         0.0,
-                        0.895588146029904 });
+                        0.895588146029904 ]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -315,7 +315,7 @@ namespace Novacta.Analytics.Tests
 
                 const int populationSize = 9;
                 var inclusionProbabilities = DoubleMatrix.Dense(populationSize, 1,
-                    new double[populationSize] {
+                    [
                         0.0602933142691422,
                         0.130083877944215,
                         0.211283730466511,
@@ -324,7 +324,7 @@ namespace Novacta.Analytics.Tests
                         0.537249360967418,
                         0.661978741628504,
                         1.0,
-                        0.895588146029904 });
+                        0.895588146029904 ]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -346,7 +346,7 @@ namespace Novacta.Analytics.Tests
 
                 const int populationSize = 9;
                 var inclusionProbabilities = DoubleMatrix.Dense(populationSize, 1,
-                    new double[populationSize] {
+                    [
                         0.0602933142691422,
                         0.130083877944215,
                         0.211283730466511 + .5,
@@ -355,7 +355,7 @@ namespace Novacta.Analytics.Tests
                         0.537249360967418,
                         0.661978741628504,
                         0.782520969486053,
-                        0.895588146029904 });
+                        0.895588146029904 ]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>

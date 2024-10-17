@@ -26,7 +26,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Sampling
         const int sampleSize = 4;
         static readonly DoubleMatrix inclusionProbabilities =
             DoubleMatrix.Dense(populationSize, 1,
-                new double[9] {
+                [
                     0.0602933142691422,
                     0.130083877944215,
                     0.211283730466511,
@@ -35,7 +35,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Sampling
                     0.537249360967418,
                     0.661978741628504,
                     0.782520969486053,
-                    0.895588146029904});
+                    0.895588146029904]);
         // The quantile of order .9 for
         // the chi-squared distribution having 9-1
         // degrees of freedom is 13.36157
@@ -43,7 +43,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Sampling
         const double goodnessOfFitCriticalValue = 13.36157;
         static readonly DoubleMatrix bernoulliProbabilities =
             DoubleMatrix.Dense(populationSize, 1,
-                new double[9] { .1, .2, .3, .4, .5, .6, .7, .8, .9 });
+                [.1, .2, .3, .4, .5, .6, .7, .8, .9]);
 
         /// <summary>
         /// Initializes a new instance of the 

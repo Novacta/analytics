@@ -9,7 +9,6 @@ using Novacta.Analytics.Tests.Tools;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Numerics;
 using System.Text;
 
 namespace Novacta.Analytics.Tests
@@ -82,13 +81,13 @@ namespace Novacta.Analytics.Tests
             partialPath = stringBuilder.ToString();
 
             var testableMatrix = new TestableComplexMatrix(
-                asColumnMajorDenseArray: new Complex[20] {
+                asColumnMajorDenseArray: [
                                         0,  0, -2, 0,
                                         0,  0,  0, 0,
                                         0, -1,  0, 0,
                                         0,  0,  0, 0,
                                         0,  0,  0, 0
-                },
+                ],
                 numberOfRows: 4,
                 numberOfColumns: 5,
                 isUpperHessenberg: false,
@@ -430,11 +429,11 @@ namespace Novacta.Analytics.Tests
 
             // stream does not contain a valid dense matrix representation
             {
-                string[] data = new string[4] {
+                string[] data = [
                 "Dense,2, 3, MatrixName",
                 ",column0,,column2",
                 "row0,1.0,4.0,5.0",
-                "row1,2.0,6.0"};
+                "row1,2.0,6.0"];
 
                 // Create a stream containing the CSV content.
                 MemoryStream stream = new();
@@ -461,11 +460,11 @@ namespace Novacta.Analytics.Tests
 
             // stream does not contain a valid sparse matrix representation
             {
-                string[] data = new string[4] {
+                string[] data = [
                 "Sparse,2, 3, MatrixName",
                 "2,3,5.0",
                 "0,Column0",
-                "0,Row0"};
+                "0,Row0"];
 
                 // Create a stream containing the CSV content.
                 MemoryStream stream = new();

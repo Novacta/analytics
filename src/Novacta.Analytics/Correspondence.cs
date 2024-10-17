@@ -164,10 +164,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static Correspondence Analyze(DoubleMatrix data)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             PrincipalProjections.FromReciprocalAveraging(
                 data: data,

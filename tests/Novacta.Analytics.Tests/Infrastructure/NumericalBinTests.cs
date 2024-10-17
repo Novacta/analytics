@@ -26,9 +26,9 @@ namespace Novacta.Analytics.Infrastructure.Tests
         public void ToStringTest()
         {
             var numericalData = DoubleMatrix.Dense(5, 1,
-                new double[5] { -1, -1, -1, 1, 1 });
+                [-1, -1, -1, 1, 1]);
             var targetData = DoubleMatrix.Dense(5, 1,
-                new double[5] { 10, 20, 10, 10, 10 });
+                [10, 20, 10, 10, 10]);
             var bins = NumericalBin.GetNumericalBins(numericalData, targetData);
 
             // Two bins expected

@@ -86,8 +86,7 @@ namespace Novacta.Analytics.Tests
                     return g;
                 };
 
-                var arg = DoubleMatrix.Dense(2, 1, new double[2]
-                    { 9.0, -2.1 });
+                var arg = DoubleMatrix.Dense(2, 1, [9.0, -2.1]);
 
                 var expected =
                     gradient(
@@ -130,8 +129,7 @@ namespace Novacta.Analytics.Tests
                     return g;
                 };
 
-                var arg = DoubleMatrix.Dense(2, 1, new double[2]
-                    { 0.0, -2.1 });
+                var arg = DoubleMatrix.Dense(2, 1, [0.0, -2.1]);
 
                 var expected =
                     gradient(
@@ -147,8 +145,7 @@ namespace Novacta.Analytics.Tests
                     actual: actual,
                     delta: DoubleMatrixTest.Accuracy);
 
-                arg = DoubleMatrix.Dense(2, 1, new double[2]
-                    { 9.0, 0.0 });
+                arg = DoubleMatrix.Dense(2, 1, [9.0, 0.0]);
 
                 expected =
                     gradient(
@@ -242,8 +239,7 @@ namespace Novacta.Analytics.Tests
                     return h;
                 }
 
-                var arg = DoubleMatrix.Dense(2, 1, new double[2]
-                    { 9.0, -2.1 });
+                var arg = DoubleMatrix.Dense(2, 1, [9.0, -2.1]);
 
                 var expected =
                     hessian(

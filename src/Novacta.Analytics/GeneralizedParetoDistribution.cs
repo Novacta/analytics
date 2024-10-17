@@ -129,9 +129,7 @@ namespace Novacta.Analytics
         /// <inheritdoc/>
         public override DoubleMatrix Cdf(DoubleMatrix arguments)
         {
-            if (arguments is null) {
-                throw new ArgumentNullException(nameof(arguments));
-            }
+            ArgumentNullException.ThrowIfNull(arguments);
 
             double xi = this.xi;
             double mu = this.mu;
@@ -220,9 +218,7 @@ namespace Novacta.Analytics
         /// <inheritdoc/>
         public override DoubleMatrix InverseCdf(DoubleMatrix arguments)
         {
-            if (arguments is null) {
-                throw new ArgumentNullException(nameof(arguments));
-            }
+            ArgumentNullException.ThrowIfNull(arguments);
 
             double xi = this.xi;
             double mu = this.mu;
@@ -296,9 +292,7 @@ namespace Novacta.Analytics
         /// <inheritdoc/>
         public override DoubleMatrix Pdf(DoubleMatrix arguments)
         {
-            if (arguments is null) {
-                throw new ArgumentNullException(nameof(arguments));
-            }
+            ArgumentNullException.ThrowIfNull(arguments);
 
             double xi = this.xi;
             double mu = this.mu;

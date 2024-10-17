@@ -49,9 +49,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "notebooks", "notebooks", "{63E2E06E-E19B-40FD-AFF0-4562A8AC1038}"
 	ProjectSection(SolutionItems) = preProject
 		notebooks\complex_SVD.ipynb = notebooks\complex_SVD.ipynb
+		notebooks\plots.ipynb = notebooks\plots.ipynb
 	EndProjectSection
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Novacta.Analytics.Documentation", "src\Novacta.Analytics.Documentation\Novacta.Analytics.Documentation.shfbproj", "{6A700957-2283-4287-9DBD-21B47E2E19BF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Novacta.Analytics.Runtime", "src\Novacta.Analytics.Runtime\Novacta.Analytics.Runtime.csproj", "{6B0E56D6-AE90-4EF4-96B2-DF173C5B3E1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -223,6 +226,26 @@ Global
 		{6A700957-2283-4287-9DBD-21B47E2E19BF}.Release|x64.Build.0 = Release|Any CPU
 		{6A700957-2283-4287-9DBD-21B47E2E19BF}.Release|x86.ActiveCfg = Release|Any CPU
 		{6A700957-2283-4287-9DBD-21B47E2E19BF}.Release|x86.Build.0 = Release|Any CPU
+		{6B0E56D6-AE90-4EF4-96B2-DF173C5B3E1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B0E56D6-AE90-4EF4-96B2-DF173C5B3E1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B0E56D6-AE90-4EF4-96B2-DF173C5B3E1A}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{6B0E56D6-AE90-4EF4-96B2-DF173C5B3E1A}.Debug|ARM.Build.0 = Debug|Any CPU
+		{6B0E56D6-AE90-4EF4-96B2-DF173C5B3E1A}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{6B0E56D6-AE90-4EF4-96B2-DF173C5B3E1A}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{6B0E56D6-AE90-4EF4-96B2-DF173C5B3E1A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6B0E56D6-AE90-4EF4-96B2-DF173C5B3E1A}.Debug|x64.Build.0 = Debug|Any CPU
+		{6B0E56D6-AE90-4EF4-96B2-DF173C5B3E1A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6B0E56D6-AE90-4EF4-96B2-DF173C5B3E1A}.Debug|x86.Build.0 = Debug|Any CPU
+		{6B0E56D6-AE90-4EF4-96B2-DF173C5B3E1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B0E56D6-AE90-4EF4-96B2-DF173C5B3E1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B0E56D6-AE90-4EF4-96B2-DF173C5B3E1A}.Release|ARM.ActiveCfg = Release|Any CPU
+		{6B0E56D6-AE90-4EF4-96B2-DF173C5B3E1A}.Release|ARM.Build.0 = Release|Any CPU
+		{6B0E56D6-AE90-4EF4-96B2-DF173C5B3E1A}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{6B0E56D6-AE90-4EF4-96B2-DF173C5B3E1A}.Release|ARM64.Build.0 = Release|Any CPU
+		{6B0E56D6-AE90-4EF4-96B2-DF173C5B3E1A}.Release|x64.ActiveCfg = Release|Any CPU
+		{6B0E56D6-AE90-4EF4-96B2-DF173C5B3E1A}.Release|x64.Build.0 = Release|Any CPU
+		{6B0E56D6-AE90-4EF4-96B2-DF173C5B3E1A}.Release|x86.ActiveCfg = Release|Any CPU
+		{6B0E56D6-AE90-4EF4-96B2-DF173C5B3E1A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -241,6 +264,7 @@ Global
 		{DA7198AC-9C6E-4038-A350-B6F7D4F14523} = {213B3501-D412-4738-97A1-55D3E8B9E6A7}
 		{81B60964-5CAE-4A30-BF67-20773BB3EDDA} = {213B3501-D412-4738-97A1-55D3E8B9E6A7}
 		{6A700957-2283-4287-9DBD-21B47E2E19BF} = {47DEC2D7-6AF8-481F-94C8-DB3D2979AE0A}
+		{6B0E56D6-AE90-4EF4-96B2-DF173C5B3E1A} = {47DEC2D7-6AF8-481F-94C8-DB3D2979AE0A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AA191A9C-9BAC-4554-9DB3-BBB73B8D69B0}

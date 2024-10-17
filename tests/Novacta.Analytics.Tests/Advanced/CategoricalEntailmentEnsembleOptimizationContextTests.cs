@@ -30,7 +30,7 @@ namespace Novacta.Analytics.Advanced.Tests
                     {
                         new CategoricalEntailmentEnsembleOptimizationContext(
                             objectiveFunction: (x) => Stat.Mean(x),
-                            featureCategoryCounts: new List<int>(2) { 5, 6 },
+                            featureCategoryCounts: [5, 6],
                             numberOfResponseCategories: 3,
                             numberOfCategoricalEntailments: 4,
                             allowEntailmentPartialTruthValues: true,
@@ -54,7 +54,7 @@ namespace Novacta.Analytics.Advanced.Tests
                     {
                         new CategoricalEntailmentEnsembleOptimizationContext(
                             objectiveFunction: null,
-                            featureCategoryCounts: new List<int>(3) { 5, 6, 7 },
+                            featureCategoryCounts: [5, 6, 7],
                             numberOfResponseCategories: 3,
                             numberOfCategoricalEntailments: 4,
                             allowEntailmentPartialTruthValues: true,
@@ -106,7 +106,7 @@ namespace Novacta.Analytics.Advanced.Tests
                     {
                         new CategoricalEntailmentEnsembleOptimizationContext(
                             objectiveFunction: (x) => Stat.Mean(x),
-                            featureCategoryCounts: new List<int>(),
+                            featureCategoryCounts: [],
                             numberOfResponseCategories: 3,
                             numberOfCategoricalEntailments: 4,
                             allowEntailmentPartialTruthValues: true,
@@ -134,7 +134,7 @@ namespace Novacta.Analytics.Advanced.Tests
                     {
                         new CategoricalEntailmentEnsembleOptimizationContext(
                             objectiveFunction: (x) => Stat.Mean(x),
-                            featureCategoryCounts: new List<int>(3) { 5, 0, 7 },
+                            featureCategoryCounts: [5, 0, 7],
                             numberOfResponseCategories: 3,
                             numberOfCategoricalEntailments: 4,
                             allowEntailmentPartialTruthValues: true,
@@ -162,7 +162,7 @@ namespace Novacta.Analytics.Advanced.Tests
                     {
                         new CategoricalEntailmentEnsembleOptimizationContext(
                             objectiveFunction: (x) => Stat.Mean(x),
-                            featureCategoryCounts: new List<int>(3) { 5, -1, 7 },
+                            featureCategoryCounts: [5, -1, 7],
                             numberOfResponseCategories: 3,
                             numberOfCategoricalEntailments: 4,
                             allowEntailmentPartialTruthValues: true,
@@ -190,7 +190,7 @@ namespace Novacta.Analytics.Advanced.Tests
                     {
                         new CategoricalEntailmentEnsembleOptimizationContext(
                             objectiveFunction: (x) => Stat.Mean(x),
-                            featureCategoryCounts: new List<int>(3) { 5, 6, 7 },
+                            featureCategoryCounts: [5, 6, 7],
                             numberOfResponseCategories: 0,
                             numberOfCategoricalEntailments: 4,
                             allowEntailmentPartialTruthValues: true,
@@ -218,7 +218,7 @@ namespace Novacta.Analytics.Advanced.Tests
                     {
                         new CategoricalEntailmentEnsembleOptimizationContext(
                             objectiveFunction: (x) => Stat.Mean(x),
-                            featureCategoryCounts: new List<int>(3) { 5, 6, 7 },
+                            featureCategoryCounts: [5, 6, 7],
                             numberOfResponseCategories: -1,
                             numberOfCategoricalEntailments: 4,
                             allowEntailmentPartialTruthValues: true,
@@ -246,7 +246,7 @@ namespace Novacta.Analytics.Advanced.Tests
                     {
                         new CategoricalEntailmentEnsembleOptimizationContext(
                             objectiveFunction: (x) => Stat.Mean(x),
-                            featureCategoryCounts: new List<int>(3) { 5, 6, 7 },
+                            featureCategoryCounts: [5, 6, 7],
                             numberOfResponseCategories: 3,
                             numberOfCategoricalEntailments: 0,
                             allowEntailmentPartialTruthValues: true,
@@ -274,7 +274,7 @@ namespace Novacta.Analytics.Advanced.Tests
                     {
                         new CategoricalEntailmentEnsembleOptimizationContext(
                             objectiveFunction: (x) => Stat.Mean(x),
-                            featureCategoryCounts: new List<int>(3) { 5, 6, 7 },
+                            featureCategoryCounts: [5, 6, 7],
                             numberOfResponseCategories: 3,
                             numberOfCategoricalEntailments: -1,
                             allowEntailmentPartialTruthValues: true,
@@ -302,7 +302,7 @@ namespace Novacta.Analytics.Advanced.Tests
                     {
                         new CategoricalEntailmentEnsembleOptimizationContext(
                             objectiveFunction: (x) => Stat.Mean(x),
-                            featureCategoryCounts: new List<int>(3) { 5, 6, 7 },
+                            featureCategoryCounts: [5, 6, 7],
                             numberOfResponseCategories: 3,
                             numberOfCategoricalEntailments: 4,
                             allowEntailmentPartialTruthValues: true,
@@ -330,7 +330,7 @@ namespace Novacta.Analytics.Advanced.Tests
                     {
                         new CategoricalEntailmentEnsembleOptimizationContext(
                             objectiveFunction: (x) => Stat.Mean(x),
-                            featureCategoryCounts: new List<int>(3) { 5, 6, 7 },
+                            featureCategoryCounts: [5, 6, 7],
                             numberOfResponseCategories: 3,
                             numberOfCategoricalEntailments: 4,
                             allowEntailmentPartialTruthValues: true,
@@ -358,7 +358,7 @@ namespace Novacta.Analytics.Advanced.Tests
                     {
                         new CategoricalEntailmentEnsembleOptimizationContext(
                             objectiveFunction: (x) => Stat.Mean(x),
-                            featureCategoryCounts: new List<int>(3) { 5, 6, 7 },
+                            featureCategoryCounts: [5, 6, 7],
                             numberOfResponseCategories: 3,
                             numberOfCategoricalEntailments: 4,
                             allowEntailmentPartialTruthValues: true,
@@ -386,7 +386,7 @@ namespace Novacta.Analytics.Advanced.Tests
                     {
                         new CategoricalEntailmentEnsembleOptimizationContext(
                             objectiveFunction: (x) => Stat.Mean(x),
-                            featureCategoryCounts: new List<int>(3) { 5, 6, 7 },
+                            featureCategoryCounts: [5, 6, 7],
                             numberOfResponseCategories: 3,
                             numberOfCategoricalEntailments: 4,
                             allowEntailmentPartialTruthValues: true,
@@ -417,7 +417,7 @@ namespace Novacta.Analytics.Advanced.Tests
                     {
                         new CategoricalEntailmentEnsembleOptimizationContext(
                             objectiveFunction: (x) => Stat.Mean(x),
-                            featureCategoryCounts: new List<int>(3) { 5, 6, 7 },
+                            featureCategoryCounts: [5, 6, 7],
                             numberOfResponseCategories: 3,
                             numberOfCategoricalEntailments: 4,
                             allowEntailmentPartialTruthValues: true,
@@ -447,7 +447,7 @@ namespace Novacta.Analytics.Advanced.Tests
                     {
                         new CategoricalEntailmentEnsembleOptimizationContext(
                             objectiveFunction: (x) => Stat.Mean(x),
-                            featureCategoryCounts: new List<int>(3) { 5, 6, 7 },
+                            featureCategoryCounts: [5, 6, 7],
                             numberOfResponseCategories: 3,
                             numberOfCategoricalEntailments: 4,
                             allowEntailmentPartialTruthValues: true,
@@ -477,7 +477,7 @@ namespace Novacta.Analytics.Advanced.Tests
                     {
                         new CategoricalEntailmentEnsembleOptimizationContext(
                             objectiveFunction: (x) => Stat.Mean(x),
-                            featureCategoryCounts: new List<int>(3) { 5, 6, 7 },
+                            featureCategoryCounts: [5, 6, 7],
                             numberOfResponseCategories: 3,
                             numberOfCategoricalEntailments: 4,
                             allowEntailmentPartialTruthValues: true,
@@ -507,7 +507,7 @@ namespace Novacta.Analytics.Advanced.Tests
                     {
                         new CategoricalEntailmentEnsembleOptimizationContext(
                             objectiveFunction: (x) => Stat.Mean(x),
-                            featureCategoryCounts: new List<int>(3) { 5, 6, 7 },
+                            featureCategoryCounts: [5, 6, 7],
                             numberOfResponseCategories: 3,
                             numberOfCategoricalEntailments: 4,
                             allowEntailmentPartialTruthValues: true,
@@ -537,7 +537,7 @@ namespace Novacta.Analytics.Advanced.Tests
                     {
                         new CategoricalEntailmentEnsembleOptimizationContext(
                             objectiveFunction: (x) => Stat.Mean(x),
-                            featureCategoryCounts: new List<int>(3) { 5, 6, 7 },
+                            featureCategoryCounts: [5, 6, 7],
                             numberOfResponseCategories: 3,
                             numberOfCategoricalEntailments: 4,
                             allowEntailmentPartialTruthValues: true,
@@ -650,14 +650,14 @@ namespace Novacta.Analytics.Advanced.Tests
                     responseVariable: testableContext.ResponseVariable);
 
             expectedClassifier.Add(
-                featurePremises: new List<SortedSet<double>>(1) {
-                        new SortedSet<double>(){ 0.0, 1.0, 2.0 } },
+                featurePremises: [
+                        new(){ 0.0, 1.0, 2.0 } ],
                 responseConclusion: 0.0,
                 truthValue: 1.0);
 
             expectedClassifier.Add(
-                featurePremises: new List<SortedSet<double>>(1) {
-                        new SortedSet<double>(){ 3.0, 4.0, 5.0 } },
+                featurePremises: [
+                        new(){ 3.0, 4.0, 5.0 } ],
                 responseConclusion: 1.0,
                 truthValue: 1.0);
 
@@ -667,8 +667,8 @@ namespace Novacta.Analytics.Advanced.Tests
                     responseVariable: testableContext.ResponseVariable);
 
             actualClassifier.Add(
-                featurePremises: new List<SortedSet<double>>(1) {
-                        new SortedSet<double>(){ 0.0, 1.0, 2.0 } },
+                featurePremises: [
+                        new(){ 0.0, 1.0, 2.0 } ],
                 responseConclusion: 0.0,
                 truthValue: 1.0);
 
@@ -761,8 +761,8 @@ namespace Novacta.Analytics.Advanced.Tests
                     {
                         context.GetCategoricalEntailmentEnsembleClassifier(
                             state: DoubleMatrix.Dense(1, 9,
-                                new double[9] {
-                                    0, 0, 0, 1, 1, 1,    1, 0,    1.0 }),
+                                [
+                                    0, 0, 0, 1, 1, 1,    1, 0,    1.0 ]),
                             featureVariables: null,
                             responseVariable: testableContext.ResponseVariable);
                     },
@@ -789,9 +789,9 @@ namespace Novacta.Analytics.Advanced.Tests
                     {
                         context.GetCategoricalEntailmentEnsembleClassifier(
                             state: DoubleMatrix.Dense(1, 9,
-                                new double[9] {
-                                    0, 0, 0, 1, 1, 1,    1, 0,    1.0 }),
-                            featureVariables: new List<CategoricalVariable>(),
+                                [
+                                    0, 0, 0, 1, 1, 1,    1, 0,    1.0 ]),
+                            featureVariables: [],
                             responseVariable: testableContext.ResponseVariable);
                     },
                     expectedType: typeof(ArgumentException),
@@ -816,10 +816,9 @@ namespace Novacta.Analytics.Advanced.Tests
                     {
                         context.GetCategoricalEntailmentEnsembleClassifier(
                             state: DoubleMatrix.Dense(1, 9,
-                                new double[9] {
-                                    0, 0, 0, 1, 1, 1,    1, 0,    1.0 }),
-                            featureVariables: new List<CategoricalVariable>()
-                                { new CategoricalVariable("F") { { 0.0, "A" }, 1.0 } },
+                                [
+                                    0, 0, 0, 1, 1, 1,    1, 0,    1.0 ]),
+                            featureVariables: [new CategoricalVariable("F") { { 0.0, "A" }, 1.0 }],
                             responseVariable: testableContext.ResponseVariable);
                     },
                     expectedType: typeof(ArgumentException),
@@ -840,8 +839,8 @@ namespace Novacta.Analytics.Advanced.Tests
                     {
                         context.GetCategoricalEntailmentEnsembleClassifier(
                             state: DoubleMatrix.Dense(1, 9,
-                                new double[9] {
-                                    0, 0, 0, 1, 1, 1,    1, 0,    1.0 }),
+                                [
+                                    0, 0, 0, 1, 1, 1,    1, 0,    1.0 ]),
                             featureVariables: testableContext.FeatureVariables,
                             responseVariable: null);
                     },
@@ -868,8 +867,8 @@ namespace Novacta.Analytics.Advanced.Tests
                     {
                         context.GetCategoricalEntailmentEnsembleClassifier(
                             state: DoubleMatrix.Dense(1, 9,
-                                new double[9] {
-                                    0, 0, 0, 1, 1, 1,    1, 0,    1.0 }),
+                                [
+                                    0, 0, 0, 1, 1, 1,    1, 0,    1.0 ]),
                             featureVariables: testableContext.FeatureVariables,
                             responseVariable: new CategoricalVariable("R") { { 0.0, "A" } });
                     },
@@ -886,8 +885,7 @@ namespace Novacta.Analytics.Advanced.Tests
 
                 var actual = context.GetCategoricalEntailmentEnsembleClassifier(
                     state: DoubleMatrix.Dense(1, 9,
-                        new double[9] {
-                                    0, 0, 0, 1, 1, 1,    1, 0,    .99 }),
+                        [0, 0, 0, 1, 1, 1, 1, 0, .99 ]),
                     featureVariables: testableContext.FeatureVariables,
                     responseVariable: testableContext.ResponseVariable);
 
@@ -900,8 +898,7 @@ namespace Novacta.Analytics.Advanced.Tests
                     new CategoricalEntailment(
                         featureVariables: testableContext.FeatureVariables,
                         responseVariable: testableContext.ResponseVariable,
-                        featurePremises: new List<SortedSet<double>>() {
-                            new SortedSet<double>() { 3.0, 4.0, 5.0 } },
+                        featurePremises: [new() { 3.0, 4.0, 5.0 }],
                         responseConclusion: 0.0,
                         truthValue: .99));
 
@@ -920,7 +917,7 @@ namespace Novacta.Analytics.Advanced.Tests
                 var context = new CategoricalEntailmentEnsembleOptimizationContext(
                     objectiveFunction:
                         (DoubleMatrix state) => { return Double.PositiveInfinity; },
-                    featureCategoryCounts: new List<int>(1) { 6 },
+                    featureCategoryCounts: [6],
                     numberOfResponseCategories: 4,
                     numberOfCategoricalEntailments: 1,
                     allowEntailmentPartialTruthValues: true,
@@ -932,8 +929,8 @@ namespace Novacta.Analytics.Advanced.Tests
                 int numberOfEvaluations = 10000;
                 double delta = .01;
 
-                var parameter = DoubleMatrix.Dense(1, 10, new double[10] {
-                    .5, .5, .5, .5, .5, .5, .25, .25, .25, .25 });
+                var parameter = DoubleMatrix.Dense(1, 10, [
+                    .5, .5, .5, .5, .5, .5, .25, .25, .25, .25 ]);
 
                 // Generate states
 

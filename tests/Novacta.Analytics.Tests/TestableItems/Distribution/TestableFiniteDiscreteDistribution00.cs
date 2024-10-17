@@ -2,7 +2,6 @@
 // Licensed under the MIT license. 
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Collections.Generic;
 
 namespace Novacta.Analytics.Tests.TestableItems.Distribution
@@ -27,10 +26,10 @@ namespace Novacta.Analytics.Tests.TestableItems.Distribution
     class TestableFiniteDiscreteDistribution00 : TestableProbabilityDistribution
     {
         static readonly DoubleMatrix values = DoubleMatrix.Dense(5, 1,
-            new double[5] { 2, -1, 3, -8, -4 });
+            [2, -1, 3, -8, -4]);
 
         static readonly DoubleMatrix masses = DoubleMatrix.Dense(5, 1,
-            new double[5] { .1, .3, .2, .1, .3 });
+            [.1, .3, .2, .1, .3]);
 
         const double mean = -1.5;
         const double variance = 11.45;
@@ -48,9 +47,9 @@ namespace Novacta.Analytics.Tests.TestableItems.Distribution
             {
                 {
                     new TestableDoubleMatrix(
-                        asColumnMajorDenseArray: new double[2]{
+                        asColumnMajorDenseArray: [
                              values[2],
-                             -1.1},
+                             -1.1],
                         numberOfRows: 2,
                         numberOfColumns: 1,
                         isUpperHessenberg: false,
@@ -61,19 +60,19 @@ namespace Novacta.Analytics.Tests.TestableItems.Distribution
                         isSkewSymmetric: false,
                         upperBandwidth: 0,
                         lowerBandwidth: 1),
-                    DoubleMatrix.Dense(2, 1, new Double[2]{
+                    DoubleMatrix.Dense(2, 1, [
                         masses[2],
-                        0.0})
+                        0.0])
                 }
             },
             cdfPartialGraph: new Dictionary<TestableDoubleMatrix, DoubleMatrix>()
             {
                 {
                     new TestableDoubleMatrix(
-                        asColumnMajorDenseArray: new double[3]{
+                        asColumnMajorDenseArray: [
                             -9.0,
                             values[4],
-                            2.1},
+                            2.1],
                         numberOfRows: 3,
                         numberOfColumns: 1,
                         isUpperHessenberg: false,
@@ -84,10 +83,10 @@ namespace Novacta.Analytics.Tests.TestableItems.Distribution
                         isSkewSymmetric: false,
                         upperBandwidth: 0,
                         lowerBandwidth: 2),
-                    DoubleMatrix.Dense(3, 1, new Double[3]{
+                    DoubleMatrix.Dense(3, 1, [
                         0.0,
                         masses[3] + masses[4],
-                        masses[3] + masses[4] + masses[1] + masses[0]})
+                        masses[3] + masses[4] + masses[1] + masses[0]])
                 }
             })
         {

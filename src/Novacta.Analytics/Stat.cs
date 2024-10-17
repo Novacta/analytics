@@ -149,10 +149,7 @@ namespace Novacta.Analytics
             ReadOnlyDoubleMatrix data,
             DataOperation dataOperation)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return Correlation(data.matrix, dataOperation);
         }
@@ -294,21 +291,17 @@ namespace Novacta.Analytics
             bool adjustForBias,
             DataOperation dataOperation)
         {
-            if (data is null)
-                throw new ArgumentNullException(nameof(data));
+            ArgumentNullException.ThrowIfNull(data);
 
-            switch (dataOperation)
+            return dataOperation switch
             {
-                case DataOperation.OnRows:
-                    return CovarianceOnRows(data, adjustForBias);
-                case DataOperation.OnColumns:
-                    return CovarianceOnColumns(data, adjustForBias);
-                default:
-                    throw new ArgumentException(
+                DataOperation.OnRows => CovarianceOnRows(data, adjustForBias),
+                DataOperation.OnColumns => CovarianceOnColumns(data, adjustForBias),
+                _ => throw new ArgumentException(
                         ImplementationServices.GetResourceString(
-                        "STR_EXCEPT_NOT_FIELD_OF_DATA_OPERATION"),
-                        nameof(dataOperation));
-            }
+                            "STR_EXCEPT_NOT_FIELD_OF_DATA_OPERATION"),
+                        nameof(dataOperation)),
+            };
         }
 
         private static DoubleMatrix CovarianceOnColumns(
@@ -438,10 +431,7 @@ namespace Novacta.Analytics
             bool adjustForBias,
             DataOperation dataOperation)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return Covariance(data.matrix, adjustForBias, dataOperation);
         }
@@ -579,10 +569,7 @@ namespace Novacta.Analytics
             DoubleMatrix data,
             bool adjustForBias)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
             double n = data.Count;
 
             if (adjustForBias && (n < 4.0))
@@ -793,10 +780,7 @@ namespace Novacta.Analytics
         public static DoubleMatrix Kurtosis(DoubleMatrix data, bool adjustForBias,
             DataOperation dataOperation)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             if ((DataOperation.OnColumns != dataOperation)
                 &&
@@ -840,10 +824,7 @@ namespace Novacta.Analytics
             ReadOnlyDoubleMatrix data,
             bool adjustForBias)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return Kurtosis(data.matrix, adjustForBias);
         }
@@ -855,10 +836,7 @@ namespace Novacta.Analytics
             bool adjustForBias,
             DataOperation dataOperation)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return Kurtosis(data.matrix, adjustForBias, dataOperation);
         }
@@ -925,10 +903,7 @@ namespace Novacta.Analytics
         public static IndexValuePair Max(
             DoubleMatrix data)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             var implementor = data.implementor;
             var value = maxDoubleOperators[(int)implementor.StorageScheme](implementor, out int index);
@@ -943,10 +918,7 @@ namespace Novacta.Analytics
         public static IndexValuePair Max(
             ReadOnlyDoubleMatrix data)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return Max(data.matrix);
         }
@@ -1005,10 +977,7 @@ namespace Novacta.Analytics
             DoubleMatrix data,
             DataOperation dataOperation)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             if ((DataOperation.OnColumns != dataOperation)
                 &&
@@ -1044,10 +1013,7 @@ namespace Novacta.Analytics
             ReadOnlyDoubleMatrix data,
             DataOperation dataOperation)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return Max(data.matrix, dataOperation);
         }
@@ -1102,10 +1068,7 @@ namespace Novacta.Analytics
         public static double Mean(
             ReadOnlyDoubleMatrix data)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return Mean(data.matrix);
         }
@@ -1193,10 +1156,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref="Stat.Mean(DoubleMatrix, DataOperation)"/>
         public static DoubleMatrix Mean(ReadOnlyDoubleMatrix data, DataOperation dataOperation)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return Mean(data.matrix, dataOperation);
         }
@@ -1263,10 +1223,7 @@ namespace Novacta.Analytics
         public static IndexValuePair Min(
             DoubleMatrix data)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             var implementor = data.implementor;
             var value = minDoubleOperators[(int)implementor.StorageScheme](implementor, out int index);
@@ -1281,10 +1238,7 @@ namespace Novacta.Analytics
         public static IndexValuePair Min(
             ReadOnlyDoubleMatrix data)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return Min(data.matrix);
         }
@@ -1343,10 +1297,7 @@ namespace Novacta.Analytics
             DoubleMatrix data,
             DataOperation dataOperation)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             if ((DataOperation.OnColumns != dataOperation)
                 &&
@@ -1382,10 +1333,7 @@ namespace Novacta.Analytics
             ReadOnlyDoubleMatrix data,
             DataOperation dataOperation)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return Min(data.matrix, dataOperation);
         }
@@ -1481,15 +1429,9 @@ namespace Novacta.Analytics
         /// </exception>
         public static DoubleMatrix Quantile(DoubleMatrix data, DoubleMatrix probabilities)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
-            if (probabilities is null)
-            {
-                throw new ArgumentNullException(nameof(probabilities));
-            }
+            ArgumentNullException.ThrowIfNull(probabilities);
 
             for (int p = 0; p < probabilities.Count; p++)
             {
@@ -1577,10 +1519,7 @@ namespace Novacta.Analytics
             ReadOnlyDoubleMatrix data,
             DoubleMatrix probabilities)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return Quantile(data.matrix, probabilities);
         }
@@ -1735,15 +1674,9 @@ namespace Novacta.Analytics
             DoubleMatrix probabilities,
             DataOperation dataOperation)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
-            if (probabilities is null)
-            {
-                throw new ArgumentNullException(nameof(probabilities));
-            }
+            ArgumentNullException.ThrowIfNull(probabilities);
 
             for (int p = 0; p < probabilities.Count; p++)
             {
@@ -1759,18 +1692,15 @@ namespace Novacta.Analytics
                 }
             }
 
-            switch (dataOperation)
+            return dataOperation switch
             {
-                case DataOperation.OnRows:
-                    return QuantileOnRows(data, probabilities);
-                case DataOperation.OnColumns:
-                    return QuantileOnColumns(data, probabilities);
-                default:
-                    throw new ArgumentException(
+                DataOperation.OnRows => QuantileOnRows(data, probabilities),
+                DataOperation.OnColumns => QuantileOnColumns(data, probabilities),
+                _ => throw new ArgumentException(
                         ImplementationServices.GetResourceString(
-                        "STR_EXCEPT_NOT_FIELD_OF_DATA_OPERATION"),
-                        nameof(dataOperation));
-            }
+                            "STR_EXCEPT_NOT_FIELD_OF_DATA_OPERATION"),
+                        nameof(dataOperation)),
+            };
         }
 
         private static DoubleMatrix[] QuantileOnRows(
@@ -1946,10 +1876,7 @@ namespace Novacta.Analytics
             DoubleMatrix probabilities,
             DataOperation dataOperation)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return Quantile(data.matrix, probabilities, dataOperation);
         }
@@ -2085,10 +2012,7 @@ namespace Novacta.Analytics
         /// <seealso href="http://en.wikipedia.org/wiki/Skewness"/>
         public static double Skewness(DoubleMatrix data, bool adjustForBias)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             var implementor = data.implementor;
             double n = data.Count;
@@ -2112,10 +2036,7 @@ namespace Novacta.Analytics
             ReadOnlyDoubleMatrix data,
             bool adjustForBias)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return Skewness(data.matrix, adjustForBias);
         }
@@ -2309,10 +2230,7 @@ namespace Novacta.Analytics
             bool adjustForBias,
             DataOperation dataOperation)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             if ((DataOperation.OnColumns != dataOperation)
                 &&
@@ -2352,10 +2270,7 @@ namespace Novacta.Analytics
             bool adjustForBias,
             DataOperation dataOperation)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return Skewness(data.matrix, adjustForBias, dataOperation);
         }
@@ -2429,10 +2344,7 @@ namespace Novacta.Analytics
             DoubleMatrix data,
             SortDirection sortDirection)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             if ((SortDirection.Ascending != sortDirection)
                 && (SortDirection.Descending != sortDirection))
@@ -2496,10 +2408,7 @@ namespace Novacta.Analytics
         /// <seealso cref="SortIndexResults"/>
         public static SortIndexResults SortIndex(DoubleMatrix data, SortDirection sortDirection)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             if ((SortDirection.Ascending != sortDirection)
                 && (SortDirection.Descending != sortDirection))
@@ -2528,10 +2437,7 @@ namespace Novacta.Analytics
             ReadOnlyDoubleMatrix data,
             SortDirection sortDirection)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return Sort(data.matrix, sortDirection);
         }
@@ -2539,10 +2445,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref="Stat.SortIndex(DoubleMatrix, SortDirection)"/>
         public static SortIndexResults SortIndex(ReadOnlyDoubleMatrix data, SortDirection sortDirection)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return SortIndex(data.matrix, sortDirection);
         }
@@ -2764,10 +2667,7 @@ namespace Novacta.Analytics
             ReadOnlyDoubleMatrix data,
             bool adjustForBias)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return StandardDeviation(data.matrix, adjustForBias);
         }
@@ -2778,10 +2678,7 @@ namespace Novacta.Analytics
             bool adjustForBias,
             DataOperation dataOperation)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return StandardDeviation(data.matrix, adjustForBias, dataOperation);
         }
@@ -2858,10 +2755,7 @@ namespace Novacta.Analytics
         public static double Sum(
             DoubleMatrix data)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             var implementor = data.implementor;
             return sumDoubleOperators[(int)implementor.StorageScheme](implementor);
@@ -2940,10 +2834,7 @@ namespace Novacta.Analytics
             DoubleMatrix data,
             DataOperation dataOperation)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             if ((DataOperation.OnColumns != dataOperation)
                 &&
@@ -2964,10 +2855,7 @@ namespace Novacta.Analytics
         public static double Sum(
             ReadOnlyDoubleMatrix data)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return Sum(data.matrix);
         }
@@ -2977,10 +2865,7 @@ namespace Novacta.Analytics
             ReadOnlyDoubleMatrix data,
             DataOperation dataOperation)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return Sum(data.matrix, dataOperation);
         }
@@ -3055,10 +2940,7 @@ namespace Novacta.Analytics
         public static double SumOfSquaredDeviations(
             DoubleMatrix data)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             var implementor = data.implementor;
 
@@ -3152,10 +3034,7 @@ namespace Novacta.Analytics
             DoubleMatrix data,
             DataOperation dataOperation)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             if ((DataOperation.OnColumns != dataOperation)
                 &&
@@ -3177,10 +3056,7 @@ namespace Novacta.Analytics
         public static double SumOfSquaredDeviations(
             ReadOnlyDoubleMatrix data)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return SumOfSquaredDeviations(data.matrix);
         }
@@ -3190,10 +3066,7 @@ namespace Novacta.Analytics
             ReadOnlyDoubleMatrix data,
             DataOperation dataOperation)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return SumOfSquaredDeviations(data.matrix, dataOperation);
         }
@@ -3274,10 +3147,7 @@ namespace Novacta.Analytics
             DoubleMatrix data,
             bool adjustForBias)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             var implementor = data.implementor;
 
@@ -3421,10 +3291,7 @@ namespace Novacta.Analytics
             bool adjustForBias,
             DataOperation dataOperation)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             if ((DataOperation.OnColumns != dataOperation)
                 &&
@@ -3460,10 +3327,7 @@ namespace Novacta.Analytics
             ReadOnlyDoubleMatrix data,
             bool adjustForBias)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return Variance(data.matrix, adjustForBias);
         }
@@ -3474,10 +3338,7 @@ namespace Novacta.Analytics
             bool adjustForBias,
             DataOperation dataOperation)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             return Variance(data.matrix, adjustForBias, dataOperation);
         }

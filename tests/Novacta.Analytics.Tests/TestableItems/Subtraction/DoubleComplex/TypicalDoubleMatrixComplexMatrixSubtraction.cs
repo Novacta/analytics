@@ -4,7 +4,6 @@
 
 using Novacta.Analytics.Tests.TestableItems.Matrices;
 using Novacta.Analytics.Tests.Tools;
-using System.Numerics;
 
 namespace Novacta.Analytics.Tests.TestableItems.Subtraction
 {
@@ -30,15 +29,15 @@ namespace Novacta.Analytics.Tests.TestableItems.Subtraction
         TypicalDoubleMatrixComplexMatrixSubtraction() :
             base(
                 expected: new ComplexMatrixState(
-                    asColumnMajorDenseArray: new Complex[6] 
-                    { 
-                        new Complex(5, 5), 
-                        new Complex(5, 4), 
-                        new Complex(5, 3), 
-                        new Complex(5, 2), 
-                        new Complex(5, 1),
-                        new Complex(5, 0)
-                    },
+                    asColumnMajorDenseArray:
+                    [
+                        new(5, 5), 
+                        new(5, 4), 
+                        new(5, 3), 
+                        new(5, 2), 
+                        new(5, 1),
+                        new(5, 0)
+                    ],
                     numberOfRows: 2,
                     numberOfColumns: 3),
                 left: TestableDoubleMatrix16.Get(),

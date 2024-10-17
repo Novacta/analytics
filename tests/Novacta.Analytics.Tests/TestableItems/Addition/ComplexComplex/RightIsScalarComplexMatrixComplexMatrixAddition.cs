@@ -1,6 +1,5 @@
 using Novacta.Analytics.Tests.TestableItems.Matrices;
 using Novacta.Analytics.Tests.Tools;
-using System.Numerics;
 
 namespace Novacta.Analytics.Tests.TestableItems.Addition
 {
@@ -24,15 +23,15 @@ namespace Novacta.Analytics.Tests.TestableItems.Addition
         RightIsScalarComplexMatrixComplexMatrixAddition() :
             base(
                 expected: new ComplexMatrixState(
-                    asColumnMajorDenseArray: new Complex[6] 
-                    {
-                        new Complex(-1, -1),
+                    asColumnMajorDenseArray:
+                    [
+                        new(-1, -1),
                         0, 
-                        new Complex(1, 1), 
-                        new Complex(2, 2), 
-                        new Complex(3, 3),
-                        new Complex(4, 4)
-                    },
+                        new(1, 1), 
+                        new(2, 2), 
+                        new(3, 3),
+                        new(4, 4)
+                    ],
                     numberOfRows: 2,
                     numberOfColumns: 3),
                 left: TestableComplexMatrix16.Get(),

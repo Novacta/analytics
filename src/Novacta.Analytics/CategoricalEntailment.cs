@@ -89,7 +89,7 @@ namespace Novacta.Analytics
     /// </remarks>
     /// <seealso cref="CategoricalEntailmentEnsembleClassifier"/>
     /// <seealso cref="Advanced.CategoricalEntailmentEnsembleOptimizationContext"/>
-    public class CategoricalEntailment 
+    public class CategoricalEntailment
     {
         #region State
 
@@ -282,7 +282,7 @@ namespace Novacta.Analytics
 
             for (int f = 0; f < numberOfFeatureVariables; f++)
             {
-                this.featurePremises.Add(new SortedSet<double>());
+                this.featurePremises.Add([]);
                 premise = this.featurePremises[f];
                 currentFeatureCategories = featureVariables[f].Categories;
                 int numberOfCurrentFeatureCategories = currentFeatureCategories.Count;
@@ -298,8 +298,7 @@ namespace Novacta.Analytics
                 this.isNonemptyProperPremise[f] =
                     premise.IsProperSubsetOf(featureVariables[f].CategoryCodes)
                     &&
-                    premise.Count > 0
-                    ? true : false;
+                    premise.Count > 0;
 
                 entailmentRepresentationIndex += numberOfCurrentFeatureCategories;
             }
@@ -373,8 +372,7 @@ namespace Novacta.Analytics
 
                 this.isNonemptyProperPremise[j] =
                     this.featurePremises[j].IsProperSubsetOf(featureVariables[j].CategoryCodes)
-                    && this.featurePremises[j].Count > 0
-                    ? true : false;
+                    && this.featurePremises[j].Count > 0;
             }
 
             responseVariable.SetAsReadOnly();
@@ -484,15 +482,9 @@ namespace Novacta.Analytics
         {
             #region Input validation
 
-            if (dataSet is null)
-            {
-                throw new ArgumentNullException(nameof(dataSet));
-            }
+            ArgumentNullException.ThrowIfNull(dataSet);
 
-            if (featureVariableIndexes is null)
-            {
-                throw new ArgumentNullException(nameof(featureVariableIndexes));
-            }
+            ArgumentNullException.ThrowIfNull(featureVariableIndexes);
 
             if (featureVariableIndexes.Max >= dataSet.NumberOfColumns)
             {
@@ -515,7 +507,7 @@ namespace Novacta.Analytics
 
             #endregion
 
-            List<int> validatedItemIndexes = new();
+            List<int> validatedItemIndexes = [];
 
             for (int i = 0; i < dataSet.NumberOfRows; i++)
             {
@@ -540,8 +532,7 @@ namespace Novacta.Analytics
                 }
             }
 
-            return IndexCollection.FromArray(
-                validatedItemIndexes.ToArray(), false);
+            return IndexCollection.FromArray([.. validatedItemIndexes], false);
         }
 
         #endregion

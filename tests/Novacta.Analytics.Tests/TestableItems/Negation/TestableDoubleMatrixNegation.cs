@@ -2,8 +2,6 @@
 // Licensed under the MIT license. 
 // See the LICENSE file in the project root for more information.
 
-using System;
-
 namespace Novacta.Analytics.Tests.TestableItems.Negation
 {
     /// <summary>
@@ -26,15 +24,15 @@ namespace Novacta.Analytics.Tests.TestableItems.Negation
                 expected,
                 operand,
                 operandWritableOps:
-                    new Func<DoubleMatrix, DoubleMatrix>[2] {
+                    [
                         (o) => -o,
                         (o) => DoubleMatrix.Negate(o)
-                    },
+                    ],
                 operandReadOnlyOps:
-                    new Func<ReadOnlyDoubleMatrix, DoubleMatrix>[2] {
+                    [
                         (o) => -o,
                         (o) => ReadOnlyDoubleMatrix.Negate(o)
-                    }
+                    ]
                 )
         {
         }

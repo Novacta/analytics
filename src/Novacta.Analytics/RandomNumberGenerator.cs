@@ -34,7 +34,7 @@ namespace Novacta.Analytics
         /// <remarks>
         /// <para>
         /// The SFMT 19937 generator has a period length equal 
-        /// to <latex mode='inline'>2^19937</latex>.
+        /// to <latex mode='inline'>2^{19937}</latex>.
         /// </para>
         /// </remarks>
         /// <seealso href="https://en.wikipedia.org/wiki/Mersenne_Twister"/>
@@ -57,7 +57,7 @@ namespace Novacta.Analytics
         /// <remarks>
         /// <para>
         /// The MT 19937 generator has a period length equal 
-        /// to <latex mode='inline'>2^19937</latex>.
+        /// to <latex mode='inline'>2^{19937}</latex>.
         /// </para>
         /// </remarks>
         /// <seealso href="https://en.wikipedia.org/wiki/Mersenne_Twister"/>
@@ -85,7 +85,7 @@ namespace Novacta.Analytics
         /// The MT 2203 generators guarantee mutual 
         /// independence of the corresponding random number sequences.
         /// Every MT 2203 generator has a period length equal 
-        /// to <latex mode='inline'>2^2203</latex>.
+        /// to <latex mode='inline'>2^{2203}</latex>.
         /// </para>
         /// <para>
         /// Method <see cref="CreateNextMT2203(int)"/> increments the iterator 

@@ -20,7 +20,7 @@ namespace Novacta.Analytics.Infrastructure
         #region State
 
         private readonly List<TreeNode<T>> children =
-            new();
+            [];
 
         /// <summary>
         /// Gets the data of this <see cref="TreeNode{T}"/>.

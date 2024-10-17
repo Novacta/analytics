@@ -9,14 +9,14 @@ namespace Novacta.Analytics.CodeExamples
         public void Main()
         {
             // Create a data stream.
-            string[] data = new string[7] {
+            string[] data = [
                         "COLOR,NUMBER",
                         "Red,Negative",
                         "Green,Zero",
                         "White,Positive",
                         "Red,Negative",
                         "Blue,Negative",
-                        "Blue,Positive" };
+                        "Blue,Positive" ];
 
             MemoryStream stream = new();
             StreamWriter writer = new(stream);

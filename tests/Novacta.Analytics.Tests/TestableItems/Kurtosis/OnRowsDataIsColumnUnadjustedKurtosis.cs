@@ -17,7 +17,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Kurtosis
         protected OnRowsDataIsColumnUnadjustedKurtosis() :
             base(
                 expected: new DoubleMatrixState(
-                    asColumnMajorDenseArray: new double[3] { Double.NaN, Double.NaN, Double.NaN },
+                    asColumnMajorDenseArray: [Double.NaN, Double.NaN, Double.NaN],
                     numberOfRows: 3,
                     numberOfColumns: 1),
                 data: TestableDoubleMatrix20.Get(),

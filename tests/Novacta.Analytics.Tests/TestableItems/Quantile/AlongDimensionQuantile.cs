@@ -2,8 +2,6 @@
 // Licensed under the MIT license. 
 // See the LICENSE file in the project root for more information.
 
-using System;
-
 namespace Novacta.Analytics.Tests.TestableItems.Quantile
 {
     /// <summary>
@@ -32,9 +30,9 @@ namespace Novacta.Analytics.Tests.TestableItems.Quantile
                 probabilities: probabilities,
                 dataOperation: dataOperation,
                 dataWritableOps:
-                    new Func<DoubleMatrix, DoubleMatrix, DataOperation, DoubleMatrix[]>[1] { Stat.Quantile },
+                    [Stat.Quantile],
                 dataReadOnlyOps:
-                    new Func<ReadOnlyDoubleMatrix, DoubleMatrix, DataOperation, DoubleMatrix[]>[1] { Stat.Quantile })
+                    [Stat.Quantile])
         {
         }
     }

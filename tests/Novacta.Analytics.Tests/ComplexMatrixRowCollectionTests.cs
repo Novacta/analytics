@@ -30,7 +30,7 @@ namespace Novacta.Analytics.Tests
             // value is not null
             {
                 ComplexMatrix matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 var expected = matrix;
@@ -47,7 +47,7 @@ namespace Novacta.Analytics.Tests
         public void AsComplexMatrixTest()
         {
             ComplexMatrix expected = ComplexMatrix.Dense(2, 3,
-                new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                [1, 2, 3, 4, 5, 6]);
 
             var doubleMatrixRowCollection = expected.AsRowCollection();
 
@@ -55,7 +55,7 @@ namespace Novacta.Analytics.Tests
 
             ComplexMatrixAssert.IsStateAsExpected(
                 expectedState: new ComplexMatrixState(
-                    asColumnMajorDenseArray: new Complex[6] { 1, 2, 3, 4, 5, 6 },
+                    asColumnMajorDenseArray: [1, 2, 3, 4, 5, 6],
                     numberOfRows: 2,
                     numberOfColumns: 3),
                 actualMatrix: actual,
@@ -68,7 +68,7 @@ namespace Novacta.Analytics.Tests
             // value is less than 0
             {
                 var matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 ArgumentExceptionAssert.Throw(
@@ -85,7 +85,7 @@ namespace Novacta.Analytics.Tests
             // value is greater than NumberOfColumns - 1
             {
                 var matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 ArgumentExceptionAssert.Throw(
@@ -102,7 +102,7 @@ namespace Novacta.Analytics.Tests
             // value is inside the bounds
             {
                 var matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 int dataColumn = 1;
@@ -117,8 +117,8 @@ namespace Novacta.Analytics.Tests
                 Complex expected = matrix[row.Index, dataColumn];
                 row[dataColumn] = expected;
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: [""],
+                    actual: [.. subscriber.PropertyNames]);
                 var actual = row[dataColumn];
                 ComplexAssert.AreEqual(
                     expected,
@@ -132,8 +132,8 @@ namespace Novacta.Analytics.Tests
                     row[dataColumn],
                     ComplexMatrixTest.Accuracy);
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "", "[1]", "XData" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: ["", "[1]", "XData"],
+                    actual: [.. subscriber.PropertyNames]);
             }
         }
 
@@ -143,7 +143,7 @@ namespace Novacta.Analytics.Tests
             // value is less than 0
             {
                 var matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 ArgumentExceptionAssert.Throw(
@@ -160,7 +160,7 @@ namespace Novacta.Analytics.Tests
             // value is greater than NumberOfColumns - 1
             {
                 var matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 ArgumentExceptionAssert.Throw(
@@ -177,7 +177,7 @@ namespace Novacta.Analytics.Tests
             // value is inside the bounds
             {
                 var matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 int dataColumn = 1;
@@ -193,8 +193,8 @@ namespace Novacta.Analytics.Tests
                 Complex expected = matrix[row.Index, dataColumn];
                 row[dataColumn] = expected;
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: [""],
+                    actual: [.. subscriber.PropertyNames]);
                 var actual = row[dataColumn];
                 ComplexAssert.AreEqual(expected, actual, ComplexMatrixTest.Accuracy);
 
@@ -205,8 +205,8 @@ namespace Novacta.Analytics.Tests
                     row[dataColumn],
                     ComplexMatrixTest.Accuracy);
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "", "[1]", "YData" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: ["", "[1]", "YData"],
+                    actual: [.. subscriber.PropertyNames]);
             }
         }
 
@@ -216,7 +216,7 @@ namespace Novacta.Analytics.Tests
             // value is less than 0
             {
                 var matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 ArgumentExceptionAssert.Throw(
@@ -233,7 +233,7 @@ namespace Novacta.Analytics.Tests
             // value is greater than NumberOfColumns - 1
             {
                 var matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 ArgumentExceptionAssert.Throw(
@@ -250,7 +250,7 @@ namespace Novacta.Analytics.Tests
             // value is inside the bounds
             {
                 var matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 int dataColumn = 1;
@@ -266,8 +266,8 @@ namespace Novacta.Analytics.Tests
                 Complex expected = matrix[row.Index, dataColumn];
                 row[dataColumn] = expected;
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: [""],
+                    actual: [.. subscriber.PropertyNames]);
                 var actual = row[dataColumn];
                 ComplexAssert.AreEqual(expected, actual, ComplexMatrixTest.Accuracy);
 
@@ -278,8 +278,8 @@ namespace Novacta.Analytics.Tests
                     row[dataColumn],
                     ComplexMatrixTest.Accuracy);
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "", "[1]", "ZData" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: ["", "[1]", "ZData"],
+                    actual: [.. subscriber.PropertyNames]);
             }
         }
     }

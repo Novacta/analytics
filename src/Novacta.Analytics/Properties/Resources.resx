@@ -204,6 +204,9 @@
   <data name="STR_EXCEPT_GDA_ROWS_NOT_EQUAL_TO_ACTIVE_POINTS" xml:space="preserve">
     <value>The parameter must have a number of rows equal to the number of active points.</value>
   </data>
+  <data name="STR_EXCEPT_IDV_INVALID_COLUMN_TYPE" xml:space="preserve">
+    <value>Invalid TValue type: {0}. Expected: {1}.</value>
+  </data>
   <data name="STR_EXCEPT_IND_LAST_LESS_THAN_FIRST" xml:space="preserve">
     <value>The last index must be greater than or equal to first one.</value>
   </data>
@@ -345,6 +348,12 @@
   <data name="STR_EXCEPT_PAR_MUST_BE_NOT_GREATER_THAN_OTHER" xml:space="preserve">
     <value>Parameter '{0}' must be less than or equal to parameter '{1}'.</value>
   </data>
+  <data name="STR_EXCEPT_PAR_MUST_BE_NOT_GREATER_THAN_OTHER_ROWS" xml:space="preserve">
+    <value>Parameter '{0}' must be less than or equal to the number of rows in parameter '{1}'.</value>
+  </data>
+  <data name="STR_EXCEPT_PAR_MUST_BE_NOT_LESS_THAN_VALUE" xml:space="preserve">
+    <value>The parameter must be greater than or equal to {0}.</value>
+  </data>
   <data name="STR_EXCEPT_PAR_MUST_BE_POSITIVE" xml:space="preserve">
     <value>The parameter must be positive.</value>
   </data>
@@ -431,5 +440,23 @@
   </data>
   <data name="STR_EXCEPT_VSL_CANNOT_CREATE_STREAM_DESCRIPTOR" xml:space="preserve">
     <value>An error occured during the creation of the random stream.</value>
+  </data>
+  <data name="STR_EXCEPT_MAT_CODIFIER_REFERS_TO_IRRELEVANT_KEY" xml:space="preserve">
+    <value>The dictionary cannot contain keys not included in collection parameter '{0}'.</value>
+  </data>
+  <data name="STR_EXCEPT_MAT_CODIFIER_IS_NULL" xml:space="preserve">
+    <value>The dictionary cannot contain null values.</value>
+  </data>
+  <data name="STR_EXCEPT_NMMDS_NO_INITIAL_CONFIGURATION" xml:space="preserve">
+    <value>The dissimilarity matrix can't be scaled to an initial configuration.</value>
+  </data>
+  <data name="STR_EXCEPT_NMMDS_UNALLOWED_CONFIGURATION_DIMENSION" xml:space="preserve">
+    <value>The requested configuration dimension is not allowed. It must not be greater than the number of positive eigenvalues of the transformed dissimilarity matrix.</value>
+  </data>
+  <data name="STR_EXCEPT_CMDS_UNALLOWED_CONFIGURATION_DIMENSION" xml:space="preserve">
+    <value>The requested configuration dimension is not allowed. It must not be greater than the number of positive eigenvalues of the transformed proximity matrix.</value>
+  </data>
+  <data name="STR_EXCEPT_CMDS_PROXIMITIES_CANNOT_BE_SCALED" xml:space="preserve">
+    <value>The proximity matrix can't be scaled since its transformation has no positive eigenvalues.</value>
   </data>
 </root>

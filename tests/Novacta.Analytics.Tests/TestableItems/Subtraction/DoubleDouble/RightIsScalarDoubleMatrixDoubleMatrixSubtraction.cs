@@ -27,7 +27,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Subtraction
         RightIsScalarDoubleMatrixDoubleMatrixSubtraction() :
             base(
                 expected: new DoubleMatrixState(
-                    asColumnMajorDenseArray: new double[6] { 1, 2, 3, 4, 5, 6 },
+                    asColumnMajorDenseArray: [1, 2, 3, 4, 5, 6],
                     numberOfRows: 2,
                     numberOfColumns: 3),
                 left: TestableDoubleMatrix16.Get(),

@@ -180,8 +180,7 @@ namespace Novacta.Analytics
         /// </exception>
         internal IndexCollection(int[] indexes, bool copyIndexes)
         {
-            if (indexes is null)
-                throw new ArgumentNullException(nameof(indexes));
+            ArgumentNullException.ThrowIfNull(indexes);
 
             if (indexes.Length == 0)
             {
@@ -594,8 +593,7 @@ namespace Novacta.Analytics
         {
             get
             {
-                if (null == positions)
-                    throw new ArgumentNullException(nameof(positions));
+                ArgumentNullException.ThrowIfNull(positions);
 
                 int numberOfIndexes = this.indexes.Length;
 
@@ -802,7 +800,7 @@ namespace Novacta.Analytics
         public static bool operator <(IndexCollection left, IndexCollection right)
         {
             if (left is null) {
-                return right is null ? false : true;
+                return right is not null;
             }
 
             return left.CompareTo(right) < 0;
@@ -854,7 +852,7 @@ namespace Novacta.Analytics
         public static bool operator >(IndexCollection left, IndexCollection right)
         {
             if (right is null) {
-                return left is null ? false : true;
+                return left is not null;
             }
 
             return right.CompareTo(left) < 0;
@@ -950,7 +948,7 @@ namespace Novacta.Analytics
         public static bool operator ==(IndexCollection left, IndexCollection right)
         {
             if (left is null) {
-                return right is null ? true : false;
+                return right is null;
             }
 
             return left.Equals(right);
@@ -1131,10 +1129,7 @@ namespace Novacta.Analytics
         /// <inheritdoc/>
         public void CopyTo(int[] array, int arrayIndex)
         {
-            if (array is null)
-            {
-                throw new ArgumentNullException(nameof(array));
-            }
+            ArgumentNullException.ThrowIfNull(array);
 
             if (arrayIndex < 0)
             {

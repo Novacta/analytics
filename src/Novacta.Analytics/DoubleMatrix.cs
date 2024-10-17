@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 using Novacta.Analytics.Infrastructure;
 using System.Linq;
 using System.Numerics;
+using System.IO;
 
 namespace Novacta.Analytics
 {
@@ -33,6 +34,11 @@ namespace Novacta.Analytics
     /// is <see cref="StorageScheme.CompressedRow">StorageScheme.CompressedRow</see>,
     /// which means that storage is allocated for non-zero entries only, using
     /// a compressed sparse row scheme.
+    /// </para>
+    /// <para>
+    /// Matrices can also be created by loading data from a stream; see,
+    /// for example,
+    /// <see cref="Encode(TextReader, char, IndexCollection, bool, Dictionary{int, Codifier}, IFormatProvider)"/>.
     /// </para>
     /// <para><b>Indexing</b></para>
     /// <para id='arrange'>                  
@@ -133,7 +139,7 @@ namespace Novacta.Analytics
     /// </para>
     /// <para id='super'>
     /// If <latex mode="inline">n>1</latex>, then the matrix has 
-    /// <latex depth="0" mode="inline">n-1</latex> <b> super-diagonals</b>: for 
+    /// <latex mode="inline">n-1</latex> <b> super-diagonals</b>: for 
     /// <latex mode="inline">k=1,\dots,n-1</latex>, the 
     /// <latex mode="inline">k</latex>-th super-diagonal is the collection of entries
     /// corresponding to the positions
@@ -143,7 +149,7 @@ namespace Novacta.Analytics
     /// </para>
     /// <para id='sub'>
     /// If <latex mode="inline">m>1</latex>, the matrix has 
-    /// <latex depth="0" mode="inline">m-1</latex> <b> sub-diagonals</b>: for 
+    /// <latex mode="inline">m-1</latex> <b> sub-diagonals</b>: for 
     /// <latex mode="inline">k=1,\dots,m-1</latex>, the 
     /// <latex mode="inline">k</latex>-th sub-diagonal is the collection of entries
     /// corresponding to the positions
@@ -318,7 +324,7 @@ namespace Novacta.Analytics
         public DoubleMatrix(double value)
         {
             this.implementor = new DenseDoubleMatrixImplementor(
-                1, 1, new double[] { value }, StorageOrder.ColumnMajor);
+                1, 1, [value], StorageOrder.ColumnMajor);
         }
 
         internal DoubleMatrix(MatrixImplementor<Double> implementor)
@@ -378,8 +384,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static explicit operator DoubleMatrix(IndexPartition<double> value)
         {
-            if (value is null)
-                throw new ArgumentNullException(nameof(value));
+            ArgumentNullException.ThrowIfNull(value);
 
             // Compute the matrix count
             int numberOfItems = 0;
@@ -446,8 +451,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static explicit operator DoubleMatrix(ReadOnlyDoubleMatrix value)
         {
-            if (value is null)
-                throw new ArgumentNullException(nameof(value));
+            ArgumentNullException.ThrowIfNull(value);
 
             return value.matrix.Clone();
         }
@@ -463,8 +467,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static DoubleMatrix FromReadOnlyDoubleMatrix(ReadOnlyDoubleMatrix value)
         {
-            if (value is null)
-                throw new ArgumentNullException(nameof(value));
+            ArgumentNullException.ThrowIfNull(value);
 
             return value.matrix.Clone();
         }
@@ -510,8 +513,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static explicit operator double(DoubleMatrix value)
         {
-            if (value is null)
-                throw new ArgumentNullException(nameof(value));
+            ArgumentNullException.ThrowIfNull(value);
 
             if (!value.IsScalar)
             {
@@ -634,7 +636,7 @@ namespace Novacta.Analytics
             {
                 if (null == this.rowNames)
                 {
-                    this.rowNames = new Dictionary<int, string>();
+                    this.rowNames = [];
                 }
 
                 return new ReadOnlyDictionary<int, string>(this.rowNames);
@@ -677,7 +679,7 @@ namespace Novacta.Analytics
             }
 
             if (null == this.rowNames)
-                this.rowNames = new Dictionary<int, string>();
+                this.rowNames = [];
 
             this.rowNames[rowIndex] = rowName;
         }
@@ -728,7 +730,7 @@ namespace Novacta.Analytics
 
             if (this.rowNames is not null)
             {
-                clonedRowNames = new Dictionary<int, string>();
+                clonedRowNames = [];
                 foreach (var i in this.rowNames.Keys)
                 {
                     clonedRowNames[i] = this.rowNames[i];
@@ -812,7 +814,7 @@ namespace Novacta.Analytics
             {
                 if (null == this.columnNames)
                 {
-                    this.columnNames = new Dictionary<int, string>();
+                    this.columnNames = [];
                 }
                 return new ReadOnlyDictionary<int, string>(this.columnNames);
             }
@@ -854,7 +856,7 @@ namespace Novacta.Analytics
             }
 
             if (null == this.columnNames)
-                this.columnNames = new Dictionary<int, string>();
+                this.columnNames = [];
 
             this.columnNames[columnIndex] = columnName;
         }
@@ -904,7 +906,7 @@ namespace Novacta.Analytics
 
             if (this.columnNames is not null)
             {
-                clonedColumnNames = new Dictionary<int, string>();
+                clonedColumnNames = [];
                 foreach (var i in this.columnNames.Keys)
                 {
                     clonedColumnNames[i] = this.columnNames[i];
@@ -1003,10 +1005,7 @@ namespace Novacta.Analytics
         /// </exception>
         public DoubleMatrixRowCollection AsRowCollection(IndexCollection rowIndexes)
         {
-            if (rowIndexes is null)
-            {
-                throw new ArgumentNullException(nameof(rowIndexes));
-            }
+            ArgumentNullException.ThrowIfNull(rowIndexes);
             if (rowIndexes.maxIndex >= this.NumberOfRows)
             {
                 throw new ArgumentOutOfRangeException(nameof(rowIndexes),
@@ -1121,10 +1120,7 @@ namespace Novacta.Analytics
         public static DoubleMatrix Diagonal(
             DoubleMatrix mainDiagonal)
         {
-            if (mainDiagonal is null)
-            {
-                throw new ArgumentNullException(nameof(mainDiagonal));
-            }
+            ArgumentNullException.ThrowIfNull(mainDiagonal);
 
             int dimension = mainDiagonal.Count;
             var diagonalImplementor = new SparseCsr3DoubleMatrixImplementor(dimension, dimension, dimension);
@@ -1143,10 +1139,7 @@ namespace Novacta.Analytics
         public static DoubleMatrix Diagonal(
             ReadOnlyDoubleMatrix mainDiagonal)
         {
-            if (mainDiagonal is null)
-            {
-                throw new ArgumentNullException(nameof(mainDiagonal));
-            }
+            ArgumentNullException.ThrowIfNull(mainDiagonal);
 
             return Diagonal(mainDiagonal.matrix);
         }
@@ -1262,10 +1255,7 @@ namespace Novacta.Analytics
         {
             #region Input validation
 
-            if (null == data)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             int numberOfRows = data.GetLength(0);
             int numberOfColumns = data.GetLength(1);
@@ -1537,10 +1527,7 @@ namespace Novacta.Analytics
                         "STR_EXCEPT_PAR_MUST_BE_POSITIVE"));
             }
 
-            if (null == data)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             if ((StorageOrder.ColumnMajor != storageOrder)
                 && (StorageOrder.RowMajor != storageOrder))
@@ -1632,10 +1619,7 @@ namespace Novacta.Analytics
                         "STR_EXCEPT_PAR_MUST_BE_POSITIVE"));
             }
 
-            if (null == data)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             int matrixCount = numberOfRows * numberOfColumns;
             if (data.Length != matrixCount)
@@ -1765,10 +1749,7 @@ namespace Novacta.Analytics
                         "STR_EXCEPT_PAR_MUST_BE_POSITIVE"));
             }
 
-            if (null == data)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             if ((StorageOrder.ColumnMajor != storageOrder)
                 && (StorageOrder.RowMajor != storageOrder))
@@ -2031,14 +2012,8 @@ namespace Novacta.Analytics
         /// </exception>
         public static DoubleMatrix operator +(DoubleMatrix left, DoubleMatrix right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(left);
+            ArgumentNullException.ThrowIfNull(right);
             return new DoubleMatrix(sumOperators[(int)left.implementor.StorageScheme,
                (int)right.implementor.StorageScheme](left.implementor, right.implementor));
         }
@@ -2106,10 +2081,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static DoubleMatrix operator +(DoubleMatrix left, double right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
+            ArgumentNullException.ThrowIfNull(left);
             return new DoubleMatrix(scalarSumOperators[(int)left.implementor.StorageScheme]
                 (left.implementor, right));
         }
@@ -2158,10 +2130,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static DoubleMatrix operator +(double left, DoubleMatrix right)
         {
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(right);
             return new DoubleMatrix(scalarSumOperators[(int)right.implementor.StorageScheme]
                 (right.implementor, left));
         }
@@ -2218,10 +2187,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator +(DoubleMatrix left, Complex right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
+            ArgumentNullException.ThrowIfNull(left);
             return new ComplexMatrix(complexScalarSumOperators[(int)left.implementor.StorageScheme]
                 (left.implementor, right));
         }
@@ -2261,10 +2227,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator +(Complex left, DoubleMatrix right)
         {
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(right);
             return new ComplexMatrix(complexScalarSumOperators[(int)right.implementor.StorageScheme]
                 (right.implementor, left));
         }
@@ -2330,10 +2293,7 @@ namespace Novacta.Analytics
         /// <seealso cref="Apply"/>
         public void InPlaceApply(Func<double, double> func)
         {
-            if (func is null)
-            {
-                throw new ArgumentNullException(nameof(func));
-            }
+            ArgumentNullException.ThrowIfNull(func);
             inPlaceApplyOperators[(int)this.implementor.StorageScheme](this.implementor, func);
         }
 
@@ -2391,10 +2351,7 @@ namespace Novacta.Analytics
         /// <seealso cref="InPlaceApply"/>
         public DoubleMatrix Apply(Func<double, double> func)
         {
-            if (func is null)
-            {
-                throw new ArgumentNullException(nameof(func));
-            }
+            ArgumentNullException.ThrowIfNull(func);
 
             return new DoubleMatrix(outPlaceApplyOperators[
                 (int)this.implementor.StorageScheme]
@@ -2465,14 +2422,8 @@ namespace Novacta.Analytics
         /// </exception>
         public static DoubleMatrix ElementWiseMultiply(DoubleMatrix left, DoubleMatrix right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(left);
+            ArgumentNullException.ThrowIfNull(right);
             return new DoubleMatrix(multiplyByElementOperators[(int)left.implementor.StorageScheme,
                (int)right.implementor.StorageScheme](left.implementor, right.implementor));
         }
@@ -2627,10 +2578,7 @@ namespace Novacta.Analytics
         /// </exception>
         public IndexCollection FindWhile(Predicate<double> match)
         {
-            if (match is null)
-            {
-                throw new ArgumentNullException(nameof(match));
-            }
+            ArgumentNullException.ThrowIfNull(match);
 
             var implementor = this.implementor;
             return findWhileDoubleOperators[(int)implementor.StorageScheme](implementor, match);
@@ -2695,9 +2643,7 @@ namespace Novacta.Analytics
             {
                 if (this.HasColumnNames)
                 {
-                    var rowNames = this.rowNames;
-                    this.rowNames = this.columnNames;
-                    this.columnNames = rowNames;
+                    (this.columnNames, this.rowNames) = (this.rowNames, this.columnNames);
                 }
                 else
                 {
@@ -2899,14 +2845,8 @@ namespace Novacta.Analytics
         /// <seealso href="https://en.wikipedia.org/wiki/QR_decomposition"/>
         public static DoubleMatrix operator /(DoubleMatrix left, DoubleMatrix right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(left);
+            ArgumentNullException.ThrowIfNull(right);
             return new DoubleMatrix(divideOperators[(int)left.implementor.StorageScheme,
                (int)right.implementor.StorageScheme](left.implementor, right.implementor));
         }
@@ -2968,10 +2908,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static DoubleMatrix operator /(DoubleMatrix left, double right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
+            ArgumentNullException.ThrowIfNull(left);
             return new DoubleMatrix(scalarRightDivideOperators[(int)left.implementor.StorageScheme]
                 (left.implementor, right));
         }
@@ -3022,10 +2959,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator /(DoubleMatrix left, Complex right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
+            ArgumentNullException.ThrowIfNull(left);
             return new ComplexMatrix(complexScalarRightDivideOperators[(int)left.implementor.StorageScheme]
                 (left.implementor, right));
         }
@@ -3090,10 +3024,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static DoubleMatrix operator /(double left, DoubleMatrix right)
         {
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(right);
             return new DoubleMatrix(scalarLeftDivideOperators[(int)right.implementor.StorageScheme]
                 (right.implementor, left));
         }
@@ -3145,10 +3076,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator /(Complex left, DoubleMatrix right)
         {
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(right);
             return new ComplexMatrix(complexScalarLeftDivideOperators[(int)right.implementor.StorageScheme]
                 (right.implementor, left));
         }
@@ -3247,14 +3175,8 @@ namespace Novacta.Analytics
         /// </exception>
         public static DoubleMatrix operator *(DoubleMatrix left, DoubleMatrix right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(left);
+            ArgumentNullException.ThrowIfNull(right);
             return new DoubleMatrix(multiplyOperators[(int)left.implementor.StorageScheme,
                (int)right.implementor.StorageScheme](left.implementor, right.implementor));
         }
@@ -3316,10 +3238,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static DoubleMatrix operator *(DoubleMatrix left, double right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
+            ArgumentNullException.ThrowIfNull(left);
             return new DoubleMatrix(scalarMultiplyOperators[(int)left.implementor.StorageScheme]
                 (left.implementor, right));
         }
@@ -3361,10 +3280,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static DoubleMatrix operator *(double left, DoubleMatrix right)
         {
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(right);
             return new DoubleMatrix(scalarMultiplyOperators[(int)right.implementor.StorageScheme]
                 (right.implementor, left));
         }
@@ -3415,10 +3331,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator *(DoubleMatrix left, Complex right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
+            ArgumentNullException.ThrowIfNull(left);
             return new ComplexMatrix(complexScalarMultiplyOperators[(int)left.implementor.StorageScheme]
                 (left.implementor, right));
         }
@@ -3451,10 +3364,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator *(Complex left, DoubleMatrix right)
         {
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(right);
             return new ComplexMatrix(complexScalarMultiplyOperators[(int)right.implementor.StorageScheme]
                 (right.implementor, left));
         }
@@ -3552,14 +3462,8 @@ namespace Novacta.Analytics
         /// </exception>
         public static DoubleMatrix operator -(DoubleMatrix left, DoubleMatrix right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(left);
+            ArgumentNullException.ThrowIfNull(right);
             return new DoubleMatrix(subtractOperators[(int)left.implementor.StorageScheme,
                (int)right.implementor.StorageScheme](left.implementor, right.implementor));
         }
@@ -3621,10 +3525,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static DoubleMatrix operator -(DoubleMatrix left, double right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
+            ArgumentNullException.ThrowIfNull(left);
             return new DoubleMatrix(scalarRightSubtractOperators[(int)left.implementor.StorageScheme]
                 (left.implementor, right));
         }
@@ -3675,10 +3576,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator -(DoubleMatrix left, Complex right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
+            ArgumentNullException.ThrowIfNull(left);
             return new ComplexMatrix(complexScalarRightSubtractOperators[(int)left.implementor.StorageScheme]
                 (left.implementor, right));
         }
@@ -3741,10 +3639,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static DoubleMatrix operator -(double left, DoubleMatrix right)
         {
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(right);
             return new DoubleMatrix(scalarLeftSubtractOperators[(int)right.implementor.StorageScheme]
                 (right.implementor, left));
         }
@@ -3794,10 +3689,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static ComplexMatrix operator -(Complex left, DoubleMatrix right)
         {
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
+            ArgumentNullException.ThrowIfNull(right);
             return new ComplexMatrix(complexScalarLeftSubtractOperators[(int)right.implementor.StorageScheme]
                 (right.implementor, left));
         }
@@ -3862,10 +3754,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static DoubleMatrix operator -(DoubleMatrix matrix)
         {
-            if (matrix is null)
-            {
-                throw new ArgumentNullException(nameof(matrix));
-            }
+            ArgumentNullException.ThrowIfNull(matrix);
             return new DoubleMatrix(negationOperators[(int)matrix.implementor.StorageScheme]
                 (matrix.implementor));
         }
@@ -4255,8 +4144,7 @@ namespace Novacta.Analytics
         {
             get
             {
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
                 var subMatrix = new DoubleMatrix(this.implementor[rowIndex, columnIndexes]);
 
@@ -4276,11 +4164,9 @@ namespace Novacta.Analytics
             }
             set
             {
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
-                if (value is null)
-                    throw new ArgumentNullException(nameof(value));
+                ArgumentNullException.ThrowIfNull(value);
 
                 this.implementor[rowIndex, columnIndexes] = value.implementor;
             }
@@ -4300,8 +4186,7 @@ namespace Novacta.Analytics
         {
             get
             {
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
                 // Check if columnIndexes is a string reserved for sub-reference
                 if (0 != string.Compare(columnIndexes, ":", StringComparison.Ordinal))
@@ -4330,11 +4215,9 @@ namespace Novacta.Analytics
 
             set
             {
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
-                if (value is null)
-                    throw new ArgumentNullException(nameof(value));
+                ArgumentNullException.ThrowIfNull(value);
 
                 // Check if columnIndexes is a string reserved for sub-reference
                 if (0 != string.Compare(columnIndexes, ":", StringComparison.Ordinal))
@@ -4367,8 +4250,7 @@ namespace Novacta.Analytics
         {
             get
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
                 var subMatrix = new DoubleMatrix(this.implementor[rowIndexes, columnIndex]);
 
@@ -4388,11 +4270,9 @@ namespace Novacta.Analytics
             }
             set
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
-                if (value is null)
-                    throw new ArgumentNullException(nameof(value));
+                ArgumentNullException.ThrowIfNull(value);
 
                 this.implementor[rowIndexes, columnIndex] = value.implementor;
             }
@@ -4412,11 +4292,9 @@ namespace Novacta.Analytics
         {
             get
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
                 DoubleMatrix subMatrix = new(this.implementor[rowIndexes, columnIndexes]);
 
@@ -4436,14 +4314,11 @@ namespace Novacta.Analytics
             }
             set
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
-                if (value is null)
-                    throw new ArgumentNullException(nameof(value));
+                ArgumentNullException.ThrowIfNull(value);
 
                 this.implementor[rowIndexes, columnIndexes] = value.implementor;
             }
@@ -4463,11 +4338,9 @@ namespace Novacta.Analytics
         {
             get
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
                 // Check if columnIndexes is a string reserved for sub-reference
                 if (0 != string.Compare(columnIndexes, ":", StringComparison.Ordinal))
@@ -4495,14 +4368,11 @@ namespace Novacta.Analytics
             }
             set
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
-                if (value is null)
-                    throw new ArgumentNullException(nameof(value));
+                ArgumentNullException.ThrowIfNull(value);
 
                 // Check if columnIndexes is a string reserved for sub-reference
                 if (0 != string.Compare(columnIndexes, ":", StringComparison.Ordinal))
@@ -4535,8 +4405,7 @@ namespace Novacta.Analytics
         {
             get
             {
-                if (rowIndexes is null)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
                 // Check if rowIndexes is a string reserved for sub-reference
                 if (0 != string.Compare(rowIndexes, ":", StringComparison.Ordinal))
@@ -4564,8 +4433,7 @@ namespace Novacta.Analytics
             }
             set
             {
-                if (rowIndexes is null)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
                 // Check if rowIndexes is a string reserved for sub-reference
                 if (0 != string.Compare(rowIndexes, ":", StringComparison.Ordinal))
@@ -4576,8 +4444,7 @@ namespace Novacta.Analytics
                            "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX"));
                 }
 
-                if (value is null)
-                    throw new ArgumentNullException(nameof(value));
+                ArgumentNullException.ThrowIfNull(value);
 
                 this.implementor[rowIndexes, columnIndex] = value.implementor;
             }
@@ -4597,11 +4464,9 @@ namespace Novacta.Analytics
         {
             get
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
                 // Check if rowIndexes is a string reserved for sub reference
                 if (0 != string.Compare(rowIndexes, ":", StringComparison.Ordinal))
@@ -4629,11 +4494,9 @@ namespace Novacta.Analytics
             }
             set
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
                 // Check if rowIndexes is a string reserved for sub-reference
                 if (0 != string.Compare(rowIndexes, ":", StringComparison.Ordinal))
@@ -4644,8 +4507,7 @@ namespace Novacta.Analytics
                            "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX"));
                 }
 
-                if (value is null)
-                    throw new ArgumentNullException(nameof(value));
+                ArgumentNullException.ThrowIfNull(value);
 
                 this.implementor[rowIndexes, columnIndexes] = value.implementor;
             }
@@ -4665,11 +4527,9 @@ namespace Novacta.Analytics
         {
             get
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
                 if (0 != string.Compare(rowIndexes, ":", StringComparison.Ordinal))
                 {
@@ -4703,15 +4563,12 @@ namespace Novacta.Analytics
             }
             set
             {
-                if (null == rowIndexes)
-                    throw new ArgumentNullException(nameof(rowIndexes));
+                ArgumentNullException.ThrowIfNull(rowIndexes);
 
-                if (null == columnIndexes)
-                    throw new ArgumentNullException(nameof(columnIndexes));
+                ArgumentNullException.ThrowIfNull(columnIndexes);
 
 
-                if (value is null)
-                    throw new ArgumentNullException(nameof(value));
+                ArgumentNullException.ThrowIfNull(value);
 
                 if (0 != string.Compare(rowIndexes, ":", StringComparison.Ordinal))
                 {
@@ -5083,8 +4940,7 @@ namespace Novacta.Analytics
         /// </exception>
         public DoubleMatrix Vec(IndexCollection linearIndexes)
         {
-            if (linearIndexes is null)
-                throw new ArgumentNullException(nameof(linearIndexes));
+            ArgumentNullException.ThrowIfNull(linearIndexes);
 
             return new DoubleMatrix(this.implementor[linearIndexes]);
         }
@@ -5152,6 +5008,7 @@ namespace Novacta.Analytics
         /// </summary>
         /// <value><c>true</c> if this instance is read only; otherwise, <c>false</c>.</value>
         public bool IsReadOnly { get => false; }
+
 
         private static Func<MatrixImplementor<double>, double, int>[] IndexOfOperators()
         {
@@ -5244,10 +5101,7 @@ namespace Novacta.Analytics
         /// <inheritdoc/>
         public void CopyTo(double[] array, int arrayIndex)
         {
-            if (array is null)
-            {
-                throw new ArgumentNullException(nameof(array));
-            }
+            ArgumentNullException.ThrowIfNull(array);
 
             if (arrayIndex < 0)
             {
@@ -5281,6 +5135,518 @@ namespace Novacta.Analytics
         bool ICollection<double>.Remove(double item)
         {
             throw new NotSupportedException();
+        }
+
+        #endregion
+
+        #region Encoders
+
+        /// <summary>
+        /// Encodes categorical or numerical data from the stream 
+        /// underlying the specified text reader into a matrix,
+        /// applying specific categorical data codifiers.
+        /// </summary>
+        /// <param name="reader">
+        /// The reader having access to the data stream.
+        /// </param>
+        /// <param name="columnDelimiter">
+        /// The delimiter used to separate columns in data lines.
+        /// </param>
+        /// <param name="extractedColumns">
+        /// The zero-based indexes of the columns from which 
+        /// data are to be extracted.</param>
+        /// <param name="firstLineContainsVariableNames">
+        /// If set to <c>true</c> signals that the first
+        /// line contains variable names.</param>
+        /// <param name="specialCodifiers">
+        /// A mapping from a subset of extracted column indexes to 
+        /// a set of codifiers, to be executed when extracting 
+        /// data from the corresponding columns.</param>
+        /// <param name="provider">
+        /// An object that provides formatting information.
+        /// </param>    
+        /// <returns>
+        /// The matrix containing information about the
+        /// streamed data.
+        /// </returns>
+        /// <remarks>
+        /// <para id='SpecialEncode.0'><b>Data Extraction</b></para>
+        /// <para id='SpecialEncode.1'>
+        /// Each line from the stream is interpreted as the information about 
+        /// variables
+        /// observed at a given instance. A line is split in tokens, 
+        /// each corresponding
+        /// to a (zero-based) column, which in turn stores the data
+        /// of a given variable. Columns are assumed to be
+        /// separated each other by the character passed as 
+        /// <paramref name="columnDelimiter"/>.
+        /// Data from a variable are extracted only if the corresponding 
+        /// column index is in the 
+        /// collection <paramref name="extractedColumns"/>. 
+        /// </para>
+        /// <para id='SpecialEncode.2'><b>Special Codification</b></para>
+        /// <para id ='SpecialEncode.3'>
+        /// By default, tokens in a column are interpreted as 
+        /// numerical data, which are 
+        /// inserted in the matrix 
+        /// using <see cref="Convert.ToDouble(string, IFormatProvider)"/>. 
+        /// This behavior can be overridden by mapping 
+        /// a special codifier
+        /// to a given column by inserting, in the dictionary 
+        /// <paramref name="specialCodifiers"/>, the codifier as
+        /// a value keyed with the 
+        /// index of the column whose data are to be transformed. 
+        /// A special codifier can be
+        /// useful if a given column corresponds to a categorical variable 
+        /// whose labels must be represented via numerical codes 
+        /// in the returned matrix.
+        /// </para>
+        /// </remarks>
+        /// <example>
+        /// <para id='SpecialEncode.4'>
+        /// In the following example, a stream is read to encode
+        /// data into a matrix.
+        /// The stream contains two columns, the first corresponding 
+        /// to a variable representing time instants, 
+        /// and the second to a numerical one. A special codifier 
+        /// is assigned to the first column 
+        /// to define codes for time representations.
+        ///</para>
+        /// <para id='SpecialEncode.5'>
+        /// <code title="Encoding data into a matrix from a stream using a special codifier"
+        /// source="..\Novacta.Analytics.CodeExamples\MatrixEncodeExample0.cs.txt" 
+        /// language="cs" />
+        /// </para> 
+        ///</example>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="reader" /> is <b>null</b>. <br/>
+        /// -or- <br/>
+        /// <paramref name="extractedColumns" />  is <b>null</b>. <br/>
+        /// -or- <br/>
+        /// <paramref name="specialCodifiers"/> is <b>null</b>. <br/>
+        /// -or- <br/>
+        /// <paramref name="provider"/> is <b>null</b>.
+        /// </exception> 
+        /// <exception cref="ArgumentException">        
+        /// <paramref name="specialCodifiers"/> contains <b>null</b> values 
+        /// or keys which are
+        /// not in the <paramref name="extractedColumns"/> collection.
+        /// </exception>
+        /// <exception cref="InvalidDataException">
+        /// There are no data rows in the stream accessed by 
+        /// <paramref name="reader" />. <br/> 
+        /// -or- <br/>
+        /// There is at least a row
+        /// which contains not enough data for any column specified by 
+        /// <paramref name="extractedColumns" />. This can happen if 
+        /// there are missing columns, 
+        /// or if tokens extracted 
+        /// from the stream are <b>null</b> 
+        /// or consist only of white-space characters. 
+        /// </exception>
+        /// <seealso cref="Codifier" />
+        public static DoubleMatrix Encode(
+            TextReader reader,
+            char columnDelimiter,
+            IndexCollection extractedColumns,
+            bool firstLineContainsVariableNames,
+            Dictionary<int, Codifier> specialCodifiers,
+            IFormatProvider provider)
+        {
+            #region Input validation
+
+            ArgumentNullException.ThrowIfNull(reader);
+            ArgumentNullException.ThrowIfNull(extractedColumns);
+            ArgumentNullException.ThrowIfNull(specialCodifiers);
+
+            foreach (var codifier in specialCodifiers)
+            {
+                if (!extractedColumns.Contains(codifier.Key))
+                {
+                    throw new ArgumentException(
+                        string.Format(
+                            CultureInfo.InvariantCulture,
+                            ImplementationServices.GetResourceString(
+                                "STR_EXCEPT_MAT_CODIFIER_REFERS_TO_IRRELEVANT_KEY"),
+                            "columns"),
+                        nameof(specialCodifiers));
+                }
+                if (codifier.Value is null)
+                {
+                    throw new ArgumentException(
+                        ImplementationServices.GetResourceString(
+                            "STR_EXCEPT_MAT_CODIFIER_IS_NULL"),
+                        nameof(specialCodifiers));
+                }
+            }
+
+            ArgumentNullException.ThrowIfNull(provider);
+
+            #endregion
+
+            int numberOfVariables = extractedColumns.Count;
+
+            string[] variableNames = [];
+
+            List<double> rawData = new(100 * numberOfVariables);
+
+            bool[] isSpecialColumn = new bool[numberOfVariables];
+            for (int j = 0; j < numberOfVariables; j++)
+            {
+                isSpecialColumn[j] =
+                    specialCodifiers.ContainsKey(extractedColumns[j]);
+            }
+
+            string line;
+            string[] tokens;
+            int lineNumber = 0, column = -1;
+            double code;
+
+            try
+            {
+                while ((line = reader.ReadLine()) != null)
+                {
+                    tokens = line.Split(columnDelimiter);
+
+                    if (0 == lineNumber)
+                    {
+                        if (firstLineContainsVariableNames)
+                        {
+                            variableNames = new string[numberOfVariables];
+                            for (int j = 0; j < numberOfVariables; j++)
+                            {
+                                column = extractedColumns[j];
+                                if (column >= tokens.Length)
+                                {
+                                    throw new InvalidDataException(
+                                        string.Format(
+                                            CultureInfo.InvariantCulture,
+                                            ImplementationServices.GetResourceString(
+                                                "STR_EXCEPT_CAT_DATASET_NOT_ENOUGH_ROW_DATA"),
+                                            lineNumber,
+                                            column));
+                                }
+                                if (tokens[column] == string.Empty
+                                    || 
+                                    String.IsNullOrWhiteSpace(tokens[column]))
+                                {
+                                    throw new Exception();
+                                }
+                                variableNames[j] = tokens[column];
+                            }
+                            lineNumber++;
+                            continue;
+                        }
+                    }
+
+                    for (int j = 0; j < numberOfVariables; j++)
+                    {
+                        column = extractedColumns[j];
+                        if (column >= tokens.Length)
+                        {
+                            throw new InvalidDataException(
+                                string.Format(
+                                    provider,
+                                    ImplementationServices.GetResourceString(
+                                        "STR_EXCEPT_CAT_DATASET_NOT_ENOUGH_ROW_DATA"),
+                                    lineNumber,
+                                    column));
+                        }
+
+                        if (isSpecialColumn[j])
+                        {
+                            code = specialCodifiers[column](tokens[column], provider);
+                        }
+                        else
+                        {
+                            code = Convert.ToDouble(tokens[column], provider);
+                        }
+
+                        rawData.Add(code);
+                    }
+
+                    lineNumber++;
+                }
+            }
+            catch (Exception)
+            {
+                throw new InvalidDataException(
+                    string.Format(
+                        provider,
+                        ImplementationServices.GetResourceString(
+                            "STR_EXCEPT_CAT_DATASET_NOT_ENOUGH_ROW_DATA"),
+                        lineNumber,
+                        column));
+            }
+
+            int numberOfItems =
+                firstLineContainsVariableNames ? lineNumber - 1 : lineNumber;
+
+            if (numberOfItems < 1)
+            {
+                throw new InvalidDataException(
+                    ImplementationServices.GetResourceString(
+                        "STR_EXCEPT_CAT_DATASET_NOT_ENOUGH_DATA"));
+            }
+
+            DoubleMatrix matrix = DoubleMatrix.Dense(
+                numberOfItems, numberOfVariables, [.. rawData], StorageOrder.RowMajor);
+
+            if (firstLineContainsVariableNames)
+            {
+                for (int j = 0; j < numberOfVariables; j++)
+                {
+                    matrix.SetColumnName(j, variableNames[j]);
+                }
+            }
+
+            return matrix;
+        }
+
+        /// <summary>
+        /// Encodes categorical or numerical data from the given file into a matrix,
+        /// applying specific categorical data codifiers.
+        /// </summary>
+        /// <param name="path">
+        /// The data file to be opened for reading.</param>
+        /// <param name="columnDelimiter">
+        /// The delimiter used to separate columns in data lines.</param>
+        /// <param name="extractedColumns">
+        /// The zero-based indexes of the columns from which 
+        /// data are to be extracted.</param>
+        /// <param name="firstLineContainsVariableNames">
+        /// If set to <c>true</c> signals that the first
+        /// line contains variable names.</param>
+        /// <param name="specialCodifiers">
+        /// A mapping from a subset of extracted column indexes to 
+        /// a set of codifiers, to be executed when extracting data 
+        /// from the corresponding columns.
+        /// </param>
+        /// <param name="provider">
+        /// An object that provides formatting 
+        /// information.
+        /// </param>    
+        /// <returns>
+        /// The matrix containing information about the streamed data.
+        /// </returns>
+        /// <remarks>
+        /// <inheritdoc cref="Encode(TextReader, char, IndexCollection, bool, Dictionary{int, Codifier}, IFormatProvider)" 
+        /// path="para[@id='SpecialEncode.0']"/>
+        /// <inheritdoc cref="Encode(TextReader, char, IndexCollection, bool, Dictionary{int, Codifier}, IFormatProvider)" 
+        /// path="para[@id='SpecialEncode.1']"/>
+        /// <inheritdoc cref="Encode(TextReader, char, IndexCollection, bool, Dictionary{int, Codifier}, IFormatProvider)" 
+        /// path="para[@id='SpecialEncode.2']"/>
+        /// <inheritdoc cref="Encode(TextReader, char, IndexCollection, bool, Dictionary{int, Codifier}, IFormatProvider)" 
+        /// path="para[@id='SpecialEncode.3']"/>
+        /// </remarks>
+        /// <example>
+        /// <inheritdoc cref="Encode(TextReader, char, IndexCollection, bool, Dictionary{int, Codifier}, IFormatProvider)" 
+        /// path="para[@id='SpecialEncode.4']"/>
+        /// <inheritdoc cref="Encode(TextReader, char, IndexCollection, bool, Dictionary{int, Codifier}, IFormatProvider)" 
+        /// path="para[@id='SpecialEncode.5']"/>
+        ///</example>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="path"/> is <b>null</b>. <br/>
+        /// -or-<br/>
+        /// <paramref name="extractedColumns" /> is <b>null</b>.<br/>
+        /// -or-<br/>
+        /// <paramref name="specialCodifiers"/> is <b>null</b>. <br/>
+        /// -or-<br/>
+        /// <paramref name="provider"/> is <b>null</b>.
+        /// </exception> 
+        /// <exception cref="ArgumentException">
+        /// <paramref name="specialCodifiers"/> contains <b>null</b>
+        /// values or keys which are
+        /// not in the <paramref name="extractedColumns"/> collection.<br/>
+        /// -or-<br/>
+        /// <paramref name="path"/> is an empty string ("").
+        /// </exception>
+        /// <exception cref="FileNotFoundException">
+        /// The file cannot be found.
+        /// </exception>
+        /// <exception cref="DirectoryNotFoundException">
+        /// The specified path is invalid, such as being on an unmapped drive.
+        /// </exception>
+        /// <exception cref="IOException">
+        /// <paramref name="path"/> includes an incorrect or invalid syntax 
+        /// for file name, directory name, or volume label.
+        /// </exception>
+        /// <exception cref="InvalidDataException">
+        /// The stream to file having the specified <paramref name="path" /> contains no data rows.<br/>
+        /// -or-<br/>
+        /// There is at least a row
+        /// which contains not enough data for any column specified by 
+        /// <paramref name="extractedColumns" />. This can happen if there are missing columns, 
+        /// or if tokens extracted 
+        /// from the stream are <b>null</b> 
+        /// or consist only of white-space characters. 
+        /// </exception>
+        /// <seealso cref="Codifier" />
+        /// <seealso cref="File"/>
+        public static DoubleMatrix Encode(
+            string path,
+            char columnDelimiter,
+            IndexCollection extractedColumns,
+            bool firstLineContainsVariableNames,
+            Dictionary<int, Codifier> specialCodifiers,
+            IFormatProvider provider)
+        {
+            using StreamReader reader = new(path);
+
+            return Encode(
+                 reader,
+                 columnDelimiter,
+                 extractedColumns,
+                 firstLineContainsVariableNames,
+                 specialCodifiers,
+                 provider);
+        }
+
+        /// <summary>
+        /// Encodes numerical data from the specified file.
+        /// </summary>
+        /// <param name="path">
+        /// The data file to be opened for reading.</param>
+        /// <param name="columnDelimiter">
+        /// The delimiter used to separate columns in data lines.</param>
+        /// <param name="extractedColumns">
+        /// The zero-based indexes of the columns from which 
+        /// data are to be extracted.</param>
+        /// <param name="firstLineContainsVariableNames">
+        /// If set to <c>true</c> signals that the first
+        /// line contains variable names.</param>
+        /// <returns>
+        /// The matrix containing information about the streamed data.</returns>
+        /// <remarks>
+        /// <inheritdoc cref="Encode(TextReader, char, IndexCollection, bool, Dictionary{int, Codifier},IFormatProvider)" 
+        /// path="para[@id='SpecialEncode.1']"/>
+        /// <para>
+        /// Data are encoded as culture independent numerical values, 
+        /// by applying the <see cref="CultureInfo.InvariantCulture"/>.
+        /// </para>
+        /// </remarks>
+        /// <example>
+        /// <inheritdoc cref="Encode(TextReader, char, IndexCollection, bool)" 
+        /// path="para[@id='Encode.0']"/>
+        /// <inheritdoc cref="Encode(TextReader, char, IndexCollection, bool)" 
+        /// path="para[@id='Encode.1']"/>
+        /// </example>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="path"/> is <b>null</b>. <br/>
+        /// -or-<br/>
+        /// <paramref name="extractedColumns" /> is <b>null</b>.
+        /// </exception> 
+        /// <exception cref="ArgumentException">
+        /// <paramref name="path"/> is an empty string ("").
+        /// </exception>
+        /// <exception cref="FileNotFoundException">
+        /// The file cannot be found.
+        /// </exception>
+        /// <exception cref="DirectoryNotFoundException">
+        /// The specified path is invalid, such as being on an unmapped drive.
+        /// </exception>
+        /// <exception cref="IOException">
+        /// <paramref name="path"/> includes an incorrect or invalid syntax 
+        /// for file name, directory name, or volume label.
+        /// </exception>
+        /// <exception cref="InvalidDataException">
+        /// The stream to file having the specified 
+        /// <paramref name="path" /> contains no data rows.<br/>
+        /// -or-<br/>
+        /// There is at least a row
+        /// which contains not enough data for any column specified by 
+        /// <paramref name="extractedColumns" />. This can happen if 
+        /// there are missing columns, 
+        /// or if tokens extracted 
+        /// from the stream
+        /// are <b>null</b> 
+        /// or consist only of white-space characters. 
+        /// </exception>
+        /// <seealso cref="StreamReader" />
+        public static DoubleMatrix Encode(
+            string path,
+            char columnDelimiter,
+            IndexCollection extractedColumns,
+            bool firstLineContainsVariableNames)
+        {
+            using StreamReader reader = new(path);
+
+            return Encode(
+                 reader,
+                 columnDelimiter,
+                 extractedColumns,
+                 firstLineContainsVariableNames);
+        }
+
+        /// <summary>
+        /// Encodes numerical data from the stream underlying the 
+        /// specified text reader.
+        /// </summary>
+        /// <param name="reader">
+        /// The reader having access to the data stream.
+        /// </param>
+        /// <param name="columnDelimiter">
+        /// The delimiter used to separate columns in data lines.
+        /// </param>
+        /// <param name="extractedColumns">
+        /// The zero-based indexes of the columns from which 
+        /// data are to be extracted.</param>
+        /// <param name="firstLineContainsVariableNames">
+        /// If set to <c>true</c> signals that the first
+        /// line contains variable names.
+        /// </param>
+        /// <returns>
+        /// The matrix containing information about the streamed data.</returns>
+        /// <remarks>
+        /// <inheritdoc cref="Encode(TextReader, char, IndexCollection, bool, Dictionary{int, Codifier}, IFormatProvider)" 
+        /// path="para[@id='SpecialEncode.1']"/>
+        /// <para>
+        /// Data are encoded as culture independent numerical values, 
+        /// by applying the <see cref="CultureInfo.InvariantCulture"/>.
+        /// </para>
+        /// </remarks>
+        /// <example>
+        /// <para id='Encode.0'>
+        /// In the following example, a stream is read to encode numerical data into a 
+        /// matrix.
+        ///</para>
+        /// <para id='Encode.1'>
+        /// <code title="Encoding data into a matrix from a stream containing numerical variables"
+        /// source="..\Novacta.Analytics.CodeExamples\MatrixEncodeExample1.cs.txt" 
+        /// language="cs" />
+        /// </para> 
+        ///</example>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="reader" /> is <b>null</b>. <br/>
+        /// -or-<br/> 
+        /// <paramref name="extractedColumns" /> is <b>null</b>.
+        /// </exception> 
+        /// <exception cref="InvalidDataException">
+        /// The stream accessed by <paramref name="reader" /> contains no 
+        /// data rows.<br/>
+        /// -or-<br/>
+        /// There is at least a row
+        /// which contains not enough data for any column specified by 
+        /// <paramref name="extractedColumns" />. This can happen if 
+        /// there are missing columns, 
+        /// or if tokens extracted 
+        /// from the stream
+        /// are <b>null</b> 
+        /// or consist only of white-space characters. 
+        /// </exception>
+        /// <seealso cref="StreamReader" />
+        public static DoubleMatrix Encode(
+            TextReader reader,
+            char columnDelimiter,
+            IndexCollection extractedColumns,
+            bool firstLineContainsVariableNames)
+        {
+            return Encode(reader,
+                columnDelimiter,
+                extractedColumns,
+                firstLineContainsVariableNames,
+                [],
+                CultureInfo.InvariantCulture);
         }
 
         #endregion

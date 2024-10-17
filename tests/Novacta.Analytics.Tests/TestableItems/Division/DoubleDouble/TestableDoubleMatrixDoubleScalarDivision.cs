@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Novacta.Analytics.Tests.TestableItems.Division
+﻿namespace Novacta.Analytics.Tests.TestableItems.Division
 {
     /// <summary>
     /// Represents a testable division between a matrix and a scalar.
@@ -18,15 +16,15 @@ namespace Novacta.Analytics.Tests.TestableItems.Division
                 left,
                 right,
                 leftWritableRightScalarOps:
-                    new Func<DoubleMatrix, double, DoubleMatrix>[2] {
+                    [
                         (l, r) => l / r,
                         (l, r) => DoubleMatrix.Divide(l, r)
-                    },
+                    ],
                 leftReadOnlyRightScalarOps:
-                    new Func<ReadOnlyDoubleMatrix, double, DoubleMatrix>[2] {
+                    [
                         (l, r) => l / r,
                         (l, r) => ReadOnlyDoubleMatrix.Divide(l, r)
-                    }
+                    ]
                 )
         {
         }

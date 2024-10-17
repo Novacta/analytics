@@ -20,7 +20,7 @@ namespace Novacta.Analytics.CodeExamples
             Console.WriteLine();
 
             // Specify the rows to enumerate.
-            var rowIndexes = IndexCollection.FromArray(new int[6] { 0, 0, 1, 2, 3, 2 });
+            var rowIndexes = IndexCollection.FromArray([0, 0, 1, 2, 3, 2]);
             
             // Get the collection of the specified matrix rows.
             var rows = matrix.AsRowCollection(rowIndexes);

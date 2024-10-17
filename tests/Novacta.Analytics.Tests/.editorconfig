@@ -1,0 +1,9 @@
+
+# All files
+[*.{cs,vb}]
+dotnet_diagnostic.CA1806.severity = none
+dotnet_diagnostic.CA1861.severity = none
+dotnet_diagnostic.CA2208.severity = none
+dotnet_diagnostic.CA1859.severity = none
+dotnet_diagnostic.IDE0062.severity = none
+dotnet_diagnostic.IDE0290.severity = none

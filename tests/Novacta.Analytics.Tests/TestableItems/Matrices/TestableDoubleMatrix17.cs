@@ -15,7 +15,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Matrices
         /// Initializes a new instance of the <see cref="TestableDoubleMatrix17" /> class.
         /// </summary>
         TestableDoubleMatrix17() : base(
-                asColumnMajorDenseArray: new double[1] { -1 },
+                asColumnMajorDenseArray: [-1],
                 numberOfRows: 1,
                 numberOfColumns: 1,
                 isUpperHessenberg: true,

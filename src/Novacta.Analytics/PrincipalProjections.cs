@@ -53,17 +53,17 @@ namespace Novacta.Analytics
     /// Given a basis <latex>\A</latex> of <latex>\R^K</latex>, a 
     /// structure 
     /// <latex>S</latex> can be represented by a 
-    /// <i>cloud</i>, say <latex>\bc{A}{\C_S}</latex>, which 
+    /// <i>cloud</i>, say <latex>\C__{S,\A}</latex>, which 
     /// can be formally defined as the
-    /// triplet <latex>(\A,\bc{A}{X_S},w_S)</latex>, where
+    /// triplet <latex>(\A,X_{S,\A},w_S)</latex>, where
     /// <latex mode="display">
-    /// \bc{A}{X_S} =\mx{
-    ///     \T{\bc{A}{x_1}} \\ \vdots \\ \T{\bc{A}{x_n}}
+    /// X_{S,\A} =\mx{
+    ///     \T{x_{1,\A}} \\ \vdots \\ \T{x_{n,\A}}
     ///     }
     /// </latex>
     /// is the coordinates matrix w.r.t. <latex>\A</latex> of the points
     /// in <latex>S</latex>, i.e., its <latex>i</latex>-th row, 
-    /// <latex>\T{\bc{A}{x_i}}</latex>, stands for the coordinates 
+    /// <latex>\T{x_{i,\A}}</latex>, stands for the coordinates 
     /// of point <latex>x_i</latex>.
     /// </para>
     /// <para>
@@ -71,10 +71,10 @@ namespace Novacta.Analytics
     /// as follows. Its 
     /// <i>mean point</i>, the vector <latex>m_S</latex>, 
     /// whose <latex>\A</latex> coordinates are given by
-    /// <latex>\bc{A}{m_S} = \T{\bc{A}{X_S}}\,w_S</latex>,
+    /// <latex>m_{S,\A} = \T{X_{S,\A}}\,w_S</latex>,
     /// is
     /// <latex mode="display">\label{eq:Mean_S}
-    /// m_S = A\,\T{\bc{A}{X_S}}\,w_S.
+    /// m_S = A\,\T{X_{S,\A}}\,w_S.
     /// </latex>
     /// Furthermore, the <i>variance</i> of <latex>S</latex>, 
     /// say <latex>\Var_S</latex>, is defined 
@@ -87,9 +87,9 @@ namespace Novacta.Analytics
     /// \bdist{A}{x,y} 
     /// = \bnorm{A}{x-y} \\
     /// = \round{
-    ///     \T{\round{\bc{A}{x} - \bc{A}{y}}}\,
+    ///     \T{\round{x_{\basis{A}} - y_{\basis{A}}}}\,
     ///     \Q{A}\,
-    ///     \round{\bc{A}{x} - \bc{A}{y}}
+    ///     \round{x_{\basis{A}} - y_{\basis{A}}}
     ///     }^{1/2}\\
     /// </latex>
     /// is the distance induced by basis <latex>\A</latex> via 
@@ -99,20 +99,20 @@ namespace Novacta.Analytics
     /// </latex>
     /// and <i>scalar product</i>
     /// <latex mode="display">
-    /// \bsprod{A}{x|y} = \T{\bc{A}{x}}\,\Q{A}\,\bc{A}{y},
+    /// \bsprod{A}{x|y} = \T{x_{\basis{A}}}\,\Q{A}\,y_{\basis{A}},
     /// </latex>
     /// where <latex>x,y \in \R^K</latex> and
     /// <latex mode="display">
     /// \Q{A} = \T{A}\,A.
     /// </latex>
-    /// The columns of <latex>\bc{A}{X_S}</latex> are referred to as 
+    /// The columns of <latex>X_{S,\A}</latex> are referred to as 
     /// the <i>active</i> variables 
     /// observed at the <latex>S</latex> points w.r.t. basis 
     /// <latex>\A</latex>. The covariance matrix of such variables 
     /// can be defined 
     /// as follows,
     /// <latex mode="display">
-    /// \Cov_{S,\A} = \T{\bc{A}{X_S}}\,W_S\,\bc{A}{X_S},
+    /// \Cov_{S,\A} = \T{X_{S,\A}}\,W_S\,X_{S,\A},
     /// </latex>
     /// where 
     /// <latex mode="display">
@@ -252,7 +252,7 @@ namespace Novacta.Analytics
     /// satisfy
     /// <latex mode="display">
     ///     \mx{
-    ///         \bc{A}{d_1} \quad \hdots \quad \bc{A}{d_K}
+    ///         d_{1,\A} \quad \hdots \quad d_{K,\A}
     ///     } = \Delta.
     /// </latex>
     /// The rows of <latex>\T{\Delta}</latex> can be interpreted
@@ -265,11 +265,11 @@ namespace Novacta.Analytics
     /// and the points in <latex>S</latex> admit the following 
     /// coordinates matrix w.r.t. <latex>\basis{P}</latex>:
     /// <latex mode="display">
-    ///     \bc{P}{X_S} = \bc{A}{X_S}\,\Q{A}\,\Delta.
+    ///     X_{S,\basis{P}} = X_{S,\A}\,\Q{A}\,\Delta.
     /// </latex>
     /// This argument suggests that a <i>principal cloud</i> of 
     /// <latex>S\equiv\round{X_S,w_S}</latex> can be defined as the cloud 
-    /// <latex>\C_{S,\basis{P}}=\round{\basis{P},\bc{P}{X_S},w_S}</latex>.
+    /// <latex>\C_{S,\basis{P}}=\round{\basis{P},X_{S,\basis{P}},w_S}</latex>.
     /// </para>
     /// <para><b>Approximations in lower dimensional spaces</b></para> 
     /// <para>
@@ -376,14 +376,14 @@ namespace Novacta.Analytics
     /// active variables on the first <latex>L</latex> standardized 
     /// principal variables 
     /// as follows.
-    /// Let <latex>\bc{A}{y_j}</latex> be the <latex>j</latex>-th 
-    /// column of <latex>\bc{A}{X_S}</latex>, i.e., 
+    /// Let <latex>y__{j,\A}</latex> be the <latex>j</latex>-th 
+    /// column of <latex>X_{S,\A}</latex>, i.e., 
     /// the <latex>j</latex>-th <i>active</i> variable; furthermore, define
     /// <latex>
-    ///     \bc{P}{\tilde{X}_S}
+    ///     \tilde{X}_{S,\basis{P}}
     /// </latex>
     /// as the matrix representing the first 
-    /// <latex>L</latex> columns of <latex>\bc{P}{X_S}</latex>, and
+    /// <latex>L</latex> columns of <latex>X_{S,\basis{P}}</latex>, and
     /// <latex>
     ///     \tilde{\Lambda}
     /// </latex>
@@ -397,19 +397,19 @@ namespace Novacta.Analytics
     /// <latex mode="display">
     ///     \hat{\beta}_j = \argmin_{\beta \in \R^K}
     ///     \sum_{i=1}^{n} w_i \,
-    ///     \Dist_{\mathcal{I}_n} \round{ \bc{A}{y_j}, Z\,\beta }^2,    
+    ///     \Dist_{\mathcal{I}_n} \round{ y__{j,\A}, Z\,\beta }^2,    
     /// </latex>
     /// where, <latex>1_n</latex> being a column vector of <latex>n</latex> ones,
     /// <latex mode="display">
     /// Z=\round{ I_n - 1_n\,\T{w_S} }
-    ///   \bc{P}{\tilde{X}_S}\,\tilde{\Lambda}^{-1/2}
+    ///   \tilde{X}_{S,\basis{P}}\,\tilde{\Lambda}^{-1/2}
     /// </latex>
     /// is the matrix of the first <latex>L</latex> standardized 
     /// principal coordinates.
     /// Thus, for <latex>j=1,\dots,K</latex>,
     /// <latex mode="display">
     /// \hat{\beta}_j = 
-    ///    \Inv{\round{\T{Z}\,W_S\,Z }} \T{Z}\,W_S\,\bc{A}{y_j}.
+    ///    \Inv{\round{\T{Z}\,W_S\,Z }} \T{Z}\,W_S\,y__{j,\A}.
     /// </latex>
     /// It can be noted that 
     /// <latex mode="display">
@@ -423,7 +423,7 @@ namespace Novacta.Analytics
     ///                     \vdots \\
     ///                     \T{\hat{\beta}_K} \\
     ///      }
-    ///      = \T{\bc{A}{X_S}}\,W_S\,Z.
+    ///      = \T{X_{S,\A}}\,W_S\,Z.
     /// </latex>
     /// Matrix <latex>B</latex> can be analyzed by getting property 
     /// <see cref="RegressionCoefficients"/>.
@@ -745,14 +745,11 @@ namespace Novacta.Analytics
             var variances = DoubleMatrix.Dense(p, 1, d_array);
             variances.InPlaceApply(x => Math.Pow(x, 2.0));
 
-            var principalIndexes = variances.FindWhile(x => x > minimalProjectedVariance);
-
-            if (principalIndexes is null)
-            {
+            var principalIndexes = variances.FindWhile(x => x > minimalProjectedVariance)
+                ??
                 throw new InvalidOperationException(
                     ImplementationServices.GetResourceString(
                         "STR_EXCEPT_GDA_NON_POSITIVE_PRINCIPAL_VARIANCES"));
-            }
 
             variances = variances.Vec(principalIndexes);
 
@@ -977,14 +974,11 @@ namespace Novacta.Analytics
 
             var variances = DoubleMatrix.Dense(k, 1, lambda_array);
 
-            var principalIndexes = variances.FindWhile(x => x > minimalProjectedVariance);
-
-            if (principalIndexes is null)
-            {
+            var principalIndexes = variances.FindWhile(x => x > minimalProjectedVariance)
+                ?? 
                 throw new InvalidOperationException(
                     ImplementationServices.GetResourceString(
                         "STR_EXCEPT_GDA_NON_POSITIVE_PRINCIPAL_VARIANCES"));
-            }
 
             // Coordinates of principal directions w.r.t. 
             // the active cloud basis, i.e., 
@@ -1083,11 +1077,7 @@ namespace Novacta.Analytics
         {
             #region Input validation
 
-            if (activeCoordinates is null)
-            {
-                throw new ArgumentNullException(
-                    nameof(activeCoordinates));
-            }
+            ArgumentNullException.ThrowIfNull(activeCoordinates);
 
             if (this.ActiveCloud.Coordinates.NumberOfColumns !=
                 activeCoordinates.NumberOfColumns)
@@ -1108,8 +1098,7 @@ namespace Novacta.Analytics
         public DoubleMatrix LocateSupplementaryPoints(
             ReadOnlyDoubleMatrix activeCoordinates)
         {
-            if (activeCoordinates is null)
-                throw new ArgumentNullException(nameof(activeCoordinates));
+            ArgumentNullException.ThrowIfNull(activeCoordinates);
 
             return this.LocateSupplementaryPoints(activeCoordinates.matrix);
         }
@@ -1149,8 +1138,7 @@ namespace Novacta.Analytics
         /// to the number of points in the active cloud.</exception>
         public DoubleMatrix RegressSupplementaryVariables(DoubleMatrix supplementaryVariables)
         {
-            if (supplementaryVariables is null)
-                throw new ArgumentNullException(nameof(supplementaryVariables));
+            ArgumentNullException.ThrowIfNull(supplementaryVariables);
 
             int numberOfVariables = supplementaryVariables.NumberOfRows;
 
@@ -1168,8 +1156,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref="RegressSupplementaryVariables(DoubleMatrix)"/>
         public DoubleMatrix RegressSupplementaryVariables(ReadOnlyDoubleMatrix supplementaryVariables)
         {
-            if (supplementaryVariables is null)
-                throw new ArgumentNullException(nameof(supplementaryVariables));
+            ArgumentNullException.ThrowIfNull(supplementaryVariables);
 
             return this.RegressSupplementaryVariables(supplementaryVariables.matrix);
         }
@@ -1210,8 +1197,7 @@ namespace Novacta.Analytics
         /// to the number of points in the active cloud.</exception>
         public DoubleMatrix CorrelateSupplementaryVariables(DoubleMatrix supplementaryVariables)
         {
-            if (supplementaryVariables is null)
-                throw new ArgumentNullException(nameof(supplementaryVariables));
+            ArgumentNullException.ThrowIfNull(supplementaryVariables);
 
             int numberOfVariables = supplementaryVariables.NumberOfRows;
 
@@ -1237,8 +1223,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref="CorrelateSupplementaryVariables(DoubleMatrix)"/>
         public DoubleMatrix CorrelateSupplementaryVariables(ReadOnlyDoubleMatrix supplementaryVariables)
         {
-            if (supplementaryVariables is null)
-                throw new ArgumentNullException(nameof(supplementaryVariables));
+            ArgumentNullException.ThrowIfNull(supplementaryVariables);
 
             return this.CorrelateSupplementaryVariables(supplementaryVariables.matrix);
         }

@@ -18,7 +18,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Covariance
                 base(
                     expected: new DoubleMatrixState(
                         asColumnMajorDenseArray:
-                            new double[25] {
+                            [
                                            32.2500,
                                           -17.7500,
                                           -19.0000,
@@ -43,7 +43,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Covariance
                                            -4.0000,
                                            -4.7500,
                                             4.0000,
-                                            1.2500 },
+                                            1.2500 ],
                         numberOfRows: 5,
                         numberOfColumns: 5
                     ),

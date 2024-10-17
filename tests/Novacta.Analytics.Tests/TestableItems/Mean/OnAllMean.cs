@@ -2,8 +2,6 @@
 // Licensed under the MIT license. 
 // See the LICENSE file in the project root for more information.
 
-using System;
-
 namespace Novacta.Analytics.Tests.TestableItems.Mean
 {
     /// <summary>
@@ -26,9 +24,9 @@ namespace Novacta.Analytics.Tests.TestableItems.Mean
                 expected: expected,
                 data: data,
                 dataWritableOps:
-                    new Func<DoubleMatrix, double>[1] { Stat.Mean },
+                    [Stat.Mean],
                 dataReadOnlyOps:
-                   new Func<ReadOnlyDoubleMatrix, double>[1] { Stat.Mean })
+                   [Stat.Mean])
         {
         }
     }

@@ -23,20 +23,16 @@ namespace Novacta.Analytics.Tests.TestableItems.GDA
     {
         static readonly CategoricalDataSet dataSet;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Performance",
-            "CA1810:Initialize reference type static fields inline",
-            Justification = "Performance is not a concern.")]
         static TestableMultipleCorrespondence00()
         {
             // Create a data stream.
-            string[] data = new string[6] {
+            string[] data = [
             "COLOR,NUMBER",
             "Red,Negative",
             "Green,Zero",
             "Red,Negative",
             "Blue,Negative",
-            "Blue,Positive" };
+            "Blue,Positive" ];
 
             MemoryStream stream = new();
             StreamWriter writer = new(stream);

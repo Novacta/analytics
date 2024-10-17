@@ -15,12 +15,12 @@ namespace Novacta.Analytics.Tests.TestableItems.Min
     {
         protected OnRowsMin02() :
                 base(
-                    expected: new IndexValuePair[4] {
-                        new IndexValuePair() { index = 0, value = 0.0 },
-                        new IndexValuePair() { index = 0, value = 0.0 },
-                        new IndexValuePair() { index = 0, value = 0.0 },
-                        new IndexValuePair() { index = 0, value = 0.0 }
-                    },
+                    expected: [
+                        new() { index = 0, value = 0.0 },
+                        new() { index = 0, value = 0.0 },
+                        new() { index = 0, value = 0.0 },
+                        new() { index = 0, value = 0.0 }
+                    ],
                     data: TestableDoubleMatrix42.Get(),
                     dataOperation: DataOperation.OnRows
                 )

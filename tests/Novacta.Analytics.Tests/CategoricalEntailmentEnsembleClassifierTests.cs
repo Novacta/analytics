@@ -51,7 +51,7 @@ namespace Novacta.Analytics.Tests
                     () =>
                     {
                         new CategoricalEntailmentEnsembleClassifier(
-                            featureVariables: new List<CategoricalVariable>(),
+                            featureVariables: [],
                             responseVariable: responseVariable);
                     },
                     expectedType: typeof(ArgumentException),
@@ -202,7 +202,7 @@ namespace Novacta.Analytics.Tests
                     actual: classifier.ResponseVariable);
 
                 ListAssert<CategoricalEntailment>.ContainSameItems(
-                    expected: new List<CategoricalEntailment>(),
+                    expected: [],
                     actual: new List<CategoricalEntailment>(classifier.Entailments),
                     areEqual: CategoricalEntailmentAssert.AreEqual);
             }
@@ -282,9 +282,9 @@ namespace Novacta.Analytics.Tests
                     () =>
                     {
                         classifier.Add(
-                            featurePremises: new List<SortedSet<double>>() {
-                                new SortedSet<double>() { -1.0 }
-                            },
+                            featurePremises: [
+                                new() { -1.0 }
+                            ],
                             responseConclusion: 0,
                             truthValue: .5);
                     },
@@ -329,10 +329,10 @@ namespace Novacta.Analytics.Tests
                     () =>
                     {
                         classifier.Add(
-                            featurePremises: new List<SortedSet<double>>() {
-                                new SortedSet<double>() { -1.0 },
-                                new SortedSet<double>() { 2.0 }
-                            },
+                            featurePremises: [
+                                new() { -1.0 },
+                                new() { 2.0 }
+                            ],
                             responseConclusion: 0,
                             truthValue: .5);
                     },
@@ -374,10 +374,10 @@ namespace Novacta.Analytics.Tests
                     () =>
                     {
                         classifier.Add(
-                            featurePremises: new List<SortedSet<double>>() {
-                                new SortedSet<double>() { -1.0 },
-                                new SortedSet<double>() {  }
-                            },
+                            featurePremises: [
+                                new() { -1.0 },
+                                new() {  }
+                            ],
                             responseConclusion: 2,
                             truthValue: .5);
                     },
@@ -421,10 +421,10 @@ namespace Novacta.Analytics.Tests
                     () =>
                     {
                         classifier.Add(
-                            featurePremises: new List<SortedSet<double>>() {
-                                new SortedSet<double>() { -1.0 },
-                                new SortedSet<double>() {  }
-                            },
+                            featurePremises: [
+                                new() { -1.0 },
+                                new() {  }
+                            ],
                             responseConclusion: 0,
                             truthValue: -.5);
                     },
@@ -468,10 +468,10 @@ namespace Novacta.Analytics.Tests
                     () =>
                     {
                         classifier.Add(
-                            featurePremises: new List<SortedSet<double>>() {
-                                new SortedSet<double>() { -1.0 },
-                                new SortedSet<double>() {  }
-                            },
+                            featurePremises: [
+                                new() { -1.0 },
+                                new() {  }
+                            ],
                             responseConclusion: 0,
                             truthValue: 1.1);
                     },
@@ -510,22 +510,22 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 var classifier = new CategoricalEntailmentEnsembleClassifier(
-                    featureVariables: new List<CategoricalVariable>() {
+                    featureVariables: [
                         f0, f1
-                    },
+                    ],
                     responseVariable: r);
 
                 List<CategoricalEntailment> expected =
-                    new();
+                    [];
 
                 List<SortedSet<double>> featurePremises;
                 double responseConclusion;
                 double truthValue;
 
-                featurePremises = new List<SortedSet<double>>() {
-                    new SortedSet<double>() { 0.0, 2.0 },
-                    new SortedSet<double>() { 0.0 }
-                };
+                featurePremises = [
+                    [0.0, 2.0],
+                    [0.0]
+                ];
                 responseConclusion = 0;
                 truthValue = .4;
 
@@ -541,10 +541,10 @@ namespace Novacta.Analytics.Tests
                     responseConclusion: responseConclusion,
                     truthValue: truthValue));
 
-                featurePremises = new List<SortedSet<double>>() {
-                    new SortedSet<double>() { 1.0, 3.0 },
-                    new SortedSet<double>() { 2.0 }
-                };
+                featurePremises = [
+                    [1.0, 3.0],
+                    [2.0]
+                ];
                 responseConclusion = 1;
                 truthValue = .75;
 
@@ -560,10 +560,10 @@ namespace Novacta.Analytics.Tests
                     responseConclusion: responseConclusion,
                     truthValue: truthValue));
 
-                featurePremises = new List<SortedSet<double>>() {
-                    new SortedSet<double>() { 4.0 },
-                    new SortedSet<double>() { 1.0 }
-                };
+                featurePremises = [
+                    [4.0],
+                    [1.0]
+                ];
                 responseConclusion = 2;
                 truthValue = .9;
 
@@ -680,7 +680,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, responseVariable };
+                    [f0, f1, responseVariable];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -775,7 +775,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, responseVariable };
+                    [f0, f1, responseVariable];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -867,7 +867,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, responseVariable };
+                    [f0, f1, responseVariable];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -962,7 +962,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, responseVariable };
+                    [f0, f1, responseVariable];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -1057,7 +1057,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, responseVariable };
+                    [f0, f1, responseVariable];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -1149,7 +1149,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, responseVariable };
+                    [f0, f1, responseVariable];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -1241,7 +1241,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, responseVariable };
+                    [f0, f1, responseVariable];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -1315,7 +1315,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, r };
+                    [f0, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -1357,7 +1357,7 @@ namespace Novacta.Analytics.Tests
                 int responseIndex = 1;
 
                 var actualClassifier = new CategoricalEntailmentEnsembleClassifier(
-                    featureVariables: new List<CategoricalVariable>(1) { f0 },
+                    featureVariables: [f0],
                     responseVariable: r);
 
                 actualClassifier.AddTrained(
@@ -1369,18 +1369,18 @@ namespace Novacta.Analytics.Tests
                     trainSequentially: false);
 
                 var expectedClassifier = new CategoricalEntailmentEnsembleClassifier(
-                    featureVariables: new List<CategoricalVariable>(1) { f0 },
+                    featureVariables: [f0],
                     responseVariable: r);
 
                 expectedClassifier.Add(
-                    featurePremises: new List<SortedSet<double>>(1) {
-                        new SortedSet<double>(){ 0.0, 1.0, 2.0 } },
+                    featurePremises: [
+                        new(){ 0.0, 1.0, 2.0 } ],
                     responseConclusion: 0.0,
                     truthValue: 1.0);
 
                 expectedClassifier.Add(
-                    featurePremises: new List<SortedSet<double>>(1) {
-                        new SortedSet<double>(){ 3.0, 4.0, 5.0 } },
+                    featurePremises: [
+                        new(){ 3.0, 4.0, 5.0 } ],
                     responseConclusion: 1.0,
                     truthValue: 1.0);
 
@@ -1422,7 +1422,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, r };
+                    [f0, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -1464,12 +1464,12 @@ namespace Novacta.Analytics.Tests
                 int responseIndex = 1;
 
                 var actualClassifier = new CategoricalEntailmentEnsembleClassifier(
-                    featureVariables: new List<CategoricalVariable>(1) { f0 },
+                    featureVariables: [f0],
                     responseVariable: r);
 
                 actualClassifier.Add(
-                    featurePremises: new List<SortedSet<double>>(1) {
-                        new SortedSet<double>(){ 0.0, 1.0, 2.0 } },
+                    featurePremises: [
+                        new(){ 0.0, 1.0, 2.0 } ],
                     responseConclusion: 0.0,
                     truthValue: 1.0);
 
@@ -1482,18 +1482,18 @@ namespace Novacta.Analytics.Tests
                     trainSequentially: false);
 
                 var expectedClassifier = new CategoricalEntailmentEnsembleClassifier(
-                    featureVariables: new List<CategoricalVariable>(1) { f0 },
+                    featureVariables: [f0],
                     responseVariable: r);
 
                 expectedClassifier.Add(
-                    featurePremises: new List<SortedSet<double>>(1) {
-                        new SortedSet<double>(){ 0.0, 1.0, 2.0 } },
+                    featurePremises: [
+                        new(){ 0.0, 1.0, 2.0 } ],
                     responseConclusion: 0.0,
                     truthValue: 1.0);
 
                 expectedClassifier.Add(
-                    featurePremises: new List<SortedSet<double>>(1) {
-                        new SortedSet<double>(){ 3.0, 4.0, 5.0 } },
+                    featurePremises: [
+                        new(){ 3.0, 4.0, 5.0 } ],
                     responseConclusion: 1.0,
                     truthValue: 1.0);
 
@@ -1535,7 +1535,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, r };
+                    [f0, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -1577,7 +1577,7 @@ namespace Novacta.Analytics.Tests
                 int responseIndex = 1;
 
                 var actualClassifier = new CategoricalEntailmentEnsembleClassifier(
-                    featureVariables: new List<CategoricalVariable>(1) { f0 },
+                    featureVariables: [f0],
                     responseVariable: r);
 
                 actualClassifier.AddTrained(
@@ -1589,18 +1589,18 @@ namespace Novacta.Analytics.Tests
                     trainSequentially: true);
 
                 var expectedClassifier = new CategoricalEntailmentEnsembleClassifier(
-                    featureVariables: new List<CategoricalVariable>(1) { f0 },
+                    featureVariables: [f0],
                     responseVariable: r);
 
                 expectedClassifier.Add(
-                    featurePremises: new List<SortedSet<double>>(1) {
-                        new SortedSet<double>(){ 0.0, 1.0, 2.0 } },
+                    featurePremises: [
+                        new(){ 0.0, 1.0, 2.0 } ],
                     responseConclusion: 0.0,
                     truthValue: 1.0);
 
                 expectedClassifier.Add(
-                    featurePremises: new List<SortedSet<double>>(1) {
-                        new SortedSet<double>(){ 3.0, 4.0, 5.0 } },
+                    featurePremises: [
+                        new(){ 3.0, 4.0, 5.0 } ],
                     responseConclusion: 1.0,
                     truthValue: 1.0);
 
@@ -1642,7 +1642,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, r };
+                    [f0, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -1684,12 +1684,12 @@ namespace Novacta.Analytics.Tests
                 int responseIndex = 1;
 
                 var actualClassifier = new CategoricalEntailmentEnsembleClassifier(
-                    featureVariables: new List<CategoricalVariable>(1) { f0 },
+                    featureVariables: [f0],
                     responseVariable: r);
 
                 actualClassifier.Add(
-                    featurePremises: new List<SortedSet<double>>(1) {
-                        new SortedSet<double>(){ 0.0, 1.0, 2.0 } },
+                    featurePremises: [
+                        new(){ 0.0, 1.0, 2.0 } ],
                     responseConclusion: 0.0,
                     truthValue: 1.0);
 
@@ -1702,18 +1702,18 @@ namespace Novacta.Analytics.Tests
                     trainSequentially: true);
 
                 var expectedClassifier = new CategoricalEntailmentEnsembleClassifier(
-                    featureVariables: new List<CategoricalVariable>(1) { f0 },
+                    featureVariables: [f0],
                     responseVariable: r);
 
                 expectedClassifier.Add(
-                    featurePremises: new List<SortedSet<double>>(1) {
-                        new SortedSet<double>(){ 0.0, 1.0, 2.0 } },
+                    featurePremises: [
+                        new(){ 0.0, 1.0, 2.0 } ],
                     responseConclusion: 0.0,
                     truthValue: 1.0);
 
                 expectedClassifier.Add(
-                    featurePremises: new List<SortedSet<double>>(1) {
-                        new SortedSet<double>(){ 3.0, 4.0, 5.0 } },
+                    featurePremises: [
+                        new(){ 3.0, 4.0, 5.0 } ],
                     responseConclusion: 1.0,
                     truthValue: 1.0);
 
@@ -1759,7 +1759,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 var target = new CategoricalEntailmentEnsembleClassifier(
-                    featureVariables: new List<CategoricalVariable>(1) { f0 },
+                    featureVariables: [f0],
                     responseVariable: r);
 
                 var featureVariableIndexes = IndexCollection.Range(0, 0);
@@ -1797,11 +1797,11 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 var target = new CategoricalEntailmentEnsembleClassifier(
-                    featureVariables: new List<CategoricalVariable>(1) { f0 },
+                    featureVariables: [f0],
                     responseVariable: r);
 
                 List<CategoricalVariable> variables =
-                    new() { f0, r };
+                    [f0, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -1881,11 +1881,11 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 var target = new CategoricalEntailmentEnsembleClassifier(
-                    featureVariables: new List<CategoricalVariable>(1) { f0 },
+                    featureVariables: [f0],
                     responseVariable: r);
 
                 List<CategoricalVariable> variables =
-                    new() { f0, r };
+                    [f0, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -1962,11 +1962,11 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 var target = new CategoricalEntailmentEnsembleClassifier(
-                    featureVariables: new List<CategoricalVariable>(1) { f0 },
+                    featureVariables: [f0],
                     responseVariable: r);
 
                 List<CategoricalVariable> variables =
-                    new() { f0, r };
+                    [f0, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -2039,7 +2039,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, r };
+                    [f0, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -2078,18 +2078,16 @@ namespace Novacta.Analytics.Tests
                     data);
 
                 var target = new CategoricalEntailmentEnsembleClassifier(
-                    featureVariables: new List<CategoricalVariable>() { f0 },
+                    featureVariables: [f0],
                     responseVariable: r);
 
                 target.Add(
-                    featurePremises: new List<SortedSet<double>>()
-                        { new SortedSet<double>() { 0.0, 1.0, 2.0 } },
+                    featurePremises: [new() { 0.0, 1.0, 2.0 }],
                     responseConclusion: 1,
                     truthValue: 1.0);
 
                 target.Add(
-                    featurePremises: new List<SortedSet<double>>()
-                        { new SortedSet<double>() { 3.0, 4.0, 5.0 } },
+                    featurePremises: [new() { 3.0, 4.0, 5.0 }],
                     responseConclusion: 0,
                     truthValue: 1.0);
 
@@ -2097,7 +2095,7 @@ namespace Novacta.Analytics.Tests
                     dataSet: dataSet,
                     featureVariableIndexes: IndexCollection.Range(0, 0));
 
-                variables = new List<CategoricalVariable>() { r };
+                variables = [r];
 
                 data = DoubleMatrix.Dense(
                     new double[24, 1] {
@@ -2163,7 +2161,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, r };
+                    [f0, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -2202,7 +2200,7 @@ namespace Novacta.Analytics.Tests
                     data);
 
                 var target = new CategoricalEntailmentEnsembleClassifier(
-                    featureVariables: new List<CategoricalVariable>() { f0 },
+                    featureVariables: [f0],
                     responseVariable: r);
 
                 int numberOfEvaluations = 10000;
@@ -2317,7 +2315,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, r };
+                    [f0, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -2390,7 +2388,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, r };
+                    [f0, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -2470,7 +2468,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, r };
+                    [f0, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -2550,7 +2548,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, r };
+                    [f0, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -2630,7 +2628,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, r };
+                    [f0, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -2710,7 +2708,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, r };
+                    [f0, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -2790,7 +2788,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, r };
+                    [f0, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -2863,7 +2861,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, r };
+                    [f0, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -2901,10 +2899,10 @@ namespace Novacta.Analytics.Tests
                     variables,
                     data);
 
-                var unaccurateResponseIndexes =
+                var inaccurateResponseIndexes =
                     IndexCollection.Range(8, 15);
 
-                foreach (var index in unaccurateResponseIndexes)
+                foreach (var index in inaccurateResponseIndexes)
                 {
                     data[index, 1] = data[index, 1] == 0.0 ? 1.0 : 0.0;
                 }
@@ -2922,7 +2920,7 @@ namespace Novacta.Analytics.Tests
 
                 double numberOfPredictions = data.NumberOfRows;
                 double numberOfExactPredictions =
-                    numberOfPredictions - unaccurateResponseIndexes.Count;
+                    numberOfPredictions - inaccurateResponseIndexes.Count;
 
                 var expectedAccuracy =
                     numberOfExactPredictions / numberOfPredictions;
@@ -2954,7 +2952,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, r };
+                    [f0, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -2992,10 +2990,10 @@ namespace Novacta.Analytics.Tests
                     variables,
                     data);
 
-                var unaccurateResponseIndexes =
+                var inaccurateResponseIndexes =
                     IndexCollection.Range(0, 11);
 
-                foreach (var index in unaccurateResponseIndexes)
+                foreach (var index in inaccurateResponseIndexes)
                 {
                     data[index, 1] = data[index, 1] == 0.0 ? 1.0 : 0.0;
                 }
@@ -3013,7 +3011,7 @@ namespace Novacta.Analytics.Tests
 
                 double numberOfPredictions = data.NumberOfRows;
                 double numberOfExactPredictions =
-                    numberOfPredictions - unaccurateResponseIndexes.Count;
+                    numberOfPredictions - inaccurateResponseIndexes.Count;
 
                 var expectedAccuracy =
                     numberOfExactPredictions / numberOfPredictions;
@@ -3076,7 +3074,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, r };
+                    [f0, f1, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -3162,7 +3160,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, r };
+                    [f0, f1, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -3248,7 +3246,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, r };
+                    [f0, f1, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -3334,7 +3332,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, r };
+                    [f0, f1, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -3417,7 +3415,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, r };
+                    [f0, f1, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -3500,7 +3498,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, r };
+                    [f0, f1, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -3570,7 +3568,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, r };
+                    [f0, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                 new double[24, 2] {
@@ -3621,18 +3619,18 @@ namespace Novacta.Analytics.Tests
                        trainSequentially: false);
 
                 var expectedClassifier = new CategoricalEntailmentEnsembleClassifier(
-                    featureVariables: new List<CategoricalVariable>(1) { f0 },
+                    featureVariables: [f0],
                     responseVariable: r);
 
                 expectedClassifier.Add(
-                    featurePremises: new List<SortedSet<double>>(1) {
-                        new SortedSet<double>(){ 0.0, 1.0, 2.0 } },
+                    featurePremises: [
+                        new(){ 0.0, 1.0, 2.0 } ],
                     responseConclusion: 0.0,
                     truthValue: 1.0);
 
                 expectedClassifier.Add(
-                    featurePremises: new List<SortedSet<double>>(1) {
-                        new SortedSet<double>(){ 3.0, 4.0, 5.0 } },
+                    featurePremises: [
+                        new(){ 3.0, 4.0, 5.0 } ],
                     responseConclusion: 1.0,
                     truthValue: 1.0);
 
@@ -3684,7 +3682,7 @@ namespace Novacta.Analytics.Tests
                 r.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, r };
+                    [f0, f1, r];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[24, 3] {
@@ -3739,23 +3737,23 @@ namespace Novacta.Analytics.Tests
                     responseVariable: r);
 
                 expectedClassifier.Add(
-                    featurePremises: new List<SortedSet<double>>(2) {
-                        new SortedSet<double>(){ 0.0, 1.0, 2.0 },
-                        new SortedSet<double>(){ 0.0, 1.0 } },
+                    featurePremises: [
+                        new(){ 0.0, 1.0, 2.0 },
+                        new(){ 0.0, 1.0 } ],
                     responseConclusion: 0.0,
                     truthValue: 1.0);
 
                 expectedClassifier.Add(
-                    featurePremises: new List<SortedSet<double>>(2) {
-                        new SortedSet<double>(){ 0.0, 1.0, 2.0 },
-                        new SortedSet<double>(){ 2.0, 3.0 } },
+                    featurePremises: [
+                        new(){ 0.0, 1.0, 2.0 },
+                        new(){ 2.0, 3.0 } ],
                     responseConclusion: 2.0,
                     truthValue: 1.0);
 
                 expectedClassifier.Add(
-                    featurePremises: new List<SortedSet<double>>(2) {
-                        new SortedSet<double>(){ 3.0, 4.0, 5.0 },
-                        new SortedSet<double>(){ 0.0, 1.0, 2.0, 3.0 } },
+                    featurePremises: [
+                        new(){ 3.0, 4.0, 5.0 },
+                        new(){ 0.0, 1.0, 2.0, 3.0 } ],
                     responseConclusion: 1.0,
                     truthValue: 1.0);
 

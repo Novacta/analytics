@@ -17,8 +17,8 @@ namespace Novacta.Analytics.Tests.TestableItems.SortIndex
         protected SortIndex00() :
                 base(
                     expected: new SortIndexResults() {
-                       SortedData = DoubleMatrix.Dense(2, 2, new double[4] { 1, 2, 3, 4 }),
-                       SortedIndexes = IndexCollection.FromArray(new int[4] { 1, 3, 2, 0 })
+                       SortedData = DoubleMatrix.Dense(2, 2, [1, 2, 3, 4]),
+                       SortedIndexes = IndexCollection.FromArray([1, 3, 2, 0])
                     },
                     data: TestableDoubleMatrix54.Get(),
                     sortDirection: SortDirection.Ascending)

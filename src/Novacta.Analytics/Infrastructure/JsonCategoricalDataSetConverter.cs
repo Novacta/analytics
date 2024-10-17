@@ -87,17 +87,12 @@ namespace Novacta.Analytics.Infrastructure
             }
 
             reader.Read();
-            switch (reader.TokenType)
+            categoricalDataSet.Name = reader.TokenType switch
             {
-                case JsonTokenType.String:
-                    categoricalDataSet.Name = reader.GetString();
-                    break;
-                case JsonTokenType.Null:
-                    categoricalDataSet.Name = null;
-                    break;
-                default:
-                    throw new JsonException();
-            }
+                JsonTokenType.String => reader.GetString(),
+                JsonTokenType.Null => null,
+                _ => throw new JsonException(),
+            };
 
             #endregion
 

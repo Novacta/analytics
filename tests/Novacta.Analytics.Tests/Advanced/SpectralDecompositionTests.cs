@@ -18,6 +18,9 @@ namespace Novacta.Analytics.Advanced.Tests
             // matrix is null
             SpectralDecompositionTest.Decompose.MatrixIsNull();
 
+            // matrix is not square
+            SpectralDecompositionTest.Decompose.MatrixIsNotSquare();
+
             // matrix is real
             SpectralDecompositionTest.Decompose.Succeed(
                 TestableSpectralDecomposition00.Get());
@@ -32,6 +35,9 @@ namespace Novacta.Analytics.Advanced.Tests
         {
             // matrix is null
             SpectralDecompositionTest.GetEigenvalues.MatrixIsNull();
+
+            // matrix is not square
+            SpectralDecompositionTest.GetEigenvalues.MatrixIsNotSquare();
 
             // matrix is real
             SpectralDecompositionTest.GetEigenvalues.Succeed(

@@ -32,8 +32,8 @@ namespace Novacta.Analytics.Tests.TestableItems.Division
         RightIsHessenbergDoubleMatrixDoubleMatrixDivision() :
             base(
                 expected: new DoubleMatrixState(
-                    asColumnMajorDenseArray: new double[10]
-                    {
+                    asColumnMajorDenseArray:
+                    [
                         -0.999,
                          6.260E-15,
                          1.999,
@@ -43,7 +43,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Division
                         -2.151E-16,
                         -6.203E-16,
                         -1.517E-16,
-                        -1.674E-16 },
+                        -1.674E-16 ],
                     numberOfRows: 2,
                     numberOfColumns: 5),
                 left: TestableDoubleMatrix23.Get(),

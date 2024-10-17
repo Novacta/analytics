@@ -32,8 +32,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Division
         RightIsSymmetricAndNonPosDefiniteDoubleMatrixDoubleMatrixDivision() :
             base(
                 expected: new DoubleMatrixState(
-                    asColumnMajorDenseArray: new double[10]
-                        { 0.25, 0, -0.5, 2, 2.5, 0, -1.25, 0, 0.25, 0 },
+                    asColumnMajorDenseArray: [0.25, 0, -0.5, 2, 2.5, 0, -1.25, 0, 0.25, 0],
                     numberOfRows: 2,
                     numberOfColumns: 5),
                 left: TestableDoubleMatrix23.Get(),

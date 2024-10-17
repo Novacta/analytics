@@ -1,4 +1,3 @@
-using System;
 using System.Numerics;
 
 namespace Novacta.Analytics.Tests.TestableItems.Addition
@@ -19,15 +18,15 @@ namespace Novacta.Analytics.Tests.TestableItems.Addition
                 left,
                 right,
                 leftWritableRightScalarOps:
-                    new Func<DoubleMatrix, Complex, ComplexMatrix>[2] {
+                    [
                         (l, r) => l + r,
                         (l, r) => DoubleMatrix.Add(l, r)
-                    },
+                    ],
                 leftReadOnlyRightScalarOps:
-                    new Func<ReadOnlyDoubleMatrix, Complex, ComplexMatrix>[2] {
+                    [
                         (l, r) => l + r,
                         (l, r) => ReadOnlyDoubleMatrix.Add(l, r)
-                    }
+                    ]
                 )
         {
         }

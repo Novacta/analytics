@@ -17,7 +17,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Sum
         protected OnRowsDataIsColumnSum() :
             base(
                 expected: new DoubleMatrixState(
-                    asColumnMajorDenseArray: new double[3] { -5, -4, -3 },
+                    asColumnMajorDenseArray: [-5, -4, -3],
                     numberOfRows: 3,
                     numberOfColumns: 1),
                 data: TestableDoubleMatrix20.Get(),

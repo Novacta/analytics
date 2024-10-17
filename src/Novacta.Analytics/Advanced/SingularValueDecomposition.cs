@@ -88,10 +88,7 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (matrix is null)
-            {
-                throw new ArgumentNullException(nameof(matrix));
-            }
+            ArgumentNullException.ThrowIfNull(matrix);
 
             #endregion
 
@@ -151,10 +148,7 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (matrix is null)
-            {
-                throw new ArgumentNullException(nameof(matrix));
-            }
+            ArgumentNullException.ThrowIfNull(matrix);
 
             #endregion
 
@@ -183,10 +177,7 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (matrix is null)
-            {
-                throw new ArgumentNullException(nameof(matrix));
-            }
+            ArgumentNullException.ThrowIfNull(matrix);
 
             #endregion
 
@@ -235,10 +226,7 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (matrix is null)
-            {
-                throw new ArgumentNullException(nameof(matrix));
-            }
+            ArgumentNullException.ThrowIfNull(matrix);
 
             #endregion
 
@@ -258,10 +246,7 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (matrix is null)
-            {
-                throw new ArgumentNullException(nameof(matrix));
-            }
+            ArgumentNullException.ThrowIfNull(matrix);
 
             #endregion
 
@@ -321,10 +306,7 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (matrix is null)
-            {
-                throw new ArgumentNullException(nameof(matrix));
-            }
+            ArgumentNullException.ThrowIfNull(matrix);
 
             #endregion
 
@@ -341,10 +323,7 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (matrix is null)
-            {
-                throw new ArgumentNullException(nameof(matrix));
-            }
+            ArgumentNullException.ThrowIfNull(matrix);
 
             #endregion
 
@@ -393,10 +372,7 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (matrix is null)
-            {
-                throw new ArgumentNullException(nameof(matrix));
-            }
+            ArgumentNullException.ThrowIfNull(matrix);
 
             #endregion
 

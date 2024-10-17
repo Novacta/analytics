@@ -18,7 +18,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Variance
                 base(
                     expected: new DoubleMatrixState(
                         asColumnMajorDenseArray:
-                            new double[4] { 0.9600, 3.0400, 3.0400, 3.7600 },
+                            [0.9600, 3.0400, 3.0400, 3.7600],
                         numberOfRows: 4,
                         numberOfColumns: 1
                     ),

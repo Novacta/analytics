@@ -32,8 +32,8 @@ namespace Novacta.Analytics.Tests.TestableItems.Division
         RightIsNoPatternedSquareDoubleMatrixDoubleMatrixDivision() :
             base(
                 expected: new DoubleMatrixState(
-                    asColumnMajorDenseArray: new double[10]
-                    {
+                    asColumnMajorDenseArray:
+                    [
                         -3.4167,
                         -6.5000,
                          6.8333,
@@ -43,7 +43,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Division
                          2.4167,
                          6.5,
                         -0.4833,
-                        -1.3 },
+                        -1.3 ],
                     numberOfRows: 2,
                     numberOfColumns: 5),
                 left: TestableDoubleMatrix23.Get(),

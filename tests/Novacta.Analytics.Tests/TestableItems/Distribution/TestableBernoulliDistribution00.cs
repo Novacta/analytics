@@ -2,7 +2,6 @@
 // Licensed under the MIT license. 
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Collections.Generic;
 
 namespace Novacta.Analytics.Tests.TestableItems.Distribution
@@ -26,12 +25,12 @@ namespace Novacta.Analytics.Tests.TestableItems.Distribution
             {
                 {
                     new TestableDoubleMatrix(
-                        asColumnMajorDenseArray: new double[5]{
+                        asColumnMajorDenseArray: [
                              -0.1,
                              0.0,
                              .2,
                              1.0,
-                             1.1},
+                             1.1],
                         numberOfRows: 5,
                         numberOfColumns: 1,
                         isUpperHessenberg: false,
@@ -42,24 +41,24 @@ namespace Novacta.Analytics.Tests.TestableItems.Distribution
                         isSkewSymmetric: false,
                         upperBandwidth: 0,
                         lowerBandwidth: 4),
-                    DoubleMatrix.Dense(5, 1, new Double[5]{
+                    DoubleMatrix.Dense(5, 1, [
                         0.0,
                         .52,
                         0.0,
                         .48,
-                        0.0})
+                        0.0])
                 }
             },
             cdfPartialGraph: new Dictionary<TestableDoubleMatrix, DoubleMatrix>()
             {
                 {
                     new TestableDoubleMatrix(
-                        asColumnMajorDenseArray: new double[5]{
+                        asColumnMajorDenseArray: [
                              -0.1,
                              0.0,
                              .2,
                              1.0,
-                             1.1},
+                             1.1],
                         numberOfRows: 5,
                         numberOfColumns: 1,
                         isUpperHessenberg: false,
@@ -70,12 +69,12 @@ namespace Novacta.Analytics.Tests.TestableItems.Distribution
                         isSkewSymmetric: false,
                         upperBandwidth: 0,
                         lowerBandwidth: 4),
-                    DoubleMatrix.Dense(5, 1, new Double[5]{
+                    DoubleMatrix.Dense(5, 1, [
                         0.0,
                         .52,
                         .52,
                         1.0,
-                        1.0})
+                        1.0])
                 }
             })
         {

@@ -18,8 +18,7 @@ namespace Novacta.Analytics.Tests.TestableItems.SumOfSquaredDeviations
                 base(
                     expected: new DoubleMatrixState(
                         asColumnMajorDenseArray:
-                            new double[5] 
-                                { 129, 81, 106, 89, 5 },
+                            [129, 81, 106, 89, 5],
                         numberOfRows: 1,
                         numberOfColumns: 5
                     ),

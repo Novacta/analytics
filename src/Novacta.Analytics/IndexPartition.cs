@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 using Novacta.Analytics.Infrastructure;
@@ -172,13 +171,9 @@ namespace Novacta.Analytics
             IndexCollection elements,
             Func<int, T> partitioner) where T : IComparable<T>
         {
-            if (elements is null) {
-                throw new ArgumentNullException(nameof(elements));
-            }
+            ArgumentNullException.ThrowIfNull(elements);
 
-            if (partitioner is null) {
-                throw new ArgumentNullException(nameof(partitioner));
-            }
+            ArgumentNullException.ThrowIfNull(partitioner);
 
             var distinctPartIdentifiers = new SortedSet<T>();
             var indexLists = new Dictionary<T, List<int>>();
@@ -189,7 +184,7 @@ namespace Novacta.Analytics
                 T part = partitioner(element);
                 isNotAlreadyPartIdentifier = distinctPartIdentifiers.Add(part);
                 if (isNotAlreadyPartIdentifier) {
-                    indexLists.Add(part, new List<int>());
+                    indexLists.Add(part, []);
                 }
 
                 indexLists[part].Add(element);
@@ -197,10 +192,10 @@ namespace Novacta.Analytics
 
             IndexPartition<T> partition = new();
 
-            foreach (var identifer in distinctPartIdentifiers) {
-                partition[identifer] = new IndexCollection(
-                    indexLists[identifer].ToArray(), false);
-                partition.partIndetifiers.Add(identifer);
+            foreach (var identifier in distinctPartIdentifiers) {
+                partition[identifier] = new IndexCollection(
+                    [.. indexLists[identifier]], false);
+                partition.partIdentifiers.Add(identifier);
             }
 
             return partition;
@@ -229,9 +224,7 @@ namespace Novacta.Analytics
         public static IndexPartition<T> Create<T>(
             IEnumerable<T> elements) where T : IComparable<T>
         {
-            if (elements is null) {
-                throw new ArgumentNullException(nameof(elements));
-            }
+            ArgumentNullException.ThrowIfNull(elements);
 
             var distinctElements = new SortedSet<T>();
             var indexLists = new Dictionary<T, List<int>>();
@@ -242,7 +235,7 @@ namespace Novacta.Analytics
 
                 isNotAlreadyInElementSet = distinctElements.Add(element);
                 if (isNotAlreadyInElementSet) {
-                    indexLists.Add(element, new List<int>());
+                    indexLists.Add(element, []);
                 }
 
                 indexLists[element].Add(i++);
@@ -252,8 +245,8 @@ namespace Novacta.Analytics
 
             foreach (var element in distinctElements) {
                 partition[element] = new IndexCollection(
-                    indexLists[element].ToArray(), false);
-                partition.partIndetifiers.Add(element);
+                    [.. indexLists[element]], false);
+                partition.partIdentifiers.Add(element);
             }
 
             return partition;
@@ -283,9 +276,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static IndexPartition<double> Create(DoubleMatrix elements)
         {
-            if (elements is null) {
-                throw new ArgumentNullException(nameof(elements));
-            }
+            ArgumentNullException.ThrowIfNull(elements);
 
             var distinctElements = new SortedSet<double>();
             var indexLists = new Dictionary<double, List<int>>();
@@ -296,7 +287,7 @@ namespace Novacta.Analytics
                 currentElement = elements[i];
                 isNotAlreadyInElementSet = distinctElements.Add(currentElement);
                 if (isNotAlreadyInElementSet) {
-                    indexLists.Add(currentElement, new List<int>());
+                    indexLists.Add(currentElement, []);
                 }
 
                 indexLists[currentElement].Add(i);
@@ -306,8 +297,8 @@ namespace Novacta.Analytics
 
             foreach (var element in distinctElements) {
                 partition[element] = new IndexCollection(
-                    indexLists[element].ToArray(), false);
-                partition.partIndetifiers.Add(element);
+                    [.. indexLists[element]], false);
+                partition.partIdentifiers.Add(element);
             }
 
             return partition;
@@ -335,14 +326,12 @@ namespace Novacta.Analytics
         public static IndexPartition<DoubleMatrixRow> Create(
             DoubleMatrixRowCollection elements)
         {
-            if (elements is null) {
-                throw new ArgumentNullException(nameof(elements));
-            }
+            ArgumentNullException.ThrowIfNull(elements);
 
             SortedSet<DoubleMatrixRow> distinctElements =
-                new();
+                [];
             Dictionary<DoubleMatrixRow, List<int>> indexLists =
-                new();
+                [];
 
             bool isNotAlreadyInElementSet;
             int i = 0;
@@ -350,7 +339,7 @@ namespace Novacta.Analytics
 
                 isNotAlreadyInElementSet = distinctElements.Add(row);
                 if (isNotAlreadyInElementSet) {
-                    indexLists.Add(row, new List<int>());
+                    indexLists.Add(row, []);
                 }
 
                 indexLists[row].Add(i);
@@ -362,8 +351,8 @@ namespace Novacta.Analytics
 
             foreach (var element in distinctElements) {
                 partition[element] = new IndexCollection(
-                    indexLists[element].ToArray(), false);
-                partition.partIndetifiers.Add(element);
+                    [.. indexLists[element]], false);
+                partition.partIdentifiers.Add(element);
             }
 
             return partition;
@@ -408,20 +397,16 @@ namespace Novacta.Analytics
         public static double MinimumCentroidLinkage(DoubleMatrix data,
             IndexPartition<double> partition)
         {
-            if (data is null) {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
-            if (partition is null) {
-                throw new ArgumentNullException(nameof(partition));
-            }
+            ArgumentNullException.ThrowIfNull(partition);
 
             double minimumMeanLinkage, currentMeanLinkage;
 
             DoubleMatrix left, right;
 
             minimumMeanLinkage = double.PositiveInfinity;
-            double[] categories = partition.Identifiers.ToArray();
+            double[] categories = [.. partition.Identifiers];
 
             int numberOfClusters = categories.Length;
             int numberOfObservations = data.NumberOfRows;
@@ -496,16 +481,12 @@ namespace Novacta.Analytics
         /// <seealso href="http://en.wikipedia.org/wiki/Dunn_index"/>
         public static double DunnIndex(DoubleMatrix data, IndexPartition<double> partition)
         {
-            if (data is null) {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
-            if (partition is null) {
-                throw new ArgumentNullException(nameof(partition));
-            }
+            ArgumentNullException.ThrowIfNull(partition);
 
             int numberOfClusters = partition.Count;
-            double[] categories = partition.Identifiers.ToArray();
+            double[] categories = [.. partition.Identifiers];
 
             DoubleMatrix[] clusters = new DoubleMatrix[numberOfClusters];
             double diameter, maxDiameter;
@@ -545,8 +526,8 @@ namespace Novacta.Analytics
             // DI = min { min     { D(i,j) / max { D(k) } } }
             //       i     j, j≠i             k
 
-            double dunnIndex = min / maxDiameter;
-            return dunnIndex;
+            double index = min / maxDiameter;
+            return index;
         }
 
         /// <summary>
@@ -590,16 +571,12 @@ namespace Novacta.Analytics
         public static double DaviesBouldinIndex(DoubleMatrix data,
             IndexPartition<double> partition)
         {
-            if (data is null) {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
-            if (partition is null) {
-                throw new ArgumentNullException(nameof(partition));
-            }
+            ArgumentNullException.ThrowIfNull(partition);
 
             int numberOfClusters = partition.Count;
-            double[] categories = partition.Identifiers.ToArray();
+            double[] categories = [.. partition.Identifiers];
             double distance;
             int size;
 
@@ -637,7 +614,7 @@ namespace Novacta.Analytics
             // DBI = (1/numberOfIndividuals) Σ  max{ (S(i) + S(j) ) / d(C(i), C(j)) }
             //             i  j≠i
 
-            double daviesBouldinIndex = 0.0;
+            double index = 0.0;
 
             double[] max = new double[numberOfClusters];
             double current;
@@ -654,12 +631,12 @@ namespace Novacta.Analytics
                         }
                     }
                 }
-                daviesBouldinIndex += max[i];
+                index += max[i];
             }
 
-            daviesBouldinIndex /= numberOfClusters;
+            index /= numberOfClusters;
 
-            return daviesBouldinIndex;
+            return index;
         }
 
         #endregion
@@ -700,10 +677,10 @@ namespace Novacta.Analytics
     public sealed class IndexPartition<T>
     {
         internal Dictionary<T, IndexCollection> parts =
-            new();
+            [];
 
-        internal List<T> partIndetifiers =
-            new();
+        internal List<T> partIdentifiers =
+            [];
 
         internal IndexPartition()
         {
@@ -730,13 +707,13 @@ namespace Novacta.Analytics
                     throw new ArgumentNullException(nameof(partIdentifier));
                 }
 
-                if (!this.parts.ContainsKey(partIdentifier)) {
+                if (!parts.TryGetValue(partIdentifier, out IndexCollection value)) {
                     throw new ArgumentException(
                         ImplementationServices.GetResourceString(
                         "STR_EXCEPT_PAR_IS_NOT_A_PART_IDENTIFIER"), 
                         nameof(partIdentifier));
                 }
-                return this.parts[partIdentifier];
+                return value;
             }
             internal set
             {
@@ -768,7 +745,7 @@ namespace Novacta.Analytics
         /// <value>The part identifiers.</value>
         public IReadOnlyList<T> Identifiers
         {
-            get { return this.partIndetifiers; }
+            get { return this.partIdentifiers; }
 
         }
 
@@ -776,7 +753,7 @@ namespace Novacta.Analytics
         /// Gets the count of the parts.
         /// </summary>
         /// <value>The count of the parts in the partition.</value>
-        public int Count { get { return this.partIndetifiers.Count; } }
+        public int Count { get { return this.partIdentifiers.Count; } }
 
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
@@ -788,7 +765,7 @@ namespace Novacta.Analytics
 
             foreach (KeyValuePair<T, IndexCollection> pair in this.parts) {
                 stringBuilder.Append('[');
-                stringBuilder.Append("(");
+                stringBuilder.Append('(');
                 stringBuilder.Append(pair.Key);
                 stringBuilder.Append("),  ");
                 stringBuilder.Append(pair.Value);

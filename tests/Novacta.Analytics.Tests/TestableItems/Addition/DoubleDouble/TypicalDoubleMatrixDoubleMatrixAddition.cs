@@ -29,7 +29,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Addition
         TypicalDoubleMatrixDoubleMatrixAddition() :
             base(
                 expected: new DoubleMatrixState(
-                    asColumnMajorDenseArray: new double[6] { -5, -3, -1, 1, 3, 5 },
+                    asColumnMajorDenseArray: [-5, -3, -1, 1, 3, 5],
                     numberOfRows: 2,
                     numberOfColumns: 3),
                 left: TestableDoubleMatrix16.Get(),

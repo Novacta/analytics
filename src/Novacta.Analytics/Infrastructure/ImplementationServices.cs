@@ -209,7 +209,7 @@ namespace Novacta.Analytics.Infrastructure
                 {
                     if (isAddingFirstMatrixRowName)
                     {
-                        matrixRowNames = new Dictionary<int, string>();
+                        matrixRowNames = [];
                         isAddingFirstMatrixRowName = false;
                     }
                     matrixRowNames[i] = name;
@@ -349,7 +349,7 @@ namespace Novacta.Analytics.Infrastructure
                 {
                     if (isAddingFirstMatrixColumnName)
                     {
-                        matrixColumnNames = new Dictionary<int, string>();
+                        matrixColumnNames = [];
                         isAddingFirstMatrixColumnName = false;
                     }
                     matrixColumnNames[i] = name;
@@ -493,7 +493,7 @@ namespace Novacta.Analytics.Infrastructure
                 {
                     if (isAddingFirstMatrixRowName)
                     {
-                        matrixRowNames = new Dictionary<int, string>();
+                        matrixRowNames = [];
                         isAddingFirstMatrixRowName = false;
                     }
                     matrixRowNames[i] = name;
@@ -633,7 +633,7 @@ namespace Novacta.Analytics.Infrastructure
                 {
                     if (isAddingFirstMatrixColumnName)
                     {
-                        matrixColumnNames = new Dictionary<int, string>();
+                        matrixColumnNames = [];
                         isAddingFirstMatrixColumnName = false;
                     }
                     matrixColumnNames[i] = name;

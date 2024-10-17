@@ -140,15 +140,9 @@ namespace Novacta.Analytics
         {
             #region Input validation
 
-            if (objectiveFunction is null)
-            {
-                throw new ArgumentNullException(nameof(objectiveFunction));
-            }
+            ArgumentNullException.ThrowIfNull(objectiveFunction);
 
-            if (initialArgument is null)
-            {
-                throw new ArgumentNullException(nameof(initialArgument));
-            }
+            ArgumentNullException.ThrowIfNull(initialArgument);
 
             if (!initialArgument.IsRowVector)
             {
@@ -242,15 +236,9 @@ namespace Novacta.Analytics
         {
             #region Input validation
 
-            if (objectiveFunction is null)
-            {
-                throw new ArgumentNullException(nameof(objectiveFunction));
-            }
+            ArgumentNullException.ThrowIfNull(objectiveFunction);
 
-            if (initialArgument is null)
-            {
-                throw new ArgumentNullException(nameof(initialArgument));
-            }
+            ArgumentNullException.ThrowIfNull(initialArgument);
 
             if (!initialArgument.IsRowVector)
             {
@@ -343,15 +331,9 @@ namespace Novacta.Analytics
         {
             #region Input validation
 
-            if (objectiveFunction is null)
-            {
-                throw new ArgumentNullException(nameof(objectiveFunction));
-            }
+            ArgumentNullException.ThrowIfNull(objectiveFunction);
 
-            if (initialArgument is null)
-            {
-                throw new ArgumentNullException(nameof(initialArgument));
-            }
+            ArgumentNullException.ThrowIfNull(initialArgument);
 
             if (!initialArgument.IsRowVector)
             {
@@ -464,15 +446,9 @@ namespace Novacta.Analytics
         {
             #region Input validation
 
-            if (objectiveFunction is null)
-            {
-                throw new ArgumentNullException(nameof(objectiveFunction));
-            }
+            ArgumentNullException.ThrowIfNull(objectiveFunction);
 
-            if (initialArgument is null)
-            {
-                throw new ArgumentNullException(nameof(initialArgument));
-            }
+            ArgumentNullException.ThrowIfNull(initialArgument);
 
             if (!initialArgument.IsRowVector)
             {

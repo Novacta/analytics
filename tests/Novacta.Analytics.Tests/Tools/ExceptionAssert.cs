@@ -21,10 +21,6 @@ namespace Novacta.Analytics.Tests.Tools
         /// throw an <see cref="Exception"/>.</param>
         /// <param name="expectedType">The expected type.</param>
         /// <param name="expectedMessage">The expected message.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Design", 
-            "CA1031:Do not catch general exception types", 
-            Justification = "By design: needed for testing purposes.")]
         public static void Throw(
             Action action,
             Type expectedType,
@@ -58,10 +54,6 @@ namespace Novacta.Analytics.Tests.Tools
         /// <param name="action">The action expected to
         /// throw an <see cref="Exception"/>.</param>
         /// <param name="expectedType">The expected type.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Design",
-            "CA1031:Do not catch general exception types",
-            Justification = "By design: needed for testing purposes.")]
         public static void Throw(
             Action action,
             Type expectedType)
@@ -95,10 +87,6 @@ namespace Novacta.Analytics.Tests.Tools
         /// <param name="expectedMessage">The expected message.</param>
         /// <param name="expectedInnerType">The expected inner type.</param>
         /// <param name="expectedInnerMessage">The expected inner message.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Design",
-            "CA1031:Do not catch general exception types",
-            Justification = "By design: needed for testing purposes.")]
         public static void Throw(
             Action action,
             Type expectedType,
@@ -147,10 +135,6 @@ namespace Novacta.Analytics.Tests.Tools
         /// throw an <see cref="Exception"/>.</param>
         /// <param name="expectedInnerType">The expected inner type.</param>
         /// <param name="expectedInnerMessage">The expected inner message.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Design",
-            "CA1031:Do not catch general exception types",
-            Justification = "By design: needed for testing purposes.")]
         public static void InnerThrow(
             Action action,
             Type expectedInnerType,

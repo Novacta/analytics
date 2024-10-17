@@ -306,10 +306,7 @@ namespace Novacta.Analytics
         {
             #region Input validation
 
-            if (bernoulliProbabilities is null)
-            {
-                throw new ArgumentNullException(nameof(bernoulliProbabilities));
-            }
+            ArgumentNullException.ThrowIfNull(bernoulliProbabilities);
 
             int populationSize = bernoulliProbabilities.Count;
 
@@ -420,10 +417,7 @@ namespace Novacta.Analytics
         {
             #region Input validation
 
-            if (inclusionProbabilities is null)
-            {
-                throw new ArgumentNullException(nameof(inclusionProbabilities));
-            }
+            ArgumentNullException.ThrowIfNull(inclusionProbabilities);
 
             int populationSize = inclusionProbabilities.Count;
 

@@ -33,13 +33,13 @@ namespace Novacta.Analytics.Tests.TestableItems.Matrices
         /// Initializes a new instance of the <see cref="TestableComplexMatrix25" /> class.
         /// </summary>
         TestableComplexMatrix25() : base(
-                asColumnMajorDenseArray: new Complex[25]
-                {
+                asColumnMajorDenseArray:
+                [
                      c11,  0,    0,      0,      0,
                      c11,  c22,  0,      0,      0,
                      c11,  c33,  c66,    0,      0,
                      c11,  c44,  c1010,  c2020,  0,
-                     c11,  c55,  c1515,  c3535,  c7070 },
+                     c11,  c55,  c1515,  c3535,  c7070 ],
                 numberOfRows: 5,
                 numberOfColumns: 5,
                 isUpperHessenberg: true,

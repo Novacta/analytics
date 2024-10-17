@@ -226,8 +226,7 @@ namespace Novacta.Analytics
         public static MultipleCorrespondence Analyze(
             CategoricalDataSet dataSet)
         {
-            if (dataSet is null)
-                throw new ArgumentNullException(nameof(dataSet));
+            ArgumentNullException.ThrowIfNull(dataSet);
 
             var disjunctiveProtocol = dataSet.Disjoin();
 

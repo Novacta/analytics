@@ -25,7 +25,7 @@ namespace Novacta.Analytics.Tests
                 DoubleMatrix data = null;
                 DoubleMatrix individualWeights = DoubleMatrix.Dense(1, 1, 1.0 / 4.0);
                 DoubleMatrix variableCoefficients = DoubleMatrix.Dense(
-                    1, 2, new double[2] { 9, 4 });
+                    1, 2, [9, 4]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -71,7 +71,7 @@ namespace Novacta.Analytics.Tests
                 DoubleMatrix data = DoubleMatrix.Dense(4, 2);
                 DoubleMatrix individualWeights = null;
                 DoubleMatrix variableCoefficients = DoubleMatrix.Dense(
-                    1, 2, new double[2] { 9, 4 });
+                    1, 2, [9, 4]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -132,7 +132,7 @@ namespace Novacta.Analytics.Tests
                 DoubleMatrix data = DoubleMatrix.Dense(4, 2);
                 DoubleMatrix individualWeights = DoubleMatrix.Dense(1, 4, 1.0 / 4.0);
                 DoubleMatrix variableCoefficients = DoubleMatrix.Dense(
-                    1, 2, new double[2] { 9, 4 });
+                    1, 2, [9, 4]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -173,7 +173,7 @@ namespace Novacta.Analytics.Tests
                 DoubleMatrix data = DoubleMatrix.Dense(4, 2);
                 DoubleMatrix individualWeights = DoubleMatrix.Dense(5, 1, 1.0 / 4.0);
                 DoubleMatrix variableCoefficients = DoubleMatrix.Dense(
-                    1, 2, new double[2] { 9, 4 });
+                    1, 2, [9, 4]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -212,7 +212,7 @@ namespace Novacta.Analytics.Tests
                 DoubleMatrix data = DoubleMatrix.Dense(4, 2);
                 DoubleMatrix individualWeights = DoubleMatrix.Dense(4, 1, -1.0);
                 DoubleMatrix variableCoefficients = DoubleMatrix.Dense(
-                    1, 2, new double[2] { 9, 4 });
+                    1, 2, [9, 4]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -250,9 +250,9 @@ namespace Novacta.Analytics.Tests
 
                 DoubleMatrix data = DoubleMatrix.Dense(4, 2);
                 DoubleMatrix individualWeights = DoubleMatrix.Dense(4, 1,
-                    new double[4] { .3, .6, .2, .1 });
+                    [.3, .6, .2, .1]);
                 DoubleMatrix variableCoefficients = DoubleMatrix.Dense(
-                    1, 2, new double[2] { 9, 4 });
+                    1, 2, [9, 4]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -293,7 +293,7 @@ namespace Novacta.Analytics.Tests
                 DoubleMatrix individualWeights = DoubleMatrix.Dense(4, 1,
                     1.0 / 4.0);
                 DoubleMatrix variableCoefficients = DoubleMatrix.Dense(
-                    2, 1, new double[2] { 9, 4 });
+                    2, 1, [9, 4]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -323,7 +323,7 @@ namespace Novacta.Analytics.Tests
                 DoubleMatrix individualWeights = DoubleMatrix.Dense(4, 1,
                     1.0 / 4.0);
                 DoubleMatrix variableCoefficients = DoubleMatrix.Dense(
-                    1, 3, new double[3] { 9, 4, 5 });
+                    1, 3, [9, 4, 5]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -351,7 +351,7 @@ namespace Novacta.Analytics.Tests
                 DoubleMatrix individualWeights = DoubleMatrix.Dense(4, 1,
                     1.0 / 4.0);
                 DoubleMatrix variableCoefficients = DoubleMatrix.Dense(
-                    1, 2, new double[2] { 9, 0 });
+                    1, 2, [9, 0]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -374,11 +374,11 @@ namespace Novacta.Analytics.Tests
                         "STR_EXCEPT_SVD_ERRORS");
 
                 DoubleMatrix data = DoubleMatrix.Dense(2, 2,
-                    new double[4] { Double.NegativeInfinity, 0, 0, 1});
+                    [Double.NegativeInfinity, 0, 0, 1]);
                 DoubleMatrix individualWeights = DoubleMatrix.Dense(2, 1,
                     1.0 / 2.0);
                 DoubleMatrix variableCoefficients = DoubleMatrix.Dense(
-                    1, 2, new double[2] { 1, 1 });
+                    1, 2, [1, 1]);
 
                 ExceptionAssert.Throw(
                     () =>
@@ -403,7 +403,7 @@ namespace Novacta.Analytics.Tests
                 DoubleMatrix individualWeights = DoubleMatrix.Dense(4, 1,
                     1.0 / 4.0);
                 DoubleMatrix variableCoefficients = DoubleMatrix.Dense(
-                    1, 2, new double[2] { 1, 1 });
+                    1, 2, [1, 1]);
 
                 ExceptionAssert.Throw(
                     () =>
@@ -443,11 +443,11 @@ namespace Novacta.Analytics.Tests
             {
                 {
                     DoubleMatrix data = DoubleMatrix.Dense(4, 2,
-                        new double[8] { 1, 2, 3, 4, 5, 6, 7, 0 });
+                        [1, 2, 3, 4, 5, 6, 7, 0]);
                     DoubleMatrix individualWeights = DoubleMatrix.Dense(4, 1,
                         1.0 / 4.0);
                     DoubleMatrix variableCoefficients = DoubleMatrix.Dense(
-                        1, 2, new double[2] { 9, 4 });
+                        1, 2, [9, 4]);
 
                     var principalComponents =
                         PrincipalComponents.Analyze(
@@ -459,7 +459,7 @@ namespace Novacta.Analytics.Tests
 
                     DoubleMatrixAssert.AreEqual(
                         expected: new Basis(
-                            DoubleMatrix.Dense(2, 2, new double[4] { 3, 0, 0, 2 }))
+                            DoubleMatrix.Dense(2, 2, [3, 0, 0, 2]))
                                 .GetBasisMatrix(),
                         actual: cloud.Basis.GetBasisMatrix(),
                         delta: CloudTest.Accuracy);
@@ -484,7 +484,7 @@ namespace Novacta.Analytics.Tests
 
                 {
                     DoubleMatrix data = DoubleMatrix.Dense(4, 2,
-                        new double[8] { 1, 2, 3, 4, 5, 6, 7, 0 });
+                        [1, 2, 3, 4, 5, 6, 7, 0]);
                     DoubleMatrix individualWeights = DoubleMatrix.Dense(4, 1,
                         1.0 / 4.0);
 
@@ -521,7 +521,7 @@ namespace Novacta.Analytics.Tests
 
                 {
                     DoubleMatrix data = DoubleMatrix.Dense(4, 2,
-                        new double[8] { 1, 2, 3, 4, 5, 6, 7, 0 });
+                        [1, 2, 3, 4, 5, 6, 7, 0]);
 
                     var principalComponents =
                         PrincipalComponents.Analyze(

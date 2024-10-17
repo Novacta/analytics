@@ -4,7 +4,6 @@
 
 using Novacta.Analytics.Tests.TestableItems.Matrices;
 using Novacta.Analytics.Tests.Tools;
-using System.Numerics;
 
 namespace Novacta.Analytics.Tests.TestableItems.Negation
 {
@@ -28,16 +27,16 @@ namespace Novacta.Analytics.Tests.TestableItems.Negation
         TypicalComplexMatrixNegation() :
             base(
                 expected: new ComplexMatrixState(
-                    asColumnMajorDenseArray: new Complex[9] { 
+                    asColumnMajorDenseArray: [ 
                         0,
-                        new Complex(4, 4),
-                        new Complex(-7, -7),
-                        new Complex(-4, -4),
+                        new(4, 4),
+                        new(-7, -7),
+                        new(-4, -4),
                         0,
-                        new Complex(8, 8),
-                        new Complex(7, 7),
-                        new Complex(-8, -8), 
-                        0 },
+                        new(8, 8),
+                        new(7, 7),
+                        new(-8, -8), 
+                        0 ],
                     numberOfRows: 3,
                     numberOfColumns: 3),
                 operand: TestableComplexMatrix15.Get()

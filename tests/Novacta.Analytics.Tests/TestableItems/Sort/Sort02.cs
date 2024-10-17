@@ -18,7 +18,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Sort
         protected Sort02() :
                 base(
                     expected: new DoubleMatrixState(
-                        asColumnMajorDenseArray: new double[6] { -2, -1, 0, 0, 1, 2 },
+                        asColumnMajorDenseArray: [-2, -1, 0, 0, 1, 2],
                         numberOfRows: 2,
                         numberOfColumns: 3),
                     data: TestableDoubleMatrix55.Get(),

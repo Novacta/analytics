@@ -15,13 +15,13 @@ namespace Novacta.Analytics.Tests.TestableItems.Max
     {
         protected OnColumnsMax00() :
                 base(
-                    expected: new IndexValuePair[5] {
-                        new IndexValuePair() { index = 0, value = 16.0 },
-                        new IndexValuePair() { index = 3, value = 14.0 },
-                        new IndexValuePair() { index = 3, value = 15.0 },
-                        new IndexValuePair() { index = 0, value = 13.0 },
-                        new IndexValuePair() { index = 0, value = 4.0 }
-                    },
+                    expected: [
+                        new() { index = 0, value = 16.0 },
+                        new() { index = 3, value = 14.0 },
+                        new() { index = 3, value = 15.0 },
+                        new() { index = 0, value = 13.0 },
+                        new() { index = 0, value = 4.0 }
+                    ],
                     data: TestableDoubleMatrix40.Get(),
                     dataOperation: DataOperation.OnColumns
                 )

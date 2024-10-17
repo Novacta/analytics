@@ -91,7 +91,7 @@ namespace Novacta.Analytics.Tests.Tools
         public override bool CanInvertCdf { get => true; }
 
         private static readonly double[] CdfConstants = 
-            new double[9] {
+            [
                 1.25331413731550025,
                 0.421369229288054473,
                 0.236652382913560671,
@@ -100,7 +100,7 @@ namespace Novacta.Analytics.Tests.Tools
                 0.0990285964717319214,
                 0.0827662865013691773,
                 0.0710695805388521071,
-                0.0622586659950261958 };
+                0.0622586659950261958 ];
 
         private static double Phi(double x)
         {

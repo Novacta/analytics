@@ -4,7 +4,7 @@ The **Novacta.Analytics** library
 provides functionality for data analysis.
 
 The project targets
-[.NET 6](https://github.com/dotnet/core/blob/main/release-notes/6.0/README.md),
+[.NET 8](https://github.com/dotnet/core/blob/main/release-notes/8.0/README.md),
 and supports the
 [x86-64 architecture](https://en.wikipedia.org/wiki/X86-64)
 on Windows, Linux, and macOS platforms.
@@ -15,7 +15,7 @@ Installation can be performed via [NuGet](https://www.nuget.org/packages/Novacta
 
 ### Matrix algebra operations
 
-* Matrices of 
+* Matrices of
   [Double](https://docs.microsoft.com/dotnet/api/system.double) 
   or
   [Complex](https://docs.microsoft.com/dotnet/api/system.numerics.complex)
@@ -33,8 +33,8 @@ Installation can be performed via [NuGet](https://www.nuget.org/packages/Novacta
   and 
   [ReadOnlyComplexMatrix](https://novacta.github.io/analytics/html/E2E3D527.htm).
 * Overloaded operators
-  supporting sums, subtractions, multiplications, and divisions whose operands 
-  are (writable or read-only) matrices or scalars, eventually mixing Complex or 
+  supporting sums, subtractions, multiplications, and divisions whose operands
+  are (writable or read-only) matrices or scalars, eventually mixing Complex or
   Double based operands.
 * Matrix slicing where rows or columns are referred to
   using integers, strings, or
@@ -49,8 +49,10 @@ Installation can be performed via [NuGet](https://www.nuget.org/packages/Novacta
   and
   [Spectral Decompositions](https://novacta.github.io/analytics/html/17359C6B.htm)
   of symmetric/Hermitian matrices.
+* Create matrices by
+  [encoding](https://novacta.github.io/analytics/html/B1082BD8.htm)
+  numerical or categorical data.
 
-   
 ### Matrix data presentation and interaction in application UI
 
 * Matrices can be exploited as
@@ -81,6 +83,11 @@ Installation can be performed via [NuGet](https://www.nuget.org/packages/Novacta
   directions by identifying new, uncorrelated variables
   whose variances enhance our comprehension of the overall cloud
   variability, possibly approximating the cloud in a lower dimensional space.
+* Multidimensional scaling
+  * [Classical](https://novacta.github.io/analytics/html/F58681BC.htm)
+    scaling of a proximity matrix.
+  * [Nonmetric](https://novacta.github.io/analytics/html/4FE4ECE4.htm)
+    scaling of a dissimilarity matrix.
 * Compute the
   [principal components](https://novacta.github.io/analytics/html/3ADC7B56.htm)
   of a matrix, an application of principal projections
@@ -103,7 +110,7 @@ Installation can be performed via [NuGet](https://www.nuget.org/packages/Novacta
 * Create
   [categorical data sets](https://novacta.github.io/analytics/html/B39F799B.htm)
   by
-  [encoding](https://novacta.github.io/analytics/html/CBC7240B.htm)
+  [encoding](https://novacta.github.io/analytics/html/77DAF585.htm)
   categorical or numerical data from a stream.
 * Categorize continuous data
   [by entropy minimization](https://novacta.github.io/analytics/html/5D736549.htm).
@@ -178,15 +185,15 @@ For available versions, see the
 
 ## Copyrights and Licenses
 
-All source code is Copyright (c) 2018 Giovanni Lafratta.
+All source code is Copyright © 2018 Giovanni Lafratta.
 
 **Novacta.Analytics** is licensed under the
 [MIT License](https://github.com/novacta/analytics/blob/master/LICENSE.md).
 
 This project relies on native dynamic-link libraries obtained
 via the Intel® oneAPI Math Kernel Library customDLL builder.
-[oneAPI MKL](https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl.html) is 
-Copyright (c) 2021 Intel® Corporation and
+[oneAPI MKL](https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl.html) is
+Copyright © 2021 Intel® Corporation and
 licensed under the
 [ISSL](https://software.intel.com/en-us/license/intel-simplified-software-license)
 terms.

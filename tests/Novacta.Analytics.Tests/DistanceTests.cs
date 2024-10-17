@@ -341,12 +341,12 @@ namespace Novacta.Analytics.Tests
                 var expected = DoubleMatrix.Dense(
                     numberOfItems,
                     numberOfItems,
-                    new double[] {
+                    [
                         0.0000000, 0.5385165, 0.5099020, 0.6480741,
                         0.5385165, 0.0000000, 0.3000000, 0.3316625,
                         0.5099020, 0.3000000, 0.0000000, 0.2449490,
                         0.6480741, 0.3316625, 0.2449490, 0.0000000
-                    },
+                    ],
                     StorageOrder.RowMajor);
 
                 DoubleMatrixAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);

@@ -42,17 +42,14 @@ namespace Novacta.Analytics
         {
             get
             {
-                if (this.randomNumberGenerator is null) {
-                    this.randomNumberGenerator = 
+                this.randomNumberGenerator ??= 
                         RandomNumberGenerator.CreateSFMT19937(0);
-                }
+
                 return this.randomNumberGenerator;
             }
             set
             {
-                if (value is null) {
-                    throw new ArgumentNullException(nameof(value));
-                }
+                ArgumentNullException.ThrowIfNull(value);
                 this.randomNumberGenerator = value;
             }
         }

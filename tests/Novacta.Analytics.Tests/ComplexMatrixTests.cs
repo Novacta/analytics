@@ -31,8 +31,8 @@ namespace Novacta.Analytics.Tests
         /// <returns>The list of available <see cref="TestableComplexMatrix"/> instances.</returns>
         static List<TestableComplexMatrix> GetTestableMatrices()
         {
-            List<TestableComplexMatrix> TestableItems = new()
-            {
+            List<TestableComplexMatrix> TestableItems =
+            [
                 TestableComplexMatrix00.Get(),
                 TestableComplexMatrix01.Get(),
                 TestableComplexMatrix02.Get(),
@@ -106,7 +106,7 @@ namespace Novacta.Analytics.Tests
                 TestableComplexMatrix70.Get(),
                 TestableComplexMatrix71.Get(),
                 TestableComplexMatrix72.Get()
-            };
+            ];
 
             return TestableItems;
         }
@@ -305,11 +305,11 @@ namespace Novacta.Analytics.Tests
 
             ComplexMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[2]
-                                {
-                                    new Complex(6, 6),
-                                    new Complex(9, 9)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(6, 6),
+                                    new(9, 9)
+                                ],
                                 numberOfRows: 1,
                                 numberOfColumns: 2),
                 testableMatrix: TestableComplexMatrix14.Get(),
@@ -318,12 +318,12 @@ namespace Novacta.Analytics.Tests
 
             ComplexMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[3]
-                                {
-                                    new Complex(2,2),
-                                    new Complex(5,5),
-                                    new Complex(8,8)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(2,2),
+                                    new(5,5),
+                                    new(8,8)
+                                ],
                                 numberOfRows: 1,
                                 numberOfColumns: 3),
                 testableMatrix: TestableComplexMatrix14.Get(),
@@ -332,12 +332,12 @@ namespace Novacta.Analytics.Tests
 
             ComplexMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[3]
-                                {
-                                    new Complex(4,4),
-                                    new Complex(5,5),
-                                    new Complex(6,6)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(4,4),
+                                    new(5,5),
+                                    new(6,6)
+                                ],
                                 numberOfRows: 3,
                                 numberOfColumns: 1),
                 testableMatrix: TestableComplexMatrix14.Get(),
@@ -346,15 +346,15 @@ namespace Novacta.Analytics.Tests
 
             ComplexMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[6]
-                                {
-                                    new Complex(4, 4),
-                                    new Complex(5, 5),
-                                    new Complex(6, 6),
-                                    new Complex(7, 7),
-                                    new Complex(8, 8),
-                                    new Complex(9, 9)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(4, 4),
+                                    new(5, 5),
+                                    new(6, 6),
+                                    new(7, 7),
+                                    new(8, 8),
+                                    new(9, 9)
+                                ],
                                 numberOfRows: 3,
                                 numberOfColumns: 2),
                 testableMatrix: TestableComplexMatrix14.Get(),
@@ -363,15 +363,15 @@ namespace Novacta.Analytics.Tests
 
             ComplexMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[6]
-                                {
-                                    new Complex(2, 2),
-                                    new Complex(3, 3),
-                                    new Complex(5, 5),
-                                    new Complex(6, 6),
-                                    new Complex(8, 8),
-                                    new Complex(9, 9)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(2, 2),
+                                    new(3, 3),
+                                    new(5, 5),
+                                    new(6, 6),
+                                    new(8, 8),
+                                    new(9, 9)
+                                ],
                                 numberOfRows: 2,
                                 numberOfColumns: 3),
                 testableMatrix: TestableComplexMatrix14.Get(),
@@ -380,12 +380,12 @@ namespace Novacta.Analytics.Tests
 
             ComplexMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[3]
-                                {
-                                    new Complex(4, 4),
-                                    new Complex(5, 5),
-                                    new Complex(6, 6)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(4, 4),
+                                    new(5, 5),
+                                    new(6, 6)
+                                ],
                                 numberOfRows: 3,
                                 numberOfColumns: 1),
                 testableMatrix: TestableComplexMatrix14.Get(),
@@ -394,15 +394,15 @@ namespace Novacta.Analytics.Tests
 
             ComplexMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[6]
-                                {
-                                    new Complex(4, 4),
-                                    new Complex(5, 5),
-                                    new Complex(6, 6),
-                                    new Complex(7, 7),
-                                    new Complex(8, 8),
-                                    new Complex(9, 9)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(4, 4),
+                                    new(5, 5),
+                                    new(6, 6),
+                                    new(7, 7),
+                                    new(8, 8),
+                                    new(9, 9)
+                                ],
                                 numberOfRows: 3,
                                 numberOfColumns: 2),
                 testableMatrix: TestableComplexMatrix14.Get(),
@@ -411,18 +411,18 @@ namespace Novacta.Analytics.Tests
 
             ComplexMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[9]
-                                {
-                                    new Complex(1, 1),
-                                    new Complex(2, 2),
-                                    new Complex(3, 3),
-                                    new Complex(4, 4),
-                                    new Complex(5, 5),
-                                    new Complex(6, 6),
-                                    new Complex(7, 7),
-                                    new Complex(8, 8),
-                                    new Complex(9, 9)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(1, 1),
+                                    new(2, 2),
+                                    new(3, 3),
+                                    new(4, 4),
+                                    new(5, 5),
+                                    new(6, 6),
+                                    new(7, 7),
+                                    new(8, 8),
+                                    new(9, 9)
+                                ],
                                 numberOfRows: 3,
                                 numberOfColumns: 3),
                 testableMatrix: TestableComplexMatrix14.Get(),
@@ -436,11 +436,11 @@ namespace Novacta.Analytics.Tests
             // 0    m[1,[0,2]]
             ComplexMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[2]
-                                {
-                                    new Complex(1, 1),
-                                    new Complex(5, 5)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(1, 1),
+                                    new(5, 5)
+                                ],
                                 numberOfRows: 1,
                                 numberOfColumns: 2,
                                 rowNames: new Dictionary<int, string>(1) { { 0, "r1" } },
@@ -452,12 +452,12 @@ namespace Novacta.Analytics.Tests
             // 1    m[1,:]
             ComplexMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[3]
-                                {
-                                    new Complex(1, 1),
-                                    new Complex(3, 3),
-                                    new Complex(5, 5)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(1, 1),
+                                    new(3, 3),
+                                    new(5, 5)
+                                ],
                                 numberOfRows: 1,
                                 numberOfColumns: 3,
                                 rowNames: new Dictionary<int, string>(1) { { 0, "r1" } },
@@ -469,10 +469,10 @@ namespace Novacta.Analytics.Tests
             // 2    m[[1],1]
             ComplexMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[1]
-                                {
-                                    new Complex(3, 3)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(3, 3)
+                                ],
                                 numberOfRows: 1,
                                 numberOfColumns: 1,
                                 rowNames: new Dictionary<int, string>(1) { { 0, "r1" } },
@@ -484,13 +484,13 @@ namespace Novacta.Analytics.Tests
             // 3    m[[1,0],[0,1]]
             ComplexMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[4]
-                                {
-                                    new Complex(1, 1),
-                                    new Complex(0, 0),
-                                    new Complex(3, 3),
-                                    new Complex(2, 2)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(1, 1),
+                                    new(0, 0),
+                                    new(3, 3),
+                                    new(2, 2)
+                                ],
                                 numberOfRows: 2,
                                 numberOfColumns: 2,
                                 rowNames: new Dictionary<int, string>(2) { { 0, "r1" }, { 1, "r0" } },
@@ -502,15 +502,15 @@ namespace Novacta.Analytics.Tests
             // 4    m[[0,1],:]
             ComplexMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[6]
-                                {
-                                    new Complex(0, 0),
-                                    new Complex(1, 1),
-                                    new Complex(2, 2),
-                                    new Complex(3, 3),
-                                    new Complex(4, 4),
-                                    new Complex(5, 5)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(0, 0),
+                                    new(1, 1),
+                                    new(2, 2),
+                                    new(3, 3),
+                                    new(4, 4),
+                                    new(5, 5)
+                                ],
                                 numberOfRows: 2,
                                 numberOfColumns: 3,
                                 rowNames: new Dictionary<int, string>(2) { { 0, "r0" }, { 1, "r1" } },
@@ -522,11 +522,11 @@ namespace Novacta.Analytics.Tests
             // 5    m[:,1]
             ComplexMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[2]
-                                {
-                                    new Complex(2, 2),
-                                    new Complex(3, 3)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(2, 2),
+                                    new(3, 3)
+                                ],
                                 numberOfRows: 2,
                                 numberOfColumns: 1,
                                 rowNames: new Dictionary<int, string>(2) { { 0, "r0" }, { 1, "r1" } },
@@ -538,13 +538,13 @@ namespace Novacta.Analytics.Tests
             // 6    m[:,[1,0]]
             ComplexMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[4]
-                                {
-                                    new Complex(2, 2),
-                                    new Complex(3, 3),
-                                    new Complex(0, 0),
-                                    new Complex(1, 1)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(2, 2),
+                                    new(3, 3),
+                                    new(0, 0),
+                                    new(1, 1)
+                                ],
                                 numberOfRows: 2,
                                 numberOfColumns: 2,
                                 rowNames: new Dictionary<int, string>(2) { { 0, "r0" }, { 1, "r1" } },
@@ -556,15 +556,15 @@ namespace Novacta.Analytics.Tests
             // 7    m[:,:]
             ComplexMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[6]
-                                {
-                                    new Complex(0, 0),
-                                    new Complex(1, 1),
-                                    new Complex(2, 2),
-                                    new Complex(3, 3),
-                                    new Complex(4, 4),
-                                    new Complex(5, 5)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(0, 0),
+                                    new(1, 1),
+                                    new(2, 2),
+                                    new(3, 3),
+                                    new(4, 4),
+                                    new(5, 5)
+                                ],
                                 numberOfRows: 2,
                                 numberOfColumns: 3,
                                 rowNames: new Dictionary<int, string>(2) { { 0, "r0" }, { 1, "r1" } },
@@ -596,11 +596,11 @@ namespace Novacta.Analytics.Tests
 
             ComplexMatrixTest.IndexerSet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[2]
-                                {
-                                    new Complex(-6, -6),
-                                    new Complex(-9, -9)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(-6, -6),
+                                    new(-9, -9)
+                                ],
                                 numberOfRows: 1,
                                 numberOfColumns: 2),
                 testableMatrix: TestableComplexMatrix14.Get(),
@@ -609,12 +609,12 @@ namespace Novacta.Analytics.Tests
 
             ComplexMatrixTest.IndexerSet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[3]
-                                {
-                                    new Complex(-2, -2),
-                                    new Complex(-5, -5),
-                                    new Complex(-8, -8)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(-2, -2),
+                                    new(-5, -5),
+                                    new(-8, -8)
+                                ],
                                 numberOfRows: 1,
                                 numberOfColumns: 3),
                 testableMatrix: TestableComplexMatrix14.Get(),
@@ -623,12 +623,12 @@ namespace Novacta.Analytics.Tests
 
             ComplexMatrixTest.IndexerSet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[3]
-                                {
-                                    new Complex(-4, -4),
-                                    new Complex(-5, -5),
-                                    new Complex(-6, -6)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(-4, -4),
+                                    new(-5, -5),
+                                    new(-6, -6)
+                                ],
                                 numberOfRows: 3,
                                 numberOfColumns: 1),
                 testableMatrix: TestableComplexMatrix14.Get(),
@@ -637,15 +637,15 @@ namespace Novacta.Analytics.Tests
 
             ComplexMatrixTest.IndexerSet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[6]
-                                {
-                                    new Complex(-4, -4),
-                                    new Complex(-5, -5),
-                                    new Complex(-6, -6),
-                                    new Complex(-7, -7),
-                                    new Complex(-8, -8),
-                                    new Complex(-9, -9)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(-4, -4),
+                                    new(-5, -5),
+                                    new(-6, -6),
+                                    new(-7, -7),
+                                    new(-8, -8),
+                                    new(-9, -9)
+                                ],
                                 numberOfRows: 3,
                                 numberOfColumns: 2),
                 testableMatrix: TestableComplexMatrix14.Get(),
@@ -654,15 +654,15 @@ namespace Novacta.Analytics.Tests
 
             ComplexMatrixTest.IndexerSet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[6]
-                                {
-                                    new Complex(-2, -2),
-                                    new Complex(-3, -3),
-                                    new Complex(-5, -5),
-                                    new Complex(-6, -6),
-                                    new Complex(-8, -8),
-                                    new Complex(-9, -9)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(-2, -2),
+                                    new(-3, -3),
+                                    new(-5, -5),
+                                    new(-6, -6),
+                                    new(-8, -8),
+                                    new(-9, -9)
+                                ],
                                 numberOfRows: 2,
                                 numberOfColumns: 3),
                 testableMatrix: TestableComplexMatrix14.Get(),
@@ -671,12 +671,12 @@ namespace Novacta.Analytics.Tests
 
             ComplexMatrixTest.IndexerSet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[3]
-                                {
-                                    new Complex(-4, -4),
-                                    new Complex(-5, -5),
-                                    new Complex(-6, -6)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(-4, -4),
+                                    new(-5, -5),
+                                    new(-6, -6)
+                                ],
                                 numberOfRows: 3,
                                 numberOfColumns: 1),
                 testableMatrix: TestableComplexMatrix14.Get(),
@@ -685,15 +685,15 @@ namespace Novacta.Analytics.Tests
 
             ComplexMatrixTest.IndexerSet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[6]
-                                {
-                                    new Complex(-4, -4),
-                                    new Complex(-5, -5),
-                                    new Complex(-6, -6),
-                                    new Complex(-7, -7),
-                                    new Complex(-8, -8),
-                                    new Complex(-9, -9)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(-4, -4),
+                                    new(-5, -5),
+                                    new(-6, -6),
+                                    new(-7, -7),
+                                    new(-8, -8),
+                                    new(-9, -9)
+                                ],
                                 numberOfRows: 3,
                                 numberOfColumns: 2),
                 testableMatrix: TestableComplexMatrix14.Get(),
@@ -702,18 +702,18 @@ namespace Novacta.Analytics.Tests
 
             ComplexMatrixTest.IndexerSet.SubMatrix(
                 expectedState: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[9]
-                                {
-                                    new Complex(-1, -1),
-                                    new Complex(-2, -2),
-                                    new Complex(-3, -3),
-                                    new Complex(-4, -4),
-                                    new Complex(-5, -5),
-                                    new Complex(-6, -6),
-                                    new Complex(-7, -7),
-                                    new Complex(-8, -8),
-                                    new Complex(-9, -9)
-                                },
+                                asColumnMajorDenseArray:
+                                [
+                                    new(-1, -1),
+                                    new(-2, -2),
+                                    new(-3, -3),
+                                    new(-4, -4),
+                                    new(-5, -5),
+                                    new(-6, -6),
+                                    new(-7, -7),
+                                    new(-8, -8),
+                                    new(-9, -9)
+                                ],
                                 numberOfRows: 3,
                                 numberOfColumns: 3),
                 testableMatrix: TestableComplexMatrix14.Get(),
@@ -1370,15 +1370,14 @@ namespace Novacta.Analytics.Tests
             var target = ComplexMatrix.Dense(
                 3,
                 2,
-                new Complex[6]
-                {
+                [
                     0,
                     0,
                     0,
-                    new Complex(2, 2),
-                    new Complex(3, 3),
+                    new(2, 2),
+                    new(3, 3),
                     Complex.NaN
-                });
+                ]);
 
             target.SetRowName(0, "Row0");
             target.SetRowName(1, "Row1");
@@ -1396,15 +1395,14 @@ namespace Novacta.Analytics.Tests
                 ComplexMatrix actual = rowCollection;
 
                 var expected = ComplexMatrix.Dense(3, 2,
-                    new Complex[6]
-                    {
+                    [
                         0,
                         0,
                         0,
-                        new Complex(2, 2),
-                        new Complex(3, 3),
+                        new(2, 2),
+                        new(3, 3),
                         Complex.NaN
-                    });
+                    ]);
 
                 expected.SetRowName(0, "Row0");
                 expected.SetRowName(1, "Row1");
@@ -1455,13 +1453,12 @@ namespace Novacta.Analytics.Tests
                 ComplexMatrix actual = rowCollection;
 
                 var expected = ComplexMatrix.Dense(2, 2,
-                    new Complex[4]
-                    {
+                    [
                         0,
                         0,
-                        new Complex(2, 2),
+                        new(2, 2),
                         Complex.NaN
-                    });
+                    ]);
 
                 expected.SetRowName(0, "Row0");
                 expected.SetRowName(1, "Row2");
@@ -1668,15 +1665,15 @@ namespace Novacta.Analytics.Tests
 
             // matrix has no row or column names
 
-            target = ComplexMatrix.Dense(2, 3, new Complex[6]
-            {
-                new Complex(.1, .1),
-                new Complex(10.2, 10.2),
-                new Complex(-2.3, -2.3),
-                new Complex(1000.2, 1000.2),
-                new Complex(.2, .2),
-                new Complex(239.32, 239.32)
-            });
+            target = ComplexMatrix.Dense(2, 3,
+            [
+                new(.1, .1),
+                new(10.2, 10.2),
+                new(-2.3, -2.3),
+                new(1000.2, 1000.2),
+                new(.2, .2),
+                new(239.32, 239.32)
+            ]);
 
             //         "                 " 17 char length
             //         "                                      " 38 char length
@@ -1704,18 +1701,18 @@ namespace Novacta.Analytics.Tests
 
             // matrix has some row or column names
 
-            target = ComplexMatrix.Dense(3, 3, new Complex[9]
-            {
-                new Complex(.1, .1),
-                new Complex(10.2, 10.2),
+            target = ComplexMatrix.Dense(3, 3,
+            [
+                new(.1, .1),
+                new(10.2, 10.2),
                 0,
-                new Complex(-2.3, -2.3),
-                new Complex(1000.2, 1000.2),
+                new(-2.3, -2.3),
+                new(1000.2, 1000.2),
                 0,
-                new Complex(.2, .2),
-                new Complex(239.32, 239.32),
+                new(.2, .2),
+                new(239.32, 239.32),
                 0
-            });
+            ]);
 
             //                "                 " 17 char length
 
@@ -1778,18 +1775,18 @@ namespace Novacta.Analytics.Tests
 
             // matrix has some row names but no col ones
 
-            target = ComplexMatrix.Dense(3, 3, new Complex[9]
-            {
-                new Complex(.1, .1),
-                new Complex(10.2, 10.2),
+            target = ComplexMatrix.Dense(3, 3,
+            [
+                new(.1, .1),
+                new(10.2, 10.2),
                 0,
-                new Complex(-2.3, -2.3),
-                new Complex(1000.2, 1000.2),
+                new(-2.3, -2.3),
+                new(1000.2, 1000.2),
                 0,
-                new Complex(.2, .2),
-                new Complex(239.32, 239.32),
+                new(.2, .2),
+                new(239.32, 239.32),
                 0
-            });
+            ]);
 
             //                "                 " 17 char length
             //                "                                       " 39 char length
@@ -1836,18 +1833,18 @@ namespace Novacta.Analytics.Tests
 
             // matrix has no row names and some column ones
 
-            target = ComplexMatrix.Dense(3, 3, new Complex[9]
-            {
-                new Complex(.1, .1),
-                new Complex(10.2, 10.2),
+            target = ComplexMatrix.Dense(3, 3,
+            [
+                new(.1, .1),
+                new(10.2, 10.2),
                 0,
-                new Complex(-2.3, -2.3),
-                new Complex(1000.2, 1000.2),
+                new(-2.3, -2.3),
+                new(1000.2, 1000.2),
                 0,
-                new Complex(.2, .2),
-                new Complex(239.32, 239.32),
+                new(.2, .2),
+                new(239.32, 239.32),
                 0
-            });
+            ]);
 
             //                "                 " 17 char length
 
@@ -2030,7 +2027,7 @@ namespace Novacta.Analytics.Tests
 
                 ComplexMatrixAssert.IsStateAsExpected(
                     expectedState: new ComplexMatrixState(
-                        asColumnMajorDenseArray: new Complex[6] { c, c, c, c, c, c },
+                        asColumnMajorDenseArray: [c, c, c, c, c, c],
                         numberOfRows: numberOfRows,
                         numberOfColumns: numberOfColumns),
                     actualMatrix: actual,
@@ -2038,7 +2035,7 @@ namespace Novacta.Analytics.Tests
 
                 Assert.AreEqual(StorageOrder.ColumnMajor, actual.StorageOrder);
                 Assert.AreEqual(StorageScheme.Dense, actual.StorageScheme);
-                ComplexArrayAssert.AreEqual(new Complex[6] { c, c, c, c, c, c }, actual.GetStorage(), ComplexMatrixTest.Accuracy);
+                ComplexArrayAssert.AreEqual([c, c, c, c, c, c], actual.GetStorage(), ComplexMatrixTest.Accuracy);
             }
 
             #endregion
@@ -2050,7 +2047,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var actual = ComplexMatrix.Dense(0, 1, Array.Empty<Complex>());
+                        var actual = ComplexMatrix.Dense(0, 1, []);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
                     expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_POSITIVE,
@@ -2062,7 +2059,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var actual = ComplexMatrix.Dense(1, 0, Array.Empty<Complex>());
+                        var actual = ComplexMatrix.Dense(1, 0, []);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
                     expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_POSITIVE,
@@ -2097,7 +2094,7 @@ namespace Novacta.Analytics.Tests
             {
                 int numberOfRows = 2;
                 int numberOfColumns = 3;
-                Complex[] data = new Complex[6] { 0, 1, 2, 3, 4, 5 };
+                Complex[] data = [0, 1, 2, 3, 4, 5];
                 var actual = ComplexMatrix.Dense(numberOfRows, numberOfColumns, data);
 
                 ComplexMatrixAssert.IsStateAsExpected(
@@ -2110,7 +2107,7 @@ namespace Novacta.Analytics.Tests
 
                 Assert.AreEqual(StorageOrder.ColumnMajor, actual.StorageOrder);
                 Assert.AreEqual(StorageScheme.Dense, actual.StorageScheme);
-                ComplexArrayAssert.AreEqual(new Complex[6] { 0, 1, 2, 3, 4, 5 }, actual.GetStorage(), ComplexMatrixTest.Accuracy);
+                ComplexArrayAssert.AreEqual([0, 1, 2, 3, 4, 5], actual.GetStorage(), ComplexMatrixTest.Accuracy);
             }
 
             #endregion
@@ -2122,7 +2119,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var actual = ComplexMatrix.Dense(0, 1, Array.Empty<Complex>(), true);
+                        var actual = ComplexMatrix.Dense(0, 1, [], true);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
                     expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_POSITIVE,
@@ -2134,7 +2131,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var actual = ComplexMatrix.Dense(1, 0, Array.Empty<Complex>(), true);
+                        var actual = ComplexMatrix.Dense(1, 0, [], true);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
                     expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_POSITIVE,
@@ -2169,7 +2166,7 @@ namespace Novacta.Analytics.Tests
             {
                 int numberOfRows = 2;
                 int numberOfColumns = 3;
-                Complex[] data = new Complex[6] { 0, 1, 2, 3, 4, 5 };
+                Complex[] data = [0, 1, 2, 3, 4, 5];
                 var actual = ComplexMatrix.Dense(numberOfRows, numberOfColumns, data, true);
 
                 ComplexMatrixAssert.IsStateAsExpected(
@@ -2183,7 +2180,7 @@ namespace Novacta.Analytics.Tests
                 Assert.AreEqual(StorageOrder.ColumnMajor, actual.StorageOrder);
                 Assert.AreEqual(StorageScheme.Dense, actual.StorageScheme);
                 ComplexArrayAssert.AreEqual(
-                    new Complex[6] { 0, 1, 2, 3, 4, 5 }, actual.GetStorage(), ComplexMatrixTest.Accuracy);
+                    [0, 1, 2, 3, 4, 5], actual.GetStorage(), ComplexMatrixTest.Accuracy);
 
                 Assert.AreNotSame(data, actual.GetStorage());
             }
@@ -2192,7 +2189,7 @@ namespace Novacta.Analytics.Tests
             {
                 int numberOfRows = 2;
                 int numberOfColumns = 3;
-                Complex[] data = new Complex[6] { 0, 1, 2, 3, 4, 5 };
+                Complex[] data = [0, 1, 2, 3, 4, 5];
                 var actual = ComplexMatrix.Dense(numberOfRows, numberOfColumns, data, false);
 
                 ComplexMatrixAssert.IsStateAsExpected(
@@ -2206,7 +2203,7 @@ namespace Novacta.Analytics.Tests
                 Assert.AreEqual(StorageOrder.ColumnMajor, actual.StorageOrder);
                 Assert.AreEqual(StorageScheme.Dense, actual.StorageScheme);
                 ComplexArrayAssert.AreEqual(
-                    new Complex[6] { 0, 1, 2, 3, 4, 5 }, actual.GetStorage(), ComplexMatrixTest.Accuracy);
+                    [0, 1, 2, 3, 4, 5], actual.GetStorage(), ComplexMatrixTest.Accuracy);
 
                 Assert.AreSame(data, actual.GetStorage());
             }
@@ -2220,7 +2217,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var actual = ComplexMatrix.Dense(0, 1, Array.Empty<Complex>(), StorageOrder.RowMajor);
+                        var actual = ComplexMatrix.Dense(0, 1, [], StorageOrder.RowMajor);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
                     expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_POSITIVE,
@@ -2232,7 +2229,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var actual = ComplexMatrix.Dense(1, 0, Array.Empty<Complex>(), StorageOrder.RowMajor);
+                        var actual = ComplexMatrix.Dense(1, 0, [], StorageOrder.RowMajor);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
                     expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_POSITIVE,
@@ -2256,7 +2253,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var actual = ComplexMatrix.Dense(2, 3, new Complex[6] { 0, 1, 2, 3, 4, 5 }, (StorageOrder)(-1));
+                        var actual = ComplexMatrix.Dense(2, 3, [0, 1, 2, 3, 4, 5], (StorageOrder)(-1));
                     },
                     expectedType: typeof(ArgumentException),
                     expectedPartialMessage: STR_EXCEPT_NOT_FIELD_OF_STORAGE_ORDER,
@@ -2279,12 +2276,12 @@ namespace Novacta.Analytics.Tests
             {
                 int numberOfRows = 2;
                 int numberOfColumns = 3;
-                Complex[] data = new Complex[6] { 0, 1, 2, 3, 4, 5 };
+                Complex[] data = [0, 1, 2, 3, 4, 5];
                 var actual = ComplexMatrix.Dense(numberOfRows, numberOfColumns, data, StorageOrder.RowMajor);
 
                 ComplexMatrixAssert.IsStateAsExpected(
                     expectedState: new ComplexMatrixState(
-                        asColumnMajorDenseArray: new Complex[6] { 0, 3, 1, 4, 2, 5 },
+                        asColumnMajorDenseArray: [0, 3, 1, 4, 2, 5],
                         numberOfRows: numberOfRows,
                         numberOfColumns: numberOfColumns),
                     actualMatrix: actual,
@@ -2292,7 +2289,7 @@ namespace Novacta.Analytics.Tests
 
                 Assert.AreEqual(StorageOrder.ColumnMajor, actual.StorageOrder);
                 Assert.AreEqual(StorageScheme.Dense, actual.StorageScheme);
-                ComplexArrayAssert.AreEqual(new Complex[6] { 0, 3, 1, 4, 2, 5 }, actual.GetStorage(), ComplexMatrixTest.Accuracy);
+                ComplexArrayAssert.AreEqual([0, 3, 1, 4, 2, 5], actual.GetStorage(), ComplexMatrixTest.Accuracy);
             }
 
             #endregion
@@ -2356,7 +2353,7 @@ namespace Novacta.Analytics.Tests
 
                 ComplexMatrixAssert.IsStateAsExpected(
                     expectedState: new ComplexMatrixState(
-                        asColumnMajorDenseArray: data.ToArray(),
+                        asColumnMajorDenseArray: [.. data],
                         numberOfRows: numberOfRows,
                         numberOfColumns: numberOfColumns),
                     actualMatrix: actual,
@@ -2364,7 +2361,7 @@ namespace Novacta.Analytics.Tests
 
                 Assert.AreEqual(StorageOrder.ColumnMajor, actual.StorageOrder);
                 Assert.AreEqual(StorageScheme.Dense, actual.StorageScheme);
-                ComplexArrayAssert.AreEqual(new Complex[6] { 0, 1, 2, 3, 4, 5 }, actual.GetStorage(), ComplexMatrixTest.Accuracy);
+                ComplexArrayAssert.AreEqual([0, 1, 2, 3, 4, 5], actual.GetStorage(), ComplexMatrixTest.Accuracy);
             }
 
             #endregion
@@ -2440,7 +2437,7 @@ namespace Novacta.Analytics.Tests
 
                 ComplexMatrixAssert.IsStateAsExpected(
                     expectedState: new ComplexMatrixState(
-                        asColumnMajorDenseArray: new Complex[6] { 0, 3, 1, 4, 2, 5 },
+                        asColumnMajorDenseArray: [0, 3, 1, 4, 2, 5],
                         numberOfRows: numberOfRows,
                         numberOfColumns: numberOfColumns),
                     actualMatrix: actual,
@@ -2448,7 +2445,7 @@ namespace Novacta.Analytics.Tests
 
                 Assert.AreEqual(StorageOrder.ColumnMajor, actual.StorageOrder);
                 Assert.AreEqual(StorageScheme.Dense, actual.StorageScheme);
-                ComplexArrayAssert.AreEqual(new Complex[6] { 0, 3, 1, 4, 2, 5 }, actual.GetStorage(), ComplexMatrixTest.Accuracy);
+                ComplexArrayAssert.AreEqual([0, 3, 1, 4, 2, 5], actual.GetStorage(), ComplexMatrixTest.Accuracy);
             }
 
             #endregion
@@ -2498,7 +2495,7 @@ namespace Novacta.Analytics.Tests
 
                 ComplexMatrixAssert.IsStateAsExpected(
                     expectedState: new ComplexMatrixState(
-                        asColumnMajorDenseArray: new Complex[6] { 0, 1, 2, 3, 4, 5 },
+                        asColumnMajorDenseArray: [0, 1, 2, 3, 4, 5],
                         numberOfRows: data.GetLength(0),
                         numberOfColumns: data.GetLength(1)),
                     actualMatrix: actual,
@@ -2506,7 +2503,7 @@ namespace Novacta.Analytics.Tests
 
                 Assert.AreEqual(StorageOrder.ColumnMajor, actual.StorageOrder);
                 Assert.AreEqual(StorageScheme.Dense, actual.StorageScheme);
-                ComplexArrayAssert.AreEqual(new Complex[6] { 0, 1, 2, 3, 4, 5 }, actual.GetStorage(), ComplexMatrixTest.Accuracy);
+                ComplexArrayAssert.AreEqual([0, 1, 2, 3, 4, 5], actual.GetStorage(), ComplexMatrixTest.Accuracy);
             }
 
             #endregion
@@ -2540,7 +2537,7 @@ namespace Novacta.Analytics.Tests
 
             // ComplexMatrix mainDiagonal is not null
             {
-                var mainDiagonal = ComplexMatrix.Dense(2, 2, new Complex[4] { 0, 2, 1, 3 });
+                var mainDiagonal = ComplexMatrix.Dense(2, 2, [0, 2, 1, 3]);
                 // diagonal = 
                 // [  0   1
                 //    2   3
@@ -2557,13 +2554,13 @@ namespace Novacta.Analytics.Tests
                 ComplexMatrixAssert.AreEqual(expected, actual, ComplexMatrixTest.Accuracy);
                 Assert.AreEqual(StorageOrder.RowMajor, actual.StorageOrder);
                 Assert.AreEqual(StorageScheme.CompressedRow, actual.StorageScheme);
-                ComplexArrayAssert.AreEqual(new Complex[4] { 2, 1, 3, 0 }, actual.GetStorage(), ComplexMatrixTest.Accuracy);
+                ComplexArrayAssert.AreEqual([2, 1, 3, 0], actual.GetStorage(), ComplexMatrixTest.Accuracy);
             }
 
             // ReadOnlyComplexMatrix mainDiagonal is not null
             {
                 var mainDiagonal =
-                    ComplexMatrix.Dense(2, 2, new Complex[4] { 0, 2, 1, 3 })
+                    ComplexMatrix.Dense(2, 2, [0, 2, 1, 3])
                     .AsReadOnly();
                 // diagonal = 
                 // [  0   1
@@ -2581,7 +2578,7 @@ namespace Novacta.Analytics.Tests
                 ComplexMatrixAssert.AreEqual(expected, actual, ComplexMatrixTest.Accuracy);
                 Assert.AreEqual(StorageOrder.RowMajor, actual.StorageOrder);
                 Assert.AreEqual(StorageScheme.CompressedRow, actual.StorageScheme);
-                ComplexArrayAssert.AreEqual(new Complex[4] { 2, 1, 3, 0 }, actual.GetStorage(), ComplexMatrixTest.Accuracy);
+                ComplexArrayAssert.AreEqual([2, 1, 3, 0], actual.GetStorage(), ComplexMatrixTest.Accuracy);
             }
         }
 
@@ -2617,14 +2614,14 @@ namespace Novacta.Analytics.Tests
                 //    0   0   1  ]
 
                 var expected = new ComplexMatrixState(
-                    asColumnMajorDenseArray: new Complex[9] { 1, 0, 0, 0, 1, 0, 0, 0, 1 },
+                    asColumnMajorDenseArray: [1, 0, 0, 0, 1, 0, 0, 0, 1],
                     numberOfRows: 3,
                     numberOfColumns: 3);
 
                 ComplexMatrixAssert.IsStateAsExpected(expected, actual, ComplexMatrixTest.Accuracy);
                 Assert.AreEqual(StorageOrder.RowMajor, actual.StorageOrder);
                 Assert.AreEqual(StorageScheme.CompressedRow, actual.StorageScheme);
-                ComplexArrayAssert.AreEqual(new Complex[3] { 1, 1, 1 }, actual.GetStorage(), ComplexMatrixTest.Accuracy);
+                ComplexArrayAssert.AreEqual([1, 1, 1], actual.GetStorage(), ComplexMatrixTest.Accuracy);
             }
         }
 
@@ -2698,7 +2695,7 @@ namespace Novacta.Analytics.Tests
                 Assert.AreEqual(StorageScheme.CompressedRow, actual.StorageScheme);
                 Assert.AreEqual(StorageOrder.RowMajor, actual.AsReadOnly().StorageOrder);
                 Assert.AreEqual(StorageScheme.CompressedRow, actual.AsReadOnly().StorageScheme);
-                ComplexArrayAssert.AreEqual(Array.Empty<Complex>(), actual.GetStorage(), ComplexMatrixTest.Accuracy);
+                ComplexArrayAssert.AreEqual([], actual.GetStorage(), ComplexMatrixTest.Accuracy);
             }
         }
 
@@ -2712,12 +2709,12 @@ namespace Novacta.Analytics.Tests
             ComplexMatrixTest.Find.Value(
                 testableMatrix: TestableComplexMatrix35.Get(),
                 value: 0.0,
-                expected: IndexCollection.FromArray(new int[] { 0, 3, 4 }));
+                expected: IndexCollection.FromArray([0, 3, 4]));
 
             ComplexMatrixTest.Find.Value(
                 testableMatrix: TestableComplexMatrix35.Get(),
                 value: Complex.NaN,
-                expected: IndexCollection.FromArray(new int[] { 5 }));
+                expected: IndexCollection.FromArray([5]));
 
             ComplexMatrixTest.Find.Value(
                 testableMatrix: TestableComplexMatrix36.Get(),
@@ -2727,7 +2724,7 @@ namespace Novacta.Analytics.Tests
             ComplexMatrixTest.Find.Value(
                 testableMatrix: TestableComplexMatrix37.Get(),
                 value: new Complex(2.0, 2.0),
-                expected: IndexCollection.FromArray(new int[] { 1, 2, 4 }));
+                expected: IndexCollection.FromArray([1, 2, 4]));
         }
 
         [TestMethod()]
@@ -2735,7 +2732,7 @@ namespace Novacta.Analytics.Tests
         {
             ComplexMatrixTest.Find.Nonzero(
                 testableMatrix: TestableComplexMatrix35.Get(),
-                expected: IndexCollection.FromArray(new int[] { 1, 2, 5 }));
+                expected: IndexCollection.FromArray([1, 2, 5]));
 
             ComplexMatrixTest.Find.Nonzero(
                 testableMatrix: TestableComplexMatrix36.Get(),
@@ -2750,7 +2747,7 @@ namespace Novacta.Analytics.Tests
             ComplexMatrixTest.Find.While.Succeed(
                 testableMatrix: TestableComplexMatrix35.Get(),
                 match: (c) => { return c.Real <= 1 && c.Imaginary <= 1; },
-                expected: IndexCollection.FromArray(new int[] { 0, 3, 4 }));
+                expected: IndexCollection.FromArray([0, 3, 4]));
 
             ComplexMatrixTest.Find.While.Succeed(
                 testableMatrix: TestableComplexMatrix35.Get(),
@@ -2760,7 +2757,7 @@ namespace Novacta.Analytics.Tests
             ComplexMatrixTest.Find.While.Succeed(
                 testableMatrix: TestableComplexMatrix35.Get(),
                 match: (c) => { return c.Real >= 0 && c.Imaginary >= 0; },
-                expected: IndexCollection.FromArray(new int[] { 0, 1, 2, 3, 4 }));
+                expected: IndexCollection.FromArray([0, 1, 2, 3, 4]));
         }
 
         #endregion
@@ -2956,7 +2953,7 @@ namespace Novacta.Analytics.Tests
             BinaryOperationTest.LeftComplexMatrixRightComplexMatrix.Fail(
                 RightWrongColsComplexMatrixComplexMatrixDivision.Get());
 
-            // ----- Unsquare, rank deficient right operand
+            // ----- Not square, rank deficient right operand
             BinaryOperationTest.LeftComplexMatrixRightComplexMatrix.Fail(
                 RightIsRectangularAndRankDeficientComplexMatrixComplexMatrixDivision.Get());
 
@@ -3024,7 +3021,7 @@ namespace Novacta.Analytics.Tests
             BinaryOperationTest.LeftComplexMatrixRightDoubleMatrix.Fail(
                 RightWrongColsComplexMatrixDoubleMatrixDivision.Get());
 
-            // ----- Unsquare, rank deficient right operand
+            // ----- Not square, rank deficient right operand
             BinaryOperationTest.LeftComplexMatrixRightDoubleMatrix.Fail(
                 RightIsRectangularAndRankDeficientComplexMatrixDoubleMatrixDivision.Get());
 
@@ -3091,7 +3088,7 @@ namespace Novacta.Analytics.Tests
             BinaryOperationTest.LeftDoubleMatrixRightComplexMatrix.Fail(
                 RightWrongColsDoubleMatrixComplexMatrixDivision.Get());
 
-            // ----- Unsquare, rank deficient right operand
+            // ----- Not square, rank deficient right operand
             BinaryOperationTest.LeftDoubleMatrixRightComplexMatrix.Fail(
                 RightIsRectangularAndRankDeficientDoubleMatrixComplexMatrixDivision.Get());
 
@@ -3573,15 +3570,15 @@ namespace Novacta.Analytics.Tests
             {
                 // IEnumerable.GetEnumerator
                 {
-                    var target = ComplexMatrix.Dense(2, 3, new Complex[6]
-                    {
-                        new Complex(1, 1),
-                        new Complex(2, 2),
-                        new Complex(3, 3),
-                        new Complex(4, 4),
-                        new Complex(5, 5),
-                        new Complex(6, 6)
-                    });
+                    var target = ComplexMatrix.Dense(2, 3,
+                    [
+                        new(1, 1),
+                        new(2, 2),
+                        new(3, 3),
+                        new(4, 4),
+                        new(5, 5),
+                        new(6, 6)
+                    ]);
                     IEnumerable enumerable = (IEnumerable)target;
 
                     IEnumerator enumerator = enumerable.GetEnumerator();
@@ -3607,15 +3604,15 @@ namespace Novacta.Analytics.Tests
 
                 // IEnumerable<Complex>.GetEnumerator
                 {
-                    var target = ComplexMatrix.Dense(2, 3, new Complex[6]
-                    {
-                        new Complex(1, 1),
-                        new Complex(2, 2),
-                        new Complex(3, 3),
-                        new Complex(4, 4),
-                        new Complex(5, 5),
-                        new Complex(6, 6)
-                    });
+                    var target = ComplexMatrix.Dense(2, 3,
+                    [
+                        new(1, 1),
+                        new(2, 2),
+                        new(3, 3),
+                        new(4, 4),
+                        new(5, 5),
+                        new(6, 6)
+                    ]);
                     IEnumerable<Complex> enumerable = (IEnumerable<Complex>)target;
 
                     IEnumerator<Complex> enumerator = enumerable.GetEnumerator();
@@ -3647,15 +3644,15 @@ namespace Novacta.Analytics.Tests
                             "GetResourceString",
                             new string[] { "STR_EXCEPT_ENU_OUT_OF_BOUNDS" });
 
-                    var target = ComplexMatrix.Dense(2, 3, new Complex[6]
-                    {
-                        new Complex(1, 1),
-                        new Complex(2, 2),
-                        new Complex(3, 3),
-                        new Complex(4, 4),
-                        new Complex(5, 5),
-                        new Complex(6, 6)
-                    });
+                    var target = ComplexMatrix.Dense(2, 3,
+                    [
+                        new(1, 1),
+                        new(2, 2),
+                        new(3, 3),
+                        new(4, 4),
+                        new(5, 5),
+                        new(6, 6)
+                    ]);
                     var enumerable = (IEnumerable<Complex>)target;
 
                     var enumerator = enumerable.GetEnumerator();
@@ -3677,15 +3674,15 @@ namespace Novacta.Analytics.Tests
                             "GetResourceString",
                             new string[] { "STR_EXCEPT_ENU_OUT_OF_BOUNDS" });
 
-                    var target = ComplexMatrix.Dense(2, 3, new Complex[6]
-                    {
-                        new Complex(1, 1),
-                        new Complex(2, 2),
-                        new Complex(3, 3),
-                        new Complex(4, 4),
-                        new Complex(5, 5),
-                        new Complex(6, 6)
-                    });
+                    var target = ComplexMatrix.Dense(2, 3,
+                    [
+                        new(1, 1),
+                        new(2, 2),
+                        new(3, 3),
+                        new(4, 4),
+                        new(5, 5),
+                        new(6, 6)
+                    ]);
                     var enumerable = (IEnumerable)target;
 
                     var enumerator = enumerable.GetEnumerator();
@@ -3705,15 +3702,15 @@ namespace Novacta.Analytics.Tests
             {
                 // IEnumerable.GetEnumerator
                 {
-                    var target = ComplexMatrix.Dense(2, 3, new Complex[6]
-                    {
-                        new Complex(1, 1),
-                        new Complex(2, 2),
-                        new Complex(3, 3),
-                        new Complex(4, 4),
-                        new Complex(5, 5),
-                        new Complex(6, 6)
-                    }).AsReadOnly();
+                    var target = ComplexMatrix.Dense(2, 3,
+                    [
+                        new(1, 1),
+                        new(2, 2),
+                        new(3, 3),
+                        new(4, 4),
+                        new(5, 5),
+                        new(6, 6)
+                    ]).AsReadOnly();
 
                     IEnumerable enumerable = (IEnumerable)target;
 
@@ -3740,15 +3737,15 @@ namespace Novacta.Analytics.Tests
 
                 // IEnumerable<Complex>.GetEnumerator
                 {
-                    var target = ComplexMatrix.Dense(2, 3, new Complex[6]
-                    {
-                        new Complex(1, 1),
-                        new Complex(2, 2),
-                        new Complex(3, 3),
-                        new Complex(4, 4),
-                        new Complex(5, 5),
-                        new Complex(6, 6)
-                    }).AsReadOnly();
+                    var target = ComplexMatrix.Dense(2, 3,
+                    [
+                        new(1, 1),
+                        new(2, 2),
+                        new(3, 3),
+                        new(4, 4),
+                        new(5, 5),
+                        new(6, 6)
+                    ]).AsReadOnly();
 
                     IEnumerable<Complex> enumerable = (IEnumerable<Complex>)target;
 
@@ -3781,15 +3778,15 @@ namespace Novacta.Analytics.Tests
                             "GetResourceString",
                             new string[] { "STR_EXCEPT_ENU_OUT_OF_BOUNDS" });
 
-                    var target = ComplexMatrix.Dense(2, 3, new Complex[6]
-                    {
-                        new Complex(1, 1),
-                        new Complex(2, 2),
-                        new Complex(3, 3),
-                        new Complex(4, 4),
-                        new Complex(5, 5),
-                        new Complex(6, 6)
-                    }).AsReadOnly();
+                    var target = ComplexMatrix.Dense(2, 3,
+                    [
+                        new(1, 1),
+                        new(2, 2),
+                        new(3, 3),
+                        new(4, 4),
+                        new(5, 5),
+                        new(6, 6)
+                    ]).AsReadOnly();
 
                     var enumerable = (IEnumerable<Complex>)target;
 
@@ -3812,15 +3809,15 @@ namespace Novacta.Analytics.Tests
                             "GetResourceString",
                             new string[] { "STR_EXCEPT_ENU_OUT_OF_BOUNDS" });
 
-                    var target = ComplexMatrix.Dense(2, 3, new Complex[6]
-                    {
-                        new Complex(1, 1),
-                        new Complex(2, 2),
-                        new Complex(3, 3),
-                        new Complex(4, 4),
-                        new Complex(5, 5),
-                        new Complex(6, 6)
-                    }).AsReadOnly();
+                    var target = ComplexMatrix.Dense(2, 3,
+                    [
+                        new(1, 1),
+                        new(2, 2),
+                        new(3, 3),
+                        new(4, 4),
+                        new(5, 5),
+                        new(6, 6)
+                    ]).AsReadOnly();
 
                     var enumerable = (IEnumerable)target;
 
@@ -3854,15 +3851,15 @@ namespace Novacta.Analytics.Tests
                     testableMatrix: TestableComplexMatrix16.Get(),
                     func: addZero,
                     expected: new ComplexMatrixState(
-                                    asColumnMajorDenseArray: new Complex[6]
-                                    {
-                                        new Complex(0, 0),
-                                        new Complex(1, 1),
-                                        new Complex(2, 2),
-                                        new Complex(3, 3),
-                                        new Complex(4, 4),
-                                        new Complex(5, 5)
-                                    },
+                                    asColumnMajorDenseArray:
+                                    [
+                                        new(0, 0),
+                                        new(1, 1),
+                                        new(2, 2),
+                                        new(3, 3),
+                                        new(4, 4),
+                                        new(5, 5)
+                                    ],
                                     numberOfRows: 2,
                                     numberOfColumns: 3));
 
@@ -3870,13 +3867,13 @@ namespace Novacta.Analytics.Tests
                     testableMatrix: TestableComplexMatrix38.Get(),
                     func: addZero,
                     expected: new ComplexMatrixState(
-                                    asColumnMajorDenseArray: new Complex[20]
-                                        {
+                                    asColumnMajorDenseArray:
+                                        [
                                             0, 0, 0, 0, 0,
-                                            0, 0, new Complex(2, 2), new Complex(3, 3), new Complex(5, 5),
-                                            0, new Complex(6, 6), 0, new Complex(7, 7), 0,
-                                            0, new Complex(4, 4), 0, 0, 0
-                                        },
+                                            0, 0, new(2, 2), new(3, 3), new(5, 5),
+                                            0, new(6, 6), 0, new(7, 7), 0,
+                                            0, new(4, 4), 0, 0, 0
+                                        ],
                                     numberOfRows: 4,
                                     numberOfColumns: 5));
 
@@ -3884,19 +3881,19 @@ namespace Novacta.Analytics.Tests
                     testableMatrix: TestableComplexMatrix39.Get(),
                     func: addZero,
                     expected: new ComplexMatrixState(
-                                    asColumnMajorDenseArray: new Complex[30]
-                                        {
-                                            0, 0, new Complex(3, 3),
+                                    asColumnMajorDenseArray:
+                                        [
+                                            0, 0, new(3, 3),
                                             0, 0, 0,
-                                            new Complex(3, 3), new Complex(5, 5), new Complex(1, 1),
-                                            0, new Complex(7, 7), 0,
-                                            new Complex(4, 4), 0, 0,
+                                            new(3, 3), new(5, 5), new(1, 1),
+                                            0, new(7, 7), 0,
+                                            new(4, 4), 0, 0,
                                             0, 0, 0,
-                                            0, new Complex(2, 2), 0,
-                                            0, new Complex(1, 1), 0,
-                                            new Complex(1, 1), 0, 0,
-                                            0, 0, new Complex(1, 1)
-                                        },
+                                            0, new(2, 2), 0,
+                                            0, new(1, 1), 0,
+                                            new(1, 1), 0, 0,
+                                            0, 0, new(1, 1)
+                                        ],
                                     numberOfRows: 3,
                                     numberOfColumns: 10));
             }
@@ -3909,15 +3906,15 @@ namespace Novacta.Analytics.Tests
                     testableMatrix: TestableComplexMatrix16.Get(),
                     func: addOne,
                     expected: new ComplexMatrixState(
-                                    asColumnMajorDenseArray: new Complex[6]
-                                        {
-                                            new Complex(1, 1),
-                                            new Complex(2, 2),
-                                            new Complex(3, 3),
-                                            new Complex(4, 4),
-                                            new Complex(5, 5),
-                                            new Complex(6, 6)
-                                        },
+                                    asColumnMajorDenseArray:
+                                        [
+                                            new(1, 1),
+                                            new(2, 2),
+                                            new(3, 3),
+                                            new(4, 4),
+                                            new(5, 5),
+                                            new(6, 6)
+                                        ],
                                     numberOfRows: 2,
                                     numberOfColumns: 3));
 
@@ -3925,13 +3922,13 @@ namespace Novacta.Analytics.Tests
                     testableMatrix: TestableComplexMatrix38.Get(),
                     func: addOne,
                     expected: new ComplexMatrixState(
-                                    asColumnMajorDenseArray: new Complex[20]
-                                        {
-                                            new Complex(1, 1), new Complex(1, 1), new Complex(1, 1), new Complex(1, 1), new Complex(1, 1),
-                                            new Complex(1, 1), new Complex(1, 1), new Complex(3, 3), new Complex(4, 4), new Complex(6, 6),
-                                            new Complex(1, 1), new Complex(7, 7), new Complex(1, 1), new Complex(8, 8), new Complex(1, 1),
-                                            new Complex(1, 1), new Complex(5, 5), new Complex(1, 1), new Complex(1, 1), new Complex(1, 1)
-                                        },
+                                    asColumnMajorDenseArray:
+                                        [
+                                            new(1, 1), new(1, 1), new(1, 1), new(1, 1), new(1, 1),
+                                            new(1, 1), new(1, 1), new(3, 3), new(4, 4), new(6, 6),
+                                            new(1, 1), new(7, 7), new(1, 1), new(8, 8), new(1, 1),
+                                            new(1, 1), new(5, 5), new(1, 1), new(1, 1), new(1, 1)
+                                        ],
                                     numberOfRows: 4,
                                     numberOfColumns: 5));
 
@@ -3939,19 +3936,19 @@ namespace Novacta.Analytics.Tests
                     testableMatrix: TestableComplexMatrix39.Get(),
                     func: addOne,
                     expected: new ComplexMatrixState(
-                                    asColumnMajorDenseArray: new Complex[30]
-                                        {
-                                            new Complex(1, 1), new Complex(1, 1), new Complex(4, 4),
-                                            new Complex(1, 1), new Complex(1, 1), new Complex(1, 1),
-                                            new Complex(4, 4), new Complex(6, 6), new Complex(2, 2),
-                                            new Complex(1, 1), new Complex(8, 8), new Complex(1, 1),
-                                            new Complex(5, 5), new Complex(1, 1), new Complex(1, 1),
-                                            new Complex(1, 1), new Complex(1, 1), new Complex(1, 1),
-                                            new Complex(1, 1), new Complex(3, 3), new Complex(1, 1),
-                                            new Complex(1, 1), new Complex(2, 2), new Complex(1, 1),
-                                            new Complex(2, 2), new Complex(1, 1), new Complex(1, 1),
-                                            new Complex(1, 1), new Complex(1, 1), new Complex(2, 2)
-                                        },
+                                    asColumnMajorDenseArray:
+                                        [
+                                            new(1, 1), new(1, 1), new(4, 4),
+                                            new(1, 1), new(1, 1), new(1, 1),
+                                            new(4, 4), new(6, 6), new(2, 2),
+                                            new(1, 1), new(8, 8), new(1, 1),
+                                            new(5, 5), new(1, 1), new(1, 1),
+                                            new(1, 1), new(1, 1), new(1, 1),
+                                            new(1, 1), new(3, 3), new(1, 1),
+                                            new(1, 1), new(2, 2), new(1, 1),
+                                            new(2, 2), new(1, 1), new(1, 1),
+                                            new(1, 1), new(1, 1), new(2, 2)
+                                        ],
                                     numberOfRows: 3,
                                     numberOfColumns: 10));
             }
@@ -3977,8 +3974,8 @@ namespace Novacta.Analytics.Tests
             ComplexMatrixTest.Conjugate.OutPlace(
                 testableMatrix: TestableComplexMatrix38.Get(),
                 expected: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[20]
-                                    {
+                                asColumnMajorDenseArray:
+                                    [
                                         C(c00),
                                         C(c00),
                                         C(c00),
@@ -3999,15 +3996,15 @@ namespace Novacta.Analytics.Tests
                                         C(c00),
                                         C(c00),
                                         C(c00)
-                                    },
+                                    ],
                                 numberOfRows: 4,
                                 numberOfColumns: 5));
 
             ComplexMatrixTest.Conjugate.OutPlace(
                 testableMatrix: TestableComplexMatrix39.Get(),
                 expected: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[30]
-                                    {
+                                asColumnMajorDenseArray:
+                                    [
                                         C(c00), C(c00), C(c33),
                                         C(c00), C(c00), C(c00),
                                         C(c33), C(c55), C(c11),
@@ -4018,22 +4015,22 @@ namespace Novacta.Analytics.Tests
                                         C(c00), C(c11), C(c00),
                                         C(c11), C(c00), C(c00),
                                         C(c00), C(c00), C(c11)
-                                    },
+                                    ],
                                 numberOfRows: 3,
                                 numberOfColumns: 10));
 
             ComplexMatrixTest.Conjugate.OutPlace(
                 testableMatrix: TestableComplexMatrix16.Get(),
                 expected: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[6]
-                                    {
+                                asColumnMajorDenseArray:
+                                    [
                                         0,
                                         C(c11),
                                         C(c22),
                                         C(c33),
                                         C(c44),
                                         C(c55)
-                                    },
+                                    ],
                                 numberOfRows: 2,
                                 numberOfColumns: 3,
                                 rowNames: new Dictionary<int, string>(2) { { 0, "r0" }, { 1, "r1" } },
@@ -4042,15 +4039,15 @@ namespace Novacta.Analytics.Tests
             ComplexMatrixTest.Conjugate.OutPlace(
                 testableMatrix: TestableComplexMatrix57.Get(),
                 expected: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[6]
-                                    {
+                                asColumnMajorDenseArray:
+                                    [
                                         0,
                                         C(c11),
                                         C(c22),
                                         C(c33),
                                         C(c44),
                                         C(c55)
-                                    },
+                                    ],
                                 numberOfRows: 2,
                                 numberOfColumns: 3,
                                 rowNames: new Dictionary<int, string>(2) { { 0, "r0" }, { 1, "r1" } }));
@@ -4058,15 +4055,15 @@ namespace Novacta.Analytics.Tests
             ComplexMatrixTest.Conjugate.OutPlace(
                 testableMatrix: TestableComplexMatrix58.Get(),
                 expected: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[6]
-                                    {
+                                asColumnMajorDenseArray:
+                                    [
                                         0,
                                         C(c11),
                                         C(c22),
                                         C(c33),
                                         C(c44),
                                         C(c55)
-                                    },
+                                    ],
                                 numberOfRows: 2,
                                 numberOfColumns: 3,
                                 columnNames: new Dictionary<int, string>(3) { { 0, "c0" }, { 1, "c1" }, { 2, "c2" } }));
@@ -4092,40 +4089,40 @@ namespace Novacta.Analytics.Tests
             ComplexMatrixTest.ConjugateTranspose.OutPlace(
                 testableMatrix: TestableComplexMatrix38.Get(),
                 expected: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[20]
-                                    {
+                                asColumnMajorDenseArray:
+                                    [
                                       0, 0,      C(c33), 0,      C(c44),
                                       0, 0,      C(c55), C(c77), 0,
                                       0, 0,      0,      0,      0,
                                       0, C(c22), C(c66), 0,      0
-                                    },
+                                    ],
                                 numberOfRows: 5,
                                 numberOfColumns: 4));
 
             ComplexMatrixTest.ConjugateTranspose.OutPlace(
                 testableMatrix: TestableComplexMatrix39.Get(),
                 expected: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[30]
-                                    {
+                                asColumnMajorDenseArray:
+                                    [
                                         0,      0, C(c33), 0,      C(c44), 0, 0,      0,      C(c11), 0,
                                         0,      0, C(c55), C(c77), 0,      0, C(c22), C(c11), 0,      0,
                                         C(c33), 0, C(c11), 0,      0,      0, 0,      0,      0,      C(c11)
-                                    },
+                                    ],
                                 numberOfRows: 10,
                                 numberOfColumns: 3));
 
             ComplexMatrixTest.ConjugateTranspose.OutPlace(
                 testableMatrix: TestableComplexMatrix16.Get(),
                 expected: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[6]
-                                    {
+                                asColumnMajorDenseArray:
+                                    [
                                         0, 
                                         C(c22), 
                                         C(c44), 
                                         C(c11), 
                                         C(c33), 
                                         C(c55)
-                                    },
+                                    ],
                                 numberOfRows: 3,
                                 numberOfColumns: 2,
                                 columnNames: new Dictionary<int, string>(2) { { 0, "r0" }, { 1, "r1" } },
@@ -4134,15 +4131,15 @@ namespace Novacta.Analytics.Tests
             ComplexMatrixTest.ConjugateTranspose.OutPlace(
                 testableMatrix: TestableComplexMatrix57.Get(),
                 expected: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[6]
-                                    {
+                                asColumnMajorDenseArray:
+                                    [
                                         0, 
                                         C(c22), 
                                         C(c44), 
                                         C(c11), 
                                         C(c33), 
                                         C(c55)
-                                    },
+                                    ],
                                 numberOfRows: 3,
                                 numberOfColumns: 2,
                                 columnNames: new Dictionary<int, string>(2) { { 0, "r0" }, { 1, "r1" } }));
@@ -4150,15 +4147,15 @@ namespace Novacta.Analytics.Tests
             ComplexMatrixTest.ConjugateTranspose.OutPlace(
                 testableMatrix: TestableComplexMatrix58.Get(),
                 expected: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[6]
-                                    {
+                                asColumnMajorDenseArray:
+                                    [
                                         0, 
                                         C(c22), 
                                         C(c44), 
                                         C(c11), 
                                         C(c33), 
                                         C(c55)
-                                    },
+                                    ],
                                 numberOfRows: 3,
                                 numberOfColumns: 2,
                                 rowNames: new Dictionary<int, string>(3) { { 0, "c0" }, { 1, "c1" }, { 2, "c2" } }));
@@ -4182,35 +4179,35 @@ namespace Novacta.Analytics.Tests
             ComplexMatrixTest.Transpose.OutPlace(
                 testableMatrix: TestableComplexMatrix38.Get(),
                 expected: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[20]
-                                    {
+                                asColumnMajorDenseArray:
+                                    [
                                       0, 0,   c33, 0,   c44,
                                       0, 0,   c55, c77, 0,
                                       0, 0,   0,   0,   0,
                                       0, c22, c66, 0,   0
-                                    },
+                                    ],
                                 numberOfRows: 5,
                                 numberOfColumns: 4));
 
             ComplexMatrixTest.Transpose.OutPlace(
                 testableMatrix: TestableComplexMatrix39.Get(),
                 expected: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[30]
-                                    {
+                                asColumnMajorDenseArray:
+                                    [
                                         0,   0, c33, 0,    c44, 0,   0,   0,   c11, 0,
                                         0,   0, c55, c77,  0,   0,   c22, c11, 0,   0,
                                         c33, 0, c11, 0,    0,   0,   0,   0,   0,   c11
-                                    },
+                                    ],
                                 numberOfRows: 10,
                                 numberOfColumns: 3));
 
             ComplexMatrixTest.Transpose.OutPlace(
                 testableMatrix: TestableComplexMatrix16.Get(),
                 expected: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[6]
-                                    {
+                                asColumnMajorDenseArray:
+                                    [
                                       0, c22, c44, c11, c33, c55
-                                    },
+                                    ],
                                 numberOfRows: 3,
                                 numberOfColumns: 2,
                                 columnNames: new Dictionary<int, string>(2) { { 0, "r0" }, { 1, "r1" } },
@@ -4219,10 +4216,10 @@ namespace Novacta.Analytics.Tests
             ComplexMatrixTest.Transpose.OutPlace(
                 testableMatrix: TestableComplexMatrix57.Get(),
                 expected: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[6]
-                                    {
+                                asColumnMajorDenseArray:
+                                    [
                                       0, c22, c44, c11, c33, c55
-                                    },
+                                    ],
                                 numberOfRows: 3,
                                 numberOfColumns: 2,
                                 columnNames: new Dictionary<int, string>(2) { { 0, "r0" }, { 1, "r1" } }));
@@ -4230,10 +4227,10 @@ namespace Novacta.Analytics.Tests
             ComplexMatrixTest.Transpose.OutPlace(
                 testableMatrix: TestableComplexMatrix58.Get(),
                 expected: new ComplexMatrixState(
-                                asColumnMajorDenseArray: new Complex[6]
-                                    {
+                                asColumnMajorDenseArray:
+                                    [
                                       0, c22, c44, c11, c33, c55
-                                    },
+                                    ],
                                 numberOfRows: 3,
                                 numberOfColumns: 2,
                                 rowNames: new Dictionary<int, string>(3) { { 0, "c0" }, { 1, "c1" }, { 2, "c2" } }));
@@ -4263,7 +4260,7 @@ namespace Novacta.Analytics.Tests
                     var target = ComplexMatrix.Dense(
                         3,
                         2,
-                        new Complex[6] { 0, 0, 0, c22, c33, Complex.NaN });
+                        [0, 0, 0, c22, c33, Complex.NaN]);
 
                     target.SetRowName(0, "Row0");
                     target.SetRowName(1, "Row1");
@@ -4367,16 +4364,16 @@ namespace Novacta.Analytics.Tests
 
             ComplexMatrixTest.CopyTo.Succeed(
                 testableMatrix: TestableComplexMatrix09.Get(),
-                array: new Complex[6] { 10, 20, 30, 40, 50, 60 },
+                array: [10, 20, 30, 40, 50, 60],
                 arrayIndex: 1,
-                expected: new Complex[6] { 10, new Complex(1, 1), 0, 0, 0, 60 },
+                expected: [10, new(1, 1), 0, 0, 0, 60],
                 delta: ComplexMatrixTest.Accuracy);
 
             ComplexMatrixTest.CopyTo.Succeed(
                testableMatrix: TestableComplexMatrix13.Get(),
-               array: new Complex[6] { 10, 20, 30, 40, 50, 60 },
+               array: [10, 20, 30, 40, 50, 60],
                arrayIndex: 2,
-               expected: new Complex[6] { 10, 20, new Complex(1.1, 1.1), 0, 0, new Complex(4.4, 4.4) },
+               expected: [10, 20, new(1.1, 1.1), 0, 0, new(4.4, 4.4)],
                delta: ComplexMatrixTest.Accuracy);
         }
 

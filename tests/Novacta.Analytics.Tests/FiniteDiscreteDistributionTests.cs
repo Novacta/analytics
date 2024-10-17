@@ -21,10 +21,10 @@ namespace Novacta.Analytics.Tests
             // Valid input
             {
                 var values = DoubleMatrix.Dense(3, 2,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var masses = DoubleMatrix.Dense(3, 2,
-                    new double[6] { .1, .2, .3, .2, .1, .1 });
+                    [.1, .2, .3, .2, .1, .1]);
 
                 var distribution = new FiniteDiscreteDistribution(
                     values: values, masses: masses);
@@ -42,7 +42,7 @@ namespace Novacta.Analytics.Tests
             // values is null
             {
                 var masses = DoubleMatrix.Dense(3, 2,
-                    new double[6] { .1, .2, .3, .2, .1, .1 });
+                    [.1, .2, .3, .2, .1, .1]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -64,7 +64,7 @@ namespace Novacta.Analytics.Tests
                 var values = DoubleMatrix.Dense(3, 2);
 
                 var masses = DoubleMatrix.Dense(3, 2,
-                    new double[6] { .1, .2, .3, .2, .1, .1 });
+                    [.1, .2, .3, .2, .1, .1]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -80,7 +80,7 @@ namespace Novacta.Analytics.Tests
             // masses is null
             {
                 var values = DoubleMatrix.Dense(3, 2,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -102,10 +102,10 @@ namespace Novacta.Analytics.Tests
                         "values");
 
                 var values = DoubleMatrix.Dense(3, 2,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var masses = DoubleMatrix.Dense(1, 2,
-                    new double[2] { .5, .5 });
+                    [.5, .5]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -127,10 +127,10 @@ namespace Novacta.Analytics.Tests
                         "values");
 
                 var values = DoubleMatrix.Dense(3, 2,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var masses = DoubleMatrix.Dense(3, 1,
-                    new double[3] { .2, .5, .3 });
+                    [.2, .5, .3]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -152,10 +152,10 @@ namespace Novacta.Analytics.Tests
                             "0", "1");
 
                 var values = DoubleMatrix.Dense(3, 2,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var masses = DoubleMatrix.Dense(3, 2,
-                    new double[6] { .2, .5, .3, -.1, .1, 0 });
+                    [.2, .5, .3, -.1, .1, 0]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -175,10 +175,10 @@ namespace Novacta.Analytics.Tests
                         "STR_EXCEPT_PAR_ENTRIES_MUST_SUM_TO_1");
 
                 var values = DoubleMatrix.Dense(3, 2,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var masses = DoubleMatrix.Dense(3, 2,
-                    new double[6] { .2, .5, .3, .1, .1, 0 });
+                    [.2, .5, .3, .1, .1, 0]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -196,7 +196,7 @@ namespace Novacta.Analytics.Tests
         public void UniformTest()
         {
             var values = DoubleMatrix.Dense(3, 2,
-                new double[6] { 1, 2, 3, 4, 5, 6 });
+                [1, 2, 3, 4, 5, 6]);
 
             var distribution = FiniteDiscreteDistribution.Uniform(values);
 
@@ -216,13 +216,13 @@ namespace Novacta.Analytics.Tests
             // Valid input
             {
                 var values = DoubleMatrix.Dense(3, 2,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var distribution = FiniteDiscreteDistribution.Uniform(
                     values: values);
 
                 var masses = DoubleMatrix.Dense(3, 2,
-                    new double[6] { .1, .2, .3, .2, .1, .1 });
+                    [.1, .2, .3, .2, .1, .1]);
 
                 distribution.SetMasses(masses: masses);
 
@@ -235,7 +235,7 @@ namespace Novacta.Analytics.Tests
             // masses is null
             {
                 var values = DoubleMatrix.Dense(3, 2,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var distribution = FiniteDiscreteDistribution.Uniform(
                     values: values);
@@ -259,13 +259,13 @@ namespace Novacta.Analytics.Tests
                         "values");
 
                 var values = DoubleMatrix.Dense(3, 2,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var distribution = FiniteDiscreteDistribution.Uniform(
                     values: values);
 
                 var masses = DoubleMatrix.Dense(1, 2,
-                    new double[2] { .5, .5 });
+                    [.5, .5]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -286,13 +286,13 @@ namespace Novacta.Analytics.Tests
                         "values");
 
                 var values = DoubleMatrix.Dense(3, 2,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var distribution = FiniteDiscreteDistribution.Uniform(
                     values: values);
 
                 var masses = DoubleMatrix.Dense(3, 1,
-                    new double[3] { .2, .5, .3 });
+                    [.2, .5, .3]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -313,13 +313,13 @@ namespace Novacta.Analytics.Tests
                             "0", "1");
 
                 var values = DoubleMatrix.Dense(3, 2,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var distribution = FiniteDiscreteDistribution.Uniform(
                     values: values);
 
                 var masses = DoubleMatrix.Dense(3, 2,
-                    new double[6] { .2, .5, .3, -.1, .1, 0 });
+                    [.2, .5, .3, -.1, .1, 0]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -338,13 +338,13 @@ namespace Novacta.Analytics.Tests
                         "STR_EXCEPT_PAR_ENTRIES_MUST_SUM_TO_1");
 
                 var values = DoubleMatrix.Dense(3, 2,
-                    new double[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var distribution = FiniteDiscreteDistribution.Uniform(
                     values: values);
 
                 var masses = DoubleMatrix.Dense(3, 2,
-                    new double[6] { .2, .5, .3, .1, .1, 0 });
+                    [.2, .5, .3, .1, .1, 0]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>

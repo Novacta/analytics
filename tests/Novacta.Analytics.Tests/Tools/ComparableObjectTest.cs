@@ -38,9 +38,7 @@ namespace Novacta.Analytics.Tests.Tools
             IComparable<T>,
             IComparable
         {
-            if (obj is null) {
-                throw new ArgumentNullException(nameof(obj));
-            }
+            ArgumentNullException.ThrowIfNull(obj);
 
             Assert.IsFalse(obj.Equals((T)null));
 
@@ -76,9 +74,7 @@ namespace Novacta.Analytics.Tests.Tools
         /// </exception>
         public static void CompareToWithNulls(IndexCollection obj)
         {
-            if (obj is null) {
-                throw new ArgumentNullException(nameof(obj));
-            }
+            ArgumentNullException.ThrowIfNull(obj);
 
             // <=
 
@@ -130,9 +126,7 @@ namespace Novacta.Analytics.Tests.Tools
         /// </exception>
         public static void CompareToWithNulls(DoubleMatrixRow obj)
         {
-            if (obj is null) {
-                throw new ArgumentNullException(nameof(obj));
-            }
+            ArgumentNullException.ThrowIfNull(obj);
 
             // <=
 

@@ -214,10 +214,7 @@ namespace Novacta.Analytics
             IList<CategoricalVariable> featureVariables,
             CategoricalVariable responseVariable)
         {
-            if (featureVariables is null)
-            {
-                throw new ArgumentNullException(nameof(featureVariables));
-            }
+            ArgumentNullException.ThrowIfNull(featureVariables);
 
             if (featureVariables.Count == 0)
             {
@@ -241,10 +238,7 @@ namespace Novacta.Analytics
                 }
             }
 
-            if (responseVariable is null)
-            {
-                throw new ArgumentNullException(nameof(responseVariable));
-            }
+            ArgumentNullException.ThrowIfNull(responseVariable);
 
             if (responseVariable.NumberOfCategories == 0)
             {
@@ -264,7 +258,7 @@ namespace Novacta.Analytics
                 featureVariable.SetAsReadOnly();
             }
 
-            this.responseCodeIndexPairs = new SortedList<double, int>();
+            this.responseCodeIndexPairs = [];
             int i = 0;
             foreach (var code in responseVariable.CategoryCodes)
             {
@@ -274,7 +268,7 @@ namespace Novacta.Analytics
             this.ResponseVariable = responseVariable;
             this.ResponseVariable.SetAsReadOnly();
 
-            this.entailments = new List<CategoricalEntailment>();
+            this.entailments = [];
         }
 
         /// <summary>
@@ -348,15 +342,9 @@ namespace Novacta.Analytics
         {
             #region Input validation
 
-            if (dataSet is null)
-            {
-                throw new ArgumentNullException(nameof(dataSet));
-            }
+            ArgumentNullException.ThrowIfNull(dataSet);
 
-            if (featureVariableIndexes is null)
-            {
-                throw new ArgumentNullException(nameof(featureVariableIndexes));
-            }
+            ArgumentNullException.ThrowIfNull(featureVariableIndexes);
 
             if (featureVariableIndexes.maxIndex >= dataSet.Data.NumberOfColumns)
             {
@@ -568,10 +556,7 @@ namespace Novacta.Analytics
         {
             #region Input validation
 
-            if (featurePremises is null)
-            {
-                throw new ArgumentNullException(nameof(featurePremises));
-            }
+            ArgumentNullException.ThrowIfNull(featurePremises);
 
             if (this.FeatureVariables.Count != featurePremises.Count)
             {
@@ -727,15 +712,9 @@ namespace Novacta.Analytics
         {
             #region Input validation
 
-            if (dataSet is null)
-            {
-                throw new ArgumentNullException(nameof(dataSet));
-            }
+            ArgumentNullException.ThrowIfNull(dataSet);
 
-            if (featureVariableIndexes is null)
-            {
-                throw new ArgumentNullException(nameof(featureVariableIndexes));
-            }
+            ArgumentNullException.ThrowIfNull(featureVariableIndexes);
 
             if (featureVariableIndexes.Max >= dataSet.Data.NumberOfColumns)
             {
@@ -890,15 +869,9 @@ namespace Novacta.Analytics
         {
             #region Input validation
 
-            if (dataSet is null)
-            {
-                throw new ArgumentNullException(nameof(dataSet));
-            }
+            ArgumentNullException.ThrowIfNull(dataSet);
 
-            if (featureVariableIndexes is null)
-            {
-                throw new ArgumentNullException(nameof(featureVariableIndexes));
-            }
+            ArgumentNullException.ThrowIfNull(featureVariableIndexes);
 
             if (dataSet.NumberOfColumns <= featureVariableIndexes.Max)
             {
@@ -966,7 +939,7 @@ namespace Novacta.Analytics
             }
 
             return new CategoricalDataSet(
-                new List<CategoricalVariable>() { this.ResponseVariable },
+                [this.ResponseVariable],
                 itemResponses);
         }
 
@@ -1026,10 +999,7 @@ namespace Novacta.Analytics
         {
             #region Input validation
 
-            if (predictedDataSet is null)
-            {
-                throw new ArgumentNullException(nameof(predictedDataSet));
-            }
+            ArgumentNullException.ThrowIfNull(predictedDataSet);
 
             if (predictedResponseVariableIndex >= predictedDataSet.Data.NumberOfColumns
                 ||
@@ -1045,10 +1015,7 @@ namespace Novacta.Analytics
                             nameof(predictedDataSet)));
             }
 
-            if (actualDataSet is null)
-            {
-                throw new ArgumentNullException(nameof(actualDataSet));
-            }
+            ArgumentNullException.ThrowIfNull(actualDataSet);
 
             if (actualResponseVariableIndex >= actualDataSet.Data.NumberOfColumns
                 ||

@@ -32,8 +32,8 @@ namespace Novacta.Analytics.Tests.TestableItems.Division
         RightIsRectangularNotLessRowsThanColsDoubleMatrixDoubleMatrixDivision() :
             base(
                 expected: new DoubleMatrixState(
-                    asColumnMajorDenseArray: new double[10]
-                    {
+                    asColumnMajorDenseArray:
+                    [
                          -1.24142857142857,
                          -1.82571428571429,
                           0.485714285714283,
@@ -43,7 +43,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Division
                           0.775714285714289,
                           1.12285714285715,
                          -0.661428571428575,
-                         -1.06571428571429 },
+                         -1.06571428571429 ],
                     numberOfRows: 2,
                     numberOfColumns: 5),
                 left: TestableDoubleMatrix34.Get(),

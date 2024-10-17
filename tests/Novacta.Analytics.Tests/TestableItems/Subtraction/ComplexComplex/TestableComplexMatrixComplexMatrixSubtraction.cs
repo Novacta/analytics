@@ -2,8 +2,6 @@
 // Licensed under the MIT license. 
 // See the LICENSE file in the project root for more information.
 
-using System;
-
 namespace Novacta.Analytics.Tests.TestableItems.Subtraction
 {
     /// <summary>
@@ -28,25 +26,25 @@ namespace Novacta.Analytics.Tests.TestableItems.Subtraction
                 left,
                 right,
                 leftWritableRightWritableOps:
-                    new Func<ComplexMatrix, ComplexMatrix, ComplexMatrix>[2] {
+                    [
                         (l, r) => l - r,
                         (l, r) => ComplexMatrix.Subtract(l, r)
-                    },
+                    ],
                 leftReadOnlyRightWritableOps:
-                    new Func<ReadOnlyComplexMatrix, ComplexMatrix, ComplexMatrix>[2] {
+                    [
                         (l, r) => l - r,
                         (l, r) => ReadOnlyComplexMatrix.Subtract(l, r)
-                    },
+                    ],
                 leftWritableRightReadOnlyOps:
-                    new Func<ComplexMatrix, ReadOnlyComplexMatrix, ComplexMatrix>[2] {
+                    [
                         (l, r) => l - r,
                         (l, r) => ReadOnlyComplexMatrix.Subtract(l, r)
-                    },
+                    ],
                 leftReadOnlyRightReadOnlyOps:
-                    new Func<ReadOnlyComplexMatrix, ReadOnlyComplexMatrix, ComplexMatrix>[2] {
+                    [
                         (l, r) => l - r,
                         (l, r) => ReadOnlyComplexMatrix.Subtract(l, r)
-                    }
+                    ]
                 )
         {
         }

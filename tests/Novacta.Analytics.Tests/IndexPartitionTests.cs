@@ -61,11 +61,11 @@ namespace Novacta.Analytics.Tests
 
                 IndexPartition<double> expected = new()
                 {
-                    partIndetifiers = new List<double>(2)
-                    {
+                    partIdentifiers =
+                    [
                         0.0,
                         1.0
-                    },
+                    ],
 
                     parts = new Dictionary<double, IndexCollection>(2)
                     {
@@ -113,18 +113,18 @@ namespace Novacta.Analytics.Tests
 
                 IndexPartition<double> expected = new()
                 {
-                    partIndetifiers = new List<double>(3)
-                    {
+                    partIdentifiers =
+                    [
                         -1.0,
                         0.0,
                         1.0
-                    },
+                    ],
 
                     parts = new Dictionary<double, IndexCollection>(3)
                     {
-                        { -1.0, IndexCollection.FromArray(new int[] { 3, 4, 6 }) },
+                        { -1.0, IndexCollection.FromArray([3, 4, 6]) },
                         { 0.0, IndexCollection.Default(1) },
-                        { 1.0, IndexCollection.FromArray(new int[] { 2, 5, 7 }) }
+                        { 1.0, IndexCollection.FromArray([2, 5, 7]) }
                     }
                 };
 
@@ -166,7 +166,7 @@ namespace Novacta.Analytics.Tests
 
                 var expected = new IndexPartition<double>
                 {
-                    partIndetifiers = new List<double>(3)
+                    partIdentifiers = new List<double>(3)
                     {
                         0.0,
                         1.0,
@@ -176,10 +176,10 @@ namespace Novacta.Analytics.Tests
 
                     parts = new Dictionary<double, IndexCollection>(3)
                     {
-                        { 0.0, IndexCollection.FromArray(new int[] { 1 }) },
-                        { 1.0, IndexCollection.FromArray(new int[] { 0, 5 }) },
-                        { 2.0, IndexCollection.FromArray(new int[] { 2, 4 }) },
-                        { 3.0, IndexCollection.FromArray(new int[] { 3 }) }
+                        { 0.0, IndexCollection.FromArray([1]) },
+                        { 1.0, IndexCollection.FromArray([0, 5]) },
+                        { 2.0, IndexCollection.FromArray([2, 4]) },
+                        { 3.0, IndexCollection.FromArray([3]) }
                     }
                 };
 
@@ -232,18 +232,18 @@ namespace Novacta.Analytics.Tests
 
                 var expected = new IndexPartition<string>
                 {
-                    partIndetifiers = new List<string>(3)
-                    {
+                    partIdentifiers =
+                    [
                         "one",
                         "three",
                         "two"
-                    },
+                    ],
 
                     parts = new Dictionary<string, IndexCollection>(3)
                     {
-                        { "one", IndexCollection.FromArray(new int[] { 0, 2, 3 }) },
+                        { "one", IndexCollection.FromArray([0, 2, 3]) },
                         { "three", IndexCollection.Range(4, 5) },
-                        { "two", IndexCollection.FromArray(new int[] { 1 }) }
+                        { "two", IndexCollection.FromArray([1]) }
                     }
                 };
 
@@ -330,16 +330,16 @@ namespace Novacta.Analytics.Tests
                 // 
                 var expected = new IndexPartition<bool>
                 {
-                    partIndetifiers = new List<bool>(2)
-                    {
+                    partIdentifiers =
+                    [
                         false,
                         true
-                    },
+                    ],
 
                     parts = new Dictionary<bool, IndexCollection>(2)
                     {
-                        { false, IndexCollection.FromArray(new int[2] { 0, 10 }) },
-                        { true, IndexCollection.FromArray(new int[2] { 5, 15 }) }
+                        { false, IndexCollection.FromArray([0, 10]) },
+                        { true, IndexCollection.FromArray([5, 15]) }
                     }
                 };
 
@@ -400,12 +400,12 @@ namespace Novacta.Analytics.Tests
 
                 var expected = new IndexPartition<DoubleMatrixRow>
                 {
-                    partIndetifiers = new List<DoubleMatrixRow>(3)
-                    {
+                    partIdentifiers =
+                    [
                         elements[0],
                         elements[2],
                         elements[4]
-                    },
+                    ],
 
                     parts = new Dictionary<DoubleMatrixRow, IndexCollection>(3)
                     {
@@ -477,7 +477,7 @@ namespace Novacta.Analytics.Tests
             {
                 var actual = target["one"];
 
-                var expected = IndexCollection.FromArray(new int[3] { 0, 2, 3 });
+                var expected = IndexCollection.FromArray([0, 2, 3]);
 
                 IndexCollectionAssert.AreEqual(expected, actual);
             }
@@ -562,7 +562,7 @@ namespace Novacta.Analytics.Tests
                 var actual = IndexPartition.MinimumCentroidLinkage(
                     data, partition);
 
-                List<double> linkages = new();
+                List<double> linkages = [];
                 foreach (var leftId in partition.Identifiers)
                 {
                     var leftPart = partition[leftId];
@@ -797,16 +797,16 @@ namespace Novacta.Analytics.Tests
             // Part identifier: "true"
             //      indexes: 5, 15
             // 
-            var falsePart = IndexCollection.FromArray(new int[2] { 0, 10 });
-            var truePart = IndexCollection.FromArray(new int[2] { 5, 15 });
+            var falsePart = IndexCollection.FromArray([0, 10]);
+            var truePart = IndexCollection.FromArray([5, 15]);
 
             var target = new IndexPartition<string>
             {
-                partIndetifiers = new List<string>(2)
-                    {
+                partIdentifiers =
+                    [
                         "false",
                         "true"
-                    },
+                    ],
 
                 parts = new Dictionary<string, IndexCollection>(2)
                     {
@@ -851,7 +851,7 @@ namespace Novacta.Analytics.Tests
 
             var target = new IndexPartition<double>
             {
-                partIndetifiers = new List<double>(3)
+                partIdentifiers = new List<double>(3)
                 {
                     0.0,
                     1.0,
@@ -861,10 +861,10 @@ namespace Novacta.Analytics.Tests
 
                 parts = new Dictionary<double, IndexCollection>(3)
                 {
-                    { 0.0, IndexCollection.FromArray(new int[] { 1 }) },
-                    { 1.0, IndexCollection.FromArray(new int[] { 0, 5 }) },
-                    { 2.0, IndexCollection.FromArray(new int[] { 2, 4 }) },
-                    { 3.0, IndexCollection.FromArray(new int[] { 3 }) }
+                    { 0.0, IndexCollection.FromArray([1]) },
+                    { 1.0, IndexCollection.FromArray([0, 5]) },
+                    { 2.0, IndexCollection.FromArray([2, 4]) },
+                    { 3.0, IndexCollection.FromArray([3]) }
                 }
             };
 
@@ -879,13 +879,13 @@ namespace Novacta.Analytics.Tests
             // 2                
             // 1                
             // 
-            var expected = DoubleMatrix.Dense(6, 1, new double[] {
+            var expected = DoubleMatrix.Dense(6, 1, [
                 1,
                 0,
                 2,
                 3,
                 2,
-                1 });
+                1 ]);
 
             DoubleMatrixAssert.AreEqual(expected, actual, 1e-2);
         }

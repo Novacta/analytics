@@ -26,9 +26,9 @@ namespace Novacta.Analytics.Infrastructure.Tests
         public void ToStringTest()
         {
             var numericalData = DoubleMatrix.Dense(7, 1, 
-                new double[7] { 1, 1, 1, 2, 2, 3, 4 });
+                [1, 1, 1, 2, 2, 3, 4]);
             var targetData = DoubleMatrix.Dense(7, 1, 
-                new double[7] { 10, 10, 10, 10, 10, 10, 5 });
+                [10, 10, 10, 10, 10, 10, 5]);
             var blocks = NumericalBlock.GetNumericalBlocks(
                 numericalData, 
                 targetData);

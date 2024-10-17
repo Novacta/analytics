@@ -17,8 +17,8 @@ namespace Novacta.Analytics.Tests.TestableItems.Quantile
         protected OnAllDataIsScalarQuantile() :
             base(
                 expected: new DoubleMatrixState(
-                    asColumnMajorDenseArray: new double[1] {
-                        TestableDoubleMatrix19.Get().AsDense[0] },
+                    asColumnMajorDenseArray: [
+                        TestableDoubleMatrix19.Get().AsDense[0] ],
                     numberOfRows: 1,
                     numberOfColumns: 1),
                 data: TestableDoubleMatrix19.Get(),

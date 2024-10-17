@@ -259,13 +259,13 @@ namespace Novacta.Analytics
                 numberOfColumns: columnVariable.NumberOfCategories);
 
             SortedSet<DoubleMatrixRow> distinctRows =
-                new();
+                [];
             Dictionary<DoubleMatrixRow, int> counts =
-                new();
+                [];
 
             var rows = this.data[":",
                 new IndexCollection(
-                    new int[2] { rowVariableIndex, columnVariableIndex }, false)]
+                    [rowVariableIndex, columnVariableIndex], false)]
                         .AsRowCollection();
 
             bool isNotAlreadyInRowSet;
@@ -356,15 +356,9 @@ namespace Novacta.Analytics
             List<CategoricalVariable> variables,
             DoubleMatrix data)
         {
-            if (variables is null)
-            {
-                throw new ArgumentNullException(nameof(variables));
-            }
+            ArgumentNullException.ThrowIfNull(variables);
 
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             if (data.NumberOfColumns != variables.Count)
             {
@@ -406,27 +400,33 @@ namespace Novacta.Analytics
         /// <summary>
         /// Encodes categorical or numerical data from the stream 
         /// underlying the specified text reader
-        /// applying specific data categorizers.
+        /// applying specific numerical data categorizers.
         /// </summary>
         /// <param name="reader">
         /// The reader having access to the data stream.</param>
         /// <param name="columnDelimiter">
-        /// The delimiter used to separate columns in data lines.</param>
+        /// The delimiter used to separate columns in data lines.
+        /// </param>
         /// <param name="extractedColumns">
         /// The zero-based indexes of the columns from which 
-        /// data are to be extracted.</param>
+        /// data are to be extracted.
+        /// </param>
         /// <param name="firstLineContainsVariableNames">
         /// If set to <c>true</c> signals that the first
-        /// line contains variable names.</param>
+        /// line contains variable names.
+        /// </param>
         /// <param name="specialCategorizers">
         /// A mapping from a subset of extracted column indexes to 
         /// a set of categorizers, to be executed when extracting 
-        /// data from the corresponding columns.</param>
+        /// data from the corresponding columns.
+        /// </param>
         /// <param name="provider">
         /// An object that provides formatting information to
-        /// parse numeric values.</param>    
+        /// parse numeric values.
+        /// </param>    
         /// <returns>The dataset containing information about the
-        /// streamed data.</returns>
+        /// streamed data.
+        /// </returns>
         /// <remarks>
         /// <para id='SpecialEncode.0'><b>Data Extraction</b></para>
         /// <para id='SpecialEncode.1'>
@@ -528,18 +528,10 @@ namespace Novacta.Analytics
         {
             #region Input validation
 
-            if (reader is null)
-            {
-                throw new ArgumentNullException(nameof(reader));
-            }
-            if (extractedColumns is null)
-            {
-                throw new ArgumentNullException(nameof(extractedColumns));
-            }
-            if (specialCategorizers is null)
-            {
-                throw new ArgumentNullException(nameof(specialCategorizers));
-            }
+            ArgumentNullException.ThrowIfNull(reader);
+            ArgumentNullException.ThrowIfNull(extractedColumns);
+            ArgumentNullException.ThrowIfNull(specialCategorizers);
+
             foreach (var categorizer in specialCategorizers)
             {
                 if (!extractedColumns.Contains(categorizer.Key))
@@ -560,10 +552,8 @@ namespace Novacta.Analytics
                         nameof(specialCategorizers));
                 }
             }
-            if (provider is null)
-            {
-                throw new ArgumentNullException(nameof(provider));
-            }
+
+            ArgumentNullException.ThrowIfNull(provider);
 
             #endregion
 
@@ -578,8 +568,7 @@ namespace Novacta.Analytics
             for (int j = 0; j < numberOfVariables; j++)
             {
                 isSpecialColumn[j] =
-                    specialCategorizers.Keys.Contains(extractedColumns[j]) ?
-                    true : false;
+                    specialCategorizers.ContainsKey(extractedColumns[j]);
             }
 
             string line;
@@ -688,7 +677,7 @@ namespace Novacta.Analytics
             }
 
             DoubleMatrix data = DoubleMatrix.Dense(
-                numberOfVariables, numberOfItems, rawData.ToArray(), false);
+                numberOfVariables, numberOfItems, [.. rawData], false);
             data.InPlaceTranspose();
             for (int j = 0; j < numberOfVariables; j++)
             {
@@ -706,20 +695,27 @@ namespace Novacta.Analytics
         /// specified text reader.
         /// </summary>
         /// <param name="reader">
-        /// The reader having access to the data stream.</param>
+        /// The reader having access to the data stream.
+        /// </param>
         /// <param name="columnDelimiter">
-        /// The delimiter used to separate columns in data lines.</param>
+        /// The delimiter used to separate columns in data lines.
+        /// </param>
         /// <param name="extractedColumns">
         /// The zero-based indexes of the columns from which 
-        /// data are to be extracted.</param>
+        /// data are to be extracted.
+        /// </param>
         /// <param name="firstLineContainsVariableNames">
         /// If set to <c>true</c> signals that the first
-        /// line contains variable names.</param>
+        /// line contains variable names.
+        /// </param>
         /// <returns>
         /// The dataset containing information about the streamed data.</returns>
         /// <remarks>
         /// <inheritdoc cref="Encode(TextReader, char, IndexCollection, bool, Dictionary{int, Categorizer}, IFormatProvider)" 
         /// path="para[@id='SpecialEncode.1']"/>
+        /// <para>
+        /// Data are encoded applying the <see cref="CultureInfo.InvariantCulture"/>.
+        /// </para>        
         /// </remarks>
         /// <example>
         /// <para id='Encode.0'>
@@ -748,7 +744,7 @@ namespace Novacta.Analytics
         /// there are missing columns, 
         /// or if strings representing variable names or category 
         /// labels, i.e. tokens extracted 
-        /// from the stream or returned by a special categorizer, 
+        /// from the stream, 
         /// are <b>null</b> 
         /// or consist only of white-space characters. 
         /// In some cases, the <see cref="Exception.InnerException"/> 
@@ -767,7 +763,7 @@ namespace Novacta.Analytics
                 columnDelimiter,
                 extractedColumns,
                 firstLineContainsVariableNames,
-                new Dictionary<int, Categorizer>(),
+                [],
                 CultureInfo.InvariantCulture);
         }
 
@@ -775,20 +771,28 @@ namespace Novacta.Analytics
         /// Encodes categorical data from the specified file.
         /// </summary>
         /// <param name="path">
-        /// The data file to be opened for reading.</param>
+        /// The data file to be opened for reading.
+        /// </param>
         /// <param name="columnDelimiter">
-        /// The delimiter used to separate columns in data lines.</param>
+        /// The delimiter used to separate columns in data lines.
+        /// </param>
         /// <param name="extractedColumns">
         /// The zero-based indexes of the columns from which 
-        /// data are to be extracted.</param>
+        /// data are to be extracted.
+        /// </param>
         /// <param name="firstLineContainsVariableNames">
         /// If set to <c>true</c> signals that the first
-        /// line contains variable names.</param>
+        /// line contains variable names.
+        /// </param>
         /// <returns>
-        /// The dataset containing information about the streamed data.</returns>
+        /// The dataset containing information about the streamed data.
+        /// </returns>
         /// <remarks>
         /// <inheritdoc cref="Encode(TextReader, char, IndexCollection, bool, Dictionary{int, Categorizer},IFormatProvider)" 
         /// path="para[@id='SpecialEncode.1']"/>
+        /// <para>
+        /// Data are encoded applying the <see cref="CultureInfo.InvariantCulture"/>.
+        /// </para>        
         /// </remarks>
         /// <example>
         /// <inheritdoc cref="Encode(TextReader, char, IndexCollection, bool)" 
@@ -824,7 +828,7 @@ namespace Novacta.Analytics
         /// there are missing columns, 
         /// or if strings representing variable names or category labels,
         /// i.e. tokens extracted 
-        /// from the stream or returned by a special categorizer, 
+        /// from the stream, 
         /// are <b>null</b> 
         /// or consist only of white-space characters. 
         /// In some cases, the <see cref="Exception.InnerException"/> 
@@ -839,39 +843,45 @@ namespace Novacta.Analytics
             IndexCollection extractedColumns,
             bool firstLineContainsVariableNames)
         {
-            using (StreamReader reader = new(path))
-            {
-                return Encode(
-                     reader,
-                     columnDelimiter,
-                     extractedColumns,
-                     firstLineContainsVariableNames);
-            }
+            using StreamReader reader = new(path);
+
+            return Encode(
+                 reader,
+                 columnDelimiter,
+                 extractedColumns,
+                 firstLineContainsVariableNames);
         }
 
         /// <summary>
         /// Encodes categorical or numerical data from the given file
-        /// applying specific data categorizers.
+        /// applying specific numerical data categorizers.
         /// </summary>
         /// <param name="path">
-        /// The data file to be opened for reading.</param>
+        /// The data file to be opened for reading.
+        /// </param>
         /// <param name="columnDelimiter">
-        /// The delimiter used to separate columns in data lines.</param>
+        /// The delimiter used to separate columns in data lines.
+        /// </param>
         /// <param name="extractedColumns">
         /// The zero-based indexes of the columns from which 
-        /// data are to be extracted.</param>
+        /// data are to be extracted.
+        /// </param>
         /// <param name="firstLineContainsVariableNames">
         /// If set to <c>true</c> signals that the first
-        /// line contains variable names.</param>
+        /// line contains variable names.
+        /// </param>
         /// <param name="specialCategorizers">
         /// A mapping from a subset of extracted column indexes to 
         /// a set of categorizers, to be executed when extracting data 
-        /// from the corresponding columns.</param>
+        /// from the corresponding columns.
+        /// </param>
         /// <param name="provider">
         /// An object that provides formatting 
-        /// information to parse numeric values.</param>    
+        /// information to parse numeric values.
+        /// </param>    
         /// <returns>
-        /// The dataset containing information about the streamed data.</returns>
+        /// The dataset containing information about the streamed data.
+        /// </returns>
         /// <remarks>
         /// <inheritdoc cref="Encode(TextReader, char, IndexCollection, bool, Dictionary{int, Categorizer}, IFormatProvider)" 
         /// path="para[@id='SpecialEncode.0']"/>
@@ -942,16 +952,15 @@ namespace Novacta.Analytics
             Dictionary<int, Categorizer> specialCategorizers,
             IFormatProvider provider)
         {
-            using (StreamReader reader = new(path))
-            {
-                return Encode(
-                     reader,
-                     columnDelimiter,
-                     extractedColumns,
-                     firstLineContainsVariableNames,
-                     specialCategorizers,
-                     provider);
-            }
+            using StreamReader reader = new(path);
+
+            return Encode(
+                 reader,
+                 columnDelimiter,
+                 extractedColumns,
+                 firstLineContainsVariableNames,
+                 specialCategorizers,
+                 provider);
         }
 
         #endregion
@@ -1065,10 +1074,7 @@ namespace Novacta.Analytics
         /// </exception>
         public DoubleMatrix Disjoin(DoubleMatrix supplementaryData)
         {
-            if (supplementaryData is null)
-            {
-                throw new ArgumentNullException(nameof(supplementaryData));
-            }
+            ArgumentNullException.ThrowIfNull(supplementaryData);
 
             if (supplementaryData.NumberOfColumns != this.Variables.Count)
             {
@@ -1143,599 +1149,6 @@ namespace Novacta.Analytics
 
             return disjunctiveData;
         }
-
-        #endregion
-
-        #region IReadOnlyTabularCollection
-
-        /// <inheritdoc/>
-        public int NumberOfRows { get { return this.data.NumberOfRows; } }
-
-        /// <inheritdoc/>
-        public int NumberOfColumns { get { return this.data.NumberOfColumns; } }
-
-        #region IndexCollection, *
-
-        /// <summary>
-        /// Gets the information
-        /// in the <see cref="CategoricalDataSet" /> corresponding to 
-        /// the specified individuals
-        /// and variables.
-        /// </summary>
-        /// <param name="rowIndexes">
-        /// The zero-based indexes of the individuals to get.</param>
-        /// <param name="columnIndexes">
-        /// The zero-based indexes of the variables to get.</param>
-        /// <value>
-        /// The categorical dataset containing the specified information.</value>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="rowIndexes"/> is <b>null</b>.<br/>
-        /// -or-<br/>
-        /// <paramref name="columnIndexes"/> is <b>null</b>.
-        /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="rowIndexes"/> contains values which 
-        /// are not valid row indexes for the 
-        /// <see cref="Data"/> of 
-        /// the <see cref="CategoricalDataSet"/>.<br/>
-        /// -or-<br/>
-        /// <paramref name="columnIndexes"/> contains values which are 
-        /// not valid column indexes for the 
-        /// <see cref="Data"/> of 
-        /// the <see cref="CategoricalDataSet"/>.
-        /// </exception>
-        public CategoricalDataSet this[
-            IndexCollection rowIndexes,
-            IndexCollection columnIndexes]
-        {
-            get
-            {
-                if (rowIndexes is null)
-                {
-                    throw new ArgumentNullException(nameof(rowIndexes));
-                }
-
-                if (columnIndexes is null)
-                {
-                    throw new ArgumentNullException(nameof(columnIndexes));
-                }
-
-                if (rowIndexes.maxIndex >= this.data.NumberOfRows)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(rowIndexes),
-                        ImplementationServices.GetResourceString(
-                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
-                }
-
-                if (columnIndexes.maxIndex >= this.data.NumberOfColumns)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(columnIndexes),
-                        ImplementationServices.GetResourceString(
-                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
-                }
-
-                var subVariables =
-                    new List<CategoricalVariable>(columnIndexes.Count);
-                foreach (var i in columnIndexes)
-                {
-                    subVariables.Add(this.variables[i]);
-                }
-
-                var subData = this.data[rowIndexes, columnIndexes];
-
-                return new CategoricalDataSet(subVariables, subData);
-            }
-        }
-
-        /// <summary>
-        /// Gets the information
-        /// in the <see cref="CategoricalDataSet" /> corresponding 
-        /// to the specified individuals
-        /// and variables.
-        /// </summary>
-        /// <param name="rowIndexes">
-        /// The zero-based indexes of the individuals to get.</param>
-        /// <param name="columnIndexes">
-        /// The zero-based indexes of the 
-        /// variables to get. The value must be <c>":"</c>, which means that all valid indexes
-        /// are specified.</param>
-        /// <value>
-        /// The categorical dataset containing the specified information.</value>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="rowIndexes"/> is <b>null</b>.<br/>
-        /// -or-<br/>
-        /// <paramref name="columnIndexes"/> is <b>null</b>.
-        /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="rowIndexes"/> contains values 
-        /// which are not valid row indexes for the 
-        /// <see cref="Data"/> of 
-        /// the <see cref="CategoricalDataSet"/>.<br/>
-        /// -or-<br/>
-        /// <paramref name="columnIndexes"/> is not a string reserved 
-        /// for matrix sub-referencing.</exception>
-        public CategoricalDataSet this[
-            IndexCollection rowIndexes,
-            string columnIndexes]
-        {
-            get
-            {
-                if (rowIndexes is null)
-                    throw new ArgumentNullException(nameof(rowIndexes));
-
-                if (columnIndexes is null)
-                    throw new ArgumentNullException(nameof(columnIndexes));
-
-                if (rowIndexes.maxIndex >= this.data.NumberOfRows)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(rowIndexes),
-                        ImplementationServices.GetResourceString(
-                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
-                }
-
-                if (0 != string.Compare(
-                        columnIndexes, ":", StringComparison.Ordinal))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(columnIndexes),
-                       ImplementationServices.GetResourceString(
-                           "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX"));
-                }
-
-                var subVariables = new List<CategoricalVariable>(this.variables);
-
-                var subData = this.data[rowIndexes, columnIndexes];
-
-                return new CategoricalDataSet(subVariables, subData);
-            }
-        }
-
-        /// <summary>
-        /// Gets the information
-        /// in the <see cref="CategoricalDataSet" /> corresponding to the specified 
-        /// individuals and variable.
-        /// </summary>
-        /// <param name="rowIndexes">
-        /// The zero-based indexes of the individuals to get.</param>
-        /// <param name="columnIndex">
-        /// The zero-based index of the variable to get.</param>
-        /// <value>
-        /// The categorical dataset containing the specified information.</value>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="rowIndexes"/>
-        /// is <b>null</b>.
-        /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="rowIndexes"/> contains values
-        /// which are not valid row indexes for the 
-        /// <see cref="Data"/> of 
-        /// the <see cref="CategoricalDataSet"/>.<br/>
-        /// -or-<br/>
-        /// <paramref name="columnIndex"/> contains a value
-        /// which is not a valid column index for the 
-        /// <see cref="Data"/> of 
-        /// the <see cref="CategoricalDataSet"/>.
-        /// </exception>
-        public CategoricalDataSet this[
-            IndexCollection rowIndexes,
-            int columnIndex]
-        {
-            get
-            {
-                if (rowIndexes is null)
-                    throw new ArgumentNullException(nameof(rowIndexes));
-
-                if (rowIndexes.maxIndex >= this.data.NumberOfRows)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(rowIndexes),
-                        ImplementationServices.GetResourceString(
-                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
-                }
-
-                if (columnIndex < 0 || this.data.NumberOfColumns <= columnIndex)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(columnIndex),
-                        ImplementationServices.GetResourceString(
-                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
-                }
-
-                var subVariables = new List<CategoricalVariable>(1)
-                {
-                    this.variables[columnIndex]
-                };
-
-                var subData = this.data[rowIndexes, columnIndex];
-
-                return new CategoricalDataSet(subVariables, subData);
-            }
-        }
-
-        #endregion
-
-        #region String, *
-
-        /// <summary>
-        /// Gets the information
-        /// in the <see cref="CategoricalDataSet" /> corresponding to the 
-        /// specified individuals and variables.
-        /// </summary>
-        /// <param name="rowIndexes">
-        /// The zero-based indexes of the 
-        /// individuals to get. The value must by <c>":"</c>,
-        /// which means that all valid indexes
-        /// are specified.</param>
-        /// <param name="columnIndexes">
-        /// The zero-based indexes of the 
-        /// variables to get. The value must by <c>":"</c>, 
-        /// which means that all valid indexes
-        /// are specified.</param>
-        /// <value>
-        /// The categorical dataset containing the specified information.</value>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="rowIndexes"/>is <b>null</b>.<br/>
-        /// -or-<br/>
-        /// <paramref name="columnIndexes"/> is <b>null</b>.
-        /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="rowIndexes"/> 
-        /// is not a string reserved for matrix sub-referencing.<br/>
-        /// -or-<br/>
-        /// <paramref name="columnIndexes"/> contains values
-        /// which are not valid column indexes for the 
-        /// <see cref="Data"/> of 
-        /// the <see cref="CategoricalDataSet"/>.
-        /// </exception>
-        public CategoricalDataSet this[
-            string rowIndexes,
-            IndexCollection columnIndexes]
-        {
-            get
-            {
-                if (rowIndexes is null)
-                    throw new ArgumentNullException(nameof(rowIndexes));
-
-                if (columnIndexes is null)
-                    throw new ArgumentNullException(nameof(columnIndexes));
-
-                if (0 != string.Compare(rowIndexes, ":", StringComparison.Ordinal))
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(rowIndexes),
-                        ImplementationServices.GetResourceString(
-                            "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX"));
-                }
-
-                if (columnIndexes.maxIndex >= this.data.NumberOfColumns)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(columnIndexes),
-                        ImplementationServices.GetResourceString(
-                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
-                }
-
-                var subVariables =
-                    new List<CategoricalVariable>(columnIndexes.Count);
-                foreach (var i in columnIndexes)
-                {
-                    subVariables.Add(this.variables[i]);
-                }
-
-                var subData = this.data[rowIndexes, columnIndexes];
-
-                return new CategoricalDataSet(subVariables, subData);
-            }
-        }
-
-        /// <summary>
-        /// Gets the information
-        /// in the <see cref="CategoricalDataSet" /> corresponding to the 
-        /// specified individuals
-        /// and variables.
-        /// </summary>
-        /// <param name="rowIndexes">
-        /// The zero-based indexes of the 
-        /// individuals to get. The value must by <c>":"</c>, 
-        /// which means that all valid indexes
-        /// are specified.</param>
-        /// <param name="columnIndexes">
-        /// The zero-based indexes of the 
-        /// variables to get. The value must by <c>":"</c>, 
-        /// which means that all valid indexes
-        /// are specified.</param>
-        /// <value>
-        /// The categorical dataset containing the specified information.</value>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="rowIndexes"/> is <b>null</b>.<br/>
-        /// -or-<br/>
-        /// <paramref name="columnIndexes"/> is <b>null</b>.
-        /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="rowIndexes"/> is not a string reserved 
-        /// for matrix sub-referencing.<br/>
-        /// -or-<br/>
-        /// <paramref name="columnIndexes"/> is not a string reserved 
-        /// for matrix sub-referencing.
-        /// </exception>
-        public CategoricalDataSet this[
-            string rowIndexes,
-            string columnIndexes]
-        {
-            get
-            {
-                if (rowIndexes is null)
-                    throw new ArgumentNullException(nameof(rowIndexes));
-
-                if (columnIndexes is null)
-                    throw new ArgumentNullException(nameof(columnIndexes));
-
-                if (0 != string.Compare(rowIndexes, ":", StringComparison.Ordinal))
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(rowIndexes),
-                        ImplementationServices.GetResourceString(
-                            "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX"));
-                }
-
-                if (0 != string.Compare(columnIndexes, ":", StringComparison.Ordinal))
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(columnIndexes),
-                        ImplementationServices.GetResourceString(
-                            "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX"));
-                }
-
-                var subVariables = new List<CategoricalVariable>(this.variables);
-
-                var subData = this.data[rowIndexes, columnIndexes];
-
-                return new CategoricalDataSet(subVariables, subData);
-            }
-        }
-
-        /// <summary>
-        /// Gets the information
-        /// in the <see cref="CategoricalDataSet" /> corresponding to the 
-        /// specified individuals
-        /// and variable.
-        /// </summary>
-        /// <param name="rowIndexes">
-        /// The zero-based indexes of the 
-        /// individuals to get. The value must by <c>":"</c>, 
-        /// which means that all valid indexes
-        /// are specified.</param>
-        /// <param name="columnIndex">
-        /// The zero-based index of the variable to get.</param>
-        /// <value>
-        /// The categorical dataset containing the specified information.</value>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="rowIndexes"/>
-        /// is <b>null</b>.
-        /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="rowIndexes"/> 
-        /// is not a string reserved for matrix sub-referencing.<br/> 
-        /// -or-<br/>
-        /// <paramref name="columnIndex"/> contains a value
-        /// which is not a valid column index for the 
-        /// <see cref="Data"/> of 
-        /// the <see cref="CategoricalDataSet"/>.
-        /// </exception>
-        public CategoricalDataSet this[
-            string rowIndexes,
-            int columnIndex]
-        {
-            get
-            {
-                if (rowIndexes is null)
-                    throw new ArgumentNullException(nameof(rowIndexes));
-
-                if (0 != string.Compare(rowIndexes, ":", StringComparison.Ordinal))
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(rowIndexes),
-                        ImplementationServices.GetResourceString(
-                            "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX"));
-                }
-
-                if (columnIndex < 0 || this.data.NumberOfColumns <= columnIndex)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(columnIndex),
-                        ImplementationServices.GetResourceString(
-                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
-                }
-
-                var subVariables = new List<CategoricalVariable>(1)
-                {
-                    this.variables[columnIndex]
-                };
-
-                var subData = this.data[rowIndexes, columnIndex];
-
-                return new CategoricalDataSet(subVariables, subData);
-            }
-        }
-
-        #endregion
-
-        #region int, *
-
-        /// <summary>
-        /// Gets the information
-        /// in the <see cref="CategoricalDataSet" /> corresponding to 
-        /// the specified individual and variables.
-        /// </summary>
-        /// <param name="rowIndex">
-        /// The zero-based index of the individual to get.</param>
-        /// <param name="columnIndexes">
-        /// The zero-based indexes of the variables to get.</param>
-        /// <value>
-        /// The categorical dataset containing the specified information.</value>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="columnIndexes"/> is <b>null</b>.
-        /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="rowIndex"/> contains a value which 
-        /// is not a valid row index for the 
-        /// <see cref="Data"/> of 
-        /// the <see cref="CategoricalDataSet"/>.<br/>
-        /// -or-<br/>
-        /// <paramref name="columnIndexes"/> contains values which 
-        /// are not valid column indexes for the 
-        /// <see cref="Data"/> of 
-        /// the <see cref="CategoricalDataSet"/>.
-        /// </exception>
-        public CategoricalDataSet this[
-            int rowIndex,
-            IndexCollection columnIndexes]
-        {
-            get
-            {
-                if (columnIndexes is null)
-                    throw new ArgumentNullException(nameof(columnIndexes));
-
-                if (rowIndex < 0 || this.data.NumberOfRows <= rowIndex)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(rowIndex),
-                        ImplementationServices.GetResourceString(
-                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
-                }
-
-                if (columnIndexes.maxIndex >= this.data.NumberOfColumns)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(columnIndexes),
-                        ImplementationServices.GetResourceString(
-                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
-                }
-
-                var subVariables =
-                    new List<CategoricalVariable>(columnIndexes.Count);
-                foreach (var i in columnIndexes)
-                {
-                    subVariables.Add(this.variables[i]);
-                }
-
-                var subData = this.data[rowIndex, columnIndexes];
-
-                return new CategoricalDataSet(subVariables, subData);
-            }
-        }
-
-        /// <summary>
-        /// Gets the information
-        /// in the <see cref="CategoricalDataSet" /> corresponding to the 
-        /// specified individual and variables.
-        /// </summary>
-        /// <param name="rowIndex">
-        /// The zero-based index of the individual to get.</param>
-        /// <param name="columnIndexes">
-        /// The zero-based indexes of the 
-        /// variables to get. The value must by <c>":"</c>, which means 
-        /// that all valid indexes
-        /// are specified.</param>
-        /// <value>
-        /// The categorical dataset containing the specified information.</value>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="columnIndexes"/> is <b>null</b>.
-        /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="rowIndex"/> contains a value 
-        /// which is not a valid row index for the 
-        /// <see cref="Data"/> of 
-        /// the <see cref="CategoricalDataSet"/>.<br/>
-        /// -or-<br/>
-        /// <paramref name="columnIndexes"/> is not a string reserved 
-        /// for matrix sub-referencing.</exception>
-        public CategoricalDataSet this[
-            int rowIndex,
-            string columnIndexes]
-        {
-            get
-            {
-                if (columnIndexes is null)
-                    throw new ArgumentNullException(nameof(columnIndexes));
-
-                if (rowIndex < 0 || this.data.NumberOfRows <= rowIndex)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(rowIndex),
-                        ImplementationServices.GetResourceString(
-                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
-                }
-
-                if (0 != string.Compare(columnIndexes, ":", StringComparison.Ordinal))
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(columnIndexes),
-                        ImplementationServices.GetResourceString(
-                            "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX"));
-                }
-
-                var subVariables = new List<CategoricalVariable>(this.variables);
-
-                var subData = this.data[rowIndex, columnIndexes];
-
-                return new CategoricalDataSet(subVariables, subData);
-            }
-        }
-
-        /// <summary>
-        /// Gets the information
-        /// in the <see cref="CategoricalDataSet" /> corresponding to 
-        /// the specified individual and variable.
-        /// </summary>
-        /// <param name="rowIndex">
-        /// The zero-based index of the individual to get.</param>
-        /// <param name="columnIndex">
-        /// The zero-based index of the variable to get.</param>
-        /// <value>
-        /// The category of the specified variable observed at the specified individual.</value>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="rowIndex"/> contains a value 
-        /// which is not a valid row index for the 
-        /// <see cref="Data"/> of 
-        /// the <see cref="CategoricalDataSet"/>.<br/>
-        /// -or-<br/>
-        /// <paramref name="columnIndex"/> contains a value 
-        /// which is not a valid column index for the 
-        /// <see cref="Data"/> of 
-        /// the <see cref="CategoricalDataSet"/>.
-        /// </exception>
-        public Category this[
-            int rowIndex,
-            int columnIndex]
-        {
-            get
-            {
-                if (rowIndex < 0 || this.data.NumberOfRows <= rowIndex)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(rowIndex),
-                        ImplementationServices.GetResourceString(
-                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
-                }
-
-                if (columnIndex < 0 || this.data.NumberOfColumns <= columnIndex)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(columnIndex),
-                        ImplementationServices.GetResourceString(
-                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
-                }
-
-                var categoryCode = this.data[rowIndex, columnIndex];
-                var variable = this.variables[columnIndex];
-
-                variable.TryGet(categoryCode, out Category category);
-
-                return category;
-            }
-        }
-
-        #endregion
 
         #endregion
 
@@ -1827,16 +1240,15 @@ namespace Novacta.Analytics
             int targetColumn,
             IFormatProvider provider)
         {
-            using (StreamReader reader = new(path))
-            {
-                return CategorizeByEntropyMinimization(
-                     reader,
-                     columnDelimiter,
-                     numericalColumns,
-                     firstLineContainsVariableNames,
-                     targetColumn,
-                     provider);
-            }
+            using StreamReader reader = new(path);
+
+            return CategorizeByEntropyMinimization(
+                 reader,
+                 columnDelimiter,
+                 numericalColumns,
+                 firstLineContainsVariableNames,
+                 targetColumn,
+                 provider);
         }
 
         /// <summary>
@@ -1959,18 +1371,9 @@ namespace Novacta.Analytics
         {
             #region Input validation
 
-            if (reader is null)
-            {
-                throw new ArgumentNullException(nameof(reader));
-            }
-            if (numericalColumns is null)
-            {
-                throw new ArgumentNullException(nameof(numericalColumns));
-            }
-            if (provider is null)
-            {
-                throw new ArgumentNullException(nameof(provider));
-            }
+            ArgumentNullException.ThrowIfNull(reader);
+            ArgumentNullException.ThrowIfNull(numericalColumns);
+            ArgumentNullException.ThrowIfNull(provider);
             if (targetColumn < 0)
             {
                 throw new ArgumentOutOfRangeException(
@@ -2082,7 +1485,7 @@ namespace Novacta.Analytics
             DoubleMatrix data = DoubleMatrix.Dense(
                 1 + numberOfNumericalVariables,
                 numberOfItems,
-                rawData.ToArray());
+                [.. rawData]);
             data.InPlaceTranspose();
 
             // Get categorizers
@@ -2340,6 +1743,583 @@ namespace Novacta.Analytics
             int size = leftSize + rightSize;
             return (left.Entropy * leftSize + right.Entropy * rightSize) / size;
         }
+
+        #endregion
+
+        #region IReadOnlyTabularCollection
+
+        /// <inheritdoc/>
+        public int NumberOfRows { get { return this.data.NumberOfRows; } }
+
+        /// <inheritdoc/>
+        public int NumberOfColumns { get { return this.data.NumberOfColumns; } }
+
+        #region IndexCollection, *
+
+        /// <summary>
+        /// Gets the information
+        /// in the <see cref="CategoricalDataSet" /> corresponding to 
+        /// the specified individuals
+        /// and variables.
+        /// </summary>
+        /// <param name="rowIndexes">
+        /// The zero-based indexes of the individuals to get.</param>
+        /// <param name="columnIndexes">
+        /// The zero-based indexes of the variables to get.</param>
+        /// <value>
+        /// The categorical dataset containing the specified information.</value>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="rowIndexes"/> is <b>null</b>.<br/>
+        /// -or-<br/>
+        /// <paramref name="columnIndexes"/> is <b>null</b>.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="rowIndexes"/> contains values which 
+        /// are not valid row indexes for the 
+        /// <see cref="Data"/> of 
+        /// the <see cref="CategoricalDataSet"/>.<br/>
+        /// -or-<br/>
+        /// <paramref name="columnIndexes"/> contains values which are 
+        /// not valid column indexes for the 
+        /// <see cref="Data"/> of 
+        /// the <see cref="CategoricalDataSet"/>.
+        /// </exception>
+        public CategoricalDataSet this[
+            IndexCollection rowIndexes,
+            IndexCollection columnIndexes]
+        {
+            get
+            {
+                ArgumentNullException.ThrowIfNull(rowIndexes);
+
+                ArgumentNullException.ThrowIfNull(columnIndexes);
+
+                if (rowIndexes.maxIndex >= this.data.NumberOfRows)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(rowIndexes),
+                        ImplementationServices.GetResourceString(
+                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
+                }
+
+                if (columnIndexes.maxIndex >= this.data.NumberOfColumns)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(columnIndexes),
+                        ImplementationServices.GetResourceString(
+                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
+                }
+
+                var subVariables =
+                    new List<CategoricalVariable>(columnIndexes.Count);
+                foreach (var i in columnIndexes)
+                {
+                    subVariables.Add(this.variables[i]);
+                }
+
+                var subData = this.data[rowIndexes, columnIndexes];
+
+                return new CategoricalDataSet(subVariables, subData);
+            }
+        }
+
+        /// <summary>
+        /// Gets the information
+        /// in the <see cref="CategoricalDataSet" /> corresponding 
+        /// to the specified individuals
+        /// and variables.
+        /// </summary>
+        /// <param name="rowIndexes">
+        /// The zero-based indexes of the individuals to get.</param>
+        /// <param name="columnIndexes">
+        /// The zero-based indexes of the 
+        /// variables to get. The value must be <c>":"</c>, which means that all valid indexes
+        /// are specified.</param>
+        /// <value>
+        /// The categorical dataset containing the specified information.</value>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="rowIndexes"/> is <b>null</b>.<br/>
+        /// -or-<br/>
+        /// <paramref name="columnIndexes"/> is <b>null</b>.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="rowIndexes"/> contains values 
+        /// which are not valid row indexes for the 
+        /// <see cref="Data"/> of 
+        /// the <see cref="CategoricalDataSet"/>.<br/>
+        /// -or-<br/>
+        /// <paramref name="columnIndexes"/> is not a string reserved 
+        /// for matrix sub-referencing.</exception>
+        public CategoricalDataSet this[
+            IndexCollection rowIndexes,
+            string columnIndexes]
+        {
+            get
+            {
+                ArgumentNullException.ThrowIfNull(rowIndexes);
+
+                ArgumentNullException.ThrowIfNull(columnIndexes);
+
+                if (rowIndexes.maxIndex >= this.data.NumberOfRows)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(rowIndexes),
+                        ImplementationServices.GetResourceString(
+                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
+                }
+
+                if (0 != string.Compare(
+                        columnIndexes, ":", StringComparison.Ordinal))
+                {
+                    throw new ArgumentOutOfRangeException(nameof(columnIndexes),
+                       ImplementationServices.GetResourceString(
+                           "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX"));
+                }
+
+                var subVariables = new List<CategoricalVariable>(this.variables);
+
+                var subData = this.data[rowIndexes, columnIndexes];
+
+                return new CategoricalDataSet(subVariables, subData);
+            }
+        }
+
+        /// <summary>
+        /// Gets the information
+        /// in the <see cref="CategoricalDataSet" /> corresponding to the specified 
+        /// individuals and variable.
+        /// </summary>
+        /// <param name="rowIndexes">
+        /// The zero-based indexes of the individuals to get.</param>
+        /// <param name="columnIndex">
+        /// The zero-based index of the variable to get.</param>
+        /// <value>
+        /// The categorical dataset containing the specified information.</value>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="rowIndexes"/>
+        /// is <b>null</b>.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="rowIndexes"/> contains values
+        /// which are not valid row indexes for the 
+        /// <see cref="Data"/> of 
+        /// the <see cref="CategoricalDataSet"/>.<br/>
+        /// -or-<br/>
+        /// <paramref name="columnIndex"/> contains a value
+        /// which is not a valid column index for the 
+        /// <see cref="Data"/> of 
+        /// the <see cref="CategoricalDataSet"/>.
+        /// </exception>
+        public CategoricalDataSet this[
+            IndexCollection rowIndexes,
+            int columnIndex]
+        {
+            get
+            {
+                ArgumentNullException.ThrowIfNull(rowIndexes);
+
+                if (rowIndexes.maxIndex >= this.data.NumberOfRows)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(rowIndexes),
+                        ImplementationServices.GetResourceString(
+                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
+                }
+
+                if (columnIndex < 0 || this.data.NumberOfColumns <= columnIndex)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(columnIndex),
+                        ImplementationServices.GetResourceString(
+                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
+                }
+
+                var subVariables = new List<CategoricalVariable>(1)
+                {
+                    this.variables[columnIndex]
+                };
+
+                var subData = this.data[rowIndexes, columnIndex];
+
+                return new CategoricalDataSet(subVariables, subData);
+            }
+        }
+
+        #endregion
+
+        #region String, *
+
+        /// <summary>
+        /// Gets the information
+        /// in the <see cref="CategoricalDataSet" /> corresponding to the 
+        /// specified individuals and variables.
+        /// </summary>
+        /// <param name="rowIndexes">
+        /// The zero-based indexes of the 
+        /// individuals to get. The value must by <c>":"</c>,
+        /// which means that all valid indexes
+        /// are specified.</param>
+        /// <param name="columnIndexes">
+        /// The zero-based indexes of the 
+        /// variables to get. The value must by <c>":"</c>, 
+        /// which means that all valid indexes
+        /// are specified.</param>
+        /// <value>
+        /// The categorical dataset containing the specified information.</value>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="rowIndexes"/>is <b>null</b>.<br/>
+        /// -or-<br/>
+        /// <paramref name="columnIndexes"/> is <b>null</b>.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="rowIndexes"/> 
+        /// is not a string reserved for matrix sub-referencing.<br/>
+        /// -or-<br/>
+        /// <paramref name="columnIndexes"/> contains values
+        /// which are not valid column indexes for the 
+        /// <see cref="Data"/> of 
+        /// the <see cref="CategoricalDataSet"/>.
+        /// </exception>
+        public CategoricalDataSet this[
+            string rowIndexes,
+            IndexCollection columnIndexes]
+        {
+            get
+            {
+                ArgumentNullException.ThrowIfNull(rowIndexes);
+
+                ArgumentNullException.ThrowIfNull(columnIndexes);
+
+                if (0 != string.Compare(rowIndexes, ":", StringComparison.Ordinal))
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(rowIndexes),
+                        ImplementationServices.GetResourceString(
+                            "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX"));
+                }
+
+                if (columnIndexes.maxIndex >= this.data.NumberOfColumns)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(columnIndexes),
+                        ImplementationServices.GetResourceString(
+                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
+                }
+
+                var subVariables =
+                    new List<CategoricalVariable>(columnIndexes.Count);
+                foreach (var i in columnIndexes)
+                {
+                    subVariables.Add(this.variables[i]);
+                }
+
+                var subData = this.data[rowIndexes, columnIndexes];
+
+                return new CategoricalDataSet(subVariables, subData);
+            }
+        }
+
+        /// <summary>
+        /// Gets the information
+        /// in the <see cref="CategoricalDataSet" /> corresponding to the 
+        /// specified individuals
+        /// and variables.
+        /// </summary>
+        /// <param name="rowIndexes">
+        /// The zero-based indexes of the 
+        /// individuals to get. The value must by <c>":"</c>, 
+        /// which means that all valid indexes
+        /// are specified.</param>
+        /// <param name="columnIndexes">
+        /// The zero-based indexes of the 
+        /// variables to get. The value must by <c>":"</c>, 
+        /// which means that all valid indexes
+        /// are specified.</param>
+        /// <value>
+        /// The categorical dataset containing the specified information.</value>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="rowIndexes"/> is <b>null</b>.<br/>
+        /// -or-<br/>
+        /// <paramref name="columnIndexes"/> is <b>null</b>.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="rowIndexes"/> is not a string reserved 
+        /// for matrix sub-referencing.<br/>
+        /// -or-<br/>
+        /// <paramref name="columnIndexes"/> is not a string reserved 
+        /// for matrix sub-referencing.
+        /// </exception>
+        public CategoricalDataSet this[
+            string rowIndexes,
+            string columnIndexes]
+        {
+            get
+            {
+                ArgumentNullException.ThrowIfNull(rowIndexes);
+
+                ArgumentNullException.ThrowIfNull(columnIndexes);
+
+                if (0 != string.Compare(rowIndexes, ":", StringComparison.Ordinal))
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(rowIndexes),
+                        ImplementationServices.GetResourceString(
+                            "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX"));
+                }
+
+                if (0 != string.Compare(columnIndexes, ":", StringComparison.Ordinal))
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(columnIndexes),
+                        ImplementationServices.GetResourceString(
+                            "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX"));
+                }
+
+                var subVariables = new List<CategoricalVariable>(this.variables);
+
+                var subData = this.data[rowIndexes, columnIndexes];
+
+                return new CategoricalDataSet(subVariables, subData);
+            }
+        }
+
+        /// <summary>
+        /// Gets the information
+        /// in the <see cref="CategoricalDataSet" /> corresponding to the 
+        /// specified individuals
+        /// and variable.
+        /// </summary>
+        /// <param name="rowIndexes">
+        /// The zero-based indexes of the 
+        /// individuals to get. The value must by <c>":"</c>, 
+        /// which means that all valid indexes
+        /// are specified.</param>
+        /// <param name="columnIndex">
+        /// The zero-based index of the variable to get.</param>
+        /// <value>
+        /// The categorical dataset containing the specified information.</value>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="rowIndexes"/>
+        /// is <b>null</b>.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="rowIndexes"/> 
+        /// is not a string reserved for matrix sub-referencing.<br/> 
+        /// -or-<br/>
+        /// <paramref name="columnIndex"/> contains a value
+        /// which is not a valid column index for the 
+        /// <see cref="Data"/> of 
+        /// the <see cref="CategoricalDataSet"/>.
+        /// </exception>
+        public CategoricalDataSet this[
+            string rowIndexes,
+            int columnIndex]
+        {
+            get
+            {
+                ArgumentNullException.ThrowIfNull(rowIndexes);
+
+                if (0 != string.Compare(rowIndexes, ":", StringComparison.Ordinal))
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(rowIndexes),
+                        ImplementationServices.GetResourceString(
+                            "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX"));
+                }
+
+                if (columnIndex < 0 || this.data.NumberOfColumns <= columnIndex)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(columnIndex),
+                        ImplementationServices.GetResourceString(
+                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
+                }
+
+                var subVariables = new List<CategoricalVariable>(1)
+                {
+                    this.variables[columnIndex]
+                };
+
+                var subData = this.data[rowIndexes, columnIndex];
+
+                return new CategoricalDataSet(subVariables, subData);
+            }
+        }
+
+        #endregion
+
+        #region int, *
+
+        /// <summary>
+        /// Gets the information
+        /// in the <see cref="CategoricalDataSet" /> corresponding to 
+        /// the specified individual and variables.
+        /// </summary>
+        /// <param name="rowIndex">
+        /// The zero-based index of the individual to get.</param>
+        /// <param name="columnIndexes">
+        /// The zero-based indexes of the variables to get.</param>
+        /// <value>
+        /// The categorical dataset containing the specified information.</value>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="columnIndexes"/> is <b>null</b>.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="rowIndex"/> contains a value which 
+        /// is not a valid row index for the 
+        /// <see cref="Data"/> of 
+        /// the <see cref="CategoricalDataSet"/>.<br/>
+        /// -or-<br/>
+        /// <paramref name="columnIndexes"/> contains values which 
+        /// are not valid column indexes for the 
+        /// <see cref="Data"/> of 
+        /// the <see cref="CategoricalDataSet"/>.
+        /// </exception>
+        public CategoricalDataSet this[
+            int rowIndex,
+            IndexCollection columnIndexes]
+        {
+            get
+            {
+                ArgumentNullException.ThrowIfNull(columnIndexes);
+
+                if (rowIndex < 0 || this.data.NumberOfRows <= rowIndex)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(rowIndex),
+                        ImplementationServices.GetResourceString(
+                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
+                }
+
+                if (columnIndexes.maxIndex >= this.data.NumberOfColumns)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(columnIndexes),
+                        ImplementationServices.GetResourceString(
+                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
+                }
+
+                var subVariables =
+                    new List<CategoricalVariable>(columnIndexes.Count);
+                foreach (var i in columnIndexes)
+                {
+                    subVariables.Add(this.variables[i]);
+                }
+
+                var subData = this.data[rowIndex, columnIndexes];
+
+                return new CategoricalDataSet(subVariables, subData);
+            }
+        }
+
+        /// <summary>
+        /// Gets the information
+        /// in the <see cref="CategoricalDataSet" /> corresponding to the 
+        /// specified individual and variables.
+        /// </summary>
+        /// <param name="rowIndex">
+        /// The zero-based index of the individual to get.</param>
+        /// <param name="columnIndexes">
+        /// The zero-based indexes of the 
+        /// variables to get. The value must by <c>":"</c>, which means 
+        /// that all valid indexes
+        /// are specified.</param>
+        /// <value>
+        /// The categorical dataset containing the specified information.</value>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="columnIndexes"/> is <b>null</b>.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="rowIndex"/> contains a value 
+        /// which is not a valid row index for the 
+        /// <see cref="Data"/> of 
+        /// the <see cref="CategoricalDataSet"/>.<br/>
+        /// -or-<br/>
+        /// <paramref name="columnIndexes"/> is not a string reserved 
+        /// for matrix sub-referencing.</exception>
+        public CategoricalDataSet this[
+            int rowIndex,
+            string columnIndexes]
+        {
+            get
+            {
+                ArgumentNullException.ThrowIfNull(columnIndexes);
+
+                if (rowIndex < 0 || this.data.NumberOfRows <= rowIndex)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(rowIndex),
+                        ImplementationServices.GetResourceString(
+                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
+                }
+
+                if (0 != string.Compare(columnIndexes, ":", StringComparison.Ordinal))
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(columnIndexes),
+                        ImplementationServices.GetResourceString(
+                            "STR_EXCEPT_TAB_UNSUPPORTED_SUBREF_SYNTAX"));
+                }
+
+                var subVariables = new List<CategoricalVariable>(this.variables);
+
+                var subData = this.data[rowIndex, columnIndexes];
+
+                return new CategoricalDataSet(subVariables, subData);
+            }
+        }
+
+        /// <summary>
+        /// Gets the information
+        /// in the <see cref="CategoricalDataSet" /> corresponding to 
+        /// the specified individual and variable.
+        /// </summary>
+        /// <param name="rowIndex">
+        /// The zero-based index of the individual to get.</param>
+        /// <param name="columnIndex">
+        /// The zero-based index of the variable to get.</param>
+        /// <value>
+        /// The category of the specified variable observed at the specified individual.</value>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="rowIndex"/> contains a value 
+        /// which is not a valid row index for the 
+        /// <see cref="Data"/> of 
+        /// the <see cref="CategoricalDataSet"/>.<br/>
+        /// -or-<br/>
+        /// <paramref name="columnIndex"/> contains a value 
+        /// which is not a valid column index for the 
+        /// <see cref="Data"/> of 
+        /// the <see cref="CategoricalDataSet"/>.
+        /// </exception>
+        public Category this[
+            int rowIndex,
+            int columnIndex]
+        {
+            get
+            {
+                if (rowIndex < 0 || this.data.NumberOfRows <= rowIndex)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(rowIndex),
+                        ImplementationServices.GetResourceString(
+                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
+                }
+
+                if (columnIndex < 0 || this.data.NumberOfColumns <= columnIndex)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(columnIndex),
+                        ImplementationServices.GetResourceString(
+                            "STR_EXCEPT_TAB_INDEX_EXCEEDS_DIMS"));
+                }
+
+                var categoryCode = this.data[rowIndex, columnIndex];
+                var variable = this.variables[columnIndex];
+
+                variable.TryGet(categoryCode, out Category category);
+
+                return category;
+            }
+        }
+
+        #endregion
 
         #endregion
     }

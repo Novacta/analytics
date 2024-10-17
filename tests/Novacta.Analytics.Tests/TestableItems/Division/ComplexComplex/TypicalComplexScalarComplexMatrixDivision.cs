@@ -29,8 +29,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Division
         TypicalComplexScalarComplexMatrixDivision() :
             base(
                 expected: new ComplexMatrixState(
-                    asColumnMajorDenseArray: new Complex[6] 
-                        { Complex.NaN, 10, 5, 3.3333333, 2.5, 2 },
+                    asColumnMajorDenseArray: [Complex.NaN, 10, 5, 3.3333333, 2.5, 2],
                     numberOfRows: 2,
                     numberOfColumns: 3),
                 left: new Complex(10, 10),

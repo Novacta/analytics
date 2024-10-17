@@ -18,7 +18,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Mean
                 base(
                     expected: new DoubleMatrixState(
                         asColumnMajorDenseArray:
-                            new double[4] { .8, .6, .6, 1.2 },
+                            [.8, .6, .6, 1.2],
                         numberOfRows: 4,
                         numberOfColumns: 1
                     ),

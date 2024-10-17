@@ -11,8 +11,8 @@
 			<para>
 				The project targets
 				<externalLink>
-					<linkText>.NET 6</linkText>
-					<linkUri>https://github.com/dotnet/core/blob/main/release-notes/6.0/README.md</linkUri>
+					<linkText>.NET 8</linkText>
+					<linkUri>https://github.com/dotnet/core/blob/main/release-notes/8.0/README.md</linkUri>
 				</externalLink>, and supports the
 				<externalLink>
 					<linkText>x86-64 architecture</linkText>
@@ -115,6 +115,23 @@
 							of symmetric/Hermitian matrices.
 						</para>
 					</listItem>
+                    <listItem>
+                        <para>
+                        Create
+                        <codeEntityReference linkText="DoubleMatrix">
+                            T:Novacta.Analytics.DoubleMatrix
+                        </codeEntityReference> 
+                        instances by
+                        <externalLink>
+                            <linkText>encoding</linkText>
+                            <linkTarget>_self</linkTarget>
+                            <linkUri>
+                                https://novacta.github.io/analytics/html/B1082BD8.htm
+                            </linkUri>
+                        </externalLink>
+                        numerical or categorical data.
+                    </para>
+                    </listItem>
 				</list>
 				<para>
 					<legacyBold>Matrix data presentation and interaction in application UI</legacyBold>
@@ -194,6 +211,29 @@
 							variability, possibly approximating the cloud in a lower dimensional space.
 						</para>
 					</listItem>
+                    <listItem>
+                        <para>
+                            Multidimensional scaling
+                        </para>
+                        <list class="bullet">
+                            <listItem>
+                                <para>
+                                    <codeEntityReference linkText="Classical analysis" qualifyHint="false">
+                                        T:Novacta.Analytics.ClassicalMultidimensionalScaling
+                                    </codeEntityReference>
+                                    of a proximity matrix.
+                                </para>
+                            </listItem>
+                            <listItem>
+                                <para>
+                                    <codeEntityReference linkText="Nonmetric analysis" qualifyHint="false" autoUpgrade="true">
+                                        T:Novacta.Analytics.NonMetricMultidimensionalScaling
+                                    </codeEntityReference>
+                                    of a dissimilarity matrix.
+                                </para>
+                            </listItem>
+                        </list>
+                    </listItem>
 					<listItem>
 						<para>
 							Compute the
@@ -218,30 +258,30 @@
 					<listItem>
 						<para>
 							Cluster Analysis
-							<list class="bullet">
-								<listItem>
-									<para>
-										<codeEntityReference linkText="Discover">
-											M:Novacta.Analytics.Clusters.Discover(Novacta.Analytics.DoubleMatrix,System.Int32)
-										</codeEntityReference>
-										optimal clusters in a data set by minimizing the sum of
-										intra-cluster squared deviations.
-									</para>
-								</listItem>
-								<listItem>
-									<para>
-										<codeEntityReference linkText="Explain">
-											M:Novacta.Analytics.Clusters.Explain(Novacta.Analytics.DoubleMatrix,Novacta.Analytics.IndexPartition{System.Double},System.Int32)
-										</codeEntityReference>
-										existing clusters selecting features
-										by minimizing the
-										<codeEntityReference linkText="Davies-Bouldin index">
-											M:Novacta.Analytics.IndexPartition.DaviesBouldinIndex(Novacta.Analytics.DoubleMatrix,Novacta.Analytics.IndexPartition{System.Double})
-										</codeEntityReference>.
-									</para>
-								</listItem>
-							</list>
-						</para>
+                        </para>
+						<list class="bullet">
+							<listItem>
+								<para>
+									<codeEntityReference linkText="Discover">
+										M:Novacta.Analytics.Clusters.Discover(Novacta.Analytics.DoubleMatrix,System.Int32)
+									</codeEntityReference>
+									optimal clusters in a data set by minimizing the sum of
+									intra-cluster squared deviations.
+								</para>
+							</listItem>
+							<listItem>
+								<para>
+									<codeEntityReference linkText="Explain">
+										M:Novacta.Analytics.Clusters.Explain(Novacta.Analytics.DoubleMatrix,Novacta.Analytics.IndexPartition{System.Double},System.Int32)
+									</codeEntityReference>
+									existing clusters selecting features
+									by minimizing the
+									<codeEntityReference linkText="Davies-Bouldin index">
+										M:Novacta.Analytics.IndexPartition.DaviesBouldinIndex(Novacta.Analytics.DoubleMatrix,Novacta.Analytics.IndexPartition{System.Double})
+									</codeEntityReference>.
+								</para>
+							</listItem>
+						</list>
 					</listItem>
 				</list>
 				<para>
@@ -254,10 +294,14 @@
 							<codeEntityReference linkText="categorical data sets">
 								T:Novacta.Analytics.CategoricalDataSet
 							</codeEntityReference>
-							by
-							<codeEntityReference linkText="encoding">
-								M:Novacta.Analytics.CategoricalDataSet.Encode(System.IO.TextReader,System.Char,Novacta.Analytics.IndexCollection,System.Boolean,System.Collections.Generic.Dictionary{System.Int32,Novacta.Analytics.Categorizer},System.IFormatProvider)
-							</codeEntityReference>
+                            by
+                            <externalLink>
+                                <linkText>encoding</linkText>
+                                <linkTarget>_self</linkTarget>
+                                <linkUri>
+                                    https://novacta.github.io/analytics/html/77DAF585.htm
+                                </linkUri>
+                            </externalLink>
 							categorical or numerical data from a stream.
 						</para>
 					</listItem>

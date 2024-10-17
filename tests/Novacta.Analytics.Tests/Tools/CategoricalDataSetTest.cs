@@ -151,7 +151,7 @@ namespace Novacta.Analytics.Tests.Tools
                     //          URL={ http://periodici.caspur.it/cgi-bin/sciserv.pl?collection=journals&journal=08856125&issue=v36i0003&article=201_gaemona },
                     //}
                     const int numberOfInstances = 27;
-                    string[] data = new string[numberOfInstances + 1] {
+                    string[] data = [
                         "NUMERICAL,TARGET",
                         "0,A",
                         "0,A",
@@ -179,7 +179,7 @@ namespace Novacta.Analytics.Tests.Tools
                         "8,C",
                         "9,C",
                         "9,C",
-                        "9,C" };
+                        "9,C" ];
 
                     // Identify the special categorizer for variable NUMERICAL
                     char columnDelimiter = ',';
@@ -251,7 +251,7 @@ namespace Novacta.Analytics.Tests.Tools
                     number.SetAsReadOnly();
 
                     List<CategoricalVariable> expectedVariables =
-                        new() { numerical, number };
+                        [numerical, number];
 
                     DoubleMatrix expectedData = DoubleMatrix.Dense(numberOfInstances, 2);
 
@@ -263,20 +263,13 @@ namespace Novacta.Analytics.Tests.Tools
                     {
                         var tokens = data[i].Split(',');
                         var targetLabel = tokens[1];
-                        switch (targetLabel)
+                        targetCode = targetLabel switch
                         {
-                            case "A":
-                                targetCode = 0.0;
-                                break;
-                            case "B":
-                                targetCode = 1.0;
-                                break;
-                            case "C":
-                                targetCode = 2.0;
-                                break;
-                            default:
-                                throw new Exception("Unrecognized target label.");
-                        }
+                            "A" => 0.0,
+                            "B" => 1.0,
+                            "C" => 2.0,
+                            _ => throw new Exception("Unrecognized target label."),
+                        };
                         expectedData[i - 1, 1] = targetCode;
                     }
 
@@ -314,7 +307,7 @@ namespace Novacta.Analytics.Tests.Tools
                     //          URL={ http://periodici.caspur.it/cgi-bin/sciserv.pl?collection=journals&journal=08856125&issue=v36i0003&article=201_gaemona },
                     //}
                     const int numberOfInstances = 27;
-                    string[] data = new string[numberOfInstances + 1] {
+                    string[] data = [
                         "NUMERICAL,TARGET",
                         "0,A",
                         "0,A",
@@ -342,7 +335,7 @@ namespace Novacta.Analytics.Tests.Tools
                         "8,C",
                         "9,C",
                         "9,C",
-                        "9,C" };
+                        "9,C" ];
 
                     MemoryStream stream = new();
                     StreamWriter writer = new(stream);
@@ -425,7 +418,7 @@ namespace Novacta.Analytics.Tests.Tools
                     number.SetAsReadOnly();
 
                     List<CategoricalVariable> expectedVariables =
-                        new() { numerical, number };
+                        [numerical, number];
 
                     DoubleMatrix expectedData = DoubleMatrix.Dense(numberOfInstances, 2);
 
@@ -437,20 +430,13 @@ namespace Novacta.Analytics.Tests.Tools
                     {
                         var tokens = data[i].Split(',');
                         var targetLabel = tokens[1];
-                        switch (targetLabel)
+                        targetCode = targetLabel switch
                         {
-                            case "A":
-                                targetCode = 0.0;
-                                break;
-                            case "B":
-                                targetCode = 1.0;
-                                break;
-                            case "C":
-                                targetCode = 2.0;
-                                break;
-                            default:
-                                throw new Exception("Unrecognized target label.");
-                        }
+                            "A" => 0.0,
+                            "B" => 1.0,
+                            "C" => 2.0,
+                            _ => throw new Exception("Unrecognized target label."),
+                        };
                         expectedData[i - 1, 1] = targetCode;
                     }
 
@@ -488,7 +474,7 @@ namespace Novacta.Analytics.Tests.Tools
                     //          URL={ http://periodici.caspur.it/cgi-bin/sciserv.pl?collection=journals&journal=08856125&issue=v36i0003&article=201_gaemona },
                     //}
                     const int numberOfInstances = 27;
-                    string[] data = new string[numberOfInstances] {
+                    string[] data = [
                         //"NUMERICAL,TARGET",
                         "0,A",
                         "0,A",
@@ -516,7 +502,7 @@ namespace Novacta.Analytics.Tests.Tools
                         "8,C",
                         "9,C",
                         "9,C",
-                        "9,C" };
+                        "9,C" ];
 
                     MemoryStream stream = new();
                     StreamWriter writer = new(stream);
@@ -599,7 +585,7 @@ namespace Novacta.Analytics.Tests.Tools
                     number.SetAsReadOnly();
 
                     List<CategoricalVariable> expectedVariables =
-                        new() { numerical, number };
+                        [numerical, number];
 
                     DoubleMatrix expectedData = DoubleMatrix.Dense(numberOfInstances, 2);
 
@@ -611,20 +597,13 @@ namespace Novacta.Analytics.Tests.Tools
                     {
                         var tokens = data[i].Split(',');
                         var targetLabel = tokens[1];
-                        switch (targetLabel)
+                        targetCode = targetLabel switch
                         {
-                            case "A":
-                                targetCode = 0.0;
-                                break;
-                            case "B":
-                                targetCode = 1.0;
-                                break;
-                            case "C":
-                                targetCode = 2.0;
-                                break;
-                            default:
-                                throw new Exception("Unrecognized target label.");
-                        }
+                            "A" => 0.0,
+                            "B" => 1.0,
+                            "C" => 2.0,
+                            _ => throw new Exception("Unrecognized target label."),
+                        };
                         expectedData[i, 1] = targetCode;
                     }
 
@@ -658,13 +637,13 @@ namespace Novacta.Analytics.Tests.Tools
                     // Category label is missing
 
                     // Create an invalid data stream 
-                    string[] data = new string[6] {
+                    string[] data = [
                         "COLOR,HAPPINESS,NUMBER",
                         "Red,TRUE,  -2.2",
                         ",TRUE, 0.0", // Labels cannot be empty or consisting of white spaces
                         "Red,FALSE,  -3.3",
                         "Black,TRUE,-1.1",
-                        "Black,FALSE, 4.4" };
+                        "Black,FALSE, 4.4" ];
 
                     MemoryStream stream = new();
                     StreamWriter writer = new(stream);
@@ -716,13 +695,13 @@ namespace Novacta.Analytics.Tests.Tools
                 public static void ExtractedColumnIsMissingInDataRow()
                 {
                     // Create a data stream 
-                    string[] data = new string[6] {
+                    string[] data = [
                         "COLOR,HAPPINESS,NUMBER,HOMER,D'OH!",
                         "Red,TRUE,  -2.2",
                         "Black,TRUE, 0.0",
                         "Red,FALSE,  -3.3",
                         "Black,TRUE,-1.1",
-                        "Black,FALSE, 4.4" };
+                        "Black,FALSE, 4.4" ];
 
                     MemoryStream stream = new();
                     StreamWriter writer = new(stream);
@@ -797,13 +776,13 @@ namespace Novacta.Analytics.Tests.Tools
                 public static void TargetColumnIsNegative()
                 {
                     // Create a data stream 
-                    string[] data = new string[6] {
+                    string[] data = [
                         "COLOR,HAPPINESS,NUMBER,HOMER,D'OH!",
                         "Red,TRUE,  -2.2",
                         "Black,TRUE, 0.0",
                         "Red,FALSE,  -3.3",
                         "Black,TRUE,-1.1",
-                        "Black,FALSE, 4.4" };
+                        "Black,FALSE, 4.4" ];
 
                     MemoryStream stream = new();
                     StreamWriter writer = new(stream);
@@ -847,8 +826,8 @@ namespace Novacta.Analytics.Tests.Tools
                 public static void NoDataRows()
                 {
                     // Create a data stream 
-                    string[] data = new string[1] {
-                        "COLOR,HAPPINESS,NUMBER" }; // No data rows
+                    string[] data = [
+                        "COLOR,HAPPINESS,NUMBER" ]; // No data rows
 
                     MemoryStream stream = new();
                     StreamWriter writer = new(stream);
@@ -926,13 +905,13 @@ namespace Novacta.Analytics.Tests.Tools
                 public static void NumericalColumnsIsNull()
                 {
                     // Create a data stream 
-                    string[] data = new string[6] {
+                    string[] data = [
                         "COLOR,HAPPINESS,NUMBER",
                         "Red,TRUE,  -2.2",
                         "Green,TRUE, 0.0",
                         "Red,FALSE,  -3.3",
                         "Black,TRUE,-1.1",
-                        "Black,FALSE, 4.4" };
+                        "Black,FALSE, 4.4" ];
 
                     MemoryStream stream = new();
                     StreamWriter writer = new(stream);
@@ -977,13 +956,13 @@ namespace Novacta.Analytics.Tests.Tools
                 public static void ProviderIsNull()
                 {
                     // Create a data stream 
-                    string[] data = new string[6] {
+                    string[] data = [
                         "COLOR,HAPPINESS,NUMBER",
                         "Red,TRUE,  -2.2",
                         "Green,TRUE, 0.0",
                         "Red,FALSE,  -3.3",
                         "Black,TRUE,-1.1",
-                        "Black,FALSE, 4.4" };
+                        "Black,FALSE, 4.4" ];
 
                     MemoryStream stream = new();
                     StreamWriter writer = new(stream);
@@ -1039,13 +1018,13 @@ namespace Novacta.Analytics.Tests.Tools
             public static void Succeed()
             {
                 // Create a data stream 
-                string[] data = new string[6] {
+                string[] data = [
                     "COLOR,HAPPINESS,NUMBER",
                     "Red,TRUE,  -2.2",
                     "Green,TRUE, 0.0",
                     "Red,FALSE,  -3.3",
                     "Black,TRUE,-1.1",
-                    "Black,FALSE, 4.4" };
+                    "Black,FALSE, 4.4" ];
 
                 MemoryStream stream = new();
                 StreamWriter writer = new(stream);
@@ -1154,13 +1133,13 @@ namespace Novacta.Analytics.Tests.Tools
                 public static void IsValid()
                 {
                     // Create a data stream 
-                    string[] data = new string[6] {
+                    string[] data = [
                         "COLOR,HAPPINESS,NUMBER",
                         "Red,TRUE,  -2.2",
                         "Green,TRUE, 0.0",
                         "Red,FALSE,  -3.3",
                         "Black,TRUE,-1.1",
-                        "Black,FALSE, 4.4" };
+                        "Black,FALSE, 4.4" ];
 
                     MemoryStream stream = new();
                     StreamWriter writer = new(stream);
@@ -1261,13 +1240,13 @@ namespace Novacta.Analytics.Tests.Tools
                 public static void IsNull()
                 {
                     // Create a data stream 
-                    string[] data = new string[6] {
+                    string[] data = [
                         "COLOR,HAPPINESS,NUMBER",
                         "Red,TRUE,  -2.2",
                         "Green,TRUE, 0.0",
                         "Red,FALSE,  -3.3",
                         "Black,TRUE,-1.1",
-                        "Black,FALSE, 4.4" };
+                        "Black,FALSE, 4.4" ];
 
                     MemoryStream stream = new();
                     StreamWriter writer = new(stream);
@@ -1334,13 +1313,13 @@ namespace Novacta.Analytics.Tests.Tools
                 public static void ContainsUnexpectedCodes()
                 {
                     // Create a data stream 
-                    string[] data = new string[6] {
+                    string[] data = [
                         "COLOR,HAPPINESS,NUMBER",
                         "Red,TRUE,  -2.2",
                         "Green,TRUE, 0.0",
                         "Red,FALSE,  -3.3",
                         "Black,TRUE,-1.1",
-                        "Black,FALSE, 4.4" };
+                        "Black,FALSE, 4.4" ];
 
                     MemoryStream stream = new();
                     StreamWriter writer = new(stream);
@@ -1412,13 +1391,13 @@ namespace Novacta.Analytics.Tests.Tools
                 public static void HasWrongNumberOfColumns()
                 {
                     // Create a data stream 
-                    string[] data = new string[6] {
+                    string[] data = [
                         "COLOR,HAPPINESS,NUMBER",
                         "Red,TRUE,  -2.2",
                         "Green,TRUE, 0.0",
                         "Red,FALSE,  -3.3",
                         "Black,TRUE,-1.1",
-                        "Black,FALSE, 4.4" };
+                        "Black,FALSE, 4.4" ];
 
                     MemoryStream stream = new();
                     StreamWriter writer = new(stream);
@@ -1504,7 +1483,7 @@ namespace Novacta.Analytics.Tests.Tools
             {
                 /// <summary>
                 /// Provides methods to test that the
-                /// advanced encoding methods in <see cref="CategoricalDataSet"/> 
+                /// basic encoding methods in <see cref="CategoricalDataSet"/> 
                 /// terminate successfully when expected.
                 public static class Succeed
                 {
@@ -1517,7 +1496,7 @@ namespace Novacta.Analytics.Tests.Tools
                     /// </summary>
                     public static void FromPathWithVariableNames()
                     {
-                        var path = "Data" + Path.DirectorySeparatorChar + "encode-path.csv";
+                        var path = "Data" + Path.DirectorySeparatorChar + "categorical-encode-path.csv";
 
                         // Encode the categorical data set
                         char columnDelimiter = ',';
@@ -1545,7 +1524,7 @@ namespace Novacta.Analytics.Tests.Tools
                         happiness.SetAsReadOnly();
 
                         List<CategoricalVariable> expectedVariables =
-                            new() { color, happiness };
+                            [color, happiness];
 
                         DoubleMatrix expectedData = DoubleMatrix.Dense(5, 2);
 
@@ -1580,13 +1559,13 @@ namespace Novacta.Analytics.Tests.Tools
                     public static void FromTextReaderWithVariableNames()
                     {
                         // Create a data stream 
-                        string[] data = new string[6] {
+                        string[] data = [
                             "COLOR,HAPPINESS,NUMBER",
                             "Red,TRUE,  -2.2",
                             "Green,TRUE, 0.0",
                             "Red,FALSE,  -3.3",
                             "Black,TRUE,-1.1",
-                            "Black,FALSE, 4.4" };
+                            "Black,FALSE, 4.4" ];
 
                         MemoryStream stream = new();
                         StreamWriter writer = new(stream);
@@ -1624,7 +1603,7 @@ namespace Novacta.Analytics.Tests.Tools
                         happiness.SetAsReadOnly();
 
                         List<CategoricalVariable> expectedVariables =
-                            new() { color, happiness };
+                            [color, happiness];
 
                         DoubleMatrix expectedData = DoubleMatrix.Dense(5, 2);
 
@@ -1661,12 +1640,12 @@ namespace Novacta.Analytics.Tests.Tools
                         // Mainstream use case - without variable names
 
                         // Create a data stream 
-                        string[] data = new string[5] {
+                        string[] data = [
                             "Red,TRUE,  -2.2",
                             "Green,TRUE, 0.0",
                             "Red,FALSE,  -3.3",
                             "Black,TRUE,-1.1",
-                            "Black,FALSE, 4.4" };
+                            "Black,FALSE, 4.4" ];
 
                         MemoryStream stream = new();
                         StreamWriter writer = new(stream);
@@ -1704,7 +1683,7 @@ namespace Novacta.Analytics.Tests.Tools
                         happiness.SetAsReadOnly();
 
                         List<CategoricalVariable> expectedVariables =
-                            new() { color, happiness };
+                            [color, happiness];
 
                         DoubleMatrix expectedData = DoubleMatrix.Dense(5, 2);
 
@@ -1748,13 +1727,13 @@ namespace Novacta.Analytics.Tests.Tools
                         // Variable name is missing
 
                         // Create an invalid data stream 
-                        string[] data = new string[6] {
+                        string[] data = [
                             "COLOR,  ,NUMBER", // Names cannot be empty or consisting of white spaces
                             "Red,TRUE,  -2.2",
                             "Green,TRUE, 0.0",
                             "Red,FALSE,  -3.3",
                             "Black,TRUE,-1.1",
-                            "Black,FALSE, 4.4" };
+                            "Black,FALSE, 4.4" ];
 
                         MemoryStream stream = new();
                         StreamWriter writer = new(stream);
@@ -1803,13 +1782,13 @@ namespace Novacta.Analytics.Tests.Tools
                         // Category label is missing
 
                         // Create an invalid data stream 
-                        string[] data = new string[6] {
+                        string[] data = [
                             "COLOR,HAPPINESS,NUMBER",
                             "Red,TRUE,  -2.2",
                             ",TRUE, 0.0", // Labels cannot be empty or consisting of white spaces
                             "Red,FALSE,  -3.3",
                             "Black,TRUE,-1.1",
-                            "Black,FALSE, 4.4" };
+                            "Black,FALSE, 4.4" ];
 
                         MemoryStream stream = new();
                         StreamWriter writer = new(stream);
@@ -1856,13 +1835,13 @@ namespace Novacta.Analytics.Tests.Tools
                     public static void ExtractedColumnIsMissingInHeaderRow()
                     {
                         // Create a data stream 
-                        string[] data = new string[6] {
+                        string[] data = [
                             "COLOR,HAPPINESS,NUMBER",
                             "Red,TRUE,  -2.2",
                             "Black,TRUE, 0.0",
                             "Red,FALSE,  -3.3",
                             "Black,TRUE,-1.1",
-                            "Black,FALSE, 4.4" };
+                            "Black,FALSE, 4.4" ];
 
                         MemoryStream stream = new();
                         StreamWriter writer = new(stream);
@@ -1907,13 +1886,13 @@ namespace Novacta.Analytics.Tests.Tools
                     public static void ExtractedColumnIsMissingInDataRow()
                     {
                         // Create a data stream 
-                        string[] data = new string[6] {
+                        string[] data = [
                             "COLOR,HAPPINESS,NUMBER,HOMER,D'OH!",
                             "Red,TRUE,  -2.2",
                             "Black,TRUE, 0.0",
                             "Red,FALSE,  -3.3",
                             "Black,TRUE,-1.1",
-                            "Black,FALSE, 4.4" };
+                            "Black,FALSE, 4.4" ];
 
                         MemoryStream stream = new();
                         StreamWriter writer = new(stream);
@@ -1958,8 +1937,8 @@ namespace Novacta.Analytics.Tests.Tools
                     public static void NoDataRows()
                     {
                         // Create a data stream 
-                        string[] data = new string[1] {
-                        "COLOR,HAPPINESS,NUMBER" }; // No data rows
+                        string[] data = [
+                        "COLOR,HAPPINESS,NUMBER" ]; // No data rows
 
                         MemoryStream stream = new();
                         StreamWriter writer = new(stream);
@@ -2029,13 +2008,13 @@ namespace Novacta.Analytics.Tests.Tools
                     public static void ExtractedColumnsIsNull()
                     {
                         // Create a data stream 
-                        string[] data = new string[6] {
+                        string[] data = [
                             "COLOR,HAPPINESS,NUMBER",
                             "Red,TRUE,  -2.2",
                             "Green,TRUE, 0.0",
                             "Red,FALSE,  -3.3",
                             "Black,TRUE,-1.1",
-                            "Black,FALSE, 4.4" };
+                            "Black,FALSE, 4.4" ];
 
                         MemoryStream stream = new();
                         StreamWriter writer = new(stream);
@@ -2091,7 +2070,7 @@ namespace Novacta.Analytics.Tests.Tools
                     /// </summary>
                     public static void FromPathWithVariableNames()
                     {
-                        var path = "Data" + Path.DirectorySeparatorChar + "encode-path.csv";
+                        var path = "Data" + Path.DirectorySeparatorChar + "categorical-encode-path.csv";
 
                         // Define a special categorizer for variable NUMBER
                         string numberCategorizer(string token, IFormatProvider provider)
@@ -2147,7 +2126,7 @@ namespace Novacta.Analytics.Tests.Tools
                         number.SetAsReadOnly();
 
                         List<CategoricalVariable> expectedVariables =
-                            new() { color, number };
+                            [color, number];
 
                         DoubleMatrix expectedData = DoubleMatrix.Dense(5, 2);
 
@@ -2183,13 +2162,13 @@ namespace Novacta.Analytics.Tests.Tools
                     public static void FromTextReaderWithVariableNames()
                     {
                         // Create a data stream 
-                        string[] data = new string[6] {
+                        string[] data = [
                             "COLOR,HAPPINESS,NUMBER",
                             "Red,TRUE,  -2.2",
                             "Green,TRUE, 0.0",
                             "Red,FALSE,  -3.3",
                             "Black,TRUE,-1.1",
-                            "Black,FALSE, 4.4" };
+                            "Black,FALSE, 4.4" ];
 
                         MemoryStream stream = new();
                         StreamWriter writer = new(stream);
@@ -2255,7 +2234,7 @@ namespace Novacta.Analytics.Tests.Tools
                         number.SetAsReadOnly();
 
                         List<CategoricalVariable> expectedVariables =
-                            new() { color, number };
+                            [color, number];
 
                         DoubleMatrix expectedData = DoubleMatrix.Dense(5, 2);
 
@@ -2293,12 +2272,12 @@ namespace Novacta.Analytics.Tests.Tools
                         // Mainstream use case - without variable names
 
                         // Create a data stream 
-                        string[] data = new string[5] {
+                        string[] data = [
                             "Red,TRUE,  -2.2",
                             "Green,TRUE, 0.0",
                             "Red,FALSE,  -3.3",
                             "Black,TRUE,-1.1",
-                            "Black,FALSE, 4.4" };
+                            "Black,FALSE, 4.4" ];
 
                         MemoryStream stream = new();
                         StreamWriter writer = new(stream);
@@ -2364,7 +2343,7 @@ namespace Novacta.Analytics.Tests.Tools
                         number.SetAsReadOnly();
 
                         List<CategoricalVariable> expectedVariables =
-                            new() { color, number };
+                            [color, number];
 
                         DoubleMatrix expectedData = DoubleMatrix.Dense(5, 2);
 
@@ -2410,13 +2389,13 @@ namespace Novacta.Analytics.Tests.Tools
                         // Variable name is missing
 
                         // Create an invalid data stream 
-                        string[] data = new string[6] {
+                        string[] data = [
                             "COLOR,HAPPINESS,  ", // Names cannot be empty or consisting of white spaces
                             "Red,TRUE,  -2.2",
                             "Green,TRUE, 0.0",
                             "Red,FALSE,  -3.3",
                             "Black,TRUE,-1.1",
-                            "Black,FALSE, 4.4" };
+                            "Black,FALSE, 4.4" ];
 
                         MemoryStream stream = new();
                         StreamWriter writer = new(stream);
@@ -2493,13 +2472,13 @@ namespace Novacta.Analytics.Tests.Tools
                         // Category label is missing
 
                         // Create an invalid data stream 
-                        string[] data = new string[6] {
+                        string[] data = [
                             "COLOR,HAPPINESS,NUMBER",
                             "Red,TRUE,  -2.2",
                             ",TRUE, 0.0", // Labels cannot be empty or consisting of white spaces
                             "Red,FALSE,  -3.3",
                             "Black,TRUE,-1.1",
-                            "Black,FALSE, 4.4" };
+                            "Black,FALSE, 4.4" ];
 
                         MemoryStream stream = new();
                         StreamWriter writer = new(stream);
@@ -2574,13 +2553,13 @@ namespace Novacta.Analytics.Tests.Tools
                     public static void ExtractedColumnIsMissingInHeaderRow()
                     {
                         // Create a data stream 
-                        string[] data = new string[6] {
+                        string[] data = [
                             "COLOR,HAPPINESS,NUMBER",
                             "Red,TRUE,  -2.2",
                             "Black,TRUE, 0.0",
                             "Red,FALSE,  -3.3",
                             "Black,TRUE,-1.1",
-                            "Black,FALSE, 4.4" };
+                            "Black,FALSE, 4.4" ];
 
                         MemoryStream stream = new();
                         StreamWriter writer = new(stream);
@@ -2653,13 +2632,13 @@ namespace Novacta.Analytics.Tests.Tools
                     public static void ExtractedColumnIsMissingInDataRow()
                     {
                         // Create a data stream 
-                        string[] data = new string[6] {
+                        string[] data = [
                             "COLOR,HAPPINESS,NUMBER,HOMER,D'OH!",
                             "Red,TRUE,  -2.2",
                             "Black,TRUE, 0.0",
                             "Red,FALSE,  -3.3",
                             "Black,TRUE,-1.1",
-                            "Black,FALSE, 4.4" };
+                            "Black,FALSE, 4.4" ];
 
                         MemoryStream stream = new();
                         StreamWriter writer = new(stream);
@@ -2732,8 +2711,8 @@ namespace Novacta.Analytics.Tests.Tools
                     public static void NoDataRows()
                     {
                         // Create a data stream 
-                        string[] data = new string[1] {
-                        "COLOR,HAPPINESS,NUMBER" }; // No data rows
+                        string[] data = [
+                        "COLOR,HAPPINESS,NUMBER" ]; // No data rows
 
                         MemoryStream stream = new();
                         StreamWriter writer = new(stream);
@@ -2859,13 +2838,13 @@ namespace Novacta.Analytics.Tests.Tools
                     public static void ExtractedColumnsIsNull()
                     {
                         // Create a data stream 
-                        string[] data = new string[6] {
+                        string[] data = [
                             "COLOR,HAPPINESS,NUMBER",
                             "Red,TRUE,  -2.2",
                             "Green,TRUE, 0.0",
                             "Red,FALSE,  -3.3",
                             "Black,TRUE,-1.1",
-                            "Black,FALSE, 4.4" };
+                            "Black,FALSE, 4.4" ];
 
                         MemoryStream stream = new();
                         StreamWriter writer = new(stream);
@@ -2933,13 +2912,13 @@ namespace Novacta.Analytics.Tests.Tools
                     public static void SpecialCategorizersIsNull()
                     {
                         // Create a data stream 
-                        string[] data = new string[6] {
+                        string[] data = [
                             "COLOR,HAPPINESS,NUMBER",
                             "Red,TRUE,  -2.2",
                             "Green,TRUE, 0.0",
                             "Red,FALSE,  -3.3",
                             "Black,TRUE,-1.1",
-                            "Black,FALSE, 4.4" };
+                            "Black,FALSE, 4.4" ];
 
                         MemoryStream stream = new();
                         StreamWriter writer = new(stream);
@@ -2985,13 +2964,13 @@ namespace Novacta.Analytics.Tests.Tools
                     public static void ProviderIsNull()
                     {
                         // Create a data stream 
-                        string[] data = new string[6] {
+                        string[] data = [
                             "COLOR,HAPPINESS,NUMBER",
                             "Red,TRUE,  -2.2",
                             "Green,TRUE, 0.0",
                             "Red,FALSE,  -3.3",
                             "Black,TRUE,-1.1",
-                            "Black,FALSE, 4.4" };
+                            "Black,FALSE, 4.4" ];
 
                         MemoryStream stream = new();
                         StreamWriter writer = new(stream);
@@ -3060,13 +3039,13 @@ namespace Novacta.Analytics.Tests.Tools
                     public static void SpecialCategorizersContainsIrrelevantKey()
                     {
                         // Create a data stream 
-                        string[] data = new string[6] {
+                        string[] data = [
                             "COLOR,HAPPINESS,NUMBER",
                             "Red,TRUE,  -2.2",
                             "Green,TRUE, 0.0",
                             "Red,FALSE,  -3.3",
                             "Black,TRUE,-1.1",
-                            "Black,FALSE, 4.4" };
+                            "Black,FALSE, 4.4" ];
 
                         MemoryStream stream = new();
                         StreamWriter writer = new(stream);
@@ -3118,13 +3097,13 @@ namespace Novacta.Analytics.Tests.Tools
                     public static void SpecialCategorizersContainsNullValue()
                     {
                         // Create a data stream 
-                        string[] data = new string[6] {
+                        string[] data = [
                             "COLOR,HAPPINESS,NUMBER",
                             "Red,TRUE,  -2.2",
                             "Green,TRUE, 0.0",
                             "Red,FALSE,  -3.3",
                             "Black,TRUE,-1.1",
-                            "Black,FALSE, 4.4" };
+                            "Black,FALSE, 4.4" ];
 
                         MemoryStream stream = new();
                         StreamWriter writer = new(stream);

@@ -2,8 +2,6 @@
 // Licensed under the MIT license. 
 // See the LICENSE file in the project root for more information.
 
-using System.Numerics;
-
 namespace Novacta.Analytics.Tests.TestableItems.Matrices
 {
     /// <summary>
@@ -18,13 +16,13 @@ namespace Novacta.Analytics.Tests.TestableItems.Matrices
         /// Initializes a new instance of the <see cref="TestableComplexMatrix66" /> class.
         /// </summary>
         TestableComplexMatrix66() : base(
-                asColumnMajorDenseArray: new Complex[4]
-                {
-                    new Complex(0, 1),
-                    new Complex(2, 2),
-                    new Complex(2, 2),
-                    new Complex(0, 4)
-                },
+                asColumnMajorDenseArray:
+                [
+                    new(0, 1),
+                    new(2, 2),
+                    new(2, 2),
+                    new(0, 4)
+                ],
                 numberOfRows: 2,
                 numberOfColumns: 2,
                 isUpperHessenberg: true,

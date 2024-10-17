@@ -22,7 +22,7 @@ namespace Novacta.Analytics.Tests
             var clone = (IndexCollection)index.Clone();
 
             IndexCollectionAssert.IsStateAsExpected(
-                expectedIndexes: new int[3] { 3, 4, 5 },
+                expectedIndexes: [3, 4, 5],
                 expectedMaxIndex: 5,
                 actual: clone);
         }
@@ -48,7 +48,7 @@ namespace Novacta.Analytics.Tests
 
             thisCollection = collections[0];
             otherCollection = IndexCollection.FromArray(
-                new int[4] { 0, 0, 0, 0 });
+                [0, 0, 0, 0]);
 
             expected = -1;
             actual = thisCollection.CompareTo(otherCollection);
@@ -67,7 +67,7 @@ namespace Novacta.Analytics.Tests
 
             thisCollection = collections[0];
             otherCollection = IndexCollection.FromArray(
-                new int[2] { 0, 0 });
+                [0, 0]);
 
             expected = 1;
             actual = thisCollection.CompareTo(otherCollection);
@@ -206,10 +206,10 @@ namespace Novacta.Analytics.Tests
             //               1  4  7  10    
             //               2  5  8  11 ]  
 
-            int[] expectedColumnIndexes = new int[12] { 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3 };
-            int[] expectedRowIndexes = new int[12] { 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2 };
+            int[] expectedColumnIndexes = [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3];
+            int[] expectedRowIndexes = [0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2];
 
-            int[] linearIndexes = new int[12] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
+            int[] linearIndexes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
             for (int i = 0; i < linearIndexes.Length; i++)
             {
@@ -247,7 +247,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        IndexCollection.FromArray(Array.Empty<int>(), true);
+                        IndexCollection.FromArray([], true);
                     },
                     expectedType: typeof(ArgumentException),
                     expectedPartialMessage: ImplementationServices.GetResourceString(
@@ -260,7 +260,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        IndexCollection.FromArray(new int[2] { 1, -1 }, true);
+                        IndexCollection.FromArray([1, -1], true);
                     },
                     expectedType: typeof(ArgumentException),
                     expectedPartialMessage: ImplementationServices.GetResourceString(
@@ -270,7 +270,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                    () =>
                    {
-                       IndexCollection.FromArray(new int[2] { 1, -1 }, false);
+                       IndexCollection.FromArray([1, -1], false);
                    },
                    expectedType: typeof(ArgumentException),
                    expectedPartialMessage: ImplementationServices.GetResourceString(
@@ -377,7 +377,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        IndexCollection.FromArray(Array.Empty<int>());
+                        IndexCollection.FromArray([]);
                     },
                     expectedType: typeof(ArgumentException),
                     expectedPartialMessage: ImplementationServices.GetResourceString(
@@ -390,7 +390,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        IndexCollection.FromArray(new int[2] { 1, -1 });
+                        IndexCollection.FromArray([1, -1]);
                     },
                     expectedType: typeof(ArgumentException),
                     expectedPartialMessage: ImplementationServices.GetResourceString(
@@ -563,7 +563,7 @@ namespace Novacta.Analytics.Tests
 
                 // positions { 2, 3 } from IndexCollection({ 3, 4, 2, 1, 0 })
                 {
-                    var target = IndexCollection.FromArray(new int[5] { 3, 4, 2, 1, 0 });
+                    var target = IndexCollection.FromArray([3, 4, 2, 1, 0]);
                     var positions = IndexCollection.Range(2, 3);
 
                     var actual = target[positions];
@@ -578,7 +578,7 @@ namespace Novacta.Analytics.Tests
 
                 // positions { 0 : 2 : 5 } from IndexCollection({ 3, 4, 2, 1, 0 })
                 {
-                    var target = IndexCollection.FromArray(new int[5] { 3, 4, 2, 1, 0 });
+                    var target = IndexCollection.FromArray([3, 4, 2, 1, 0]);
                     var positions = IndexCollection.Sequence(0, 2, 5);
 
                     var actual = target[positions];
@@ -593,8 +593,8 @@ namespace Novacta.Analytics.Tests
 
                 // positions { 1, 0, 3 } from IndexCollection({ 3, 4, 2, 1, 0 })
                 {
-                    var target = IndexCollection.FromArray(new int[5] { 3, 4, 2, 1, 0 });
-                    var positions = IndexCollection.FromArray(new int[3] { 1, 0, 3 });
+                    var target = IndexCollection.FromArray([3, 4, 2, 1, 0]);
+                    var positions = IndexCollection.FromArray([1, 0, 3]);
 
                     var actual = target[positions];
 
@@ -669,7 +669,7 @@ namespace Novacta.Analytics.Tests
                 // positions { 1, 0, 2, 2 } from IndexCollection.Sequence(3, 4, 12 )
                 {
                     var target = IndexCollection.Sequence(3, 4, 12);
-                    var positions = IndexCollection.FromArray(new int[4] { 1, 0, 2, 2 });
+                    var positions = IndexCollection.FromArray([1, 0, 2, 2]);
 
                     var actual = target[positions];
 
@@ -714,7 +714,7 @@ namespace Novacta.Analytics.Tests
                 // positions { 1, 0, 2, 2 } from IndexCollection.Sequence(15, -3, 2)          
                 {
                     var target = IndexCollection.Sequence(15, -3, 2);
-                    var positions = IndexCollection.FromArray(new int[4] { 1, 0, 2, 2 });
+                    var positions = IndexCollection.FromArray([1, 0, 2, 2]);
 
                     var actual = target[positions];
 
@@ -835,7 +835,7 @@ namespace Novacta.Analytics.Tests
                 actual[0] = 0;
 
                 IndexCollectionAssert.IsStateAsExpected(
-                    expectedIndexes: new int[1] { 0 },
+                    expectedIndexes: [0],
                     expectedMaxIndex: 0,
                     actual: actual);
             }
@@ -843,7 +843,7 @@ namespace Novacta.Analytics.Tests
             // IndexCollection: { 1, 12, 9, 6, 3 }
             {
                 var actual = IndexCollection.FromArray(
-                    new int[5] { 1, 12, 9, 6, 3 });
+                    [1, 12, 9, 6, 3]);
 
                 for (int i = 0; i < actual.Count; i++)
                 {
@@ -861,7 +861,7 @@ namespace Novacta.Analytics.Tests
             // - set at position whose index is the max index
             {
                 var actual = IndexCollection.FromArray(
-                    new int[5] { 2, 3, 4, 5, 6 });
+                    [2, 3, 4, 5, 6]);
 
                 actual[4] = 5;
                 var expectedIndexes = new int[5] { 2, 3, 4, 5, 5 };
@@ -1138,7 +1138,7 @@ namespace Novacta.Analytics.Tests
             {
                 var expectedIndexes = new int[5] { 0, 1, 2, 3, 4 };
 
-                var actual = IndexCollection.FromArray(new int[5] { 3, 4, 2, 1, 0 });
+                var actual = IndexCollection.FromArray([3, 4, 2, 1, 0]);
 
                 actual.Sort();
 
@@ -1180,7 +1180,7 @@ namespace Novacta.Analytics.Tests
         public void ContainsTest()
         {
             var target = IndexCollection.FromArray(
-                new int[6] { 0, 1, 2, 1, 3, 4 });
+                [0, 1, 2, 1, 3, 4]);
 
             Assert.AreEqual(
                 expected: true,
@@ -1211,7 +1211,7 @@ namespace Novacta.Analytics.Tests
                 string parameterName = "array";
 
                 var target = IndexCollection.FromArray(
-                    new int[6] { 0, 1, 2, 1, 3, 4 });
+                    [0, 1, 2, 1, 3, 4]);
 
                 // Dense
                 ArgumentExceptionAssert.Throw(
@@ -1235,7 +1235,7 @@ namespace Novacta.Analytics.Tests
                 string parameterName = "arrayIndex";
 
                 var target = IndexCollection.FromArray(
-                    new int[6] { 0, 1, 2, 1, 3, 4 });
+                    [0, 1, 2, 1, 3, 4]);
 
                 ArgumentExceptionAssert.Throw(
                     () =>
@@ -1256,7 +1256,7 @@ namespace Novacta.Analytics.Tests
                         new string[] { "STR_EXCEPT_PAR_NOT_ENOUGH_SPACE_IN_ARRAY" });
 
                 var target = IndexCollection.FromArray(
-                    new int[6] { 0, 1, 2, 1, 3, 4 });
+                    [0, 1, 2, 1, 3, 4]);
 
                 int count = target.Count;
 
@@ -1278,7 +1278,7 @@ namespace Novacta.Analytics.Tests
             {
                 {
                     var target = IndexCollection.FromArray(
-                        new int[4] { 1, 0, 0, 0 });
+                        [1, 0, 0, 0]);
 
                     var array = new int[6] { 10, 20, 30, 40, 50, 60 };
 
@@ -1287,13 +1287,13 @@ namespace Novacta.Analytics.Tests
                     target.CopyTo(array, arrayIndex);
 
                     ArrayAssert<int>.AreEqual(
-                        expected: new int[6] { 10, 1, 0, 0, 0, 60 },
+                        expected: [10, 1, 0, 0, 0, 60],
                         actual: array);
                 }
 
                 {
                     var target = IndexCollection.FromArray(
-                        new int[4] { 11, 0, 0, 44 });
+                        [11, 0, 0, 44]);
 
                     var array = new int[6] { 10, 20, 30, 40, 50, 60 };
 
@@ -1302,7 +1302,7 @@ namespace Novacta.Analytics.Tests
                     target.CopyTo(array, arrayIndex);
 
                     ArrayAssert<int>.AreEqual(
-                        expected: new int[6] { 10, 20, 11, 0, 0, 44 },
+                        expected: [10, 20, 11, 0, 0, 44],
                         actual: array);
                 }
             }
@@ -1312,7 +1312,7 @@ namespace Novacta.Analytics.Tests
         public void IListGetTest()
         {
             var target = IndexCollection.FromArray(
-                new int[6] { 0, 1, 2, 1, 3, 4 });
+                [0, 1, 2, 1, 3, 4]);
 
             Assert.AreEqual(
                 expected: 4,
@@ -1335,7 +1335,7 @@ namespace Novacta.Analytics.Tests
         public void IListSetTest()
         {
             var target = IndexCollection.FromArray(
-                new int[6] { 0, 1, 2, 1, 3, 4 });
+                [0, 1, 2, 1, 3, 4]);
 
             ((IList<int>)target)[5] = 40;
 
@@ -1392,7 +1392,7 @@ namespace Novacta.Analytics.Tests
         public void IndexOfTest()
         {
             var target = IndexCollection.FromArray(
-                new int[6] { 0, 1, 2, 1, 3, 4 });
+                [0, 1, 2, 1, 3, 4]);
 
             Assert.AreEqual(
                 expected: 5,

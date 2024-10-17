@@ -27,7 +27,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Negation
         TypicalDoubleMatrixNegation() :
             base(
                 expected: new DoubleMatrixState(
-                    asColumnMajorDenseArray: new double[9] { 0, 4, -7, -4, 0, 8, 7, -8, 0 },
+                    asColumnMajorDenseArray: [0, 4, -7, -4, 0, 8, 7, -8, 0],
                     numberOfRows: 3,
                     numberOfColumns: 3),
                 operand: TestableDoubleMatrix15.Get()

@@ -4,7 +4,6 @@
 
 using Novacta.Analytics.Tests.TestableItems.Matrices;
 using Novacta.Analytics.Tests.Tools;
-using System.Numerics;
 
 namespace Novacta.Analytics.Tests.TestableItems.Addition
 {
@@ -28,15 +27,15 @@ namespace Novacta.Analytics.Tests.TestableItems.Addition
         RightIsNeutralDoubleMatrixComplexScalarAddition() :
             base(
                 expected: new ComplexMatrixState(
-                    asColumnMajorDenseArray: new Complex[6] 
-                    { 
+                    asColumnMajorDenseArray:
+                    [
                         0, 
-                        new Complex(1, 0), 
-                        new Complex(2, 0), 
-                        new Complex(3, 0), 
-                        new Complex(4, 0),
-                        new Complex(5, 0)
-                    },
+                        new(1, 0), 
+                        new(2, 0), 
+                        new(3, 0), 
+                        new(4, 0),
+                        new(5, 0)
+                    ],
                     numberOfRows: 2,
                     numberOfColumns: 3),
                 left: TestableDoubleMatrix16.Get(),

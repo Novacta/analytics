@@ -27,7 +27,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Multiplication
         RightIsScalarDoubleMatrixDoubleMatrixMultiplication() :
             base(
                 expected: new DoubleMatrixState(
-                    asColumnMajorDenseArray: new double[6] { 0, 2, 4, 6, 8, 10 },
+                    asColumnMajorDenseArray: [0, 2, 4, 6, 8, 10],
                     numberOfRows: 2,
                     numberOfColumns: 3),
                 left: TestableDoubleMatrix16.Get(),

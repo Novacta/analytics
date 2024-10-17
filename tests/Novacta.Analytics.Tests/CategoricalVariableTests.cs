@@ -57,7 +57,7 @@ namespace Novacta.Analytics.Tests
                 CategoricalVariableAssert.IsStateAsExpected(
                     target,
                     expectedName,
-                    expectedCategories: new List<Category>(),
+                    expectedCategories: [],
                     expectedReadOnlyFlag: false);
             }
         }
@@ -150,11 +150,11 @@ namespace Novacta.Analytics.Tests
                     { 2, "C" }
                 };
 
-                Category[] expected = new Category[3] {
-                    new Category(0, "A" ),
-                    new Category(1, "B" ),
-                    new Category(2, "C" )
-                };
+                Category[] expected = [
+                    new(0, "A" ),
+                    new(1, "B" ),
+                    new(2, "C" )
+                ];
 
                 int index = 0;
                 foreach (var category in target)
@@ -284,7 +284,7 @@ namespace Novacta.Analytics.Tests
             CategoricalVariableAssert.IsStateAsExpected(
                 target,
                 expectedName,
-                expectedCategories: new List<Category>(),
+                expectedCategories: [],
                 expectedReadOnlyFlag: true);
         }
 
@@ -339,9 +339,9 @@ namespace Novacta.Analytics.Tests
                 CategoricalVariableAssert.IsStateAsExpected(
                     target,
                     name,
-                    expectedCategories: new List<Category>(2) {
+                    expectedCategories: [
                         category0,
-                        category1 },
+                        category1 ],
                     expectedReadOnlyFlag: false);
             }
         }
@@ -453,9 +453,9 @@ namespace Novacta.Analytics.Tests
                 CategoricalVariableAssert.IsStateAsExpected(
                     target,
                     name,
-                    expectedCategories: new List<Category>(2) {
+                    expectedCategories: [
                         category0,
-                        category1 },
+                        category1 ],
                     expectedReadOnlyFlag: false);
             }
         }
@@ -798,7 +798,7 @@ namespace Novacta.Analytics.Tests
                 };
 
                 var expected = DoubleMatrix.Dense(3, 1,
-                    new double[3] { 0.0, 1.0, 2.0 });
+                    [0.0, 1.0, 2.0]);
                 expected.Name = target.Name;
                 expected.SetRowName(0, "Zero");
                 expected.SetRowName(1, "One");
@@ -818,7 +818,7 @@ namespace Novacta.Analytics.Tests
                 string name = "The name";
 
                 var target = DoubleMatrix.Dense(3, 1,
-                    new double[3] { 0.0, 1.0, 2.0 });
+                    [0.0, 1.0, 2.0]);
                 target.Name = name;
                 target.SetRowName(0, "Zero");
                 target.SetRowName(1, "One");
@@ -841,7 +841,7 @@ namespace Novacta.Analytics.Tests
                 string name = "The name";
 
                 var target = DoubleMatrix.Dense(3, 1,
-                    new double[3] { 0.0, 1.0, 2.0 });
+                    [0.0, 1.0, 2.0]);
                 target.Name = name;
 
                 var actual = (CategoricalVariable)target;
@@ -905,7 +905,7 @@ namespace Novacta.Analytics.Tests
                 };
 
                 var expected = DoubleMatrix.Dense(3, 1,
-                    new double[3] { 0.0, 1.0, 2.0 });
+                    [0.0, 1.0, 2.0]);
                 expected.Name = target.Name;
                 expected.SetRowName(0, "Zero");
                 expected.SetRowName(1, "One");
@@ -925,7 +925,7 @@ namespace Novacta.Analytics.Tests
                 string name = "The name";
 
                 var target = DoubleMatrix.Dense(3, 1,
-                    new double[3] { 0.0, 1.0, 2.0 });
+                    [0.0, 1.0, 2.0]);
                 target.Name = name;
                 target.SetRowName(0, "Zero");
                 target.SetRowName(1, "One");
@@ -948,7 +948,7 @@ namespace Novacta.Analytics.Tests
                 string name = "The name";
 
                 var target = DoubleMatrix.Dense(3, 1,
-                    new double[3] { 0.0, 1.0, 2.0 });
+                    [0.0, 1.0, 2.0]);
                 target.Name = name;
 
                 var actual = CategoricalVariable.FromDoubleMatrix(target);

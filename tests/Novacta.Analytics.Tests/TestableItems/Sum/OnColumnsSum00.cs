@@ -18,8 +18,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Sum
                 base(
                     expected: new DoubleMatrixState(
                         asColumnMajorDenseArray:
-                            new double[5] 
-                                { 26, 34, 32, 34, 10 },
+                            [26, 34, 32, 34, 10],
                         numberOfRows: 1,
                         numberOfColumns: 5
                     ),

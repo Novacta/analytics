@@ -22,7 +22,7 @@ namespace Novacta.Analytics.Infrastructure
         /// <param name="sortDirection">The sorting mode (increasing/decreasing) to be applied.</param>
         public static void Sort(double[] data, SortDirection sortDirection)
         {
-            if (data.Length > partialQuichSortMaxDataLength)
+            if (data.Length > partialQuickSortMaxDataLength)
                 PartialQuickSort(data, sortDirection);
 
             InsertionSort(data, sortDirection);
@@ -42,7 +42,7 @@ namespace Novacta.Analytics.Infrastructure
             for (int i = 0; i < indexTable.Length; i++)
                 indexTable[i] = i;
 
-            if (n > partialQuichSortMaxDataLength)
+            if (n > partialQuickSortMaxDataLength)
                 PartialQuickSort(data, sortDirection, indexTable);
 
             InsertionSort(data, sortDirection, indexTable);
@@ -62,7 +62,7 @@ namespace Novacta.Analytics.Infrastructure
             for (int i = 0; i < indexTable.Length; i++)
                 indexTable[i] = i;
 
-            if (n > partialQuichSortMaxDataLength)
+            if (n > partialQuickSortMaxDataLength)
                 PartialQuickSort(data, sortDirection, indexTable);
 
             InsertionSort(data, sortDirection, indexTable);
@@ -89,7 +89,7 @@ namespace Novacta.Analytics.Infrastructure
             public override string ToString()
             {
                 StringBuilder stringBuilder = new();
-                stringBuilder.Append("(");
+                stringBuilder.Append('(');
                 stringBuilder.Append(this.m_l);
                 stringBuilder.Append(", ");
                 stringBuilder.Append(this.m_r);
@@ -98,7 +98,7 @@ namespace Novacta.Analytics.Infrastructure
             }
         }
 
-        const int partialQuichSortMaxDataLength = 10;
+        const int partialQuickSortMaxDataLength = 10;
         
         /// <summary>
         /// Partially sort data and corresponding indexes in increasing or decreasing order using the QuickSort algorithm.
@@ -130,7 +130,7 @@ namespace Novacta.Analytics.Infrastructure
             int mid, lPlus1; // median-of-three search helpers
             // Stack initialization
             int n = data.Length;
-            int stackCapacity = (int)Math.Floor(Math.Log((n + 1) / (partialQuichSortMaxDataLength + 2), 2.0));
+            int stackCapacity = (int)Math.Floor(Math.Log((n + 1) / (partialQuickSortMaxDataLength + 2), 2.0));
             Stack<QuickSortStackItem> stack = new(stackCapacity);
             QuickSortStackItem item;
 
@@ -242,7 +242,7 @@ namespace Novacta.Analytics.Infrastructure
                     // Q7: Put on stack
                     jMinusl = j - l;
                     rMinusj = r - j;
-                    if (partialQuichSortMaxDataLength < jMinusl && jMinusl <= rMinusj) {
+                    if (partialQuickSortMaxDataLength < jMinusl && jMinusl <= rMinusj) {
 
                         // Here both subfile lengths > M
                         // but the greater is that on the right 
@@ -251,7 +251,7 @@ namespace Novacta.Analytics.Infrastructure
                         goto Q2;
                     }
                     else {
-                        if (partialQuichSortMaxDataLength < rMinusj && rMinusj < jMinusl) {
+                        if (partialQuickSortMaxDataLength < rMinusj && rMinusj < jMinusl) {
 
                             // Here both subfile lengths > M
                             // but the greater is that on the left 
@@ -260,12 +260,12 @@ namespace Novacta.Analytics.Infrastructure
                             goto Q2;
                         }
                         else {
-                            if (jMinusl <= partialQuichSortMaxDataLength && partialQuichSortMaxDataLength < rMinusj) {
+                            if (jMinusl <= partialQuickSortMaxDataLength && partialQuickSortMaxDataLength < rMinusj) {
                                 l = j + 1;
                                 goto Q2;
                             }
                             else {
-                                if (partialQuichSortMaxDataLength < jMinusl && rMinusj <= partialQuichSortMaxDataLength) {
+                                if (partialQuickSortMaxDataLength < jMinusl && rMinusj <= partialQuickSortMaxDataLength) {
                                     r = j - 1;
                                     goto Q2;
                                 }
@@ -388,7 +388,7 @@ namespace Novacta.Analytics.Infrastructure
                     // Q7: Put on stack
                     jMinusl = j - l;
                     rMinusj = r - j;
-                    if (partialQuichSortMaxDataLength < jMinusl && jMinusl <= rMinusj) {
+                    if (partialQuickSortMaxDataLength < jMinusl && jMinusl <= rMinusj) {
 
                         // Here both subfile lengths > M
                         // but the greater is that on the right 
@@ -397,7 +397,7 @@ namespace Novacta.Analytics.Infrastructure
                         goto Q2bis;
                     }
                     else {
-                        if (partialQuichSortMaxDataLength < rMinusj && rMinusj < jMinusl) {
+                        if (partialQuickSortMaxDataLength < rMinusj && rMinusj < jMinusl) {
 
                             // Here both subfile lengths > M
                             // but the greater is that on the left 
@@ -406,12 +406,12 @@ namespace Novacta.Analytics.Infrastructure
                             goto Q2bis;
                         }
                         else {
-                            if (jMinusl <= partialQuichSortMaxDataLength && partialQuichSortMaxDataLength < rMinusj) {
+                            if (jMinusl <= partialQuickSortMaxDataLength && partialQuickSortMaxDataLength < rMinusj) {
                                 l = j + 1;
                                 goto Q2bis;
                             }
                             else {
-                                if (partialQuichSortMaxDataLength < jMinusl && rMinusj <= partialQuichSortMaxDataLength) {
+                                if (partialQuickSortMaxDataLength < jMinusl && rMinusj <= partialQuickSortMaxDataLength) {
                                     r = j - 1;
                                     goto Q2bis;
                                 }
@@ -467,7 +467,7 @@ namespace Novacta.Analytics.Infrastructure
             int mid, lPlus1; // median-of-three search helpers
             // Stack initialization
             int n = data.Length;
-            int stackCapacity = (int)Math.Floor(Math.Log((n + 1) / (partialQuichSortMaxDataLength + 2), 2.0));
+            int stackCapacity = (int)Math.Floor(Math.Log((n + 1) / (partialQuickSortMaxDataLength + 2), 2.0));
             Stack<QuickSortStackItem> stack = new(stackCapacity);
             QuickSortStackItem item;
 
@@ -578,7 +578,7 @@ namespace Novacta.Analytics.Infrastructure
                     // Q7: Put on stack
                     jMinusl = j - l;
                     rMinusj = r - j;
-                    if (partialQuichSortMaxDataLength < jMinusl && jMinusl <= rMinusj) {
+                    if (partialQuickSortMaxDataLength < jMinusl && jMinusl <= rMinusj) {
 
                         // Here both subfile lengths > M
                         // but the greater is that on the right 
@@ -587,7 +587,7 @@ namespace Novacta.Analytics.Infrastructure
                         goto Q2;
                     }
                     else {
-                        if (partialQuichSortMaxDataLength < rMinusj && rMinusj < jMinusl) {
+                        if (partialQuickSortMaxDataLength < rMinusj && rMinusj < jMinusl) {
 
                             // Here both subfile lengths > M
                             // but the greater is that on the left 
@@ -596,12 +596,12 @@ namespace Novacta.Analytics.Infrastructure
                             goto Q2;
                         }
                         else {
-                            if (jMinusl <= partialQuichSortMaxDataLength && partialQuichSortMaxDataLength < rMinusj) {
+                            if (jMinusl <= partialQuickSortMaxDataLength && partialQuickSortMaxDataLength < rMinusj) {
                                 l = j + 1;
                                 goto Q2;
                             }
                             else {
-                                if (partialQuichSortMaxDataLength < jMinusl && rMinusj <= partialQuichSortMaxDataLength) {
+                                if (partialQuickSortMaxDataLength < jMinusl && rMinusj <= partialQuickSortMaxDataLength) {
                                     r = j - 1;
                                     goto Q2;
                                 }
@@ -722,7 +722,7 @@ namespace Novacta.Analytics.Infrastructure
                     // Q7: Put on stack
                     jMinusl = j - l;
                     rMinusj = r - j;
-                    if (partialQuichSortMaxDataLength < jMinusl && jMinusl <= rMinusj) {
+                    if (partialQuickSortMaxDataLength < jMinusl && jMinusl <= rMinusj) {
 
                         // Here both subfile lengths > M
                         // but the greater is that on the right 
@@ -731,7 +731,7 @@ namespace Novacta.Analytics.Infrastructure
                         goto Q2bis;
                     }
                     else {
-                        if (partialQuichSortMaxDataLength < rMinusj && rMinusj < jMinusl) {
+                        if (partialQuickSortMaxDataLength < rMinusj && rMinusj < jMinusl) {
 
                             // Here both subfile lengths > M
                             // but the greater is that on the left 
@@ -740,12 +740,12 @@ namespace Novacta.Analytics.Infrastructure
                             goto Q2bis;
                         }
                         else {
-                            if (jMinusl <= partialQuichSortMaxDataLength && partialQuichSortMaxDataLength < rMinusj) {
+                            if (jMinusl <= partialQuickSortMaxDataLength && partialQuickSortMaxDataLength < rMinusj) {
                                 l = j + 1;
                                 goto Q2bis;
                             }
                             else {
-                                if (partialQuichSortMaxDataLength < jMinusl && rMinusj <= partialQuichSortMaxDataLength) {
+                                if (partialQuickSortMaxDataLength < jMinusl && rMinusj <= partialQuickSortMaxDataLength) {
                                     r = j - 1;
                                     goto Q2bis;
                                 }
@@ -800,7 +800,7 @@ namespace Novacta.Analytics.Infrastructure
             // Stack initialization
             int n = data.Length;
 
-            int stackCapacity = (int)Math.Floor(Math.Log((n + 1) / (partialQuichSortMaxDataLength + 2), 2.0));
+            int stackCapacity = (int)Math.Floor(Math.Log((n + 1) / (partialQuickSortMaxDataLength + 2), 2.0));
             Stack<QuickSortStackItem> stack = new(stackCapacity);
             QuickSortStackItem item;
 
@@ -882,7 +882,7 @@ namespace Novacta.Analytics.Infrastructure
                     // Q7: Put on stack
                     jMinusl = j - l;
                     rMinusj = r - j;
-                    if (partialQuichSortMaxDataLength < jMinusl && jMinusl <= rMinusj) {
+                    if (partialQuickSortMaxDataLength < jMinusl && jMinusl <= rMinusj) {
 
                         // Here both subfile lengths > M
                         // but the greater is that on the right 
@@ -891,7 +891,7 @@ namespace Novacta.Analytics.Infrastructure
                         goto Q2;
                     }
                     else {
-                        if (partialQuichSortMaxDataLength < rMinusj && rMinusj < jMinusl) {
+                        if (partialQuickSortMaxDataLength < rMinusj && rMinusj < jMinusl) {
 
                             // Here both subfile lengths > M
                             // but the greater is that on the left 
@@ -900,12 +900,12 @@ namespace Novacta.Analytics.Infrastructure
                             goto Q2;
                         }
                         else {
-                            if (jMinusl <= partialQuichSortMaxDataLength && partialQuichSortMaxDataLength < rMinusj) {
+                            if (jMinusl <= partialQuickSortMaxDataLength && partialQuickSortMaxDataLength < rMinusj) {
                                 l = j + 1;
                                 goto Q2;
                             }
                             else {
-                                if (partialQuichSortMaxDataLength < jMinusl && rMinusj <= partialQuichSortMaxDataLength) {
+                                if (partialQuickSortMaxDataLength < jMinusl && rMinusj <= partialQuickSortMaxDataLength) {
                                     r = j - 1;
                                     goto Q2;
                                 }
@@ -969,7 +969,7 @@ namespace Novacta.Analytics.Infrastructure
                     // Q7: Put on stack
                     jMinusl = j - l;
                     rMinusj = r - j;
-                    if (partialQuichSortMaxDataLength < jMinusl && jMinusl <= rMinusj) {
+                    if (partialQuickSortMaxDataLength < jMinusl && jMinusl <= rMinusj) {
 
                         // Here both subfile lengths > M
                         // but the greater is that on the right 
@@ -978,7 +978,7 @@ namespace Novacta.Analytics.Infrastructure
                         goto Q2bis;
                     }
                     else {
-                        if (partialQuichSortMaxDataLength < rMinusj && rMinusj < jMinusl) {
+                        if (partialQuickSortMaxDataLength < rMinusj && rMinusj < jMinusl) {
 
                             // Here both subfile lengths > M
                             // but the greater is that on the left 
@@ -987,12 +987,12 @@ namespace Novacta.Analytics.Infrastructure
                             goto Q2bis;
                         }
                         else {
-                            if (jMinusl <= partialQuichSortMaxDataLength && partialQuichSortMaxDataLength < rMinusj) {
+                            if (jMinusl <= partialQuickSortMaxDataLength && partialQuickSortMaxDataLength < rMinusj) {
                                 l = j + 1;
                                 goto Q2bis;
                             }
                             else {
-                                if (partialQuichSortMaxDataLength < jMinusl && rMinusj <= partialQuichSortMaxDataLength) {
+                                if (partialQuickSortMaxDataLength < jMinusl && rMinusj <= partialQuickSortMaxDataLength) {
                                     r = j - 1;
                                     goto Q2bis;
                                 }

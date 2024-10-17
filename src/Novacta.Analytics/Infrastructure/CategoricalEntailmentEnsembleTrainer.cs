@@ -195,7 +195,7 @@ namespace Novacta.Analytics.Infrastructure
                 this.numberOfResponseCategories;
             this.entailmentRepresentationLength = this.overallNumberOfCategories + 1;
 
-            this.responseCodeIndexPairs = new SortedList<double, int>();
+            this.responseCodeIndexPairs = [];
             int c = 0;
             foreach (var code in responseVariable.CategoryCodes)
             {
@@ -301,7 +301,7 @@ namespace Novacta.Analytics.Infrastructure
             }
 
             var predictedResponses = new CategoricalDataSet(
-                new List<CategoricalVariable>(1) { this.ResponseVariable },
+                [this.ResponseVariable],
                 itemClassifications);
 
             #endregion

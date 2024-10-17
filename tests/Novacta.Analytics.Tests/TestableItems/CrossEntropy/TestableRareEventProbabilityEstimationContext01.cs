@@ -28,7 +28,7 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
             thresholdLevel: -4.0,
             rareEventPerformanceBoundedness: RareEventPerformanceBoundedness.Upper,
             initialParameter: DoubleMatrix.Dense(2, 1,
-                new double[] { 0, 1 }),
+                [0, 1]),
             rareEventProbability: 3.16712418331199E-05 // delta: 1e-6
             )
         {

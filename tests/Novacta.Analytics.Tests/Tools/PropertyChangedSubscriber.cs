@@ -11,10 +11,10 @@ namespace Novacta.Analytics.Tests
     {
         public PropertyChangedSubscriber()
         {
-            this.PropertyNames = new List<string>
-            {
+            this.PropertyNames =
+            [
                 ""
-            };
+            ];
         }
 
         public List<string> PropertyNames { get; set; }

@@ -40,7 +40,7 @@ namespace Novacta.Analytics.CodeExamples
             // Create a categorical data set containing
             // observations about such variables.
             List<CategoricalVariable> variables =
-                new() { f0, f1, r };
+                [f0, f1, r];
 
             DoubleMatrix data = DoubleMatrix.Dense(
                 new double[20, 3] {

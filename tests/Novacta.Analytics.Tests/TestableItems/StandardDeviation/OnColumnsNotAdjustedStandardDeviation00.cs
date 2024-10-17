@@ -18,8 +18,7 @@ namespace Novacta.Analytics.Tests.TestableItems.StandardDeviation
                 base(
                     expected: new DoubleMatrixState(
                         asColumnMajorDenseArray:
-                            new double[5] 
-                                { 5.67890834580027, 4.5, 5.1478150704935, 4.71699056602830, 1.11803398874989 },
+                            [5.67890834580027, 4.5, 5.1478150704935, 4.71699056602830, 1.11803398874989],
                         numberOfRows: 1,
                         numberOfColumns: 5
                     ),

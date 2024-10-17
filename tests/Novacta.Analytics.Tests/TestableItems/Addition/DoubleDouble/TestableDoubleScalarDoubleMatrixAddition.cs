@@ -2,8 +2,6 @@
 // Licensed under the MIT license. 
 // See the LICENSE file in the project root for more information.
 
-using System;
-
 namespace Novacta.Analytics.Tests.TestableItems.Addition
 {
     /// <summary>
@@ -22,15 +20,15 @@ namespace Novacta.Analytics.Tests.TestableItems.Addition
                 left,
                 right,
                 leftScalarRightWritableOps:
-                    new Func<double, DoubleMatrix, DoubleMatrix>[2] {
+                    [
                         (l, r) => l + r,
                         (l, r) => DoubleMatrix.Add(l, r)
-                    },
+                    ],
                 leftScalarRightReadOnlyOps:
-                    new Func<double, ReadOnlyDoubleMatrix, DoubleMatrix>[2] {
+                    [
                         (l, r) => l + r,
                         (l, r) => ReadOnlyDoubleMatrix.Add(l, r)
-                    }
+                    ]
                 )
         {
         }

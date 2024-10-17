@@ -17,8 +17,8 @@ namespace Novacta.Analytics.Tests.TestableItems.Correlation
         protected OnColumnsDataIsRowCorrelation() :
             base(
                 expected: new DoubleMatrixState(
-                    asColumnMajorDenseArray: new double[9]
-                    {
+                    asColumnMajorDenseArray:
+                    [
                         Double.NaN,
                         Double.NaN,
                         Double.NaN,
@@ -28,7 +28,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Correlation
                         Double.NaN,
                         Double.NaN,
                         Double.NaN
-                    },
+                    ],
                     numberOfRows: 3,
                     numberOfColumns: 3),
                 data: TestableDoubleMatrix21.Get(),

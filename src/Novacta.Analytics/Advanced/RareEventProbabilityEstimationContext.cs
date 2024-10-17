@@ -396,15 +396,9 @@ namespace Novacta.Analytics.Advanced
             LinkedList<double> levels,
             LinkedList<DoubleMatrix> parameters)
         {
-            if (levels is null)
-            {
-                throw new ArgumentNullException(nameof(levels));
-            }
+            ArgumentNullException.ThrowIfNull(levels);
 
-            if (parameters is null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            ArgumentNullException.ThrowIfNull(parameters);
 
             double lastLevel = levels.Last.Value;
 
@@ -435,15 +429,9 @@ namespace Novacta.Analytics.Advanced
             double rarity,
             out DoubleMatrix eliteSample)
         {
-            if (performances is null)
-            {
-                throw new ArgumentNullException(nameof(performances));
-            }
+            ArgumentNullException.ThrowIfNull(performances);
 
-            if (sample is null)
-            {
-                throw new ArgumentNullException(nameof(sample));
-            }
+            ArgumentNullException.ThrowIfNull(sample);
 
             var performanceArray = performances.GetStorage();
             SortHelper.Sort(

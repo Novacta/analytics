@@ -1,17 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Version>2.0.0</Version>
+    <TargetFramework>net8.0</TargetFramework>
+      <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <Version>2.1.0</Version>
     <Authors>Giovanni Lafratta</Authors>
     <owners>novacta</owners>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Description>This package provides functionality for data analysis by implementing matrix algebra operations, statistical methods, and optimization algorithms.</Description>
-    <PackageReleaseNotes>* Added types to operate with matrices of complex values.
-* Added matrix singular value decompositions and spectral decompositions of symmetric/Hermitian matrices.
-* (Breaking) Indexers that try to avoid dense allocations have been deprecated.
-* (Breaking) The 32-bit generation of the x86 architecture is no longer supported.
-	</PackageReleaseNotes>
+    <PackageReleaseNotes>* Added types to support multidimensional scaling techniques.
+* Added factory methods to create matrices by encoding categorical/numerical data.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Novacta/analytics</RepositoryUrl>
     <Copyright>Copyright © Giovanni Lafratta</Copyright>
@@ -25,6 +23,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile></DocumentationFile>
@@ -75,7 +74,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Text.Json" Version="6.0.1" />
+    <PackageReference Include="System.Text.Json" Version="8.0.5" />
   </ItemGroup>
 
   <ItemGroup>
@@ -95,6 +94,13 @@
 
   <ItemGroup>
     <Folder Include="runtimes\linux-x64\native\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

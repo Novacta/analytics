@@ -10,19 +10,19 @@ namespace Novacta.Analytics.CodeExamples
         {
             // Create the left operand.
             var data = new Complex[4] {
-                new Complex(0, 0),  new Complex(2, 2),
-                new Complex(1, 1),  new Complex(3, 3)
+                new(0, 0),  new(2, 2),
+                new(1, 1),  new(3, 3)
             };
             var left = ComplexMatrix.Dense(2, 2, data, StorageOrder.RowMajor);
             Console.WriteLine("left =");
             Console.WriteLine(left);
 
             // Create the right operand.
-            data = new Complex[6] {
-                new Complex(1, -1), new Complex(5, -5),
-                new Complex(2, -2), new Complex(6, -6),
-                new Complex(3, -3), new Complex(7, -7)
-            };
+            data = [
+                new(1, -1), new(5, -5),
+                new(2, -2), new(6, -6),
+                new(3, -3), new(7, -7)
+            ];
             var right = ComplexMatrix.Dense(3, 2, data, StorageOrder.RowMajor);
             Console.WriteLine("right =");
             Console.WriteLine(right);

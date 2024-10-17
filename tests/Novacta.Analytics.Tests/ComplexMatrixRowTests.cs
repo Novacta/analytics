@@ -29,7 +29,7 @@ namespace Novacta.Analytics.Tests
             // IEnumerable.GetEnumerator
             {
                 var matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -63,7 +63,7 @@ namespace Novacta.Analytics.Tests
             // IEnumerable<Complex>.GetEnumerator
             {
                 var matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -103,7 +103,7 @@ namespace Novacta.Analytics.Tests
                         new string[] { "STR_EXCEPT_ENU_OUT_OF_BOUNDS" });
 
                 var matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -133,7 +133,7 @@ namespace Novacta.Analytics.Tests
                         new string[] { "STR_EXCEPT_ENU_OUT_OF_BOUNDS" });
 
                 var matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -159,7 +159,7 @@ namespace Novacta.Analytics.Tests
         public void ConstructorTest()
         {
             var matrix = ComplexMatrix.Dense(2, 3,
-                new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                [1, 2, 3, 4, 5, 6]);
             var rows = matrix.AsRowCollection();
 
             for (int i = 0; i < matrix.NumberOfRows; i++)
@@ -184,14 +184,14 @@ namespace Novacta.Analytics.Tests
             // matrix has no row or column names
             {
                 var matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] {
-                        new Complex(.1, .1),
-                        new Complex(10.2, 10.2),
-                        new Complex(-2.3, -2.3),
-                        new Complex(1000.2, 1000.2),
-                        new Complex(.2, .2),
-                        new Complex(239.32, 239.32)
-                    });
+                    [
+                        new(.1, .1),
+                        new(10.2, 10.2),
+                        new(-2.3, -2.3),
+                        new(1000.2, 1000.2),
+                        new(.2, .2),
+                        new(239.32, 239.32)
+                    ]);
                 var rows = matrix.AsRowCollection();
 
                 var actual = rows[0].ToString();
@@ -207,17 +207,17 @@ namespace Novacta.Analytics.Tests
             // matrix has some row or column names
             {
                 var matrix = ComplexMatrix.Dense(3, 3,
-                    new Complex[9] {
-                        new Complex(.1, .1),
-                        new Complex(10.2, 10.2),
+                    [
+                        new(.1, .1),
+                        new(10.2, 10.2),
                         0,
-                        new Complex(-2.3, -2.3),
-                        new Complex(1000.2, 1000.2),
+                        new(-2.3, -2.3),
+                        new(1000.2, 1000.2),
                         0,
-                        new Complex(.2, .2),
-                        new Complex(239.32, 239.32),
+                        new(.2, .2),
+                        new(239.32, 239.32),
                         0
-                    });
+                    ]);
                 var rows = matrix.AsRowCollection();
 
                 // ROW NAMES 
@@ -297,17 +297,17 @@ namespace Novacta.Analytics.Tests
             // matrix has some row names but no col ones
             {
                 var matrix = ComplexMatrix.Dense(3, 3,
-                    new Complex[9] {
-                        new Complex(.1, .1),
-                        new Complex(10.2, 10.2),
+                    [
+                        new(.1, .1),
+                        new(10.2, 10.2),
                         0,
-                        new Complex(-2.3, -2.3),
-                        new Complex(1000.2, 1000.2),
+                        new(-2.3, -2.3),
+                        new(1000.2, 1000.2),
                         0,
-                        new Complex(.2, .2),
-                        new Complex(239.32, 239.32),
+                        new(.2, .2),
+                        new(239.32, 239.32),
                         0
-                    });
+                    ]);
                 var rows = matrix.AsRowCollection();
 
                 // ROW NAMES 
@@ -359,17 +359,17 @@ namespace Novacta.Analytics.Tests
             // matrix has no row names and some column ones
             {
                 var matrix = ComplexMatrix.Dense(3, 3,
-                    new Complex[9] {
-                        new Complex(.1, .1),
-                        new Complex(10.2, 10.2),
+                    [
+                        new(.1, .1),
+                        new(10.2, 10.2),
                         0,
-                        new Complex(-2.3, -2.3),
-                        new Complex(1000.2, 1000.2),
+                        new(-2.3, -2.3),
+                        new(1000.2, 1000.2),
                         0,
-                        new Complex(.2, .2),
-                        new Complex(239.32, 239.32),
+                        new(.2, .2),
+                        new(239.32, 239.32),
                         0
-                    });
+                    ]);
                 var rows = matrix.AsRowCollection();
 
                 // COL NAMES
@@ -433,7 +433,7 @@ namespace Novacta.Analytics.Tests
         public void GetHashCodeTest()
         {
             var matrix = ComplexMatrix.Dense(3, 3,
-                new Complex[9] { 1, 2, 3, 4, 5, 6, 1, 2, 3 });
+                [1, 2, 3, 4, 5, 6, 1, 2, 3]);
             var rows = matrix.AsRowCollection();
 
             var row = rows[0];
@@ -460,7 +460,7 @@ namespace Novacta.Analytics.Tests
             ComplexMatrixRow row;
 
             var matrix = ComplexMatrix.Dense(3, 3,
-                 new Complex[9] { 1, 4, 1, 2, 5, 2, 3, 6, 3 },
+                 [1, 4, 1, 2, 5, 2, 3, 6, 3],
                  StorageOrder.ColumnMajor);
 
             var rows = matrix.AsRowCollection();
@@ -483,20 +483,20 @@ namespace Novacta.Analytics.Tests
             expected = matrix[rowIndex, rows.XDataColumn];
             row.XData = expected;
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "" },
-                actual: subscriber.PropertyNames.ToArray());
+                expected: [""],
+                actual: [.. subscriber.PropertyNames]);
 
             expected = matrix[rowIndex, rows.YDataColumn];
             row.YData = expected;
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "" },
-                actual: subscriber.PropertyNames.ToArray());
+                expected: [""],
+                actual: [.. subscriber.PropertyNames]);
 
             expected = matrix[rowIndex, rows.ZDataColumn];
             row.ZData = expected;
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "" },
-                actual: subscriber.PropertyNames.ToArray());
+                expected: [""],
+                actual: [.. subscriber.PropertyNames]);
 
             ComplexAssert.AreEqual(
                 matrix[rowIndex, rows.XDataColumn],
@@ -516,20 +516,20 @@ namespace Novacta.Analytics.Tests
             expected = -5.0;
             row.XData = expected;
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "", "XData", "[2]" },
-                actual: subscriber.PropertyNames.ToArray());
+                expected: ["", "XData", "[2]"],
+                actual: [.. subscriber.PropertyNames]);
 
             expected = -10.0;
             row.YData = expected;
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "", "XData", "[2]", "YData", "[1]" },
-                actual: subscriber.PropertyNames.ToArray());
+                expected: ["", "XData", "[2]", "YData", "[1]"],
+                actual: [.. subscriber.PropertyNames]);
 
             expected = -15.0;
             row.ZData = expected;
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "", "XData", "[2]", "YData", "[1]", "ZData", "[0]" },
-                actual: subscriber.PropertyNames.ToArray());
+                expected: ["", "XData", "[2]", "YData", "[1]", "ZData", "[0]"],
+                actual: [.. subscriber.PropertyNames]);
 
             ComplexAssert.AreEqual(
                 matrix[rowIndex, rows.XDataColumn],
@@ -552,7 +552,7 @@ namespace Novacta.Analytics.Tests
             ComplexMatrixRow thisRow, otherRow;
 
             matrix = ComplexMatrix.Dense(3, 3,
-                new Complex[9] { 1, 2, 3, 4, 5, 6, 1, 2, 3 },
+                [1, 2, 3, 4, 5, 6, 1, 2, 3],
                 StorageOrder.RowMajor);
 
             var rows = matrix.AsRowCollection();
@@ -659,7 +659,7 @@ namespace Novacta.Analytics.Tests
         public void MatrixTest()
         {
             ComplexMatrix matrix = ComplexMatrix.Dense(2, 3,
-                new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                [1, 2, 3, 4, 5, 6]);
             var rows = matrix.AsRowCollection();
 
             var actual = rows.Matrix;
@@ -672,7 +672,7 @@ namespace Novacta.Analytics.Tests
         public void NotifyPropertyChangedTest()
         {
             ComplexMatrix matrix = ComplexMatrix.Dense(2, 3,
-                new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                [1, 2, 3, 4, 5, 6]);
 
             var rows = matrix.AsRowCollection();
 
@@ -702,7 +702,7 @@ namespace Novacta.Analytics.Tests
             // value is not null
             {
                 ComplexMatrix matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 for (int i = 0; i < matrix.NumberOfRows; i++)
@@ -723,7 +723,7 @@ namespace Novacta.Analytics.Tests
             // columnIndex is less than 0
             {
                 ComplexMatrix matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -743,7 +743,7 @@ namespace Novacta.Analytics.Tests
             // columnIndex is greater than NumberOfColumns - 1
             {
                 ComplexMatrix matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -765,7 +765,7 @@ namespace Novacta.Analytics.Tests
                 var subscriber = new PropertyChangedSubscriber();
 
                 var matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 int dataColumn = 2;
@@ -779,8 +779,8 @@ namespace Novacta.Analytics.Tests
                 row[dataColumn] = -1;
                 Assert.AreEqual(matrix[rowIndex, dataColumn], row[dataColumn]);
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "", "[2]", "XData", "YData" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: ["", "[2]", "XData", "YData"],
+                    actual: [.. subscriber.PropertyNames]);
             }
         }
 
@@ -790,7 +790,7 @@ namespace Novacta.Analytics.Tests
             // columnIndex not representing an integer
             {
                 ComplexMatrix matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -810,7 +810,7 @@ namespace Novacta.Analytics.Tests
             // columnIndex is less than 0
             {
                 ComplexMatrix matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -830,7 +830,7 @@ namespace Novacta.Analytics.Tests
             // columnIndex is greater than NumberOfColumns - 1
             {
                 ComplexMatrix matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -852,7 +852,7 @@ namespace Novacta.Analytics.Tests
                 var subscriber = new PropertyChangedSubscriber();
 
                 var matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 int dataColumn = 2;
@@ -866,8 +866,8 @@ namespace Novacta.Analytics.Tests
                 row[dataColumn] = -1;
                 Assert.AreEqual(matrix[rowIndex, dataColumn], row["2"]);
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "", "[2]", "XData", "YData" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: ["", "[2]", "XData", "YData"],
+                    actual: [.. subscriber.PropertyNames]);
             }
         }
 
@@ -877,7 +877,7 @@ namespace Novacta.Analytics.Tests
             // columnIndex is less than 0
             {
                 ComplexMatrix matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -897,7 +897,7 @@ namespace Novacta.Analytics.Tests
             // columnIndex is greater than NumberOfColumns - 1
             {
                 ComplexMatrix matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -919,7 +919,7 @@ namespace Novacta.Analytics.Tests
                 var subscriber = new PropertyChangedSubscriber();
 
                 var matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 int dataColumn = 2;
@@ -937,8 +937,8 @@ namespace Novacta.Analytics.Tests
                     row[dataColumn],
                     ComplexMatrixTest.Accuracy);
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "", "[2]", "XData", "YData", "ZData" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: ["", "[2]", "XData", "YData", "ZData"],
+                    actual: [.. subscriber.PropertyNames]);
 
                 row[0] = -1;
                 ComplexAssert.AreEqual(
@@ -946,8 +946,8 @@ namespace Novacta.Analytics.Tests
                     row[dataColumn],
                 ComplexMatrixTest.Accuracy);
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "", "[2]", "XData", "YData", "ZData", "[0]" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: ["", "[2]", "XData", "YData", "ZData", "[0]"],
+                    actual: [.. subscriber.PropertyNames]);
             }
         }
 
@@ -957,7 +957,7 @@ namespace Novacta.Analytics.Tests
             // columnIndex not representing an integer
             {
                 ComplexMatrix matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -977,7 +977,7 @@ namespace Novacta.Analytics.Tests
             // columnIndex is less than 0
             {
                 ComplexMatrix matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -997,7 +997,7 @@ namespace Novacta.Analytics.Tests
             // columnIndex is greater than NumberOfColumns - 1
             {
                 ComplexMatrix matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -1019,7 +1019,7 @@ namespace Novacta.Analytics.Tests
                 var subscriber = new PropertyChangedSubscriber();
 
                 var matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
                 var rows = matrix.AsRowCollection();
 
                 int dataColumn = 2;
@@ -1037,8 +1037,8 @@ namespace Novacta.Analytics.Tests
                     row["2"],
                     ComplexMatrixTest.Accuracy);
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "", "[2]", "XData", "YData", "ZData" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: ["", "[2]", "XData", "YData", "ZData"],
+                    actual: [.. subscriber.PropertyNames]);
 
                 row[0] = -1;
                 ComplexAssert.AreEqual(
@@ -1046,8 +1046,8 @@ namespace Novacta.Analytics.Tests
                     row["2"],
                 ComplexMatrixTest.Accuracy);
                 ArrayAssert<string>.AreEqual(
-                    expected: new string[] { "", "[2]", "XData", "YData", "ZData", "[0]" },
-                    actual: subscriber.PropertyNames.ToArray());
+                    expected: ["", "[2]", "XData", "YData", "ZData", "[0]"],
+                    actual: [.. subscriber.PropertyNames]);
             }
         }
 
@@ -1055,7 +1055,7 @@ namespace Novacta.Analytics.Tests
         public void IndexGetTest()
         {
             var matrix = ComplexMatrix.Dense(2, 3,
-                new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                [1, 2, 3, 4, 5, 6]);
 
             var rows = matrix.AsRowCollection();
 
@@ -1075,7 +1075,7 @@ namespace Novacta.Analytics.Tests
             // value is less than 0
             {
                 ComplexMatrix matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -1095,7 +1095,7 @@ namespace Novacta.Analytics.Tests
             // value is greater than NumberOfColumns - 1
             {
                 ComplexMatrix matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -1117,7 +1117,7 @@ namespace Novacta.Analytics.Tests
                 var subscriber = new PropertyChangedSubscriber();
 
                 ComplexMatrix matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -1138,7 +1138,7 @@ namespace Novacta.Analytics.Tests
                 var subscriber = new PropertyChangedSubscriber();
 
                 ComplexMatrix matrix = ComplexMatrix.Dense(2, 3,
-                    new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                    [1, 2, 3, 4, 5, 6]);
 
                 var rows = matrix.AsRowCollection();
 
@@ -1160,7 +1160,7 @@ namespace Novacta.Analytics.Tests
         public void LengthTest()
         {
             ComplexMatrix matrix = ComplexMatrix.Dense(2, 3,
-                new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                [1, 2, 3, 4, 5, 6]);
             var rows = matrix.AsRowCollection();
 
             ComplexMatrixRow target = rows[0];
@@ -1175,7 +1175,7 @@ namespace Novacta.Analytics.Tests
         public void XDataTest()
         {
             var matrix = ComplexMatrix.Dense(2, 3,
-                new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                [1, 2, 3, 4, 5, 6]);
             var rows = matrix.AsRowCollection();
 
             int dataColumn = 1;
@@ -1191,8 +1191,8 @@ namespace Novacta.Analytics.Tests
             Complex expected = matrix[row.Index, dataColumn];
             row.XData = expected;
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "" },
-                actual: subscriber.PropertyNames.ToArray());
+                expected: [""],
+                actual: [.. subscriber.PropertyNames]);
             var actual = row.XData;
             ComplexAssert.AreEqual(expected, actual, ComplexMatrixTest.Accuracy);
 
@@ -1206,15 +1206,15 @@ namespace Novacta.Analytics.Tests
                 row.XData,
                 ComplexMatrixTest.Accuracy);
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "", "XData", "[1]" },
-                actual: subscriber.PropertyNames.ToArray());
+                expected: ["", "XData", "[1]"],
+                actual: [.. subscriber.PropertyNames]);
         }
 
         [TestMethod()]
         public void YDataTest()
         {
             var matrix = ComplexMatrix.Dense(2, 3,
-                new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                [1, 2, 3, 4, 5, 6]);
             var rows = matrix.AsRowCollection();
 
             int dataColumn = 1;
@@ -1230,8 +1230,8 @@ namespace Novacta.Analytics.Tests
             Complex expected = matrix[row.Index, dataColumn];
             row.YData = expected;
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "" },
-                actual: subscriber.PropertyNames.ToArray());
+                expected: [""],
+                actual: [.. subscriber.PropertyNames]);
             var actual = row.YData;
             ComplexAssert.AreEqual(expected, actual, ComplexMatrixTest.Accuracy);
 
@@ -1245,15 +1245,15 @@ namespace Novacta.Analytics.Tests
                 row.YData,
                 ComplexMatrixTest.Accuracy);
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "", "YData", "[1]" },
-                actual: subscriber.PropertyNames.ToArray());
+                expected: ["", "YData", "[1]"],
+                actual: [.. subscriber.PropertyNames]);
         }
 
         [TestMethod()]
         public void ZDataTest()
         {
             var matrix = ComplexMatrix.Dense(2, 3,
-                new Complex[6] { 1, 2, 3, 4, 5, 6 });
+                [1, 2, 3, 4, 5, 6]);
             var rows = matrix.AsRowCollection();
 
             int dataColumn = 1;
@@ -1269,8 +1269,8 @@ namespace Novacta.Analytics.Tests
             Complex expected = matrix[row.Index, dataColumn];
             row.ZData = expected;
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "" },
-                actual: subscriber.PropertyNames.ToArray());
+                expected: [""],
+                actual: [.. subscriber.PropertyNames]);
             var actual = row.ZData;
             ComplexAssert.AreEqual(expected, actual, ComplexMatrixTest.Accuracy);
 
@@ -1284,8 +1284,8 @@ namespace Novacta.Analytics.Tests
                 row.ZData,
                 ComplexMatrixTest.Accuracy);
             ArrayAssert<string>.AreEqual(
-                expected: new string[] { "", "ZData", "[1]" },
-                actual: subscriber.PropertyNames.ToArray());
+                expected: ["", "ZData", "[1]"],
+                actual: [.. subscriber.PropertyNames]);
         }
     }
 }

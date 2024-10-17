@@ -54,15 +54,14 @@ namespace Novacta.Analytics.Tests
 
                 var featurePremises
                     = new List<SortedSet<double>>(2) {
-                        new SortedSet<double>() { 0.0, 1.0 },
-                        new SortedSet<double>() };
+                        new() { 0.0, 1.0 },
+                        new() };
 
                 double responseConclusion = responseVariable.Categories[1].Code;
                 double truthValue = .9;
 
                 DoubleMatrix entailmentRepresentation = DoubleMatrix.Dense(1, 5 + 4 + 3 + 1,
-                    new double[5 + 4 + 3 + 1]
-                    { 1, 1, 0, 0, 0,  0, 0, 0, 0,  0, 1, 0,  .9 });
+                    [1, 1, 0, 0, 0,  0, 0, 0, 0,  0, 1, 0,  .9]);
 
                 var target = new CategoricalEntailment(
                     entailmentRepresentation: entailmentRepresentation,
@@ -114,8 +113,8 @@ namespace Novacta.Analytics.Tests
 
                 var featurePremises
                     = new List<SortedSet<double>>(2) {
-                        new SortedSet<double>() { 0.0, 1.0 },
-                        new SortedSet<double>() };
+                        new() { 0.0, 1.0 },
+                        new() };
 
                 double responseConclusion = responseVariable.Categories[1].Code;
                 double truthValue = .9;
@@ -182,8 +181,8 @@ namespace Novacta.Analytics.Tests
 
                 var featurePremises
                     = new List<SortedSet<double>>(2) {
-                        new SortedSet<double>() { 0.0, 1.0 },
-                        new SortedSet<double>() };
+                        new() { 0.0, 1.0 },
+                        new() };
 
                 double responseConclusion = responseVariable.Categories[1].Code;
                 double truthValue = .9;
@@ -247,8 +246,8 @@ namespace Novacta.Analytics.Tests
 
                 var featurePremises
                     = new List<SortedSet<double>>(2) {
-                        new SortedSet<double>() { 0.0, 1.0 },
-                        new SortedSet<double>() };
+                        new() { 0.0, 1.0 },
+                        new() };
 
                 double responseConclusion = responseVariable.Categories[1].Code;
                 double truthValue = .9;
@@ -306,8 +305,8 @@ namespace Novacta.Analytics.Tests
 
                 var featurePremises
                     = new List<SortedSet<double>>(2) {
-                        new SortedSet<double>() { 0.0, 1.0 },
-                        new SortedSet<double>() };
+                        new() { 0.0, 1.0 },
+                        new() };
 
                 double responseConclusion = responseVariable.Categories[1].Code;
                 double truthValue = .9;
@@ -366,8 +365,8 @@ namespace Novacta.Analytics.Tests
 
             var featurePremises
                 = new List<SortedSet<double>>(2) {
-                        new SortedSet<double>() { 0.0, 1.0 },
-                        new SortedSet<double>() };
+                        new() { 0.0, 1.0 },
+                        new() };
 
             double responseConclusion = responseVariable.Categories[1].Code;
             double truthValue = .9;
@@ -432,8 +431,8 @@ namespace Novacta.Analytics.Tests
 
                 var featurePremises
                     = new List<SortedSet<double>>(2) {
-                        new SortedSet<double>() { 0.0, 2.0 },
-                        new SortedSet<double>() { 1.0, 3.0 } };
+                        new() { 0.0, 2.0 },
+                        new() { 1.0, 3.0 } };
 
                 double responseConclusion = responseVariable.Categories[1].Code;
                 double truthValue = .9;
@@ -492,7 +491,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, responseVariable };
+                    [f0, f1, responseVariable];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -529,8 +528,8 @@ namespace Novacta.Analytics.Tests
 
                 var featurePremises
                     = new List<SortedSet<double>>(2) {
-                        new SortedSet<double>() { 0.0, 2.0 },
-                        new SortedSet<double>() { 1.0, 3.0 } };
+                        new() { 0.0, 2.0 },
+                        new() { 1.0, 3.0 } };
 
                 double responseConclusion = responseVariable.Categories[1].Code;
                 double truthValue = .9;
@@ -596,7 +595,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, responseVariable };
+                    [f0, f1, responseVariable];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -633,8 +632,8 @@ namespace Novacta.Analytics.Tests
 
                 var featurePremises
                     = new List<SortedSet<double>>(2) {
-                        new SortedSet<double>() { 0.0, 2.0 },
-                        new SortedSet<double>() { 1.0, 3.0 } };
+                        new() { 0.0, 2.0 },
+                        new() { 1.0, 3.0 } };
 
                 double responseConclusion = responseVariable.Categories[1].Code;
                 double truthValue = .9;
@@ -697,7 +696,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, responseVariable };
+                    [f0, f1, responseVariable];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -734,8 +733,8 @@ namespace Novacta.Analytics.Tests
 
                 var featurePremises
                     = new List<SortedSet<double>>(2) {
-                        new SortedSet<double>() { 0.0, 2.0 },
-                        new SortedSet<double>() { 1.0, 3.0 } };
+                        new() { 0.0, 2.0 },
+                        new() { 1.0, 3.0 } };
 
                 double responseConclusion = responseVariable.Categories[1].Code;
                 double truthValue = .9;
@@ -794,7 +793,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, responseVariable };
+                    [f0, f1, responseVariable];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -831,8 +830,8 @@ namespace Novacta.Analytics.Tests
 
                 var featurePremises
                     = new List<SortedSet<double>>(2) {
-                        new SortedSet<double>() { 0.0, 2.0 },
-                        new SortedSet<double>() { 1.0, 3.0 } };
+                        new() { 0.0, 2.0 },
+                        new() { 1.0, 3.0 } };
 
                 double responseConclusion = responseVariable.Categories[1].Code;
                 double truthValue = .9;
@@ -848,7 +847,7 @@ namespace Novacta.Analytics.Tests
                     target.ValidatePremises(dataSet, featureVariableIndexes);
 
                 var expected = IndexCollection.FromArray(
-                    new int[4] { 1, 3, 9, 11 });
+                    [1, 3, 9, 11]);
 
                 IndexCollectionAssert.AreEqual(expected, actual);
             }
@@ -888,7 +887,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, responseVariable };
+                    [f0, f1, responseVariable];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -925,8 +924,8 @@ namespace Novacta.Analytics.Tests
 
                 var featurePremises
                     = new List<SortedSet<double>>(2) {
-                        new SortedSet<double>() { 0.0, 2.0 },
-                        new SortedSet<double>() { } };
+                        new() { 0.0, 2.0 },
+                        new() { } };
 
                 double responseConclusion = responseVariable.Categories[1].Code;
                 double truthValue = .9;
@@ -942,7 +941,7 @@ namespace Novacta.Analytics.Tests
                     target.ValidatePremises(dataSet, featureVariableIndexes);
 
                 var expected = IndexCollection.FromArray(
-                    new int[8] { 0, 1, 2, 3, 8, 9, 10, 11 });
+                    [0, 1, 2, 3, 8, 9, 10, 11]);
 
                 IndexCollectionAssert.AreEqual(expected, actual);
             }
@@ -982,7 +981,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, responseVariable };
+                    [f0, f1, responseVariable];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -1019,8 +1018,8 @@ namespace Novacta.Analytics.Tests
 
                 var featurePremises
                     = new List<SortedSet<double>>(2) {
-                        new SortedSet<double>() { 0.0, 2.0 },
-                        new SortedSet<double>() { 0.0, 1.0, 2.0, 3.0 } };
+                        new() { 0.0, 2.0 },
+                        new() { 0.0, 1.0, 2.0, 3.0 } };
 
                 double responseConclusion = responseVariable.Categories[1].Code;
                 double truthValue = .9;
@@ -1036,7 +1035,7 @@ namespace Novacta.Analytics.Tests
                     target.ValidatePremises(dataSet, featureVariableIndexes);
 
                 var expected = IndexCollection.FromArray(
-                    new int[8] { 0, 1, 2, 3, 8, 9, 10, 11 });
+                    [0, 1, 2, 3, 8, 9, 10, 11]);
 
                 IndexCollectionAssert.AreEqual(expected, actual);
             }
@@ -1076,7 +1075,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, responseVariable };
+                    [f0, f1, responseVariable];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -1113,8 +1112,8 @@ namespace Novacta.Analytics.Tests
 
                 var featurePremises
                     = new List<SortedSet<double>>(2) {
-                        new SortedSet<double>() { 0.0, 2.0 },
-                        new SortedSet<double>() { 1.0, 3.0 } };
+                        new() { 0.0, 2.0 },
+                        new() { 1.0, 3.0 } };
 
                 double responseConclusion = responseVariable.Categories[1].Code;
                 double truthValue = .9;
@@ -1135,7 +1134,7 @@ namespace Novacta.Analytics.Tests
 
                 bool[] expected = new bool[dataSet.NumberOfRows];
                 var expectedTrueIndexes = IndexCollection.FromArray(
-                    new int[4] { 1, 3, 9, 11 });
+                    [1, 3, 9, 11]);
                 for (int i = 0; i < expectedTrueIndexes.Count; i++)
                 {
                     expected[expectedTrueIndexes[i]] = true;
@@ -1196,7 +1195,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, responseVariable };
+                    [f0, f1, responseVariable];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -1233,8 +1232,8 @@ namespace Novacta.Analytics.Tests
 
                 var featurePremises
                     = new List<SortedSet<double>>(2) {
-                        new SortedSet<double>() { 0.0, 2.0 },
-                        new SortedSet<double>() { } };
+                        new() { 0.0, 2.0 },
+                        new() { } };
 
                 double responseConclusion = responseVariable.Categories[1].Code;
                 double truthValue = .9;
@@ -1255,7 +1254,7 @@ namespace Novacta.Analytics.Tests
 
                 bool[] expected = new bool[dataSet.NumberOfRows];
                 var expectedTrueIndexes = IndexCollection.FromArray(
-                    new int[8] { 0, 1, 2, 3, 8, 9, 10, 11 });
+                    [0, 1, 2, 3, 8, 9, 10, 11]);
                 for (int i = 0; i < expectedTrueIndexes.Count; i++)
                 {
                     expected[expectedTrueIndexes[i]] = true;
@@ -1316,7 +1315,7 @@ namespace Novacta.Analytics.Tests
                 responseVariable.SetAsReadOnly();
 
                 List<CategoricalVariable> variables =
-                    new() { f0, f1, responseVariable };
+                    [f0, f1, responseVariable];
 
                 DoubleMatrix data = DoubleMatrix.Dense(
                     new double[20, 3] {
@@ -1353,8 +1352,8 @@ namespace Novacta.Analytics.Tests
 
                 var featurePremises
                     = new List<SortedSet<double>>(2) {
-                        new SortedSet<double>() { 0.0, 2.0 },
-                        new SortedSet<double>() { 0.0, 1.0, 2.0, 3.0 } };
+                        new() { 0.0, 2.0 },
+                        new() { 0.0, 1.0, 2.0, 3.0 } };
 
                 double responseConclusion = responseVariable.Categories[1].Code;
                 double truthValue = .9;
@@ -1375,7 +1374,7 @@ namespace Novacta.Analytics.Tests
 
                 bool[] expected = new bool[dataSet.NumberOfRows];
                 var expectedTrueIndexes = IndexCollection.FromArray(
-                    new int[8] { 0, 1, 2, 3, 8, 9, 10, 11 });
+                    [0, 1, 2, 3, 8, 9, 10, 11]);
                 for (int i = 0; i < expectedTrueIndexes.Count; i++)
                 {
                     expected[expectedTrueIndexes[i]] = true;

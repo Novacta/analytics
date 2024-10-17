@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="e151a15e-6aae-4b9d-aecb-e04a9aeec266" revisionNumber="1">
+    <developerConceptualDocument
+      xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+      xmlns:xlink="http://www.w3.org/1999/xlink">
+
+        <introduction>
+            <para>
+                Version 2.1.0 was released on date 2024-10-17.
+            </para>
+        </introduction>
+
+        <section>
+            <title>Changes in This Release</title>
+            <content>
+
+                <list class="bullet">
+                    <listItem>
+                        <para>
+                            Added support for
+                            <codeEntityReference linkText="encoding">
+                                M:Novacta.Analytics.DoubleMatrix.Encode(System.IO.TextReader,System.Char,Novacta.Analytics.IndexCollection,System.Boolean,System.Collections.Generic.Dictionary{System.Int32,Novacta.Analytics.Codifier},System.IFormatProvider)
+                            </codeEntityReference> 
+                            categorical or numerical variables
+                            into
+                            <codeEntityReference linkText="DoubleMatrix">
+                                T:Novacta.Analytics.DoubleMatrix
+                            </codeEntityReference> instances by reading from a stream.
+                        </para>
+                    </listItem>
+                    <listItem>
+                        <para>
+                            Added 
+                            <codeEntityReference linkText="classical multidimensional scaling">
+                                T:Novacta.Analytics.ClassicalMultidimensionalScaling
+                            </codeEntityReference>
+                            and
+                            <codeEntityReference linkText="nonmetric multidimensional scaling">
+                                T:Novacta.Analytics.NonMetricMultidimensionalScaling
+                            </codeEntityReference>
+                            to the set of supported
+                            multivariate methods.
+                        </para>
+                    </listItem>
+                </list>
+
+            </content>
+        </section>
+
+        <relatedTopics>
+        </relatedTopics>
+    </developerConceptualDocument>
+</topic>

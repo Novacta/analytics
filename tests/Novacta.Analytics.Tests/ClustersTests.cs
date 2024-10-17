@@ -155,8 +155,7 @@ namespace Novacta.Analytics.Tests
                 const int numberOfFeatures = 7;
 
                 var source = DoubleMatrix.Dense(numberOfItems, 1,
-                    new double[numberOfItems]
-                        { 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2  });
+                    [0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2]);
 
                 var expectedPartition = IndexPartition.Create(source);
                 var data = DoubleMatrix.Dense(numberOfItems, numberOfFeatures);
@@ -333,8 +332,7 @@ namespace Novacta.Analytics.Tests
                 const int numberOfItems = 12;
 
                 var source = DoubleMatrix.Dense(numberOfItems, 1,
-                    new double[numberOfItems]
-                        { 0 ,0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2 });
+                    [0 ,0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2]);
 
                 var partition = IndexPartition.Create(source);
                 var data = DoubleMatrix.Dense(numberOfItems, 7);

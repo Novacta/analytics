@@ -18,8 +18,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Kurtosis
                 base(
                     expected: new DoubleMatrixState(
                         asColumnMajorDenseArray:
-                            new double[5] 
-                                { -0.811609879, -1.32693187, -1.279102884, -1.119303118, -1.36 },
+                            [-0.811609879, -1.32693187, -1.279102884, -1.119303118, -1.36],
                         numberOfRows: 1,
                         numberOfColumns: 5
                     ),

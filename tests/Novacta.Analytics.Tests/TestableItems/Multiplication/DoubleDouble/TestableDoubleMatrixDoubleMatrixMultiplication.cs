@@ -2,8 +2,6 @@
 // Licensed under the MIT license. 
 // See the LICENSE file in the project root for more information.
 
-using System;
-
 namespace Novacta.Analytics.Tests.TestableItems.Multiplication
 {
     /// <summary>
@@ -28,25 +26,25 @@ namespace Novacta.Analytics.Tests.TestableItems.Multiplication
                 left,
                 right,
                 leftWritableRightWritableOps:
-                    new Func<DoubleMatrix, DoubleMatrix, DoubleMatrix>[2] {
+                    [
                         (l, r) => l * r,
                         (l, r) => DoubleMatrix.Multiply(l, r)
-                    },
+                    ],
                 leftReadOnlyRightWritableOps:
-                    new Func<ReadOnlyDoubleMatrix, DoubleMatrix, DoubleMatrix>[2] {
+                    [
                         (l, r) => l * r,
                         (l, r) => ReadOnlyDoubleMatrix.Multiply(l, r)
-                    },
+                    ],
                 leftWritableRightReadOnlyOps:
-                    new Func<DoubleMatrix, ReadOnlyDoubleMatrix, DoubleMatrix>[2] {
+                    [
                         (l, r) => l * r,
                         (l, r) => ReadOnlyDoubleMatrix.Multiply(l, r)
-                    },
+                    ],
                 leftReadOnlyRightReadOnlyOps:
-                    new Func<ReadOnlyDoubleMatrix, ReadOnlyDoubleMatrix, DoubleMatrix>[2] {
+                    [
                         (l, r) => l * r,
                         (l, r) => ReadOnlyDoubleMatrix.Multiply(l, r)
-                    }
+                    ]
                 )
         {
         }

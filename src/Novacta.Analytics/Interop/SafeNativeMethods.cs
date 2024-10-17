@@ -4,6 +4,7 @@
 
 using System;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace Novacta.Analytics.Interop
@@ -12,14 +13,14 @@ namespace Novacta.Analytics.Interop
     /// Provides support to operate with selected native routines.
     /// </summary>
     [System.Security.SuppressUnmanagedCodeSecurity]
-    internal static class SafeNativeMethods
+    internal static partial class SafeNativeMethods
     {
         #region BLAS
 
         /// <summary>
         /// Provides support to operate with selected BLAS native routines.
         /// </summary>
-        internal static class BLAS
+        internal static partial class BLAS
         {
             /// <summary>
             /// Contains constants indicating a linear ordering by which 
@@ -120,10 +121,9 @@ namespace Novacta.Analytics.Interop
 
             #region Double (d)
 
-            [DllImport("libna",
-                EntryPoint = "cblas_dgemm",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern void DGEMM(
+            [LibraryImport("libna", EntryPoint = "cblas_dgemm")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static partial void DGEMM(
                      int order,
                      int transA,
                      int transB,
@@ -139,10 +139,9 @@ namespace Novacta.Analytics.Interop
                      [In, Out] double[] c,
                      int ldc);
 
-            [DllImport("libna",
-                EntryPoint = "cblas_dtrsm",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern void DTRSM(
+            [LibraryImport("libna", EntryPoint = "cblas_dtrsm")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static partial void DTRSM(
                     int order,
                     int side,
                     int uplo,
@@ -160,10 +159,9 @@ namespace Novacta.Analytics.Interop
 
             #region Complex (z)
 
-            [DllImport("libna",
-                EntryPoint = "cblas_zgemm",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern unsafe void ZGEMM(
+            [LibraryImport("libna", EntryPoint = "cblas_zgemm")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static unsafe partial void ZGEMM(
                      int order,
                      int transA,
                      int transB,
@@ -179,10 +177,9 @@ namespace Novacta.Analytics.Interop
                      Complex* c,
                      int ldc);
 
-            [DllImport("libna",
-                EntryPoint = "cblas_ztrsm",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern unsafe void ZTRSM(
+            [LibraryImport("libna", EntryPoint = "cblas_ztrsm")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static unsafe partial void ZTRSM(
                     int order,
                     int side,
                     int uplo,
@@ -206,12 +203,11 @@ namespace Novacta.Analytics.Interop
         /// <summary>
         /// Provides support to operate with selected native transposition routines.
         /// </summary>
-        internal static class TRANS
+        internal static partial class TRANS
         {
-            [DllImport("libna",
-                EntryPoint = "MKL_Dimatcopy",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern void DIMATCOPY(
+            [LibraryImport("libna", EntryPoint = "MKL_Dimatcopy")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static partial void DIMATCOPY(
                     char ordering,
                     char trans,
                     int rows,
@@ -221,10 +217,9 @@ namespace Novacta.Analytics.Interop
                     int lda,
                     int ldb);
 
-            [DllImport("libna",
-                EntryPoint = "MKL_Zimatcopy",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern void ZIMATCOPY(
+            [LibraryImport("libna", EntryPoint = "MKL_Zimatcopy")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static partial void ZIMATCOPY(
                     char ordering,
                     char trans,
                     int rows,
@@ -242,7 +237,7 @@ namespace Novacta.Analytics.Interop
         /// <summary>
         /// Provides support to operate with selected LAPACK native routines.
         /// </summary>
-        internal static class LAPACK
+        internal static partial class LAPACK
         {
             /// <summary>
             /// Contains constants indicating a linear ordering by which 
@@ -265,10 +260,9 @@ namespace Novacta.Analytics.Interop
 
             #region Double (d)
 
-            [DllImport("libna",
-                EntryPoint = "LAPACKE_dgels",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern int DGELS(
+            [LibraryImport("libna", EntryPoint = "LAPACKE_dgels")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static partial int DGELS(
                 int matrix_order,
                 char trans,
                 int m,
@@ -279,10 +273,9 @@ namespace Novacta.Analytics.Interop
                 [In, Out] double[] b,
                 int ldb);
 
-            [DllImport("libna",
-                EntryPoint = "LAPACKE_dgetrs",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern int DGETRS(
+            [LibraryImport("libna", EntryPoint = "LAPACKE_dgetrs")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static partial int DGETRS(
                 int matrix_order,
                 char trans,
                 int n,
@@ -293,10 +286,9 @@ namespace Novacta.Analytics.Interop
                 [In, Out] double[] b,
                 int ldb);
 
-            [DllImport("libna",
-                EntryPoint = "LAPACKE_dgetrf",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern int DGETRF(
+            [LibraryImport("libna", EntryPoint = "LAPACKE_dgetrf")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static partial int DGETRF(
                 int matrix_order,
                 int m,
                 int n,
@@ -304,10 +296,9 @@ namespace Novacta.Analytics.Interop
                 int lda,
                 [Out] int[] ipiv);
 
-            [DllImport("libna",
-                EntryPoint = "LAPACKE_dposv",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern int DPOSV(
+            [LibraryImport("libna", EntryPoint = "LAPACKE_dposv")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static partial int DPOSV(
                 int matrix_order,
                 char uplo,
                 int n,
@@ -317,10 +308,9 @@ namespace Novacta.Analytics.Interop
                 [In, Out] double[] b,
                 int ldb);
 
-            [DllImport("libna",
-                EntryPoint = "LAPACKE_dgesvd",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern int DGESVD(
+            [LibraryImport("libna", EntryPoint = "LAPACKE_dgesvd")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static partial int DGESVD(
                 int matrix_layout,
                 char jobu,
                 char jobvt,
@@ -335,10 +325,9 @@ namespace Novacta.Analytics.Interop
                 int ldvt,
                 [In, Out] double[] superb);
 
-            [DllImport("libna",
-                EntryPoint = "LAPACKE_dsyev",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern int DSYEV(
+            [LibraryImport("libna", EntryPoint = "LAPACKE_dsyev")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static partial int DSYEV(
                 int matrix_layout,
                 char jobz,
                 char uplo,
@@ -351,10 +340,9 @@ namespace Novacta.Analytics.Interop
 
             #region Complex (z)
 
-            [DllImport("libna",
-                EntryPoint = "LAPACKE_zgels",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern int ZGELS(
+            [LibraryImport("libna", EntryPoint = "LAPACKE_zgels")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static partial int ZGELS(
                 int matrix_order,
                 char trans,
                 int m,
@@ -365,10 +353,9 @@ namespace Novacta.Analytics.Interop
                 [In, Out] Complex[] b,
                 int ldb);
 
-            [DllImport("libna",
-                EntryPoint = "LAPACKE_zgetrs",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern int ZGETRS(
+            [LibraryImport("libna", EntryPoint = "LAPACKE_zgetrs")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static partial int ZGETRS(
                 int matrix_order,
                 char trans,
                 int n,
@@ -379,10 +366,9 @@ namespace Novacta.Analytics.Interop
                 [In, Out] Complex[] b,
                 int ldb);
 
-            [DllImport("libna",
-                EntryPoint = "LAPACKE_zgetrf",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern int ZGETRF(
+            [LibraryImport("libna", EntryPoint = "LAPACKE_zgetrf")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static partial int ZGETRF(
                 int matrix_order,
                 int m,
                 int n,
@@ -390,10 +376,9 @@ namespace Novacta.Analytics.Interop
                 int lda,
                 [Out] int[] ipiv);
 
-            [DllImport("libna",
-                EntryPoint = "LAPACKE_zposv",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern int ZPOSV(
+            [LibraryImport("libna", EntryPoint = "LAPACKE_zposv")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static partial int ZPOSV(
                 int matrix_order,
                 char uplo,
                 int n,
@@ -403,10 +388,9 @@ namespace Novacta.Analytics.Interop
                 [In, Out] Complex[] b,
                 int ldb);
 
-            [DllImport("libna",
-                EntryPoint = "LAPACKE_zgesvd",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern int ZGESVD(
+            [LibraryImport("libna", EntryPoint = "LAPACKE_zgesvd")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static partial int ZGESVD(
                 int matrix_layout,
                 char jobu,
                 char jobvt,
@@ -421,10 +405,9 @@ namespace Novacta.Analytics.Interop
                 int ldvt,
                 [In, Out] double[] superb);
 
-            [DllImport("libna",
-                EntryPoint = "LAPACKE_zheev",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern int ZHEEV(
+            [LibraryImport("libna", EntryPoint = "LAPACKE_zheev")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static partial int ZHEEV(
                 int matrix_layout,
                 char jobz,
                 char uplo,
@@ -444,12 +427,11 @@ namespace Novacta.Analytics.Interop
         /// <summary>
         /// Provides support to operate with selected VML native routines.
         /// </summary>
-        internal static class VML
+        internal static partial class VML
         {
-            [DllImport("libna",
-                EntryPoint = "vdCdfNormInv",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern unsafe void vdCdfNormInv(
+            [LibraryImport("libna", EntryPoint = "vdCdfNormInv")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static unsafe partial void vdCdfNormInv(
                 int n,
                 double* a,
                 double* y);
@@ -462,7 +444,7 @@ namespace Novacta.Analytics.Interop
         /// <summary>
         /// Provides support to operate with selected VSL native routines.
         /// </summary>
-        internal static class VSL
+        internal static partial class VSL
         {
             /// <summary>
             /// Provides constants to represents VSL Status definitions.
@@ -509,24 +491,21 @@ namespace Novacta.Analytics.Interop
 
             // Methods to operate with VSL Random Streams.
 
-            [DllImport("libna",
-                EntryPoint = "vslNewStream",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern int NewStream(
+            [LibraryImport("libna", EntryPoint = "vslNewStream")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static partial int NewStream(
                 ref IntPtr stream,
                 int brng,
                 int seed);
 
-            [DllImport("libna",
-                EntryPoint = "vslDeleteStream",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern int DeleteStream(
+            [LibraryImport("libna", EntryPoint = "vslDeleteStream")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static partial int DeleteStream(
                 ref IntPtr stream);
 
-            [DllImport("libna",
-                EntryPoint = "vdRngUniform",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern unsafe int vdRngUniform(
+            [LibraryImport("libna", EntryPoint = "vdRngUniform")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static unsafe partial int vdRngUniform(
                 int method,
                 void* stream,
                 int n,
@@ -534,10 +513,9 @@ namespace Novacta.Analytics.Interop
                 double a,
                 double b);
 
-            [DllImport("libna",
-                EntryPoint = "viRngUniform",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern unsafe int viRngUniform(
+            [LibraryImport("libna", EntryPoint = "viRngUniform")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static unsafe partial int viRngUniform(
                 int method, // Must be 0
                 void* stream,
                 int n,
@@ -545,10 +523,9 @@ namespace Novacta.Analytics.Interop
                 int a,
                 int b);
 
-            [DllImport("libna",
-                EntryPoint = "vdRngGaussian",
-                CallingConvention = CallingConvention.Cdecl)]
-            internal static extern unsafe int vdRngGaussian(
+            [LibraryImport("libna", EntryPoint = "vdRngGaussian")]
+            [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+            internal static unsafe partial int vdRngGaussian(
                 int method,
                 void* stream,
                 int n,

@@ -2,12 +2,16 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Novacta.Analytics" Version="2.0.0" />
     <PackageReference Include="Novacta.Documentation.CodeExamples" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Novacta.Analytics.Runtime\Novacta.Analytics.Runtime.csproj" />
+    <ProjectReference Include="..\Novacta.Analytics\Novacta.Analytics.csproj" />
   </ItemGroup>
 
 </Project>

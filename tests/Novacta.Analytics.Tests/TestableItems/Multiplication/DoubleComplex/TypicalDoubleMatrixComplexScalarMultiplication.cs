@@ -28,15 +28,15 @@ namespace Novacta.Analytics.Tests.TestableItems.Multiplication
         TypicalDoubleMatrixComplexScalarMultiplication() :
             base(
                 expected: new ComplexMatrixState(
-                    asColumnMajorDenseArray: new Complex[6]
-                    {
+                    asColumnMajorDenseArray:
+                    [
                         0,
-                        new Complex(2, 2),
-                        new Complex(4, 4),
-                        new Complex(6, 6),
-                        new Complex(8, 8),
-                        new Complex(10, 10)
-                    },
+                        new(2, 2),
+                        new(4, 4),
+                        new(6, 6),
+                        new(8, 8),
+                        new(10, 10)
+                    ],
                     numberOfRows: 2,
                     numberOfColumns: 3),
                 left: TestableDoubleMatrix16.Get(),

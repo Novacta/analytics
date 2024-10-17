@@ -122,15 +122,9 @@ namespace Novacta.Analytics
             Func<DoubleMatrix, double> function,
             DoubleMatrix argument)
         {
-            if (function is null)
-            {
-                throw new ArgumentNullException(nameof(function));
-            }
+            ArgumentNullException.ThrowIfNull(function);
 
-            if (argument is null)
-            {
-                throw new ArgumentNullException(nameof(argument));
-            }
+            ArgumentNullException.ThrowIfNull(argument);
 
             int numberOfArguments = argument.Count;
             DoubleMatrix gradient = DoubleMatrix.Dense(
@@ -200,15 +194,9 @@ namespace Novacta.Analytics
         public static DoubleMatrix Hessian(Func<DoubleMatrix, double> function,
             DoubleMatrix argument)
         {
-            if (function is null)
-            {
-                throw new ArgumentNullException(nameof(function));
-            }
+            ArgumentNullException.ThrowIfNull(function);
 
-            if (argument is null)
-            {
-                throw new ArgumentNullException(nameof(argument));
-            }
+            ArgumentNullException.ThrowIfNull(argument);
 
             int numberOfArguments = argument.Count;
             DoubleMatrix hessian = DoubleMatrix.Dense(
@@ -335,15 +323,9 @@ namespace Novacta.Analytics
             DoubleMatrix argument,
             TFunctionParameter parameter)
         {
-            if (function is null)
-            {
-                throw new ArgumentNullException(nameof(function));
-            }
+            ArgumentNullException.ThrowIfNull(function);
 
-            if (argument is null)
-            {
-                throw new ArgumentNullException(nameof(argument));
-            }
+            ArgumentNullException.ThrowIfNull(argument);
 
             int numberOfArguments = argument.Count;
             DoubleMatrix gradient = DoubleMatrix.Dense(
@@ -421,15 +403,9 @@ namespace Novacta.Analytics
             DoubleMatrix argument, 
             TFunctionParameter parameter)
         {
-            if (function is null)
-            {
-                throw new ArgumentNullException(nameof(function));
-            }
+            ArgumentNullException.ThrowIfNull(function);
 
-            if (argument is null)
-            {
-                throw new ArgumentNullException(nameof(argument));
-            }
+            ArgumentNullException.ThrowIfNull(argument);
 
             int numberOfArguments = argument.Count;
             DoubleMatrix hessian = DoubleMatrix.Dense(

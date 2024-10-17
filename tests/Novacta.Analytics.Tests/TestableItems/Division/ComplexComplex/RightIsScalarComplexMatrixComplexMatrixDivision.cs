@@ -4,7 +4,6 @@
 
 using Novacta.Analytics.Tests.TestableItems.Matrices;
 using Novacta.Analytics.Tests.Tools;
-using System.Numerics;
 
 namespace Novacta.Analytics.Tests.TestableItems.Division
 {
@@ -28,7 +27,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Division
         RightIsScalarComplexMatrixComplexMatrixDivision() :
             base(
                 expected: new ComplexMatrixState(
-                    asColumnMajorDenseArray: new Complex[6] { 0, .5, 1, 1.5, 2, 2.5 },
+                    asColumnMajorDenseArray: [0, .5, 1, 1.5, 2, 2.5],
                     numberOfRows: 2,
                     numberOfColumns: 3),
                 left: TestableComplexMatrix16.Get(),

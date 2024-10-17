@@ -4,11 +4,6 @@
 
 using System;
 using System.IO;
-using System.Text;
-
-using System.Globalization;
-using Novacta.Analytics.Infrastructure;
-using System.Numerics;
 
 namespace Novacta.Analytics
 {

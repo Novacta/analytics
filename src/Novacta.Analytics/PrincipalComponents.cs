@@ -114,10 +114,7 @@ namespace Novacta.Analytics
         {
             #region Input validation
 
-            if (individualWeights is null)
-            {
-                throw new ArgumentNullException(nameof(individualWeights));
-            }
+            ArgumentNullException.ThrowIfNull(individualWeights);
 
             if (!individualWeights.IsColumnVector)
             {
@@ -172,10 +169,7 @@ namespace Novacta.Analytics
         {
             #region Input validation
 
-            if (variableCoefficients is null)
-            {
-                throw new ArgumentNullException(nameof(variableCoefficients));
-            }
+            ArgumentNullException.ThrowIfNull(variableCoefficients);
 
             if (!variableCoefficients.IsRowVector)
             {
@@ -267,8 +261,7 @@ namespace Novacta.Analytics
         public static PrincipalComponents Analyze(DoubleMatrix data,
             DoubleMatrix individualWeights, DoubleMatrix variableCoefficients)
         {
-            if (data is null)
-                throw new ArgumentNullException(nameof(data));
+            ArgumentNullException.ThrowIfNull(data);
 
             PrincipalComponents.ValidateIndividualWeights(data, individualWeights);
             PrincipalComponents.ValidateVariableCoefficients(data, variableCoefficients);
@@ -318,10 +311,7 @@ namespace Novacta.Analytics
         {
             #region Input validation
 
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            ArgumentNullException.ThrowIfNull(data);
 
             PrincipalComponents.ValidateIndividualWeights(data, individualWeights);
 
@@ -358,8 +348,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static PrincipalComponents Analyze(DoubleMatrix data)
         {
-            if (data is null)
-                throw new ArgumentNullException(nameof(data));
+            ArgumentNullException.ThrowIfNull(data);
 
             int numberOfIndividuals = data.NumberOfRows;
             int numberOfVariables = data.NumberOfColumns;

@@ -256,7 +256,7 @@ namespace Novacta.Analytics.Infrastructure
             var result = new SparseCsr3ComplexMatrixImplementor(
                 numberOfRows, numberOfColumns, resultCapacity);
 
-            HashSet<int> inspectedSet = new();
+            HashSet<int> inspectedSet = [];
 
             Complex leftValue, rightValue;
             int j, index;
@@ -652,7 +652,7 @@ namespace Novacta.Analytics.Infrastructure
             int resultCapacity = leftNumberOfStoredPositions + rightNumberOfStoredPositions;
             var result = new SparseCsr3ComplexMatrixImplementor(numberOfRows, numberOfColumns, resultCapacity);
 
-            HashSet<int> inspectedSet = new();
+            HashSet<int> inspectedSet = [];
 
             Complex leftValue, rightValue, value;
             int j, index;
@@ -841,7 +841,7 @@ namespace Novacta.Analytics.Infrastructure
             var result = new SparseCsr3ComplexMatrixImplementor(
                 numberOfRows, numberOfColumns, resultCapacity);
 
-            HashSet<int> inspectedSet = new();
+            HashSet<int> inspectedSet = [];
 
             Complex leftValue, rightValue, value;
             int j, index;

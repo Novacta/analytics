@@ -11,7 +11,7 @@ namespace Novacta.Analytics.CodeExamples
         {
             // Create a data stream.
             const int numberOfInstances = 27;
-            string[] data = new string[numberOfInstances + 1] {
+            string[] data = [
             "NUMERICAL,TARGET",
             "0,A",
             "0,A",
@@ -39,7 +39,7 @@ namespace Novacta.Analytics.CodeExamples
             "8,C",
             "9,C",
             "9,C",
-            "9,C" };
+            "9,C" ];
 
             MemoryStream stream = new();
             StreamWriter writer = new(stream);

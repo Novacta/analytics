@@ -23,11 +23,9 @@ namespace Novacta.Analytics.Infrastructure.Tests
 
                 SortDirection sortDirection = SortDirection.Ascending;
 
-                int[] expectedIndexTable = new int[21]
-                    { 1, 4, 2, 14, 19, 9, 6, 16, 8, 13, 3, 12, 20, 5, 18, 17, 15, 7, 10, 11, 0 };
+                int[] expectedIndexTable = [1, 4, 2, 14, 19, 9, 6, 16, 8, 13, 3, 12, 20, 5, 18, 17, 15, 7, 10, 11, 0];
 
-                int[] expectedData = new int[21]
-                    { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 };
+                int[] expectedData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
 
                 SortHelper.Sort(data, sortDirection, out int[] actualIndexTable);
 
@@ -42,11 +40,9 @@ namespace Novacta.Analytics.Infrastructure.Tests
 
                 SortDirection sortDirection = SortDirection.Descending;
 
-                int[] expectedIndexTable = new int[21]
-                    { 0, 11, 10, 7, 15, 17, 18, 5, 20, 12, 3, 13, 8, 16, 6, 9, 19, 14, 2, 4, 1 };
+                int[] expectedIndexTable = [0, 11, 10, 7, 15, 17, 18, 5, 20, 12, 3, 13, 8, 16, 6, 9, 19, 14, 2, 4, 1];
 
-                int[] expectedData = new int[21]
-                   { 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+                int[] expectedData = [21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 
                 SortHelper.Sort(data, sortDirection, out int[] actualIndexTable);
 
@@ -59,7 +55,7 @@ namespace Novacta.Analytics.Infrastructure.Tests
                 // Get data to be sorted.
                 int[] GetData()
                 {
-                    return new int[] {
+                    return [
                         -96731096,
                         838876893,
                         -300709777,
@@ -10059,7 +10055,7 @@ namespace Novacta.Analytics.Infrastructure.Tests
                         514891307,
                         -462714300,
                         83461999,
-                        634727908 };
+                        634727908 ];
                 }
 
                 // Get the expected index table, given the specified direction.
@@ -10069,7 +10065,7 @@ namespace Novacta.Analytics.Infrastructure.Tests
 
                     if (SortDirection.Ascending == sortDirection)
                     {
-                        expectedIndexTable = new int[] {
+                        expectedIndexTable = [
                             7105,
                             9074,
                             1320,
@@ -20069,11 +20065,11 @@ namespace Novacta.Analytics.Infrastructure.Tests
                             9169,
                             4094,
                             7819,
-                            8393 };
+                            8393 ];
                     }
                     else
                     {
-                        expectedIndexTable = new int[] {
+                        expectedIndexTable = [
                             8393,
                             7819,
                             4094,
@@ -30073,7 +30069,7 @@ namespace Novacta.Analytics.Infrastructure.Tests
                             1469,
                             1320,
                             9074,
-                            7105 };
+                            7105 ];
                     }
 
                     return expectedIndexTable;
@@ -30167,8 +30163,7 @@ namespace Novacta.Analytics.Infrastructure.Tests
 
                 SortDirection sortDirection = SortDirection.Ascending;
 
-                int[] expectedIndexTable = new int[21]
-                    { 1, 4, 2, 14, 19, 9, 6, 16, 8, 13, 3, 12, 20, 5, 18, 17, 15, 7, 10, 11, 0 };
+                int[] expectedIndexTable = [1, 4, 2, 14, 19, 9, 6, 16, 8, 13, 3, 12, 20, 5, 18, 17, 15, 7, 10, 11, 0];
 
                 var expectedData = new double[21]
                     { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 };
@@ -30186,8 +30181,7 @@ namespace Novacta.Analytics.Infrastructure.Tests
 
                 SortDirection sortDirection = SortDirection.Descending;
 
-                int[] expectedIndexTable = new int[21]
-                    { 0, 11, 10, 7, 15, 17, 18, 5, 20, 12, 3, 13, 8, 16, 6, 9, 19, 14, 2, 4, 1 };
+                int[] expectedIndexTable = [0, 11, 10, 7, 15, 17, 18, 5, 20, 12, 3, 13, 8, 16, 6, 9, 19, 14, 2, 4, 1];
 
                 var expectedData = new double[21]
                    { 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
@@ -30203,7 +30197,7 @@ namespace Novacta.Analytics.Infrastructure.Tests
                 // Get data to be sorted.
                 double[] GetData()
                 {
-                    return new double[] {
+                    return [
                         -0.588616527068756,
                         1.35779394494112,
                         -0.866591753925246,
@@ -40203,7 +40197,7 @@ namespace Novacta.Analytics.Infrastructure.Tests
                         -1.56603057281871,
                         -1.5061252961454,
                         0.542001660977829,
-                        -0.911084452892379};                    
+                        -0.911084452892379];                    
                 }
 
                 // Get the expected index table, given the specified direction.
@@ -40213,7 +40207,7 @@ namespace Novacta.Analytics.Infrastructure.Tests
 
                     if (SortDirection.Ascending == sortDirection)
                     {
-                        expectedIndexTable = new int[] {
+                        expectedIndexTable = [
                             9128,
                             6197,
                             3783,
@@ -50213,11 +50207,11 @@ namespace Novacta.Analytics.Infrastructure.Tests
                             31,
                             6706,
                             3721,
-                            4184 };
+                            4184 ];
                     }
                     else
                     {
-                        expectedIndexTable = new int[] {
+                        expectedIndexTable = [
                             4184,
                             3721,
                             6706,
@@ -60217,7 +60211,7 @@ namespace Novacta.Analytics.Infrastructure.Tests
                             5985,
                             3783,
                             6197,
-                            9128 };
+                            9128 ];
                     }
 
                     return expectedIndexTable;

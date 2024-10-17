@@ -608,10 +608,7 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (state is null)
-            {
-                throw new ArgumentNullException(nameof(state));
-            }
+            ArgumentNullException.ThrowIfNull(state);
 
             int numberOfCategoricalEntailments =
                 this.NumberOfCategoricalEntailments;
@@ -631,10 +628,7 @@ namespace Novacta.Analytics.Advanced
                     nameof(state));
             }
 
-            if (featureVariables is null)
-            {
-                throw new ArgumentNullException(nameof(featureVariables));
-            }
+            ArgumentNullException.ThrowIfNull(featureVariables);
 
             if (featureVariables.Count != this.FeatureCategoryCounts.Count)
             {
@@ -655,10 +649,7 @@ namespace Novacta.Analytics.Advanced
                 }
             }
 
-            if (responseVariable is null)
-            {
-                throw new ArgumentNullException(nameof(responseVariable));
-            }
+            ArgumentNullException.ThrowIfNull(responseVariable);
 
             if (responseVariable.NumberOfCategories != this.NumberOfResponseCategories)
             {
@@ -807,10 +798,7 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (objectiveFunction is null)
-            {
-                throw new ArgumentNullException(nameof(objectiveFunction));
-            }
+            ArgumentNullException.ThrowIfNull(objectiveFunction);
 
             if (
                 (probabilitySmoothingCoefficient <= 0.0)
@@ -862,10 +850,7 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (featureCategoryCounts is null)
-            {
-                throw new ArgumentNullException(nameof(featureCategoryCounts));
-            }
+            ArgumentNullException.ThrowIfNull(featureCategoryCounts);
 
             if (featureCategoryCounts.Count == 0)
             {
@@ -1037,7 +1022,7 @@ namespace Novacta.Analytics.Advanced
 
                 for (int f = 0; f < this.FeatureCategoryCounts.Count; f++)
                 {
-                    lastInPremiseFeaturePositions[e][f] = new SortedSet<int>();
+                    lastInPremiseFeaturePositions[e][f] = [];
                     for (int c = 0; c < this.FeatureCategoryCounts[f]; c++, entailmentParameterIndex++)
                     {
                         if (parameter[entailmentParameterIndex] > .5)

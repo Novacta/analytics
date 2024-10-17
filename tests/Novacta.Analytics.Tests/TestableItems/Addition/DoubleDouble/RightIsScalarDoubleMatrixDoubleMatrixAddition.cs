@@ -23,7 +23,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Addition
         RightIsScalarDoubleMatrixDoubleMatrixAddition() :
             base(
                 expected: new DoubleMatrixState(
-                    asColumnMajorDenseArray: new double[6] { -1, 0, 1, 2, 3, 4 },
+                    asColumnMajorDenseArray: [-1, 0, 1, 2, 3, 4],
                     numberOfRows: 2,
                     numberOfColumns: 3),
                 left: TestableDoubleMatrix16.Get(),

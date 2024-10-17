@@ -32,8 +32,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Division
         RightIsSymmetricComplexMatrixComplexMatrixDivision() :
             base(
                 expected: new ComplexMatrixState(
-                    asColumnMajorDenseArray: new System.Numerics.Complex[10]
-                        { -1, 0, 2, 2, 0, 0, 0, 0, 0, 0 },
+                    asColumnMajorDenseArray: [-1, 0, 2, 2, 0, 0, 0, 0, 0, 0],
                     numberOfRows: 2,
                     numberOfColumns: 5),
                 left: TestableComplexMatrix23.Get(),

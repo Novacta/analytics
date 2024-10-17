@@ -27,7 +27,7 @@ namespace Novacta.Analytics.CodeExamples
             // Set names for some rows and columns.
             serializedMatrix.SetRowName(0, "Row-0");
             serializedMatrix.SetRowName(2, "Row-2");
-            serializedMatrix.SetColumnName(1, "Col-0");
+            serializedMatrix.SetColumnName(1, "Col-1");
 
             // Show the matrix.
             Console.WriteLine("Serialized matrix:");

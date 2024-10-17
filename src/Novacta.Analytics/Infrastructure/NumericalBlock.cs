@@ -322,7 +322,7 @@ namespace Novacta.Analytics.Infrastructure
             foreach (var pair in this.targetFrequencyDistribution) {
                 builder.Append("(" + pair.Key + ", " + pair.Value + ") ");
             }
-            builder.Append("]");
+            builder.Append(']');
 
             return builder.ToString();
         }

@@ -2,8 +2,6 @@
 // Licensed under the MIT license. 
 // See the LICENSE file in the project root for more information.
 
-using System;
-
 namespace Novacta.Analytics.Tests.TestableItems.Variance
 {
     /// <summary>
@@ -30,9 +28,9 @@ namespace Novacta.Analytics.Tests.TestableItems.Variance
                 adjustForBias: adjustForBias,
                 dataOperation: dataOperation,
                 dataWritableOps:
-                    new Func<DoubleMatrix, bool, DataOperation, DoubleMatrix>[1] { Stat.Variance },
+                    [Stat.Variance],
                 dataReadOnlyOps:
-                    new Func<ReadOnlyDoubleMatrix, bool, DataOperation, DoubleMatrix>[1] { Stat.Variance })
+                    [Stat.Variance])
         {
         }
     }

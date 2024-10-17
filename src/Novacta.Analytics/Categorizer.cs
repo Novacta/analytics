@@ -15,7 +15,8 @@ namespace Novacta.Analytics
     /// The string representing a value to be categorized.</param>
     /// <param name="provider">
     /// An object that provides formatting information to
-    /// parse numeric values.</param>
+    /// parse numeric values.
+    /// </param>
     /// <returns>The category label assigned to the value.</returns>
     /// <remarks>
     /// <para>

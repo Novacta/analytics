@@ -2,7 +2,6 @@
 // Licensed under the MIT license. 
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Numerics;
 
 namespace Novacta.Analytics.Tests.TestableItems.Division
@@ -23,15 +22,15 @@ namespace Novacta.Analytics.Tests.TestableItems.Division
                 left,
                 right,
                 leftScalarRightWritableOps:
-                    new Func<Complex, ComplexMatrix, ComplexMatrix>[2] {
+                    [
                         (l, r) => l / r,
                         (l, r) => ComplexMatrix.Divide(l, r)
-                    },
+                    ],
                 leftScalarRightReadOnlyOps:
-                    new Func<Complex, ReadOnlyComplexMatrix, ComplexMatrix>[2] {
+                    [
                         (l, r) => l / r,
                         (l, r) => ReadOnlyComplexMatrix.Divide(l, r)
-                    }
+                    ]
                 )
         {
         }

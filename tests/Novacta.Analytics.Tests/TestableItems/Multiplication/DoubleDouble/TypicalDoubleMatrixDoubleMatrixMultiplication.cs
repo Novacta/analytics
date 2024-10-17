@@ -30,7 +30,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Multiplication
         TypicalDoubleMatrixDoubleMatrixMultiplication() :
             base(
                 expected: new DoubleMatrixState(
-                    asColumnMajorDenseArray: new double[2] { -20, -32 },
+                    asColumnMajorDenseArray: [-20, -32],
                     numberOfRows: 2,
                     numberOfColumns: 1),
                 left: TestableDoubleMatrix16.Get(),

@@ -96,10 +96,6 @@ namespace Novacta.Analytics.Tests.Tools
         /// </summary>
         /// <param name="expected">The partition containing the expected parts.</param>
         /// <param name="actual">The partition containing the actual parts.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Design",
-            "CA1031:Do not catch general exception types",
-            Justification = "By design: needed for testing purposes.")]
         public static void HaveEqualParts<T>(
             IndexPartition<T> expected,
             IndexPartition<T> actual)

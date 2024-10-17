@@ -197,7 +197,7 @@ namespace Novacta.Analytics.Advanced.Tests
                             stateDimension: 0,
                             optimizationGoal: OptimizationGoal.Minimization,
                             initialParameter: DoubleMatrix.Dense(2, 2,
-                                new double[] { -1.0, 10000.0, -1.0, 10000.0 }),
+                                [-1.0, 10000.0, -1.0, 10000.0]),
                             minimumNumberOfIterations: 3,
                             maximumNumberOfIterations: 10000);
                     },
@@ -222,7 +222,7 @@ namespace Novacta.Analytics.Advanced.Tests
                             stateDimension: 2,
                             optimizationGoal: (OptimizationGoal)(-1),
                             initialParameter: DoubleMatrix.Dense(2, 2,
-                                new double[] { -1.0, 10000.0, -1.0, 10000.0 }),
+                                [-1.0, 10000.0, -1.0, 10000.0]),
                             minimumNumberOfIterations: 3,
                             maximumNumberOfIterations: 10000);
                     },
@@ -267,7 +267,7 @@ namespace Novacta.Analytics.Advanced.Tests
                             stateDimension: 2,
                             optimizationGoal: OptimizationGoal.Minimization,
                             initialParameter: DoubleMatrix.Dense(2, 2,
-                                new double[] { -1.0, 10000.0, -1.0, 10000.0 }),
+                                [-1.0, 10000.0, -1.0, 10000.0]),
                             minimumNumberOfIterations: 0,
                             maximumNumberOfIterations: 10000);
                     },
@@ -292,7 +292,7 @@ namespace Novacta.Analytics.Advanced.Tests
                             stateDimension: 2,
                             optimizationGoal: OptimizationGoal.Minimization,
                             initialParameter: DoubleMatrix.Dense(2, 2,
-                                new double[] { -1.0, 10000.0, -1.0, 10000.0 }),
+                                [-1.0, 10000.0, -1.0, 10000.0]),
                             minimumNumberOfIterations: 3,
                             maximumNumberOfIterations: 0);
                     },
@@ -320,7 +320,7 @@ namespace Novacta.Analytics.Advanced.Tests
                             stateDimension: 2,
                             optimizationGoal: OptimizationGoal.Minimization,
                             initialParameter: DoubleMatrix.Dense(2, 2,
-                                new double[] { -1.0, 10000.0, -1.0, 10000.0 }),
+                                [-1.0, 10000.0, -1.0, 10000.0]),
                             minimumNumberOfIterations: 3,
                             maximumNumberOfIterations: 2);
                     },
@@ -527,7 +527,7 @@ namespace Novacta.Analytics.Advanced.Tests
             var stateDimension = 1;
             var optimizationGoal = OptimizationGoal.Maximization;
             var initialParameter = DoubleMatrix.Dense(2, 1,
-                new double[] { -6.0, 10000.0 });
+                [-6.0, 10000.0]);
             var minimumNumberOfIterations = 3;
             var maximumNumberOfIterations = 10000;
 

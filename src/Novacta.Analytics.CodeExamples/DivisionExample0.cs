@@ -17,11 +17,11 @@ namespace Novacta.Analytics.CodeExamples
             Console.WriteLine(left);
 
             // Create the right operand.
-            data = new double[6] {
+            data = [
                 0,  30,
                10,  40,
                20,  50
-            };
+            ];
             var right = DoubleMatrix.Dense(3, 2, data, StorageOrder.RowMajor);
             Console.WriteLine("right =");
             Console.WriteLine(right);

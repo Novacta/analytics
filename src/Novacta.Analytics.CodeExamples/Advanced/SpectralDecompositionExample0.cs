@@ -28,7 +28,7 @@ namespace Novacta.Analytics.CodeExamples.Advanced
             bool lowerTriangularPart = true;
 
             Console.WriteLine("Matrix to be decomposed:");
-            Console.WriteLine(DoubleMatrix.Dense(3, 3, new double[9] {
+            Console.WriteLine(DoubleMatrix.Dense(3, 3, [
                 2,
                 2,
                 0,
@@ -38,7 +38,7 @@ namespace Novacta.Analytics.CodeExamples.Advanced
                 0,
                 0,
                 5
-            }));
+            ]));
 
             // Compute the Spectral decomposition.
             var eigenvalues = SpectralDecomposition.Decompose(

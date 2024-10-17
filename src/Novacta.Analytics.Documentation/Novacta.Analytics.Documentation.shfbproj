@@ -20,17 +20,30 @@
     <HtmlHelpName>Novacta.Analytics.Documentation</HtmlHelpName>
     <Language>en-US</Language>
     <TransformComponentArguments>
-      <Argument Key="logoFile" Value="Help.png" xmlns="" />
-      <Argument Key="logoHeight" Value="" xmlns="" />
-      <Argument Key="logoWidth" Value="" xmlns="" />
-      <Argument Key="logoAltText" Value="" xmlns="" />
-      <Argument Key="logoPlacement" Value="left" xmlns="" />
-      <Argument Key="logoAlignment" Value="left" xmlns="" />
-      <Argument Key="maxVersionParts" Value="" xmlns="" />
+      <Argument Key="RobotsMetadata" Value="" />
+      <Argument Key="BibliographyDataFile" Value="Bibliography.xml" />
+      <Argument Key="RootBreadcrumbTitleText" Value="Docs" />
+      <Argument Key="ResizableTocColumn" Value="False" />
+      <Argument Key="CollapsibleSections" Value="True" />
+      <Argument Key="LogoFile" Value="Help.png" />
+      <Argument Key="LogoHeight" Value="" />
+      <Argument Key="LogoWidth" Value="" />
+      <Argument Key="LogoAltText" Value="" />
+      <Argument Key="LogoPlacement" Value="left" />
+      <Argument Key="LogoAlignment" Value="left" />
+      <Argument Key="LogoUrl" Value="" />
+      <Argument Key="MaxVersionParts" Value="" />
+      <Argument Key="DefaultLanguage" Value="cs" />
+      <Argument Key="IncludeEnumValues" Value="True" />
+      <Argument Key="EnumMemberSortOrder" Value="Value" />
+      <Argument Key="FlagsEnumValueFormat" Value="IntegerValue" />
+      <Argument Key="FlagsEnumSeparatorSize" Value="0" />
+      <Argument Key="BaseSourceCodeUrl" Value="" />
+      <Argument Key="RequestExampleUrl" Value="" />
     </TransformComponentArguments>
     <HelpFileFormat>Website</HelpFileFormat>
     <SyntaxFilters>Standard</SyntaxFilters>
-    <PresentationStyle>Novacta.Shfb.LatexTools.VS2013</PresentationStyle>
+    <PresentationStyle>Default2022</PresentationStyle>
     <CleanIntermediates>True</CleanIntermediates>
     <KeepLogFile>True</KeepLogFile>
     <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
@@ -38,135 +51,361 @@
     <BuildAssemblerVerbosity>AllMessages</BuildAssemblerVerbosity>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
     <ComponentConfigurations>
-      <ComponentConfig id="Novacta.Shfb.LatexComponent" enabled="True">
-        <component id="Novacta.Shfb.LatexComponent">
-          <documentClass value="article" />
-          <imageFileFormat value="svg" />
-          <additionalPreambleCommands>
-            <line>\DeclareMathOperator{\Grad}{grad}</line>
-            <line>\DeclareMathOperator{\VecOp}{vec}</line>
-            <line>\DeclareMathOperator{\Diag}{diag}</line>
-            <line>\DeclareMathOperator{\Dist}{Dist}</line>
-            <line>\DeclareMathOperator{\Var}{Var}</line>
-            <line>\DeclareMathOperator{\Cov}{Cov}</line>
-            <line>\DeclareMathOperator{\E}{E}</line>
-            <line>\DeclareMathOperator{\Trace}{Tr}</line>
-            <line>\DeclareMathOperator*{\argmin}{arg\,min}</line>
-            <line>%</line>
-            <line>% Commands</line>
-            <line>%</line>
-            <line>% CEBEC</line>
-            <line>% ---- OPTIMAL ARGUMENT</line>
-            <line>\newcommand{\OA}{o} </line>
-            <line>% ---- FEATURES</line>
-            <line>\newcommand{\FS}{\mathcal{F}} % Feature space</line>
-            <line>\newcommand{\FSI}{\phi} % Feature space instance</line>
-            <line>\newcommand{\FD}{\Phi} % Feature domain</line>
-            <line>\newcommand{\FC}{\phi} % Feature category</line>
-            <line>% ---- RESPONSE</line>
-            <line>\newcommand{\RD}{\Xi} % Response domain</line>
-            <line>\newcommand{\RC}{\xi} % Response category</line>
-            <line>% ---- ENTAILMENTS</line>
-            <line>\newcommand{\ES}{\mathcal{E}} % Entailment space</line>
-            <line>\newcommand{\EI}{E} % Entailment instance</line>
-            <line>\newcommand{\EP}{\Psi} % Entailment premise</line>
-            <line>\newcommand{\EC}{\zeta} % Entailment conclusion</line>
-            <line>\newcommand{\ET}{\theta} % Entailment truth value</line>
-            <line>% CLOUD</line>
-            <line>\newcommand{\C}{\mathbb{C}}</line>
-            <line>% CA</line>
-            <line>\newcommand{\Rows}{R}</line>
-            <line>\newcommand{\Cols}{C}</line>
-            <line>% LINE REFERENCE POINT</line>
-            <line>\newcommand{\lrp}{\upsilon}</line>
-            <line>\newcommand{\lrm}{\Upsilon}</line>
-            <line>% ROUND</line>
-            <line>\newcommand{\round}[1]{\left(#1\right)}</line>
-            <line>% VECTORIZATION</line>
-            <line>\renewcommand{\Vec}[1]{\VecOp \left(#1\right)}</line>
-            <line>% INVERSION-TRANSPOSITION</line>
-            <line>\newcommand{\TInv}[1]{{\left(#1^{\textsf{T}}\right)}^{-1}}</line>
-            <line>\newcommand{\InvT}[1]{{\left(#1^{-1}\right)}^{\textsf{T}}}</line>
-            <line>\newcommand{\Inv}[1]{#1^{-1}} </line>
-            <line>\newcommand{\T}[1]{#1^{\textsf{T}}} </line>
-            <line>% MEAN</line>
-            <line>\newcommand{\m}[1]{m_{\mathcal{#1}}}</line>
-            <line>% BASIS</line>
-            <line>\newcommand{\basis}[1]{\mathcal{#1}}</line>
-            <line>\newcommand{\A}{\basis{A}}</line>
-            <line>\newcommand{\B}{\basis{B}}</line>
-            <line>\newcommand{\I}{\basis{I}}</line>
-            <line>% Q</line>
-            <line>\newcommand{\Q}[1]{Q_{\basis{#1}}}</line>
-            <line>% COORDINATES</line>
-            <line>% - Merging double subscripts in macros </line>
-            <line>%   with second subscript passed as argument</line>
-            <line>% - begin</line>
-            <line>% Needed refs: \usepackage{ifthen,amsbsy}</line>
-            <line>\newcommand\des[3][]{\desaux{#2}{#3}#2_\relax{#1}}</line>
-            <line>\def\desaux#1#2#3_#4\relax#5{%</line>
-            <line>  \ifx\relax#4\relax</line>
-            <line>    \ifx\relax#2\relax</line>
-            <line>      \boldsymbol{\mathbf{#5#1}}</line>
-            <line>    \else</line>
-            <line>      #5#1_{#2}</line>
-            <line>    \fi</line>
-            <line>  \else</line>
-            <line>    \ifx\relax#2\relax</line>
-            <line>      \boldsymbol{\mathbf{#5#3_{\stripus#4}}}</line>
-            <line>    \else</line>
-            <line>      #5#3_{\stripus#4,#2}</line>
-            <line>    \fi</line>
-            <line>  \fi</line>
-            <line>}</line>
-            <line>\def\stripus#1_{#1}</line>
-            <line>% - end</line>
-            <line>\newcommand{\bc}[2]{\des{#2}{\basis{#1}}}</line>
-            <line>% DIAG</line>
-            <line>\newcommand{\diag}[1]{\Diag\left(#1\right)}</line>
-            <line>% DIST</line>
-            <line>\newcommand{\dist}[1]{\Dist\left(#1\right)}</line>
-            <line>\newcommand{\bdist}[2]{\Dist_{\basis{#1}}\left(#2\right)}</line>
-            <line>% TRACE</line>
-            <line>\newcommand{\trace}[1]{\Trace\left(#1\right)}</line>
-            <line>% NORM</line>
-            <line>\newcommand{\norm}[1]{\left\Vert#1\right\Vert}</line>
-            <line>\newcommand{\bnorm}[2]{{\left\Vert#2\right\Vert}_{\basis{#1}}}</line>
-            <line>\newcommand{\abs}[1]{\left\vert#1\right\vert}</line>
-            <line>% SCALAR PRODUCT</line>
-            <line>\newcommand{\sprod}[1]{\left\langle#1\right\rangle}</line>
-            <line>\newcommand{\bsprod}[2]{{\left\langle#2\right\rangle}_{\basis{#1}}}</line>
-            <line>% SET</line>
-            <line>\newcommand{\set}[1]{\left\{#1\right\}}</line>
-            <line>% MATRIX</line>
-            <line>\newcommand{\mx}[1]{\begin{bmatrix}#1\end{bmatrix}}</line>
-            <line>% CLOUDS</line>
-            <line>\newcommand{\Ind}{\mathbb{I}}</line>
-            <line>\newcommand{\Cat}{\mathbb{V}}</line>
-            <line>
-            </line>
-            <line>% MISCELLANEOUS</line>
-            <line>\newcommand{\R}{\mathbb{R}}</line>
-            <line>\newcommand{\eps}{\varepsilon}</line>
-            <line>\newcommand{\To}{\longrightarrow}</line>
-          </additionalPreambleCommands>
-          <latexDefaultMode value="inline" />
-          <imageDepthCorrection value="0" />
-          <imageScalePercentage value="100" />
-          <redirectFileProcessors value="false" />
-          <dvisvgmBinPath value="C:\Users\giova\AppData\Local\Programs\MiKTeX\miktex\bin\x64" />
-          <latexBinPath value="C:\Users\giova\AppData\Local\Programs\MiKTeX\miktex\bin\x64" />
-          <helpType value="{@HelpFileFormat}" />
-          <basePath value="{@WorkingFolder}" />
-          <languagefilter value="true" />
-        </component>
+      <ComponentConfig id="Novacta LaTeX Component" enabled="True">
+        <component id="Novacta LaTeX Component">
+  <documentClass value="article" />
+  <imageFileFormat value="svg" />
+  <additionalPreambleCommands>
+    <line>% allow loading amsmath
+</line>
+    <line>
+</line>
+    <line>\expandafter\let\csname equation*\endcsname\relax
+</line>
+    <line>
+</line>
+    <line>\expandafter\let\csname endequation*\endcsname\relax
+</line>
+    <line>
+</line>
+    <line>\usepackage{amsmath}
+</line>
+    <line>
+</line>
+    <line>\usepackage{amsfonts}
+</line>
+    <line>
+</line>
+    <line>\usepackage{ifthen,amsbsy}
+</line>
+    <line>
+</line>
+    <line>\DeclareMathOperator{\Grad}{grad}
+</line>
+    <line>
+</line>
+    <line>\DeclareMathOperator{\VecOp}{vec}
+</line>
+    <line>
+</line>
+    <line>\DeclareMathOperator{\Diag}{diag}
+</line>
+    <line>
+</line>
+    <line>\DeclareMathOperator{\Dist}{Dist}
+</line>
+    <line>
+</line>
+    <line>\DeclareMathOperator{\Var}{Var}
+</line>
+    <line>
+</line>
+    <line>\DeclareMathOperator{\Cov}{Cov}
+</line>
+    <line>
+</line>
+    <line>\DeclareMathOperator{\E}{E}
+</line>
+    <line>
+</line>
+    <line>\DeclareMathOperator{\Trace}{Tr}
+</line>
+    <line>
+</line>
+    <line>\DeclareMathOperator*{\argmin}{arg\,min}
+</line>
+    <line>
+</line>
+    <line>% CEBEC
+</line>
+    <line>
+</line>
+    <line>% ---- OPTIMAL ARGUMENT
+</line>
+    <line>
+</line>
+    <line>\newcommand{\OA}{o} 
+</line>
+    <line>
+</line>
+    <line>% ---- FEATURES
+</line>
+    <line>
+</line>
+    <line>\newcommand{\FS}{\mathcal{F}} % Feature space
+</line>
+    <line>
+</line>
+    <line>\newcommand{\FSI}{\phi} % Feature space instance
+</line>
+    <line>
+</line>
+    <line>\newcommand{\FD}{\Phi} % Feature domain
+</line>
+    <line>
+</line>
+    <line>\newcommand{\FC}{\phi} % Feature category
+</line>
+    <line>
+</line>
+    <line>% ---- RESPONSE
+</line>
+    <line>
+</line>
+    <line>\newcommand{\RD}{\Xi} % Response domain
+</line>
+    <line>
+</line>
+    <line>\newcommand{\RC}{\xi} % Response category
+</line>
+    <line>
+</line>
+    <line>% ---- ENTAILMENTS
+</line>
+    <line>
+</line>
+    <line>\newcommand{\ES}{\mathcal{E}} % Entailment space
+</line>
+    <line>
+</line>
+    <line>\newcommand{\EI}{E} % Entailment instance
+</line>
+    <line>
+</line>
+    <line>\newcommand{\EP}{\Psi} % Entailment premise
+</line>
+    <line>
+</line>
+    <line>\newcommand{\EC}{\zeta} % Entailment conclusion
+</line>
+    <line>
+</line>
+    <line>\newcommand{\ET}{\theta} % Entailment truth value
+</line>
+    <line>
+</line>
+    <line>% CLOUD
+</line>
+    <line>
+</line>
+    <line>\newcommand{\C}{\mathbb{C}}
+</line>
+    <line>
+</line>
+    <line>% CA
+</line>
+    <line>
+</line>
+    <line>\newcommand{\Rows}{R}
+</line>
+    <line>
+</line>
+    <line>\newcommand{\Cols}{C}
+</line>
+    <line>
+</line>
+    <line>% LINE REFERENCE POINT
+</line>
+    <line>
+</line>
+    <line>\newcommand{\lrp}{\upsilon}
+</line>
+    <line>
+</line>
+    <line>\newcommand{\lrm}{\Upsilon}
+</line>
+    <line>
+</line>
+    <line>% ROUND
+</line>
+    <line>
+</line>
+    <line>\newcommand{\round}[1]{\left(#1\right)}
+</line>
+    <line>
+</line>
+    <line>% VECTORIZATION
+</line>
+    <line>
+</line>
+    <line>\renewcommand{\Vec}[1]{\VecOp \left(#1\right)}
+</line>
+    <line>
+</line>
+    <line>% INVERSION-TRANSPOSITION
+</line>
+    <line>
+</line>
+    <line>\newcommand{\TInv}[1]{{\left(#1^{\textsf{T}}\right)}^{-1}}
+</line>
+    <line>
+</line>
+    <line>\newcommand{\InvT}[1]{{\left(#1^{-1}\right)}^{\textsf{T}}}
+</line>
+    <line>
+</line>
+    <line>\newcommand{\Inv}[1]{#1^{-1}} 
+</line>
+    <line>
+</line>
+    <line>\newcommand{\T}[1]{#1^{\textsf{T}}} 
+</line>
+    <line>
+</line>
+    <line>% MEAN
+</line>
+    <line>
+</line>
+    <line>\newcommand{\m}[1]{m_{\mathcal{#1}}}
+</line>
+    <line>
+</line>
+    <line>% BASIS
+</line>
+    <line>
+</line>
+    <line>\newcommand{\basis}[1]{\mathcal{#1}}
+</line>
+    <line>
+</line>
+    <line>\newcommand{\A}{\basis{A}}
+</line>
+    <line>
+</line>
+    <line>\newcommand{\B}{\basis{B}}
+</line>
+    <line>
+</line>
+    <line>\newcommand{\I}{\basis{I}}
+</line>
+    <line>
+</line>
+    <line>% Q
+</line>
+    <line>
+</line>
+    <line>\newcommand{\Q}[1]{Q_{\basis{#1}}}
+</line>
+    <line>
+</line>
+    <line>% DIAG
+</line>
+    <line>
+</line>
+    <line>\newcommand{\diag}[1]{\Diag\left(#1\right)}
+</line>
+    <line>
+</line>
+    <line>% DIST
+</line>
+    <line>
+</line>
+    <line>\newcommand{\dist}[1]{\Dist\left(#1\right)}
+</line>
+    <line>
+</line>
+    <line>\newcommand{\bdist}[2]{\Dist_{\basis{#1}}\left(#2\right)}
+</line>
+    <line>
+</line>
+    <line>% TRACE
+</line>
+    <line>
+</line>
+    <line>\newcommand{\trace}[1]{\Trace\left(#1\right)}
+</line>
+    <line>
+</line>
+    <line>% NORM
+</line>
+    <line>
+</line>
+    <line>\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
+</line>
+    <line>
+</line>
+    <line>\newcommand{\bnorm}[2]{{\left\Vert#2\right\Vert}_{\basis{#1}}}
+</line>
+    <line>
+</line>
+    <line>\newcommand{\abs}[1]{\left\vert#1\right\vert}
+</line>
+    <line>
+</line>
+    <line>% SCALAR PRODUCT
+</line>
+    <line>
+</line>
+    <line>\newcommand{\sprod}[1]{\left\langle#1\right\rangle}
+</line>
+    <line>
+</line>
+    <line>\newcommand{\bsprod}[2]{{\left\langle#2\right\rangle}_{\basis{#1}}}
+</line>
+    <line>
+</line>
+    <line>% SET
+</line>
+    <line>
+</line>
+    <line>\newcommand{\set}[1]{\left\{#1\right\}}
+</line>
+    <line>
+</line>
+    <line>% MATRIX
+</line>
+    <line>
+</line>
+    <line>\newcommand{\mx}[1]{\begin{bmatrix}#1\end{bmatrix}}
+</line>
+    <line>
+</line>
+    <line>% CLOUDS
+</line>
+    <line>
+</line>
+    <line>\newcommand{\Ind}{\mathbb{I}}
+</line>
+    <line>
+</line>
+    <line>\newcommand{\Cat}{\mathbb{V}}
+</line>
+    <line>
+</line>
+    <line>% MISCELLANEOUS
+</line>
+    <line>
+</line>
+    <line>\newcommand{\R}{\mathbb{R}}
+</line>
+    <line>
+</line>
+    <line>\newcommand{\eps}{\varepsilon}
+</line>
+    <line>
+</line>
+    <line>\newcommand{\To}{\longrightarrow}
+</line>
+    <line>
+</line>
+    <line>
+</line>
+    <line></line>
+  </additionalPreambleCommands>
+  <latexDefaultMode value="inline" />
+  <imageDepthCorrection value="0" />
+  <imageScalePercentage value="100" />
+  <redirectFileProcessors value="False" />
+  <latexBinPath value="C:\" />
+  <helpType value="{@HelpFileFormat}" />
+  <basePath value="{@WorkingFolder}" />
+  <languagefilter value="true" />
+</component>
       </ComponentConfig>
     </ComponentConfigurations>
     <PlugInConfigurations>
-      <PlugInConfig id="Bibliography Support" enabled="True">
-        <configuration>
-          <bibliography path="C:\Users\giova\Source\Repos\AzureDevOps\analytics\src\Novacta.Analytics.Documentation\Biblography.xml" />
-        </configuration>
+      <PlugInConfig id="Novacta LaTeX PlugIn" enabled="True">
+        <configuration />
       </PlugInConfig>
     </PlugInConfigurations>
     <DocumentationSources>
@@ -219,11 +458,12 @@
     <Folder Include="media" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Biblography.xml" />
+    <None Include="Bibliography.xml" />
     <None Include="Content\License.aml" />
     <None Include="Content\BuildAndTest.aml" />
     <None Include="Content\VersionHistory\v1.0.0.aml" />
     <None Include="Content\VersionHistory\v2.0.0.aml" />
+    <None Include="Content\VersionHistory\v2.1.0.aml" />
     <None Include="Content\VersionHistory\VersionHistory.aml" />
     <None Include="Content\Welcome.aml" />
   </ItemGroup>
@@ -247,7 +487,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Novacta.Shfb.LatexTools">
-      <Version>1.0.0</Version>
+      <Version>2.0.0</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="'$(MSBuildRestoreSessionId)' != ''" />

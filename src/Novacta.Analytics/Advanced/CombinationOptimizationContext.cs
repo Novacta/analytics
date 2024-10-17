@@ -459,10 +459,7 @@ namespace Novacta.Analytics.Advanced
         {
             #region Input validation
 
-            if (objectiveFunction is null)
-            {
-                throw new ArgumentNullException(nameof(objectiveFunction));
-            }
+            ArgumentNullException.ThrowIfNull(objectiveFunction);
 
             if (
                 (probabilitySmoothingCoefficient <= 0.0)

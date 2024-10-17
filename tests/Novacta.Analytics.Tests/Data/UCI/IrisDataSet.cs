@@ -23,7 +23,7 @@ namespace Novacta.Analytics.Tests.Data.UCI
 
         #region ALL
 
-        static readonly string[] all = new string[150] {
+        static readonly string[] all = [
             "5.1,3.5,1.4,0.2,setosa",
             "4.9,3.0,1.4,0.2,setosa",
             "4.7,3.2,1.3,0.2,setosa",
@@ -173,7 +173,7 @@ namespace Novacta.Analytics.Tests.Data.UCI
             "6.3,2.5,5.0,1.9,virginica",
             "6.5,3.0,5.2,2.0,virginica",
             "6.2,3.4,5.4,2.3,virginica",
-            "5.9,3.0,5.1,1.8,virginica" };
+            "5.9,3.0,5.1,1.8,virginica" ];
 
         #endregion
 
@@ -191,7 +191,7 @@ namespace Novacta.Analytics.Tests.Data.UCI
 
         #region CLASSES
 
-        static readonly string[] classes = new string[150] {
+        static readonly string[] classes = [
             "setosa",
             "setosa",
             "setosa",
@@ -341,7 +341,7 @@ namespace Novacta.Analytics.Tests.Data.UCI
             "virginica",
             "virginica",
             "virginica",
-            "virginica" };
+            "virginica" ];
 
         /// <summary>
         /// Gets the IRIS classes as an array 
@@ -359,7 +359,7 @@ namespace Novacta.Analytics.Tests.Data.UCI
 
         #region ATTRIBUTES 
 
-        static readonly string[] attributes = new string[150] {
+        static readonly string[] attributes = [
             "5.1,3.5,1.4,0.2",
             "4.9,3.0,1.4,0.2",
             "4.7,3.2,1.3,0.2",
@@ -509,7 +509,7 @@ namespace Novacta.Analytics.Tests.Data.UCI
             "6.3,2.5,5.0,1.9",
             "6.5,3.0,5.2,2.0",
             "6.2,3.4,5.4,2.3",
-            "5.9,3.0,5.1,1.8" };
+            "5.9,3.0,5.1,1.8" ];
 
         /// <summary>
         /// Gets the iris attributes as an array
@@ -581,7 +581,7 @@ namespace Novacta.Analytics.Tests.Data.UCI
         {
             #region DATA
 
-            double[] data = new double[150] {
+            double[] data = [
                 1,
                 1,
                 1,
@@ -731,7 +731,7 @@ namespace Novacta.Analytics.Tests.Data.UCI
                 2,
                 4,
                 4,
-                2};
+                2];
 
             #endregion
 

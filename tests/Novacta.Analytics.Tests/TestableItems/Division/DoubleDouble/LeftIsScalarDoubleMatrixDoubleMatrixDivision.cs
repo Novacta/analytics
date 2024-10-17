@@ -27,8 +27,7 @@ namespace Novacta.Analytics.Tests.TestableItems.Division
         LeftIsScalarDoubleMatrixDoubleMatrixDivision() :
             base(
                 expected: new DoubleMatrixState(
-                    asColumnMajorDenseArray: new double[6]
-                        { double.PositiveInfinity, 10, 5, 3.3333333, 2.5, 2 },
+                    asColumnMajorDenseArray: [double.PositiveInfinity, 10, 5, 3.3333333, 2.5, 2],
                     numberOfRows: 2,
                     numberOfColumns: 3),
                 left: TestableDoubleMatrix22.Get(),

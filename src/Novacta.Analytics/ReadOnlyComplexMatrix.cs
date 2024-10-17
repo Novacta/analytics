@@ -58,8 +58,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static explicit operator Complex(ReadOnlyComplexMatrix value)
         {
-            if (value is null)
-                throw new ArgumentNullException(nameof(value));
+            ArgumentNullException.ThrowIfNull(value);
 
             return (Complex)value.matrix;
         }
@@ -202,11 +201,9 @@ namespace Novacta.Analytics
         /// <inheritdoc cref="ComplexMatrix.ElementWiseMultiply(ComplexMatrix, ComplexMatrix)"/>
         public static ComplexMatrix ElementWiseMultiply(ReadOnlyComplexMatrix left, ReadOnlyComplexMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return ComplexMatrix.ElementWiseMultiply(left.matrix, right.matrix);
         }
@@ -214,8 +211,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref="ComplexMatrix.ElementWiseMultiply(ComplexMatrix, ComplexMatrix)"/>
         public static ComplexMatrix ElementWiseMultiply(ReadOnlyComplexMatrix left, ComplexMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
             return ComplexMatrix.ElementWiseMultiply(left.matrix, right);
         }
@@ -223,8 +219,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref="ComplexMatrix.ElementWiseMultiply(ComplexMatrix, ComplexMatrix)"/>
         public static ComplexMatrix ElementWiseMultiply(ComplexMatrix left, ReadOnlyComplexMatrix right)
         {
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return ComplexMatrix.ElementWiseMultiply(left, right.matrix);
         }
@@ -236,11 +231,9 @@ namespace Novacta.Analytics
         /// <inheritdoc cref="ComplexMatrix.ElementWiseMultiply(ComplexMatrix, DoubleMatrix)"/>
         public static ComplexMatrix ElementWiseMultiply(ReadOnlyComplexMatrix left, ReadOnlyDoubleMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return ComplexMatrix.ElementWiseMultiply(left.matrix, right.matrix);
         }
@@ -248,8 +241,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref="ComplexMatrix.ElementWiseMultiply(ComplexMatrix, DoubleMatrix)"/>
         public static ComplexMatrix ElementWiseMultiply(ReadOnlyComplexMatrix left, DoubleMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
             return ComplexMatrix.ElementWiseMultiply(left.matrix, right);
         }
@@ -261,11 +253,9 @@ namespace Novacta.Analytics
         /// <inheritdoc cref="ComplexMatrix.ElementWiseMultiply(DoubleMatrix, ComplexMatrix)"/>
         public static ComplexMatrix ElementWiseMultiply(ReadOnlyDoubleMatrix left, ReadOnlyComplexMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return ComplexMatrix.ElementWiseMultiply(left.matrix, right.matrix);
         }
@@ -273,8 +263,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref="ComplexMatrix.ElementWiseMultiply(DoubleMatrix, ComplexMatrix)"/>
         public static ComplexMatrix ElementWiseMultiply(DoubleMatrix left, ReadOnlyComplexMatrix right)
         {
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return ComplexMatrix.ElementWiseMultiply(left, right.matrix);
         }
@@ -290,11 +279,9 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Addition(ComplexMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator +(ReadOnlyComplexMatrix left, ReadOnlyComplexMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left.matrix + right.matrix;
         }
@@ -308,8 +295,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Addition(ComplexMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator +(ReadOnlyComplexMatrix left, ComplexMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
             return left.matrix + right;
         }
@@ -323,8 +309,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Addition(ComplexMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator +(ComplexMatrix left, ReadOnlyComplexMatrix right)
         {
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left + right.matrix;
         }
@@ -338,8 +323,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Addition(ComplexMatrix,Complex)"/>
         public static ComplexMatrix operator +(ReadOnlyComplexMatrix left, Complex right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
             return left.matrix + right;
         }
@@ -353,8 +337,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Addition(Complex,ComplexMatrix)"/>
         public static ComplexMatrix operator +(Complex left, ReadOnlyComplexMatrix right)
         {
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left + right.matrix;
         }
@@ -372,11 +355,9 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Addition(DoubleMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator +(ReadOnlyDoubleMatrix left, ReadOnlyComplexMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left.matrix + right.matrix;
         }
@@ -390,8 +371,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Addition(DoubleMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator +(DoubleMatrix left, ReadOnlyComplexMatrix right)
         {
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left + right.matrix;
         }
@@ -409,11 +389,9 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Addition(ComplexMatrix,DoubleMatrix)"/>
         public static ComplexMatrix operator +(ReadOnlyComplexMatrix left, ReadOnlyDoubleMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left.matrix + right.matrix;
         }
@@ -427,8 +405,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Addition(ComplexMatrix,DoubleMatrix)"/>
         public static ComplexMatrix operator +(ReadOnlyComplexMatrix left, DoubleMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
             return left.matrix + right;
         }
@@ -450,11 +427,9 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Division(ComplexMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator /(ReadOnlyComplexMatrix left, ReadOnlyComplexMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left.matrix / right.matrix;
         }
@@ -462,8 +437,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Division(ComplexMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator /(ReadOnlyComplexMatrix left, ComplexMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
             return left.matrix / right;
         }
@@ -471,8 +445,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Division(ComplexMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator /(ComplexMatrix left, ReadOnlyComplexMatrix right)
         {
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left / right.matrix;
         }
@@ -486,8 +459,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Division(ComplexMatrix,ComplexMatrix)"/>
         public static ComplexMatrix Divide(ReadOnlyComplexMatrix left, ComplexMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
             return left.matrix / right;
         }
@@ -501,8 +473,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Division(ComplexMatrix,Complex)"/>
         public static ComplexMatrix operator /(ReadOnlyComplexMatrix left, Complex right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
             return left.matrix / right;
         }
@@ -516,8 +487,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Division(Complex,ComplexMatrix)"/>
         public static ComplexMatrix operator /(Complex left, ReadOnlyComplexMatrix right)
         {
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left / right.matrix;
         }
@@ -535,11 +505,9 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Division(DoubleMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator /(ReadOnlyDoubleMatrix left, ReadOnlyComplexMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left.matrix / right.matrix;
         }
@@ -553,8 +521,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Division(DoubleMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator /(DoubleMatrix left, ReadOnlyComplexMatrix right)
         {
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left / right.matrix;
         }
@@ -572,11 +539,9 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Division(ComplexMatrix,DoubleMatrix)"/>
         public static ComplexMatrix operator /(ReadOnlyComplexMatrix left, ReadOnlyDoubleMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left.matrix / right.matrix;
         }
@@ -590,8 +555,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Division(ComplexMatrix,DoubleMatrix)"/>
         public static ComplexMatrix operator /(ReadOnlyComplexMatrix left, DoubleMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
             return left.matrix / right;
         }
@@ -613,11 +577,9 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Multiply(ComplexMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator *(ReadOnlyComplexMatrix left, ReadOnlyComplexMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left.matrix * right.matrix;
         }
@@ -625,8 +587,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Multiply(ComplexMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator *(ReadOnlyComplexMatrix left, ComplexMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
             return left.matrix * right;
         }
@@ -634,8 +595,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Multiply(ComplexMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator *(ComplexMatrix left, ReadOnlyComplexMatrix right)
         {
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left * right.matrix;
         }
@@ -661,8 +621,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Multiply(ComplexMatrix,Complex)"/>
         public static ComplexMatrix operator *(ReadOnlyComplexMatrix left, Complex right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
             return left.matrix * right;
         }
@@ -676,8 +635,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Multiply(Complex,ComplexMatrix)"/>
         public static ComplexMatrix operator *(Complex left, ReadOnlyComplexMatrix right)
         {
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left * right.matrix;
         }
@@ -695,11 +653,9 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Multiply(DoubleMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator *(ReadOnlyDoubleMatrix left, ReadOnlyComplexMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left.matrix * right.matrix;
         }
@@ -713,8 +669,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Multiply(DoubleMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator *(DoubleMatrix left, ReadOnlyComplexMatrix right)
         {
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left * right.matrix;
         }
@@ -732,11 +687,9 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Multiply(ComplexMatrix,DoubleMatrix)"/>
         public static ComplexMatrix operator *(ReadOnlyComplexMatrix left, ReadOnlyDoubleMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left.matrix * right.matrix;
         }
@@ -750,8 +703,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Multiply(ComplexMatrix,DoubleMatrix)"/>
         public static ComplexMatrix operator *(ReadOnlyComplexMatrix left, DoubleMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
             return left.matrix * right;
         }
@@ -773,11 +725,9 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Subtraction(ComplexMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator -(ReadOnlyComplexMatrix left, ReadOnlyComplexMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left.matrix - right.matrix;
         }
@@ -785,8 +735,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Subtraction(ComplexMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator -(ReadOnlyComplexMatrix left, ComplexMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
             return left.matrix - right;
         }
@@ -794,8 +743,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Subtraction(ComplexMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator -(ComplexMatrix left, ReadOnlyComplexMatrix right)
         {
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left - right.matrix;
         }
@@ -821,8 +769,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Subtraction(ComplexMatrix,Complex)"/>
         public static ComplexMatrix operator -(ReadOnlyComplexMatrix left, Complex right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
             return left.matrix - right;
         }
@@ -836,8 +783,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Subtraction(Complex,ComplexMatrix)"/>
         public static ComplexMatrix operator -(Complex left, ReadOnlyComplexMatrix right)
         {
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left - right.matrix;
         }
@@ -855,11 +801,9 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Subtraction(DoubleMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator -(ReadOnlyDoubleMatrix left, ReadOnlyComplexMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left.matrix - right.matrix;
         }
@@ -873,8 +817,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Subtraction(DoubleMatrix,ComplexMatrix)"/>
         public static ComplexMatrix operator -(DoubleMatrix left, ReadOnlyComplexMatrix right)
         {
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left - right.matrix;
         }
@@ -892,11 +835,9 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Subtraction(ComplexMatrix,DoubleMatrix)"/>
         public static ComplexMatrix operator -(ReadOnlyComplexMatrix left, ReadOnlyDoubleMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             return left.matrix - right.matrix;
         }
@@ -910,8 +851,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_Subtraction(ComplexMatrix,DoubleMatrix)"/>
         public static ComplexMatrix operator -(ReadOnlyComplexMatrix left, DoubleMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
             return left.matrix - right;
         }
@@ -931,8 +871,7 @@ namespace Novacta.Analytics
         /// <inheritdoc cref = "ComplexMatrix.op_UnaryNegation(ComplexMatrix)"/>
         public static ComplexMatrix operator -(ReadOnlyComplexMatrix matrix)
         {
-            if (matrix is null)
-                throw new ArgumentNullException(nameof(matrix));
+            ArgumentNullException.ThrowIfNull(matrix);
 
             return -matrix.matrix;
         }

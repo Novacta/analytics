@@ -30,8 +30,8 @@ namespace Novacta.Analytics.Tests
         /// <returns>The list of available <see cref="TestableDoubleMatrix"/> instances.</returns>
         static List<TestableDoubleMatrix> GetTestableMatrices()
         {
-            List<TestableDoubleMatrix> TestableItems = new()
-            {
+            List<TestableDoubleMatrix> TestableItems =
+            [
                 TestableDoubleMatrix00.Get(),
                 TestableDoubleMatrix01.Get(),
                 TestableDoubleMatrix02.Get(),
@@ -91,7 +91,7 @@ namespace Novacta.Analytics.Tests
                 TestableDoubleMatrix56.Get(),
                 TestableDoubleMatrix57.Get(),
                 TestableDoubleMatrix58.Get(),
-            };
+            ];
 
             return TestableItems;
         }
@@ -290,7 +290,7 @@ namespace Novacta.Analytics.Tests
 
             DoubleMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[2] { 6, 9 },
+                                asColumnMajorDenseArray: [6, 9],
                                 numberOfRows: 1,
                                 numberOfColumns: 2),
                 testableMatrix: TestableDoubleMatrix14.Get(),
@@ -299,7 +299,7 @@ namespace Novacta.Analytics.Tests
 
             DoubleMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[3] { 2, 5, 8 },
+                                asColumnMajorDenseArray: [2, 5, 8],
                                 numberOfRows: 1,
                                 numberOfColumns: 3),
                 testableMatrix: TestableDoubleMatrix14.Get(),
@@ -308,7 +308,7 @@ namespace Novacta.Analytics.Tests
 
             DoubleMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[3] { 4, 5, 6 },
+                                asColumnMajorDenseArray: [4, 5, 6],
                                 numberOfRows: 3,
                                 numberOfColumns: 1),
                 testableMatrix: TestableDoubleMatrix14.Get(),
@@ -317,7 +317,7 @@ namespace Novacta.Analytics.Tests
 
             DoubleMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[6] { 4, 5, 6, 7, 8, 9 },
+                                asColumnMajorDenseArray: [4, 5, 6, 7, 8, 9],
                                 numberOfRows: 3,
                                 numberOfColumns: 2),
                 testableMatrix: TestableDoubleMatrix14.Get(),
@@ -326,7 +326,7 @@ namespace Novacta.Analytics.Tests
 
             DoubleMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[6] { 2, 3, 5, 6, 8, 9 },
+                                asColumnMajorDenseArray: [2, 3, 5, 6, 8, 9],
                                 numberOfRows: 2,
                                 numberOfColumns: 3),
                 testableMatrix: TestableDoubleMatrix14.Get(),
@@ -335,7 +335,7 @@ namespace Novacta.Analytics.Tests
 
             DoubleMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[3] { 4, 5, 6 },
+                                asColumnMajorDenseArray: [4, 5, 6],
                                 numberOfRows: 3,
                                 numberOfColumns: 1),
                 testableMatrix: TestableDoubleMatrix14.Get(),
@@ -344,7 +344,7 @@ namespace Novacta.Analytics.Tests
 
             DoubleMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[6] { 4, 5, 6, 7, 8, 9 },
+                                asColumnMajorDenseArray: [4, 5, 6, 7, 8, 9],
                                 numberOfRows: 3,
                                 numberOfColumns: 2),
                 testableMatrix: TestableDoubleMatrix14.Get(),
@@ -353,7 +353,7 @@ namespace Novacta.Analytics.Tests
 
             DoubleMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[9] { 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                                asColumnMajorDenseArray: [1, 2, 3, 4, 5, 6, 7, 8, 9],
                                 numberOfRows: 3,
                                 numberOfColumns: 3),
                 testableMatrix: TestableDoubleMatrix14.Get(),
@@ -367,7 +367,7 @@ namespace Novacta.Analytics.Tests
             // 0    m[1,[0,2]]
             DoubleMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[2] { 1, 5 },
+                                asColumnMajorDenseArray: [1, 5],
                                 numberOfRows: 1,
                                 numberOfColumns: 2,
                                 rowNames: new Dictionary<int, string>(1) { { 0, "r1" } },
@@ -379,7 +379,7 @@ namespace Novacta.Analytics.Tests
             // 1    m[1,:]
             DoubleMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[3] { 1, 3, 5 },
+                                asColumnMajorDenseArray: [1, 3, 5],
                                 numberOfRows: 1,
                                 numberOfColumns: 3,
                                 rowNames: new Dictionary<int, string>(1) { { 0, "r1" } },
@@ -391,7 +391,7 @@ namespace Novacta.Analytics.Tests
             // 2    m[[1],1]
             DoubleMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[1] { 3 },
+                                asColumnMajorDenseArray: [3],
                                 numberOfRows: 1,
                                 numberOfColumns: 1,
                                 rowNames: new Dictionary<int, string>(1) { { 0, "r1" } },
@@ -403,7 +403,7 @@ namespace Novacta.Analytics.Tests
             // 3    m[[1,0],[0,1]]
             DoubleMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[4] { 1, 0, 3, 2 },
+                                asColumnMajorDenseArray: [1, 0, 3, 2],
                                 numberOfRows: 2,
                                 numberOfColumns: 2,
                                 rowNames: new Dictionary<int, string>(2) { { 0, "r1" }, { 1, "r0" } },
@@ -415,7 +415,7 @@ namespace Novacta.Analytics.Tests
             // 4    m[[0,1],:]
             DoubleMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[6] { 0, 1, 2, 3, 4, 5 },
+                                asColumnMajorDenseArray: [0, 1, 2, 3, 4, 5],
                                 numberOfRows: 2,
                                 numberOfColumns: 3,
                                 rowNames: new Dictionary<int, string>(2) { { 0, "r0" }, { 1, "r1" } },
@@ -427,7 +427,7 @@ namespace Novacta.Analytics.Tests
             // 5    m[:,1]
             DoubleMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[2] { 2, 3 },
+                                asColumnMajorDenseArray: [2, 3],
                                 numberOfRows: 2,
                                 numberOfColumns: 1,
                                 rowNames: new Dictionary<int, string>(2) { { 0, "r0" }, { 1, "r1" } },
@@ -439,7 +439,7 @@ namespace Novacta.Analytics.Tests
             // 6    m[:,[1,0]]
             DoubleMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[4] { 2, 3, 0, 1 },
+                                asColumnMajorDenseArray: [2, 3, 0, 1],
                                 numberOfRows: 2,
                                 numberOfColumns: 2,
                                 rowNames: new Dictionary<int, string>(2) { { 0, "r0" }, { 1, "r1" } },
@@ -451,7 +451,7 @@ namespace Novacta.Analytics.Tests
             // 7    m[:,:]
             DoubleMatrixTest.IndexerGet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[6] { 0, 1, 2, 3, 4, 5 },
+                                asColumnMajorDenseArray: [0, 1, 2, 3, 4, 5],
                                 numberOfRows: 2,
                                 numberOfColumns: 3,
                                 rowNames: new Dictionary<int, string>(2) { { 0, "r0" }, { 1, "r1" } },
@@ -483,7 +483,7 @@ namespace Novacta.Analytics.Tests
 
             DoubleMatrixTest.IndexerSet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[2] { -6, -9 },
+                                asColumnMajorDenseArray: [-6, -9],
                                 numberOfRows: 1,
                                 numberOfColumns: 2),
                 testableMatrix: TestableDoubleMatrix14.Get(),
@@ -492,7 +492,7 @@ namespace Novacta.Analytics.Tests
 
             DoubleMatrixTest.IndexerSet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[3] { -2, -5, -8 },
+                                asColumnMajorDenseArray: [-2, -5, -8],
                                 numberOfRows: 1,
                                 numberOfColumns: 3),
                 testableMatrix: TestableDoubleMatrix14.Get(),
@@ -501,7 +501,7 @@ namespace Novacta.Analytics.Tests
 
             DoubleMatrixTest.IndexerSet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[3] { -4, -5, -6 },
+                                asColumnMajorDenseArray: [-4, -5, -6],
                                 numberOfRows: 3,
                                 numberOfColumns: 1),
                 testableMatrix: TestableDoubleMatrix14.Get(),
@@ -510,7 +510,7 @@ namespace Novacta.Analytics.Tests
 
             DoubleMatrixTest.IndexerSet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[6] { -4, -5, -6, -7, -8, -9 },
+                                asColumnMajorDenseArray: [-4, -5, -6, -7, -8, -9],
                                 numberOfRows: 3,
                                 numberOfColumns: 2),
                 testableMatrix: TestableDoubleMatrix14.Get(),
@@ -519,7 +519,7 @@ namespace Novacta.Analytics.Tests
 
             DoubleMatrixTest.IndexerSet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[6] { -2, -3, -5, -6, -8, -9 },
+                                asColumnMajorDenseArray: [-2, -3, -5, -6, -8, -9],
                                 numberOfRows: 2,
                                 numberOfColumns: 3),
                 testableMatrix: TestableDoubleMatrix14.Get(),
@@ -528,7 +528,7 @@ namespace Novacta.Analytics.Tests
 
             DoubleMatrixTest.IndexerSet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[3] { -4, -5, -6 },
+                                asColumnMajorDenseArray: [-4, -5, -6],
                                 numberOfRows: 3,
                                 numberOfColumns: 1),
                 testableMatrix: TestableDoubleMatrix14.Get(),
@@ -537,7 +537,7 @@ namespace Novacta.Analytics.Tests
 
             DoubleMatrixTest.IndexerSet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[6] { -4, -5, -6, -7, -8, -9 },
+                                asColumnMajorDenseArray: [-4, -5, -6, -7, -8, -9],
                                 numberOfRows: 3,
                                 numberOfColumns: 2),
                 testableMatrix: TestableDoubleMatrix14.Get(),
@@ -546,7 +546,7 @@ namespace Novacta.Analytics.Tests
 
             DoubleMatrixTest.IndexerSet.SubMatrix(
                 expectedState: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[9] { -1, -2, -3, -4, -5, -6, -7, -8, -9 },
+                                asColumnMajorDenseArray: [-1, -2, -3, -4, -5, -6, -7, -8, -9],
                                 numberOfRows: 3,
                                 numberOfColumns: 3),
                 testableMatrix: TestableDoubleMatrix14.Get(),
@@ -1203,7 +1203,7 @@ namespace Novacta.Analytics.Tests
             var target = DoubleMatrix.Dense(
                 3,
                 2,
-                new double[6] { 0, 2, 0, 3, 0, Double.NaN },
+                [0, 2, 0, 3, 0, Double.NaN],
                 StorageOrder.RowMajor);
 
             target.SetRowName(0, "Row0");
@@ -1222,7 +1222,7 @@ namespace Novacta.Analytics.Tests
                 DoubleMatrix actual = rowCollection;
 
                 var expected = DoubleMatrix.Dense(3, 2,
-                    new double[6] { 0, 2, 0, 3, 0, Double.NaN },
+                    [0, 2, 0, 3, 0, Double.NaN],
                     StorageOrder.RowMajor);
 
                 expected.SetRowName(0, "Row0");
@@ -1274,7 +1274,7 @@ namespace Novacta.Analytics.Tests
                 DoubleMatrix actual = rowCollection;
 
                 var expected = DoubleMatrix.Dense(2, 2,
-                    new double[4] { 0, 2, 0, Double.NaN },
+                    [0, 2, 0, Double.NaN],
                     StorageOrder.RowMajor);
 
                 expected.SetRowName(0, "Row0");
@@ -1313,7 +1313,7 @@ namespace Novacta.Analytics.Tests
 
             // value is not null
             {
-                var expected = DoubleMatrix.Dense(6, 1, new double[6] { 0, 0, 1, 1, 0, 1 });
+                var expected = DoubleMatrix.Dense(6, 1, [0, 0, 1, 1, 0, 1]);
                 var value = IndexPartition.Create(expected);
                 var actual = ((DoubleMatrix)(value));
 
@@ -1523,7 +1523,7 @@ namespace Novacta.Analytics.Tests
 
             // matrix has no row or column names
 
-            target = DoubleMatrix.Dense(2, 3, new double[6] { .1, 10.2, -2.3, 1000.2, .2, 239.32 });
+            target = DoubleMatrix.Dense(2, 3, [.1, 10.2, -2.3, 1000.2, .2, 239.32]);
 
             //         "                 " 17 char length
 
@@ -1545,7 +1545,7 @@ namespace Novacta.Analytics.Tests
 
             // matrix has some row or column names
 
-            target = DoubleMatrix.Dense(3, 3, new double[9] { .1, 10.2, 0, -2.3, 1000.2, 0, .2, 239.32, 0 });
+            target = DoubleMatrix.Dense(3, 3, [.1, 10.2, 0, -2.3, 1000.2, 0, .2, 239.32, 0]);
 
             //                "                 " 17 char length
 
@@ -1595,7 +1595,7 @@ namespace Novacta.Analytics.Tests
 
             // matrix has some row names but no col ones
 
-            target = DoubleMatrix.Dense(3, 3, new double[9] { .1, 10.2, 0, -2.3, 1000.2, 0, .2, 239.32, 0 });
+            target = DoubleMatrix.Dense(3, 3, [.1, 10.2, 0, -2.3, 1000.2, 0, .2, 239.32, 0]);
 
             //                "                 " 17 char length
 
@@ -1631,7 +1631,7 @@ namespace Novacta.Analytics.Tests
 
             // matrix has no row names and some column ones
 
-            target = DoubleMatrix.Dense(3, 3, new double[9] { .1, 10.2, 0, -2.3, 1000.2, 0, .2, 239.32, 0 });
+            target = DoubleMatrix.Dense(3, 3, [.1, 10.2, 0, -2.3, 1000.2, 0, .2, 239.32, 0]);
 
             //                "                 " 17 char length
 
@@ -1805,7 +1805,7 @@ namespace Novacta.Analytics.Tests
 
                 DoubleMatrixAssert.IsStateAsExpected(
                     expectedState: new DoubleMatrixState(
-                        asColumnMajorDenseArray: new double[6] { -2, -2, -2, -2, -2, -2 },
+                        asColumnMajorDenseArray: [-2, -2, -2, -2, -2, -2],
                         numberOfRows: numberOfRows,
                         numberOfColumns: numberOfColumns),
                     actualMatrix: actual,
@@ -1813,7 +1813,7 @@ namespace Novacta.Analytics.Tests
 
                 Assert.AreEqual(StorageOrder.ColumnMajor, actual.StorageOrder);
                 Assert.AreEqual(StorageScheme.Dense, actual.StorageScheme);
-                DoubleArrayAssert.AreEqual(new double[6] { -2, -2, -2, -2, -2, -2 }, actual.GetStorage(), DoubleMatrixTest.Accuracy);
+                DoubleArrayAssert.AreEqual([-2, -2, -2, -2, -2, -2], actual.GetStorage(), DoubleMatrixTest.Accuracy);
             }
 
             #endregion
@@ -1825,7 +1825,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var actual = DoubleMatrix.Dense(0, 1, Array.Empty<double>());
+                        var actual = DoubleMatrix.Dense(0, 1, []);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
                     expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_POSITIVE,
@@ -1837,7 +1837,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var actual = DoubleMatrix.Dense(1, 0, Array.Empty<double>());
+                        var actual = DoubleMatrix.Dense(1, 0, []);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
                     expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_POSITIVE,
@@ -1872,7 +1872,7 @@ namespace Novacta.Analytics.Tests
             {
                 int numberOfRows = 2;
                 int numberOfColumns = 3;
-                double[] data = new double[6] { 0, 1, 2, 3, 4, 5 };
+                double[] data = [0, 1, 2, 3, 4, 5];
                 var actual = DoubleMatrix.Dense(numberOfRows, numberOfColumns, data);
 
                 DoubleMatrixAssert.IsStateAsExpected(
@@ -1885,7 +1885,7 @@ namespace Novacta.Analytics.Tests
 
                 Assert.AreEqual(StorageOrder.ColumnMajor, actual.StorageOrder);
                 Assert.AreEqual(StorageScheme.Dense, actual.StorageScheme);
-                DoubleArrayAssert.AreEqual(new double[6] { 0, 1, 2, 3, 4, 5 }, actual.GetStorage(), DoubleMatrixTest.Accuracy);
+                DoubleArrayAssert.AreEqual([0, 1, 2, 3, 4, 5], actual.GetStorage(), DoubleMatrixTest.Accuracy);
             }
 
             #endregion
@@ -1897,7 +1897,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var actual = DoubleMatrix.Dense(0, 1, Array.Empty<double>(), true);
+                        var actual = DoubleMatrix.Dense(0, 1, [], true);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
                     expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_POSITIVE,
@@ -1909,7 +1909,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var actual = DoubleMatrix.Dense(1, 0, Array.Empty<double>(), true);
+                        var actual = DoubleMatrix.Dense(1, 0, [], true);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
                     expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_POSITIVE,
@@ -1944,7 +1944,7 @@ namespace Novacta.Analytics.Tests
             {
                 int numberOfRows = 2;
                 int numberOfColumns = 3;
-                double[] data = new double[6] { 0, 1, 2, 3, 4, 5 };
+                double[] data = [0, 1, 2, 3, 4, 5];
                 var actual = DoubleMatrix.Dense(numberOfRows, numberOfColumns, data, true);
 
                 DoubleMatrixAssert.IsStateAsExpected(
@@ -1958,7 +1958,7 @@ namespace Novacta.Analytics.Tests
                 Assert.AreEqual(StorageOrder.ColumnMajor, actual.StorageOrder);
                 Assert.AreEqual(StorageScheme.Dense, actual.StorageScheme);
                 DoubleArrayAssert.AreEqual(
-                    new double[6] { 0, 1, 2, 3, 4, 5 }, actual.GetStorage(), DoubleMatrixTest.Accuracy);
+                    [0, 1, 2, 3, 4, 5], actual.GetStorage(), DoubleMatrixTest.Accuracy);
 
                 Assert.AreNotSame(data, actual.GetStorage());
             }
@@ -1967,7 +1967,7 @@ namespace Novacta.Analytics.Tests
             {
                 int numberOfRows = 2;
                 int numberOfColumns = 3;
-                double[] data = new double[6] { 0, 1, 2, 3, 4, 5 };
+                double[] data = [0, 1, 2, 3, 4, 5];
                 var actual = DoubleMatrix.Dense(numberOfRows, numberOfColumns, data, false);
 
                 DoubleMatrixAssert.IsStateAsExpected(
@@ -1981,7 +1981,7 @@ namespace Novacta.Analytics.Tests
                 Assert.AreEqual(StorageOrder.ColumnMajor, actual.StorageOrder);
                 Assert.AreEqual(StorageScheme.Dense, actual.StorageScheme);
                 DoubleArrayAssert.AreEqual(
-                    new double[6] { 0, 1, 2, 3, 4, 5 }, actual.GetStorage(), DoubleMatrixTest.Accuracy);
+                    [0, 1, 2, 3, 4, 5], actual.GetStorage(), DoubleMatrixTest.Accuracy);
 
                 Assert.AreSame(data, actual.GetStorage());
             }
@@ -1995,7 +1995,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var actual = DoubleMatrix.Dense(0, 1, Array.Empty<double>(), StorageOrder.RowMajor);
+                        var actual = DoubleMatrix.Dense(0, 1, [], StorageOrder.RowMajor);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
                     expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_POSITIVE,
@@ -2007,7 +2007,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var actual = DoubleMatrix.Dense(1, 0, Array.Empty<double>(), StorageOrder.RowMajor);
+                        var actual = DoubleMatrix.Dense(1, 0, [], StorageOrder.RowMajor);
                     },
                     expectedType: typeof(ArgumentOutOfRangeException),
                     expectedPartialMessage: STR_EXCEPT_PAR_MUST_BE_POSITIVE,
@@ -2031,7 +2031,7 @@ namespace Novacta.Analytics.Tests
                 ArgumentExceptionAssert.Throw(
                     () =>
                     {
-                        var actual = DoubleMatrix.Dense(2, 3, new double[6] { 0, 1, 2, 3, 4, 5 }, (StorageOrder)(-1));
+                        var actual = DoubleMatrix.Dense(2, 3, [0, 1, 2, 3, 4, 5], (StorageOrder)(-1));
                     },
                     expectedType: typeof(ArgumentException),
                     expectedPartialMessage: STR_EXCEPT_NOT_FIELD_OF_STORAGE_ORDER,
@@ -2054,12 +2054,12 @@ namespace Novacta.Analytics.Tests
             {
                 int numberOfRows = 2;
                 int numberOfColumns = 3;
-                double[] data = new double[6] { 0, 1, 2, 3, 4, 5 };
+                double[] data = [0, 1, 2, 3, 4, 5];
                 var actual = DoubleMatrix.Dense(numberOfRows, numberOfColumns, data, StorageOrder.RowMajor);
 
                 DoubleMatrixAssert.IsStateAsExpected(
                     expectedState: new DoubleMatrixState(
-                        asColumnMajorDenseArray: new double[6] { 0, 3, 1, 4, 2, 5 },
+                        asColumnMajorDenseArray: [0, 3, 1, 4, 2, 5],
                         numberOfRows: numberOfRows,
                         numberOfColumns: numberOfColumns),
                     actualMatrix: actual,
@@ -2067,7 +2067,7 @@ namespace Novacta.Analytics.Tests
 
                 Assert.AreEqual(StorageOrder.ColumnMajor, actual.StorageOrder);
                 Assert.AreEqual(StorageScheme.Dense, actual.StorageScheme);
-                DoubleArrayAssert.AreEqual(new double[6] { 0, 3, 1, 4, 2, 5 }, actual.GetStorage(), DoubleMatrixTest.Accuracy);
+                DoubleArrayAssert.AreEqual([0, 3, 1, 4, 2, 5], actual.GetStorage(), DoubleMatrixTest.Accuracy);
             }
 
             #endregion
@@ -2131,7 +2131,7 @@ namespace Novacta.Analytics.Tests
 
                 DoubleMatrixAssert.IsStateAsExpected(
                     expectedState: new DoubleMatrixState(
-                        asColumnMajorDenseArray: data.ToArray(),
+                        asColumnMajorDenseArray: [.. data],
                         numberOfRows: numberOfRows,
                         numberOfColumns: numberOfColumns),
                     actualMatrix: actual,
@@ -2139,7 +2139,7 @@ namespace Novacta.Analytics.Tests
 
                 Assert.AreEqual(StorageOrder.ColumnMajor, actual.StorageOrder);
                 Assert.AreEqual(StorageScheme.Dense, actual.StorageScheme);
-                DoubleArrayAssert.AreEqual(new double[6] { 0, 1, 2, 3, 4, 5 }, actual.GetStorage(), DoubleMatrixTest.Accuracy);
+                DoubleArrayAssert.AreEqual([0, 1, 2, 3, 4, 5], actual.GetStorage(), DoubleMatrixTest.Accuracy);
             }
 
             #endregion
@@ -2215,7 +2215,7 @@ namespace Novacta.Analytics.Tests
 
                 DoubleMatrixAssert.IsStateAsExpected(
                     expectedState: new DoubleMatrixState(
-                        asColumnMajorDenseArray: new double[6] { 0, 3, 1, 4, 2, 5 },
+                        asColumnMajorDenseArray: [0, 3, 1, 4, 2, 5],
                         numberOfRows: numberOfRows,
                         numberOfColumns: numberOfColumns),
                     actualMatrix: actual,
@@ -2223,7 +2223,7 @@ namespace Novacta.Analytics.Tests
 
                 Assert.AreEqual(StorageOrder.ColumnMajor, actual.StorageOrder);
                 Assert.AreEqual(StorageScheme.Dense, actual.StorageScheme);
-                DoubleArrayAssert.AreEqual(new double[6] { 0, 3, 1, 4, 2, 5 }, actual.GetStorage(), DoubleMatrixTest.Accuracy);
+                DoubleArrayAssert.AreEqual([0, 3, 1, 4, 2, 5], actual.GetStorage(), DoubleMatrixTest.Accuracy);
             }
 
             #endregion
@@ -2273,7 +2273,7 @@ namespace Novacta.Analytics.Tests
 
                 DoubleMatrixAssert.IsStateAsExpected(
                     expectedState: new DoubleMatrixState(
-                        asColumnMajorDenseArray: new double[6] { 0, 1, 2, 3, 4, 5 },
+                        asColumnMajorDenseArray: [0, 1, 2, 3, 4, 5],
                         numberOfRows: data.GetLength(0),
                         numberOfColumns: data.GetLength(1)),
                     actualMatrix: actual,
@@ -2281,7 +2281,7 @@ namespace Novacta.Analytics.Tests
 
                 Assert.AreEqual(StorageOrder.ColumnMajor, actual.StorageOrder);
                 Assert.AreEqual(StorageScheme.Dense, actual.StorageScheme);
-                DoubleArrayAssert.AreEqual(new double[6] { 0, 1, 2, 3, 4, 5 }, actual.GetStorage(), DoubleMatrixTest.Accuracy);
+                DoubleArrayAssert.AreEqual([0, 1, 2, 3, 4, 5], actual.GetStorage(), DoubleMatrixTest.Accuracy);
             }
 
             #endregion
@@ -2315,7 +2315,7 @@ namespace Novacta.Analytics.Tests
 
             // DoubleMatrix mainDiagonal is not null
             {
-                var mainDiagonal = DoubleMatrix.Dense(2, 2, new double[4] { 0, 2, 1, 3 });
+                var mainDiagonal = DoubleMatrix.Dense(2, 2, [0, 2, 1, 3]);
                 // diagonal = 
                 // [  0   1
                 //    2   3
@@ -2332,13 +2332,13 @@ namespace Novacta.Analytics.Tests
                 DoubleMatrixAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
                 Assert.AreEqual(StorageOrder.RowMajor, actual.StorageOrder);
                 Assert.AreEqual(StorageScheme.CompressedRow, actual.StorageScheme);
-                DoubleArrayAssert.AreEqual(new double[4] { 2, 1, 3, 0 }, actual.GetStorage(), DoubleMatrixTest.Accuracy);
+                DoubleArrayAssert.AreEqual([2, 1, 3, 0], actual.GetStorage(), DoubleMatrixTest.Accuracy);
             }
 
             // ReadOnlyDoubleMatrix mainDiagonal is not null
             {
                 var mainDiagonal =
-                    DoubleMatrix.Dense(2, 2, new double[4] { 0, 2, 1, 3 })
+                    DoubleMatrix.Dense(2, 2, [0, 2, 1, 3])
                     .AsReadOnly();
                 // diagonal = 
                 // [  0   1
@@ -2356,7 +2356,7 @@ namespace Novacta.Analytics.Tests
                 DoubleMatrixAssert.AreEqual(expected, actual, DoubleMatrixTest.Accuracy);
                 Assert.AreEqual(StorageOrder.RowMajor, actual.StorageOrder);
                 Assert.AreEqual(StorageScheme.CompressedRow, actual.StorageScheme);
-                DoubleArrayAssert.AreEqual(new double[4] { 2, 1, 3, 0 }, actual.GetStorage(), DoubleMatrixTest.Accuracy);
+                DoubleArrayAssert.AreEqual([2, 1, 3, 0], actual.GetStorage(), DoubleMatrixTest.Accuracy);
             }
         }
 
@@ -2392,14 +2392,14 @@ namespace Novacta.Analytics.Tests
                 //    0   0   1  ]
 
                 var expected = new DoubleMatrixState(
-                    asColumnMajorDenseArray: new double[9] { 1, 0, 0, 0, 1, 0, 0, 0, 1 },
+                    asColumnMajorDenseArray: [1, 0, 0, 0, 1, 0, 0, 0, 1],
                     numberOfRows: 3,
                     numberOfColumns: 3);
 
                 DoubleMatrixAssert.IsStateAsExpected(expected, actual, DoubleMatrixTest.Accuracy);
                 Assert.AreEqual(StorageOrder.RowMajor, actual.StorageOrder);
                 Assert.AreEqual(StorageScheme.CompressedRow, actual.StorageScheme);
-                DoubleArrayAssert.AreEqual(new double[3] { 1, 1, 1 }, actual.GetStorage(), DoubleMatrixTest.Accuracy);
+                DoubleArrayAssert.AreEqual([1, 1, 1], actual.GetStorage(), DoubleMatrixTest.Accuracy);
             }
         }
 
@@ -2473,7 +2473,7 @@ namespace Novacta.Analytics.Tests
                 Assert.AreEqual(StorageScheme.CompressedRow, actual.StorageScheme);
                 Assert.AreEqual(StorageOrder.RowMajor, actual.AsReadOnly().StorageOrder);
                 Assert.AreEqual(StorageScheme.CompressedRow, actual.AsReadOnly().StorageScheme);
-                DoubleArrayAssert.AreEqual(Array.Empty<double>(), actual.GetStorage(), DoubleMatrixTest.Accuracy);
+                DoubleArrayAssert.AreEqual([], actual.GetStorage(), DoubleMatrixTest.Accuracy);
             }
         }
 
@@ -2487,12 +2487,12 @@ namespace Novacta.Analytics.Tests
             DoubleMatrixTest.Find.Value(
                 testableMatrix: TestableDoubleMatrix35.Get(),
                 value: 0.0,
-                expected: IndexCollection.FromArray(new int[] { 0, 3, 4 }));
+                expected: IndexCollection.FromArray([0, 3, 4]));
 
             DoubleMatrixTest.Find.Value(
                 testableMatrix: TestableDoubleMatrix35.Get(),
                 value: Double.NaN,
-                expected: IndexCollection.FromArray(new int[] { 5 }));
+                expected: IndexCollection.FromArray([5]));
 
             DoubleMatrixTest.Find.Value(
                 testableMatrix: TestableDoubleMatrix36.Get(),
@@ -2502,7 +2502,7 @@ namespace Novacta.Analytics.Tests
             DoubleMatrixTest.Find.Value(
                 testableMatrix: TestableDoubleMatrix37.Get(),
                 value: 2.0,
-                expected: IndexCollection.FromArray(new int[] { 1, 2, 4 }));
+                expected: IndexCollection.FromArray([1, 2, 4]));
         }
 
         [TestMethod()]
@@ -2510,7 +2510,7 @@ namespace Novacta.Analytics.Tests
         {
             DoubleMatrixTest.Find.Nonzero(
                 testableMatrix: TestableDoubleMatrix35.Get(),
-                expected: IndexCollection.FromArray(new int[] { 1, 2, 5 }));
+                expected: IndexCollection.FromArray([1, 2, 5]));
 
             DoubleMatrixTest.Find.Nonzero(
                 testableMatrix: TestableDoubleMatrix36.Get(),
@@ -2525,7 +2525,7 @@ namespace Novacta.Analytics.Tests
             DoubleMatrixTest.Find.While.Succeed(
                 testableMatrix: TestableDoubleMatrix35.Get(),
                 match: (d) => { return d <= 1; },
-                expected: IndexCollection.FromArray(new int[] { 0, 3, 4 }));
+                expected: IndexCollection.FromArray([0, 3, 4]));
 
             DoubleMatrixTest.Find.While.Succeed(
                 testableMatrix: TestableDoubleMatrix35.Get(),
@@ -2535,7 +2535,7 @@ namespace Novacta.Analytics.Tests
             DoubleMatrixTest.Find.While.Succeed(
                 testableMatrix: TestableDoubleMatrix35.Get(),
                 match: (d) => { return d >= 0; },
-                expected: IndexCollection.FromArray(new int[] { 0, 1, 2, 3, 4 }));
+                expected: IndexCollection.FromArray([0, 1, 2, 3, 4]));
         }
 
         #endregion
@@ -2597,7 +2597,7 @@ namespace Novacta.Analytics.Tests
             // ----- Mismatched operands
             BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Fail(RightWrongColsDoubleMatrixDoubleMatrixDivision.Get());
 
-            // ----- Unsquare, rank deficient right operand
+            // ----- Not square, rank deficient right operand
             BinaryOperationTest.LeftDoubleMatrixRightDoubleMatrix.Fail(RightIsRectangularAndRankDeficientDoubleMatrixDoubleMatrixDivision.Get());
 
             // ----- Scalar operands
@@ -2755,7 +2755,7 @@ namespace Novacta.Analytics.Tests
             {
                 // IEnumerable.GetEnumerator
                 {
-                    var target = DoubleMatrix.Dense(2, 3, new double[6] { 1, 2, 3, 4, 5, 6 });
+                    var target = DoubleMatrix.Dense(2, 3, [1, 2, 3, 4, 5, 6]);
                     IEnumerable enumerable = (IEnumerable)target;
 
                     IEnumerator enumerator = enumerable.GetEnumerator();
@@ -2781,7 +2781,7 @@ namespace Novacta.Analytics.Tests
 
                 // IEnumerable<double>.GetEnumerator
                 {
-                    var target = DoubleMatrix.Dense(2, 3, new double[6] { 1, 2, 3, 4, 5, 6 });
+                    var target = DoubleMatrix.Dense(2, 3, [1, 2, 3, 4, 5, 6]);
                     IEnumerable<double> enumerable = (IEnumerable<double>)target;
 
                     IEnumerator<double> enumerator = enumerable.GetEnumerator();
@@ -2813,7 +2813,7 @@ namespace Novacta.Analytics.Tests
                             "GetResourceString",
                             new string[] { "STR_EXCEPT_ENU_OUT_OF_BOUNDS" });
 
-                    var target = DoubleMatrix.Dense(2, 3, new double[6] { 1, 2, 3, 4, 5, 6 });
+                    var target = DoubleMatrix.Dense(2, 3, [1, 2, 3, 4, 5, 6]);
                     var enumerable = (IEnumerable<double>)target;
 
                     var enumerator = enumerable.GetEnumerator();
@@ -2835,7 +2835,7 @@ namespace Novacta.Analytics.Tests
                             "GetResourceString",
                             new string[] { "STR_EXCEPT_ENU_OUT_OF_BOUNDS" });
 
-                    var target = DoubleMatrix.Dense(2, 3, new double[6] { 1, 2, 3, 4, 5, 6 });
+                    var target = DoubleMatrix.Dense(2, 3, [1, 2, 3, 4, 5, 6]);
                     var enumerable = (IEnumerable)target;
 
                     var enumerator = enumerable.GetEnumerator();
@@ -2855,7 +2855,7 @@ namespace Novacta.Analytics.Tests
             {
                 // IEnumerable.GetEnumerator
                 {
-                    var target = DoubleMatrix.Dense(2, 3, new double[6] { 1, 2, 3, 4, 5, 6 }).AsReadOnly();
+                    var target = DoubleMatrix.Dense(2, 3, [1, 2, 3, 4, 5, 6]).AsReadOnly();
                     IEnumerable enumerable = (IEnumerable)target;
 
                     IEnumerator enumerator = enumerable.GetEnumerator();
@@ -2881,7 +2881,7 @@ namespace Novacta.Analytics.Tests
 
                 // IEnumerable<double>.GetEnumerator
                 {
-                    var target = DoubleMatrix.Dense(2, 3, new double[6] { 1, 2, 3, 4, 5, 6 }).AsReadOnly();
+                    var target = DoubleMatrix.Dense(2, 3, [1, 2, 3, 4, 5, 6]).AsReadOnly();
                     IEnumerable<double> enumerable = (IEnumerable<double>)target;
 
                     IEnumerator<double> enumerator = enumerable.GetEnumerator();
@@ -2913,7 +2913,7 @@ namespace Novacta.Analytics.Tests
                             "GetResourceString",
                             new string[] { "STR_EXCEPT_ENU_OUT_OF_BOUNDS" });
 
-                    var target = DoubleMatrix.Dense(2, 3, new double[6] { 1, 2, 3, 4, 5, 6 }).AsReadOnly();
+                    var target = DoubleMatrix.Dense(2, 3, [1, 2, 3, 4, 5, 6]).AsReadOnly();
                     var enumerable = (IEnumerable<double>)target;
 
                     var enumerator = enumerable.GetEnumerator();
@@ -2935,7 +2935,7 @@ namespace Novacta.Analytics.Tests
                             "GetResourceString",
                             new string[] { "STR_EXCEPT_ENU_OUT_OF_BOUNDS" });
 
-                    var target = DoubleMatrix.Dense(2, 3, new double[6] { 1, 2, 3, 4, 5, 6 }).AsReadOnly();
+                    var target = DoubleMatrix.Dense(2, 3, [1, 2, 3, 4, 5, 6]).AsReadOnly();
                     var enumerable = (IEnumerable)target;
 
                     var enumerator = enumerable.GetEnumerator();
@@ -2968,8 +2968,7 @@ namespace Novacta.Analytics.Tests
                     testableMatrix: TestableDoubleMatrix16.Get(),
                     func: addZero,
                     expected: new DoubleMatrixState(
-                                    asColumnMajorDenseArray: new double[6]
-                                        { 0, 1, 2, 3, 4, 5 },
+                                    asColumnMajorDenseArray: [0, 1, 2, 3, 4, 5],
                                     numberOfRows: 2,
                                     numberOfColumns: 3));
 
@@ -2977,13 +2976,13 @@ namespace Novacta.Analytics.Tests
                     testableMatrix: TestableDoubleMatrix38.Get(),
                     func: addZero,
                     expected: new DoubleMatrixState(
-                                    asColumnMajorDenseArray: new double[20]
-                                        {
+                                    asColumnMajorDenseArray:
+                                        [
                                         0, 0, 0, 0, 0,
                                         0, 0, 2, 3, 5,
                                         0, 6, 0, 7, 0,
                                         0, 4, 0, 0, 0
-                                        },
+                                        ],
                                     numberOfRows: 4,
                                     numberOfColumns: 5));
 
@@ -2991,8 +2990,8 @@ namespace Novacta.Analytics.Tests
                     testableMatrix: TestableDoubleMatrix39.Get(),
                     func: addZero,
                     expected: new DoubleMatrixState(
-                                    asColumnMajorDenseArray: new double[30]
-                                        {
+                                    asColumnMajorDenseArray:
+                                        [
                                         0, 0, 3,
                                         0, 0, 0,
                                         3, 5, 1,
@@ -3003,7 +3002,7 @@ namespace Novacta.Analytics.Tests
                                         0, 1, 0,
                                         1, 0, 0,
                                         0, 0, 1
-                                        },
+                                        ],
                                     numberOfRows: 3,
                                     numberOfColumns: 10));
             }
@@ -3016,8 +3015,7 @@ namespace Novacta.Analytics.Tests
                     testableMatrix: TestableDoubleMatrix16.Get(),
                     func: addOne,
                     expected: new DoubleMatrixState(
-                                    asColumnMajorDenseArray: new double[6]
-                                        { 1, 2, 3, 4, 5, 6 },
+                                    asColumnMajorDenseArray: [1, 2, 3, 4, 5, 6],
                                     numberOfRows: 2,
                                     numberOfColumns: 3));
 
@@ -3025,13 +3023,13 @@ namespace Novacta.Analytics.Tests
                     testableMatrix: TestableDoubleMatrix38.Get(),
                     func: addOne,
                     expected: new DoubleMatrixState(
-                                    asColumnMajorDenseArray: new double[20]
-                                        {
+                                    asColumnMajorDenseArray:
+                                        [
                                         1, 1, 1, 1, 1,
                                         1, 1, 3, 4, 6,
                                         1, 7, 1, 8, 1,
                                         1, 5, 1, 1, 1
-                                        },
+                                        ],
                                     numberOfRows: 4,
                                     numberOfColumns: 5));
 
@@ -3039,8 +3037,8 @@ namespace Novacta.Analytics.Tests
                     testableMatrix: TestableDoubleMatrix39.Get(),
                     func: addOne,
                     expected: new DoubleMatrixState(
-                                    asColumnMajorDenseArray: new double[30]
-                                        {
+                                    asColumnMajorDenseArray:
+                                        [
                                         1, 1, 4,
                                         1, 1, 1,
                                         4, 6, 2,
@@ -3051,7 +3049,7 @@ namespace Novacta.Analytics.Tests
                                         1, 2, 1,
                                         2, 1, 1,
                                         1, 1, 2
-                                        },
+                                        ],
                                     numberOfRows: 3,
                                     numberOfColumns: 10));
             }
@@ -3067,35 +3065,35 @@ namespace Novacta.Analytics.Tests
             DoubleMatrixTest.Transpose.OutPlace(
                 testableMatrix: TestableDoubleMatrix38.Get(),
                 expected: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[20]
-                                    {
+                                asColumnMajorDenseArray:
+                                    [
                                       0, 0, 3, 0, 4,
                                       0, 0, 5, 7, 0,
                                       0, 0, 0, 0, 0,
                                       0, 2, 6, 0, 0
-                                    },
+                                    ],
                                 numberOfRows: 5,
                                 numberOfColumns: 4));
 
             DoubleMatrixTest.Transpose.OutPlace(
                 testableMatrix: TestableDoubleMatrix39.Get(),
                 expected: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[30]
-                                    {
+                                asColumnMajorDenseArray:
+                                    [
                                       0, 0, 3, 0, 4, 0, 0, 0, 1, 0,
                                       0, 0, 5, 7, 0, 0, 2, 1, 0, 0,
                                       3, 0, 1, 0, 0, 0, 0, 0, 0, 1
-                                    },
+                                    ],
                                 numberOfRows: 10,
                                 numberOfColumns: 3));
 
             DoubleMatrixTest.Transpose.OutPlace(
                 testableMatrix: TestableDoubleMatrix16.Get(),
                 expected: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[6]
-                                    {
+                                asColumnMajorDenseArray:
+                                    [
                                       0, 2, 4, 1, 3, 5
-                                    },
+                                    ],
                                 numberOfRows: 3,
                                 numberOfColumns: 2,
                                 columnNames: new Dictionary<int, string>(2) { { 0, "r0" }, { 1, "r1" } },
@@ -3104,10 +3102,10 @@ namespace Novacta.Analytics.Tests
             DoubleMatrixTest.Transpose.OutPlace(
                 testableMatrix: TestableDoubleMatrix57.Get(),
                 expected: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[6]
-                                    {
+                                asColumnMajorDenseArray:
+                                    [
                                       0, 2, 4, 1, 3, 5
-                                    },
+                                    ],
                                 numberOfRows: 3,
                                 numberOfColumns: 2,
                                 columnNames: new Dictionary<int, string>(2) { { 0, "r0" }, { 1, "r1" } }));
@@ -3115,10 +3113,10 @@ namespace Novacta.Analytics.Tests
             DoubleMatrixTest.Transpose.OutPlace(
                 testableMatrix: TestableDoubleMatrix58.Get(),
                 expected: new DoubleMatrixState(
-                                asColumnMajorDenseArray: new double[6]
-                                    {
+                                asColumnMajorDenseArray:
+                                    [
                                       0, 2, 4, 1, 3, 5
-                                    },
+                                    ],
                                 numberOfRows: 3,
                                 numberOfColumns: 2,
                                 rowNames: new Dictionary<int, string>(3) { { 0, "c0" }, { 1, "c1" }, { 2, "c2" } }));
@@ -3145,7 +3143,7 @@ namespace Novacta.Analytics.Tests
                     var target = DoubleMatrix.Dense(
                         3,
                         2,
-                        new double[6] { 0, 2, 0, 3, 0, Double.NaN },
+                        [0, 2, 0, 3, 0, Double.NaN],
                         StorageOrder.RowMajor);
 
                     target.SetRowName(0, "Row0");
@@ -3213,6 +3211,36 @@ namespace Novacta.Analytics.Tests
             }
         }
 
+        [TestMethod()]
+        public void EncodeTest()
+        {
+            DoubleMatrixTest.Encode.Basic.Succeed.FromPathWithVariableNames();
+            DoubleMatrixTest.Encode.Basic.Succeed.FromTextReaderWithVariableNames();
+            DoubleMatrixTest.Encode.Basic.Succeed.FromTextReaderWithoutVariableNames();
+            DoubleMatrixTest.Encode.Basic.Fail.ExtractedColumnIsMissingInHeaderRow();
+            DoubleMatrixTest.Encode.Basic.Fail.ExtractedColumnIsMissingInDataRow();
+            DoubleMatrixTest.Encode.Basic.Fail.NoDataRows();
+            DoubleMatrixTest.Encode.Basic.Fail.NumericalValueIsMissing();
+            DoubleMatrixTest.Encode.Basic.Fail.VariableNameIsMissing();
+            DoubleMatrixTest.Encode.Basic.Fail.ReaderIsNull();
+            DoubleMatrixTest.Encode.Basic.Fail.ExtractedColumnsIsNull();
+
+            DoubleMatrixTest.Encode.Advanced.Succeed.FromPathWithVariableNames();
+            DoubleMatrixTest.Encode.Advanced.Succeed.FromTextReaderWithVariableNames();
+            DoubleMatrixTest.Encode.Advanced.Succeed.FromTextReaderWithoutVariableNames();
+            DoubleMatrixTest.Encode.Advanced.Fail.ExtractedColumnIsMissingInHeaderRow();
+            DoubleMatrixTest.Encode.Advanced.Fail.ExtractedColumnIsMissingInDataRow();
+            DoubleMatrixTest.Encode.Advanced.Fail.NoDataRows();
+            DoubleMatrixTest.Encode.Advanced.Fail.NumericalValueIsMissing();
+            DoubleMatrixTest.Encode.Advanced.Fail.VariableNameIsMissing();
+            DoubleMatrixTest.Encode.Advanced.Fail.ReaderIsNull();
+            DoubleMatrixTest.Encode.Advanced.Fail.ExtractedColumnsIsNull();
+            DoubleMatrixTest.Encode.Advanced.Fail.SpecialCodifiersIsNull();
+            DoubleMatrixTest.Encode.Advanced.Fail.SpecialCodifiersContainsIrrelevantKey();
+            DoubleMatrixTest.Encode.Advanced.Fail.SpecialCodifiersContainsNullValue();
+            DoubleMatrixTest.Encode.Advanced.Fail.ProviderIsNull();
+        }
+
         #region IList<double>
 
         [TestMethod()]
@@ -3250,16 +3278,16 @@ namespace Novacta.Analytics.Tests
 
             DoubleMatrixTest.CopyTo.Succeed(
                 testableMatrix: TestableDoubleMatrix09.Get(),
-                array: new double[6] { 10, 20, 30, 40, 50, 60 },
+                array: [10, 20, 30, 40, 50, 60],
                 arrayIndex: 1,
-                expected: new double[6] { 10, 1, 0, 0, 0, 60 },
+                expected: [10, 1, 0, 0, 0, 60],
                 delta: DoubleMatrixTest.Accuracy);
 
             DoubleMatrixTest.CopyTo.Succeed(
                testableMatrix: TestableDoubleMatrix13.Get(),
-               array: new double[6] { 10, 20, 30, 40, 50, 60 },
+               array: [10, 20, 30, 40, 50, 60],
                arrayIndex: 2,
-               expected: new double[6] { 10, 20, 1.1, 0, 0, 4.4 },
+               expected: [10, 20, 1.1, 0, 0, 4.4],
                delta: DoubleMatrixTest.Accuracy);
         }
 

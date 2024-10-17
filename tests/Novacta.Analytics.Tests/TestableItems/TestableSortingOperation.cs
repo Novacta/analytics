@@ -58,9 +58,9 @@ namespace Novacta.Analytics.Tests.TestableItems
             this.Expected = expected;
             this.Data = data;
             this.SortDirection = sortDirection;
-            this.DataWritableOps = new Func<DoubleMatrix, SortDirection, DoubleMatrix>[1] { Stat.Sort };
+            this.DataWritableOps = [Stat.Sort];
 
-            this.DataReadOnlyOps = new Func<ReadOnlyDoubleMatrix, SortDirection, DoubleMatrix>[1] { Stat.Sort };
+            this.DataReadOnlyOps = [Stat.Sort];
         }
 
         /// <summary>
@@ -105,8 +105,8 @@ namespace Novacta.Analytics.Tests.TestableItems
             this.Expected = expected;
             this.Data = data;
             this.SortDirection = sortDirection;
-            this.DataWritableOps = new Func<DoubleMatrix, SortDirection, SortIndexResults>[1] { Stat.SortIndex };
-            this.DataReadOnlyOps = new Func<ReadOnlyDoubleMatrix, SortDirection, SortIndexResults>[1] { Stat.SortIndex };
+            this.DataWritableOps = [Stat.SortIndex];
+            this.DataReadOnlyOps = [Stat.SortIndex];
         }
 
         /// <summary>

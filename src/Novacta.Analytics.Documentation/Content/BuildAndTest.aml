@@ -25,8 +25,8 @@
 				<list class="bullet">
 					<listItem>
 						<para>
-							<link xlink:href="#build-net-6-projects">
-								.NET 6 projects
+							<link xlink:href="#build-net-projects">
+								.NET projects
 							</link>
 						</para>
 					</listItem>
@@ -53,8 +53,8 @@
 				</para>
 			</content>
 		</section>
-		<section address="build-net-6-projects">
-			<title>Build .NET 6 projects</title>
+		<section address="build-net-projects">
+			<title>Build .NET projects</title>
 			<content>
 				<list class="bullet">
 					<listItem>
@@ -476,6 +476,28 @@
 			<title>Unit tests</title>
 			<content>
 				<list class="bullet">
+                    <listItem>
+                        <para>
+                            Native dependencies are automatically placed in the test output directory.
+							As a consequence, to resolve the dependencies on a Linux or macOS target machine
+							at runtime, you need to update the library path accordingly.
+                        </para>
+						<para>
+							For example, if you are on a Linux machine you could execute the following command:
+						</para>
+						<code language="none" title="Preparing Linux environments for tests">
+                            export LD_LIBRARY_PATH=$LIBNAROOT/tests/Novacta.Analytics.Tests/bin/Debug/net8.0
+                        </code>
+                        <para>
+                            where variable <codeInline>LIBNAROOT</codeInline> contains the path to the cloned repository.
+                        </para>
+						<para>
+							If you are on a macOS machine, an analog command would be:
+						</para>
+						<code language="none" title="Preparing macOS environments for tests">
+                            export DYLD_LIBRARY_PATH=$LIBNAROOT/tests/Novacta.Analytics.Tests/bin/Debug/net8.0
+                        </code>                    
+                    </listItem>
 					<listItem>
 						<para>
 							From a shell of your choice, change the current directory to folder
@@ -486,23 +508,6 @@
 								<linkUri>https://github.com/novacta/analytics/blob/master/tests/Novacta.Analytics.Tests</linkUri>
 							</externalLink>.
 						</para>
-						<para>
-							Native dependencies are automatically placed in the test directory.
-							However, to resolve the dependencies on a Linux or macOS target machine
-							at runtime, the following commands need to be executed.
-						</para>
-						<para>
-							If you are on a Linux machine:
-						</para>
-						<code language="none" title="Preparing Linux environments for tests">
-							export LD_LIBRARY_PATH=.
-						</code>
-						<para>
-							or, if you are on a macOS machine:
-						</para>
-						<code language="none" title="Preparing macOS environments for tests">
-							export DYLD_LIBRARY_PATH=.
-						</code>
 					</listItem>
 					<listItem>
 						<para>

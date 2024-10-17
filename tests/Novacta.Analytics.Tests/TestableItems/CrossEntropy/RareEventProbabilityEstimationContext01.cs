@@ -55,7 +55,7 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
                 // Define the nominal parameter of interest
                 // (Gaussian Standard distribution).
                 initialParameter: DoubleMatrix.Dense(2, 1,
-                    new double[] { 0, 1 })
+                    [0, 1])
                   )
         {
         }
@@ -132,7 +132,7 @@ namespace Novacta.Analytics.Tests.TestableItems.CrossEntropy
             var newMu = (double)r_by_e / sumOfRatios;
 
             var newParameter = DoubleMatrix.Dense(2, 1,
-                new double[] { newMu, 1.0 });
+                [newMu, 1.0]);
 
             return newParameter;
         }

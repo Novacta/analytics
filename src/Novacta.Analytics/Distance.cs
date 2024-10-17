@@ -62,8 +62,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static DoubleMatrix Euclidean(DoubleMatrix cluster)
         {
-            if (cluster is null)
-                throw new ArgumentNullException(nameof(cluster));
+            ArgumentNullException.ThrowIfNull(cluster);
 
             DoubleMatrix currentDiff, currentSquaredDiff;
             DoubleMatrix distances = DoubleMatrix.Dense(
@@ -135,8 +134,7 @@ namespace Novacta.Analytics
         /// </exception>
         public static double CompleteDiameter(DoubleMatrix cluster)
         {
-            if (cluster is null)
-                throw new ArgumentNullException(nameof(cluster));
+            ArgumentNullException.ThrowIfNull(cluster);
 
             double diameter = double.NegativeInfinity;
 
@@ -337,11 +335,9 @@ namespace Novacta.Analytics
 
         private static void ValidateLinkageInput(DoubleMatrix left, DoubleMatrix right)
         {
-            if (left is null)
-                throw new ArgumentNullException(nameof(left));
+            ArgumentNullException.ThrowIfNull(left);
 
-            if (right is null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(right);
 
             if (left.NumberOfColumns != right.NumberOfColumns) {
                 throw new ArgumentException(
